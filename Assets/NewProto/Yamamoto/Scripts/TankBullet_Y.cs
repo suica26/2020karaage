@@ -5,6 +5,9 @@ using UnityEngine;
 public class TankBullet_Y : MonoBehaviour
 {
     public GameObject bulletPrefab;
+    private GameObject bullet;
+    public GameObject player;
+    public float desBulletTime = 10f;   //初期値は10秒 Inspector上から変更できます
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +18,6 @@ public class TankBullet_Y : MonoBehaviour
     void Update()
     {
         LaunchBullet(); 
-        this.transform.position += transform.forward;
     }
 
     void LaunchBullet()
@@ -23,17 +25,15 @@ public class TankBullet_Y : MonoBehaviour
         float random = Random.Range(0, 100);
         if (random <= 1)
         {
-            GameObject bullet = Instantiate(bulletPrefab, this.gameObject.transform.position, this.transform.rotation);
-
-            bullet.GetComponent<Rigidbody>().velocity = (bullet.transform.forward.normalized);
+            bullet = Instantiate(bulletPrefab, this.gameObject.transform.position, this.transform.rotation);
+            bullet.transform.forward = player.transform.position - this.transform.position;
+            bullet.GetComponent<Rigidbody>().velocity = (bullet.transform.forward.normalized * 10f);
+            Invoke("DestroyBullet", desBulletTime);
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    void DestroyBullet()
     {
-        if(collision.gameObject.tag == "Player")
-        {
-            Destroy(this);
-        }
+        Destroy(bullet);
     }
 }
