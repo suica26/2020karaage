@@ -10,7 +10,7 @@ public class BulidngBreak_Y : MonoBehaviour
     public AudioClip AttackSound, ExplosionSound, BreakSound;
     public float HP;        //Inspector上から設定できます。
     public int kickDamage;  //キックで与えるダメージ量
-    public int brastDamage;
+    public int blastDamage;
     public int cutterDamage;
     public int breakScore;  //建物を破壊したときに得られるスコア
     bool Bung = false;
@@ -66,13 +66,20 @@ public class BulidngBreak_Y : MonoBehaviour
     {
         //キックダメージ
         if (other.gameObject.name == "KickCollision")
+        {
             HP -= kickDamage;
+        }
         //ブラストダメージ
-        if (other.gameObject.name == "Sphere(Clone)")
-            HP -= brastDamage;
+        if (other.gameObject.name == "MorningBlastSphere_Y(Clone)")
+        {
+            Debug.Log("Hit");
+            HP -= blastDamage;
+        }
         //カッターダメージ
         if (other.gameObject.name == "Cutter(Clone)")
+        {
             HP -= cutterDamage;
+        }
 
         //振動させる
         Shake(0.25f, 0.1f);
