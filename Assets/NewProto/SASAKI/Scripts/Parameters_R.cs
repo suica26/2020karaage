@@ -1,19 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 /*
  * -------------------------
  * 
  * ||Parameters_R()
- * || ※Canvas内にCreateEmptyを生成しParametersという名前にしてアタッチしてください。
- * ||   必ず子オブジェクトにUI > Textを4つ配置し、名称をScore・Time・EP・HPとしてください。
- * ||
- * || _int score, time, ep, hp (各パラメーターの変数)
- * ||　
- * || __bool freeze (パラメーターを変化できるようにするか否か)
- * ||   float count(タイマー制御用)
- * ||   Text scoreText, timeText, epText, hpText(各UIテキストを変更するためのオブジェクト)
- * ||   GameObject resultPanel(リザルトパネルのオブジェクト)
  * ||
  * || =ScoreManager(int)
  * ||  =引数で指定した分スコアを加算します。
@@ -26,32 +19,23 @@ using UnityEngine.UI;
  * ||
  * || =HPManager(int)
  * ||  =引数で指定した分HPを加算します。
- * ||
- * || ==Update()
- * ||   =時間計測を行いTimeManagerで時間を減算しています。
- * ||
  *
  * -------------------------
  */
 
 public class Parameters_R : MonoBehaviour
 {
-    public int score, time, ep, hp;
+    [SerializeField] private Text scoreText, timeText, epText, hpText;
+    [SerializeField] private GameObject resultPanel = null;
+
+    [SerializeField] public int score, time, ep, hp;
+
 
     private bool freeze = false;
     private float count;
-    private Text scoreText, timeText, epText, hpText;
-    private GameObject resultPanel;
 
     void Start()
     {
-        scoreText = transform.Find("Score").GetComponent<Text>();
-        timeText = transform.Find("Time").GetComponent<Text>();
-        epText = transform.Find("EP").GetComponent<Text>();
-        hpText = transform.Find("HP").GetComponent<Text>();
-        resultPanel = GameObject.Find("Canvas").transform.Find("ResultPanel").gameObject;
-
-
         scoreText.text = "Score: " + score;
         timeText.text = "Time: " + time;
         epText.text = "EP: " + ep;
