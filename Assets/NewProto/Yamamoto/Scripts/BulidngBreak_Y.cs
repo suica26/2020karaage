@@ -28,7 +28,6 @@ public class BulidngBreak_Y : MonoBehaviour
             child.gameObject.GetComponent<Rigidbody>().isKinematic = true;
             // 子要素リストにパーツを追加
             myParts.Add(child.gameObject);
-
         }
     }
 
@@ -37,6 +36,10 @@ public class BulidngBreak_Y : MonoBehaviour
     {
         if (HP <= 0)//ダメージがHPを超えると破壊
         {
+            if (Bung == false)
+            {
+                GameObject.Find("Canvas").GetComponent<Parameters_R>().ScoreManager(breakScore);
+            }
             Bung = true;
         }
         else

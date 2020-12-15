@@ -44,7 +44,7 @@ public class Parameters_R : MonoBehaviour
         count = time;
     }
 
-    void ScoreManager(int addScore)
+    public void ScoreManager(int addScore)      //山本加筆：publicにすることで他Scriptで参照できるようにしました
     {
         if (!freeze)
         {
