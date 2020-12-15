@@ -54,7 +54,7 @@ public class Parameters_R : MonoBehaviour
     }
     //引数で指定した分だけスコアを加算します。
 
-    void TimeManager(int addTime)
+    public void TimeManager(int addTime)
     {
         if (!freeze)
         {
@@ -70,7 +70,7 @@ public class Parameters_R : MonoBehaviour
     }
     //引数で指定した分だけ残りタイムを加算します。
 
-    void EPManager(int addEP)
+    public void EPManager(int addEP)
     {
         if (!freeze)
         {
@@ -80,7 +80,7 @@ public class Parameters_R : MonoBehaviour
     }
     //引数で指定した分だけEPを加算します。
 
-    void HPManager(int addHP)
+    public void HPManager(int addHP)
     {
         if (!freeze)
         {

@@ -724,6 +724,7 @@ GameObject:
   - component: {fileID: 1883099122029123084}
   - component: {fileID: 1883099122029123081}
   - component: {fileID: 1649291069376457561}
+  - component: {fileID: -8645101942804034622}
   m_Layer: 0
   m_Name: ob3_storage
   m_TagString: Untagged
@@ -809,6 +810,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8075661621763774d8231cabafe12bb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scrFood: {fileID: -8645101942804034622}
   BreakEffect: {fileID: 7277550664854025442, guid: 91c7ed9439d7e4a42b3f308ecd6879c8,
     type: 3}
   Torque: 2
@@ -946,6 +948,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-8645101942804034622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649291069376457563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 400540f14b6981848a8da03f843b8495, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objFood: {fileID: 6224625970994948174, guid: 432283639b2517e4cb2744030344a38c, type: 3}
+  minFood: 4
+  maxFood: 8
 --- !u!1 &1787507102812946127
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BulidngBreak_Y : MonoBehaviour
 {
+    [SerializeField] private FoodMaker_R scrFood = null;
     public GameObject BreakEffect;
     public float Torque;
     public float Power;
@@ -14,6 +15,7 @@ public class BulidngBreak_Y : MonoBehaviour
     public int cutterDamage;
     public int breakScore;  //建物を破壊したときに得られるスコア
     bool Bung = false;
+    bool Collapse = true;
 
     // 自身の子要素を管理するリスト
     List<GameObject> myParts = new List<GameObject>();
@@ -36,21 +38,22 @@ public class BulidngBreak_Y : MonoBehaviour
     {
         if (HP <= 0)//ダメージがHPを超えると破壊
         {
-            if (Bung == false)
+            if (!Bung)
             {
                 GameObject.Find("Canvas").GetComponent<Parameters_R>().ScoreManager(breakScore);
             }
             Bung = true;
         }
-        else
-        {
-            Bung = false;
-        }
 
-        if (Bung == true)
+        if (Bung && Collapse)
         {
+            Collapse = false;
+            if(scrFood != null)
+            {
+                scrFood.DropFood();
+            }
             Explode();
-            Instantiate(BreakEffect, transform.position, Quaternion.identity);　//エフェクト発生
+            Instantiate(BreakEffect, transform.position, Quaternion.identity, transform);　//エフェクト発生
 
             //サウンド再生
             AudioSource sound1 = GetComponent<AudioSource>();
