@@ -78,7 +78,6 @@ public class BulidngBreak_Y : MonoBehaviour
         //ブラストダメージ
         if (other.gameObject.name == "MorningBlastSphere_Y(Clone)")
         {
-            Debug.Log("Hit");
             HP -= blastDamage;
         }
         //カッターダメージ

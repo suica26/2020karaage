@@ -13,7 +13,6 @@ public class MorningBlast_Y : MonoBehaviour
     private bool chargeFlg = true;
     public float spreadTime = 0.5f;    //おはようブラストの放射時間
     private bool releaseFlg;
-    public int Number = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,15 +37,6 @@ public class MorningBlast_Y : MonoBehaviour
         if(chargeFlg == false)
         {
             morningBlast.transform.localScale += new Vector3(plusScale, plusScale, plusScale);
-        }
-
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            Number++;
-            if(Number == 3)
-            {
-                Number = 0;
-            }
         }
     }
 
