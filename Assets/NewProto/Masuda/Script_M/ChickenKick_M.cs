@@ -21,8 +21,8 @@ public class ChickenKick_M : MonoBehaviour
             sound_kanri.PlayOneShot(kickSound);
 
             //エフェクト
-            Instantiate(kickEffect, transform.position, Quaternion.identity);　//エフェクト発生
-
+            var objkick = Instantiate(kickEffect, transform.position, Quaternion.identity);　//エフェクト発生
+            Destroy(objkick, 0.5f);
         }
         //キーが上がったら足が戻る
         if (Input.GetKeyUp(KeyCode.K))

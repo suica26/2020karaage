@@ -14,7 +14,7 @@ public class MorBlaAffection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GameObject chiken = GameObject.Find("chicken_form1");
+        GameObject chiken = GameObject.Find("Player");
         morBlaScript = chiken.GetComponent<MorningBlast_Y>();
     }
 

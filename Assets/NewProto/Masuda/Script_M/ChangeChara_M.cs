@@ -4,52 +4,44 @@ using UnityEngine;
 
 public class ChangeChara_M : MonoBehaviour
 {
-    GameObject FirstChicken;
-    GameObject SecondChicken;
-    GameObject ThirdChicken;
-    GameObject FinalChicken;
-    public int firstEvo = 100;
-    public int secondEvo = 200;
-    public int thirdEvo = 300;
-    public int scorePoint;
+    [SerializeField] private Parameters_R scrEP = null;
+    [SerializeField] private GameObject[] _chickenForm_tbl = null;
+    [SerializeField] private int firstEvo;
+    [SerializeField] private int secondEvo;
+    [SerializeField] private int thirdEvo;
+
+    private GameObject currentChickenForm = null;
+    private int esaPoint;
 
     void Start()
     {
-        //全形態を読み込み
-        this.FirstChicken = GameObject.Find("1stChicken");
-        this.SecondChicken = GameObject.Find("2ndChicken");
-        this.ThirdChicken = GameObject.Find("3rdChicken");
-        this.FinalChicken = GameObject.Find("FinalChicken");
-    }
-
-    void Change()
-    {
-        //第1形態を最初に出現させる
-        FirstChicken.SetActive(true);
-        SecondChicken.SetActive(false);
-        ThirdChicken.SetActive(false);
-        FinalChicken.SetActive(false);
+        _chickenForm_tbl[0].SetActive(true);
+        currentChickenForm = _chickenForm_tbl[0];
     }
 
     void Update()
     {
+        esaPoint = scrEP.ep;
+
         //第1形態から第2形態に変化
-        if (scorePoint >= firstEvo)
+        if (esaPoint >= firstEvo && esaPoint < secondEvo)
         {
-            FirstChicken.SetActive(false);
-            SecondChicken.SetActive(true);
+            currentChickenForm.SetActive(false);
+            currentChickenForm = _chickenForm_tbl[1];
         }
         //第2形態から第3形態に変化
-        if (scorePoint >= secondEvo)
+        else if (esaPoint >= secondEvo && esaPoint < thirdEvo)
         {
-            SecondChicken.SetActive(false);
-            ThirdChicken.SetActive(true);
+            currentChickenForm.SetActive(false);
+            currentChickenForm = _chickenForm_tbl[2];
         }
         //第3形態から最終形態に変化
-        if (scorePoint >= thirdEvo)
+        if (esaPoint >= thirdEvo)
         {
-            ThirdChicken.SetActive(false);
-            FinalChicken.SetActive(true);
+            currentChickenForm.SetActive(false);
+            currentChickenForm = _chickenForm_tbl[3];
         }
+
+        currentChickenForm.SetActive(true);
     }
 }
