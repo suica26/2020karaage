@@ -7,7 +7,7 @@ public class Bullet_Y : MonoBehaviour
     //このScriptは弾丸につけます
 
     public AnimationClip reflect;
-    private GameObject player;
+    [SerializeField] private GameObject player = null;
     Animator bulletAnimator;
     Rigidbody thisRB;
     [Range(10f, 100f)] public float afterReflectSpeed = 15f;
@@ -16,7 +16,6 @@ public class Bullet_Y : MonoBehaviour
     void Start()
     {
         bulletAnimator = this.gameObject.GetComponent<Animator>();
-        thisRB = this.gameObject.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -33,12 +32,14 @@ public class Bullet_Y : MonoBehaviour
     IEnumerator Reflection(GameObject morBla)
     {
         player = GameObject.Find("Player");
-        this.gameObject.transform.forward = player.transform.position - this.gameObject.transform.position;
+        var forward = (player.transform.position - this.gameObject.transform.position).normalized;
+        this.gameObject.transform.forward = forward;
+        thisRB = this.gameObject.GetComponent<Rigidbody>();
         bulletAnimator.SetTrigger("isReflect");
         thisRB.velocity = Vector3.zero;
 
         yield return new WaitForSeconds(reflect.length);
 
-        thisRB.velocity = -this.gameObject.transform.forward * afterReflectSpeed;
+        thisRB.velocity = -forward * afterReflectSpeed;
     }
 }
