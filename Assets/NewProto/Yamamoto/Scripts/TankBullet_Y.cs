@@ -28,12 +28,7 @@ public class TankBullet_Y : MonoBehaviour
             bullet = Instantiate(bulletPrefab, this.gameObject.transform.position, this.transform.rotation);
             bullet.transform.forward = player.transform.position - this.transform.position;
             bullet.GetComponent<Rigidbody>().velocity = (bullet.transform.forward.normalized * 10f);
-            Invoke("DestroyBullet", desBulletTime);
+            Destroy(bullet, desBulletTime);
         }
-    }
-
-    void DestroyBullet()
-    {
-        Destroy(bullet);
     }
 }

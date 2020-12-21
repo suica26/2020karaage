@@ -1,41 +1,25 @@
 ﻿using UnityEngine;
 
-/*
- * -------------------------
- *
- * ||FoodMaker_R()
- * ||
- * || ※objに、このスクリプトをアタッチしたオブジェクトは置かないでください。無限増殖します。
- * ||   現状ではオブジェクトを削除するようにしているのでCreateEmptyにアタッチしてください。
- * ||
- * || _int amountOfFood (設置するオブジェクトの数)
- * ||  float mapSize (ランダム生成の範囲を指定します)
- * ||  GameObject obj (設置したいオブジェクトを格納する)
- * ||
- * || __float x,z
- * ||
- * || =Start()
- * ||  =ランダムにオブジェクトを設置します。
- * ||
- *
- * -------------------------
- */
 public class FoodMaker_R : MonoBehaviour
 {
-    public int amountOfFood;
-    public float mapSize;
-    float x, z;
+    [SerializeField] private GameObject Player;
+    [SerializeField] private Parameters_R scrParameters;
+    [SerializeField] private GameObject objFood;
+    [SerializeField] private int minFood;
+    [SerializeField] private int maxFood;
 
-    public GameObject obj;
-    void Start()
+    public void DropFood()
     {
-        for (int i = 0; i < amountOfFood; i++)
-        {
-            x = Random.Range(-mapSize, mapSize);
-            z = Random.Range(-mapSize, mapSize);
+        int count = Random.Range(minFood, maxFood);
 
-            Instantiate(obj, new Vector3(x, 0.5f, z), Quaternion.identity);
+        for(int i = 0; i < count; i++)
+        {
+            var food = Instantiate(objFood, transform.position, new Quaternion(Random.Range(0,360) * Mathf.Deg2Rad, 0f, Random.Range(0, 360) * Mathf.Deg2Rad, 1));
+
+            food.GetComponent<Food_R>().Player = Player;
+            food.GetComponent<Food_R>().scrEP = scrParameters;
+
+            Destroy(food, 20f);
         }
-        Destroy(this);
     }
 }
