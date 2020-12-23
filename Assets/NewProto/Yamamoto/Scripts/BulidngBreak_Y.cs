@@ -16,6 +16,7 @@ public class BulidngBreak_Y : MonoBehaviour
     public int breakScore;  //建物を破壊したときに得られるスコア
     bool Bung = false;
     bool Collapse = true;
+    private int hitSkilID = 0;
 
     // 自身の子要素を管理するリスト
     List<GameObject> myParts = new List<GameObject>();
@@ -74,17 +75,20 @@ public class BulidngBreak_Y : MonoBehaviour
         if (other.gameObject.name == "KickCollision")
         {
             HP -= kickDamage;
+            hitSkilID = 1;
         }
         //ブラストダメージ
         if (other.gameObject.name == "MorningBlastSphere_Y(Clone)")
         {
             Debug.Log("Hit");
             HP -= blastDamage;
+            hitSkilID = 2;
         }
         //カッターダメージ
         if (other.gameObject.name == "Cutter(Clone)")
         {
             HP -= cutterDamage;
+            hitSkilID = 3;
         }
 
         //振動させる
@@ -96,12 +100,38 @@ public class BulidngBreak_Y : MonoBehaviour
     {
         foreach (GameObject obj in myParts)
         {
-            Vector3 forcePower = new Vector3(Random.Range(-Power, Power), Random.Range(-Power * 0.5f, Power * 0.5f), Random.Range(-Power * 0.5f, Power * 0.5f));
-            Vector3 TorquePower = new Vector3(Random.Range(-Torque, Torque), Random.Range(-Torque, Torque), Random.Range(-Torque, Torque));
-
             obj.GetComponent<Rigidbody>().isKinematic = false;
-            obj.GetComponent<Rigidbody>().AddForce(forcePower, ForceMode.Impulse);
-            obj.GetComponent<Rigidbody>().AddTorque(TorquePower, ForceMode.Impulse);
+            if (hitSkilID == 3)
+            {
+                GameObject cutter = GameObject.Find("Cutter(Clone)");
+                var cutterDir = cutter.GetComponent<Rigidbody>().velocity.normalized;
+                var objPos = obj.transform.position - cutter.transform.position;
+                //XZ二次元化
+                cutterDir.y = 0;
+                objPos.y = 0;
+                //外積計算
+                var cross = Vector3.Cross(cutterDir, objPos);
+                //外積で左右どちらに飛ばすか決定
+                //XZ平面での計算なのでyで左右判定
+                if (cross.y > 0)
+                {
+                    var force = new Vector3(cutterDir.z, 0, -cutterDir.x) * obj.transform.position.y/2;
+                    obj.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
+                }
+                else
+                {
+                    var force = new Vector3(-cutterDir.z, 0, cutterDir.x) * obj.transform.position.y/2;
+                    obj.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
+                }
+            }
+            else
+            {
+                Vector3 forcePower = new Vector3(Random.Range(-Power, Power), Random.Range(-Power * 0.5f, Power * 0.5f), Random.Range(-Power * 0.5f, Power * 0.5f));
+                Vector3 TorquePower = new Vector3(Random.Range(-Torque, Torque), Random.Range(-Torque, Torque), Random.Range(-Torque, Torque));
+
+                obj.GetComponent<Rigidbody>().AddForce(forcePower, ForceMode.Impulse);
+                obj.GetComponent<Rigidbody>().AddTorque(TorquePower, ForceMode.Impulse);
+            }
             //5秒後に消す
             Destroy(gameObject, 5.0f);
         }
