@@ -103,6 +103,7 @@ public class BulidngBreak_Y : MonoBehaviour
             obj.GetComponent<Rigidbody>().isKinematic = false;
             if (hitSkilID == 3)
             {
+                /*
                 GameObject cutter = GameObject.Find("Cutter(Clone)");
                 var cutterDir = cutter.GetComponent<Rigidbody>().velocity.normalized;
                 var objPos = obj.transform.position - cutter.transform.position;
@@ -122,6 +123,20 @@ public class BulidngBreak_Y : MonoBehaviour
                 {
                     var force = new Vector3(-cutterDir.z, 0, cutterDir.x) * obj.transform.position.y/2;
                     obj.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
+                }
+                */
+
+                GameObject cutter = GameObject.Find("Cutter(Clone)");
+                if(obj.transform.position.y > cutter.transform.position.y)
+                {
+                    var force = new Vector3(Random.Range(-2f,2f), 15f, Random.Range(-2f, 2f));
+                    obj.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
+                    StartCoroutine(CulForce(obj));
+                }
+                else
+                {
+                    obj.GetComponent<Rigidbody>().isKinematic = true;
+                    StartCoroutine(CulForce(obj));
                 }
             }
             else
@@ -161,5 +176,17 @@ public class BulidngBreak_Y : MonoBehaviour
         }
 
         transform.localPosition = pos;
+    }
+
+    private IEnumerator CulForce(GameObject obj)
+    {
+        Vector3 forcePower = new Vector3(Random.Range(-Power, Power), Random.Range(-Power * 0.5f, Power * 0.5f), Random.Range(-Power * 0.5f, Power * 0.5f));
+        Vector3 TorquePower = new Vector3(Random.Range(-Torque, Torque), Random.Range(-Torque, Torque), Random.Range(-Torque, Torque));
+
+        yield return new WaitForSeconds(1f);
+
+        obj.GetComponent<Rigidbody>().isKinematic = false;
+        obj.GetComponent<Rigidbody>().AddForce(forcePower, ForceMode.Impulse);
+        obj.GetComponent<Rigidbody>().AddTorque(TorquePower, ForceMode.Impulse);
     }
 }
