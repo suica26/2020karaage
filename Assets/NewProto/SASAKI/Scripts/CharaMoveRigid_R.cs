@@ -7,7 +7,6 @@ public class CharaMoveRigid_R : MonoBehaviour
     [SerializeField] private float speed = 3f;
     [SerializeField] private float jumpSpeed = 3f;
     [SerializeField] private float rotateSpeed = 1.5f;
-    [SerializeField] private GameObject preBlock = null;
 
     private Rigidbody rb;
     private float h, v;
@@ -41,40 +40,60 @@ public class CharaMoveRigid_R : MonoBehaviour
         {
             if (fallAttack)
             {
-                fallImpact();
                 fallAttack = false;
+                rb.velocity = Vector3.zero;
             }
 
             if (h != 0 || v != 0)
             {
-                moveDirection = speed * new Vector3(h, 0, v);
-                    
+                moveDirection = new Vector3(h, 0, v);
+                if(moveDirection.magnitude > 1)
+                {
+                    moveDirection.Normalize();
+                }
+
+                rb.velocity = moveDirection * speed;
+
                 Quaternion qua = Quaternion.LookRotation(moveDirection);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, qua, rotateSpeed * Time.deltaTime);
-
-                //moveDirection = transform.TransformDirection(moveDirection);
-                rb.velocity = moveDirection;
             }
 
             if (Input.GetButtonDown("Jump"))
             {
-                rb.velocity = new Vector3(rb.velocity.x, 5 * jumpSpeed, rb.velocity.z);
+                rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
             }
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.Q) && !fallAttack)
+            //空中での制動(移動量は地上の1/3程度)
+            if(h != 0 || v != 0)
             {
-                rb.AddForce(Vector3.down * jumpSpeed * 10f, ForceMode.VelocityChange);
-                fallAttack = true;
+                moveDirection = new Vector3(h, 0, v);
+                rb.AddForce(moveDirection * speed * 0.33f, ForceMode.Force);
+
+                var velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+                if(velocity.magnitude > speed)
+                {
+                    rb.velocity = velocity.normalized * speed + rb.velocity.y * Vector3.up;
+                }
+            }
+
+            if (Input.GetButtonDown("Jump") && !fallAttack)
+            {
+                StartCoroutine("FallAttack");
             }
         }
 
     }
 
-    private void fallImpact()
+    IEnumerator FallAttack()
     {
-        objFallAttack = preBlock;
-        Instantiate(objFallAttack, gameObject.transform);
+        rb.velocity = Vector3.zero;
+        rb.AddForce(Vector3.up * 4f, ForceMode.Impulse);
+        fallAttack = true;
+        yield return new WaitForSeconds(0.5f);
+
+        rb.AddForce(Vector3.down * jumpSpeed * 2f, ForceMode.Impulse);
+        yield break;
     }
 }
