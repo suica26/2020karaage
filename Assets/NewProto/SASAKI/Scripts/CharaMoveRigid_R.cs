@@ -8,6 +8,14 @@ public class CharaMoveRigid_R : MonoBehaviour
     [SerializeField] private float jumpSpeed = 3f;
     [SerializeField] private float rotateSpeed = 1.5f;
 
+    [Header("落下攻撃設定")]
+    [SerializeField] private float circleRange;
+    [SerializeField] private float circleKickRange;
+    [SerializeField] private float addFanWidth;
+    [SerializeField] private float addFanHeight;
+    [SerializeField] GameObject preCircle;
+    [SerializeField] GameObject preFan;
+
     private Rigidbody rb;
     private float h, v;
     private Vector3 moveDirection = Vector3.zero;
@@ -16,6 +24,12 @@ public class CharaMoveRigid_R : MonoBehaviour
 
     //落下攻撃用変数
     private bool fallAttack = false;
+    private int fallAttackVer = 0;
+
+    private float kickFallAttackTimer = 0f;
+    private float kickFallAttackTime = 0.5f;
+    private float cutterFallAttackTimer = 0f;
+    private float cutterFallAttackTime = 0.5f;
 
     private GameObject objFallAttack = null;
 
@@ -41,6 +55,7 @@ public class CharaMoveRigid_R : MonoBehaviour
             if (fallAttack)
             {
                 fallAttack = false;
+                fallAttackCollisionCheck(fallAttackVer);
                 rb.velocity = Vector3.zero;
             }
 
@@ -54,8 +69,11 @@ public class CharaMoveRigid_R : MonoBehaviour
 
                 rb.velocity = moveDirection * speed;
 
-                Quaternion qua = Quaternion.LookRotation(moveDirection);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, qua, rotateSpeed * Time.deltaTime);
+                if(Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
+                {
+                    Quaternion qua = Quaternion.LookRotation(moveDirection);
+                    transform.rotation = Quaternion.RotateTowards(transform.rotation, qua, rotateSpeed * Time.deltaTime);
+                }
             }
 
             if (Input.GetButtonDown("Jump"))
@@ -78,12 +96,59 @@ public class CharaMoveRigid_R : MonoBehaviour
                 }
             }
 
-            if (Input.GetButtonDown("Jump") && !fallAttack)
+            if (Input.GetMouseButton(1) && !fallAttack)
             {
-                StartCoroutine("FallAttack");
+                if(cutterFallAttackTimer <= cutterFallAttackTime)
+                {
+                    cutterFallAttackTimer += Time.deltaTime;
+                }
+                else
+                {
+                    fallAttackVer = 1;
+                    StartCoroutine("FallAttack");
+                }
+            }
+            else if(Input.GetMouseButton(0) && !fallAttack)
+            {
+                if(kickFallAttackTimer <= kickFallAttackTime)
+                {
+                    kickFallAttackTimer += Time.deltaTime;
+                }
+                else
+                {
+                    fallAttackVer = 2;
+                    StartCoroutine("FallAttack");
+                }
+            }
+            else
+            {
+                kickFallAttackTimer = 0f;
+                cutterFallAttackTimer = 0f;
             }
         }
 
+    }
+
+    void fallAttackCollisionCheck(int kickOrCutter)
+    {
+        GameObject circleChecker;
+        if(kickOrCutter == 1)
+        {
+            circleChecker = Instantiate(preCircle, transform.position, Quaternion.identity);
+            circleChecker.transform.localScale = new Vector3(circleRange, 0.1f, circleRange);
+            Destroy(circleChecker, 0.5f);
+
+            GameObject fanChecker = Instantiate(preFan, transform.position + (transform.forward * addFanHeight / 2), Quaternion.identity);
+            fanChecker.transform.rotation = transform.localRotation;
+            fanChecker.transform.localScale = new Vector3(addFanWidth, 0.1f, addFanHeight);
+            Destroy(fanChecker, 0.5f);
+        }
+        else if(kickOrCutter == 2)
+        {
+            circleChecker = Instantiate(preCircle, transform.position, Quaternion.identity);
+            circleChecker.transform.localScale = new Vector3(circleKickRange, 0.1f, circleKickRange);
+            Destroy(circleChecker, 0.5f);
+        }
     }
 
     IEnumerator FallAttack()

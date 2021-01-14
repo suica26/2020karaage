@@ -26,17 +26,25 @@ public class CutterMove1_R : MonoBehaviour
         rigid.AddForce(moveVec * 12f, ForceMode.Impulse);
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.PlayOneShot(cutterSound);
-        Destroy(gameObject, destroyTime);
     }
 
     // Update is called once per frame
     void Update()
     {
+        destroyTime -= Time.deltaTime;
         switch (cutterVer)
         {
             default:
             case 0:
-                rigid.AddForce(-moveVec * 2.5f, ForceMode.Force);
+                if (destroyTime >= 1.7f)
+                {
+                    rigid.AddForce(-moveVec * 350f * Time.deltaTime, ForceMode.Force);
+                }
+                else if (destroyTime < 1.7f)
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, player.transform.position + (Vector3.up * 0.5f), 20f * Time.deltaTime);
+                }
+
                 break;
 
             case 1:
