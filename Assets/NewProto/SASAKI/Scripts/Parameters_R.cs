@@ -29,27 +29,27 @@ public class Parameters_R : MonoBehaviour
     [SerializeField] private GameObject resultPanel = null;
 
     [SerializeField] public int score, time, ep, hp;
-
+    
 
     private bool freeze = false;
     private float count;
 
     void Start()
     {
-        scoreText.text = "Score: " + score;
+        scoreText.text = "PRICE : $" + score;
         timeText.text = "Time: " + time;
-        epText.text = "EP: " + ep;
         hpText.text = "HP: " + hp;
 
         count = time;
     }
 
+    //増田：表示を変えました
     public void ScoreManager(int addScore)      //山本加筆：publicにすることで他Scriptで参照できるようにしました
     {
         if (!freeze)
         {
             score += addScore;
-            scoreText.text = "Score: " + score;
+            scoreText.text = "PRICE : $" + score;
         }
     }
     //引数で指定した分だけスコアを加算します。
@@ -75,7 +75,6 @@ public class Parameters_R : MonoBehaviour
         if (!freeze)
         {
             ep += addEP;
-            epText.text = "EP: " + ep;
         }
     }
     //引数で指定した分だけEPを加算します。
@@ -85,13 +84,14 @@ public class Parameters_R : MonoBehaviour
         if (!freeze)
         {
             hp -= addHP;
-            if (hp <= 0)
-            {
-                freeze = true;
-                resultPanel.SetActive(true);
-                hp = 0;
-            }
-            hpText.text = "HP: " + hp;
+           /*if (hp <= 0)
+            *{
+            *    freeze = true;
+            *    resultPanel.SetActive(true);
+            *    hp = 0;
+            *}
+            *hpText.text = "HP: " + hp;
+            */
         }
     }
     //引数で指定した分だけHPを加算します。
