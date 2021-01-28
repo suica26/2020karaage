@@ -90,6 +90,10 @@ public class BulidngBreak_Y : MonoBehaviour
             HP -= cutterDamage;
             hitSkilID = 3;
         }
+        if (other.gameObject.tag == "Chain")
+        {
+            hitSkilID = 8;
+        }
 
         //振動させる
         Shake(0.25f, 0.1f);
@@ -98,6 +102,8 @@ public class BulidngBreak_Y : MonoBehaviour
     // 吹き飛ばしメソッド
     void Explode()
     {
+        this.gameObject.tag = "Broken";
+
         foreach (GameObject obj in myParts)
         {
             obj.GetComponent<Rigidbody>().isKinematic = false;
@@ -141,6 +147,9 @@ public class BulidngBreak_Y : MonoBehaviour
             }
             else
             {
+                var chainScript = obj.AddComponent<ChainBreak_Y>();
+                chainScript.Chain(obj);
+
                 Vector3 forcePower = new Vector3(Random.Range(-Power, Power), Random.Range(-Power * 0.5f, Power * 0.5f), Random.Range(-Power * 0.5f, Power * 0.5f));
                 Vector3 TorquePower = new Vector3(Random.Range(-Torque, Torque), Random.Range(-Torque, Torque), Random.Range(-Torque, Torque));
 
