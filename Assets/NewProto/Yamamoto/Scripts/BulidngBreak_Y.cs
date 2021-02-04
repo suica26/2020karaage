@@ -103,6 +103,8 @@ public class BulidngBreak_Y : MonoBehaviour
     void Explode()
     {
         this.gameObject.tag = "Broken";
+        if(hitSkilID == 1) GameObject.Find("Player").GetComponent<Animations>().KnockBack(this.gameObject);
+        //if (Random.Range(0f, 1f) < 0.03) 
 
         foreach (GameObject obj in myParts)
         {
