@@ -12,9 +12,9 @@ public class TpsCamera_R : MonoBehaviour
     Vector3 pos = Vector3.zero;
     Vector2 mouse = Vector2.zero;
 
-    public List<Renderer> rendererHitsList = new List<Renderer>();
-    public Renderer[] rendererHitsPrevs;
-    public int layer = 1 << 8;
+    private List<Renderer> rendererHitsList = new List<Renderer>();
+    private Renderer[] rendererHitsPrevs;
+    private int layer = 1 << 8;
 
     public List<Renderer> materialHitsList = new List<Renderer>();
     public Renderer[] materialHitsPrevs;

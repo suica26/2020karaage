@@ -15,6 +15,8 @@ public class CutterMove1_R : MonoBehaviour
     private Rigidbody rigid = null;
 
     private Vector3 moveVec;
+    public Transform backArea;
+    public float evoSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +25,7 @@ public class CutterMove1_R : MonoBehaviour
         moveVec = player.transform.forward;
 
         rigid = gameObject.GetComponent<Rigidbody>();
-        rigid.AddForce(moveVec * 12f, ForceMode.Impulse);
+        rigid.AddForce(moveVec * 12f * evoSpeed, ForceMode.Impulse);
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.PlayOneShot(cutterSound);
     }
@@ -38,16 +40,17 @@ public class CutterMove1_R : MonoBehaviour
             case 0:
                 if (destroyTime >= 1.7f)
                 {
-                    rigid.AddForce(-moveVec * 350f * Time.deltaTime, ForceMode.Force);
+                    rigid.AddForce(-moveVec * 350f * evoSpeed * Time.deltaTime, ForceMode.Force);
                 }
                 else if (destroyTime < 1.7f)
                 {
-                    transform.position = Vector3.MoveTowards(transform.position, player.transform.position + (Vector3.up * 0.5f), 20f * Time.deltaTime);
+                    transform.position = Vector3.MoveTowards(transform.position, backArea.position - player.transform.forward, 30f * evoSpeed * Time.deltaTime);
                 }
 
                 break;
 
             case 1:
+
 
                 break;
         }
