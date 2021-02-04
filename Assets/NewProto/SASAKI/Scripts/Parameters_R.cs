@@ -25,12 +25,10 @@ using UnityEngine.UI;
 
 public class Parameters_R : MonoBehaviour
 {
-    [SerializeField] private Text scoreText, timeText, epText, hpText;
+    [SerializeField] private Text scoreText, timeText, hpText;
     [SerializeField] private GameObject resultPanel = null;
-
     [SerializeField] public int score, time, ep, hp;
-    
-
+   
     private bool freeze = false;
     private float count;
 
@@ -68,6 +66,9 @@ public class Parameters_R : MonoBehaviour
             }
         }
     }
+
+    //進化時にタイマーが10秒増える_Mが追加
+
     //引数で指定した分だけ残りタイムを加算します。
 
     public void EPManager(int addEP)
@@ -75,6 +76,19 @@ public class Parameters_R : MonoBehaviour
         if (!freeze)
         {
             ep += addEP;
+            TimeManager(+1);
+            if (ep == 100)
+            {
+                TimeManager(+10);
+            }
+            else if (ep == 250)
+            {
+                TimeManager(+10);
+            }
+            else if (ep == 500)
+            {
+                TimeManager(+10);
+            }
         }
     }
     //引数で指定した分だけEPを加算します。
