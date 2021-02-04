@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Pause_M : MonoBehaviour
 {
-    private GameObject pausePanel;
+    [SerializeField] private GameObject pausePanel;
     //[SerializeField] private Button resumeButton;
     
     void Start()
