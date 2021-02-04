@@ -5,19 +5,19 @@ using UnityEngine.UI;
 
 public class Pause_M : MonoBehaviour
 {
-    [SerializeField] private GameObject pausePanel;
-    [SerializeField] private Button resumeButton;
+    private GameObject pausePanel;
+    //[SerializeField] private Button resumeButton;
     
     void Start()
     {
         //ポーズパネルの設定
         pausePanel.SetActive(false);
-        resumeButton.onClick.AddListener(Resume);
+        //resumeButton.onClick.AddListener(Resume);
     }
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (pausePanel.activeSelf == false)
             {
@@ -32,9 +32,10 @@ public class Pause_M : MonoBehaviour
         }
     }
 
-    private void Resume()
-    {
-        Time.timeScale = 1;
-        pausePanel.SetActive(false);
-    }
+    /*private void Resume()
+    *{
+    *   Time.timeScale = 1;
+    *    pausePanel.SetActive(false);
+    *}
+    */
 }
