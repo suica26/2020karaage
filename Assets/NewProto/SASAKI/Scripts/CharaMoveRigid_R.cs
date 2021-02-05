@@ -4,29 +4,46 @@ using UnityEngine;
 
 public class CharaMoveRigid_R : MonoBehaviour
 {
-    [SerializeField] private float speed = 3f;
-    [SerializeField] private float jumpSpeed = 3f;
-    [SerializeField] private float rotateSpeed = 1.5f;
-    [SerializeField] private GameObject preBlock = null;
+    [SerializeField] private float rotateSpeed;
+
+    [Header("落下攻撃設定")]
+    [SerializeField] private float[] circleRange;
+    [SerializeField] private float circleKickRange;
+    [SerializeField] private float addFanWidth;
+    [SerializeField] private float addFanHeight;
+    [SerializeField] GameObject preCircle;
+    [SerializeField] GameObject preFan;
 
     private Rigidbody rb;
     private float h, v;
+    private Vector3 cameraForward = Vector3.zero;
     private Vector3 moveDirection = Vector3.zero;
     private bool isGrounded = false;
     private Ray ray;
 
+    private EvolutionChicken_R scrEvo;
+    private float speed;
+    private float jumpSpeed;
+
     //落下攻撃用変数
     private bool fallAttack = false;
+    private int fallAttackVer = 0;
 
-    private GameObject objFallAttack = null;
+    private float kickFallAttackTimer = 0f;
+    private float kickFallAttackTime = 0.5f;
+    private float cutterFallAttackTimer = 0f;
+    private float cutterFallAttackTime = 0.5f;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        scrEvo = GetComponent<EvolutionChicken_R>();
     }
 
     void Update()
     {
+        speed = scrEvo.Status_SPD;
+        jumpSpeed = scrEvo.Status_JUMP;
 
         h = Input.GetAxis("Horizontal");
         v = Input.GetAxis("Vertical");
@@ -41,40 +58,108 @@ public class CharaMoveRigid_R : MonoBehaviour
         {
             if (fallAttack)
             {
-                fallImpact();
                 fallAttack = false;
+                fallAttackCollisionCheck(fallAttackVer);
+                rb.velocity = Vector3.zero;
             }
 
             if (h != 0 || v != 0)
             {
-                moveDirection = speed * new Vector3(h, 0, v);
-                    
-                Quaternion qua = Quaternion.LookRotation(moveDirection);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, qua, rotateSpeed * Time.deltaTime);
+                cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
+                moveDirection = cameraForward * v + Camera.main.transform.right * h;
+                if (moveDirection.magnitude > 1)
+                {
+                    moveDirection.Normalize();
+                }
 
-                //moveDirection = transform.TransformDirection(moveDirection);
-                rb.velocity = moveDirection;
+                rb.velocity = moveDirection * speed;
+
+                if(Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
+                {
+                    Quaternion qua = Quaternion.LookRotation(moveDirection);
+                    transform.rotation = Quaternion.RotateTowards(transform.rotation, qua, rotateSpeed * Time.deltaTime);
+                }
             }
 
             if (Input.GetButtonDown("Jump"))
             {
-                rb.velocity = new Vector3(rb.velocity.x, 5 * jumpSpeed, rb.velocity.z);
+                rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
             }
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.Q) && !fallAttack)
+            //空中での制動(移動量は地上の1/3程度)
+            if(h != 0 || v != 0)
             {
-                rb.AddForce(Vector3.down * jumpSpeed * 10f, ForceMode.VelocityChange);
-                fallAttack = true;
+                cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
+                moveDirection = cameraForward * v + Camera.main.transform.right * h;
+                rb.AddForce(moveDirection * speed * 0.33f, ForceMode.Force);
+
+                var velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+                if(velocity.magnitude > speed)
+                {
+                    rb.velocity = velocity.normalized * speed + rb.velocity.y * Vector3.up;
+                }
+            }
+
+            if (Input.GetMouseButton(1) && !fallAttack)
+            {
+                if(cutterFallAttackTimer <= cutterFallAttackTime)
+                {
+                    cutterFallAttackTimer += Time.deltaTime;
+                }
+                else
+                {
+                    fallAttackVer = 1;
+                    StartCoroutine("FallAttack");
+                }
+            }
+            else if(Input.GetMouseButton(0) && !fallAttack)
+            {
+                if(kickFallAttackTimer <= kickFallAttackTime)
+                {
+                    kickFallAttackTimer += Time.deltaTime;
+                }
+                else
+                {
+                    fallAttackVer = 2;
+                    StartCoroutine("FallAttack");
+                }
+            }
+            else
+            {
+                kickFallAttackTimer = 0f;
+                cutterFallAttackTimer = 0f;
             }
         }
 
     }
 
-    private void fallImpact()
+    void fallAttackCollisionCheck(int kickOrCutter)
     {
-        objFallAttack = preBlock;
-        Instantiate(objFallAttack, gameObject.transform);
+        GameObject circleChecker;
+        if(kickOrCutter == 1)
+        {
+            circleChecker = Instantiate(preCircle, transform.position, Quaternion.identity);
+            circleChecker.transform.localScale = new Vector3(circleRange[scrEvo.EvolutionNum], 0.1f, circleRange[scrEvo.EvolutionNum]);
+            Destroy(circleChecker, 0.5f);
+        }
+        else if(kickOrCutter == 2)
+        {
+            circleChecker = Instantiate(preCircle, transform.position, Quaternion.identity);
+            circleChecker.transform.localScale = new Vector3(circleKickRange, 0.1f, circleKickRange);
+            Destroy(circleChecker, 0.5f);
+        }
+    }
+
+    IEnumerator FallAttack()
+    {
+        rb.velocity = Vector3.zero;
+        rb.AddForce(Vector3.up * 4f, ForceMode.Impulse);
+        fallAttack = true;
+        yield return new WaitForSeconds(0.5f);
+
+        rb.AddForce(Vector3.down * jumpSpeed * 2f, ForceMode.Impulse);
+        yield break;
     }
 }

@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class TpsCameraJC_R : MonoBehaviour
 {
+    [SerializeField] GameObject objPlayer;
     [SerializeField] Transform target;
     [SerializeField] float spinSpeed = 1.0f;
+    [SerializeField] float[] radius;
 
     Vector3 nowPos;
     Vector3 pos = Vector3.zero;
     Vector2 mouse = Vector2.zero;
     Vector3 camPos;
+
+    private EvolutionChicken_R scrEvo;
 
     // Use this for initialization
     void Start()
@@ -25,6 +29,8 @@ public class TpsCameraJC_R : MonoBehaviour
         }
 
         mouse.y = 0.5f; // start mouse y pos ,0.5f is half
+
+        scrEvo = objPlayer.GetComponent<EvolutionChicken_R>();
     }
 
     // Update is called once per frame
@@ -40,6 +46,10 @@ public class TpsCameraJC_R : MonoBehaviour
         pos.x = Mathf.Sin(mouse.y * Mathf.PI) * Mathf.Cos(mouse.x * Mathf.PI);
         pos.y = Mathf.Cos(mouse.y * Mathf.PI);
         pos.z = Mathf.Sin(mouse.y * Mathf.PI) * Mathf.Sin(mouse.x * Mathf.PI);
+
+        //SetRadius
+        pos *= scrEvo.Cam_radius;
+
         // r and upper
         pos *= nowPos.z;
 

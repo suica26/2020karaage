@@ -10,7 +10,7 @@ public class Food_R : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject == Player)
+        if(collision.gameObject.tag == "Player")
         {
             scrEP.EPManager(10);
             collision.gameObject.GetComponent<AudioSource>().PlayOneShot(sound);
