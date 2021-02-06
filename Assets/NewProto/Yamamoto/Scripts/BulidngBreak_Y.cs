@@ -96,15 +96,49 @@ public class BulidngBreak_Y : MonoBehaviour
         }
 
         //振動させる
-        Shake(0.25f, 0.1f);
+        StartCoroutine(DoShake(0.25f, 0.1f));
+    }
+
+    //振動コルーチン
+    private IEnumerator DoShake(float duration, float magnitude)
+    {
+        var pos = transform.localPosition;
+
+        var elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            var x = pos.x + Random.Range(-1f, 1f) * magnitude;
+            var y = pos.y + Random.Range(-1f, 1f) * magnitude;
+
+            transform.localPosition = new Vector3(x, y, pos.z);
+
+            elapsed += Time.deltaTime;
+
+            yield return null;
+        }
+
+        transform.localPosition = pos;
     }
 
     // 吹き飛ばしメソッド
     void Explode()
     {
         this.gameObject.tag = "Broken";
-        if(hitSkilID == 1) GameObject.Find("Player").GetComponent<Animations>().KnockBack(this.gameObject);
-        //if (Random.Range(0f, 1f) < 0.03) 
+        GameObject cutter = GameObject.Find("Cutter(Clone)");
+        var cutterPos = new Vector3();
+        if (hitSkilID == 3) cutterPos = cutter.transform.position;
+
+        var G = new Vector3();
+
+        foreach (GameObject obj in myParts)
+        {
+            G += obj.transform.position;
+        }
+        G /= myParts.Count;
+
+        bool chain = false;
+        if (Random.Range(0f, 1f) < 0.05) { chain = true; Debug.Log("Chain"); }
 
         foreach (GameObject obj in myParts)
         {
@@ -133,71 +167,61 @@ public class BulidngBreak_Y : MonoBehaviour
                     obj.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
                 }
                 */
-
-                GameObject cutter = GameObject.Find("Cutter(Clone)");
-                if(obj.transform.position.y > cutter.transform.position.y)
-                {
-                    var force = new Vector3(Random.Range(-2f,2f), 15f, Random.Range(-2f, 2f));
-                    obj.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
-                    StartCoroutine(CulForce(obj));
-                }
-                else
-                {
-                    obj.GetComponent<Rigidbody>().isKinematic = true;
-                    StartCoroutine(CulForce(obj));
-                }
+                CutterExplode(obj, cutterPos, G);
             }
             else
             {
-                var chainScript = obj.AddComponent<ChainBreak_Y>();
-                chainScript.Chain(obj);
-
-                Vector3 forcePower = new Vector3(Random.Range(-Power, Power), Random.Range(-Power * 0.5f, Power * 0.5f), Random.Range(-Power * 0.5f, Power * 0.5f));
-                Vector3 TorquePower = new Vector3(Random.Range(-Torque, Torque), Random.Range(-Torque, Torque), Random.Range(-Torque, Torque));
-
-                obj.GetComponent<Rigidbody>().AddForce(forcePower, ForceMode.Impulse);
-                obj.GetComponent<Rigidbody>().AddTorque(TorquePower, ForceMode.Impulse);
+                if (chain) ChainExplode(obj, G);
+                else StartCoroutine(StandardExplosionCoroutin(obj, G));
             }
             //5秒後に消す
-            Destroy(gameObject, 5.0f);
+            Destroy(obj, 5.0f);
         }
     }
-    //揺らすメソッド
-    public void Shake(float duration, float magnitude)
-    {
-        StartCoroutine(DoShake(duration, magnitude));
-    }
 
-    private IEnumerator DoShake(float duration, float magnitude)
-    {
-        var pos = transform.localPosition;
-
-        var elapsed = 0f;
-
-        while (elapsed < duration)
-        {
-            var x = pos.x + Random.Range(-1f, 1f) * magnitude;
-            var y = pos.y + Random.Range(-1f, 1f) * magnitude;
-
-            transform.localPosition = new Vector3(x, y, pos.z);
-
-            elapsed += Time.deltaTime;
-
-            yield return null;
-        }
-
-        transform.localPosition = pos;
-    }
-
-    private IEnumerator CulForce(GameObject obj)
+    private void StandardExplosion(GameObject obj)
     {
         Vector3 forcePower = new Vector3(Random.Range(-Power, Power), Random.Range(-Power * 0.5f, Power * 0.5f), Random.Range(-Power * 0.5f, Power * 0.5f));
         Vector3 TorquePower = new Vector3(Random.Range(-Torque, Torque), Random.Range(-Torque, Torque), Random.Range(-Torque, Torque));
 
+        obj.GetComponent<Rigidbody>().AddForce(forcePower, ForceMode.Impulse);
+        obj.GetComponent<Rigidbody>().AddTorque(TorquePower, ForceMode.Impulse);
+    }
+
+    //基本的な爆発
+    private IEnumerator StandardExplosionCoroutin(GameObject obj,Vector3 G)
+    {
+        var forceDir = (G - obj.transform.position).normalized;
+        var F = forceDir * 3f;
+        obj.GetComponent<Rigidbody>().AddForce(F, ForceMode.Impulse);
+        obj.GetComponent<Rigidbody>().useGravity = false;
+
         yield return new WaitForSeconds(1f);
 
         obj.GetComponent<Rigidbody>().isKinematic = false;
-        obj.GetComponent<Rigidbody>().AddForce(forcePower, ForceMode.Impulse);
-        obj.GetComponent<Rigidbody>().AddTorque(TorquePower, ForceMode.Impulse);
+        obj.GetComponent<Rigidbody>().useGravity = true;
+        StandardExplosion(obj);
+    }
+
+    public void CutterExplode(GameObject obj, Vector3 CP, Vector3 G)
+    {
+        if (obj.transform.position.y > CP.y)
+        {
+            var force = new Vector3(Random.Range(-2f, 2f), 10f, Random.Range(-2f, 2f));
+            obj.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
+            StartCoroutine(StandardExplosionCoroutin(obj, G));
+        }
+        else
+        {
+            obj.GetComponent<Rigidbody>().isKinematic = true;
+            StartCoroutine(StandardExplosionCoroutin(obj, G));
+        }
+    }
+
+    public void ChainExplode(GameObject obj,Vector3 G)
+    {
+        var chainScript = obj.AddComponent<ChainBreak_Y>();
+        chainScript.Chain(obj);
+        StartCoroutine(StandardExplosionCoroutin(obj, G));
     }
 }
