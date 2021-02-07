@@ -6,8 +6,10 @@ public class ChainBreak_Y : MonoBehaviour
 {
     private int chikenFormNum = 0;
     public int chainStartStage = 1;
-    public int chainDamage = 0;
+    public int chainDamage = 100;
     private BulidngBreak_Y breakScript = null;
+
+    public Vector3 expStartPos; //爆発の発生地点
     // Start is called before the first frame update
     void Start()
     {
@@ -25,15 +27,5 @@ public class ChainBreak_Y : MonoBehaviour
         obj.tag = "Chain";
         if (obj.GetComponent<BoxCollider>() == null) obj.AddComponent<BoxCollider>();
         obj.GetComponent<BoxCollider>().isTrigger = true;
-        chainDamage = 200;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Object")
-        {
-            breakScript = other.GetComponent<BulidngBreak_Y>();
-            breakScript.HP -= chainDamage;
-        }
     }
 }

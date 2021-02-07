@@ -17,6 +17,9 @@ public class BulidngBreak_Y : MonoBehaviour
     bool Bung = false;
     bool Collapse = true;
     private int hitSkilID = 0;
+    private float deleteTime = 3f;
+    private Vector3 chainStartPos;
+    private float chainPower = 0f;
 
     // 自身の子要素を管理するリスト
     List<GameObject> myParts = new List<GameObject>();
@@ -65,7 +68,7 @@ public class BulidngBreak_Y : MonoBehaviour
             sound3.PlayOneShot(BreakSound);
 
             var objBoxCollider = gameObject.GetComponent<BoxCollider>();　　//BoxCollider削除用インスタンス作成
-            Destroy(objBoxCollider);　　//BoxCollider削除
+            Destroy(this.gameObject, deleteTime);　　//BoxCollider削除
         }
     }
 
@@ -92,6 +95,10 @@ public class BulidngBreak_Y : MonoBehaviour
         }
         if (other.gameObject.tag == "Chain")
         {
+            var chainScript = other.gameObject.GetComponent<ChainBreak_Y>();
+            HP -= chainScript.chainDamage;
+            chainStartPos = chainScript.expStartPos;
+            chainPower = other.gameObject.GetComponent<Rigidbody>().velocity.magnitude * 0.8f;
             hitSkilID = 8;
         }
 
@@ -138,68 +145,54 @@ public class BulidngBreak_Y : MonoBehaviour
         G /= myParts.Count;
 
         bool chain = false;
-        if (Random.Range(0f, 1f) < 0.05) { chain = true; Debug.Log("Chain"); }
+        if (Random.Range(0f, 1f) < 0.05f) { chain = true; Debug.Log("Chain"); }
 
         foreach (GameObject obj in myParts)
         {
             obj.GetComponent<Rigidbody>().isKinematic = false;
-            if (hitSkilID == 3)
+            if (chain) SetChain(obj);
+
+            if(hitSkilID == 1)
             {
-                /*
-                GameObject cutter = GameObject.Find("Cutter(Clone)");
-                var cutterDir = cutter.GetComponent<Rigidbody>().velocity.normalized;
-                var objPos = obj.transform.position - cutter.transform.position;
-                //XZ二次元化
-                cutterDir.y = 0;
-                objPos.y = 0;
-                //外積計算
-                var cross = Vector3.Cross(cutterDir, objPos);
-                //外積で左右どちらに飛ばすか決定
-                //XZ平面での計算なのでyで左右判定
-                if (cross.y > 0)
-                {
-                    var force = new Vector3(cutterDir.z, 0, -cutterDir.x) * obj.transform.position.y/2;
-                    obj.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
-                }
-                else
-                {
-                    var force = new Vector3(-cutterDir.z, 0, cutterDir.x) * obj.transform.position.y/2;
-                    obj.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
-                }
-                */
+                StartCoroutine(StandardExplosionCoroutin(obj, G));
+            }
+            else if (hitSkilID == 3)
+            {
                 CutterExplode(obj, cutterPos, G);
             }
             else
             {
-                if (chain) ChainExplode(obj, G);
-                else StartCoroutine(StandardExplosionCoroutin(obj, G));
+                ChainExplode(obj, G);
             }
             //5秒後に消す
-            Destroy(obj, 5.0f);
+            Destroy(obj, deleteTime);
         }
     }
 
     private void StandardExplosion(GameObject obj)
     {
-        Vector3 forcePower = new Vector3(Random.Range(-Power, Power), Random.Range(-Power * 0.5f, Power * 0.5f), Random.Range(-Power * 0.5f, Power * 0.5f));
+        Vector3 forcePower = new Vector3(Random.Range(-Power, Power), Random.Range(-Power * 0.2f, Power * 0.2f), Random.Range(-Power * 0.75f, Power * 0.75f));
         Vector3 TorquePower = new Vector3(Random.Range(-Torque, Torque), Random.Range(-Torque, Torque), Random.Range(-Torque, Torque));
 
-        obj.GetComponent<Rigidbody>().AddForce(forcePower, ForceMode.Impulse);
-        obj.GetComponent<Rigidbody>().AddTorque(TorquePower, ForceMode.Impulse);
+        var rb = obj.GetComponent<Rigidbody>();
+
+        rb.AddForce(forcePower, ForceMode.Impulse);
+        rb.AddTorque(TorquePower, ForceMode.Impulse);
     }
 
     //基本的な爆発
     private IEnumerator StandardExplosionCoroutin(GameObject obj,Vector3 G)
     {
         var forceDir = (G - obj.transform.position).normalized;
-        var F = forceDir * 3f;
-        obj.GetComponent<Rigidbody>().AddForce(F, ForceMode.Impulse);
-        obj.GetComponent<Rigidbody>().useGravity = false;
+        var F = forceDir * 5f;
+        var rb = obj.GetComponent<Rigidbody>();
+        rb.AddForce(F, ForceMode.Impulse);
+        rb.useGravity = false;
 
         yield return new WaitForSeconds(1f);
 
-        obj.GetComponent<Rigidbody>().isKinematic = false;
-        obj.GetComponent<Rigidbody>().useGravity = true;
+        rb.isKinematic = false;
+        rb.useGravity = true;
         StandardExplosion(obj);
     }
 
@@ -218,10 +211,21 @@ public class BulidngBreak_Y : MonoBehaviour
         }
     }
 
-    public void ChainExplode(GameObject obj,Vector3 G)
+    private void SetChain(GameObject obj)
     {
         var chainScript = obj.AddComponent<ChainBreak_Y>();
+        chainScript.expStartPos = gameObject.transform.position;
         chainScript.Chain(obj);
-        StartCoroutine(StandardExplosionCoroutin(obj, G));
+    }
+
+    public void ChainExplode(GameObject obj,Vector3 G)
+    {
+        var F = (obj.transform.position - chainStartPos).normalized * chainPower;
+        F.x *= Random.Range(0.2f, 1.8f);
+        F.z *= Random.Range(0.2f, 1.8f);
+        var rb = obj.GetComponent<Rigidbody>();
+        Vector3 TorquePower = new Vector3(Random.Range(-Torque, Torque), Random.Range(-Torque, Torque), Random.Range(-Torque, Torque));
+        rb.AddForce(F, ForceMode.Impulse);
+        rb.AddTorque(TorquePower, ForceMode.Impulse);
     }
 }
