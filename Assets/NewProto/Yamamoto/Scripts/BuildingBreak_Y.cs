@@ -2,24 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulidngBreak_Y : MonoBehaviour
+public class BuildingBreak_Y : MonoBehaviour
 {
     [SerializeField] private FoodMaker_R scrFood = null;
     public GameObject BreakEffect;
     public float Torque;
     public float Power;
     public AudioClip AttackSound, ExplosionSound, BreakSound;
+    private AudioSource aSound, eSound, bSound;
     public float HP;        //Inspector上から設定できます。
     public int kickDamage;  //キックで与えるダメージ量
     public int blastDamage;
     public int cutterDamage;
     public int breakScore;  //建物を破壊したときに得られるスコア
     bool Bung = false;
-    bool Collapse = true;
     private int hitSkilID = 0;
     private float deleteTime = 3f;
     private Vector3 chainStartPos;
     private float chainPower = 0f;
+    private bool explosion = false;
+    private bool finish = false;
 
     // 自身の子要素を管理するリスト
     List<GameObject> myParts = new List<GameObject>();
@@ -35,40 +37,38 @@ public class BulidngBreak_Y : MonoBehaviour
             // 子要素リストにパーツを追加
             myParts.Add(child.gameObject);
         }
+        aSound = GetComponent<AudioSource>();
+        eSound = GetComponent<AudioSource>();
+        bSound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (HP <= 0)//ダメージがHPを超えると破壊
+        if (HP <= 0 && !Bung)//ダメージがHPを超えると破壊
         {
-            if (!Bung)
-            {
-                GameObject.Find("Canvas").GetComponent<Parameters_R>().ScoreManager(breakScore);
-            }
-            Bung = true;
-        }
+            GameObject.Find("Canvas").GetComponent<Parameters_R>().ScoreManager(breakScore);
 
-        if (Bung && Collapse)
-        {
-            Collapse = false;
-            if(scrFood != null)
+            if (scrFood != null)
             {
                 scrFood.DropFood();
             }
             Explode();
-            Instantiate(BreakEffect, transform.position, Quaternion.identity, transform);　//エフェクト発生
 
+            Destroy(this.gameObject.GetComponent<BoxCollider>());
+            Destroy(this.gameObject, deleteTime);   //オブジェクト削除
+            Bung = true;
+        }
+
+        if (explosion && !finish)
+        {
+            //エフェクト発生
+            Instantiate(BreakEffect, transform.position, Quaternion.identity, transform);
             //サウンド再生
-            AudioSource sound1 = GetComponent<AudioSource>();
-            sound1.PlayOneShot(AttackSound);
-            AudioSource sound2 = GetComponent<AudioSource>();
-            sound2.PlayOneShot(ExplosionSound);
-            AudioSource sound3 = GetComponent<AudioSource>();
-            sound3.PlayOneShot(BreakSound);
-
-            var objBoxCollider = gameObject.GetComponent<BoxCollider>();　　//BoxCollider削除用インスタンス作成
-            Destroy(this.gameObject, deleteTime);　　//BoxCollider削除
+            aSound.PlayOneShot(AttackSound);
+            eSound.PlayOneShot(ExplosionSound);
+            bSound.PlayOneShot(BreakSound);
+            finish = true;
         }
     }
 
@@ -131,12 +131,20 @@ public class BulidngBreak_Y : MonoBehaviour
     // 吹き飛ばしメソッド
     void Explode()
     {
+        //破壊済み状態にタグとレイヤーを変更
         this.gameObject.tag = "Broken";
+        this.gameObject.layer = LayerMask.NameToLayer("BrokenObject");
+        //破壊時のおはようブラストやカッターの位置を取得
+        GameObject morBla = GameObject.Find("MorningBlastSphere_Y(Clone)");
         GameObject cutter = GameObject.Find("Cutter(Clone)");
+        var morBlaPos = new Vector3();
         var cutterPos = new Vector3();
+        if (hitSkilID == 2) morBlaPos = morBla.transform.position;
         if (hitSkilID == 3) cutterPos = cutter.transform.position;
 
+        //Gは建物の重心
         var G = new Vector3();
+        var P = this.gameObject.transform.position;
 
         foreach (GameObject obj in myParts)
         {
@@ -150,15 +158,21 @@ public class BulidngBreak_Y : MonoBehaviour
         foreach (GameObject obj in myParts)
         {
             obj.GetComponent<Rigidbody>().isKinematic = false;
+            obj.AddComponent<BoxCollider>();
+            obj.layer = LayerMask.NameToLayer("Shard");
             if (chain) SetChain(obj);
 
-            if(hitSkilID == 1)
+            if (hitSkilID == 1)
             {
-                StartCoroutine(StandardExplosionCoroutin(obj, G));
+                KickCollapse(obj, P);
+            }
+            else if (hitSkilID == 2)
+            {
+                MorBlaBreak(obj, morBlaPos);
             }
             else if (hitSkilID == 3)
             {
-                CutterExplode(obj, cutterPos, G);
+                CutterBreak(obj, cutterPos, G);
             }
             else
             {
@@ -171,11 +185,10 @@ public class BulidngBreak_Y : MonoBehaviour
 
     private void StandardExplosion(GameObject obj)
     {
+        explosion = true;
         Vector3 forcePower = new Vector3(Random.Range(-Power, Power), Random.Range(-Power * 0.2f, Power * 0.2f), Random.Range(-Power * 0.75f, Power * 0.75f));
         Vector3 TorquePower = new Vector3(Random.Range(-Torque, Torque), Random.Range(-Torque, Torque), Random.Range(-Torque, Torque));
-
         var rb = obj.GetComponent<Rigidbody>();
-
         rb.AddForce(forcePower, ForceMode.Impulse);
         rb.AddTorque(TorquePower, ForceMode.Impulse);
     }
@@ -196,19 +209,45 @@ public class BulidngBreak_Y : MonoBehaviour
         StandardExplosion(obj);
     }
 
-    public void CutterExplode(GameObject obj, Vector3 CP, Vector3 G)
+    private void KickCollapse(GameObject obj, Vector3 P)
+    {
+        var pos = obj.transform.position;
+        var dir = pos - P;
+        float power = 0f;
+        if (dir.y < 0) power = -dir.y;
+        dir.y = 0f;
+        dir = dir.normalized;
+        var F = dir * power;
+        Vector3 TorquePower = new Vector3(Random.Range(-Torque, Torque), Random.Range(-Torque, Torque), Random.Range(-Torque, Torque));
+        var rb = obj.GetComponent<Rigidbody>();
+        rb.AddForce(F, ForceMode.Impulse);
+        rb.AddTorque(TorquePower, ForceMode.Impulse);
+        explosion = true;
+    }
+
+    private void MorBlaBreak(GameObject obj,Vector3 MP)     //MPはおはようブラストのposition
+    {
+        var pos = obj.transform.position;
+        var F = pos - MP;
+        Vector3 TorquePower = new Vector3(Random.Range(-Torque, Torque), Random.Range(-Torque, Torque), Random.Range(-Torque, Torque));
+        var rb = obj.GetComponent<Rigidbody>();
+        rb.AddForce(F, ForceMode.Impulse);
+        rb.AddTorque(TorquePower, ForceMode.Impulse);
+        explosion = true;
+    }
+
+    private void CutterBreak(GameObject obj, Vector3 CP, Vector3 G)   //CPはカッターのposition　y座標比較に利用
     {
         if (obj.transform.position.y > CP.y)
         {
             var force = new Vector3(Random.Range(-2f, 2f), 10f, Random.Range(-2f, 2f));
             obj.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
-            StartCoroutine(StandardExplosionCoroutin(obj, G));
         }
         else
         {
             obj.GetComponent<Rigidbody>().isKinematic = true;
-            StartCoroutine(StandardExplosionCoroutin(obj, G));
         }
+        StartCoroutine(StandardExplosionCoroutin(obj, G));
     }
 
     private void SetChain(GameObject obj)
@@ -220,6 +259,7 @@ public class BulidngBreak_Y : MonoBehaviour
 
     public void ChainExplode(GameObject obj,Vector3 G)
     {
+        explosion = true;
         var F = (obj.transform.position - chainStartPos).normalized * chainPower;
         F.x *= Random.Range(0.2f, 1.8f);
         F.z *= Random.Range(0.2f, 1.8f);

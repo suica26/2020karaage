@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class ChainBreak_Y : MonoBehaviour
 {
-    private int chikenFormNum = 0;
     public int chainStartStage = 1;
     public int chainDamage = 100;
-    private BulidngBreak_Y breakScript = null;
+    private BuildingBreak_Y breakScript = null;
 
     public Vector3 expStartPos; //爆発の発生地点
     // Start is called before the first frame update
