@@ -121,6 +121,50 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &53586032
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 53586034}
+  - component: {fileID: 53586033}
+  m_Layer: 0
+  m_Name: KickCollision
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &53586033
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 53586032}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &53586034
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 53586032}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 251786632}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &114851538 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 304393477411147693, guid: 71d9b453319308e49a737554bb598e15,
@@ -153,7 +197,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1074258156}
   scrFood: {fileID: 114851539}
-  tier: 2
+  tier_WalkAttack: 0
+  tier_ChargeKick: 0
   BreakEffect: {fileID: 2714036437048776495, guid: c1b6977c8b92845e3a1103d68f2de786,
     type: 3}
   Torque: 1
@@ -166,6 +211,7 @@ MonoBehaviour:
   blastDamage: 110
   cutterDamage: 70
   breakScore: 50
+  breakPoint: 25
 --- !u!1 &128197442
 GameObject:
   m_ObjectHideFlags: 0
@@ -1315,7 +1361,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1074258156}
   scrFood: {fileID: 887917449}
-  tier: 2
+  tier_WalkAttack: 0
+  tier_ChargeKick: 0
   BreakEffect: {fileID: 2714036437048776495, guid: c1b6977c8b92845e3a1103d68f2de786,
     type: 3}
   Torque: 1
@@ -1328,6 +1375,7 @@ MonoBehaviour:
   blastDamage: 110
   cutterDamage: 70
   breakScore: 50
+  breakPoint: 0
 --- !u!1001 &927381235
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1578,6 +1626,7 @@ GameObject:
   - component: {fileID: 1074258161}
   - component: {fileID: 1074258162}
   - component: {fileID: 1074258163}
+  - component: {fileID: 1074258164}
   m_Layer: 2
   m_Name: Player
   m_TagString: Player
@@ -1663,7 +1712,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &1074258160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1702,6 +1751,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   preCutter: {fileID: 6961119836935489928, guid: edd512ccb3021a544b56f70bb325e81b,
     type: 3}
+  preCutterFA: {fileID: 6961119836935489928, guid: de86dd8830fb13342912a66aa34ffecd,
+    type: 3}
+  setGround: {fileID: 1207547016}
   cutterTransform:
   - {fileID: 1158644117}
   - {fileID: 2009541118}
@@ -1726,6 +1778,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxPullTime: 1
+  chargeClip: {fileID: 0}
   blastClip: {fileID: 8300000, guid: 3d4ad762f5c634b91b62292a58edb812, type: 3}
   secondBlastTime: 0.5
   thirdBlastTime: 0.5
@@ -1834,6 +1887,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1074258164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1074258156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75b95996922d5de44a3e6b1818c1c9e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kickCollisions:
+  - {fileID: 53586032}
+  - {fileID: 2039436789}
+  - {fileID: 1561970909}
+  - {fileID: 1862548236}
+  kickEffect: {fileID: 6715095415447669578, guid: c38672bee64b74bcaa57d0a877f5dc6a,
+    type: 3}
+  kickSound: {fileID: 8300000, guid: bac5f5002c9044ece8b11bf1f4bf23ff, type: 3}
+  chargePoint: 0
 --- !u!1001 &1110180607
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2189,7 +2263,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1074258156}
   scrFood: {fileID: 1212280878}
-  tier: 3
+  tier_WalkAttack: 0
+  tier_ChargeKick: 0
   BreakEffect: {fileID: 2714036437048776495, guid: c1b6977c8b92845e3a1103d68f2de786,
     type: 3}
   Torque: 1
@@ -2202,6 +2277,7 @@ MonoBehaviour:
   blastDamage: 110
   cutterDamage: 70
   breakScore: 100
+  breakPoint: 0
 --- !u!1 &1249651267 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 500a09c7bfbdd2f43b61a94e919b33c0,
@@ -2405,6 +2481,50 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71d9b453319308e49a737554bb598e15, type: 3}
+--- !u!1 &1561970909
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1561970911}
+  - component: {fileID: 1561970910}
+  m_Layer: 0
+  m_Name: KickCollision
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1561970910
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561970909}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1561970911
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561970909}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.4153846, z: 0}
+  m_LocalScale: {x: 0.07692307, y: 0.07692307, z: 0.07692307}
+  m_Children: []
+  m_Father: {fileID: 672067973}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1637314733
 GameObject:
   m_ObjectHideFlags: 0
@@ -2578,7 +2698,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1074258156}
   scrFood: {fileID: 1695827468}
-  tier: 2
+  tier_WalkAttack: 0
+  tier_ChargeKick: 0
   BreakEffect: {fileID: 2714036437048776495, guid: c1b6977c8b92845e3a1103d68f2de786,
     type: 3}
   Torque: 1
@@ -2591,6 +2712,7 @@ MonoBehaviour:
   blastDamage: 110
   cutterDamage: 70
   breakScore: 50
+  breakPoint: 0
 --- !u!1 &1789166760
 GameObject:
   m_ObjectHideFlags: 0
@@ -2824,6 +2946,50 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1862548236
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1862548238}
+  - component: {fileID: 1862548237}
+  m_Layer: 0
+  m_Name: KickCollision
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1862548237
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1862548236}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1862548238
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1862548236}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.42499998, z: 0}
+  m_LocalScale: {x: 0.045454543, y: 0.045454543, z: 0.045454543}
+  m_Children: []
+  m_Father: {fileID: 878570798}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1869879746
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3053,7 +3219,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1074258156}
   scrFood: {fileID: 1995712328}
-  tier: 4
+  tier_WalkAttack: 0
+  tier_ChargeKick: 0
   BreakEffect: {fileID: 2714036437048776495, guid: c1b6977c8b92845e3a1103d68f2de786,
     type: 3}
   Torque: 1
@@ -3066,6 +3233,7 @@ MonoBehaviour:
   blastDamage: 110
   cutterDamage: 70
   breakScore: 300
+  breakPoint: 0
 --- !u!1001 &2002998657
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3379,6 +3547,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1249651270}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2039436789
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2039436791}
+  - component: {fileID: 2039436790}
+  m_Layer: 0
+  m_Name: KickCollision
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &2039436790
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2039436789}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &2039436791
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2039436789}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.525, z: 0}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_Children: []
+  m_Father: {fileID: 1249651270}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2072982560
 GameObject:

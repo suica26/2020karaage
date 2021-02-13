@@ -27,7 +27,7 @@ public class CutterMove1_R : MonoBehaviour
         rigid = gameObject.GetComponent<Rigidbody>();
         rigid.AddForce(moveVec * 12f * evoSpeed, ForceMode.Impulse);
         audioSource = gameObject.GetComponent<AudioSource>();
-        audioSource.PlayOneShot(cutterSound);
+        audioSource.PlayOneShot(cutterSound, 5.0f);
     }
 
     // Update is called once per frame
