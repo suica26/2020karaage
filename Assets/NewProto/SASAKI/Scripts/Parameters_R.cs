@@ -27,18 +27,25 @@ public class Parameters_R : MonoBehaviour
 {
     [SerializeField] private Text scoreText, timeText, hpText;
     [SerializeField] private GameObject resultPanel = null;
-    [SerializeField] public int score, time, ep, hp;
+    [SerializeField] public int score, time, ep, hp, kick, 
+        maxEP1, maxEP2, currentEP, getEP;
    
     private bool freeze = false;
     private float count;
+    public Slider kickSlider, epSlider, hpSlider;
 
     void Start()
     {
         scoreText.text = "PRICE : $" + score;
         timeText.text = "Time: " + time;
         hpText.text = "HP: " + hp;
-
+        kickSlider.value = 0;
+        epSlider.value = 0;
+        epSlider.maxValue = 100;
+        hpSlider.value = 50;
+        hpSlider.maxValue = 50;
         count = time;
+        kick = 1;
     }
 
     //増田：表示を変えました
@@ -48,6 +55,11 @@ public class Parameters_R : MonoBehaviour
         {
             score += addScore;
             scoreText.text = "PRICE : $" + score;
+            kickSlider.value += kick;
+            if (kickSlider.value == 10)
+            {
+                kickSlider.value = 0;
+            }
         }
     }
     //引数で指定した分だけスコアを加算します。
@@ -77,6 +89,8 @@ public class Parameters_R : MonoBehaviour
         {
             ep += addEP;
             TimeManager(+1);
+            currentEP = currentEP + getEP;
+            epSlider.value = currentEP;
             if (ep == 100)
             {
                 TimeManager(+10);
@@ -98,6 +112,7 @@ public class Parameters_R : MonoBehaviour
         if (!freeze)
         {
             hp -= addHP;
+            hpSlider.value -= addHP;
            /*if (hp <= 0)
             *{
             *    freeze = true;
@@ -116,6 +131,23 @@ public class Parameters_R : MonoBehaviour
         if (time - count > 1)
         {
             TimeManager(-1);
+        }
+
+        if (epSlider.value == maxEP1)
+        {
+            epSlider.value = 0;
+            currentEP = 0;
+            epSlider.maxValue = 150;
+            hpSlider.maxValue = 100;
+            maxEP1 = 10000;
+        }
+        else if (epSlider.value == maxEP2)
+        {
+            epSlider.value = 0;
+            currentEP = 0;
+            epSlider.maxValue = 250;
+            hpSlider.maxValue = 150;
+            maxEP2 = 10000;
         }
     }
     //タイマーです。一秒ごとにTimeManager()で一秒減らしてます。
