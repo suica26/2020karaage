@@ -4,31 +4,41 @@ using UnityEngine;
 
 public class TankBullet_Y : MonoBehaviour
 {
+    private EnemyNav_Y navScript;
     public GameObject bulletPrefab;
     private GameObject bullet;
-    public GameObject player;
+    private GameObject launchPort;
+    private GameObject head;
+    public float fireFreeze = 5f;
+    private float routineTimer = 0f;
     public float desBulletTime = 10f;   //初期値は10秒 Inspector上から変更できます
     // Start is called before the first frame update
     void Start()
     {
-        
+        navScript = this.gameObject.GetComponent<EnemyNav_Y>();
+        launchPort = transform.Find("Gun/launchport").gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-        LaunchBullet(); 
+        if (navScript.navFlg)
+        {
+            if (routineTimer <= 0f)
+            {
+                Debug.Log(routineTimer);
+                LaunchBullet();
+            }
+            else routineTimer -= Time.deltaTime;
+        }
     }
 
     void LaunchBullet()
     {
-        float random = Random.Range(0, 100);
-        if (random <= 1)
-        {
-            bullet = Instantiate(bulletPrefab, this.gameObject.transform.position, this.transform.rotation);
-            bullet.transform.forward = player.transform.position - this.transform.position;
-            bullet.GetComponent<Rigidbody>().velocity = (bullet.transform.forward.normalized * 10f);
-            Destroy(bullet, desBulletTime);
-        }
+        routineTimer = fireFreeze;
+        bullet = Instantiate(bulletPrefab, launchPort.transform.position, this.transform.rotation);
+        bullet.transform.forward = GameObject.Find("Player").transform.position - launchPort.transform.position;
+        bullet.GetComponent<Rigidbody>().velocity = (bullet.transform.forward.normalized * 10f);
+        Destroy(bullet, desBulletTime);
     }
 }

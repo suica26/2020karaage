@@ -16,6 +16,7 @@ public class BuildingBreak_Y : MonoBehaviour
     public int cutterDamage;
     public int breakScore;  //建物を破壊したときに得られるスコア
     bool Bung = false;
+    private bool damage = false;
     private int hitSkilID = 0;
     private float deleteTime = 3f;
     private Vector3 chainStartPos;
@@ -79,19 +80,21 @@ public class BuildingBreak_Y : MonoBehaviour
         {
             HP -= kickDamage;
             hitSkilID = 1;
+            damage = true;
         }
         //ブラストダメージ
         if (other.gameObject.name == "MorningBlastSphere_Y(Clone)")
         {
-            Debug.Log("Hit");
             HP -= blastDamage;
             hitSkilID = 2;
+            damage = true;
         }
         //カッターダメージ
         if (other.gameObject.name == "Cutter(Clone)")
         {
             HP -= cutterDamage;
             hitSkilID = 3;
+            damage = true;
         }
         if (other.gameObject.tag == "Chain")
         {
@@ -100,10 +103,15 @@ public class BuildingBreak_Y : MonoBehaviour
             chainStartPos = chainScript.expStartPos;
             chainPower = other.gameObject.GetComponent<Rigidbody>().velocity.magnitude * 0.8f;
             hitSkilID = 8;
+            damage = true;
         }
 
-        //振動させる
-        StartCoroutine(DoShake(0.25f, 0.1f));
+        if (damage)
+        {
+            //振動させる
+            StartCoroutine(DoShake(0.25f, 0.1f));
+            damage = false;
+        }
     }
 
     //振動コルーチン
