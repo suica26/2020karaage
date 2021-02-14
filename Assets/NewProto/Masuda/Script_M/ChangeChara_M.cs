@@ -27,7 +27,7 @@ public class ChangeChara_M : MonoBehaviour
         if (esaPoint >= firstEvo && esaPoint < secondEvo)
         {
             currentChickenForm.SetActive(false);
-            currentChickenForm = _chickenForm_tbl[1];      
+            currentChickenForm = _chickenForm_tbl[1];
         }
         //第2形態から第3形態に変化
         else if (esaPoint >= secondEvo && esaPoint < thirdEvo)
