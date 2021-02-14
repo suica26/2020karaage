@@ -3117,19 +3117,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8075661621763774d8231cabafe12bb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrFood: {fileID: 1826267765989022820}
+  tier_WalkAttack: 4
+  tier_ChargeKick: 0
   BreakEffect: {fileID: 4887747504211809885, guid: 191835ba8b4804149ab0f1c5224f8ec1,
     type: 3}
-  Torque: 2
-  Power: 20
   AttackSound: {fileID: 0}
   ExplosionSound: {fileID: 8300000, guid: daefb0acdaea1bb449e0b8a09ad05e6a, type: 3}
   BreakSound: {fileID: 8300000, guid: 7038fc68676cc428f99f62497340bda1, type: 3}
+  Torque: 2
+  Power: 20
   HP: 1000
-  kickDamage: 150
-  blastDamage: 110
-  cutterDamage: 70
+  kickMag: 200
+  blastMag: 200
+  cutterMag: 200
+  chargeKickMag: 500
+  chainProbability: 5
+  chainDamage: 30
+  superChainDamage: 500
   breakScore: 300
+  breakPoint: 50
 --- !u!65 &7340861720396784177
 BoxCollider:
   m_ObjectHideFlags: 0

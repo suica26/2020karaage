@@ -4,23 +4,34 @@ using UnityEngine;
 
 public class BuildingBreak_Y : MonoBehaviour
 {
-    [SerializeField] private FoodMaker_R scrFood = null;
+    [Range(0, 4), SerializeField] private int tier_WalkAttack;
+    [Range(0, 4), SerializeField] private int tier_ChargeKick;
     public GameObject BreakEffect;
+    public AudioClip AttackSound, ExplosionSound, BreakSound;
     public float Torque;
     public float Power;
-    public AudioClip AttackSound, ExplosionSound, BreakSound;
+    public int HP;                  //Inspector上から設定できます。
+    [Header("ダメージ倍率")]
+    public int kickMag;             //キックのダメージ倍率
+    public int blastMag;         //ブラストのダメージ倍率
+    public int cutterMag;        //カッターのダメージ倍率
+    public int chargeKickMag;       //ためキックのダメージ倍率
+    [Header("連鎖破壊発生確率")] [Range(0, 100)] public float chainProbability = 5f;        //連鎖破壊発生確率
+    [Header("連鎖破壊でのダメージ量")] public int chainDamage;                 //連鎖破壊でのダメージ(自分の破片)
+    [Header("ためキックによる連鎖破壊でのダメージ量")] public int superChainDamage;    //ためキックによる連鎖破壊でのダメージ
+    [Header("破壊時のスコア")] public int breakScore;                          //建物を破壊したときに得られるスコア
+    [Header("破壊時のチャージポイント")] public int breakPoint;                //建物を破壊したときに得られるチャージポイント
     private AudioSource aSound, eSound, bSound;
-    public int HP;        //Inspector上から設定できます。
-    public int kickDamage;  //キックで与えるダメージ量
-    public int blastDamage;
-    public int cutterDamage;
-    public int breakScore;  //建物を破壊したときに得られるスコア
-    bool Bung = false;
-    private bool damage = false;
+    private GameObject player;
+    private Vector3 chainStartPos;
+    private FoodMaker_R scrFood;
+    private chickenKick_R scrKick;
+    private EvolutionChicken_R scrEvo;
     private int hitSkilID = 0;
     private float deleteTime = 3f;
-    private Vector3 chainStartPos;
     private float chainPower = 0f;
+    private bool damage = false;
+    private bool Bung = false;
     private bool explosion = false;
     private bool finish = false;
 
@@ -30,6 +41,9 @@ public class BuildingBreak_Y : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.Find("Player");
+        scrKick = player.GetComponent<chickenKick_R>();
+        scrEvo = player.GetComponent<EvolutionChicken_R>();
         // 自分の子要素をチェック
         foreach (Transform child in gameObject.transform)
         {
@@ -46,17 +60,20 @@ public class BuildingBreak_Y : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        hitSkilID = 4;
+
         if (HP <= 0 && !Bung)//ダメージがHPを超えると破壊
         {
             GameObject.Find("Canvas").GetComponent<Parameters_R>().ScoreManager(breakScore);
+            scrKick.chargePoint += breakPoint;
 
             if (scrFood != null)
             {
                 scrFood.DropFood();
             }
-            Explode();
 
-            Destroy(this.gameObject.GetComponent<BoxCollider>());
+            BuildingBreak();
+            if (hitSkilID != 4) Destroy(GetComponent<BoxCollider>());
             Destroy(this.gameObject, deleteTime);   //オブジェクト削除
             Bung = true;
         }
@@ -66,7 +83,6 @@ public class BuildingBreak_Y : MonoBehaviour
             //エフェクト発生
             Instantiate(BreakEffect, transform.position, Quaternion.identity, transform);
             //サウンド再生
-            aSound.PlayOneShot(AttackSound);
             eSound.PlayOneShot(ExplosionSound);
             bSound.PlayOneShot(BreakSound);
             finish = true;
@@ -78,21 +94,30 @@ public class BuildingBreak_Y : MonoBehaviour
         //キックダメージ
         if (other.gameObject.name == "KickCollision")
         {
-            HP -= kickDamage;
-            hitSkilID = 1;
+            if (scrKick.chargePoint >= 100 && scrEvo.EvolutionNum >= tier_ChargeKick)
+            {
+                HP = 0;
+                scrKick.chargePoint = 0;
+                hitSkilID = 4;
+            }
+            else
+            {
+                HP -= kickMag;
+                hitSkilID = 1;
+            }
             damage = true;
         }
         //ブラストダメージ
         if (other.gameObject.name == "MorningBlastSphere_Y(Clone)")
         {
-            HP -= blastDamage;
+            HP -= blastMag;
             hitSkilID = 2;
             damage = true;
         }
         //カッターダメージ
         if (other.gameObject.name == "Cutter(Clone)")
         {
-            HP -= cutterDamage;
+            HP -= cutterMag;
             hitSkilID = 3;
             damage = true;
         }
@@ -102,15 +127,25 @@ public class BuildingBreak_Y : MonoBehaviour
             HP -= chainScript.chainDamage;
             chainStartPos = chainScript.expStartPos;
             chainPower = other.gameObject.GetComponent<Rigidbody>().velocity.magnitude * 0.8f;
-            hitSkilID = 8;
+            hitSkilID = 0;
             damage = true;
         }
 
         if (damage)
         {
             //振動させる
+            aSound.PlayOneShot(AttackSound);
             StartCoroutine(DoShake(0.25f, 0.1f));
             damage = false;
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        //踏みつぶし攻撃
+        if (collision.gameObject.tag == "Player" && scrEvo.EvolutionNum >= tier_WalkAttack)
+        {
+            HP = 0;
+            hitSkilID = 5;
         }
     }
 
@@ -136,8 +171,8 @@ public class BuildingBreak_Y : MonoBehaviour
         transform.localPosition = pos;
     }
 
-    // 吹き飛ばしメソッド
-    void Explode()
+    // 破壊メソッド
+    void BuildingBreak()
     {
         //破壊済み状態にタグとレイヤーを変更
         tag = "Broken";
@@ -161,33 +196,32 @@ public class BuildingBreak_Y : MonoBehaviour
         G /= myParts.Count;
 
         bool chain = false;
-        if (Random.Range(0f, 1f) < 0.05f) { chain = true; Debug.Log("Chain"); }
+        if (Random.Range(0f, 1f) < chainProbability/100f) { chain = true; Debug.Log("Chain"); }
 
         foreach (GameObject obj in myParts)
         {
+            if (hitSkilID == 4) break;
             obj.GetComponent<Rigidbody>().isKinematic = false;
             obj.AddComponent<BoxCollider>();
             obj.layer = LayerMask.NameToLayer("Shard");
-            if (chain) SetChain(obj);
+            if (chain) SetChain(obj,chainDamage);
 
-            if (hitSkilID == 1)
+            switch (hitSkilID)
             {
-                KickCollapse(obj, P);
+                case 1: KickCollapse(obj, P); break;
+                case 2: MorBlaBreak(obj, morBlaPos); break;
+                case 3: CutterBreak(obj, cutterPos, G); break;
+                case 5: StandardExplosion(obj); break;
+                default: Debug.Log("エラー:対応していない処理です"); break;
             }
-            else if (hitSkilID == 2)
-            {
-                MorBlaBreak(obj, morBlaPos);
-            }
-            else if (hitSkilID == 3)
-            {
-                CutterBreak(obj, cutterPos, G);
-            }
-            else
-            {
-                ChainExplode(obj, G);
-            }
+
             //5秒後に消す
             Destroy(obj, deleteTime);
+        }
+
+        if (hitSkilID == 4)
+        {
+            SetChain(this.gameObject, superChainDamage); ChargeKickBreak();
         }
     }
 
@@ -258,9 +292,26 @@ public class BuildingBreak_Y : MonoBehaviour
         StartCoroutine(StandardExplosionCoroutin(obj, G));
     }
 
-    private void SetChain(GameObject obj)
+    private void ChargeKickBreak()
+    {
+        var dir = transform.position - player.transform.position;
+        dir.y = 0f;
+        dir = dir.normalized;
+        dir.y = 0.5f;
+        var F = dir * 50f;
+        Torque *= 1000f;
+        Vector3 TorquePower = new Vector3(Random.Range(-Torque, Torque), Random.Range(-Torque, Torque), Random.Range(-Torque, Torque));
+        var rb = GetComponent<Rigidbody>();
+        rb.isKinematic = false;
+        rb.useGravity = true;
+        rb.AddForce(F, ForceMode.Impulse);
+        rb.AddTorque(TorquePower, ForceMode.Impulse);
+    }
+
+    private void SetChain(GameObject obj,int shardDamage)
     {
         var chainScript = obj.AddComponent<ChainBreak_Y>();
+        chainScript.chainDamage = shardDamage;
         chainScript.expStartPos = gameObject.transform.position;
         chainScript.Chain(obj);
     }

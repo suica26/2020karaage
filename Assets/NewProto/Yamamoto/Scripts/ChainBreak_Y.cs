@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ChainBreak_Y : MonoBehaviour
 {
-    public int chainStartStage = 1;
     public int chainDamage = 100;
     public Vector3 expStartPos; //爆発の発生地点
 
