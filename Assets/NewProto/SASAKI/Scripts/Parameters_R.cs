@@ -28,7 +28,7 @@ public class Parameters_R : MonoBehaviour
     [SerializeField] private Text scoreText, timeText, hpText;
     [SerializeField] private GameObject resultPanel = null;
     [SerializeField] public int score, time, ep, hp, kick, 
-        maxEP1, maxEP2, currentEP, getEP;
+        maxEP1, maxEP2, maxEP3, currentEP, getEP;
    
     private bool freeze = false;
     private float count;
@@ -138,7 +138,8 @@ public class Parameters_R : MonoBehaviour
             epSlider.value = 0;
             currentEP = 0;
             epSlider.maxValue = 150;
-            hpSlider.maxValue = 100;
+            hpSlider.maxValue = 80;
+            hpSlider.value += 30; 
             maxEP1 = 10000;
         }
         else if (epSlider.value == maxEP2)
@@ -146,8 +147,12 @@ public class Parameters_R : MonoBehaviour
             epSlider.value = 0;
             currentEP = 0;
             epSlider.maxValue = 250;
-            hpSlider.maxValue = 150;
+            hpSlider.maxValue = 160;
+            hpSlider.value += 80;
             maxEP2 = 10000;
+        }else if(epSlider.value == maxEP3)
+        {
+            hpSlider.value += 340;
         }
     }
     //タイマーです。一秒ごとにTimeManager()で一秒減らしてます。
