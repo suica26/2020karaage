@@ -22,6 +22,7 @@ public class CharaMoveRigid_R : MonoBehaviour
     private Ray ray;
 
     private EvolutionChicken_R scrEvo;
+    private Cutter_R scrCutter;
     private float speed;
     private float jumpSpeed;
 
@@ -38,6 +39,7 @@ public class CharaMoveRigid_R : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         scrEvo = GetComponent<EvolutionChicken_R>();
+        scrCutter = GetComponent<Cutter_R>();
     }
 
     void Update()
@@ -59,7 +61,7 @@ public class CharaMoveRigid_R : MonoBehaviour
             if (fallAttack)
             {
                 fallAttack = false;
-                fallAttackCollisionCheck(fallAttackVer);
+                fallAttackCollisionCheck();
                 rb.velocity = Vector3.zero;
             }
 
@@ -110,7 +112,7 @@ public class CharaMoveRigid_R : MonoBehaviour
                 }
                 else
                 {
-                    fallAttackVer = 1;
+                    fallAttackVer = 2;
                     StartCoroutine("FallAttack");
                 }
             }
@@ -122,7 +124,7 @@ public class CharaMoveRigid_R : MonoBehaviour
                 }
                 else
                 {
-                    fallAttackVer = 2;
+                    fallAttackVer = 1;
                     StartCoroutine("FallAttack");
                 }
             }
@@ -135,31 +137,39 @@ public class CharaMoveRigid_R : MonoBehaviour
 
     }
 
-    void fallAttackCollisionCheck(int kickOrCutter)
+    void fallAttackCollisionCheck()
     {
         GameObject circleChecker;
-        if(kickOrCutter == 1)
+        if(fallAttackVer == 1)
         {
             circleChecker = Instantiate(preCircle, transform.position, Quaternion.identity);
             circleChecker.transform.localScale = new Vector3(circleRange[scrEvo.EvolutionNum], 0.1f, circleRange[scrEvo.EvolutionNum]);
-            Destroy(circleChecker, 0.5f);
-        }
-        else if(kickOrCutter == 2)
-        {
-            circleChecker = Instantiate(preCircle, transform.position, Quaternion.identity);
-            circleChecker.transform.localScale = new Vector3(circleKickRange, 0.1f, circleKickRange);
             Destroy(circleChecker, 0.5f);
         }
     }
 
     IEnumerator FallAttack()
     {
-        rb.velocity = Vector3.zero;
-        rb.AddForce(Vector3.up * 4f, ForceMode.Impulse);
-        fallAttack = true;
-        yield return new WaitForSeconds(0.5f);
+        if(fallAttackVer == 1)
+        {
+            rb.velocity = Vector3.zero;
+            rb.AddForce(Vector3.up * 4f, ForceMode.Impulse);
+            fallAttack = true;
+            yield return new WaitForSeconds(0.5f);
 
-        rb.AddForce(Vector3.down * jumpSpeed * 2f, ForceMode.Impulse);
-        yield break;
+            rb.AddForce(Vector3.down * jumpSpeed * 2f, ForceMode.Impulse);
+            yield break;
+        }
+        else
+        {
+            rb.velocity = Vector3.zero;
+            rb.AddForce(Vector3.up * 4f, ForceMode.Impulse);
+            fallAttack = true;
+            yield return new WaitForSeconds(0.5f);
+            scrCutter.CutterAttack();
+
+            rb.AddForce(Vector3.down * jumpSpeed * 2f, ForceMode.Impulse);
+            yield break;
+        }
     }
 }

@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 7085002276654931349}
   - component: {fileID: 6267467712832785778}
   - component: {fileID: 1418663819757619074}
-  - component: {fileID: 7005204394689491266}
   - component: {fileID: 2189924157468444328}
+  - component: {fileID: -3450733528987409216}
   m_Layer: 2
-  m_Name: Cutter
+  m_Name: CutterFA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -112,23 +112,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7005204394689491266
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6961119836935489928}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ac20e4eb8d6952438fbff5b9994f376, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cutterSound: {fileID: 8300000, guid: 40e73b647457d6c4e998208db25b8c54, type: 3}
-  cutterVer: 0
-  rotSpeed: 360
-  backArea: {fileID: 0}
-  evoSpeed: 0
 --- !u!82 &2189924157468444328
 AudioSource:
   m_ObjectHideFlags: 0
@@ -225,3 +208,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-3450733528987409216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6961119836935489928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382c55cb125280242973b4bd30e7de4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ground: {fileID: 0}
+  backArea: {fileID: 0}
+  evoSpeed: 0

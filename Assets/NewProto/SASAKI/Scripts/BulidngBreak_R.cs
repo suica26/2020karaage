@@ -6,7 +6,8 @@ public class BulidngBreak_R : MonoBehaviour
 {
     [SerializeField] private GameObject Player;
     [SerializeField] private FoodMaker_R scrFood = null;
-    [Range(1, 4), SerializeField] private int tier;
+    [Range(0, 4), SerializeField] private int tier_WalkAttack;
+    [Range(0, 4), SerializeField] private int tier_ChargeKick;
     public GameObject BreakEffect;
     public float Torque;
     public float Power;
@@ -16,9 +17,11 @@ public class BulidngBreak_R : MonoBehaviour
     public int blastDamage;
     public int cutterDamage;
     public int breakScore;  //建物を破壊したときに得られるスコア
+    public int breakPoint;  //建物を破棄したときに得られるチャージポイント
     bool Bung = false;
     bool Collapse = true;
 
+    private chickenKick_R scrKick;
     private EvolutionChicken_R scrEvo;
 
     // 自身の子要素を管理するリスト
@@ -27,6 +30,7 @@ public class BulidngBreak_R : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        scrKick = Player.GetComponent<chickenKick_R>();
         scrEvo = Player.GetComponent<EvolutionChicken_R>();
 
         // 自分の子要素をチェック
@@ -47,6 +51,7 @@ public class BulidngBreak_R : MonoBehaviour
             if (!Bung)
             {
                 GameObject.Find("Canvas").GetComponent<Parameters_R>().ScoreManager(breakScore);
+                scrKick.chargePoint += breakPoint;
             }
             Bung = true;
         }
@@ -79,7 +84,15 @@ public class BulidngBreak_R : MonoBehaviour
         //キックダメージ
         if (other.gameObject.name == "KickCollision")
         {
-            HP -= kickDamage;
+            if(scrKick.chargePoint >= 100 && scrEvo.EvolutionNum >= tier_ChargeKick)
+            {
+                HP = 0;
+                scrKick.chargePoint = 0;
+            }
+            else
+            {
+                HP -= kickDamage;
+            }
         }
         //ブラストダメージ
         if (other.gameObject.name == "MorningBlastSphere_Y(Clone)")
@@ -100,7 +113,7 @@ public class BulidngBreak_R : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         //踏みつぶし攻撃
-        if (collision.gameObject.tag == "Player" && scrEvo.EvolutionNum >= tier)
+        if (collision.gameObject.tag == "Player" && scrEvo.EvolutionNum >= tier_WalkAttack)
         {
             HP = 0;
         }
