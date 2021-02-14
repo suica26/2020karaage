@@ -5,6 +5,8 @@ using UnityEngine;
 public class Cutter_R : MonoBehaviour
 {
     [SerializeField] private GameObject preCutter = null;
+    [SerializeField] private GameObject preCutterFA;
+    [SerializeField] private GameObject setGround;
 
     [SerializeField] private Transform[] cutterTransform;
     [SerializeField] private float[] cutterSize;
@@ -12,8 +14,8 @@ public class Cutter_R : MonoBehaviour
     public bool throwingCutter = false;
 
     GameObject cutter;
+    GameObject cutterFA;
     EvolutionChicken_R scrEvo;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -36,12 +38,16 @@ public class Cutter_R : MonoBehaviour
 
     public void CutterAttack()
     {
-
+        cutterFA = Instantiate(preCutterFA, cutterTransform[scrEvo.EvolutionNum].position, Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0, 0, 0)));
+        cutterFA.transform.localScale = cutter.transform.localScale * cutterSize[scrEvo.EvolutionNum];
+        cutterFA.GetComponent<CutterMoveFA_R>().ground = setGround;
+        cutterFA.GetComponent<CutterMoveFA_R>().evoSpeed = cutterSize[scrEvo.EvolutionNum];
+        cutterFA.GetComponent<CutterMoveFA_R>().backArea = cutterTransform[scrEvo.EvolutionNum];
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject == cutter)
+        if(other.gameObject.name == "Cutter(Clone)" || other.gameObject.name == "CutterFA(Clone)")
         {
             Destroy(other.gameObject);
             throwingCutter = false;

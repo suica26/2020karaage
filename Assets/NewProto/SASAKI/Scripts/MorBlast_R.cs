@@ -5,6 +5,7 @@ using UnityEngine;
 public class MorBlast_R : MonoBehaviour
 {
     [SerializeField] private float maxPullTime;
+    [SerializeField] private AudioClip chargeClip;
     [SerializeField] private AudioClip blastClip;
     [SerializeField] private float secondBlastTime, thirdBlastTime;
     [SerializeField] private float[] spreadScale;
@@ -66,6 +67,10 @@ public class MorBlast_R : MonoBehaviour
     {
         if(pullTime < maxPullTime)
         {
+            if (!audioSource.isPlaying)
+            {
+                //audioSource.PlayOneShot(chargeClip, 5.0f);
+            }
             pullTime += Time.deltaTime;
         }
         else if(pullTime >= maxPullTime)
