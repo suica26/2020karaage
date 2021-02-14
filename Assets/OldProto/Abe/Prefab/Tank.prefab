@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 740392090487104618}
   - component: {fileID: 591681524194802956}
   - component: {fileID: -1289019804591318571}
+  - component: {fileID: 5785591650176258643}
+  - component: {fileID: -3528759734893100838}
   m_Layer: 0
   m_Name: Tank
   m_TagString: Untagged
@@ -76,6 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e74c95f74d84214086feb9bdf035c0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nav: {fileID: 0}
   eneDis: 20
   navFlg: 0
 --- !u!195 &-1289019804591318571
@@ -100,6 +103,46 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &5785591650176258643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998171526041432950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b4a8a1ada7ed87449ed6fc1b5fc4c8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 626279893075345666, guid: 524c2dc832f21e444bb6a4f89300021e,
+    type: 3}
+  fireFreeze: 5
+  desBulletTime: 10
+--- !u!114 &-3528759734893100838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998171526041432950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8075661621763774d8231cabafe12bb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrFood: {fileID: 0}
+  BreakEffect: {fileID: 0}
+  Torque: 0
+  Power: 0
+  AttackSound: {fileID: 0}
+  ExplosionSound: {fileID: 0}
+  BreakSound: {fileID: 0}
+  HP: 0
+  kickDamage: 0
+  blastDamage: 0
+  cutterDamage: 0
+  breakScore: 0
 --- !u!1 &4860956250139582127
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ public class BuildingBreak_Y : MonoBehaviour
     public float Power;
     public AudioClip AttackSound, ExplosionSound, BreakSound;
     private AudioSource aSound, eSound, bSound;
-    public float HP;        //Inspector上から設定できます。
+    public int HP;        //Inspector上から設定できます。
     public int kickDamage;  //キックで与えるダメージ量
     public int blastDamage;
     public int cutterDamage;
@@ -140,7 +140,7 @@ public class BuildingBreak_Y : MonoBehaviour
     void Explode()
     {
         //破壊済み状態にタグとレイヤーを変更
-        this.gameObject.tag = "Broken";
+        tag = "Broken";
         this.gameObject.layer = LayerMask.NameToLayer("BrokenObject");
         //破壊時のおはようブラストやカッターの位置を取得
         GameObject morBla = GameObject.Find("MorningBlastSphere_Y(Clone)");
@@ -152,7 +152,7 @@ public class BuildingBreak_Y : MonoBehaviour
 
         //Gは建物の重心
         var G = new Vector3();
-        var P = this.gameObject.transform.position;
+        var P = transform.position;
 
         foreach (GameObject obj in myParts)
         {
