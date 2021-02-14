@@ -6,20 +6,7 @@ public class ChainBreak_Y : MonoBehaviour
 {
     public int chainStartStage = 1;
     public int chainDamage = 100;
-    private BuildingBreak_Y breakScript = null;
-
     public Vector3 expStartPos; //爆発の発生地点
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void Chain(GameObject obj)
     {
