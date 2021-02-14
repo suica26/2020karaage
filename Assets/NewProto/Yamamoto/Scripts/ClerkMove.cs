@@ -5,13 +5,13 @@ using UnityEngine;
 public class ClerkMove : MonoBehaviour
 {
     private EnemyNav_Y navScript;
-    [SerializeField]private float routineTimer;
+    [SerializeField]private float routineTimer = 0f;
     //攻撃をした際の次の行動までの時間
     public float hitFleeze = 5f;    //殴り時
     private Animator animator;
     private string waitStr = "isWait";
     private string runStr = "isRun";
-    private string hitStr = "isHit";
+    private string hitStr = "Hit";
     private GameObject player;
     public GameObject hitBoxPrefab = null;
 
@@ -21,7 +21,6 @@ public class ClerkMove : MonoBehaviour
         navScript = GetComponent<EnemyNav_Y>();
         animator = GetComponent<Animator>();
         player = GameObject.Find("Player");
-        routineTimer = 0f;
     }
 
     // Update is called once per frame
@@ -56,22 +55,18 @@ public class ClerkMove : MonoBehaviour
     {
         animator.SetBool(waitStr, true);
         animator.SetBool(runStr, false);
-        animator.SetBool(hitStr, false);
     }
 
     private void Run()
     {
         animator.SetBool(runStr, true);
         animator.SetBool(waitStr, false);
-        animator.SetBool(hitStr, false);
-        transform.forward = navScript.nav.velocity;
     }
 
     private void Hit()
     {
         routineTimer = hitFleeze;
-        animator.SetBool(hitStr, true);
-        Debug.Log("hit");
+        animator.SetTrigger(hitStr);
     }
 
     private void CreateDamageBox()

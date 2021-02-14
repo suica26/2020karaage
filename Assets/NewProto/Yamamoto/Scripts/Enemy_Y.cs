@@ -13,11 +13,14 @@ public class Enemy_Y : MonoBehaviour
     public int cutterDamage = 0;
     private Animator animator;
     private bool live = true;
+    private GameObject player;
+    public float torque;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
+        player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
@@ -98,9 +101,27 @@ public class Enemy_Y : MonoBehaviour
         Destroy(GetComponent<EnemyNav_Y>());
         GetComponent<NavMeshAgent>().enabled = false;
         Destroy(this.gameObject, 3f);
-        GetComponent<Rigidbody>().useGravity = false;
         if (GetComponent<CapsuleCollider>() != null) Destroy(GetComponent<CapsuleCollider>());
         live = false;
-        animator.SetTrigger("Death");
+        animator.SetBool("isDeath", true);
+        if (hitSkilID == 3 || hitSkilID == 8)
+        {
+            GetComponent<Rigidbody>().useGravity = false;
+        }
+        else
+        {
+            var rb = GetComponent<Rigidbody>();
+            rb.isKinematic = false;
+            rb.freezeRotation = false;
+            rb.useGravity = true;
+            var F = transform.position - player.transform.position;
+            F.y = 0;
+            F = F.normalized;
+            F.y = 0.6f;
+            animator.applyRootMotion = false;
+            rb.AddForce(F * 50f, ForceMode.Impulse);
+            Vector3 TorquePower = new Vector3(Random.Range(-torque, torque), Random.Range(-torque, torque), Random.Range(-torque, torque));
+            rb.AddTorque(TorquePower, ForceMode.Impulse);
+        }
     }
 }

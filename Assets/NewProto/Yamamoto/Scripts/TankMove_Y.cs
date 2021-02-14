@@ -32,7 +32,6 @@ public class TankMove_Y : MonoBehaviour
         {
             if (routineTimer <= 0f)
             {
-                Debug.Log(routineTimer);
                 LaunchBullet();
             }
             else routineTimer -= Time.deltaTime;

@@ -799,6 +799,7 @@ GameObject:
   - component: {fileID: -467652645431974226}
   - component: {fileID: 5605824141474829233}
   - component: {fileID: 3906591500205283640}
+  - component: {fileID: 8984250292784249946}
   m_Layer: 0
   m_Name: Police_Y
   m_TagString: Untagged
@@ -871,9 +872,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48c95c6e9f20f1c4ea35fa0fd0f25f2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  routineTimer: 0
   fireFreeze: 3
   hitFleeze: 1
   bulletPrefab: {fileID: 8871777121355791282, guid: 265a824829aba0d4aa6e6875340839c8,
+    type: 3}
+  hitBoxPrefab: {fileID: 3531957827537779740, guid: a150f44f619a03c4789834dc1d0d0ef4,
     type: 3}
 --- !u!114 &-467652645431974226
 MonoBehaviour:
@@ -920,6 +924,26 @@ MonoBehaviour:
   nav: {fileID: 0}
   eneDis: 50
   navFlg: 0
+  live: 1
+--- !u!95 &8984250292784249946
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6409649343163760621}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 92ebdc475605dd14797b45e1c2f3705e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6593029485720162807
 GameObject:
   m_ObjectHideFlags: 0
