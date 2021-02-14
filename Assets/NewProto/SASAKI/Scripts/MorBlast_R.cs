@@ -69,7 +69,7 @@ public class MorBlast_R : MonoBehaviour
         {
             if (!audioSource.isPlaying)
             {
-                audioSource.PlayOneShot(chargeClip, 5.0f);
+                //audioSource.PlayOneShot(chargeClip, 5.0f);
             }
             pullTime += Time.deltaTime;
         }
