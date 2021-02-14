@@ -17,7 +17,7 @@ public class Gauge_M : MonoBehaviour
     void Update()
     {
         //Spaceを押すとゲージがたまっていく
-        if (Input.GetKey(KeyCode.B))
+        if (Input.GetKey(KeyCode.Space))
         {
             rt.sizeDelta = new Vector2(rt.sizeDelta.x + 2.5f, 25.0f);
             if (rt.sizeDelta.x >= 150)
@@ -27,7 +27,7 @@ public class Gauge_M : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.B))
+        if (Input.GetKeyUp(KeyCode.Space))
         {
             //Spaceを離すとゲージが空になる
             rt.sizeDelta = new Vector2(0.0f, 50.0f);
