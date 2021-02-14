@@ -47,7 +47,7 @@ public class Cutter_R : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject == cutter || other.gameObject == cutterFA)
+        if(other.gameObject.name == "Cutter(Clone)" || other.gameObject.name == "CutterFA(Clone)")
         {
             Destroy(other.gameObject);
             throwingCutter = false;
