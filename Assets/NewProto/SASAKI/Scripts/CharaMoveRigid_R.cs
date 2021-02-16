@@ -110,7 +110,7 @@ public class CharaMoveRigid_R : MonoBehaviour
                 {
                     cutterFallAttackTimer += Time.deltaTime;
                 }
-                else
+                else if(!scrCutter.throwingCutter)
                 {
                     fallAttackVer = 2;
                     StartCoroutine("FallAttack");
