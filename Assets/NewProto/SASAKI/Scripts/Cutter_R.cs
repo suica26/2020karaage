@@ -11,6 +11,7 @@ public class Cutter_R : MonoBehaviour
     [SerializeField] private Transform[] cutterTransform;
     [SerializeField] private float[] cutterSize;
 
+    private float timer;
     public bool throwingCutter = false;
 
     GameObject cutter;
@@ -20,27 +21,41 @@ public class Cutter_R : MonoBehaviour
     void Start()
     {
         scrEvo = GetComponent<EvolutionChicken_R>();
+        timer = 0.0f;
         throwingCutter = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(1) && !throwingCutter)
+        if (Input.GetMouseButton(1))
         {
-            throwingCutter = true;
-            cutter = Instantiate(preCutter, cutterTransform[scrEvo.EvolutionNum].position, Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0, 0, -90)));
-            cutter.transform.localScale = cutter.transform.localScale * cutterSize[scrEvo.EvolutionNum];
-            cutter.GetComponent<CutterMove1_R>().evoSpeed = cutterSize[scrEvo.EvolutionNum];
-            cutter.GetComponent<CutterMove1_R>().backArea = cutterTransform[scrEvo.EvolutionNum];
+            timer += Time.deltaTime;
+        }
+        if (Input.GetMouseButtonUp(1))
+        {
+            if(!throwingCutter && timer <= 0.5f)
+            {
+                timer = 0.0f;
+                throwingCutter = true;
+                cutter = Instantiate(preCutter, cutterTransform[scrEvo.EvolutionNum].position, Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0, 0, -90)));
+                cutter.transform.localScale = cutter.transform.localScale * cutterSize[scrEvo.EvolutionNum];
+                cutter.GetComponent<CutterMove1_R>().evoSpeed = cutterSize[scrEvo.EvolutionNum];
+                cutter.GetComponent<CutterMove1_R>().backArea = cutterTransform[scrEvo.EvolutionNum];
+            }
+            else
+            {
+                timer = 0.0f;
+            }
         }
     }
 
     public void CutterAttack()
     {
+        timer = 0.0f;
+        throwingCutter = true;
         cutterFA = Instantiate(preCutterFA, cutterTransform[scrEvo.EvolutionNum].position, Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0, 0, 0)));
-        cutterFA.transform.localScale = cutter.transform.localScale * cutterSize[scrEvo.EvolutionNum];
-        cutterFA.GetComponent<CutterMoveFA_R>().ground = setGround;
+        cutterFA.transform.localScale = cutterFA.transform.localScale * cutterSize[scrEvo.EvolutionNum];
         cutterFA.GetComponent<CutterMoveFA_R>().evoSpeed = cutterSize[scrEvo.EvolutionNum];
         cutterFA.GetComponent<CutterMoveFA_R>().backArea = cutterTransform[scrEvo.EvolutionNum];
     }

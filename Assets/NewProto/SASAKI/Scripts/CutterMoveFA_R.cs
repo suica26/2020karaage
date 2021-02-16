@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CutterMoveFA_R : MonoBehaviour
 {
-    public GameObject ground;
     private GameObject player;
 
     private Rigidbody rigid;
@@ -46,7 +45,7 @@ public class CutterMoveFA_R : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject == ground)
+        if(other.gameObject.tag == "Ground")
         {
             touchGround = true;
             rigid.velocity = Vector3.zero;
