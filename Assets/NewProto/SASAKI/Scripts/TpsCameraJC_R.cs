@@ -7,7 +7,6 @@ public class TpsCameraJC_R : MonoBehaviour
     [SerializeField] GameObject objPlayer;
     [SerializeField] Transform target;
     [SerializeField] float spinSpeed = 1.0f;
-    [SerializeField] float[] radius;
 
     Vector3 nowPos;
     Vector3 pos = Vector3.zero;
