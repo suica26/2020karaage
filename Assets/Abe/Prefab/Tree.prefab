@@ -50,9 +50,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
   scrParameters: {fileID: 0}
-  objFood: {fileID: 0}
-  minFood: 0
-  maxFood: 0
+  objFood: {fileID: 6224625970994948174, guid: 432283639b2517e4cb2744030344a38c, type: 3}
+  minFood: 1
+  maxFood: 2
 --- !u!114 &3476724451111682075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,22 +67,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tier_WalkAttack: 0
   tier_ChargeKick: 0
-  BreakEffect: {fileID: 0}
+  divideObject: {fileID: 0}
   AttackSound: {fileID: 0}
+  HP: 200
+  kickMag: 0.7
+  blastMag: 0.7
+  cutterMag: 1.5
+  chargeKickMag: 2
+  breakScore: 100
+  breakPoint: 1
+  BreakEffect: {fileID: 0}
   ExplosionSound: {fileID: 0}
-  BreakSound: {fileID: 0}
-  HP: 300
-  Torque: 0
-  Power: 0
-  kickMag: 0
-  blastMag: 0
-  cutterMag: 0
-  chargeKickMag: 0
+  CollapseSound: {fileID: 0}
+  deleteTime: 3
+  Torque: 1
+  Power: 1
   chainProbability: 5
-  chainDamage: 0
-  superChainDamage: 0
-  breakScore: 0
-  breakPoint: 0
+  chainDamage: 5
+  superChainDamage: 200
 --- !u!82 &-4844768861795583518
 AudioSource:
   m_ObjectHideFlags: 0

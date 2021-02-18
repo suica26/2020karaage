@@ -35,7 +35,6 @@ public class ObjectBreak_Y : MonoBehaviour
             // 子要素リストにパーツを追加
             myParts.Add(child.gameObject);
         }
-        Debug.Log(myParts.Count);
         eSound = GetComponent<AudioSource>();
         cSound = GetComponent<AudioSource>();
     }

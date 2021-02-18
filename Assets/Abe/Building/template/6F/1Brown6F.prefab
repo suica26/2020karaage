@@ -736,22 +736,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tier_WalkAttack: 0
   tier_ChargeKick: 0
-  BreakEffect: {fileID: 0}
-  AttackSound: {fileID: 0}
-  ExplosionSound: {fileID: 0}
-  BreakSound: {fileID: 0}
-  Torque: 0
-  Power: 0
-  HP: 400
-  kickMag: 0
-  blastMag: 0
-  cutterMag: 0
-  chargeKickMag: 0
+  divideObject: {fileID: 0}
+  AttackSound: {fileID: 8300000, guid: abc42f36fe5c4c240a548f5df50a0ecd, type: 3}
+  HP: 600
+  kickMag: 1.5
+  blastMag: 1.1
+  cutterMag: 0.7
+  chargeKickMag: 3
+  breakScore: 150000
+  breakPoint: 10
+  BreakEffect: {fileID: 4267790152953556362, guid: 76dd1b57ce27a487db64614c36a17924,
+    type: 3}
+  ExplosionSound: {fileID: 8300000, guid: e454532e8e33d5d4cb74819fbd7d415e, type: 3}
+  CollapseSound: {fileID: 8300000, guid: 4bec759f4d32b044fb76a940aca32d43, type: 3}
+  deleteTime: 3
+  Torque: 1
+  Power: 1
   chainProbability: 5
-  chainDamage: 0
-  superChainDamage: 0
-  breakScore: 0
-  breakPoint: 0
+  chainDamage: 50
+  superChainDamage: 600
 --- !u!114 &-3841543393369260767
 MonoBehaviour:
   m_ObjectHideFlags: 0
