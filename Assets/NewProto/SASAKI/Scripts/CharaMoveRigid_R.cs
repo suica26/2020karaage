@@ -11,6 +11,9 @@ public class CharaMoveRigid_R : MonoBehaviour
     [SerializeField] private float circleKickRange;
     [SerializeField] private float addFanWidth;
     [SerializeField] private float addFanHeight;
+    [SerializeField] private AudioClip CutterFAClip;
+    [SerializeField] private AudioClip KickFAClip;
+    [SerializeField] private AudioClip JumpClip;
     [SerializeField] GameObject preCircle;
     [SerializeField] GameObject preFan;
 
@@ -18,8 +21,10 @@ public class CharaMoveRigid_R : MonoBehaviour
     private float h, v;
     private Vector3 cameraForward = Vector3.zero;
     private Vector3 moveDirection = Vector3.zero;
-    private bool isGrounded = false;
+    private bool isGrounded = true;
     private Ray ray;
+
+    private AudioSource audioSource;
 
     private EvolutionChicken_R scrEvo;
     private Cutter_R scrCutter;
@@ -38,6 +43,7 @@ public class CharaMoveRigid_R : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
         scrEvo = GetComponent<EvolutionChicken_R>();
         scrCutter = GetComponent<Cutter_R>();
     }
@@ -85,6 +91,7 @@ public class CharaMoveRigid_R : MonoBehaviour
 
             if (Input.GetButtonDown("Jump"))
             {
+                audioSource.PlayOneShot(JumpClip);
                 rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
             }
         }
@@ -157,6 +164,7 @@ public class CharaMoveRigid_R : MonoBehaviour
             fallAttack = true;
             yield return new WaitForSeconds(0.5f);
 
+            audioSource.PlayOneShot(KickFAClip);
             rb.AddForce(Vector3.down * jumpSpeed * 2f, ForceMode.Impulse);
             yield break;
         }
@@ -166,8 +174,9 @@ public class CharaMoveRigid_R : MonoBehaviour
             rb.AddForce(Vector3.up * 4f, ForceMode.Impulse);
             fallAttack = true;
             yield return new WaitForSeconds(0.5f);
-            scrCutter.CutterAttack();
 
+            audioSource.PlayOneShot(CutterFAClip);
+            scrCutter.CutterAttack();
             rb.AddForce(Vector3.down * jumpSpeed * 2f, ForceMode.Impulse);
             yield break;
         }

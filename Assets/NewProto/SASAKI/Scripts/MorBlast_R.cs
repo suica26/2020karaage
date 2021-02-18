@@ -7,14 +7,16 @@ public class MorBlast_R : MonoBehaviour
     [SerializeField] private float maxPullTime;
     [SerializeField] private AudioClip chargeClip;
     [SerializeField] private AudioClip blastClip;
+    [SerializeField] private AudioClip evoBlastClip;
     [SerializeField] private float secondBlastTime, thirdBlastTime;
     [SerializeField] private float[] spreadScale;
+    [SerializeField] private float[] spreadEvoScale;
     public GameObject morBlaSphere;    //おはようブラストの干渉判定用の球体
     private float plusScale = 0f;   //おはようブラストの放射範囲
     private GameObject[] morningBlast = new GameObject[3];
-    private bool chargeFlg = true;
-    public float spreadTime = 0.5f;    //おはようブラストの放射時間
-    private bool releaseFlg;
+    private int charge;
+    private bool isBlast;   //ブラスト発声中か否かのフラグ
+    public float spreadTime;    //おはようブラストの放射時間
     public int Number = 0;
 
     private float pullTime = 0f;
@@ -26,22 +28,39 @@ public class MorBlast_R : MonoBehaviour
     {
         scrEvo = GetComponent<EvolutionChicken_R>();
         audioSource = GetComponent<AudioSource>();
-        releaseFlg = false;
-        Application.targetFrameRate = 60;
+        isBlast = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        releaseFlg = Input.GetMouseButtonUp(2) && pullTime > 0.5f;
+        if (Input.GetMouseButton(2) && !isBlast)
+        {
+            if(charge < 3)
+            {
+                //チャージ音を鳴らす
+                if (!(audioSource.isPlaying == chargeClip))
+                    audioSource.PlayOneShot(chargeClip);
+            }
 
-        if (Input.GetMouseButton(2) && chargeFlg == true)
-        {
-            ChargeBlast();
+            //チャージ段階の判定
+            pullTime += Time.deltaTime;
+            if (pullTime >= 1f && charge == 0)
+                charge = 1;
+            if (pullTime >= 2f && charge == 1)
+                charge = 2;
+            if (pullTime >= 3f && charge == 2)
+                charge = 3;
         }
-        if (releaseFlg == true && chargeFlg == true)   //2秒間押し続けるか、Bボタンを離したときに発動
+        if (Input.GetMouseButtonUp(2))   //マウス中ボタンを離した際に発動
         {
-            StartCoroutine("ReleaseBlast");
+            audioSource.Stop();
+            pullTime = 0f;
+            if(charge > 0)
+            {
+                isBlast = true;
+                StartCoroutine("ReleaseBlast");
+            }
         }
 
         
@@ -49,7 +68,7 @@ public class MorBlast_R : MonoBehaviour
         {
             if (morningBlast[i] != null)
             {
-                morningBlast[i].transform.localScale += new Vector3(plusScale, plusScale, plusScale);
+                morningBlast[i].transform.localScale += new Vector3(plusScale, plusScale, plusScale) / spreadTime * Time.deltaTime;
             }   
         }
 
@@ -63,28 +82,11 @@ public class MorBlast_R : MonoBehaviour
         }
     }
 
-    void ChargeBlast()
-    {
-        if(pullTime < maxPullTime)
-        {
-            if (!audioSource.isPlaying)
-            {
-                audioSource.PlayOneShot(chargeClip, 5.0f);
-            }
-            pullTime += Time.deltaTime;
-        }
-        else if(pullTime >= maxPullTime)
-        {
-            releaseFlg = true;
-        }
-    }
-
     IEnumerator ReleaseBlast()
     {
-        plusScale = pullTime / maxPullTime + spreadScale[scrEvo.EvolutionNum];
+        plusScale = spreadScale[charge - 1] * spreadEvoScale[scrEvo.EvolutionNum];
         pullTime = 0f;
-        chargeFlg = false;
-        releaseFlg = false;
+        charge = 0;
         audioSource.PlayOneShot(blastClip);
 
         //1回目
@@ -98,14 +100,16 @@ public class MorBlast_R : MonoBehaviour
         //3回目
         morningBlast[2] = Instantiate(morBlaSphere, transform);
         Destroy(morningBlast[2], spreadTime);
-        chargeFlg = true;
+        isBlast = false;
         yield break;
     }
 
     //進化時のブラスト生成
     public void EvoBlast()
     {
-        pullTime = 1.0f;
-        StartCoroutine("ReleaseBlast");
+        plusScale = spreadScale[2] * spreadEvoScale[scrEvo.EvolutionNum];
+        audioSource.PlayOneShot(evoBlastClip);
+        morningBlast[0] = Instantiate(morBlaSphere, transform);
+        Destroy(morningBlast[0], spreadTime);
     }
 }

@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class CutterMoveFA_R : MonoBehaviour
 {
-    private GameObject player;
+    [SerializeField] private AudioClip CutterClip;
 
+    private GameObject player;
     private Rigidbody rigid;
+    private AudioSource audioSource;
 
     private Vector3 moveVec;
     public Transform backArea;
@@ -23,6 +25,7 @@ public class CutterMoveFA_R : MonoBehaviour
         touchGround = false;
         rigid = GetComponent<Rigidbody>();
         rigid.AddForce(-transform.up * 18f * evoSpeed, ForceMode.Impulse);
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -45,6 +48,7 @@ public class CutterMoveFA_R : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        audioSource.PlayOneShot(CutterClip);
         if(other.gameObject.tag == "Ground")
         {
             touchGround = true;
