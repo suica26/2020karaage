@@ -25,7 +25,7 @@ public class TankMove_Y : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        int HP = GetComponent<BuildingBreak_Y >().HP;
+        int HP = GetComponent<ObjectStateManagement_Y>().HP;
         if (HP <= 0) Destroy(this);
 
         if (navScript.navFlg)
