@@ -8,14 +8,14 @@ public class BuildingBreak_Y : MonoBehaviour
     [Range(0, 4), SerializeField] private int tier_ChargeKick;
     public GameObject BreakEffect;
     public AudioClip AttackSound, ExplosionSound, BreakSound;
-    public float Torque;
-    public float Power;
     public int HP;                  //Inspector上から設定できます。
+    public float Torque;    //爆発でどれだけ回転するか
+    public float Power;     //爆発でどれぐらい吹っ飛ぶか
     [Header("ダメージ倍率")]
-    public int kickMag;             //キックのダメージ倍率
-    public int blastMag;         //ブラストのダメージ倍率
-    public int cutterMag;        //カッターのダメージ倍率
-    public int chargeKickMag;       //ためキックのダメージ倍率
+    public float kickMag;             //キックのダメージ倍率
+    public float blastMag;         //ブラストのダメージ倍率
+    public float cutterMag;        //カッターのダメージ倍率
+    public float chargeKickMag;       //ためキックのダメージ倍率
     [Header("連鎖破壊発生確率")] [Range(0, 100)] public float chainProbability = 5f;        //連鎖破壊発生確率
     [Header("連鎖破壊でのダメージ量")] public int chainDamage;                 //連鎖破壊でのダメージ(自分の破片)
     [Header("ためキックによる連鎖破壊でのダメージ量")] public int superChainDamage;    //ためキックによる連鎖破壊でのダメージ
@@ -44,6 +44,7 @@ public class BuildingBreak_Y : MonoBehaviour
         player = GameObject.Find("Player");
         scrKick = player.GetComponent<chickenKick_R>();
         scrEvo = player.GetComponent<EvolutionChicken_R>();
+        scrFood = GetComponent<FoodMaker_R>();
         // 自分の子要素をチェック
         foreach (Transform child in gameObject.transform)
         {
@@ -94,15 +95,22 @@ public class BuildingBreak_Y : MonoBehaviour
         //キックダメージ
         if (other.gameObject.name == "KickCollision")
         {
-            if (scrKick.chargePoint >= 100 && scrEvo.EvolutionNum >= tier_ChargeKick)
+            if (scrKick.chargePoint >= 100)
             {
-                HP = 0;
-                scrKick.chargePoint = 0;
-                hitSkilID = 4;
+                if(scrEvo.EvolutionNum >= tier_ChargeKick)
+                {
+                    HP = 0;
+                    scrKick.chargePoint = 0;
+                    hitSkilID = 4;
+                }
+                else
+                {
+                    HP -= (int)(scrEvo.Status_ATK * chargeKickMag);
+                }
             }
             else
             {
-                HP -= kickMag;
+                HP -= (int)(scrEvo.Status_ATK * kickMag);
                 hitSkilID = 1;
             }
             damage = true;
@@ -110,14 +118,14 @@ public class BuildingBreak_Y : MonoBehaviour
         //ブラストダメージ
         if (other.gameObject.name == "MorningBlastSphere_Y(Clone)")
         {
-            HP -= blastMag;
+            HP -= (int)(scrEvo.Status_ATK * blastMag);
             hitSkilID = 2;
             damage = true;
         }
         //カッターダメージ
         if (other.gameObject.name == "Cutter(Clone)")
         {
-            HP -= cutterMag;
+            HP -= (int)(scrEvo.Status_ATK * cutterMag);
             hitSkilID = 3;
             damage = true;
         }
