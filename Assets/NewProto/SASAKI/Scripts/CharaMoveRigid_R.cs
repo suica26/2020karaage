@@ -14,6 +14,7 @@ public class CharaMoveRigid_R : MonoBehaviour
     [SerializeField] private AudioClip CutterFAClip;
     [SerializeField] private AudioClip KickFAClip;
     [SerializeField] private AudioClip JumpClip;
+    [SerializeField] private Transition_R scrAnim;
     [SerializeField] GameObject preCircle;
     [SerializeField] GameObject preFan;
 
@@ -64,8 +65,12 @@ public class CharaMoveRigid_R : MonoBehaviour
 
         if (isGrounded)
         {
+            scrAnim.SetAnimator(Transition_R.Anim.JUMP, false);
+
             if (fallAttack)
             {
+                scrAnim.SetAnimator(Transition_R.Anim.KICKFA, false);
+                scrAnim.SetAnimator(Transition_R.Anim.CUTTERFA, false);
                 fallAttack = false;
                 fallAttackCollisionCheck();
                 rb.velocity = Vector3.zero;
@@ -73,6 +78,7 @@ public class CharaMoveRigid_R : MonoBehaviour
 
             if (h != 0 || v != 0)
             {
+                scrAnim.SetAnimator(Transition_R.Anim.WALK, true);
                 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
                 moveDirection = cameraForward * v + Camera.main.transform.right * h;
                 if (moveDirection.magnitude > 1)
@@ -88,17 +94,25 @@ public class CharaMoveRigid_R : MonoBehaviour
                     transform.rotation = Quaternion.RotateTowards(transform.rotation, qua, rotateSpeed * Time.deltaTime);
                 }
             }
+            else
+            {
+                scrAnim.SetAnimator(Transition_R.Anim.WALK, false);
+            }
 
             if (Input.GetButtonDown("Jump"))
             {
                 audioSource.PlayOneShot(JumpClip);
+                scrAnim.SetAnimator(Transition_R.Anim.JUMP, true);
                 rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
             }
         }
         else
         {
+            scrAnim.SetAnimator(Transition_R.Anim.JUMP, true);
+            scrAnim.SetAnimator(Transition_R.Anim.WALK, false);
+
             //空中での制動(移動量は地上の1/3程度)
-            if(h != 0 || v != 0)
+            if (h != 0 || v != 0)
             {
                 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
                 moveDirection = cameraForward * v + Camera.main.transform.right * h;
@@ -141,7 +155,6 @@ public class CharaMoveRigid_R : MonoBehaviour
                 cutterFallAttackTimer = 0f;
             }
         }
-
     }
 
     void fallAttackCollisionCheck()
@@ -159,10 +172,11 @@ public class CharaMoveRigid_R : MonoBehaviour
     {
         if(fallAttackVer == 1)
         {
+            scrAnim.SetAnimator(Transition_R.Anim.KICKFA, true);
             rb.velocity = Vector3.zero;
-            rb.AddForce(Vector3.up * 4f, ForceMode.Impulse);
+            rb.AddForce(Vector3.up * scrEvo.Status_JUMP * 0.75f, ForceMode.Impulse);
             fallAttack = true;
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.95f);
 
             audioSource.PlayOneShot(KickFAClip);
             rb.AddForce(Vector3.down * jumpSpeed * 2f, ForceMode.Impulse);
@@ -170,10 +184,11 @@ public class CharaMoveRigid_R : MonoBehaviour
         }
         else
         {
+            scrAnim.SetAnimator(Transition_R.Anim.CUTTERFA, true);
             rb.velocity = Vector3.zero;
-            rb.AddForce(Vector3.up * 4f, ForceMode.Impulse);
+            rb.AddForce(Vector3.up * scrEvo.Status_JUMP * 0.75f, ForceMode.Impulse);
             fallAttack = true;
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.95f);
 
             audioSource.PlayOneShot(CutterFAClip);
             scrCutter.CutterAttack();
