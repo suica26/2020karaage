@@ -5,21 +5,20 @@ using UnityEngine;
 public class ObjectBreak_Y : MonoBehaviour
 {
     public GameObject BreakEffect;
-    public AudioClip ExplosionSound, BreakSound, CollapseSound;
-    public float deleteTime = 3f;
-    public float Torque;    //爆発でどれだけ回転するか
-    public float Power;     //爆発でどれぐらい吹っ飛ぶか
-    [Header("連鎖破壊発生確率")] [Range(0, 100)] public float chainProbability = 5f;        //連鎖破壊発生確率
-    [Header("連鎖破壊でのダメージ量")] public int chainDamage;                 //連鎖破壊でのダメージ(自分の破片)
-    [Header("ためキックによる連鎖破壊でのダメージ量")] public int superChainDamage;    //ためキックによる連鎖破壊でのダメージ
-    private AudioSource eSound, bSound, cSound;
-    private GameObject player;
-    private Vector3 chainStartPos;
+    public AudioClip ExplosionSound, CollapseSound;
+    public Vector3 chainStartPos;
+    public float deleteTime = 3f;   //破片消滅までの時間
+    public float Torque = 1f;    //爆発でどれだけ回転するか
+    public float Power = 1f;     //爆発でどれぐらい吹っ飛ぶか
+    public float chainProbability = 5f;        //連鎖破壊発生確率
+    public int chainDamage;                 //連鎖破壊でのダメージ(自分の破片)
+    public int superChainDamage;    //ためキックによる連鎖破壊でのダメージ
     public int hitSkilID = 0;
-    private float chainPower = 0f;
-    private bool damage = false;
-    private bool Bung = false;
-    private bool live = true;
+    public float chainPower = 0f;
+    public bool live = true;
+    public bool death = false;
+    private AudioSource eSound, cSound;
+    private GameObject player;
 
     // 自身の子要素を管理するリスト
     List<GameObject> myParts = new List<GameObject>();
@@ -36,23 +35,23 @@ public class ObjectBreak_Y : MonoBehaviour
             // 子要素リストにパーツを追加
             myParts.Add(child.gameObject);
         }
+        Debug.Log(myParts.Count);
         eSound = GetComponent<AudioSource>();
-        bSound = GetComponent<AudioSource>();
         cSound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        ObjectBreak();
-        if (hitSkilID != 4) Destroy(GetComponent<BoxCollider>());
-        Destroy(this.gameObject, deleteTime);   //オブジェクト削除
+        if(death && tag != "Broken")
+        {
+            ObjectBreak();
+            if (hitSkilID != 4) Destroy(GetComponent<BoxCollider>());
+            Destroy(this.gameObject, deleteTime);   //オブジェクト削除
 
-        //エフェクト発生
-        Instantiate(BreakEffect, transform.position, Quaternion.identity, transform);
-        //サウンド再生
-        eSound.PlayOneShot(ExplosionSound);
-        bSound.PlayOneShot(BreakSound);
+            //エフェクト発生
+            Instantiate(BreakEffect, transform.position, Quaternion.identity, transform);
+        }
     }
 
     public void ObjectBreak()
@@ -85,7 +84,7 @@ public class ObjectBreak_Y : MonoBehaviour
         {
             if (hitSkilID == 4) break;
             obj.GetComponent<Rigidbody>().isKinematic = false;
-            obj.AddComponent<BoxCollider>();
+            if (obj.GetComponent<BoxCollider>() == null) obj.AddComponent<BoxCollider>();
             obj.layer = LayerMask.NameToLayer("Shard");
             if (chain) SetChain(obj, chainDamage);
 
@@ -110,7 +109,12 @@ public class ObjectBreak_Y : MonoBehaviour
 
     private void StandardExplosion(GameObject obj)
     {
-        if(live) eSound.PlayOneShot(ExplosionSound);live = false;
+        if (live)
+        {
+            eSound.PlayOneShot(ExplosionSound);
+            if(CollapseSound != null)cSound.PlayOneShot(CollapseSound);
+            live = false;
+        }
         Vector3 forcePower = new Vector3(Random.Range(-Power, Power), Random.Range(-Power * 0.2f, Power * 0.2f), Random.Range(-Power * 0.75f, Power * 0.75f));
         Vector3 TorquePower = new Vector3(Random.Range(-Torque, Torque), Random.Range(-Torque, Torque), Random.Range(-Torque, Torque));
         var rb = obj.GetComponent<Rigidbody>();
@@ -158,7 +162,12 @@ public class ObjectBreak_Y : MonoBehaviour
         var rb = obj.GetComponent<Rigidbody>();
         rb.AddForce(F, ForceMode.Impulse);
         rb.AddTorque(TorquePower, ForceMode.Impulse);
-        if (live) eSound.PlayOneShot(ExplosionSound); live = false;
+        if (live)
+        {
+            eSound.PlayOneShot(ExplosionSound);
+            if (CollapseSound != null) cSound.PlayOneShot(CollapseSound);
+            live = false;
+        }
     }
 
     private void CutterBreak(GameObject obj, Vector3 CP, Vector3 G)   //CPはカッターのposition　y座標比較に利用
@@ -201,7 +210,12 @@ public class ObjectBreak_Y : MonoBehaviour
 
     public void ChainExplode(GameObject obj, Vector3 G)
     {
-        if (live) eSound.PlayOneShot(ExplosionSound); live = false;
+        if (live)
+        {
+            eSound.PlayOneShot(ExplosionSound);
+            if (CollapseSound != null) cSound.PlayOneShot(CollapseSound);
+            live = false;
+        }
         var F = (obj.transform.position - chainStartPos).normalized * chainPower;
         F.x *= Random.Range(0.2f, 1.8f);
         F.z *= Random.Range(0.2f, 1.8f);

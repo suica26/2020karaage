@@ -6,7 +6,6 @@ public class ObjectStateManagement_Y : MonoBehaviour
 {
     [Range(0, 4), SerializeField] private int tier_WalkAttack;
     [Range(0, 4), SerializeField] private int tier_ChargeKick;
-    [Header("壊れるときに分割オブジェクトへの差し替えをしない場合はObjectBreak_Yをつけて設定を行ってください")]
     public GameObject divideObject = null;
     public AudioClip AttackSound;
     public int HP;                  //Inspector上から設定できます。
@@ -26,6 +25,17 @@ public class ObjectStateManagement_Y : MonoBehaviour
     private float chainPower;
     private int hitSkilID = 0;
     private bool damage = false;
+    private bool notLive = false;
+
+    [Header("破壊時の設定")]
+    public GameObject BreakEffect;
+    public AudioClip ExplosionSound, CollapseSound;
+    public float deleteTime = 3f;
+    public float Torque = 1f;    //爆発でどれだけ回転するか
+    public float Power = 1f;     //爆発でどれぐらい吹っ飛ぶか
+    [Header("連鎖破壊発生確率")] [Range(0, 100)] public float chainProbability = 5f;        //連鎖破壊発生確率
+    [Header("連鎖破壊でのダメージ量(相手への)")] public int chainDamage;                 //連鎖破壊でのダメージ(自分の破片)
+    [Header("ためキックによる連鎖破壊でのダメージ量(相手への)")] public int superChainDamage;    //ためキックによる連鎖破壊でのダメージ
 
     // Start is called before the first frame update
     void Start()
@@ -40,7 +50,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (HP <= 0)//HPがなくなると、分割オブジェクトに差し替え発生
+        if (HP <= 0 && !notLive)//HPがなくなると、分割オブジェクトに差し替え発生
         {
             GameObject.Find("Canvas").GetComponent<Parameters_R>().ScoreManager(breakScore);
             scrKick.chargePoint += breakPoint;
@@ -50,15 +60,16 @@ public class ObjectStateManagement_Y : MonoBehaviour
                 scrFood.DropFood();
             }
 
+            //差し替え処理
             if (divideObject != null)
             {
                 ChangeObject();
-                Destroy(this.gameObject);
             }
-            else if (GetComponent<ObjectBreak_Y>() != null)
+            else     //差し替えをしない場合
             {
-                GetComponent<ObjectBreak_Y>().ObjectBreak();
+                Substitution();
             }
+            notLive = true;
         }
     }
 
@@ -153,7 +164,41 @@ public class ObjectStateManagement_Y : MonoBehaviour
 
     private void ChangeObject()
     {
-        var scr = divideObject.GetComponent<ObjectBreak_Y>();
+        var DO = Instantiate(divideObject, transform.position, transform.rotation);
+        var rb = DO.AddComponent<Rigidbody>();
+        rb.useGravity = false;
+        rb.isKinematic = true;
+        var scr = DO.AddComponent<ObjectBreak_Y>();
         scr.hitSkilID = hitSkilID;
+        scr.chainPower = chainPower;
+        scr.chainStartPos = chainStartPos;
+        scr.ExplosionSound = ExplosionSound;
+        scr.CollapseSound = CollapseSound;
+        scr.BreakEffect = BreakEffect;
+        scr.deleteTime = deleteTime;
+        scr.Torque = Torque;
+        scr.Power = Power;
+        scr.chainProbability = 5f;
+        scr.chainDamage = chainDamage;
+        scr.superChainDamage = superChainDamage;
+        scr.death = true;
+    }
+
+    private void Substitution()
+    {
+        var scr = this.gameObject.AddComponent<ObjectBreak_Y>();
+        scr.hitSkilID = hitSkilID;
+        scr.chainPower = chainPower;
+        scr.chainStartPos = chainStartPos;
+        scr.ExplosionSound = ExplosionSound;
+        scr.CollapseSound = CollapseSound;
+        scr.BreakEffect = BreakEffect;
+        scr.deleteTime = deleteTime;
+        scr.Torque = Torque;
+        scr.Power = Power;
+        scr.chainProbability = 5f;
+        scr.chainDamage = chainDamage;
+        scr.superChainDamage = superChainDamage;
+        scr.death = true;
     }
 }
