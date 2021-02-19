@@ -8,6 +8,7 @@ public class MorBlast_R : MonoBehaviour
     [SerializeField] private AudioClip chargeClip;
     [SerializeField] private AudioClip blastClip;
     [SerializeField] private AudioClip evoBlastClip;
+    [SerializeField] private Transition_R scrAnim;
     [SerializeField] private float secondBlastTime, thirdBlastTime;
     [SerializeField] private float[] spreadScale;
     [SerializeField] private float[] spreadEvoScale;
@@ -88,6 +89,7 @@ public class MorBlast_R : MonoBehaviour
         pullTime = 0f;
         charge = 0;
         audioSource.PlayOneShot(blastClip);
+        scrAnim.SetAnimator(Transition_R.Anim.BLAST, true);
 
         //1回目
         morningBlast[0] = Instantiate(morBlaSphere, transform);
@@ -100,7 +102,9 @@ public class MorBlast_R : MonoBehaviour
         //3回目
         morningBlast[2] = Instantiate(morBlaSphere, transform);
         Destroy(morningBlast[2], spreadTime);
+
         isBlast = false;
+        scrAnim.SetAnimator(Transition_R.Anim.BLAST, false);
         yield break;
     }
 

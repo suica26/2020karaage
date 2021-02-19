@@ -1580,11 +1580,6 @@ MonoBehaviour:
   objPlayer: {fileID: 1074258156}
   target: {fileID: 1074258158}
   spinSpeed: 1
-  radius:
-  - 1
-  - 2
-  - 4
-  - 6
 --- !u!1 &1074258156
 GameObject:
   m_ObjectHideFlags: 0
@@ -1599,8 +1594,8 @@ GameObject:
   - component: {fileID: 1074258160}
   - component: {fileID: 1074258161}
   - component: {fileID: 1074258162}
-  - component: {fileID: 1074258163}
   - component: {fileID: 1074258164}
+  - component: {fileID: 1074258163}
   m_Layer: 2
   m_Name: Player
   m_TagString: Player
@@ -1708,6 +1703,10 @@ MonoBehaviour:
   circleKickRange: 20
   addFanWidth: 5
   addFanHeight: 15
+  CutterFAClip: {fileID: 8300000, guid: 4c7003c3dff38d54b98daefc88d60f58, type: 3}
+  KickFAClip: {fileID: 8300000, guid: 4c7003c3dff38d54b98daefc88d60f58, type: 3}
+  JumpClip: {fileID: 8300000, guid: 230e7611a4dbd10478f3b299643c67b4, type: 3}
+  scrAnim: {fileID: 2076929641}
   preCircle: {fileID: 4332330924646062579, guid: d2b73bed1213f2e4ba83dd3a8dbee18d,
     type: 3}
   preFan: {fileID: 3783839548578507492, guid: 837deb20a45166541a37af9b56e0cbbd, type: 3}
@@ -1738,6 +1737,7 @@ MonoBehaviour:
   - 1.5
   - 2
   - 3
+  scrAnim: {fileID: 2076929641}
   throwingCutter: 0
 --- !u!114 &1074258162
 MonoBehaviour:
@@ -1752,15 +1752,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxPullTime: 1
-  chargeClip: {fileID: 0}
-  blastClip: {fileID: 8300000, guid: 3d4ad762f5c634b91b62292a58edb812, type: 3}
+  chargeClip: {fileID: 8300000, guid: c700a1f33278c244bbd20375f4bb131c, type: 3}
+  blastClip: {fileID: 8300000, guid: 3c58f9f3131016d4ead5201f88d691d7, type: 3}
+  evoBlastClip: {fileID: 8300000, guid: 7feef3793d690574195ef850f68cced9, type: 3}
+  scrAnim: {fileID: 2076929641}
   secondBlastTime: 0.5
   thirdBlastTime: 0.5
   spreadScale:
-  - 0
-  - 0.5
+  - 7
+  - 10.5
+  - 14
+  spreadEvoScale:
   - 1
-  - 1.8
+  - 1.5
+  - 2
+  - 3
   morBlaSphere: {fileID: 5946415761110413900, guid: c23533bcfef72204c8283a93a07fbf9b,
     type: 3}
   spreadTime: 0.5
@@ -1880,7 +1886,8 @@ MonoBehaviour:
   - {fileID: 1862548236}
   kickEffect: {fileID: 6715095415447669578, guid: c38672bee64b74bcaa57d0a877f5dc6a,
     type: 3}
-  kickSound: {fileID: 8300000, guid: bac5f5002c9044ece8b11bf1f4bf23ff, type: 3}
+  kickSound: {fileID: 8300000, guid: f67ea4fc8b2c08141809c63bd2243348, type: 3}
+  scrAnim: {fileID: 2076929641}
   chargePoint: 0
 --- !u!1001 &1110180607
 PrefabInstance:
@@ -2125,7 +2132,7 @@ GameObject:
   - component: {fileID: 1207547017}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

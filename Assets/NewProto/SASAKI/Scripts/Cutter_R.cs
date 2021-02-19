@@ -11,7 +11,10 @@ public class Cutter_R : MonoBehaviour
     [SerializeField] private Transform[] cutterTransform;
     [SerializeField] private float[] cutterSize;
 
+    [SerializeField] Transition_R scrAnim;
+
     private float timer;
+    private float animTimer;
     public bool throwingCutter = false;
 
     GameObject cutter;
@@ -22,6 +25,7 @@ public class Cutter_R : MonoBehaviour
     {
         scrEvo = GetComponent<EvolutionChicken_R>();
         timer = 0.0f;
+        animTimer = 0f;
         throwingCutter = false;
     }
 
@@ -37,15 +41,27 @@ public class Cutter_R : MonoBehaviour
             if(!throwingCutter && timer <= 0.5f)
             {
                 timer = 0.0f;
+                animTimer = 0.25f;
                 throwingCutter = true;
                 cutter = Instantiate(preCutter, cutterTransform[scrEvo.EvolutionNum].position, Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0, 0, -90)));
                 cutter.transform.localScale = cutter.transform.localScale * cutterSize[scrEvo.EvolutionNum];
                 cutter.GetComponent<CutterMove1_R>().evoSpeed = cutterSize[scrEvo.EvolutionNum];
                 cutter.GetComponent<CutterMove1_R>().backArea = cutterTransform[scrEvo.EvolutionNum];
+                scrAnim.SetAnimator(Transition_R.Anim.CUTTER, true);
             }
             else
             {
                 timer = 0.0f;
+            }
+        }
+
+        if (animTimer != 0f)
+        {
+            animTimer -= Time.deltaTime;
+            if (animTimer <= 0f)
+            {
+                animTimer = 0f;
+                scrAnim.SetAnimator(Transition_R.Anim.CUTTER, false);
             }
         }
     }
