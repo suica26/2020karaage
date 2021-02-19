@@ -53,7 +53,7 @@ public class Parameters_R : MonoBehaviour
     {
         if (!freeze)
         {
-            //score += addScore;
+            score += addScore;
             scoreText.text = "Price:$ " + score;
             kickSlider.value += 1;
             if (Input.GetKey(KeyCode.K))

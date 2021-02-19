@@ -15,14 +15,15 @@ public class Pause_M : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            //ポーズのオンオフ
             pausePanel.SetActive(!pausePanel.activeSelf);
 
-            //　ポーズUIが表示されてる時は停止
+            //ポーズ中に停止
             if (pausePanel.activeSelf)
             {
                 Time.timeScale = 0f;
             }
-            //　ポーズUIが表示されてなければ通常通り進行
+            //時が動き出す
             else
             {
                 Time.timeScale = 1f;
