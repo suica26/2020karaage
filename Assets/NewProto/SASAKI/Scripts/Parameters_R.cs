@@ -28,7 +28,8 @@ public class Parameters_R : MonoBehaviour
     [SerializeField] private Text scoreText, timeText, epText, hpText;
     [SerializeField] private GameObject resultPanel = null;
 
-    [SerializeField] public int score, time, ep, hp, maxEP1, maxEP2, maxEP3;
+    [SerializeField] public int score, time, ep, hp, maxEP1, maxEP2, maxEP3,
+        maxHP1, maxHP2, maxHP3, plusHP1, plusHP2, plusHP3, sp;
     [SerializeField] public Slider hpSlider, epSlider, kickSlider;
 
     private bool freeze = false;
@@ -56,9 +57,9 @@ public class Parameters_R : MonoBehaviour
             score += addScore;
             scoreText.text = "Price:$ " + score;
             kickSlider.value += 1;
-            if (Input.GetKey(KeyCode.K))
+            if (Input.GetMouseButton(0))
             {
-                if (kickSlider.value == 10)
+                if (kickSlider.value == sp)
                 {
                     kickSlider.value = 0;
                 }
@@ -138,21 +139,21 @@ public class Parameters_R : MonoBehaviour
             epSlider.value = 0;
             epSlider.maxValue = maxEP2;
             maxEP1 = 10000;
-            hpSlider.maxValue = 80;
-            hpSlider.value += 30;
+            hpSlider.maxValue = maxHP1;
+            hpSlider.value += plusHP1;
         }
         else if (epSlider.value == maxEP2)
         {
             epSlider.value = 0;
             epSlider.maxValue = maxEP3;
             maxEP2 = 10000;
-            hpSlider.maxValue = 160;
-            hpSlider.value += 80;
+            hpSlider.maxValue = maxHP2;
+            hpSlider.value += plusHP2 ;
         }
         else if (epSlider.value == maxEP3)
         {
-            hpSlider.maxValue = 500;
-            hpSlider.value += 340;
+            hpSlider.maxValue = maxHP3;
+            hpSlider.value += plusHP3;
         }
     }
     //タイマーです。一秒ごとにTimeManager()で一秒減らしてます。
