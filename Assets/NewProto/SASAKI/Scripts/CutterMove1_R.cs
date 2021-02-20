@@ -5,13 +5,13 @@ using UnityEngine;
 public class CutterMove1_R : MonoBehaviour
 {
     [SerializeField] private AudioClip cutterSound;
-    [SerializeField] private float rotSpeed;
 
+    private float rotSpeed = 360f;
     private float destroyTime = 3.4f;
 
-    private GameObject player = null;
-    private AudioSource audioSource = null;
-    private Rigidbody rigid = null;
+    private GameObject player;
+    private AudioSource audioSource;
+    private Rigidbody rigid;
 
     private Vector3 moveVec;
     public Transform backArea;
@@ -39,7 +39,7 @@ public class CutterMove1_R : MonoBehaviour
         }
         else if (destroyTime < 1.7f)
         {
-            transform.position = Vector3.MoveTowards(transform.position, backArea.position - player.transform.forward, 30f * evoSpeed * Time.deltaTime);    
+            transform.position = Vector3.MoveTowards(transform.position, backArea.position, 30f * evoSpeed * Time.deltaTime);    
         }
         gameObject.transform.Rotate(rotSpeed * Time.deltaTime, 0, 0);
     }
