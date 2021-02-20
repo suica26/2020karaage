@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CharaMoveRigid_R : MonoBehaviour
 {
+    [SerializeField] private float[] raycastCubeX;
+    [SerializeField] private float[] raycastCubeZ;
     [SerializeField] private float rotateSpeed;
 
     [Header("落下攻撃設定")]
@@ -57,11 +59,27 @@ public class CharaMoveRigid_R : MonoBehaviour
         h = Input.GetAxis("Horizontal");
         v = Input.GetAxis("Vertical");
 
+        /*
         //足元から下へ向けて球状のRayを発射し，着地判定をする
         ray = new Ray(gameObject.transform.position + 0.15f * gameObject.transform.up, - gameObject.transform.up);
         isGrounded = Physics.SphereCast(ray, 0.13f, 0.08f);
         //着地判定の範囲をシーンに示す
         Debug.DrawRay(gameObject.transform.position + 0.2f * gameObject.transform.up, -0.22f * gameObject.transform.up);
+        */
+
+        //BoxCastで設置判定
+        RaycastHit[] hits = Physics.BoxCastAll(transform.position + transform.up * 0.1f, new Vector3(raycastCubeX[scrEvo.EvolutionNum] * 0.5f, 0.05f, raycastCubeZ[scrEvo.EvolutionNum] * 0.5f), -transform.up,
+                           Quaternion.Euler(transform.rotation.eulerAngles), 0.1f);
+        isGrounded = false;
+
+        foreach(RaycastHit hit in  hits)
+        {
+            Debug.Log(hit.transform.gameObject.name);
+            if(hit.transform.gameObject.tag != "Player")
+            {
+                isGrounded = true;
+            }
+        }
 
         if (isGrounded)
         {
@@ -195,5 +213,16 @@ public class CharaMoveRigid_R : MonoBehaviour
             rb.AddForce(Vector3.down * jumpSpeed * 2f, ForceMode.Impulse);
             yield break;
         }
+    }
+
+    public void FieldCheck(bool check)
+    {
+        //isGrounded = check;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(transform.position - transform.up * 0.05f, new Vector3(raycastCubeX[scrEvo.EvolutionNum], 0.1f ,raycastCubeZ[scrEvo.EvolutionNum]));
     }
 }

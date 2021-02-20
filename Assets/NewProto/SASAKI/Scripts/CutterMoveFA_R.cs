@@ -40,7 +40,7 @@ public class CutterMoveFA_R : MonoBehaviour
             }
             else if (destroyTime > 1.7f)
             {
-                transform.position = Vector3.MoveTowards(transform.position, backArea.position - player.transform.forward, 30f * evoSpeed * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, backArea.position, 30f * evoSpeed * Time.deltaTime);
             }
         }
         gameObject.transform.Rotate(rotSpeed * Time.deltaTime, 0, 0);
@@ -48,12 +48,15 @@ public class CutterMoveFA_R : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        audioSource.PlayOneShot(CutterClip);
-        if(other.gameObject.tag == "Ground")
+        if (enabled)
         {
-            touchGround = true;
-            rigid.velocity = Vector3.zero;
-            rigid.AddForce(moveVec * 12f * evoSpeed, ForceMode.Impulse);
+            audioSource.PlayOneShot(CutterClip);
+            if (other.gameObject.tag == "Ground")
+            {
+                touchGround = true;
+                rigid.velocity = Vector3.zero;
+                rigid.AddForce(moveVec * 12f * evoSpeed, ForceMode.Impulse);
+            }
         }
     }
 }
