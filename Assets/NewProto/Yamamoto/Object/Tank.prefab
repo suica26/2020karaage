@@ -81,6 +81,7 @@ MonoBehaviour:
   nav: {fileID: 0}
   eneDis: 20
   navFlg: 0
+  live: 1
 --- !u!195 &-1289019804591318571
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -131,18 +132,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8075661621763774d8231cabafe12bb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrFood: {fileID: 0}
+  tier_WalkAttack: 4
+  tier_ChargeKick: 3
+  divideObject: {fileID: 0}
+  AttackSound: {fileID: 0}
+  HP: 2000
+  kickMag: 0
+  blastMag: 0
+  cutterMag: 0
+  chargeKickMag: 0
+  breakScore: 0
+  breakPoint: 0
   BreakEffect: {fileID: 0}
+  ExplosionSound: {fileID: 0}
+  CollapseSound: {fileID: 0}
+  deleteTime: 3
   Torque: 0
   Power: 0
-  AttackSound: {fileID: 0}
-  ExplosionSound: {fileID: 0}
-  BreakSound: {fileID: 0}
-  HP: 0
-  kickDamage: 0
-  blastDamage: 0
-  cutterDamage: 0
-  breakScore: 0
+  chainProbability: 5
+  chainDamage: 0
+  superChainDamage: 0
 --- !u!1 &4860956250139582127
 GameObject:
   m_ObjectHideFlags: 0

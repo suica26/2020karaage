@@ -6,15 +6,24 @@ using UnityEngine.AI;
 public class Enemy_Y : MonoBehaviour
 {
     public int HP = 0;
-    private bool damage = false;
-    private int hitSkilID = 0;
+    [Header("ダメージ倍率")]
+    public float kickMag;             //キックのダメージ倍率
+    public float blastMag;         //ブラストのダメージ倍率
+    public float cutterMag;        //カッターのダメージ倍率
+    public float chargeKickMag;       //ためキックのダメージ倍率
     public int kickDamage = 0;
     public int blastDamage = 0;
     public int cutterDamage = 0;
+    [Header("破壊時のスコア")] public int breakScore;                          //建物を破壊したときに得られるスコア
+    [Header("破壊時のチャージポイント")] public int breakPoint;                //建物を破壊したときに得られるチャージポイント
     private Animator animator;
-    private bool live = true;
     private GameObject player;
-    public float torque;
+    private FoodMaker_R scrFood;
+    private chickenKick_R scrKick;
+    private EvolutionChicken_R scrEvo;
+    private bool live = true;
+    private bool damage = false;
+    private int hitSkilID = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -120,6 +129,7 @@ public class Enemy_Y : MonoBehaviour
             F.y = 0.6f;
             animator.applyRootMotion = false;
             rb.AddForce(F * 50f, ForceMode.Impulse);
+            float torque = 5f;
             Vector3 TorquePower = new Vector3(Random.Range(-torque, torque), Random.Range(-torque, torque), Random.Range(-torque, torque));
             rb.AddTorque(TorquePower, ForceMode.Impulse);
         }
