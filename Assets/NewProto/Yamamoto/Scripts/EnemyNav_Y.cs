@@ -21,7 +21,7 @@ public class EnemyNav_Y : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        targetPos = GameObject.Find("Player").transform.position;
+        targetPos = GameObject.FindGameObjectWithTag("Player").transform.position;
         //この下変更＆追加
         if (Vector3.Distance(targetPos, this.transform.position) <= eneDis)
         {

@@ -162,6 +162,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
         transform.localPosition = pos;
     }
 
+    //差し替えする場合
     private void ChangeObject()
     {
         var DO = Instantiate(divideObject, transform.position, transform.rotation);
@@ -183,7 +184,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
         scr.superChainDamage = superChainDamage;
         scr.death = true;
     }
-
+    //しない場合
     private void Substitution()
     {
         var scr = this.gameObject.AddComponent<ObjectBreak_Y>();
