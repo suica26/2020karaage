@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Option_M : MonoBehaviour
 {
-    [SerializeField] private GameObject pausePanel;
+    [SerializeField] private GameObject optionPanel, optionPanel2;
 
     void Start()
     {
-        pausePanel.SetActive(false);
+        optionPanel.SetActive(false);
+        optionPanel2.SetActive(false);
     }
 
     void Update()
@@ -18,6 +19,6 @@ public class Option_M : MonoBehaviour
 
     public void OnClick()
     {
-        pausePanel.SetActive(true);
+        optionPanel.SetActive(true);
     }
 }

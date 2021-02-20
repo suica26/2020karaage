@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Back_option : MonoBehaviour
 {
-    [SerializeField] private GameObject backButton, optionPanel;
+    [SerializeField] private GameObject optionPanel, optionPanel2;
 
     void Start()
     {
-        optionPanel.SetActive(false);
+       
     }
 
 
@@ -20,5 +20,6 @@ public class Back_option : MonoBehaviour
     public void OnClick()
     {
         optionPanel.SetActive(false);
+        optionPanel2.SetActive(false);
     }
 }
