@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class Food_R : MonoBehaviour
 {
-    [SerializeField] private AudioClip sound = null;
-    public GameObject Player = null;
-    public Parameters_R scrEP = null;
+    [SerializeField] private AudioClip sound;
+    private Parameters_R scrEP;
+
+    void Start()
+    {
+        scrEP = GameObject.Find("Canvas").GetComponent<Parameters_R>();
+    }
 
     void OnCollisionEnter(Collision collision)
     {
