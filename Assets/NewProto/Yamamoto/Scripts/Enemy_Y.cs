@@ -5,15 +5,14 @@ using UnityEngine.AI;
 
 public class Enemy_Y : MonoBehaviour
 {
+    [Range(0, 4), SerializeField] private int tier_WalkAttack;
+    [Range(0, 4), SerializeField] private int tier_ChargeKick;
     public int HP = 0;
     [Header("ダメージ倍率")]
     public float kickMag;             //キックのダメージ倍率
     public float blastMag;         //ブラストのダメージ倍率
     public float cutterMag;        //カッターのダメージ倍率
     public float chargeKickMag;       //ためキックのダメージ倍率
-    public int kickDamage = 0;
-    public int blastDamage = 0;
-    public int cutterDamage = 0;
     [Header("破壊時のスコア")] public int breakScore;                          //建物を破壊したときに得られるスコア
     [Header("破壊時のチャージポイント")] public int breakPoint;                //建物を破壊したときに得られるチャージポイント
     private Animator animator;
@@ -30,6 +29,9 @@ public class Enemy_Y : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         player = GameObject.Find("Player");
+        scrKick = player.GetComponent<chickenKick_R>();
+        scrEvo = player.GetComponent<EvolutionChicken_R>();
+        scrFood = GetComponent<FoodMaker_R>();
     }
 
     // Update is called once per frame
@@ -46,39 +48,61 @@ public class Enemy_Y : MonoBehaviour
         //キックダメージ
         if (other.gameObject.name == "KickCollision")
         {
-            HP -= kickDamage;
-            hitSkilID = 1;
+            if (scrKick.chargePoint >= 100)
+            {
+                if (scrEvo.EvolutionNum >= tier_ChargeKick)
+                {
+                    HP = 0;
+                    scrKick.chargePoint = 0;
+                    hitSkilID = 4;
+                }
+                else
+                {
+                    HP -= (int)(scrEvo.Status_ATK * chargeKickMag);
+                }
+            }
+            else
+            {
+                HP -= (int)(scrEvo.Status_ATK * kickMag);
+                hitSkilID = 1;
+            }
             damage = true;
         }
         //ブラストダメージ
         if (other.gameObject.name == "MorningBlastSphere_Y(Clone)")
         {
-            HP -= blastDamage;
+            HP -= (int)(scrEvo.Status_ATK * blastMag / 3f);
             hitSkilID = 2;
             damage = true;
         }
         //カッターダメージ
         if (other.gameObject.name == "Cutter(Clone)")
         {
-            HP -= cutterDamage;
+            HP -= (int)(scrEvo.Status_ATK * cutterMag);
             hitSkilID = 3;
             damage = true;
         }
-        if (other.gameObject.tag == "Chain")
+        if (other.gameObject.tag == "fallAttackCircle(Clone)")
         {
-            var chainScript = other.gameObject.GetComponent<ChainBreak_Y>();
-            HP -= chainScript.chainDamage;
-            hitSkilID = 8;
+            HP -= (int)(scrEvo.Status_ATK * kickMag);
+            hitSkilID = 1;
             damage = true;
         }
 
         if (damage)
         {
-            var dir = other.gameObject.transform.position - transform.position;
-            dir.y = 0;
-            transform.forward = dir;
+            //振動させる
             StartCoroutine(DoShake(0.25f, 0.1f));
             damage = false;
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        //踏みつぶし攻撃
+        if (collision.gameObject.tag == "Player" && scrEvo.EvolutionNum >= tier_WalkAttack)
+        {
+            HP = 0;
+            hitSkilID = 5;
         }
     }
 

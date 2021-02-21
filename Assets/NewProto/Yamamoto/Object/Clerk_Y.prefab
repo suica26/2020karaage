@@ -544,11 +544,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be6f231d80391bd46aa7c814fe5f3607, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tier_WalkAttack: 1
+  tier_ChargeKick: 0
   HP: 500
-  kickDamage: 100
-  blastDamage: 500
-  cutterDamage: 100
-  torque: 0
+  kickMag: 1
+  blastMag: 1.2
+  cutterMag: 2
+  chargeKickMag: 5
+  breakScore: 500
+  breakPoint: 1
 --- !u!136 &6743351154751058487
 CapsuleCollider:
   m_ObjectHideFlags: 0

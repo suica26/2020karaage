@@ -143,14 +143,15 @@ MonoBehaviour:
   tier_ChargeKick: 1
   divideObject: {fileID: 0}
   AttackSound: {fileID: 8300000, guid: 70a5e9b67ec89e84eb71df41da6e577a, type: 3}
-  HP: 100
+  ContactSound: {fileID: 8300000, guid: ccd8035a8244f2347a152a0086899149, type: 3}
+  HP: 500
   kickMag: 1.2
   blastMag: 1.1
   cutterMag: 1
   chargeKickMag: 2
   breakScore: 1000
   breakPoint: 2
-  BreakEffect: {fileID: 4267790152953556362, guid: 76dd1b57ce27a487db64614c36a17924,
+  BreakEffect: {fileID: 2714036437048776495, guid: c1b6977c8b92845e3a1103d68f2de786,
     type: 3}
   ExplosionSound: {fileID: 8300000, guid: 09e9e3f4d1c5c98449d7cf372877a4ea, type: 3}
   CollapseSound: {fileID: 8300000, guid: c8609e1c65e54fb4ab552b0230f73bfe, type: 3}
@@ -158,8 +159,8 @@ MonoBehaviour:
   Torque: 1
   Power: 1
   chainProbability: 5
-  chainDamage: 20
-  superChainDamage: 100
+  chainDamage: 30
+  superChainDamage: 500
 --- !u!114 &7628322967625085260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,8 +173,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 400540f14b6981848a8da03f843b8495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
-  scrParameters: {fileID: 0}
   objFood: {fileID: 6224625970994948174, guid: 432283639b2517e4cb2744030344a38c, type: 3}
   minFood: 2
   maxFood: 4

@@ -1611,9 +1611,9 @@ MonoBehaviour:
   blastMag: 1.1
   cutterMag: 0.7
   chargeKickMag: 3
-  breakScore: 500000
+  breakScore: 300000
   breakPoint: 10
-  BreakEffect: {fileID: 4267790152953556362, guid: 76dd1b57ce27a487db64614c36a17924,
+  BreakEffect: {fileID: 2714036437048776495, guid: c1b6977c8b92845e3a1103d68f2de786,
     type: 3}
   ExplosionSound: {fileID: 8300000, guid: e454532e8e33d5d4cb74819fbd7d415e, type: 3}
   CollapseSound: {fileID: 8300000, guid: 4bec759f4d32b044fb76a940aca32d43, type: 3}
@@ -1621,8 +1621,8 @@ MonoBehaviour:
   Torque: 1
   Power: 1
   chainProbability: 5
-  chainDamage: 30
-  superChainDamage: 400
+  chainDamage: 50
+  superChainDamage: 1000
 --- !u!114 &5639346447659453312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1636,8 +1636,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objFood: {fileID: 6224625970994948174, guid: 432283639b2517e4cb2744030344a38c, type: 3}
-  minFood: 0
-  maxFood: 0
+  minFood: 4
+  maxFood: 8
 --- !u!54 &-1429164137525235922
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -121,6 +121,12 @@ public class ObjectStateManagement_Y : MonoBehaviour
             hitSkilID = 0;
             damage = true;
         }
+        if (other.gameObject.tag == "fallAttackCircle(Clone)")
+        {
+            HP -= (int)(scrEvo.Status_ATK * kickMag);
+            hitSkilID = 1;
+            damage = true;
+        }
 
         if (damage)
         {
