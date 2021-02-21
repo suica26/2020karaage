@@ -135,23 +135,25 @@ MonoBehaviour:
   tier_WalkAttack: 4
   tier_ChargeKick: 3
   divideObject: {fileID: 0}
-  AttackSound: {fileID: 0}
+  AttackSound: {fileID: 8300000, guid: abc42f36fe5c4c240a548f5df50a0ecd, type: 3}
+  ContactSound: {fileID: 8300000, guid: 113f5ebf54c0069488819975ac9f88a2, type: 3}
   HP: 2000
-  kickMag: 0
-  blastMag: 0
-  cutterMag: 0
-  chargeKickMag: 0
-  breakScore: 0
-  breakPoint: 0
-  BreakEffect: {fileID: 0}
-  ExplosionSound: {fileID: 0}
-  CollapseSound: {fileID: 0}
+  kickMag: 1
+  blastMag: 0.8
+  cutterMag: 1.2
+  chargeKickMag: 5
+  breakScore: 300000
+  breakPoint: 10
+  BreakEffect: {fileID: 2714036437048776495, guid: c1b6977c8b92845e3a1103d68f2de786,
+    type: 3}
+  ExplosionSound: {fileID: 8300000, guid: e454532e8e33d5d4cb74819fbd7d415e, type: 3}
+  CollapseSound: {fileID: 8300000, guid: 4bec759f4d32b044fb76a940aca32d43, type: 3}
   deleteTime: 3
-  Torque: 0
-  Power: 0
+  Torque: 1
+  Power: 1
   chainProbability: 5
-  chainDamage: 0
-  superChainDamage: 0
+  chainDamage: 50
+  superChainDamage: 2000
 --- !u!1 &4860956250139582127
 GameObject:
   m_ObjectHideFlags: 0
