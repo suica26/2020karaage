@@ -172,6 +172,7 @@ MonoBehaviour:
   plusHP2: 0
   plusHP3: 0
   sp: 0
+  maxSP: 0
   hpSlider: {fileID: 0}
   epSlider: {fileID: 0}
   kickSlider: {fileID: 0}
@@ -393,12 +394,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: cb4896e224a2c3c4b9866307abc5c131,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -79.49
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cb4896e224a2c3c4b9866307abc5c131,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.03
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cb4896e224a2c3c4b9866307abc5c131,
         type: 3}
@@ -474,11 +475,13 @@ MonoBehaviour:
   tier_ChargeKick: 0
   divideObject: {fileID: 0}
   AttackSound: {fileID: 0}
+  ContactSound: {fileID: 0}
   HP: 100
   kickMag: 1
   blastMag: 1
   cutterMag: 1
   chargeKickMag: 1
+  fallAttackMag: 0
   breakScore: 0
   breakPoint: 0
   BreakEffect: {fileID: 0}
@@ -501,8 +504,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3294.6816, y: 4888.5757, z: 2263.692}
-  m_Center: {x: 8118.599, y: 2302.1187, z: 65.57703}
+  m_Size: {x: 3156.1746, y: 4888.5757, z: 2054.895}
+  m_Center: {x: -1602.5986, y: 2302.1187, z: -398.89487}
 --- !u!1 &575406451
 GameObject:
   m_ObjectHideFlags: 0
@@ -737,6 +740,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75b95996922d5de44a3e6b1818c1c9e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
   kickCollisions:
   - {fileID: 639241131}
   - {fileID: 1819820206}
@@ -859,6 +863,7 @@ MonoBehaviour:
   chargeClip: {fileID: 0}
   blastClip: {fileID: 8300000, guid: 3d4ad762f5c634b91b62292a58edb812, type: 3}
   evoBlastClip: {fileID: 0}
+  audioSource: {fileID: 0}
   scrAnim: {fileID: 0}
   secondBlastTime: 0.5
   thirdBlastTime: 0.5
@@ -886,14 +891,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   preCutter: {fileID: 6961119836935489928, guid: edd512ccb3021a544b56f70bb325e81b,
     type: 3}
-  preCutterFA: {fileID: 6961119836935489928, guid: de86dd8830fb13342912a66aa34ffecd,
-    type: 3}
   setGround: {fileID: 0}
   cutterTransform:
   - {fileID: 805114001}
   - {fileID: 575406452}
   - {fileID: 1536254299}
   - {fileID: 183724837}
+  backAreaTransform: []
   cutterSize:
   - 1
   - 1.5
@@ -913,22 +917,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb493362eb7f1ed4484c1ef1fdca619d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  walkClip: []
+  audioSourceWalk: {fileID: 0}
+  audioSourceCommon: {fileID: 0}
   rotateSpeed: 700
+  raycastCubeX: []
+  raycastCubeZ: []
   circleRange:
   - 20
   - 25
   - 30
   - 40
-  circleKickRange: 20
-  addFanWidth: 5
-  addFanHeight: 15
+  preCircle: {fileID: 4332330924646062579, guid: d2b73bed1213f2e4ba83dd3a8dbee18d,
+    type: 3}
   CutterFAClip: {fileID: 0}
   KickFAClip: {fileID: 0}
   JumpClip: {fileID: 0}
   scrAnim: {fileID: 0}
-  preCircle: {fileID: 4332330924646062579, guid: d2b73bed1213f2e4ba83dd3a8dbee18d,
-    type: 3}
-  preFan: {fileID: 3783839548578507492, guid: 837deb20a45166541a37af9b56e0cbbd, type: 3}
 --- !u!114 &683658910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -973,7 +978,7 @@ MonoBehaviour:
   - 15
   - 20
   - 30
-  CAM_RADIUS: 01000000020000000300000005000000
+  CAM_RADIUS: []
 --- !u!54 &683658911
 Rigidbody:
   m_ObjectHideFlags: 0

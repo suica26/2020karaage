@@ -12,8 +12,6 @@ public class PoliceMove : MonoBehaviour
     public float hitFleeze = 1f;    //警棒で殴った時
     public GameObject bulletPrefab = null;
     private Animator animator;
-    private string waitStr = "isWait";
-    private string runStr = "isRun";
     private string fireStr = "Fire";
     private string hitStr = "Hit";
     private GameObject player;

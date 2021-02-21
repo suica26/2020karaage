@@ -17,11 +17,11 @@ public class ObjectBreak_Y : MonoBehaviour
     public float chainPower = 0f;
     public bool live = true;
     public bool death = false;
-    private AudioSource eSound, cSound;
+    private AudioSource audioSource;
     private GameObject player;
 
     // 自身の子要素を管理するリスト
-    List<GameObject> myParts = new List<GameObject>();
+    private List<GameObject> myParts = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -35,8 +35,8 @@ public class ObjectBreak_Y : MonoBehaviour
             // 子要素リストにパーツを追加
             myParts.Add(child.gameObject);
         }
-        eSound = GetComponent<AudioSource>();
-        cSound = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
+        tag = "Untagged";
     }
 
     // Update is called once per frame
@@ -95,9 +95,6 @@ public class ObjectBreak_Y : MonoBehaviour
                 case 5: StandardExplosion(obj); break;
                 default: Debug.Log("エラー:対応していない処理です"); break;
             }
-
-            //5秒後に消す
-            Destroy(obj, deleteTime);
         }
 
         if (hitSkilID == 4)
@@ -110,8 +107,8 @@ public class ObjectBreak_Y : MonoBehaviour
     {
         if (live)
         {
-            eSound.PlayOneShot(ExplosionSound);
-            if(CollapseSound != null)cSound.PlayOneShot(CollapseSound);
+            audioSource.PlayOneShot(ExplosionSound);
+            if(CollapseSound != null) audioSource.PlayOneShot(CollapseSound);
             live = false;
         }
         Vector3 forcePower = new Vector3(Random.Range(-Power, Power), Random.Range(-Power * 0.2f, Power * 0.2f), Random.Range(-Power * 0.75f, Power * 0.75f));
@@ -150,7 +147,7 @@ public class ObjectBreak_Y : MonoBehaviour
         var rb = obj.GetComponent<Rigidbody>();
         rb.AddForce(F, ForceMode.Impulse);
         rb.AddTorque(TorquePower, ForceMode.Impulse);
-        if (live) cSound.PlayOneShot(CollapseSound); live = false;
+        if (live) audioSource.PlayOneShot(CollapseSound); live = false;
     }
 
     private void MorBlaBreak(GameObject obj, Vector3 MP)     //MPはおはようブラストのposition
@@ -163,8 +160,8 @@ public class ObjectBreak_Y : MonoBehaviour
         rb.AddTorque(TorquePower, ForceMode.Impulse);
         if (live)
         {
-            eSound.PlayOneShot(ExplosionSound);
-            if (CollapseSound != null) cSound.PlayOneShot(CollapseSound);
+            audioSource.PlayOneShot(ExplosionSound);
+            if (CollapseSound != null) audioSource.PlayOneShot(CollapseSound);
             live = false;
         }
     }
@@ -211,8 +208,8 @@ public class ObjectBreak_Y : MonoBehaviour
     {
         if (live)
         {
-            eSound.PlayOneShot(ExplosionSound);
-            if (CollapseSound != null) cSound.PlayOneShot(CollapseSound);
+            audioSource.PlayOneShot(ExplosionSound);
+            if (CollapseSound != null) audioSource.PlayOneShot(CollapseSound);
             live = false;
         }
         var F = (obj.transform.position - chainStartPos).normalized * chainPower;

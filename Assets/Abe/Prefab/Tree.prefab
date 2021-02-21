@@ -48,8 +48,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 400540f14b6981848a8da03f843b8495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
-  scrParameters: {fileID: 0}
   objFood: {fileID: 6224625970994948174, guid: 432283639b2517e4cb2744030344a38c, type: 3}
   minFood: 1
   maxFood: 2
@@ -69,11 +67,13 @@ MonoBehaviour:
   tier_ChargeKick: 0
   divideObject: {fileID: 0}
   AttackSound: {fileID: 0}
+  ContactSound: {fileID: 0}
   HP: 200
   kickMag: 0.7
   blastMag: 0.7
   cutterMag: 1.5
   chargeKickMag: 2
+  fallAttackMag: 0.8
   breakScore: 100
   breakPoint: 1
   BreakEffect: {fileID: 0}

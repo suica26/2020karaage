@@ -13,6 +13,8 @@ public class Enemy_Y : MonoBehaviour
     public float blastMag;         //ブラストのダメージ倍率
     public float cutterMag;        //カッターのダメージ倍率
     public float chargeKickMag;       //ためキックのダメージ倍率
+    public float fallAttackMag;     //落下攻撃のダメージ倍率
+    public float KnockBackPower;    //ノックバックする量
     [Header("破壊時のスコア")] public int breakScore;                          //建物を破壊したときに得られるスコア
     [Header("破壊時のチャージポイント")] public int breakPoint;                //建物を破壊したときに得られるチャージポイント
     private Animator animator;
@@ -20,6 +22,7 @@ public class Enemy_Y : MonoBehaviour
     private FoodMaker_R scrFood;
     private chickenKick_R scrKick;
     private EvolutionChicken_R scrEvo;
+    private Rigidbody rb;
     private bool live = true;
     private bool damage = false;
     private int hitSkilID = 0;
@@ -32,6 +35,7 @@ public class Enemy_Y : MonoBehaviour
         scrKick = player.GetComponent<chickenKick_R>();
         scrEvo = player.GetComponent<EvolutionChicken_R>();
         scrFood = GetComponent<FoodMaker_R>();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -39,7 +43,19 @@ public class Enemy_Y : MonoBehaviour
     {
         if(HP <= 0 && live)
         {
+            GameObject.Find("Canvas").GetComponent<Parameters_R>().ScoreManager(breakScore);
+            if (scrFood != null)
+            {
+                scrFood.DropFood();
+            }
             Death();
+        }
+        else
+        {
+            if (rb.velocity.magnitude < 5f)
+            {
+                animator.applyRootMotion = true;
+            }
         }
     }
 
@@ -82,9 +98,19 @@ public class Enemy_Y : MonoBehaviour
             hitSkilID = 3;
             damage = true;
         }
-        if (other.gameObject.tag == "fallAttackCircle(Clone)")
+        //連鎖破壊の破片
+        if (other.gameObject.tag == "Chain")
         {
-            HP -= (int)(scrEvo.Status_ATK * kickMag);
+            var chainScript = other.gameObject.GetComponent<ChainBreak_Y>();
+            HP -= chainScript.chainDamage;
+            hitSkilID = 0;
+            damage = true;
+        }
+        //落下攻撃の衝撃波
+        if (other.gameObject.name == "fallAttackCircle(Clone)")
+        {
+            HP -= (int)(scrEvo.Status_ATK * fallAttackMag);
+            KnockBack();
             hitSkilID = 1;
             damage = true;
         }
@@ -104,6 +130,12 @@ public class Enemy_Y : MonoBehaviour
             HP = 0;
             hitSkilID = 5;
         }
+    }
+
+    private void KnockBack()
+    {
+        animator.applyRootMotion = false;
+        rb.AddForce(-transform.forward * KnockBackPower, ForceMode.Impulse);
     }
 
     //振動コルーチン

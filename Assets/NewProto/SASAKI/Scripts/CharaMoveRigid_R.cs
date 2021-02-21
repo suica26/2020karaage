@@ -73,7 +73,7 @@ public class CharaMoveRigid_R : MonoBehaviour
 
         foreach(RaycastHit hit in  hits)
         {
-            Debug.Log(hit.transform.gameObject.name);
+            //Debug.Log(hit.transform.gameObject.name);
             if(hit.transform.gameObject.tag != "Player")
             {
                 isGrounded = true;

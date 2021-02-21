@@ -14,6 +14,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
     public float blastMag;         //ブラストのダメージ倍率
     public float cutterMag;        //カッターのダメージ倍率
     public float chargeKickMag;       //ためキックのダメージ倍率
+    public float fallAttackMag;     //落下攻撃のダメージ倍率
     [Header("破壊時のスコア")] public int breakScore;                          //建物を破壊したときに得られるスコア
     [Header("破壊時のチャージポイント")] public int breakPoint;                //建物を破壊したときに得られるチャージポイント
     private AudioSource audioSource;
@@ -121,9 +122,9 @@ public class ObjectStateManagement_Y : MonoBehaviour
             hitSkilID = 0;
             damage = true;
         }
-        if (other.gameObject.tag == "fallAttackCircle(Clone)")
+        if (other.gameObject.name == "fallAttackCircle(Clone)")
         {
-            HP -= (int)(scrEvo.Status_ATK * kickMag);
+            HP -= (int)(scrEvo.Status_ATK * fallAttackMag);
             hitSkilID = 1;
             damage = true;
         }
@@ -179,7 +180,10 @@ public class ObjectStateManagement_Y : MonoBehaviour
     //差し替えする場合
     private void ChangeObject()
     {
-        var DO = Instantiate(divideObject, transform.position, transform.rotation);
+        var genPos = transform.position;
+        genPos.y = 0f;
+        var DO = Instantiate(divideObject, genPos, transform.rotation);
+        DO.AddComponent<AudioSource>();
         var rb = DO.AddComponent<Rigidbody>();
         rb.useGravity = false;
         rb.isKinematic = true;
@@ -197,6 +201,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
         scr.chainDamage = chainDamage;
         scr.superChainDamage = superChainDamage;
         scr.death = true;
+        Destroy(this.gameObject);
     }
     //しない場合
     private void Substitution()
