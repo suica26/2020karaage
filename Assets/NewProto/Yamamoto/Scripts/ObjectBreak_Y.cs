@@ -47,9 +47,6 @@ public class ObjectBreak_Y : MonoBehaviour
             ObjectBreak();
             if (hitSkilID != 4) Destroy(GetComponent<BoxCollider>());
             Destroy(this.gameObject, deleteTime);   //オブジェクト削除
-
-            //エフェクト発生
-            Instantiate(BreakEffect, transform.position, Quaternion.identity, transform);
         }
     }
 
@@ -79,27 +76,58 @@ public class ObjectBreak_Y : MonoBehaviour
         bool chain = false;
         if (Random.Range(0f, 1f) < chainProbability / 100f) { chain = true; Debug.Log("Chain"); }
 
-        foreach (GameObject obj in myParts)
+        //子オブジェクトを持っているとき
+        if(myParts.Count != 0)
         {
-            if (hitSkilID == 4) break;
+            foreach (GameObject obj in myParts)
+            {
+                if (hitSkilID == 4) break;
+                obj.GetComponent<Rigidbody>().isKinematic = false;
+                if (obj.GetComponent<BoxCollider>() == null) obj.AddComponent<BoxCollider>();
+                obj.layer = LayerMask.NameToLayer("Shard");
+                if (chain) SetChain(obj, chainDamage);
+
+                switch (hitSkilID)
+                {
+                    case 1: KickCollapse(obj, P); break;
+                    case 2: MorBlaBreak(obj, morBlaPos); break;
+                    case 3: CutterBreak(obj, cutterPos, G); break;
+                    case 5: StandardExplosion(obj); break;
+                    default: Debug.Log("エラー:対応していない処理です"); break;
+                }
+            }
+
+            if (chain && hitSkilID != 4)
+            {
+                PlayerKnockBack();
+            }
+
+            if (hitSkilID == 4)
+            {
+                SetChain(this.gameObject, superChainDamage); ChargeKickBreak();
+            }
+        }
+        else    //子要素を持たない単体オブジェクトの場合
+        {
+            var obj = this.gameObject;
             obj.GetComponent<Rigidbody>().isKinematic = false;
             if (obj.GetComponent<BoxCollider>() == null) obj.AddComponent<BoxCollider>();
             obj.layer = LayerMask.NameToLayer("Shard");
-            if (chain) SetChain(obj, chainDamage);
+            if (chain)
+            {
+                PlayerKnockBack();
+                SetChain(obj, chainDamage);
+            }
 
             switch (hitSkilID)
             {
                 case 1: KickCollapse(obj, P); break;
                 case 2: MorBlaBreak(obj, morBlaPos); break;
                 case 3: CutterBreak(obj, cutterPos, G); break;
+                case 4: SetChain(this.gameObject, superChainDamage); ChargeKickBreak(); break;
                 case 5: StandardExplosion(obj); break;
                 default: Debug.Log("エラー:対応していない処理です"); break;
             }
-        }
-
-        if (hitSkilID == 4)
-        {
-            SetChain(this.gameObject, superChainDamage); ChargeKickBreak();
         }
     }
 
@@ -107,8 +135,8 @@ public class ObjectBreak_Y : MonoBehaviour
     {
         if (live)
         {
-            audioSource.PlayOneShot(ExplosionSound);
-            if(CollapseSound != null) audioSource.PlayOneShot(CollapseSound);
+            if (ExplosionSound != null) audioSource.PlayOneShot(ExplosionSound);
+            if (CollapseSound != null) audioSource.PlayOneShot(CollapseSound);
             live = false;
         }
         Vector3 forcePower = new Vector3(Random.Range(-Power, Power), Random.Range(-Power * 0.2f, Power * 0.2f), Random.Range(-Power * 0.75f, Power * 0.75f));
@@ -116,6 +144,8 @@ public class ObjectBreak_Y : MonoBehaviour
         var rb = obj.GetComponent<Rigidbody>();
         rb.AddForce(forcePower, ForceMode.Impulse);
         rb.AddTorque(TorquePower, ForceMode.Impulse);
+        //エフェクト発生
+        if (BreakEffect != null) Instantiate(BreakEffect, transform.position, Quaternion.identity, transform);
     }
 
     //基本的な爆発
@@ -160,7 +190,7 @@ public class ObjectBreak_Y : MonoBehaviour
         rb.AddTorque(TorquePower, ForceMode.Impulse);
         if (live)
         {
-            audioSource.PlayOneShot(ExplosionSound);
+            if (ExplosionSound != null) audioSource.PlayOneShot(ExplosionSound);
             if (CollapseSound != null) audioSource.PlayOneShot(CollapseSound);
             live = false;
         }
@@ -208,7 +238,7 @@ public class ObjectBreak_Y : MonoBehaviour
     {
         if (live)
         {
-            audioSource.PlayOneShot(ExplosionSound);
+            if (ExplosionSound != null) audioSource.PlayOneShot(ExplosionSound);
             if (CollapseSound != null) audioSource.PlayOneShot(CollapseSound);
             live = false;
         }
@@ -219,5 +249,13 @@ public class ObjectBreak_Y : MonoBehaviour
         Vector3 TorquePower = new Vector3(Random.Range(-Torque, Torque), Random.Range(-Torque, Torque), Random.Range(-Torque, Torque));
         rb.AddForce(F, ForceMode.Impulse);
         rb.AddTorque(TorquePower, ForceMode.Impulse);
+    }
+
+    private void PlayerKnockBack()
+    {
+        var dir = player.transform.position - transform.position;
+        dir.y = 0f;
+        dir = dir.normalized;
+        player.GetComponent<Rigidbody>().AddForce(dir * Power / 2f, ForceMode.Impulse);
     }
 }

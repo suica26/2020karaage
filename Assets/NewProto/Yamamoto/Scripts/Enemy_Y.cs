@@ -125,7 +125,9 @@ public class Enemy_Y : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         //踏みつぶし攻撃
-        if (collision.gameObject.tag == "Player" && scrEvo.EvolutionNum >= tier_WalkAttack)
+        if (collision.gameObject.tag == "Player" && 
+            scrEvo.EvolutionNum >= tier_WalkAttack && 
+            collision.gameObject.GetComponent<Rigidbody >().velocity.magnitude > 1f)
         {
             HP = 0;
             hitSkilID = 5;

@@ -7,19 +7,20 @@ public class TankMove_Y : MonoBehaviour
     private EnemyNav_Y navScript;
     public GameObject bulletPrefab;
     private GameObject bullet;
-    private GameObject launchPort;
+    public GameObject launchPort;
     private GameObject head;
     public float fireFreeze = 5f;
     private float routineTimer = 0f;
     public float desBulletTime = 10f;   //初期値は10秒 Inspector上から変更できます
+    public int bulletDamage;
     private GameObject player;
 
     // Start is called before the first frame update
     void Start()
     {
         navScript = GetComponent<EnemyNav_Y>();
-        launchPort = transform.Find("Gun/launchport").gameObject;
-        player = GameObject.Find("Player");
+        launchPort = transform.Find("TankBase/TankHead/Gun").gameObject;
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
@@ -52,6 +53,7 @@ public class TankMove_Y : MonoBehaviour
             bullet = Instantiate(bulletPrefab, launchPort.transform.position, transform.rotation);
             bullet.transform.forward = GameObject.Find("Player").transform.position - launchPort.transform.position;
             bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward.normalized * 10f;
+            bullet.GetComponent<BulletDamage>().damage = bulletDamage;
             Destroy(bullet, desBulletTime);
         }
     }

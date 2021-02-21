@@ -69,10 +69,11 @@ MonoBehaviour:
   AttackSound: {fileID: 8300000, guid: 70a5e9b67ec89e84eb71df41da6e577a, type: 3}
   ContactSound: {fileID: 8300000, guid: ccd8035a8244f2347a152a0086899149, type: 3}
   HP: 300
-  kickMag: 1.2
-  blastMag: 1.1
-  cutterMag: 1
+  kickMag: 1.5
+  blastMag: 1
+  cutterMag: 1.2
   chargeKickMag: 2
+  fallAttackMag: 1.1
   breakScore: 1000
   breakPoint: 2
   BreakEffect: {fileID: 2714036437048776495, guid: c1b6977c8b92845e3a1103d68f2de786,
@@ -234,6 +235,26 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4267790152953556362, guid: 76dd1b57ce27a487db64614c36a17924,
         type: 3}
+    - target: {fileID: 1442311777662297204, guid: 3213015bd5a04db44a7e8a76ae69741b,
+        type: 3}
+      propertyPath: fallAttackMag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1442311777662297204, guid: 3213015bd5a04db44a7e8a76ae69741b,
+        type: 3}
+      propertyPath: kickMag
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1442311777662297204, guid: 3213015bd5a04db44a7e8a76ae69741b,
+        type: 3}
+      propertyPath: cutterMag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1442311777662297204, guid: 3213015bd5a04db44a7e8a76ae69741b,
+        type: 3}
+      propertyPath: blastMag
+      value: 1.1
+      objectReference: {fileID: 0}
     - target: {fileID: 3121773946452198725, guid: 3213015bd5a04db44a7e8a76ae69741b,
         type: 3}
       propertyPath: m_Name
