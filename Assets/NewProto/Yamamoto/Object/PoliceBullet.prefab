@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 5993783274711880844}
   - component: {fileID: 6521926194950978667}
   - component: {fileID: -3455962273569146126}
+  - component: {fileID: 903227821874282591}
   m_Layer: 0
   m_Name: PoliceBullet
-  m_TagString: Untagged
+  m_TagString: EnemyItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,6 +113,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &903227821874282591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8871777121355791282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e556d2d41ba47094b9feb6653af366ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
 --- !u!1001 &6203643864328423322
 PrefabInstance:
   m_ObjectHideFlags: 0

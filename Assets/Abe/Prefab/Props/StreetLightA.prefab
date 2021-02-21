@@ -69,10 +69,11 @@ MonoBehaviour:
   AttackSound: {fileID: 8300000, guid: 70a5e9b67ec89e84eb71df41da6e577a, type: 3}
   ContactSound: {fileID: 8300000, guid: ccd8035a8244f2347a152a0086899149, type: 3}
   HP: 500
-  kickMag: 1.2
-  blastMag: 1.1
-  cutterMag: 1
+  kickMag: 1
+  blastMag: 1.2
+  cutterMag: 1.5
   chargeKickMag: 2
+  fallAttackMag: 1
   breakScore: 1000
   breakPoint: 2
   BreakEffect: {fileID: 2714036437048776495, guid: c1b6977c8b92845e3a1103d68f2de786,
@@ -288,6 +289,26 @@ PrefabInstance:
         type: 3}
       propertyPath: chainDamage
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3040465702832958394, guid: 5b2a661f9df86f24391f68040babb3ec,
+        type: 3}
+      propertyPath: fallAttackMag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3040465702832958394, guid: 5b2a661f9df86f24391f68040babb3ec,
+        type: 3}
+      propertyPath: cutterMag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3040465702832958394, guid: 5b2a661f9df86f24391f68040babb3ec,
+        type: 3}
+      propertyPath: kickMag
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3040465702832958394, guid: 5b2a661f9df86f24391f68040babb3ec,
+        type: 3}
+      propertyPath: blastMag
+      value: 1.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b2a661f9df86f24391f68040babb3ec, type: 3}

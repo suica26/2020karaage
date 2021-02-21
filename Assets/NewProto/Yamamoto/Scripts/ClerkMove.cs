@@ -14,6 +14,7 @@ public class ClerkMove : MonoBehaviour
     private GameObject player;
     private NavMeshAgent agent;
     public GameObject hitBoxPrefab = null;
+    public int hitDamage;
 
     // Start is called before the first frame update
     void Start()
@@ -60,6 +61,7 @@ public class ClerkMove : MonoBehaviour
         genPos.y = 2f;
         var hitBox = Instantiate(hitBoxPrefab, genPos, Quaternion.identity, transform.Find("Body"));
         hitBox.GetComponent<BoxCollider>().isTrigger = true;
+        hitBox.GetComponent<HitBoxDamage>().damage = hitDamage;
         Destroy(hitBox, Time.deltaTime * 10f);
     }
 }
