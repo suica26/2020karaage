@@ -7,7 +7,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
     [Range(0, 4), SerializeField] private int tier_WalkAttack;
     [Range(0, 4), SerializeField] private int tier_ChargeKick;
     public GameObject divideObject = null;
-    public AudioClip AttackSound;
+    public AudioClip AttackSound, ContactSound;
     public int HP;                  //Inspector上から設定できます。
     [Header("ダメージ倍率")]
     public float kickMag;             //キックのダメージ倍率
@@ -16,7 +16,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
     public float chargeKickMag;       //ためキックのダメージ倍率
     [Header("破壊時のスコア")] public int breakScore;                          //建物を破壊したときに得られるスコア
     [Header("破壊時のチャージポイント")] public int breakPoint;                //建物を破壊したときに得られるチャージポイント
-    private AudioSource aSound;
+    private AudioSource audioSource;
     private GameObject player;
     private Vector3 chainStartPos;
     private FoodMaker_R scrFood;
@@ -44,7 +44,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
         scrKick = player.GetComponent<chickenKick_R>();
         scrEvo = player.GetComponent<EvolutionChicken_R>();
         scrFood = GetComponent<FoodMaker_R>();
-        aSound = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -101,7 +101,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
         //ブラストダメージ
         if (other.gameObject.name == "MorningBlastSphere_Y(Clone)")
         {
-            HP -= (int)(scrEvo.Status_ATK * blastMag);
+            HP -= (int)(scrEvo.Status_ATK * blastMag / 3f);
             hitSkilID = 2;
             damage = true;
         }
@@ -124,8 +124,15 @@ public class ObjectStateManagement_Y : MonoBehaviour
 
         if (damage)
         {
+            if(hitSkilID == 2 || hitSkilID == 3)
+            {
+                audioSource.PlayOneShot(ContactSound);
+            }
+            else
+            {
+                audioSource.PlayOneShot(AttackSound);
+            }
             //振動させる
-            aSound.PlayOneShot(AttackSound);
             StartCoroutine(DoShake(0.25f, 0.1f));
             damage = false;
         }
@@ -137,6 +144,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
         {
             HP = 0;
             hitSkilID = 5;
+            audioSource.PlayOneShot(AttackSound);
         }
     }
 
