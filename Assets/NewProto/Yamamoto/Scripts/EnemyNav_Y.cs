@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class EnemyNav_Y : MonoBehaviour
 {
     //これは敵に付けてください
-    public NavMeshAgent nav;
+    private NavMeshAgent nav;
     private Vector3 targetPos;
     public float eneDis = 20.0f;//追加
     public bool navFlg = false;
@@ -22,16 +22,16 @@ public class EnemyNav_Y : MonoBehaviour
     void Update()
     {
         targetPos = GameObject.FindGameObjectWithTag("Player").transform.position;
-        //この下変更＆追加
+        nav.destination = targetPos;
+        if (live) nav.enabled = true;
+        else nav.enabled = false;
+
         if (Vector3.Distance(targetPos, this.transform.position) <= eneDis)
         {
-            if(live) nav.enabled = true;
-            nav.destination = targetPos;
             navFlg = true;
         }
         else
         {
-            nav.enabled = false;
             navFlg = false;
         }
     }

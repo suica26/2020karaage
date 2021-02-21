@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class ClerkMove : MonoBehaviour
 {
@@ -9,10 +10,9 @@ public class ClerkMove : MonoBehaviour
     //攻撃をした際の次の行動までの時間
     public float hitFleeze = 5f;    //殴り時
     private Animator animator;
-    private string waitStr = "isWait";
-    private string runStr = "isRun";
     private string hitStr = "Hit";
     private GameObject player;
+    private NavMeshAgent agent;
     public GameObject hitBoxPrefab = null;
 
     // Start is called before the first frame update
@@ -20,6 +20,7 @@ public class ClerkMove : MonoBehaviour
     {
         navScript = GetComponent<EnemyNav_Y>();
         animator = GetComponent<Animator>();
+        agent = GetComponent<NavMeshAgent>();
         player = GameObject.Find("Player");
     }
 
@@ -28,11 +29,10 @@ public class ClerkMove : MonoBehaviour
     {
         int HP = GetComponent<Enemy_Y>().HP;
         if (HP <= 0) Destroy(this);
+        animator.SetFloat("Speed", agent.speed);
 
         if (navScript.navFlg)
         {
-            Run();
-
             if (routineTimer <= 0f)
             {
                 if (Vector3.Distance(player.transform.position, transform.position) <= 5f)
@@ -46,21 +46,6 @@ public class ClerkMove : MonoBehaviour
                 routineTimer -= Time.deltaTime;
             }
         }
-        else
-        {
-            Wait();
-        }
-    }
-    private void Wait()
-    {
-        animator.SetBool(waitStr, true);
-        animator.SetBool(runStr, false);
-    }
-
-    private void Run()
-    {
-        animator.SetBool(runStr, true);
-        animator.SetBool(waitStr, false);
     }
 
     private void Hit()
