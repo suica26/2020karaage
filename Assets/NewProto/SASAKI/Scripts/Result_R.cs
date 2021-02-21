@@ -25,12 +25,14 @@ public class Result_R : MonoBehaviour
     {
         sceneName = SceneManager.GetActiveScene().name;
         resultScore = scrParameter.score;
+        Time.timeScale = 0f;
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
+            Time.timeScale = 1f;
             SceneManager.LoadScene(sceneName);
             
         }

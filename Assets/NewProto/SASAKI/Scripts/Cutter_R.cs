@@ -50,9 +50,9 @@ public class Cutter_R : MonoBehaviour
         {
             if(!throwingCutter && timer <= 0.5f)
             {
+                throwingCutter = true;
                 timer = 0.0f;
                 animTimer = 0.25f;
-                throwingCutter = true;
                 cutter = Instantiate(preCutter, cutterTransform[scrEvo.EvolutionNum].position, Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0, 0, -90)));
                 cutter.transform.localScale = cutter.transform.localScale * cutterSize[scrEvo.EvolutionNum];
                 cutter.GetComponent<CutterMoveFA_R>().enabled = false;
@@ -64,7 +64,6 @@ public class Cutter_R : MonoBehaviour
             else
             {
                 timer = 0.0f;
-                catchableTimer = 0.0f;
             }
         }
 
@@ -93,7 +92,7 @@ public class Cutter_R : MonoBehaviour
         cutter.GetComponent<CutterMoveFA_R>().backArea = backAreaTransform[scrEvo.EvolutionNum];
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.name == "Cutter(Clone)" && catchableTimer >= 1.0f)
         {
