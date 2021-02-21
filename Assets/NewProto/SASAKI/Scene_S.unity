@@ -2847,6 +2847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75b95996922d5de44a3e6b1818c1c9e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
   kickCollisions:
   - {fileID: 724296291}
   - {fileID: 2016208301}
@@ -2873,6 +2874,7 @@ MonoBehaviour:
   chargeClip: {fileID: 8300000, guid: c700a1f33278c244bbd20375f4bb131c, type: 3}
   blastClip: {fileID: 8300000, guid: 3c58f9f3131016d4ead5201f88d691d7, type: 3}
   evoBlastClip: {fileID: 8300000, guid: 7feef3793d690574195ef850f68cced9, type: 3}
+  audioSource: {fileID: 0}
   scrAnim: {fileID: 306120031}
   secondBlastTime: 0.5
   thirdBlastTime: 0.5
@@ -2933,6 +2935,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb493362eb7f1ed4484c1ef1fdca619d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  walkClip:
+  - {fileID: 8300000, guid: 5adf029b369131a46b488b1a70157b49, type: 3}
+  - {fileID: 8300000, guid: 5adf029b369131a46b488b1a70157b49, type: 3}
+  - {fileID: 8300000, guid: 5adf029b369131a46b488b1a70157b49, type: 3}
+  - {fileID: 8300000, guid: 5adf029b369131a46b488b1a70157b49, type: 3}
+  audioSourceWalk: {fileID: 1313039520}
+  audioSourceCommon: {fileID: 1313039520}
+  rotateSpeed: 700
   raycastCubeX:
   - 0.2
   - 1.3
@@ -2943,22 +2953,17 @@ MonoBehaviour:
   - 0.8
   - 4.8
   - 7.8
-  rotateSpeed: 700
   circleRange:
   - 20
   - 25
   - 30
   - 40
-  circleKickRange: 20
-  addFanWidth: 5
-  addFanHeight: 15
+  preCircle: {fileID: 4332330924646062579, guid: d2b73bed1213f2e4ba83dd3a8dbee18d,
+    type: 3}
   CutterFAClip: {fileID: 8300000, guid: 4c7003c3dff38d54b98daefc88d60f58, type: 3}
   KickFAClip: {fileID: 8300000, guid: 4c7003c3dff38d54b98daefc88d60f58, type: 3}
   JumpClip: {fileID: 8300000, guid: 230e7611a4dbd10478f3b299643c67b4, type: 3}
   scrAnim: {fileID: 306120031}
-  preCircle: {fileID: 4332330924646062579, guid: d2b73bed1213f2e4ba83dd3a8dbee18d,
-    type: 3}
-  preFan: {fileID: 3783839548578507492, guid: 837deb20a45166541a37af9b56e0cbbd, type: 3}
 --- !u!114 &1313039525
 MonoBehaviour:
   m_ObjectHideFlags: 0

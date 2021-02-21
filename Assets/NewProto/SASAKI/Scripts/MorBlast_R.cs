@@ -8,6 +8,7 @@ public class MorBlast_R : MonoBehaviour
     [SerializeField] private AudioClip chargeClip;
     [SerializeField] private AudioClip blastClip;
     [SerializeField] private AudioClip evoBlastClip;
+    [SerializeField] private AudioSource audioSource;
     [SerializeField] private Transition_R scrAnim;
     [SerializeField] private float secondBlastTime, thirdBlastTime;
     [SerializeField] private float[] spreadScale;
@@ -23,12 +24,10 @@ public class MorBlast_R : MonoBehaviour
     private float pullTime = 0f;
 
     private EvolutionChicken_R scrEvo;
-    private AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
         scrEvo = GetComponent<EvolutionChicken_R>();
-        audioSource = GetComponent<AudioSource>();
         isBlast = false;
     }
 

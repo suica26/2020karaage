@@ -4,30 +4,30 @@ using UnityEngine;
 
 public class CharaMoveRigid_R : MonoBehaviour
 {
-    [SerializeField] private float[] raycastCubeX;
-    [SerializeField] private float[] raycastCubeZ;
-    [SerializeField] private float rotateSpeed;
+    [SerializeField] private AudioClip[] walkClip;
+    [Tooltip("足音用AudioSource"), SerializeField] private AudioSource audioSourceWalk;
+    [Tooltip("ジャンプ、落下攻撃用"), SerializeField] private AudioSource audioSourceCommon;
+    [Tooltip("キャラクターの回転速度"), SerializeField] private float rotateSpeed;
+
+    [Header("接地判定用")]
+    [Tooltip("BoxCast(足元検知用)のX成分指定(1~4段階まで)"), SerializeField] private float[] raycastCubeX;
+    [Tooltip("BoxCast(足元検知用)のZ成分指定(1~4段階まで)"), SerializeField] private float[] raycastCubeZ;
 
     [Header("落下攻撃設定")]
-    [SerializeField] private float[] circleRange;
-    [SerializeField] private float circleKickRange;
-    [SerializeField] private float addFanWidth;
-    [SerializeField] private float addFanHeight;
+    [Tooltip("落下攻撃時の衝撃波の半径"), SerializeField] private float[] circleRange;
+    [SerializeField] GameObject preCircle;
     [SerializeField] private AudioClip CutterFAClip;
     [SerializeField] private AudioClip KickFAClip;
     [SerializeField] private AudioClip JumpClip;
+
+    [Header("アニメーション処理用")]
     [SerializeField] private Transition_R scrAnim;
-    [SerializeField] GameObject preCircle;
-    [SerializeField] GameObject preFan;
 
     private Rigidbody rb;
     private float h, v;
     private Vector3 cameraForward = Vector3.zero;
     private Vector3 moveDirection = Vector3.zero;
     private bool isGrounded = true;
-    private Ray ray;
-
-    private AudioSource audioSource;
 
     private EvolutionChicken_R scrEvo;
     private Cutter_R scrCutter;
@@ -46,7 +46,6 @@ public class CharaMoveRigid_R : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        audioSource = GetComponent<AudioSource>();
         scrEvo = GetComponent<EvolutionChicken_R>();
         scrCutter = GetComponent<Cutter_R>();
     }
@@ -81,10 +80,12 @@ public class CharaMoveRigid_R : MonoBehaviour
             }
         }
 
+        //以下接地時の処理を記述
         if (isGrounded)
         {
             scrAnim.SetAnimator(Transition_R.Anim.JUMP, false);
 
+            //FallAttack中に接地した際の処理
             if (fallAttack)
             {
                 scrAnim.SetAnimator(Transition_R.Anim.KICKFA, false);
@@ -94,9 +95,17 @@ public class CharaMoveRigid_R : MonoBehaviour
                 rb.velocity = Vector3.zero;
             }
 
+            //チキンが移動している際の処理
             if (h != 0 || v != 0)
             {
+                //足音が再生されていない場合に足音を再生
+                if(audioSourceWalk.isPlaying != walkClip[scrEvo.EvolutionNum])
+                {
+                    audioSourceWalk.PlayOneShot(walkClip[scrEvo.EvolutionNum]);
+                }
                 scrAnim.SetAnimator(Transition_R.Anim.WALK, true);
+
+                //チキンの移動方向や移動量を計算
                 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
                 moveDirection = cameraForward * v + Camera.main.transform.right * h;
                 if (moveDirection.magnitude > 1)
@@ -106,6 +115,7 @@ public class CharaMoveRigid_R : MonoBehaviour
 
                 rb.velocity = moveDirection * speed;
 
+                //チキンの身体の向きを修正
                 if(Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
                 {
                     Quaternion qua = Quaternion.LookRotation(moveDirection);
@@ -114,12 +124,18 @@ public class CharaMoveRigid_R : MonoBehaviour
             }
             else
             {
+                //足音が再生されていた場合停止させる
+                if (audioSourceWalk.isPlaying == walkClip[scrEvo.EvolutionNum])
+                {
+                    audioSourceWalk.Stop();
+                }
                 scrAnim.SetAnimator(Transition_R.Anim.WALK, false);
             }
 
+            //ジャンプした際の処理
             if (Input.GetButtonDown("Jump"))
             {
-                audioSource.PlayOneShot(JumpClip);
+                audioSourceCommon.PlayOneShot(JumpClip);
                 scrAnim.SetAnimator(Transition_R.Anim.JUMP, true);
                 rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
             }
@@ -132,6 +148,11 @@ public class CharaMoveRigid_R : MonoBehaviour
             //空中での制動(移動量は地上の1/3程度)
             if (h != 0 || v != 0)
             {
+                if (audioSourceWalk.isPlaying == walkClip[scrEvo.EvolutionNum])
+                {
+                    audioSourceWalk.Stop();
+                }
+
                 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
                 moveDirection = cameraForward * v + Camera.main.transform.right * h;
                 rb.AddForce(moveDirection * speed * 0.33f, ForceMode.Force);
@@ -143,19 +164,8 @@ public class CharaMoveRigid_R : MonoBehaviour
                 }
             }
 
-            if (Input.GetMouseButton(1) && !fallAttack)
-            {
-                if(cutterFallAttackTimer <= cutterFallAttackTime)
-                {
-                    cutterFallAttackTimer += Time.deltaTime;
-                }
-                else if(!scrCutter.throwingCutter)
-                {
-                    fallAttackVer = 2;
-                    StartCoroutine("FallAttack");
-                }
-            }
-            else if(Input.GetMouseButton(0) && !fallAttack)
+            //落下攻撃の処理(キック)
+            if(Input.GetMouseButton(0) && !fallAttack)
             {
                 if(kickFallAttackTimer <= kickFallAttackTime)
                 {
@@ -167,6 +177,19 @@ public class CharaMoveRigid_R : MonoBehaviour
                     StartCoroutine("FallAttack");
                 }
             }
+            //落下攻撃の処理(カッター)
+            else if (Input.GetMouseButton(1) && !fallAttack)
+            {
+                if (cutterFallAttackTimer <= cutterFallAttackTime)
+                {
+                    cutterFallAttackTimer += Time.deltaTime;
+                }
+                else if (!scrCutter.throwingCutter)
+                {
+                    fallAttackVer = 2;
+                    StartCoroutine("FallAttack");
+                }
+            }
             else
             {
                 kickFallAttackTimer = 0f;
@@ -175,6 +198,7 @@ public class CharaMoveRigid_R : MonoBehaviour
         }
     }
 
+    //落下攻撃後、接地時にInvoke。衝撃波を設定
     void fallAttackCollisionCheck()
     {
         GameObject circleChecker;
@@ -186,8 +210,10 @@ public class CharaMoveRigid_R : MonoBehaviour
         }
     }
 
+    //落下攻撃時の動きの処理
     IEnumerator FallAttack()
     {
+        //キック
         if(fallAttackVer == 1)
         {
             scrAnim.SetAnimator(Transition_R.Anim.KICKFA, true);
@@ -196,10 +222,11 @@ public class CharaMoveRigid_R : MonoBehaviour
             fallAttack = true;
             yield return new WaitForSeconds(0.95f);
 
-            audioSource.PlayOneShot(KickFAClip);
+            audioSourceCommon.PlayOneShot(KickFAClip);
             rb.AddForce(Vector3.down * jumpSpeed * 2f, ForceMode.Impulse);
             yield break;
         }
+        //カッター
         else
         {
             scrAnim.SetAnimator(Transition_R.Anim.CUTTERFA, true);
@@ -208,21 +235,10 @@ public class CharaMoveRigid_R : MonoBehaviour
             fallAttack = true;
             yield return new WaitForSeconds(0.95f);
 
-            audioSource.PlayOneShot(CutterFAClip);
+            audioSourceCommon.PlayOneShot(CutterFAClip);
             scrCutter.CutterAttack();
             rb.AddForce(Vector3.down * jumpSpeed * 2f, ForceMode.Impulse);
             yield break;
         }
-    }
-
-    public void FieldCheck(bool check)
-    {
-        //isGrounded = check;
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(transform.position - transform.up * 0.05f, new Vector3(raycastCubeX[scrEvo.EvolutionNum], 0.1f ,raycastCubeZ[scrEvo.EvolutionNum]));
     }
 }
