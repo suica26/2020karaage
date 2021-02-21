@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class chickenKick_R : MonoBehaviour
 {
+    [SerializeField] AudioSource audioSource;
     [SerializeField] GameObject[] kickCollisions;
     [SerializeField] GameObject kickEffect;
     [SerializeField] AudioClip kickSound;
     [SerializeField] Transition_R scrAnim;
 
-    AudioSource audioSource;
     EvolutionChicken_R scrEvo;
 
     public int chargePoint;
@@ -18,7 +18,6 @@ public class chickenKick_R : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
         scrEvo = GetComponent<EvolutionChicken_R>();
         timer = 0.0f;
         chargePoint = 0;
