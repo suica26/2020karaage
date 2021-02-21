@@ -28,7 +28,7 @@ public class Parameters_R : MonoBehaviour
     [SerializeField] private Text scoreText, timeText, epText, hpText;
     [SerializeField] private GameObject resultPanel = null;
 
-    [SerializeField] public int score, time, ep, hp, maxEP1, maxEP2, maxEP3, maxHP1, maxHP2, maxHP3, plusHP1, plusHP2, plusHP3, sp;
+    [SerializeField] public int score, time, ep, hp, maxEP1, maxEP2, maxEP3, maxHP1, maxHP2, maxHP3, plusHP1, plusHP2, plusHP3, sp, maxSP;
     [SerializeField] public Slider hpSlider, epSlider, kickSlider;
 
     private bool freeze = false;
@@ -45,7 +45,7 @@ public class Parameters_R : MonoBehaviour
         epSlider.value = 0;
         epSlider.maxValue = 30;
         kickSlider.value = 0;
-        kickSlider.maxValue = 10;
+        kickSlider.maxValue = maxSP;
         count = time;
     }
 
