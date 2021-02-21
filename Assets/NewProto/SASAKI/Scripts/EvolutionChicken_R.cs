@@ -15,7 +15,7 @@ public class EvolutionChicken_R : MonoBehaviour
     [SerializeField] private float[] SCORE;
     [SerializeField] private float[] JUMP;
 
-    [SerializeField] private int[] CAM_RADIUS;
+    [SerializeField] private float[] CAM_RADIUS;
 
     private Parameters_R scrParam;
     private MorBlast_R scrBlast;
@@ -28,7 +28,7 @@ public class EvolutionChicken_R : MonoBehaviour
     private float status_SPD;
     private float status_SCORE;
     private float status_JUMP;
-    private int cam_radius;
+    private float cam_radius;
 
     //カプセル化
     public int EvolutionNum { get { return evolutionNum; } }
@@ -38,9 +38,8 @@ public class EvolutionChicken_R : MonoBehaviour
     public float Status_SCORE { get { return status_SCORE; } }
     public float Status_JUMP { get { return status_JUMP; } }
 
-    public int Cam_radius { get { return cam_radius; } }
+    public float Cam_radius { get { return cam_radius; } }
 
-    // Start is called before the first frame update
     void Start()
     {
         scrParam = objParam.gameObject.GetComponent<Parameters_R>();
