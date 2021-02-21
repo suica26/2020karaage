@@ -18,7 +18,7 @@ public class Result_R : MonoBehaviour
     [SerializeField] private Parameters_R scrParameter = null;
     [SerializeField] private Text gameOverText;
 
-    private int resultScore;
+    public int resultScore;
     private string sceneName;
 
     void Start()
@@ -32,11 +32,13 @@ public class Result_R : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(sceneName);
+            
         }
     }
 
     void OnEnable()
     {
-        gameOverText.text = "Score: " + resultScore;
+        resultScore = PlayerPrefs.GetInt("SCORE", resultScore);
+        gameOverText.text = "Total damage:$ " + resultScore;
     }
 }

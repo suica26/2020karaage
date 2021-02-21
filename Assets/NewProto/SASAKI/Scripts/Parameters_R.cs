@@ -34,9 +34,9 @@ public class Parameters_R : MonoBehaviour
     private bool freeze = false;
     private float count;
 
-    void Start()
+    public void Start()
     {
-        scoreText.text = "Price: $" + score;
+        scoreText.text = "Price:$ " + score;
         timeText.text = "Time: " + time;
         epText.text = "EP: " + ep;
         hpText.text = "HP: " + hp;
@@ -54,11 +54,12 @@ public class Parameters_R : MonoBehaviour
         if (!freeze)
         {
             score += addScore;
-            scoreText.text = "Price: $" + score;
+            scoreText.text = "Price:$ " + score;
             kickSlider.value += 1;
+  
             if (Input.GetMouseButton(0))
             {
-                if(kickSlider.value == sp)
+                if (kickSlider.value == sp)
                 {
                     kickSlider.value = 0;
                 }
@@ -76,6 +77,8 @@ public class Parameters_R : MonoBehaviour
             timeText.text = "Time: " + time;
             if (time <= 0)
             {
+                PlayerPrefs.SetInt("SCORE", score);
+                PlayerPrefs.Save();
                 freeze = true;
                 resultPanel.SetActive(true);
             }
@@ -89,13 +92,15 @@ public class Parameters_R : MonoBehaviour
         {
             ep += addEP;
             epText.text = "EP: " + ep;
-            if(ep == 30)
+            if (ep == 30)
             {
                 TimeManager(10);
-            }else if(ep == 100)
+            }
+            else if (ep == 100)
             {
                 TimeManager(10);
-            }else if(ep == 300)
+            }
+            else if (ep == 300)
             {
                 TimeManager(10);
             }
@@ -125,6 +130,7 @@ public class Parameters_R : MonoBehaviour
     private void Update()
     {
         count -= Time.deltaTime;
+        
         if (time - count > 1)
         {
             TimeManager(-1);
