@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -1289019804591318571}
   - component: {fileID: 5785591650176258643}
   - component: {fileID: -3528759734893100838}
+  - component: {fileID: -6762000761309293490}
   m_Layer: 0
   m_Name: Tank
   m_TagString: Enemy
@@ -95,7 +96,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 10
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -117,6 +118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 626279893075345666, guid: 524c2dc832f21e444bb6a4f89300021e,
     type: 3}
+  launchPort: {fileID: 0}
   fireFreeze: 5
   desBulletTime: 10
   bulletDamage: 50
@@ -155,6 +157,21 @@ MonoBehaviour:
   chainProbability: 5
   chainDamage: 50
   superChainDamage: 2000
+--- !u!114 &-6762000761309293490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998171526041432950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 400540f14b6981848a8da03f843b8495, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objFood: {fileID: 6224625970994948174, guid: 432283639b2517e4cb2744030344a38c, type: 3}
+  minFood: 6
+  maxFood: 12
 --- !u!1 &4860956250139582127
 GameObject:
   m_ObjectHideFlags: 0

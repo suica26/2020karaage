@@ -7,7 +7,7 @@ public class TankMove_Y : MonoBehaviour
     private EnemyNav_Y navScript;
     public GameObject bulletPrefab;
     private GameObject bullet;
-    private GameObject launchPort;
+    public GameObject launchPort;
     private GameObject head;
     public float fireFreeze = 5f;
     private float routineTimer = 0f;
@@ -19,7 +19,7 @@ public class TankMove_Y : MonoBehaviour
     void Start()
     {
         navScript = GetComponent<EnemyNav_Y>();
-        launchPort = transform.Find("Gun").gameObject;
+        launchPort = transform.Find("TankBase/TankHead/Gun").gameObject;
         player = GameObject.FindGameObjectWithTag("Player");
     }
 

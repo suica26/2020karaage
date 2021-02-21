@@ -800,6 +800,7 @@ GameObject:
   - component: {fileID: 5605824141474829233}
   - component: {fileID: 3906591500205283640}
   - component: {fileID: 8984250292784249946}
+  - component: {fileID: -7068490744834132733}
   m_Layer: 0
   m_Name: Police_Y
   m_TagString: Enemy
@@ -952,6 +953,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-7068490744834132733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6409649343163760621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 400540f14b6981848a8da03f843b8495, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objFood: {fileID: 6224625970994948174, guid: 432283639b2517e4cb2744030344a38c, type: 3}
+  minFood: 4
+  maxFood: 6
 --- !u!1 &6593029485720162807
 GameObject:
   m_ObjectHideFlags: 0

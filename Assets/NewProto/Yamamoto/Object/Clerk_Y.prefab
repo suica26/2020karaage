@@ -453,6 +453,7 @@ GameObject:
   - component: {fileID: 6743351154751058487}
   - component: {fileID: 5114308404199194051}
   - component: {fileID: 278897972307246757}
+  - component: {fileID: -4645030219664583842}
   m_Layer: 0
   m_Name: Clerk_Y
   m_TagString: Enemy
@@ -601,6 +602,21 @@ MonoBehaviour:
   hitBoxPrefab: {fileID: 3531957827537779740, guid: a150f44f619a03c4789834dc1d0d0ef4,
     type: 3}
   hitDamage: 10
+--- !u!114 &-4645030219664583842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3518508829542101968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 400540f14b6981848a8da03f843b8495, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objFood: {fileID: 6224625970994948174, guid: 432283639b2517e4cb2744030344a38c, type: 3}
+  minFood: 2
+  maxFood: 4
 --- !u!1 &5409312547980441499
 GameObject:
   m_ObjectHideFlags: 0

@@ -133,11 +133,11 @@ public class ObjectStateManagement_Y : MonoBehaviour
         {
             if(hitSkilID == 2 || hitSkilID == 3)
             {
-                audioSource.PlayOneShot(ContactSound);
+                if (ContactSound != null) audioSource.PlayOneShot(ContactSound);
             }
             else
             {
-                audioSource.PlayOneShot(AttackSound);
+                if (AttackSound != null) audioSource.PlayOneShot(AttackSound);
             }
             //振動させる
             StartCoroutine(DoShake(0.25f, 0.1f));

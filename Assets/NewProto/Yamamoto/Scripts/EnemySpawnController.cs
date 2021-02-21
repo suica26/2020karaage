@@ -65,7 +65,7 @@ public class EnemySpawnController : MonoBehaviour
         enemyNum[i]++;
         var scr = enemy.AddComponent<EnemyStatusForGameAI>();
         scr.i = i;  //何番目の敵(Prefab)なのかを記憶させる
-        Debug.Log($"{i}番目の敵は,{enemyNum[i]}体います");
+        //Debug.Log($"{i}番目の敵は,{enemyNum[i]}体います");
     }
 
     //スポーン候補地点からランダムにスポーン位置を決定

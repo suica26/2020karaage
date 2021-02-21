@@ -135,8 +135,8 @@ public class ObjectBreak_Y : MonoBehaviour
     {
         if (live)
         {
-            audioSource.PlayOneShot(ExplosionSound);
-            if(CollapseSound != null) audioSource.PlayOneShot(CollapseSound);
+            if (ExplosionSound != null) audioSource.PlayOneShot(ExplosionSound);
+            if (CollapseSound != null) audioSource.PlayOneShot(CollapseSound);
             live = false;
         }
         Vector3 forcePower = new Vector3(Random.Range(-Power, Power), Random.Range(-Power * 0.2f, Power * 0.2f), Random.Range(-Power * 0.75f, Power * 0.75f));
@@ -190,7 +190,7 @@ public class ObjectBreak_Y : MonoBehaviour
         rb.AddTorque(TorquePower, ForceMode.Impulse);
         if (live)
         {
-            audioSource.PlayOneShot(ExplosionSound);
+            if (ExplosionSound != null) audioSource.PlayOneShot(ExplosionSound);
             if (CollapseSound != null) audioSource.PlayOneShot(CollapseSound);
             live = false;
         }
@@ -238,7 +238,7 @@ public class ObjectBreak_Y : MonoBehaviour
     {
         if (live)
         {
-            audioSource.PlayOneShot(ExplosionSound);
+            if (ExplosionSound != null) audioSource.PlayOneShot(ExplosionSound);
             if (CollapseSound != null) audioSource.PlayOneShot(CollapseSound);
             live = false;
         }

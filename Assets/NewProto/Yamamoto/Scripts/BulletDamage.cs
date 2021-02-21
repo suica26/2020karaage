@@ -19,10 +19,6 @@ public class BulletDamage : MonoBehaviour
         if(other.gameObject.tag == "Player")
         {
             param.HPManager(damage);
-        }
-
-        if(other.gameObject.tag != "Enemy" && other.gameObject.tag != "EnemyItem")
-        {
             Destroy(this.gameObject);
         }
     }
