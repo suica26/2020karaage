@@ -16,27 +16,28 @@ using UnityEngine.SceneManagement;
 public class Result_R : MonoBehaviour
 {
     [SerializeField] private Parameters_R scrParameter = null;
-    [SerializeField] private Text gameOverText;
+    [SerializeField] private GameObject nextPanel;
 
-    private int resultScore;
     private string sceneName;
 
     void Start()
     {
         sceneName = SceneManager.GetActiveScene().name;
-        resultScore = scrParameter.score;
+        nextPanel.SetActive(false);
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
+            Time.timeScale = 1f;
+            nextPanel.SetActive(true);
             SceneManager.LoadScene(sceneName);
         }
     }
 
     void OnEnable()
     {
-        gameOverText.text = "Score: " + resultScore;
+        Time.timeScale = 0f;
     }
 }

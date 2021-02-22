@@ -4,37 +4,52 @@ using UnityEngine;
 
 public class chickenKick_R : MonoBehaviour
 {
+    [SerializeField] AudioSource audioSource;
     [SerializeField] GameObject[] kickCollisions;
     [SerializeField] GameObject kickEffect;
     [SerializeField] AudioClip kickSound;
+    [SerializeField] Transition_R scrAnim;
 
-    AudioSource audioSource;
     EvolutionChicken_R scrEvo;
 
     public int chargePoint;
+    private float timer;
 
     // Start is called before the first frame update
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
         scrEvo = GetComponent<EvolutionChicken_R>();
-
+        timer = 0.0f;
         chargePoint = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
-            audioSource.PlayOneShot(kickSound);
-            var objKick = Instantiate(kickEffect, transform.position, Quaternion.identity);
-            Destroy(objKick, 0.5f);
-            kickCollisions[scrEvo.EvolutionNum].SetActive(true);
+            timer += Time.deltaTime;
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            if(timer <= 0.5f)
+            {
+                timer = 0.0f;
+                audioSource.PlayOneShot(kickSound);
+                var objKick = Instantiate(kickEffect, transform.position, Quaternion.identity);
+                Destroy(objKick, 0.5f);
+                kickCollisions[scrEvo.EvolutionNum].SetActive(true);
+                scrAnim.SetAnimator(Transition_R.Anim.KICK, true);
+            }
+            else
+            {
+                timer = 0.0f;
+            }
         }
         else
         {
             kickCollisions[scrEvo.EvolutionNum].SetActive(false);
+            scrAnim.SetAnimator(Transition_R.Anim.KICK, false);
         }
     }
 }

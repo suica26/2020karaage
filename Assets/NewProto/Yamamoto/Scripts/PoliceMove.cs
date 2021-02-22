@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PoliceMove : MonoBehaviour
 {
@@ -10,12 +11,13 @@ public class PoliceMove : MonoBehaviour
     public float fireFreeze = 3f;    //発砲時
     public float hitFleeze = 1f;    //警棒で殴った時
     public GameObject bulletPrefab = null;
+    public int hitDamage;
+    public int bulletDamage;
     private Animator animator;
-    private string waitStr = "isWait";
-    private string runStr = "isRun";
     private string fireStr = "Fire";
     private string hitStr = "Hit";
     private GameObject player;
+    private NavMeshAgent agent;
     public GameObject hitBoxPrefab = null;
 
     // Start is called before the first frame update
@@ -24,6 +26,7 @@ public class PoliceMove : MonoBehaviour
         navScript = GetComponent<EnemyNav_Y>();
         player = GameObject.Find("Player");
         animator = GetComponent<Animator>();
+        agent = GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
@@ -31,11 +34,10 @@ public class PoliceMove : MonoBehaviour
     {
         int HP = GetComponent<Enemy_Y>().HP;
         if (HP <= 0) Destroy(this);
+        animator.SetFloat("Speed", agent.speed);
 
         if (navScript.navFlg)
         {
-            Run();
-
             if (routineTimer <= 0f)
             {
                 float dist = Vector3.Distance(player.transform.position, transform.position);
@@ -54,21 +56,6 @@ public class PoliceMove : MonoBehaviour
                 routineTimer -= Time.deltaTime;
             }
         }
-        else
-        {
-            Wait();
-        }
-    }
-    private void Wait()
-    {
-        animator.SetBool(waitStr, true);
-        animator.SetBool(runStr, false);
-    }
-
-    private void Run()
-    {
-        animator.SetBool(runStr, true);
-        animator.SetBool(waitStr, false);
     }
 
     private void FireSet()
@@ -94,6 +81,7 @@ public class PoliceMove : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, genPos, transform.rotation);
         bullet.transform.Rotate(90f, 0f, 0f);
         bullet.GetComponent<Rigidbody>().velocity = transform.forward * 20f;
+        bullet.GetComponent<BulletDamage>().damage = bulletDamage;
         Destroy(bullet, 5f);
     }
 
@@ -109,6 +97,7 @@ public class PoliceMove : MonoBehaviour
         genPos.y = 2f;
         var hitBox = Instantiate(hitBoxPrefab, genPos, Quaternion.identity, transform.Find("Body"));
         hitBox.GetComponent<BoxCollider>().isTrigger = true;
+        hitBox.GetComponent<HitBoxDamage>().damage = hitDamage;
         Destroy(hitBox, Time.deltaTime * 10f);
     }
 }

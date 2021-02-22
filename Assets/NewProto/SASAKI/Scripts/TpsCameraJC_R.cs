@@ -6,8 +6,8 @@ public class TpsCameraJC_R : MonoBehaviour
 {
     [SerializeField] GameObject objPlayer;
     [SerializeField] Transform target;
+    [SerializeField] Transform[] focus;
     [SerializeField] float spinSpeed = 1.0f;
-    [SerializeField] float[] radius;
 
     Vector3 nowPos;
     Vector3 pos = Vector3.zero;
@@ -19,7 +19,7 @@ public class TpsCameraJC_R : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        // Canera get Start Position from Player
+        // Camera get Start Position from Player
         nowPos = transform.position;
 
         if (target == null)
@@ -40,7 +40,7 @@ public class TpsCameraJC_R : MonoBehaviour
         // Get MouseMove
         mouse -= new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")) * Time.deltaTime * spinSpeed;
         // Clamp mouseY move
-        mouse.y = Mathf.Clamp(mouse.y, 0.5f, 0.95f);
+        mouse.y = Mathf.Clamp(mouse.y, 0.25f, 0.95f);
 
         // sphere coordinates
         pos.x = Mathf.Sin(mouse.y * Mathf.PI) * Mathf.Cos(mouse.x * Mathf.PI);
@@ -56,18 +56,18 @@ public class TpsCameraJC_R : MonoBehaviour
         pos.y += nowPos.y;
         //pos.x += nowPos.x; // if u need a formula,pls remove comment tag.
 
-        camPos = pos + target.position;
+        camPos = pos + focus[scrEvo.EvolutionNum].position;
         transform.position = camPos;
-        transform.LookAt(target.transform);
+        transform.LookAt(focus[scrEvo.EvolutionNum]);
         SetCam();
     }
 
     void SetCam()
     {
         Vector3 setCamPos;
-        Vector3 distance = camPos - target.transform.position;
-        Ray ray = new Ray(target.transform.position, distance);
-        Debug.DrawRay(ray.origin, ray.direction * 10, Color.red, 0.1f,false);
+        Vector3 distance = camPos - focus[scrEvo.EvolutionNum].position;
+        Ray ray = new Ray(focus[scrEvo.EvolutionNum].position, distance);
+        Debug.DrawRay(ray.origin, ray.direction * distance.magnitude, Color.red, 0.1f,false);
         if(Physics.Raycast(ray, out RaycastHit hit, distance.magnitude) == true)
         {
             setCamPos = hit.point;

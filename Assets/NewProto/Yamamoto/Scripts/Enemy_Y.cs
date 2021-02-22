@@ -5,22 +5,37 @@ using UnityEngine.AI;
 
 public class Enemy_Y : MonoBehaviour
 {
+    [Range(0, 4), SerializeField] private int tier_WalkAttack;
+    [Range(0, 4), SerializeField] private int tier_ChargeKick;
     public int HP = 0;
+    [Header("ダメージ倍率")]
+    public float kickMag;             //キックのダメージ倍率
+    public float blastMag;         //ブラストのダメージ倍率
+    public float cutterMag;        //カッターのダメージ倍率
+    public float chargeKickMag;       //ためキックのダメージ倍率
+    public float fallAttackMag;     //落下攻撃のダメージ倍率
+    public float KnockBackPower;    //ノックバックする量
+    [Header("破壊時のスコア")] public int breakScore;                          //建物を破壊したときに得られるスコア
+    [Header("破壊時のチャージポイント")] public int breakPoint;                //建物を破壊したときに得られるチャージポイント
+    private Animator animator;
+    private GameObject player;
+    private FoodMaker_R scrFood;
+    private chickenKick_R scrKick;
+    private EvolutionChicken_R scrEvo;
+    private Rigidbody rb;
+    private bool live = true;
     private bool damage = false;
     private int hitSkilID = 0;
-    public int kickDamage = 0;
-    public int blastDamage = 0;
-    public int cutterDamage = 0;
-    private Animator animator;
-    private bool live = true;
-    private GameObject player;
-    public float torque;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         player = GameObject.Find("Player");
+        scrKick = player.GetComponent<chickenKick_R>();
+        scrEvo = player.GetComponent<EvolutionChicken_R>();
+        scrFood = GetComponent<FoodMaker_R>();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -28,7 +43,19 @@ public class Enemy_Y : MonoBehaviour
     {
         if(HP <= 0 && live)
         {
+            GameObject.Find("Canvas").GetComponent<Parameters_R>().ScoreManager(breakScore);
+            if (scrFood != null)
+            {
+                scrFood.DropFood();
+            }
             Death();
+        }
+        else
+        {
+            if (rb.velocity.magnitude < 5f)
+            {
+                animator.applyRootMotion = true;
+            }
         }
     }
 
@@ -37,40 +64,80 @@ public class Enemy_Y : MonoBehaviour
         //キックダメージ
         if (other.gameObject.name == "KickCollision")
         {
-            HP -= kickDamage;
-            hitSkilID = 1;
+            if (scrKick.chargePoint >= 100)
+            {
+                if (scrEvo.EvolutionNum >= tier_ChargeKick)
+                {
+                    HP = 0;
+                    scrKick.chargePoint = 0;
+                    hitSkilID = 4;
+                }
+                else
+                {
+                    HP -= (int)(scrEvo.Status_ATK * chargeKickMag);
+                }
+            }
+            else
+            {
+                HP -= (int)(scrEvo.Status_ATK * kickMag);
+                hitSkilID = 1;
+            }
             damage = true;
         }
         //ブラストダメージ
         if (other.gameObject.name == "MorningBlastSphere_Y(Clone)")
         {
-            HP -= blastDamage;
+            HP -= (int)(scrEvo.Status_ATK * blastMag / 3f);
             hitSkilID = 2;
             damage = true;
         }
         //カッターダメージ
         if (other.gameObject.name == "Cutter(Clone)")
         {
-            HP -= cutterDamage;
+            HP -= (int)(scrEvo.Status_ATK * cutterMag);
             hitSkilID = 3;
             damage = true;
         }
+        //連鎖破壊の破片
         if (other.gameObject.tag == "Chain")
         {
             var chainScript = other.gameObject.GetComponent<ChainBreak_Y>();
             HP -= chainScript.chainDamage;
-            hitSkilID = 8;
+            hitSkilID = 0;
+            damage = true;
+        }
+        //落下攻撃の衝撃波
+        if (other.gameObject.name == "fallAttackCircle(Clone)")
+        {
+            HP -= (int)(scrEvo.Status_ATK * fallAttackMag);
+            KnockBack();
+            hitSkilID = 1;
             damage = true;
         }
 
         if (damage)
         {
-            var dir = other.gameObject.transform.position - transform.position;
-            dir.y = 0;
-            transform.forward = dir;
+            //振動させる
             StartCoroutine(DoShake(0.25f, 0.1f));
             damage = false;
         }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        //踏みつぶし攻撃
+        if (collision.gameObject.tag == "Player" && 
+            scrEvo.EvolutionNum >= tier_WalkAttack && 
+            collision.gameObject.GetComponent<Rigidbody >().velocity.magnitude > 1f)
+        {
+            HP = 0;
+            hitSkilID = 5;
+        }
+    }
+
+    private void KnockBack()
+    {
+        animator.applyRootMotion = false;
+        rb.AddForce(-transform.forward * KnockBackPower, ForceMode.Impulse);
     }
 
     //振動コルーチン
@@ -120,6 +187,7 @@ public class Enemy_Y : MonoBehaviour
             F.y = 0.6f;
             animator.applyRootMotion = false;
             rb.AddForce(F * 50f, ForceMode.Impulse);
+            float torque = 5f;
             Vector3 TorquePower = new Vector3(Random.Range(-torque, torque), Random.Range(-torque, torque), Random.Range(-torque, torque));
             rb.AddTorque(TorquePower, ForceMode.Impulse);
         }

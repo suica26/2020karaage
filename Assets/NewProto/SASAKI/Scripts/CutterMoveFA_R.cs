@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class CutterMoveFA_R : MonoBehaviour
 {
-    public GameObject ground;
-    private GameObject player;
+    [SerializeField] private AudioClip CutterClip;
 
+    private GameObject player;
     private Rigidbody rigid;
+    private AudioSource audioSource;
 
     private Vector3 moveVec;
     public Transform backArea;
@@ -24,6 +25,7 @@ public class CutterMoveFA_R : MonoBehaviour
         touchGround = false;
         rigid = GetComponent<Rigidbody>();
         rigid.AddForce(-transform.up * 18f * evoSpeed, ForceMode.Impulse);
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -38,7 +40,7 @@ public class CutterMoveFA_R : MonoBehaviour
             }
             else if (destroyTime > 1.7f)
             {
-                transform.position = Vector3.MoveTowards(transform.position, backArea.position - player.transform.forward, 30f * evoSpeed * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, backArea.position, 30f * evoSpeed * Time.deltaTime);
             }
         }
         gameObject.transform.Rotate(rotSpeed * Time.deltaTime, 0, 0);
@@ -46,11 +48,15 @@ public class CutterMoveFA_R : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject == ground)
+        if (enabled)
         {
-            touchGround = true;
-            rigid.velocity = Vector3.zero;
-            rigid.AddForce(moveVec * 12f * evoSpeed, ForceMode.Impulse);
+            audioSource.PlayOneShot(CutterClip);
+            if (other.gameObject.tag == "Ground")
+            {
+                touchGround = true;
+                rigid.velocity = Vector3.zero;
+                rigid.AddForce(moveVec * 12f * evoSpeed, ForceMode.Impulse);
+            }
         }
     }
 }
