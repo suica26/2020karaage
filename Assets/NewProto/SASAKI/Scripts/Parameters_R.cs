@@ -25,7 +25,7 @@ using UnityEngine.UI;
 
 public class Parameters_R : MonoBehaviour
 {
-    [SerializeField] private Text scoreText, timeText, epText, hpText;
+    [SerializeField] private Text scoreText, finalScoreText, timeText, epText, hpText;
     [SerializeField] private GameObject resultPanel = null;
 
     [SerializeField] public int score, time, ep, hp, maxEP1, maxEP2, maxEP3, maxHP1, maxHP2, maxHP3, plusHP1, plusHP2, plusHP3, sp, maxSP;
@@ -37,11 +37,12 @@ public class Parameters_R : MonoBehaviour
     public void Start()
     {
         scoreText.text = "Price:$ " + score;
+        finalScoreText.text = "Total damage:$ " + score;
         timeText.text = "Time: " + time;
         epText.text = "EP: " + ep;
         hpText.text = "HP: " + hp;
-        hpSlider.value = 50;
-        hpSlider.maxValue = 50;
+        hpSlider.value = 100;
+        hpSlider.maxValue = 100;
         epSlider.value = 0;
         epSlider.maxValue = 30;
         kickSlider.value = 0;
@@ -77,8 +78,7 @@ public class Parameters_R : MonoBehaviour
             timeText.text = "Time: " + time;
             if (time <= 0)
             {
-                PlayerPrefs.SetInt("SCORE", score);
-                PlayerPrefs.Save();
+                finalScoreText.text = "Total damage:$ " + score;
                 freeze = true;
                 resultPanel.SetActive(true);
             }
@@ -143,6 +143,7 @@ public class Parameters_R : MonoBehaviour
             maxEP1 = 10000;
             hpSlider.maxValue = maxHP1;
             hpSlider.value += plusHP1;
+            hp += plusHP1; 
         }
         else if (epSlider.value == maxEP2)
         {
@@ -151,11 +152,13 @@ public class Parameters_R : MonoBehaviour
             maxEP2 = 10000;
             hpSlider.maxValue = maxHP2;
             hpSlider.value += plusHP2;
+            hp += plusHP2;
         }
         else if (epSlider.value == maxEP3)
         {
             hpSlider.maxValue = maxHP3;
             hpSlider.value += plusHP3;
+            hp += plusHP3;
         }
     }
     //タイマーです。一秒ごとにTimeManager()で一秒減らしてます。

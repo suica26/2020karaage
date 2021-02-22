@@ -16,16 +16,14 @@ using UnityEngine.SceneManagement;
 public class Result_R : MonoBehaviour
 {
     [SerializeField] private Parameters_R scrParameter = null;
-    [SerializeField] private Text gameOverText;
+    [SerializeField] private GameObject nextPanel;
 
-    public int resultScore;
     private string sceneName;
 
     void Start()
     {
         sceneName = SceneManager.GetActiveScene().name;
-        resultScore = scrParameter.score;
-        Time.timeScale = 0f;
+        nextPanel.SetActive(false);
     }
 
     void Update()
@@ -33,14 +31,13 @@ public class Result_R : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             Time.timeScale = 1f;
+            nextPanel.SetActive(true);
             SceneManager.LoadScene(sceneName);
-            
         }
     }
 
     void OnEnable()
     {
-        resultScore = PlayerPrefs.GetInt("SCORE", resultScore);
-        gameOverText.text = "Total damage:$ " + resultScore;
+        Time.timeScale = 0f;
     }
 }
