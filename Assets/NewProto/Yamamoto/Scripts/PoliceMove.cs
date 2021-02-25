@@ -18,6 +18,7 @@ public class PoliceMove : MonoBehaviour
     private string hitStr = "Hit";
     private GameObject player;
     private NavMeshAgent agent;
+    private GameObject hitBox;
     public GameObject hitBoxPrefab = null;
 
     // Start is called before the first frame update
@@ -94,10 +95,14 @@ public class PoliceMove : MonoBehaviour
     private void CreateDamageBox()
     {
         var genPos = transform.position + transform.forward * 2f;
-        genPos.y = 2f;
-        var hitBox = Instantiate(hitBoxPrefab, genPos, Quaternion.identity, transform.Find("Body"));
+        genPos.y = 1f;
+        hitBox = Instantiate(hitBoxPrefab, genPos, Quaternion.identity, transform.Find("Body"));
         hitBox.GetComponent<BoxCollider>().isTrigger = true;
         hitBox.GetComponent<HitBoxDamage>().damage = hitDamage;
-        Destroy(hitBox, Time.deltaTime * 10f);
+    }
+
+    private void DeleteHitBox()
+    {
+        Destroy(hitBox);
     }
 }
