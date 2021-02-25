@@ -23,8 +23,15 @@ public class EnemyNav_Y : MonoBehaviour
     {
         targetPos = GameObject.FindGameObjectWithTag("Player").transform.position;
         nav.destination = targetPos;
-        if (live) nav.enabled = true;
-        else nav.enabled = false;
+        if (live)
+        {
+            nav.enabled = true;
+        }
+        else 
+        {
+            nav.enabled = false;
+            nav.isStopped = true;
+        }
 
         if (Vector3.Distance(targetPos, this.transform.position) <= eneDis)
         {

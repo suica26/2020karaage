@@ -83,6 +83,7 @@ public class ObjectBreak_Y : MonoBehaviour
             {
                 if (hitSkilID == 4) break;
                 obj.GetComponent<Rigidbody>().isKinematic = false;
+                obj.GetComponent<Rigidbody>().useGravity = true;
                 if (obj.GetComponent<BoxCollider>() == null) obj.AddComponent<BoxCollider>();
                 obj.layer = LayerMask.NameToLayer("Shard");
                 if (chain) SetChain(obj, chainDamage);
@@ -111,6 +112,7 @@ public class ObjectBreak_Y : MonoBehaviour
         {
             var obj = this.gameObject;
             obj.GetComponent<Rigidbody>().isKinematic = false;
+            obj.GetComponent<Rigidbody>().useGravity = true;
             if (obj.GetComponent<BoxCollider>() == null) obj.AddComponent<BoxCollider>();
             obj.layer = LayerMask.NameToLayer("Shard");
             if (chain)
@@ -141,7 +143,6 @@ public class ObjectBreak_Y : MonoBehaviour
         }
         Vector3 forcePower = new Vector3(Random.Range(-Power, Power), Random.Range(-Power * 0.2f, Power * 0.2f), Random.Range(-Power * 0.75f, Power * 0.75f));
         Vector3 TorquePower = new Vector3(Random.Range(-Torque, Torque), Random.Range(-Torque, Torque), Random.Range(-Torque, Torque));
-        var rb = obj.GetComponent<Rigidbody>();
         rb.AddForce(forcePower, ForceMode.Impulse);
         rb.AddTorque(TorquePower, ForceMode.Impulse);
         //エフェクト発生
@@ -220,8 +221,6 @@ public class ObjectBreak_Y : MonoBehaviour
         Torque *= 1000f;
         Vector3 TorquePower = new Vector3(Random.Range(-Torque, Torque), Random.Range(-Torque, Torque), Random.Range(-Torque, Torque));
         var rb = GetComponent<Rigidbody>();
-        rb.isKinematic = false;
-        rb.useGravity = true;
         rb.AddForce(F, ForceMode.Impulse);
         rb.AddTorque(TorquePower, ForceMode.Impulse);
     }
