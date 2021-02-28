@@ -10,6 +10,9 @@ public class Cutter_R : MonoBehaviour
     [SerializeField] private Transform[] cutterTransform;
     [SerializeField] private Transform[] backAreaTransform;
     [SerializeField] private float[] cutterSize;
+    [Tooltip("カッターを投げる際の初速"), SerializeField] private float cutterBaseSpeed;
+    [Tooltip("落下攻撃時のカッターの初速"), SerializeField] private float cutterFABaseSpeed;
+    [Tooltip("落下攻撃時のカッターが地面に到達するまでの速度"), SerializeField] private float dropSpeed;
 
     [SerializeField] Transition_R scrAnim;
 
@@ -56,9 +59,11 @@ public class Cutter_R : MonoBehaviour
                 cutter = Instantiate(preCutter, cutterTransform[scrEvo.EvolutionNum].position, Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0, 0, -90)));
                 cutter.transform.localScale = cutter.transform.localScale * cutterSize[scrEvo.EvolutionNum];
                 cutter.GetComponent<CutterMoveFA_R>().enabled = false;
-                cutter.GetComponent<CutterMove1_R>().enabled = true;
-                cutter.GetComponent<CutterMove1_R>().evoSpeed = cutterSize[scrEvo.EvolutionNum];
-                cutter.GetComponent<CutterMove1_R>().backArea = backAreaTransform[scrEvo.EvolutionNum];
+                CutterMove1_R scrCutter = cutter.GetComponent<CutterMove1_R>();
+                scrCutter.enabled = true;
+                scrCutter.evoSpeed = cutterSize[scrEvo.EvolutionNum];
+                scrCutter.backArea = backAreaTransform[scrEvo.EvolutionNum];
+                scrCutter.cutterBaseSpeed = cutterBaseSpeed;
                 scrAnim.SetAnimator(Transition_R.Anim.CUTTER, true);
             }
             else
@@ -87,9 +92,12 @@ public class Cutter_R : MonoBehaviour
         cutter = Instantiate(preCutter, cutterTransform[scrEvo.EvolutionNum].position, Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0, 0, 0)));
         cutter.transform.localScale = cutter.transform.localScale * cutterSize[scrEvo.EvolutionNum];
         cutter.GetComponent<CutterMove1_R>().enabled = false;
-        cutter.GetComponent<CutterMoveFA_R>().enabled = true;
-        cutter.GetComponent<CutterMoveFA_R>().evoSpeed = cutterSize[scrEvo.EvolutionNum];
-        cutter.GetComponent<CutterMoveFA_R>().backArea = backAreaTransform[scrEvo.EvolutionNum];
+        CutterMoveFA_R scrCutter = cutter.GetComponent<CutterMoveFA_R>();
+        scrCutter.enabled = true;
+        scrCutter.evoSpeed = cutterSize[scrEvo.EvolutionNum];
+        scrCutter.backArea = backAreaTransform[scrEvo.EvolutionNum];
+        scrCutter.cutterBaseSpeed = cutterFABaseSpeed;
+        scrCutter.dropSpeed = dropSpeed;
     }
 
     private void OnTriggerEnter(Collider other)

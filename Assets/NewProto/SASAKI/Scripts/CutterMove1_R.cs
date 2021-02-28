@@ -7,7 +7,7 @@ public class CutterMove1_R : MonoBehaviour
     [SerializeField] private AudioClip cutterSound;
 
     private float rotSpeed = 360f;
-    private float destroyTime = 3.4f;
+    private float destroyTime;
 
     private GameObject player;
     private AudioSource audioSource;
@@ -16,6 +16,7 @@ public class CutterMove1_R : MonoBehaviour
     private Vector3 moveVec;
     public Transform backArea;
     public float evoSpeed;
+    public float cutterBaseSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +25,7 @@ public class CutterMove1_R : MonoBehaviour
         moveVec = player.transform.forward;
 
         rigid = gameObject.GetComponent<Rigidbody>();
-        rigid.AddForce(moveVec * 12f * evoSpeed, ForceMode.Impulse);
+        rigid.AddForce(moveVec * cutterBaseSpeed * evoSpeed, ForceMode.Impulse);
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.PlayOneShot(cutterSound);
     }
@@ -32,14 +33,14 @@ public class CutterMove1_R : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        destroyTime -= Time.deltaTime;
-        if (destroyTime >= 1.7f)
+        destroyTime += Time.deltaTime;
+        if (destroyTime <= 1.5f)
         {
-            rigid.AddForce(-moveVec * 350f * evoSpeed * Time.deltaTime, ForceMode.Force);   
+            rigid.AddForce(-moveVec * cutterBaseSpeed * evoSpeed, ForceMode.Force);   
         }
-        else if (destroyTime < 1.7f)
+        else if (destroyTime > 1.5f)
         {
-            transform.position = Vector3.MoveTowards(transform.position, backArea.position, 30f * evoSpeed * Time.deltaTime);    
+            transform.position = Vector3.MoveTowards(transform.position, backArea.position, cutterBaseSpeed * 2f * evoSpeed * Time.deltaTime);    
         }
         gameObject.transform.Rotate(rotSpeed * Time.deltaTime, 0, 0);
     }
