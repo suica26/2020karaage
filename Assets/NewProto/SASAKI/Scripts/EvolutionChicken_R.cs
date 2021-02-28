@@ -61,10 +61,10 @@ public class EvolutionChicken_R : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        /*if (Input.GetKeyDown(KeyCode.E))
         {
             scrParam.EPManager(50); 
-        }
+        }*/
         EP = scrParam.ep;
 
         if(evolutionNum < evolutionPoint.Length && EP >= evolutionPoint[evolutionNum])

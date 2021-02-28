@@ -143,6 +143,7 @@ public class ObjectBreak_Y : MonoBehaviour
         }
         Vector3 forcePower = new Vector3(Random.Range(-Power, Power), Random.Range(-Power * 0.2f, Power * 0.2f), Random.Range(-Power * 0.75f, Power * 0.75f));
         Vector3 TorquePower = new Vector3(Random.Range(-Torque, Torque), Random.Range(-Torque, Torque), Random.Range(-Torque, Torque));
+        var rb = obj.GetComponent<Rigidbody>();
         rb.AddForce(forcePower, ForceMode.Impulse);
         rb.AddTorque(TorquePower, ForceMode.Impulse);
         //エフェクト発生

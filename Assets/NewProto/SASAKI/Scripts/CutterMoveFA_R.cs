@@ -24,7 +24,7 @@ public class CutterMoveFA_R : MonoBehaviour
         moveVec = player.transform.forward;
         touchGround = false;
         rigid = GetComponent<Rigidbody>();
-        rigid.AddForce(-transform.up * 18f * evoSpeed, ForceMode.Impulse);
+        rigid.AddForce(-transform.up * 24f * evoSpeed, ForceMode.Impulse);
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -34,13 +34,13 @@ public class CutterMoveFA_R : MonoBehaviour
         if (touchGround)
         {
             destroyTime += Time.deltaTime;
-            if (destroyTime <= 1.7f)
+            if (destroyTime <= 2.0f)
             {
-                rigid.AddForce(-moveVec * 350f * evoSpeed * Time.deltaTime, ForceMode.Force);
+                rigid.AddForce(-moveVec * 500f * evoSpeed * Time.deltaTime, ForceMode.Force);
             }
-            else if (destroyTime > 1.7f)
+            else if (destroyTime > 2.0f)
             {
-                transform.position = Vector3.MoveTowards(transform.position, backArea.position, 30f * evoSpeed * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, backArea.position, 45f * evoSpeed * Time.deltaTime);
             }
         }
         gameObject.transform.Rotate(rotSpeed * Time.deltaTime, 0, 0);
@@ -55,7 +55,7 @@ public class CutterMoveFA_R : MonoBehaviour
             {
                 touchGround = true;
                 rigid.velocity = Vector3.zero;
-                rigid.AddForce(moveVec * 12f * evoSpeed, ForceMode.Impulse);
+                rigid.AddForce(moveVec * 18f * evoSpeed, ForceMode.Impulse);
             }
         }
     }
