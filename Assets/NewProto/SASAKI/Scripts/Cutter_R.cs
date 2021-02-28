@@ -106,7 +106,7 @@ public class Cutter_R : MonoBehaviour
         scrCutter.dropSpeed = dropSpeed;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.name == "Cutter(Clone)" && catchableTimer >= 1.0f)
         {
