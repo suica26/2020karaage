@@ -40,6 +40,12 @@ public class Cutter_R : MonoBehaviour
         if (throwingCutter)
         {
             catchableTimer += Time.deltaTime;
+
+            if (catchableTimer >= 5.0f)
+            {
+                catchableTimer = 0.0f;
+                throwingCutter = false;
+            }
         }
 
         //マウスクリック中にタイマー(通常or落下攻撃判定用)を加算
@@ -100,7 +106,7 @@ public class Cutter_R : MonoBehaviour
         scrCutter.dropSpeed = dropSpeed;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.name == "Cutter(Clone)" && catchableTimer >= 1.0f)
         {

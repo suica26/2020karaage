@@ -31,16 +31,16 @@ public class CutterMoveFA_R : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (touchGround)
         {
             destroyTime += Time.deltaTime;
-            if (destroyTime <= 1.5f)
+            if (destroyTime <= 1.0f)
             {
                 rigid.AddForce(-moveVec * cutterBaseSpeed * evoSpeed, ForceMode.Force);
             }
-            else if (destroyTime > 1.5f)
+            else if (destroyTime > 1.0f)
             {
                 transform.position = Vector3.MoveTowards(transform.position, backArea.position, cutterBaseSpeed * 2f * evoSpeed * Time.deltaTime);
             }
