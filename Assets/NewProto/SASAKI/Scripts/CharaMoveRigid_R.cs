@@ -223,7 +223,7 @@ public class CharaMoveRigid_R : MonoBehaviour
             yield return new WaitForSeconds(0.95f);
 
             audioSourceCommon.PlayOneShot(KickFAClip);
-            rb.AddForce(Vector3.down * jumpSpeed * 2f, ForceMode.Impulse);
+            rb.AddForce(Vector3.down * jumpSpeed * 4f, ForceMode.Impulse);
             yield break;
         }
         //カッター

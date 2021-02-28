@@ -17,6 +17,8 @@ public class EvolutionChicken_R : MonoBehaviour
 
     [SerializeField] private float[] CAM_RADIUS;
 
+    [SerializeField] private bool DEBUG_MODE;
+
     private Parameters_R scrParam;
     private MorBlast_R scrBlast;
     private int EP;
@@ -61,9 +63,12 @@ public class EvolutionChicken_R : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (DEBUG_MODE)
         {
-            scrParam.EPManager(50); 
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                scrParam.EPManager(50);
+            }
         }
         EP = scrParam.ep;
 
