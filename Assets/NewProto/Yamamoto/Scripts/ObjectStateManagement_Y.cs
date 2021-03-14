@@ -19,6 +19,11 @@ public class ObjectStateManagement_Y : MonoBehaviour
     [Header("破壊時のチャージポイント")] public int breakPoint;                //建物を破壊したときに得られるチャージポイント
     private AudioSource audioSource;
     private GameObject player;
+
+    //加筆(佐々木)
+    private CharaMoveRigid_R scrCharaMove;
+    //
+
     private Vector3 chainStartPos;
     private FoodMaker_R scrFood;
     private chickenKick_R scrKick;
@@ -42,6 +47,10 @@ public class ObjectStateManagement_Y : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
+
+        //加筆(佐々木)
+        scrCharaMove = player.GetComponent<CharaMoveRigid_R>();
+        //
         scrKick = player.GetComponent<chickenKick_R>();
         scrEvo = player.GetComponent<EvolutionChicken_R>();
         scrFood = GetComponent<FoodMaker_R>();
@@ -124,7 +133,8 @@ public class ObjectStateManagement_Y : MonoBehaviour
         }
         if (other.gameObject.name == "fallAttackCircle(Clone)")
         {
-            HP -= (int)(scrEvo.Status_ATK * fallAttackMag);
+            //加筆しました(元スクリプト：(int)(scrEvo.Status_ATK * fallAttackMag);)
+            HP -= (int)(scrEvo.Status_ATK * fallAttackMag * scrCharaMove.damageBoost);
             hitSkilID = 1;
             damage = true;
         }
