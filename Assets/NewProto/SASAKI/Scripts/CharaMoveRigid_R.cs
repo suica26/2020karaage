@@ -32,6 +32,7 @@ public class CharaMoveRigid_R : MonoBehaviour
     private Vector3 moveDirection = Vector3.zero;
     private bool isGrounded = true;
 
+    private TpsCameraJC_R scrCam;
     private EvolutionChicken_R scrEvo;
     private Cutter_R scrCutter;
     private float speed;
@@ -54,6 +55,7 @@ public class CharaMoveRigid_R : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        scrCam = Camera.main.GetComponent<TpsCameraJC_R>();
         scrEvo = GetComponent<EvolutionChicken_R>();
         scrCutter = GetComponent<Cutter_R>();
     }
@@ -222,10 +224,18 @@ public class CharaMoveRigid_R : MonoBehaviour
                 damageBoost = boostMag[2];
             Debug.Log(damageBoost);
 
+            MakeCamShake();
+
             circleChecker = Instantiate(preCircle, transform.position, Quaternion.identity);
             circleChecker.transform.localScale = new Vector3(circleRange[scrEvo.EvolutionNum], 0.1f, circleRange[scrEvo.EvolutionNum]);
             Destroy(circleChecker, 0.5f);
         }
+    }
+
+    //カメラを揺らす処理
+    void MakeCamShake()
+    {
+        scrCam.Shake();
     }
 
     //落下攻撃時の動きの処理
