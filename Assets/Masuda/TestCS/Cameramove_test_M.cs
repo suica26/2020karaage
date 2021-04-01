@@ -18,4 +18,6 @@ public class Cameramove_test_M : MonoBehaviour
         // 最初に取得した位置関係を足すことで常に一定の距離を維持する（ポイント）
         transform.position = target.transform.position + offset;
     }
+
 }
+

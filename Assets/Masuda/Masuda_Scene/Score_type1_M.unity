@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 28908844}
   - component: {fileID: 28908843}
   - component: {fileID: 28908842}
+  - component: {fileID: 28908845}
   m_Layer: 0
   m_Name: TextCon
   m_TagString: Untagged
@@ -214,6 +215,19 @@ Transform:
   m_Father: {fileID: 1697673478}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &28908845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 28908841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d31c3ac5680e2b546a369b95d8590417, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: {fileID: 28908841}
 --- !u!1 &216700041
 GameObject:
   m_ObjectHideFlags: 0
@@ -877,6 +891,7 @@ GameObject:
   - component: {fileID: 656854891}
   - component: {fileID: 656854890}
   - component: {fileID: 656854889}
+  - component: {fileID: 656854892}
   m_Layer: 0
   m_Name: TextCon
   m_TagString: Untagged
@@ -959,6 +974,19 @@ Transform:
   m_Father: {fileID: 1221186043}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &656854892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 656854888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d31c3ac5680e2b546a369b95d8590417, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: {fileID: 656854888}
 --- !u!1 &673198564
 GameObject:
   m_ObjectHideFlags: 0
@@ -1241,7 +1269,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: {fileID: 732870582}
-  obj: {fileID: 1643321572}
   price: 100
 --- !u!4 &711589534
 Transform:
@@ -1270,6 +1297,7 @@ GameObject:
   - component: {fileID: 732870585}
   - component: {fileID: 732870584}
   - component: {fileID: 732870583}
+  - component: {fileID: 732870586}
   m_Layer: 0
   m_Name: TextCon
   m_TagString: Untagged
@@ -1352,6 +1380,19 @@ Transform:
   m_Father: {fileID: 711589534}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &732870586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 732870582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d31c3ac5680e2b546a369b95d8590417, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: {fileID: 732870582}
 --- !u!1 &736907593
 GameObject:
   m_ObjectHideFlags: 0
@@ -1708,6 +1749,7 @@ GameObject:
   - component: {fileID: 778308594}
   - component: {fileID: 778308596}
   - component: {fileID: 778308595}
+  - component: {fileID: 778308597}
   m_Layer: 0
   m_Name: TextCon
   m_TagString: Untagged
@@ -1790,6 +1832,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &778308597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 778308593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d31c3ac5680e2b546a369b95d8590417, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: {fileID: 778308593}
 --- !u!1 &791679707
 GameObject:
   m_ObjectHideFlags: 0
@@ -1820,7 +1875,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: {fileID: 1157519948}
-  obj: {fileID: 736907593}
   price: 800000
 --- !u!4 &791679709
 Transform:
@@ -1868,7 +1922,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: {fileID: 778308593}
-  obj: {fileID: 0}
   price: 20
 --- !u!4 &922383178
 Transform:
@@ -2023,6 +2076,7 @@ GameObject:
   - component: {fileID: 1150201884}
   - component: {fileID: 1150201883}
   - component: {fileID: 1150201882}
+  - component: {fileID: 1150201885}
   m_Layer: 0
   m_Name: TextCon
   m_TagString: Untagged
@@ -2105,6 +2159,19 @@ Transform:
   m_Father: {fileID: 1426753398}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1150201885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1150201881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d31c3ac5680e2b546a369b95d8590417, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: {fileID: 1150201881}
 --- !u!1 &1157519948
 GameObject:
   m_ObjectHideFlags: 0
@@ -2116,6 +2183,7 @@ GameObject:
   - component: {fileID: 1157519951}
   - component: {fileID: 1157519950}
   - component: {fileID: 1157519949}
+  - component: {fileID: 1157519952}
   m_Layer: 0
   m_Name: TextCon
   m_TagString: Untagged
@@ -2198,6 +2266,19 @@ Transform:
   m_Father: {fileID: 791679709}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1157519952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1157519948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d31c3ac5680e2b546a369b95d8590417, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: {fileID: 1157519948}
 --- !u!1 &1168242706
 GameObject:
   m_ObjectHideFlags: 0
@@ -2385,7 +2466,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: {fileID: 656854888}
-  obj: {fileID: 701737934}
   price: 10
 --- !u!4 &1221186043
 Transform:
@@ -2433,7 +2513,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: {fileID: 1150201881}
-  obj: {fileID: 1168242706}
   price: 2000
 --- !u!4 &1426753398
 Transform:
@@ -2651,7 +2730,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: {fileID: 28908841}
-  obj: {fileID: 1738892214}
   price: 10000
 --- !u!4 &1697673478
 Transform:
