@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class CameraRotateTest_M : MonoBehaviour
 {
-    public GameObject playerObject;
+    [SerializeField] public GameObject playerObject;
     public Vector2 rotationSpeed;
-    public bool reverse;
-
+    public bool reverse; 
     private Camera mainCamera;
     private Vector2 lastMousePosition;
 
@@ -18,6 +17,7 @@ public class CameraRotateTest_M : MonoBehaviour
 
     void Update()
     {
+
         if (Input.GetMouseButtonDown(0))
         {
             lastMousePosition = Input.mousePosition;

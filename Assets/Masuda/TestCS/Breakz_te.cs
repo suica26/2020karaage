@@ -7,16 +7,16 @@ public class Breakz_te : MonoBehaviour
 {
     [SerializeField] private GameObject obj;
     [SerializeField] public Text scoreText;
-    [SerializeField] public float count, counter, n, add, gain;
+    [SerializeField] float count, counter, n, add, gain, onoff, timer;
     [SerializeField] public Transform trf;
     private RectTransform txtTrf;
-    private Vector3 offset = new Vector3(0f, 0.5f, 0f);
+    private Vector3 offset = new Vector3(0.5f, 0.8f, 0f);
 
     void Start()
     {
         count = 0;
         add = 0;
-        scoreText.color = new Color(0, 0, 0, 0);
+        scoreText.color = new Color(0, 0, 0, 1);
         txtTrf = scoreText.GetComponent<RectTransform>();
     }
 
@@ -27,30 +27,41 @@ public class Breakz_te : MonoBehaviour
         {
             count++;
             counter = count;
-            add += count;
+            add += counter;
         }
 
         if (counter == n)
         {
-            //gain = 0;
+            timer += Time.deltaTime;
             Color();
+            Destroy(obj,0.1f);
             txtTrf.position = RectTransformUtility.WorldToScreenPoint
-            (Camera.main, trf.position + offset);
-            scoreText.text = "+" + add;
-            obj.SetActive(false);
-        }
-
-        if (gain >= 1.5f)
-        {
-            gain = 1.5f;
-            scoreText.text = "+" + 0;
-            add = 0;
+                 (Camera.main, trf.position + offset);
+            if (onoff == 1)
+            {
+                scoreText.text = "+" + 0;
+                add = 0;
+            }
+            else if (onoff == 0)
+            {
+                scoreText.text = "+" + add;
+            }
         }
     }
 
     void Color()
     {
-        gain += Time.deltaTime / 2;
-        scoreText.color = new Color(0, 0, 0, 1.5f - gain);
+        gain += Time.deltaTime;
+        scoreText.color = new Color(0, 0, 0, 3f - gain);
+        if (gain >= 3f)
+        {
+            gain = 3f;
+            scoreText.text = "+" + 0;
+        }
+        if (timer >= 3.0f)
+        {
+            timer = 3.0f;
+            onoff = 1;
+        }
     }
 }
