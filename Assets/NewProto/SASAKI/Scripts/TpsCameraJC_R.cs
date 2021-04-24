@@ -8,6 +8,8 @@ public class TpsCameraJC_R : MonoBehaviour
     [SerializeField] Transform target;
     [SerializeField] Transform[] focus;
     [SerializeField] float spinSpeed = 1.0f;
+    [Header("カメラの振動"), SerializeField] float duration;
+    [Tooltip("最大振幅の設定(進化段階ごと)"), SerializeField] private float[] magnitude;
 
     Vector3 nowPos;
     Vector3 pos = Vector3.zero;
@@ -36,7 +38,6 @@ public class TpsCameraJC_R : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         // Get MouseMove
         mouse -= new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")) * Time.deltaTime * spinSpeed;
         // Clamp mouseY move
@@ -72,6 +73,28 @@ public class TpsCameraJC_R : MonoBehaviour
         {
             setCamPos = hit.point;
             transform.position = setCamPos;
+        }
+    }
+
+    public void Shake()
+    {
+        StartCoroutine(DoShake(duration, magnitude[scrEvo.EvolutionNum]));
+    }
+
+    private IEnumerator DoShake(float dur, float magnitude)
+    {
+        var elapsed = 0f;
+
+        while(elapsed < dur)
+        {
+            var pos = transform.localPosition;
+            var x = pos.x + Random.Range(-1f, 1f) * magnitude;
+            var y = pos.y + Random.Range(-1f, 1f) * magnitude;
+
+            transform.localPosition = new Vector3(x, y, pos.z);
+
+            elapsed += Time.deltaTime;
+            yield return null;
         }
     }
 }
