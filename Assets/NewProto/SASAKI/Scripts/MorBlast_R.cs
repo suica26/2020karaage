@@ -34,6 +34,10 @@ public class MorBlast_R : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Mathf.Approximately(Time.timeScale, 0f))
+        {
+            return;
+        }
         if (Input.GetMouseButton(2) && !isBlast)
         {
             if(charge < 3)

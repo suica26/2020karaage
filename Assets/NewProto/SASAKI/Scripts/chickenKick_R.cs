@@ -26,6 +26,10 @@ public class chickenKick_R : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Mathf.Approximately(Time.timeScale, 0f))
+        {
+            return;
+        }
         if (Input.GetMouseButton(0))
         {
             timer += Time.deltaTime;

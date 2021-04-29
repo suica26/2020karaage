@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Pause_M : MonoBehaviour
 {
-    [SerializeField] private GameObject pausePanel;
+    [SerializeField] private GameObject pausePanel,optionPanel;
 
     void Start()
     {
@@ -27,6 +27,7 @@ public class Pause_M : MonoBehaviour
             else
             {
                 Time.timeScale = 1f;
+                optionPanel.SetActive(false);
             }
         }
     }
