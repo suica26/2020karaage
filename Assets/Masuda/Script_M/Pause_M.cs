@@ -22,12 +22,14 @@ public class Pause_M : MonoBehaviour
             if (pausePanel.activeSelf)
             {
                 Time.timeScale = 0f;
+                Cursor.visible = true;
             }
             //時が動き出す
             else
             {
                 Time.timeScale = 1f;
                 optionPanel.SetActive(false);
+                Cursor.visible = false;
             }
         }
     }
