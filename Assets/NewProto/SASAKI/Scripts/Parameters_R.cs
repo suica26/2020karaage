@@ -29,10 +29,11 @@ public class Parameters_R : MonoBehaviour
     [SerializeField] private GameObject resultPanel = null;
 
     [SerializeField] public int score, time, ep, hp, maxEP1, maxEP2, maxEP3, maxHP1, maxHP2, maxHP3, plusHP1, plusHP2, plusHP3, sp, maxSP, damTime, plusTime;
-    [SerializeField] public Slider hpSlider, epSlider, kickSlider;
+    //[SerializeField] public Slider hpSlider, epSlider, kickSlider;
+    [SerializeField] public Image circle;
 
     private bool freeze = false;
-    private float count;
+    private float count,circlePoint;
 
     public void Start()
     {
@@ -41,13 +42,14 @@ public class Parameters_R : MonoBehaviour
         timeText.text = "Time: " + time;
         epText.text = "EP: " + ep;
         hpText.text = "HP: " + hp;
-        hpSlider.value = 100;
+        /*hpSlider.value = 100;
         hpSlider.maxValue = 100;
         epSlider.value = 0;
         epSlider.maxValue = 30;
         kickSlider.value = 0;
-        kickSlider.maxValue = maxSP;
+        kickSlider.maxValue = maxSP;*/
         count = time;
+        circlePoint = 0.166f;
     }
 
     public void ScoreManager(int addScore)      //山本加筆：publicにすることで他Scriptで参照できるようにしました
@@ -56,15 +58,15 @@ public class Parameters_R : MonoBehaviour
         {
             score += addScore;
             scoreText.text = "Price:$ " + score;
-            kickSlider.value += 1;
+            //kickSlider.value += 1;
   
-            if (Input.GetMouseButton(0))
+            /*if (Input.GetMouseButton(0))
             {
                 if (kickSlider.value == sp)
                 {
                     kickSlider.value = 0;
                 }
-            }
+            }*/
         }
     }
     //引数で指定した分だけスコアを加算します。
@@ -92,14 +94,19 @@ public class Parameters_R : MonoBehaviour
         {
             ep += addEP;
             plusTime += 1;
-            epSlider.value += addEP;
+            circle.fillAmount += circlePoint;
+            //epSlider.value += addEP;
             epText.text = "EP: " + ep;
             if (ep == 30)
             {
+                circle.fillAmount = 0;
+                circlePoint = 0.0714f;
                 TimeManager(10);
             }
             else if (ep == 100)
             {
+                circle.fillAmount = 0;
+                circlePoint = 0.025f;
                 TimeManager(10);
             }
             else if (ep == 300)
@@ -145,7 +152,7 @@ public class Parameters_R : MonoBehaviour
             TimeManager(-1);
         }
 
-        if (epSlider.value == maxEP1)
+        /*if (epSlider.value == maxEP1)
         {
             epSlider.value = 0;
             epSlider.maxValue = maxEP2;
@@ -153,9 +160,8 @@ public class Parameters_R : MonoBehaviour
             /*hpSlider.maxValue = maxHP1;
             hpSlider.value += plusHP1;
             hp += plusHP1; 
-            */
-        }
-        else if (epSlider.value == maxEP2)
+        }*/
+        /*else if (epSlider.value == maxEP2)
         {
             epSlider.value = 0;
             epSlider.maxValue = maxEP3;
@@ -163,8 +169,8 @@ public class Parameters_R : MonoBehaviour
             /*hpSlider.maxValue = maxHP2;
             hpSlider.value += plusHP2;
             hp += plusHP2;
-            */
-        }
+            
+        }*/
         /*else if (epSlider.value == maxEP3)
         {
             hpSlider.maxValue = maxHP3;

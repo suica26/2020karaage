@@ -36,8 +36,12 @@ public class Cutter_R : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //カッターを投げている際にタイマー(カッター取得用)を加算
-        if (throwingCutter)
+        if (Mathf.Approximately(Time.timeScale, 0f))
+        {
+            return;
+        }
+            //カッターを投げている際にタイマー(カッター取得用)を加算
+            if (throwingCutter)
         {
             catchableTimer += Time.deltaTime;
 

@@ -7,6 +7,7 @@ public class GameStart_M : MonoBehaviour
 {
     //タイトル画面でボタンをクリックするとゲーム画面を読み込みます
     //シーンGameStartのButtonに張っ付いてます
+    [SerializeField] public GameObject option;
     void Start()
     {
         
