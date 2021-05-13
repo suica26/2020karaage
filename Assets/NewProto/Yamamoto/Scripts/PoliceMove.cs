@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class PoliceMove : MonoBehaviour
 {
     private EnemyNav_Y navScript;
-    [SerializeField]private float routineTimer = 0f;
+    [SerializeField] private float routineTimer = 0f;
     //攻撃をした際の次の行動までの時間
     public float fireFreeze = 3f;    //発砲時
     public float hitFleeze = 1f;    //警棒で殴った時
@@ -20,6 +20,7 @@ public class PoliceMove : MonoBehaviour
     private NavMeshAgent agent;
     private GameObject hitBox;
     public GameObject hitBoxPrefab = null;
+    private Enemy_Y eneScr;
 
     // Start is called before the first frame update
     void Start()
@@ -28,13 +29,13 @@ public class PoliceMove : MonoBehaviour
         player = GameObject.Find("Player");
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
+        eneScr = GetComponent<Enemy_Y>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        int HP = GetComponent<Enemy_Y>().HP;
-        if (HP <= 0) Destroy(this);
+        if (eneScr.HP <= 0) Destroy(this);
         animator.SetFloat("Speed", agent.speed);
 
         if (navScript.navFlg)

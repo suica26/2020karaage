@@ -14,6 +14,7 @@ public class TankMove_Y : MonoBehaviour
     public float desBulletTime = 10f;   //初期値は10秒 Inspector上から変更できます
     public int bulletDamage;
     private GameObject player;
+    private ObjectStateManagement_Y objScr;
 
     // Start is called before the first frame update
     void Start()
@@ -21,13 +22,13 @@ public class TankMove_Y : MonoBehaviour
         navScript = GetComponent<EnemyNav_Y>();
         launchPort = transform.Find("TankBase/TankHead/Gun").gameObject;
         player = GameObject.FindGameObjectWithTag("Player");
+        objScr = GetComponent<ObjectStateManagement_Y>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        int HP = GetComponent<ObjectStateManagement_Y>().HP;
-        if (HP <= 0) Destroy(this);
+        if (objScr.HP <= 0) Destroy(this);
 
         if (navScript.navFlg)
         {

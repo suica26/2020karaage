@@ -6,9 +6,9 @@ using UnityEngine.AI;
 public class ClerkMove : MonoBehaviour
 {
     private EnemyNav_Y navScript;
-    [SerializeField]private float routineTimer = 0f;
+    [SerializeField] private float routineTimer = 0f;
     //攻撃をした際の次の行動までの時間
-    public float hitFleeze = 5f;    //殴り時
+    public float hitFreeze = 5f;    //殴り時
     private Animator animator;
     private string hitStr = "Hit";
     private GameObject player;
@@ -16,6 +16,7 @@ public class ClerkMove : MonoBehaviour
     private GameObject hitBox;
     public GameObject hitBoxPrefab = null;
     public int hitDamage;
+    private Enemy_Y eneScr;
 
     // Start is called before the first frame update
     void Start()
@@ -24,14 +25,13 @@ public class ClerkMove : MonoBehaviour
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.Find("Player");
+        eneScr = GetComponent<Enemy_Y>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        int HP = GetComponent<Enemy_Y>().HP;
-        if (HP <= 0) Destroy(this);
-        animator.SetFloat("Speed", agent.speed);
+        if (eneScr.HP <= 0) Destroy(this); animator.SetFloat("Speed", agent.speed);
 
         if (navScript.navFlg)
         {
@@ -52,7 +52,7 @@ public class ClerkMove : MonoBehaviour
 
     private void Hit()
     {
-        routineTimer = hitFleeze;
+        routineTimer = hitFreeze;
         animator.SetTrigger(hitStr);
     }
 
