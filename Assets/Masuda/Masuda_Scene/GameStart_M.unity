@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -807,7 +807,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.0754717, g: 0.06763973, b: 0.06763973, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -816,7 +816,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 50
-    m_FontStyle: 0
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 50
@@ -904,7 +904,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u753B\u8CEA1\n"
+  m_Text: "\u4F4E\u3044"
 --- !u!222 &248012597
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -963,7 +963,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.0754717, g: 0.06763973, b: 0.06763973, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -972,7 +972,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 50
-    m_FontStyle: 0
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 50
@@ -1848,7 +1848,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.0754717, g: 0.06763973, b: 0.06763973, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1857,7 +1857,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 50
-    m_FontStyle: 0
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 50
@@ -1888,6 +1888,7 @@ GameObject:
   - component: {fileID: 498583350}
   - component: {fileID: 498583349}
   - component: {fileID: 498583348}
+  - component: {fileID: 498583351}
   m_Layer: 5
   m_Name: English
   m_TagString: Untagged
@@ -1957,7 +1958,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 498583349}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 498583351}
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &498583349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1995,6 +2007,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 498583346}
   m_CullTransparentMesh: 0
+--- !u!114 &498583351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 498583346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab8751177c9a3544afa6c609ff2933f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text1: {fileID: 213464968}
+  text2: {fileID: 1906135858}
+  text3: {fileID: 481142114}
+  text4: {fileID: 286801428}
+  text5: {fileID: 1749005598}
+  text6: {fileID: 1321902224}
+  text7: {fileID: 248012596}
+  text8: {fileID: 2137563969}
+  text9: {fileID: 30796158}
+  text10: {fileID: 511978535}
+  text11: {fileID: 1378082702}
 --- !u!1 &506842427
 GameObject:
   m_ObjectHideFlags: 0
@@ -3911,6 +3946,7 @@ GameObject:
   - component: {fileID: 1346463344}
   - component: {fileID: 1346463343}
   - component: {fileID: 1346463342}
+  - component: {fileID: 1346463345}
   m_Layer: 5
   m_Name: Japanese
   m_TagString: Untagged
@@ -3980,7 +4016,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1346463343}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1346463345}
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1346463343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4018,6 +4065,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1346463340}
   m_CullTransparentMesh: 0
+--- !u!114 &1346463345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1346463340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9969bc4053ec7914fb864beb4f454274, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text1: {fileID: 213464968}
+  text2: {fileID: 1906135858}
+  text3: {fileID: 481142114}
+  text4: {fileID: 286801428}
+  text5: {fileID: 1749005598}
+  text6: {fileID: 1321902224}
+  text7: {fileID: 248012596}
+  text8: {fileID: 2137563969}
+  text9: {fileID: 30796158}
+  text10: {fileID: 511978535}
+  text11: {fileID: 1378082702}
 --- !u!1 &1351247366
 GameObject:
   m_ObjectHideFlags: 0
@@ -5160,7 +5230,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30AA\u30D7\u30B7\u30E7\u30F3"
+  m_Text: "\u8A2D\u5B9A"
 --- !u!222 &1749005599
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5371,7 +5441,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.0754717, g: 0.06763973, b: 0.06763973, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -5380,7 +5450,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 50
-    m_FontStyle: 0
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 50
@@ -5880,7 +5950,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u753B\u8CEA2\n"
+  m_Text: "\u9AD8\u3044"
 --- !u!222 &2137563970
 CanvasRenderer:
   m_ObjectHideFlags: 0
