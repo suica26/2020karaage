@@ -9,6 +9,9 @@ public class kickID : MonoBehaviour
     int time;
     public float cool;
 
+    public GameObject colider;
+    public doorscore door;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +32,7 @@ public class kickID : MonoBehaviour
         {
 
             time = time + 1;
+            colider.SetActive(true);
 
         }
 
@@ -37,6 +41,20 @@ public class kickID : MonoBehaviour
 
             time = 0;
             id = 0;
+
+        }
+
+        if (id == 0)
+        {
+
+            colider.SetActive(false);
+
+        }
+
+        if (door.nowanim >= 5)
+        {
+
+            id = 1;
 
         }
     }
