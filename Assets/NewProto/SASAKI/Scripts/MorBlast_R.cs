@@ -13,9 +13,15 @@ public class MorBlast_R : MonoBehaviour
     [SerializeField] private float secondBlastTime, thirdBlastTime;
     [SerializeField] private float[] spreadScale;
     [SerializeField] private float[] spreadEvoScale;
+
+    [SerializeField] private GameObject _effect;
+    [SerializeField] private Transform[] center;
+    [SerializeField] private float[] effectScale;
+
     public GameObject morBlaSphere;    //おはようブラストの干渉判定用の球体
     private float plusScale = 0f;   //おはようブラストの放射範囲
     private GameObject[] morningBlast = new GameObject[3];
+    private GameObject effect;
     private int charge;
     private bool isBlast;   //ブラスト発声中か否かのフラグ
     public float spreadTime;    //おはようブラストの放射時間
@@ -38,8 +44,16 @@ public class MorBlast_R : MonoBehaviour
         {
             return;
         }
+
         if (Input.GetMouseButton(2) && !isBlast)
         {
+            if(effect == null)
+            {
+                effect = Instantiate(_effect, center[scrEvo.EvolutionNum].position, Quaternion.Euler(transform.rotation.eulerAngles), transform);
+                effect.transform.localScale *= effectScale[scrEvo.EvolutionNum];
+                PlayEffect();
+            }
+
             if(charge < 3)
             {
                 //チャージ音を鳴らす
@@ -58,6 +72,9 @@ public class MorBlast_R : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(2))   //マウス中ボタンを離した際に発動
         {
+            if (effect != null)
+                Destroy(effect);
+
             audioSource.Stop();
             pullTime = 0f;
             if(charge > 0)
@@ -118,5 +135,16 @@ public class MorBlast_R : MonoBehaviour
         audioSource.PlayOneShot(evoBlastClip);
         morningBlast[0] = Instantiate(morBlaSphere, transform);
         Destroy(morningBlast[0], spreadTime);
+    }
+
+    private void PlayEffect()
+    {
+        if(effect != null)
+        {
+            foreach(var particle in effect.GetComponentsInChildren<ParticleSystem>())
+            {
+                particle.Play();
+            }
+        }
     }
 }
