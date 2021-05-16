@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7553062626443744636}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.3, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 0.1, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
@@ -108,19 +108,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c9f9aea61eb4dd4da3bdc4d71f9ea09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objBlow: {fileID: 5187927325884015421, guid: e07044e4f2753d64c84b9464fa23a07c, type: 3}
-  gimmickNum: 0
-  usageEvo: 3
-  forceMode_Impulse: 0
-  force: 200
-  time: 2.5
-  x: 2
-  y: 5
-  z: 2
-  scrObj: {fileID: 0}
-  MinIntervalTime: 0
-  MaxIntervalTime: 0
-  windEffect: {fileID: 0}
+  _obj: {fileID: 5187927325884015421, guid: e07044e4f2753d64c84b9464fa23a07c, type: 3}
+  _effect: {fileID: 2317707842986940698, guid: eec542b6039e7704ca73e1b87c00d644, type: 3}
+  _usageEvo: 0
+  _force: 200
+  _time: 2.5
+  _ySize: 0.2
+  _xScale: 2
+  _yScale: 5
+  _zScale: 2
 --- !u!54 &-3037700048920991352
 Rigidbody:
   m_ObjectHideFlags: 0

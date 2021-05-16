@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 1147393441451093481}
   - component: {fileID: 3263336908568711823}
   - component: {fileID: 921994030263615930}
-  - component: {fileID: -6100670691385107786}
   - component: {fileID: 9126068207181943820}
+  - component: {fileID: 599738983079451488}
   m_Layer: 0
   m_Name: SubwayAirVent
   m_TagString: Untagged
@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5342961204854070007}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.05, z: 0}
   m_LocalScale: {x: 3, y: 0.1, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -95,32 +95,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-6100670691385107786
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5342961204854070007}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c9f9aea61eb4dd4da3bdc4d71f9ea09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objBlow: {fileID: 5187927325884015421, guid: e07044e4f2753d64c84b9464fa23a07c, type: 3}
-  gimmickNum: 2
-  usageEvo: 3
-  forceMode_Impulse: 0
-  force: 80
-  time: 5
-  x: 3
-  y: 5
-  z: 5
-  hosei: 0
-  scrObj: {fileID: 0}
-  MinIntervalTime: 20
-  MaxIntervalTime: 40
-  windEffect: {fileID: 0}
 --- !u!54 &9126068207181943820
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -137,3 +111,26 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &599738983079451488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5342961204854070007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d96bd8d53bc26d4e99926d30bd9ea51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _obj: {fileID: 5187927325884015421, guid: e07044e4f2753d64c84b9464fa23a07c, type: 3}
+  _effect: {fileID: 1773889032440237418, guid: 9a25c5e231e55a4488cf483a53c75ad1, type: 3}
+  _usageEvo: 3
+  _force: 80
+  _time: 5
+  _ySize: 0.1
+  _xScale: 3
+  _yScale: 5
+  _zScale: 5
+  _minIntervalTime: 20
+  _maxIntervalTime: 40
