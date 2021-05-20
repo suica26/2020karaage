@@ -30,10 +30,10 @@ public class Parameters_R : MonoBehaviour
 
     [SerializeField] public int score, time, ep, hp, maxEP1, maxEP2, maxEP3, maxHP1, maxHP2, maxHP3, plusHP1, plusHP2, plusHP3, sp, maxSP, damTime, plusTime;
     //[SerializeField] public Slider hpSlider, epSlider, kickSlider;
-    [SerializeField] public Image circle;
+    [SerializeField] public Image circle,niwa;
 
     private bool freeze = false;
-    private float count,circlePoint;
+    private float count,circlePoint,niwaPer;
 
     public void Start()
     {
@@ -49,6 +49,7 @@ public class Parameters_R : MonoBehaviour
         kickSlider.value = 0;
         kickSlider.maxValue = maxSP;*/
         count = time;
+        niwaPer = 0.166f;
         circlePoint = 0.166f;
     }
 
@@ -94,19 +95,19 @@ public class Parameters_R : MonoBehaviour
         {
             ep += addEP;
             plusTime += 1;
-            circle.fillAmount += circlePoint;
+            niwa.fillAmount += niwaPer;
             //epSlider.value += addEP;
             epText.text = "EP: " + ep;
             if (ep == 30)
             {
-                circle.fillAmount = 0;
-                circlePoint = 0.0714f;
+                niwa.fillAmount = 0;
+                niwaPer = 0.0714f;
                 TimeManager(10);
             }
             else if (ep == 100)
             {
-                circle.fillAmount = 0;
-                circlePoint = 0.025f;
+                niwa.fillAmount = 0;
+                niwaPer = 0.025f;
                 TimeManager(10);
             }
             else if (ep == 300)
@@ -129,8 +130,9 @@ public class Parameters_R : MonoBehaviour
         if (!freeze)
         {
             TimeManager(-damTime);
-            /*hp -= addHP;
-            hpSlider.value -= addHP;
+            hp -= addHP;
+            circle.fillAmount -= addHP / 10;
+            //hpSlider.value -= addHP;
             if (hp <= 0)
             {
                 freeze = true;
@@ -138,7 +140,6 @@ public class Parameters_R : MonoBehaviour
                 hp = 0;
             }
             hpText.text = "HP: " + hp;
-            */
         }
     }
     //引数で指定した分だけHPを加算します。
