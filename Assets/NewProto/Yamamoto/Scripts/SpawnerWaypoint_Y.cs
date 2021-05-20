@@ -23,7 +23,7 @@ public class SpawnerWaypoint_Y : MonoBehaviour
     {
         routes = new GameObject[][] { route1, route2, route3, route4, route5 };
         //ステージを開始したときに市民がいるようにするため
-        routineTimer = spawnTime;
+        //routineTimer = spawnTime;
     }
 
     void Update()
