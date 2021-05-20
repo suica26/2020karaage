@@ -29,7 +29,7 @@ public class Stage1_Mission_M : MonoBehaviour
         if (other.gameObject.tag == "jama")
         {
             Destroy(check);
-            mission.text = splitText[1];
+            mission.text = splitText[4];
         }
     }
 }
