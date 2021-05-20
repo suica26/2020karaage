@@ -2,26 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnerWaypoint_Y : MonoBehaviour
+public class SpawnerWaypoint_Y : WayPoint_Y
 {
-    [Header("設定したルートの数と同じにしてください")]
-    [Range(1, 5)] public int maxRouteNum;
-    public GameObject[] route1;
-    public GameObject[] route2;
-    public GameObject[] route3;
-    public GameObject[] route4;
-    public GameObject[] route5;
-    private GameObject[][] routes;
+    private WayPointGraph_Y wayPointGraph;
     public GameObject[] civilPrefabs;
     private GameObject civil;
     public float blurScale;
+    private GameObject[] route;
 
     [SerializeField] private float routineTimer;
     public float spawnTime;
 
     void Start()
     {
-        routes = new GameObject[][] { route1, route2, route3, route4, route5 };
+        wayPointGraph = GameObject.Find("GameAI_Y").GetComponent<WayPointGraph_Y>();
         //ステージを開始したときに市民がいるようにするため
         //routineTimer = spawnTime;
     }
@@ -39,7 +33,9 @@ public class SpawnerWaypoint_Y : MonoBehaviour
     public void SpawnCivil()
     {
         civil = Instantiate(civilPrefabs[(Random.Range(0, civilPrefabs.Length))], InstantiatePositionBlur(), Quaternion.identity);
-        civil.GetComponent<Civil_Y>().RouteSetting(routes[Random.Range(0, maxRouteNum)]);
+        wayPointGraph.CulDijkstra(this.PointNumber);
+        wayPointGraph.GetRoute(route);
+        civil.GetComponent<Civil_Y>().RouteSetting(route);
     }
 
     private Vector3 InstantiatePositionBlur()
