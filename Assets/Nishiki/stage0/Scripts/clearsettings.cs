@@ -7,7 +7,7 @@ public class clearsettings : MonoBehaviour
 
     public GameObject whiteness;
     public GameObject Schanger;
-    int mode = 0;
+    public int mode = 0;
     int time = 0;
 
     // Start is called before the first frame update
