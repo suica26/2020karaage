@@ -224,18 +224,12 @@ public class CharaMoveRigid_R : MonoBehaviour
                 damageBoost = boostMag[2];
             Debug.Log(damageBoost);
 
-            MakeCamShake();
+            scrCam.Shake();
 
             circleChecker = Instantiate(preCircle, transform.position, Quaternion.identity);
             circleChecker.transform.localScale = new Vector3(circleRange[scrEvo.EvolutionNum], 0.1f, circleRange[scrEvo.EvolutionNum]);
             Destroy(circleChecker, 0.5f);
         }
-    }
-
-    //カメラを揺らす処理
-    void MakeCamShake()
-    {
-        scrCam.Shake();
     }
 
     //落下攻撃時の動きの処理

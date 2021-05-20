@@ -22,8 +22,18 @@ public class BlowerGimmickBase : MonoBehaviour
         Vector3 pos = transform.position + new Vector3(0, (_yScale - _ySize) / 2.0f, 0);
         GameObject obj = Instantiate(_obj, pos, Quaternion.identity);
         obj.transform.localScale = new Vector3(_xScale, _yScale, _zScale);
-        obj.GetComponent<BlowWind_R>().force = _force;
-        obj.GetComponent<BlowWind_R>().usageEvo = _usageEvo;
+
+        if (obj.GetComponent<BlowWind_R>())
+        {
+            obj.GetComponent<BlowWind_R>().force = _force;
+            obj.GetComponent<BlowWind_R>().usageEvo = _usageEvo;
+        }
+        else
+        {
+            obj.GetComponent<Explode_R>().force = _force;
+            obj.GetComponent<Explode_R>().usageEvo = _usageEvo;
+        }
+
         Destroy(obj, _time);
 
         return obj;
@@ -34,6 +44,10 @@ public class BlowerGimmickBase : MonoBehaviour
     {
         Vector3 pos = transform.position - new Vector3(0, _ySize / 2.0f, 0);
         GameObject effect = Instantiate(_effect, pos, Quaternion.identity);
+
+        if(effect.GetComponent<ParticleSystem>() != null)
+            effect.GetComponent<ParticleSystem>().Play();
+
         //子オブジェクトのパーティクルを再生
         foreach (var childObj in effect.GetComponentsInChildren<ParticleSystem>())
         {
