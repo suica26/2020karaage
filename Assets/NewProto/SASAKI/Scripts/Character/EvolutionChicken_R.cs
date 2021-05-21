@@ -15,8 +15,6 @@ public class EvolutionChicken_R : MonoBehaviour
     [SerializeField] private float[] SCORE;
     [SerializeField] private float[] JUMP;
 
-    [SerializeField] private float[] CAM_RADIUS;
-
     [SerializeField] private bool DEBUG_MODE;
 
     private Parameters_R scrParam;
@@ -30,7 +28,6 @@ public class EvolutionChicken_R : MonoBehaviour
     private float status_SPD;
     private float status_SCORE;
     private float status_JUMP;
-    private float cam_radius;
 
     //カプセル化
     public int EvolutionNum { get { return evolutionNum; } }
@@ -39,8 +36,6 @@ public class EvolutionChicken_R : MonoBehaviour
     public float Status_SPD { get { return status_SPD; } }
     public float Status_SCORE { get { return status_SCORE; } }
     public float Status_JUMP { get { return status_JUMP; } }
-
-    public float Cam_radius { get { return cam_radius; } }
 
     void Start()
     {
@@ -53,7 +48,6 @@ public class EvolutionChicken_R : MonoBehaviour
         status_SPD = SPD[evolutionNum];
         status_SCORE = SCORE[evolutionNum];
         status_JUMP = JUMP[evolutionNum];
-        cam_radius = CAM_RADIUS[evolutionNum];
 
         chickens[1].SetActive(false);
         chickens[2].SetActive(false);
@@ -84,7 +78,6 @@ public class EvolutionChicken_R : MonoBehaviour
             status_SPD = SPD[evolutionNum];
             status_SCORE = SCORE[evolutionNum];
             status_JUMP = JUMP[evolutionNum];
-            cam_radius = CAM_RADIUS[evolutionNum];
 
             scrBlast.EvoBlast();
         }

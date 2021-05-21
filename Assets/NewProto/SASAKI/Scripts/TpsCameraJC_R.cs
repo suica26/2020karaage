@@ -7,6 +7,7 @@ public class TpsCameraJC_R : MonoBehaviour
     [SerializeField] GameObject objPlayer;
     [SerializeField] Transform target;
     [SerializeField] Transform[] focus;
+    [SerializeField] float[] radius;
     [SerializeField] float spinSpeed = 1.0f;
     [Header("カメラの振動"), SerializeField] float duration;
     [Tooltip("最大振幅の設定(進化段階ごと)"), SerializeField] private float[] magnitude;
@@ -49,7 +50,7 @@ public class TpsCameraJC_R : MonoBehaviour
         pos.z = Mathf.Sin(mouse.y * Mathf.PI) * Mathf.Sin(mouse.x * Mathf.PI);
 
         //SetRadius
-        pos *= scrEvo.Cam_radius;
+        pos *= radius[scrEvo.EvolutionNum];
 
         // r and upper
         pos *= nowPos.z;

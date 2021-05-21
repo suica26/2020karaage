@@ -30,10 +30,12 @@ public class chickenKick_R : MonoBehaviour
         {
             return;
         }
+
         if (Input.GetMouseButton(0))
         {
             timer += Time.deltaTime;
         }
+
         if (Input.GetMouseButtonUp(0))
         {
             if(timer <= 0.5f)
