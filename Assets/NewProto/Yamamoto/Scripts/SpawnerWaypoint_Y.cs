@@ -10,28 +10,28 @@ public class SpawnerWaypoint_Y : WayPoint_Y
     public float blurScale;
     private GameObject[] route;
 
-    [SerializeField] private float routineTimer;
+    public float routineTimer;
     public float spawnTime;
 
     void Start()
     {
         wayPointGraph = GameObject.Find("GameAI_Y").GetComponent<WayPointGraph_Y>();
         //ステージを開始したときに市民がいるようにするため
-        //routineTimer = spawnTime;
+        routineTimer = spawnTime;
     }
 
     void Update()
     {
         routineTimer += Time.deltaTime;
-        if (routineTimer > spawnTime)
+        if (routineTimer >= spawnTime)
         {
             SpawnCivil();
-            routineTimer = 0f;
         }
     }
 
     public void SpawnCivil()
     {
+        routineTimer = 0f;
         civil = Instantiate(civilPrefabs[(Random.Range(0, civilPrefabs.Length))], InstantiatePositionBlur(), Quaternion.identity);
         wayPointGraph.CulDijkstra(this.PointNumber);
         wayPointGraph.GetRoute(route);
