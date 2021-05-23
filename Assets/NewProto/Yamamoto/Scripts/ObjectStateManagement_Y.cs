@@ -20,6 +20,10 @@ public class ObjectStateManagement_Y : MonoBehaviour
     private AudioSource audioSource;
     private GameObject player;
 
+    //M
+    [SerializeField] private int objPoint,plusPoint;
+    private Stage1_Mission_M s1Mis;
+
     //加筆(佐々木)
     private CharaMoveRigid_R scrCharaMove;
     //
@@ -47,7 +51,9 @@ public class ObjectStateManagement_Y : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
-
+        //M
+        s1Mis = GetComponent<Stage1_Mission_M>();
+        objPoint = s1Mis.breakNum;
         //加筆(佐々木)
         scrCharaMove = player.GetComponent<CharaMoveRigid_R>();
         //
@@ -64,6 +70,8 @@ public class ObjectStateManagement_Y : MonoBehaviour
         {
             GameObject.Find("Canvas").GetComponent<Parameters_R>().ScoreManager(breakScore);
             scrKick.chargePoint += breakPoint;
+            //M Stage1_Mission_Mの数値が設定したplusPoint分増えます
+            objPoint += plusPoint;
 
             if (scrFood != null)
             {

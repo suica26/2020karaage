@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Stage1Clear_M : MonoBehaviour
 {
-    [SerializeField] public GameObject clear, company, next;
+    [SerializeField] public GameObject clear, company, next, pause;
     void Start()
     {
         clear.SetActive(false);
@@ -14,9 +14,12 @@ public class Stage1Clear_M : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!company)
+        //テスト用、本当は!company
+        if (Input.GetKeyDown(KeyCode.O))
         {
             //Time.timeScale = 0;
+            Destroy(pause);
+            Cursor.visible = true;
             clear.SetActive(true);
             next.SetActive(true);
         }
