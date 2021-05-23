@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameStart2_M : MonoBehaviour
 {
-    [SerializeField] public GameObject option;
+    [SerializeField] public GameObject load;
     void Start()
     {
         
@@ -19,6 +19,7 @@ public class GameStart2_M : MonoBehaviour
 
     public void OnStart()
     {
+        load.SetActive(true);
         SceneManager.LoadScene("stage1");
     }
 
