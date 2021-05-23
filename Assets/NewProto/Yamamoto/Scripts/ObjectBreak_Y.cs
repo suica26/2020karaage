@@ -12,7 +12,6 @@ public class ObjectBreak_Y : MonoBehaviour
     public float Power = 1f;     //爆発でどれぐらい吹っ飛ぶか
     public float chainProbability = 5f;        //連鎖破壊発生確率
     public int chainDamage;                 //連鎖破壊でのダメージ(自分の破片)
-    public int superChainDamage;    //ためキックによる連鎖破壊でのダメージ
     public int hitSkilID = 0;
     public float chainPower = 0f;
     public bool live = true;
@@ -27,6 +26,7 @@ public class ObjectBreak_Y : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
+        /*
         // 自分の子要素をチェック
         foreach (Transform child in gameObject.transform)
         {
@@ -35,6 +35,7 @@ public class ObjectBreak_Y : MonoBehaviour
             // 子要素リストにパーツを追加
             myParts.Add(child.gameObject);
         }
+        */
         audioSource = GetComponent<AudioSource>();
         tag = "Untagged";
     }
@@ -42,7 +43,7 @@ public class ObjectBreak_Y : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(death && tag != "Broken")
+        if (death && tag != "Broken")
         {
             ObjectBreak();
             if (hitSkilID != 4) Destroy(GetComponent<BoxCollider>());
@@ -76,16 +77,21 @@ public class ObjectBreak_Y : MonoBehaviour
         bool chain = false;
         if (Random.Range(0f, 1f) < chainProbability / 100f) { chain = true; Debug.Log("Chain"); }
 
+        switch (hitSkilID)
+        {
+            case 1: KickCollapse(this.gameObject, player.transform.position); break;
+            case 6: FallenCollapse(this.gameObject, player.transform.position); break;
+            default: break;
+        }
+
         //子オブジェクトを持っているとき
-        if(myParts.Count != 0)
+        /*
+        if (myParts.Count != 0)
         {
             foreach (GameObject obj in myParts)
             {
                 if (hitSkilID == 4) break;
-                obj.GetComponent<Rigidbody>().isKinematic = false;
-                obj.GetComponent<Rigidbody>().useGravity = true;
-                if (obj.GetComponent<BoxCollider>() == null) obj.AddComponent<BoxCollider>();
-                obj.layer = LayerMask.NameToLayer("Shard");
+                ShardSettings(obj);
                 if (chain) SetChain(obj, chainDamage);
 
                 switch (hitSkilID)
@@ -111,10 +117,7 @@ public class ObjectBreak_Y : MonoBehaviour
         else    //子要素を持たない単体オブジェクトの場合
         {
             var obj = this.gameObject;
-            obj.GetComponent<Rigidbody>().isKinematic = false;
-            obj.GetComponent<Rigidbody>().useGravity = true;
-            if (obj.GetComponent<BoxCollider>() == null) obj.AddComponent<BoxCollider>();
-            obj.layer = LayerMask.NameToLayer("Shard");
+            ShardSettings(obj);
             if (chain)
             {
                 PlayerKnockBack();
@@ -131,6 +134,22 @@ public class ObjectBreak_Y : MonoBehaviour
                 default: Debug.Log("エラー:対応していない処理です"); break;
             }
         }
+        */
+    }
+
+    private void RigidOn(GameObject obj)
+    {
+        var rb = obj.GetComponent<Rigidbody>();
+        rb.isKinematic = false;
+        //rb.freezeRotation = true;
+        rb.useGravity = true;
+    }
+
+    private void ShardSettings(GameObject shard)
+    {
+        RigidOn(shard);
+        if (shard.GetComponent<BoxCollider>() == null) shard.AddComponent<BoxCollider>();
+        shard.layer = LayerMask.NameToLayer("Shard");
     }
 
     private void StandardExplosion(GameObject obj)
@@ -168,18 +187,35 @@ public class ObjectBreak_Y : MonoBehaviour
 
     private void KickCollapse(GameObject obj, Vector3 P)
     {
-        var pos = obj.transform.position;
-        var dir = pos - P;
-        float power = 0f;
-        if (dir.y < 0) power = -dir.y;
-        dir.y = 0f;
-        dir = dir.normalized;
-        var F = dir * power;
-        Vector3 TorquePower = new Vector3(Random.Range(-Torque, Torque), Random.Range(-Torque, Torque), Random.Range(-Torque, Torque));
+
+        Debug.Log("Kick!");
+        RigidOn(obj);
+
+        var D = player.transform.forward;   //direction
+        D = new Vector3(D.x, 0.3f, D.y);
         var rb = obj.GetComponent<Rigidbody>();
+
+        D = D.normalized;
+        var F = D * Power;
+        Vector3 TorquePower = new Vector3(Random.Range(-Torque, Torque), Random.Range(-Torque, Torque), Random.Range(-Torque, Torque));
         rb.AddForce(F, ForceMode.Impulse);
         rb.AddTorque(TorquePower, ForceMode.Impulse);
-        if (live) audioSource.PlayOneShot(CollapseSound); live = false;
+    }
+
+    private void FallenCollapse(GameObject obj, Vector3 P)
+    {
+
+        Debug.Log("Kick!");
+        RigidOn(obj);
+
+        var direction = obj.transform.position - P;
+        var rb = obj.GetComponent<Rigidbody>();
+
+        direction = direction.normalized;
+        var F = direction * Power;
+        Vector3 TorquePower = new Vector3(Random.Range(-Torque, Torque), Random.Range(-Torque, Torque), Random.Range(-Torque, Torque));
+        rb.AddForce(F, ForceMode.Impulse);
+        rb.AddTorque(TorquePower, ForceMode.Impulse);
     }
 
     private void MorBlaBreak(GameObject obj, Vector3 MP)     //MPはおはようブラストのposition
