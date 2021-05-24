@@ -20,7 +20,7 @@ public class NextOptio_M : MonoBehaviour
 
     public void OnClick()
     {
-        optionPanel1.SetActive(false);
+        //optionPanel1.SetActive(false);
         optionPanel2.SetActive(true);
     }
 }

@@ -8,8 +8,10 @@ public class Stage1_Mission_M : MonoBehaviour
     [SerializeField] public Text mission, submis;
     [SerializeField] public GameObject player, shop, misBox, company;
     [SerializeField] public TextAsset txtFile;
-    [SerializeField] public int breakNum, clearNum;
-    private bool check = true;
+    [SerializeField] public int smallNum, bigNum;
+    [SerializeField] public int smallBorder1, smallBorder2, smallBorder3,
+                                bigBorder1, bigBorder2, bigBorder3;
+    private bool check = false, border = false;
     private string txtData;
     private string[] splitText;
     [SerializeField] Animation missionSlide;
@@ -21,7 +23,6 @@ public class Stage1_Mission_M : MonoBehaviour
         misBox.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
         Vector3 playerPos = player.transform.position;
@@ -35,13 +36,40 @@ public class Stage1_Mission_M : MonoBehaviour
             missionSlide.Play();
             mission.text = splitText[0];
             submis.text = splitText[1];
+            border = true;
         }
 
-        if (breakNum == clearNum)
+        if (bigNum >= bigBorder3 && border == true)
         {
             missionSlide.Play();
             mission.text = splitText[2];
             submis.text = splitText[3];
+            border = false;
+            check = true;
+        }
+        else if (bigNum >= bigBorder2 && smallNum >= smallBorder1 && border == true)
+        {
+            missionSlide.Play();
+            mission.text = splitText[2];
+            submis.text = splitText[3];
+            border = false;
+            check = true;
+        }
+        else if (bigNum >= bigBorder1 && smallNum >= smallBorder2 && border == true)
+        {
+            missionSlide.Play();
+            mission.text = splitText[2];
+            submis.text = splitText[3];
+            border = false;
+            check = true;
+        }
+        else if (smallNum >= smallBorder3 && border == true)
+        {
+            missionSlide.Play();
+            mission.text = splitText[2];
+            submis.text = splitText[3];
+            border = false;
+            check = true;
         }
 
         //これはテスト用、本番は消す
@@ -60,6 +88,15 @@ public class Stage1_Mission_M : MonoBehaviour
             submis.text = splitText[5];
             check = false;
         }
+    }
+
+    public void BigNumberPlus()
+    {
+        bigNum ++;
+    }
+    public void SmallNumberPlus()
+    {
+        smallNum ++;
     }
 
     /*public void OnTriggerEnter(Collider other)
