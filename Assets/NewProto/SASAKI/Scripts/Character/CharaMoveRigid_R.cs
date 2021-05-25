@@ -52,12 +52,17 @@ public class CharaMoveRigid_R : MonoBehaviour
     private float endHeight;
     public float damageBoost;
 
+    //ADX
+    private new CriAtomSource  audio;
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         scrCam = Camera.main.GetComponent<TpsCameraJC_R>();
         scrEvo = GetComponent<EvolutionChicken_R>();
         scrCutter = GetComponent<Cutter_R>();
+        audio = (CriAtomSource)GetComponent("CriAtomSource");
     }
 
     void Update()
@@ -112,7 +117,10 @@ public class CharaMoveRigid_R : MonoBehaviour
                 //足音が再生されていない場合に足音を再生
                 if(audioSourceWalk.isPlaying != walkClip[scrEvo.EvolutionNum])
                 {
-                    audioSourceWalk.PlayOneShot(walkClip[scrEvo.EvolutionNum]);
+                    //audioSourceWalk.PlayOneShot(walkClip[scrEvo.EvolutionNum]);
+                    audio.player.SetSelectorLabel("Selector_Floor", "wood");
+                    audio.Play("footsteps00");
+
                 }
                 scrAnim.SetAnimator(Transition_R.Anim.WALK, true);
 
@@ -138,7 +146,9 @@ public class CharaMoveRigid_R : MonoBehaviour
                 //足音が再生されていた場合停止させる
                 if (audioSourceWalk.isPlaying == walkClip[scrEvo.EvolutionNum])
                 {
-                    audioSourceWalk.Stop();
+                    //audioSourceWalk.Stop();
+                    audio.Stop();
+
                 }
                 scrAnim.SetAnimator(Transition_R.Anim.WALK, false);
             }
@@ -146,7 +156,8 @@ public class CharaMoveRigid_R : MonoBehaviour
             //ジャンプした際の処理
             if (Input.GetButtonDown("Jump"))
             {
-                audioSourceCommon.PlayOneShot(JumpClip);
+                //audioSourceCommon.PlayOneShot(JumpClip);
+                audio.Play("Jump00");
                 scrAnim.SetAnimator(Transition_R.Anim.JUMP, true);
                 rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
             }
