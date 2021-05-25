@@ -21,7 +21,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
     private GameObject player;
 
     //M
-    [SerializeField] private int smallObj,bigObj;
+    //[SerializeField] private int smallObj,bigObj;
     private Stage1_Mission_M s1Mis;//
 
     //加筆(佐々木)
@@ -54,8 +54,8 @@ public class ObjectStateManagement_Y : MonoBehaviour
         player = GameObject.Find("Player");
         //M
         s1Mis = GetComponent<Stage1_Mission_M>();
-        smallObj = s1Mis.smallNum;
-        bigObj = s1Mis.bigNum;//
+        //smallObj = s1Mis.smallNum;
+        //bigObj = s1Mis.bigNum;//
 
         //加筆(佐々木)
         scrCharaMove = player.GetComponent<CharaMoveRigid_R>();

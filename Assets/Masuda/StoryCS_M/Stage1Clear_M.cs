@@ -14,6 +14,15 @@ public class Stage1Clear_M : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!company)
+        {
+            //Time.timeScale = 0;
+            Destroy(pause);
+            Cursor.visible = true;
+            clear.SetActive(true);
+            next.SetActive(true);
+        }
+
         //テスト用、本当は!company
         if (Input.GetKeyDown(KeyCode.O))
         {

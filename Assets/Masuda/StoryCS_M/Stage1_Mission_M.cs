@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Stage1_Mission_M : MonoBehaviour
 {
-    [SerializeField] public Text mission, submis;
+    [SerializeField] public Text mission, submis,count;
     [SerializeField] public GameObject player, shop, misBox, company;
     [SerializeField] public TextAsset txtFile;
     [SerializeField] public int smallNum, bigNum;
@@ -36,6 +36,7 @@ public class Stage1_Mission_M : MonoBehaviour
             missionSlide.Play();
             mission.text = splitText[0];
             submis.text = splitText[1];
+            count.text = "1";
             border = true;
         }
 
@@ -44,6 +45,7 @@ public class Stage1_Mission_M : MonoBehaviour
             missionSlide.Play();
             mission.text = splitText[2];
             submis.text = splitText[3];
+            count.text = "2";
             border = false;
             check = true;
         }
@@ -52,6 +54,7 @@ public class Stage1_Mission_M : MonoBehaviour
             missionSlide.Play();
             mission.text = splitText[2];
             submis.text = splitText[3];
+            count.text = "2";
             border = false;
             check = true;
         }
@@ -60,6 +63,7 @@ public class Stage1_Mission_M : MonoBehaviour
             missionSlide.Play();
             mission.text = splitText[2];
             submis.text = splitText[3];
+            count.text = "2";
             border = false;
             check = true;
         }
@@ -68,6 +72,7 @@ public class Stage1_Mission_M : MonoBehaviour
             missionSlide.Play();
             mission.text = splitText[2];
             submis.text = splitText[3];
+            count.text = "2";
             border = false;
             check = true;
         }
@@ -78,6 +83,7 @@ public class Stage1_Mission_M : MonoBehaviour
             missionSlide.Play();
             mission.text = splitText[4];
             submis.text = splitText[5];
+            count.text = "3";
             check = false;
         }
 
@@ -86,6 +92,7 @@ public class Stage1_Mission_M : MonoBehaviour
             missionSlide.Play();
             mission.text = splitText[4];
             submis.text = splitText[5];
+            count.text = "3";
             check = false;
         }
     }
