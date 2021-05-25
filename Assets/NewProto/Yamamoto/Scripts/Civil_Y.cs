@@ -162,6 +162,7 @@ public class Civil_Y : MonoBehaviour
 
     public void Avoid(GameObject other)
     {
+        rotTime = 0f;
         float cross_y = Vector3.Cross(transform.forward, GetVectorXZNormalized(other.transform.position, transform.position)).y;
         if (cross_y > 0f)
         {

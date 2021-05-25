@@ -41,6 +41,8 @@ public class WayPointGraph_Y : MonoBehaviour
     public void CulDijkstra(int startPoint)
     {
         int endPoint = endPointNumbers[Random.Range(0, endPointNumbers.Length)];
+        while (endPoint == startPoint) endPoint = endPointNumbers[Random.Range(0, endPointNumbers.Length)];
+
         bool finishFlg = false;
         var nextList = new List<int>();
         int[] checkPoints;
