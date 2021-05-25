@@ -13,12 +13,15 @@ public class ObjectStateManagement_Y : MonoBehaviour
     public float kickMag;             //キックのダメージ倍率
     public float blastMag;         //ブラストのダメージ倍率
     public float cutterMag;        //カッターのダメージ倍率
-    public float chargeKickMag;       //ためキックのダメージ倍率
     public float fallAttackMag;     //落下攻撃のダメージ倍率
     [Header("破壊時のスコア")] public int breakScore;                          //建物を破壊したときに得られるスコア
     [Header("破壊時のチャージポイント")] public int breakPoint;                //建物を破壊したときに得られるチャージポイント
     private AudioSource audioSource;
     private GameObject player;
+
+    //M
+    //[SerializeField] private int smallObj,bigObj;
+    private Stage1_Mission_M s1Mis;//
 
     //加筆(佐々木)
     private CharaMoveRigid_R scrCharaMove;
@@ -31,7 +34,8 @@ public class ObjectStateManagement_Y : MonoBehaviour
     private float chainPower;
     private int hitSkilID = 0;
     private bool damage = false;
-    private bool notLive = false;
+    //M publicに変えました
+    public bool notLive = false;
 
     [Header("破壊時の設定")]
     public GameObject BreakEffect;
@@ -39,14 +43,16 @@ public class ObjectStateManagement_Y : MonoBehaviour
     public float deleteTime = 3f;
     public float Torque = 1f;    //爆発でどれだけ回転するか
     public float Power = 1f;     //爆発でどれぐらい吹っ飛ぶか
-    [Header("連鎖破壊発生確率")] [Range(0, 100)] public float chainProbability = 5f;        //連鎖破壊発生確率
     [Header("連鎖破壊でのダメージ量(相手への)")] public int chainDamage;                 //連鎖破壊でのダメージ(自分の破片)
-    [Header("ためキックによる連鎖破壊でのダメージ量(相手への)")] public int superChainDamage;    //ためキックによる連鎖破壊でのダメージ
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
+        //M
+        s1Mis = GetComponent<Stage1_Mission_M>();
+        //smallObj = s1Mis.smallNum;
+        //bigObj = s1Mis.bigNum;//
 
         //加筆(佐々木)
         scrCharaMove = player.GetComponent<CharaMoveRigid_R>();
@@ -60,10 +66,23 @@ public class ObjectStateManagement_Y : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (HP <= 0 && !notLive)//HPがなくなると、分割オブジェクトに差し替え発生
         {
             GameObject.Find("Canvas").GetComponent<Parameters_R>().ScoreManager(breakScore);
             scrKick.chargePoint += breakPoint;
+
+            //M 
+            if (this.gameObject.tag == "Small")
+            {
+                player.GetComponent<Stage1_Mission_M>().SmallNumberPlus();
+                //smallObj++;
+            }
+            else if (this.gameObject.tag == "Big")
+            {
+                player.GetComponent<Stage1_Mission_M>().BigNumberPlus();
+                //bigObj++;
+            }//
 
             if (scrFood != null)
             {
@@ -83,29 +102,13 @@ public class ObjectStateManagement_Y : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         //キックダメージ
         if (other.gameObject.name == "KickCollision")
         {
-            if (scrKick.chargePoint >= 100)
-            {
-                if(scrEvo.EvolutionNum >= tier_ChargeKick)
-                {
-                    HP = 0;
-                    scrKick.chargePoint = 0;
-                    hitSkilID = 4;
-                }
-                else
-                {
-                    HP -= (int)(scrEvo.Status_ATK * chargeKickMag);
-                }
-            }
-            else
-            {
-                HP -= (int)(scrEvo.Status_ATK * kickMag);
-                hitSkilID = 1;
-            }
+            HP -= (int)(scrEvo.Status_ATK * kickMag);
+            hitSkilID = 1;
             damage = true;
         }
         //ブラストダメージ
@@ -135,13 +138,13 @@ public class ObjectStateManagement_Y : MonoBehaviour
         {
             //加筆しました(元スクリプト：(int)(scrEvo.Status_ATK * fallAttackMag);)
             HP -= (int)(scrEvo.Status_ATK * fallAttackMag * scrCharaMove.damageBoost);
-            hitSkilID = 1;
+            hitSkilID = 6;
             damage = true;
         }
 
         if (damage)
         {
-            if(hitSkilID == 2 || hitSkilID == 3)
+            if (hitSkilID == 2 || hitSkilID == 3)
             {
                 if (ContactSound != null) audioSource.PlayOneShot(ContactSound);
             }
@@ -154,6 +157,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
             damage = false;
         }
     }
+
     private void OnCollisionEnter(Collision collision)
     {
         //踏みつぶし攻撃
@@ -209,7 +213,6 @@ public class ObjectStateManagement_Y : MonoBehaviour
         scr.Power = Power;
         scr.chainProbability = 5f;
         scr.chainDamage = chainDamage;
-        scr.superChainDamage = superChainDamage;
         scr.death = true;
         Destroy(this.gameObject);
     }
@@ -228,7 +231,6 @@ public class ObjectStateManagement_Y : MonoBehaviour
         scr.Power = Power;
         scr.chainProbability = 5f;
         scr.chainDamage = chainDamage;
-        scr.superChainDamage = superChainDamage;
         scr.death = true;
     }
 }
