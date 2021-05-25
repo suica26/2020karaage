@@ -20,6 +20,10 @@ public class ObjectStateManagement_Y : MonoBehaviour
     private AudioSource audioSource;
     private GameObject player;
 
+    //M
+    //[SerializeField] private int smallObj,bigObj;
+    private Stage1_Mission_M s1Mis;//
+
     //加筆(佐々木)
     private CharaMoveRigid_R scrCharaMove;
     //
@@ -31,7 +35,8 @@ public class ObjectStateManagement_Y : MonoBehaviour
     private float chainPower;
     private int hitSkilID = 0;
     private bool damage = false;
-    private bool notLive = false;
+    //M publicに変えました
+    public bool notLive = false;
 
     [Header("破壊時の設定")]
     public GameObject BreakEffect;
@@ -47,6 +52,10 @@ public class ObjectStateManagement_Y : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
+        //M
+        s1Mis = GetComponent<Stage1_Mission_M>();
+        //smallObj = s1Mis.smallNum;
+        //bigObj = s1Mis.bigNum;//
 
         //加筆(佐々木)
         scrCharaMove = player.GetComponent<CharaMoveRigid_R>();
@@ -60,10 +69,23 @@ public class ObjectStateManagement_Y : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (HP <= 0 && !notLive)//HPがなくなると、分割オブジェクトに差し替え発生
         {
             GameObject.Find("Canvas").GetComponent<Parameters_R>().ScoreManager(breakScore);
             scrKick.chargePoint += breakPoint;
+
+            //M 
+            if (this.gameObject.tag == "Small")
+            {
+                player.GetComponent<Stage1_Mission_M>().SmallNumberPlus();
+                //smallObj++;
+            }
+            else if (this.gameObject.tag == "Big")
+            {
+                player.GetComponent<Stage1_Mission_M>().BigNumberPlus();
+                //bigObj++;
+            }//
 
             if (scrFood != null)
             {

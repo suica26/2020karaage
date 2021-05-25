@@ -7,11 +7,11 @@ public class Ciclegauge_M : MonoBehaviour
 {
     [SerializeField] private Image circle;
     public float a;
-    bool gainPower;
+    //bool gainPower;
 
     void Start()
     {
-        gainPower = false;
+        //gainPower = false;
     }
 
     // Update is called once per frame
@@ -24,7 +24,7 @@ public class Ciclegauge_M : MonoBehaviour
 
         if (circle.fillAmount >= 1.0f)
         {
-            gainPower = true;
+            //gainPower = true;
             GainCircle();
         }
         /*if (circle.fillAmount == 0f)
