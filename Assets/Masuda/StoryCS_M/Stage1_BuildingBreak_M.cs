@@ -29,6 +29,7 @@ public class Stage1_BuildingBreak_M : MonoBehaviour
         //テスト
         if (Input.GetKeyDown(KeyCode.T))
         {
+            //山本加筆　元:player.GetComponent<Stage1_Mission_M>().BigNumberPlus();
             scrStage1Mission.BigNumberPlus();
         }
 
@@ -36,10 +37,12 @@ public class Stage1_BuildingBreak_M : MonoBehaviour
         {
             if (this.gameObject.tag == "Small")
             {
+                //山本加筆　元:player.GetComponent<Stage1_Mission_M>().SmallNumberPlus();
                 scrStage1Mission.SmallNumberPlus();
             }
             else if (this.gameObject.tag == "Big")
             {
+                //山本加筆　元:player.GetComponent<Stage1_Mission_M>().BigNumberPlus();
                 scrStage1Mission.BigNumberPlus();
             }
         }
