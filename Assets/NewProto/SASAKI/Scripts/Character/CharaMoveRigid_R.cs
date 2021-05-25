@@ -118,7 +118,6 @@ public class CharaMoveRigid_R : MonoBehaviour
                 if(audioSourceWalk.isPlaying != walkClip[scrEvo.EvolutionNum])
                 {
                     //audioSourceWalk.PlayOneShot(walkClip[scrEvo.EvolutionNum]);
-                    audio.player.SetSelectorLabel("Selector_Floor", "wood");
                     audio.Play("footsteps00");
 
                 }
@@ -256,7 +255,8 @@ public class CharaMoveRigid_R : MonoBehaviour
             fallAttack = true;
             yield return new WaitForSeconds(0.95f);
 
-            audioSourceCommon.PlayOneShot(KickFAClip);
+            //audioSourceCommon.PlayOneShot(KickFAClip);
+            audio.Play("FallAttack00");
             rb.AddForce(Vector3.down * jumpSpeed * 4f, ForceMode.Impulse);
             yield break;
         }
