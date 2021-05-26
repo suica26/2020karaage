@@ -2419,6 +2419,7 @@ GameObject:
   - component: {fileID: 296357593}
   - component: {fileID: 296357592}
   - component: {fileID: 296357591}
+  - component: {fileID: 296357595}
   m_Layer: 5
   m_Name: back
   m_TagString: Untagged
@@ -2550,6 +2551,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 296357589}
   m_CullTransparentMesh: 0
+--- !u!114 &296357595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 296357589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: 
+  _cueSheet: 
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &297302464
 GameObject:
   m_ObjectHideFlags: 0
@@ -5212,6 +5236,7 @@ Transform:
   - {fileID: 1583234292}
   - {fileID: 1976590410}
   - {fileID: 1974329673}
+  - {fileID: 1757594040}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6412,6 +6437,7 @@ MonoBehaviour:
   - {fileID: 673000545}
   - {fileID: 1691760561}
   - {fileID: 1832469970}
+  radius: []
   spinSpeed: 1
   duration: 0
   magnitude: []
@@ -8220,6 +8246,7 @@ GameObject:
   - component: {fileID: 1202394770}
   - component: {fileID: 1202394769}
   - component: {fileID: 1202394771}
+  - component: {fileID: 1202394772}
   m_Layer: 0
   m_Name: rockeddoorL
   m_TagString: Untagged
@@ -8343,6 +8370,7 @@ MonoBehaviour:
   nowanim: 0
   air: {fileID: 1804011116}
   arrow: {fileID: 274157317}
+  audio: {fileID: 0}
 --- !u!54 &1202394771
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -8359,6 +8387,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1202394772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202394764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: Track_noise00
+  _cueSheet: St0_Track
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &1218018273
 GameObject:
   m_ObjectHideFlags: 0
@@ -8939,6 +8990,7 @@ GameObject:
   - component: {fileID: 1312658819}
   - component: {fileID: 1312658820}
   - component: {fileID: 1312658821}
+  - component: {fileID: 1312658822}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -9113,6 +9165,7 @@ MonoBehaviour:
   clear: {fileID: 1201772138}
   company: {fileID: 0}
   next: {fileID: 610959487}
+  pause: {fileID: 0}
 --- !u!114 &1312658821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9130,6 +9183,30 @@ MonoBehaviour:
   image2: {fileID: 243642619}
   image3: {fileID: 0}
   image4: {fileID: 0}
+  gauge: {fileID: 0}
+--- !u!114 &1312658822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1312658812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: System_Decision
+  _cueSheet: System
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &1314395966
 GameObject:
   m_ObjectHideFlags: 0
@@ -10221,6 +10298,7 @@ GameObject:
   - component: {fileID: 1575655102}
   - component: {fileID: 1575655101}
   - component: {fileID: 1575655100}
+  - component: {fileID: 1575655104}
   m_Layer: 5
   m_Name: Back
   m_TagString: Untagged
@@ -10352,6 +10430,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1575655098}
   m_CullTransparentMesh: 0
+--- !u!114 &1575655104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1575655098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: 
+  _cueSheet: 
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &1583234291
 GameObject:
   m_ObjectHideFlags: 0
@@ -11650,6 +11751,99 @@ MonoBehaviour:
   whiteness: {fileID: 1760098097}
   Schanger: {fileID: 1080559933}
   mode: 0
+--- !u!1 &1757594039
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1757594040}
+  - component: {fileID: 1757594043}
+  - component: {fileID: 1757594042}
+  - component: {fileID: 1757594041}
+  m_Layer: 0
+  m_Name: WoodColl_Sound
+  m_TagString: Wood
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1757594040
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1757594039}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -9.97, y: -0.5, z: -9.31}
+  m_LocalScale: {x: 6.16, y: 1.09, z: 11.48}
+  m_Children: []
+  m_Father: {fileID: 662499516}
+  m_RootOrder: 28
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1757594041
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1757594039}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1757594042
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1757594039}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &1757594043
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1757594039}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1760098097
 GameObject:
   m_ObjectHideFlags: 0
@@ -13215,6 +13409,7 @@ MonoBehaviour:
   nowanim: 0
   air: {fileID: 1804011116}
   arrow: {fileID: 274157317}
+  audio: {fileID: 0}
 --- !u!1 &1974329672
 GameObject:
   m_ObjectHideFlags: 0
@@ -13884,6 +14079,14 @@ MonoBehaviour:
     acbFile: St0_Track.acb
     awbFile: 
     loaderStatus: 0
+  - name: Chicken
+    acbFile: Chicken.acb
+    awbFile: 
+    loaderStatus: 0
+  - name: System
+    acbFile: System.acb
+    awbFile: 
+    loaderStatus: 0
   dspBusSetting: 
   dontDestroyOnLoad: 0
   dontRemoveExistsCueSheet: 0
@@ -13998,6 +14201,8 @@ GameObject:
   - component: {fileID: 2100359996}
   - component: {fileID: 2100359997}
   - component: {fileID: 2100359998}
+  - component: {fileID: 2100359988}
+  - component: {fileID: 2100359999}
   m_Layer: 2
   m_Name: Player
   m_TagString: Player
@@ -14028,6 +14233,30 @@ MonoBehaviour:
   kickSound: {fileID: 8300000, guid: f67ea4fc8b2c08141809c63bd2243348, type: 3}
   scrAnim: {fileID: 8367383}
   chargePoint: 0
+  audio: {fileID: 2100359988}
+--- !u!114 &2100359988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100359986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: Jump00
+  _cueSheet: Chicken
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!114 &2100359989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14057,6 +14286,9 @@ MonoBehaviour:
   - 1.5
   - 2
   - 3
+  _effect: {fileID: 0}
+  center: []
+  effectScale: []
   morBlaSphere: {fileID: 5946415761110413900, guid: c23533bcfef72204c8283a93a07fbf9b,
     type: 3}
   spreadTime: 0.5
@@ -14113,7 +14345,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5adf029b369131a46b488b1a70157b49, type: 3}
   - {fileID: 8300000, guid: 5adf029b369131a46b488b1a70157b49, type: 3}
   - {fileID: 8300000, guid: 5adf029b369131a46b488b1a70157b49, type: 3}
-  audioSourceWalk: {fileID: 0}
+  audioSourceWalk: {fileID: 2100359995}
   audioSourceCommon: {fileID: 2100359995}
   rotateSpeed: 700
   raycastCubeX:
@@ -14182,11 +14414,6 @@ MonoBehaviour:
   - 4
   JUMP:
   - 10
-  CAM_RADIUS:
-  - 0.5
-  - 1
-  - 2.5
-  - 4
   DEBUG_MODE: 0
 --- !u!54 &2100359993
 Rigidbody:
@@ -14331,9 +14558,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mission: {fileID: 1201073106}
-  Player: {fileID: 2100359986}
-  check: {fileID: 0}
+  submis: {fileID: 0}
+  count: {fileID: 0}
+  player: {fileID: 0}
+  shop: {fileID: 0}
+  misBox: {fileID: 0}
+  company: {fileID: 0}
   txtFile: {fileID: 4900000, guid: 39723467b69dbde43913dab14e35ba93, type: 3}
+  smallNum: 0
+  bigNum: 0
+  smallBorder1: 0
+  smallBorder2: 0
+  smallBorder3: 0
+  bigBorder1: 0
+  bigBorder2: 0
+  bigBorder3: 0
+  missionSlide: {fileID: 0}
 --- !u!114 &2100359997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14363,6 +14603,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.01
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2100359999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100359986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 857bb79e7e30e4c4cb485d9fc8236a1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audio: {fileID: 2100359988}
 --- !u!1 &2102983488
 GameObject:
   m_ObjectHideFlags: 0
@@ -14687,6 +14940,7 @@ GameObject:
   - component: {fileID: 2145138321}
   - component: {fileID: 2145138320}
   - component: {fileID: 2145138319}
+  - component: {fileID: 2145138323}
   m_Layer: 5
   m_Name: option
   m_TagString: Untagged
@@ -14818,6 +15072,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2145138317}
   m_CullTransparentMesh: 0
+--- !u!114 &2145138323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2145138317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: 
+  _cueSheet: 
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!23 &211311308863229384
 MeshRenderer:
   m_ObjectHideFlags: 0

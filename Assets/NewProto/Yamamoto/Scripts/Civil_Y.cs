@@ -23,12 +23,16 @@ public class Civil_Y : MonoBehaviour
     private float deleteTiming = 60f;
     public bool avoidFlg = false;
 
+    //ADX
+    public new CriAtomSource audio;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         player = GameObject.Find("Player");
         rotSpeed = Random.Range(0.7f, 1.5f);
+        audio = (CriAtomSource)GetComponent("CriAtomSource");
     }
 
     // Update is called once per frame
@@ -61,6 +65,8 @@ public class Civil_Y : MonoBehaviour
             {
                 Debug.Log("Damage!");
                 EscapeContagion();
+                audio.Play("Citizen00");
+
             }
         }
 
