@@ -33,7 +33,8 @@ public class Parameters_R : MonoBehaviour
     [SerializeField] public Image circle,niwa;
 
     private bool freeze = false;
-    private float count,circlePoint,niwaPer;
+    private float count,niwaPer;
+    [SerializeField] private int evo1, evo2, evo3;
 
     public void Start()
     {
@@ -49,8 +50,7 @@ public class Parameters_R : MonoBehaviour
         kickSlider.value = 0;
         kickSlider.maxValue = maxSP;*/
         count = time;
-        niwaPer = 0.166f;
-        circlePoint = 0.166f;
+        niwaPer = evo1;
     }
 
     public void ScoreManager(int addScore)      //山本加筆：publicにすることで他Scriptで参照できるようにしました
@@ -95,19 +95,19 @@ public class Parameters_R : MonoBehaviour
         {
             ep += addEP;
             plusTime += 1;
-            niwa.fillAmount += niwaPer;
+            niwa.fillAmount += 5 / niwaPer;
             //epSlider.value += addEP;
             epText.text = "EP: " + ep;
             if (ep == 30)
             {
                 niwa.fillAmount = 0;
-                niwaPer = 0.0714f;
+                niwaPer = evo2;
                 TimeManager(10);
             }
             else if (ep == 100)
             {
                 niwa.fillAmount = 0;
-                niwaPer = 0.025f;
+                niwaPer = evo3;
                 TimeManager(10);
             }
             else if (ep == 300)
