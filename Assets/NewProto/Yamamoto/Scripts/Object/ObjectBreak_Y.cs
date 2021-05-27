@@ -19,6 +19,12 @@ public class ObjectBreak_Y : MonoBehaviour
     private AudioSource audioSource;
     private GameObject player;
 
+    /// <summary>
+    /// ADX関連
+    /// </summary>
+    private CriAtomSource criAtomSource;
+    private string cueName_BreakSound;
+
     // 自身の子要素を管理するリスト
     private List<GameObject> myParts = new List<GameObject>();
 
@@ -36,7 +42,7 @@ public class ObjectBreak_Y : MonoBehaviour
             myParts.Add(child.gameObject);
         }
         */
-        audioSource = GetComponent<AudioSource>();
+        criAtomSource = GetComponent<CriAtomSource>();
         tag = "Untagged";
     }
 
@@ -79,7 +85,10 @@ public class ObjectBreak_Y : MonoBehaviour
 
         switch (hitSkilID)
         {
-            case 1: KickCollapse(this.gameObject, player.transform.position); break;
+            case 1:
+                cueName_BreakSound = "BuildingExplosion00";
+                KickCollapse(this.gameObject, player.transform.position);
+                break;
             case 6: FallenCollapse(this.gameObject, player.transform.position); break;
             default: break;
         }
@@ -187,8 +196,7 @@ public class ObjectBreak_Y : MonoBehaviour
 
     private void KickCollapse(GameObject obj, Vector3 P)
     {
-
-        Debug.Log("Kick!");
+        Debug.Log("Kick Break");
         RigidOn(obj);
 
         var D = player.transform.forward;   //direction
@@ -200,12 +208,13 @@ public class ObjectBreak_Y : MonoBehaviour
         Vector3 TorquePower = new Vector3(Random.Range(-Torque, Torque), Random.Range(-Torque, Torque), Random.Range(-Torque, Torque));
         rb.AddForce(F, ForceMode.Impulse);
         rb.AddTorque(TorquePower, ForceMode.Impulse);
+
+        criAtomSource.cueName = cueName_BreakSound;
+        criAtomSource.Play();
     }
 
     private void FallenCollapse(GameObject obj, Vector3 P)
     {
-
-        Debug.Log("Kick!");
         RigidOn(obj);
 
         var direction = obj.transform.position - P;

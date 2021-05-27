@@ -7,7 +7,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
     [Range(0, 4), SerializeField] private int tier_WalkAttack;
     [Range(0, 4), SerializeField] private int tier_ChargeKick;
     public GameObject divideObject = null;
-    public AudioClip AttackSound, ContactSound;
+    private string attackSoundName, contactSoundName;
     public int HP;                  //Inspector上から設定できます。
     [Header("ダメージ倍率")]
     public float kickMag;             //キックのダメージ倍率
@@ -16,7 +16,15 @@ public class ObjectStateManagement_Y : MonoBehaviour
     public float fallAttackMag;     //落下攻撃のダメージ倍率
     [Header("破壊時のスコア")] public int breakScore;                          //建物を破壊したときに得られるスコア
     [Header("破壊時のチャージポイント")] public int breakPoint;                //建物を破壊したときに得られるチャージポイント
-    private AudioSource audioSource;
+    private CriAtomSource criAtomSource;
+    /// <summary>
+    /// 1 木
+    /// 2 消火栓
+    /// 3 マンホール
+    /// 4 建物
+    /// 5 車
+    /// </summary>
+    [SerializeField] private int objectID;
     private GameObject player;
 
     //M
@@ -39,11 +47,12 @@ public class ObjectStateManagement_Y : MonoBehaviour
 
     [Header("破壊時の設定")]
     public GameObject BreakEffect;
-    public AudioClip ExplosionSound, CollapseSound;
     public float deleteTime = 3f;
     public float Torque = 1f;    //爆発でどれだけ回転するか
     public float Power = 1f;     //爆発でどれぐらい吹っ飛ぶか
     [Header("連鎖破壊でのダメージ量(相手への)")] public int chainDamage;                 //連鎖破壊でのダメージ(自分の破片)
+
+    private Stage1_Mission_M playerScrS1M;
 
     // Start is called before the first frame update
     void Start()
@@ -60,7 +69,9 @@ public class ObjectStateManagement_Y : MonoBehaviour
         scrKick = player.GetComponent<chickenKick_R>();
         scrEvo = player.GetComponent<EvolutionChicken_R>();
         scrFood = GetComponent<FoodMaker_R>();
-        audioSource = GetComponent<AudioSource>();
+        criAtomSource = GetComponent<CriAtomSource>();
+
+        playerScrS1M = player.GetComponent<Stage1_Mission_M>();
     }
 
     // Update is called once per frame
@@ -73,16 +84,16 @@ public class ObjectStateManagement_Y : MonoBehaviour
             scrKick.chargePoint += breakPoint;
 
             //M 
-            if (this.gameObject.tag == "Small")
+            if (tag == "Small")
             {
-                player.GetComponent<Stage1_Mission_M>().SmallNumberPlus();
+                playerScrS1M.SmallNumberPlus();
                 //smallObj++;
             }
-            else if (this.gameObject.tag == "Big")
+            else if (tag == "Big")
             {
-                player.GetComponent<Stage1_Mission_M>().BigNumberPlus();
+                playerScrS1M.BigNumberPlus();
                 //bigObj++;
-            }//
+            }
 
             if (scrFood != null)
             {
@@ -144,13 +155,42 @@ public class ObjectStateManagement_Y : MonoBehaviour
 
         if (damage)
         {
+            /// <summary>
+            /// 1 木
+            /// 2 消火栓
+            /// 3 マンホール
+            /// 4 建物
+            /// 5 車
+            /// </summary>
+
+            //おはようブラストとカッターの時
             if (hitSkilID == 2 || hitSkilID == 3)
             {
-                if (ContactSound != null) audioSource.PlayOneShot(ContactSound);
+                switch (objectID)
+                {
+                    case 2: contactSoundName = "Trashcan00"; break;
+                    case 3: contactSoundName = "Trashcan00"; break;
+                    case 4: contactSoundName = "BuildingContact00"; break;
+                    case 5: contactSoundName = "CarExplosion00"; break;
+                    default: contactSoundName = "BuildingExplosion00"; break;
+                }
+
+                criAtomSource.cueName = contactSoundName;
+                criAtomSource.Play("BuildingContact00");
             }
-            else
+            else //それ以外
             {
-                if (AttackSound != null) audioSource.PlayOneShot(AttackSound);
+                switch (objectID)
+                {
+                    case 2: attackSoundName = "GasExplosion00"; break;
+                    case 3: attackSoundName = "Trashcan00"; break;
+                    case 4: attackSoundName = "BuildingExplosion00"; break;
+                    case 5: attackSoundName = "CarExplosion00"; break;
+                    default: attackSoundName = "BuildingExplosion00"; break;
+                }
+
+                criAtomSource.cueName = attackSoundName;
+                criAtomSource.Play(attackSoundName);
             }
             //振動させる
             StartCoroutine(DoShake(0.25f, 0.1f));
@@ -165,7 +205,18 @@ public class ObjectStateManagement_Y : MonoBehaviour
         {
             HP = 0;
             hitSkilID = 5;
-            audioSource.PlayOneShot(AttackSound);
+
+            switch (objectID)
+            {
+                case 2: attackSoundName = "Trashcan00"; break;
+                case 3: attackSoundName = "Trashcan00"; break;
+                case 4: attackSoundName = "BuildingExplosion00"; break;
+                case 5: attackSoundName = "CarExplosion00"; break;
+                default: attackSoundName = "BuildingExplosion00"; break;
+            }
+
+            criAtomSource.cueName = attackSoundName;
+            criAtomSource.Play(attackSoundName);
         }
     }
 
@@ -197,7 +248,6 @@ public class ObjectStateManagement_Y : MonoBehaviour
         var genPos = transform.position;
         genPos.y = 0f;
         var DO = Instantiate(divideObject, genPos, transform.rotation);
-        DO.AddComponent<AudioSource>();
         var rb = DO.AddComponent<Rigidbody>();
         rb.useGravity = false;
         rb.isKinematic = true;
@@ -205,8 +255,6 @@ public class ObjectStateManagement_Y : MonoBehaviour
         scr.hitSkilID = hitSkilID;
         scr.chainPower = chainPower;
         scr.chainStartPos = chainStartPos;
-        scr.ExplosionSound = ExplosionSound;
-        scr.CollapseSound = CollapseSound;
         scr.BreakEffect = BreakEffect;
         scr.deleteTime = deleteTime;
         scr.Torque = Torque;
@@ -223,8 +271,6 @@ public class ObjectStateManagement_Y : MonoBehaviour
         scr.hitSkilID = hitSkilID;
         scr.chainPower = chainPower;
         scr.chainStartPos = chainStartPos;
-        scr.ExplosionSound = ExplosionSound;
-        scr.CollapseSound = CollapseSound;
         scr.BreakEffect = BreakEffect;
         scr.deleteTime = deleteTime;
         scr.Torque = Torque;
