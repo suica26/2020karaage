@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Backpause_M : MonoBehaviour
 {
+    private new CriAtomSource audio;
     [SerializeField] private GameObject pausePanel;
     void Start()
     {
-        
+        audio = (CriAtomSource)GetComponent("CriAtomSource");
     }
 
     void Update()
@@ -17,6 +18,7 @@ public class Backpause_M : MonoBehaviour
 
     public void OnClick()
     {
+        audio.Play("System_Cancel");
         pausePanel.SetActive(false);
         Time.timeScale = 1f;
     }
