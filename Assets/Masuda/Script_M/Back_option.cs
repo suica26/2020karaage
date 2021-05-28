@@ -19,7 +19,7 @@ public class Back_option : MonoBehaviour
 
     public void OnClick()
     {
-        optionPanel1.SetActive(false);
+        //optionPanel1.SetActive(false);
         optionPanel2.SetActive(false);
         setPanel.SetActive(false);
     }

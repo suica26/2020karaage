@@ -12,12 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c40dbe01cca5df499db18982651a960, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxRouteNum: 0
-  route1: []
-  route2: []
-  route3: []
-  route4: []
-  route5: []
+  neighbor: []
   civilPrefabs:
   - {fileID: 4767121404319453710, guid: eebae796706d0c344b4e6f5c9fa7c50d, type: 3}
   blurScale: 0
@@ -110,7 +105,8 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 84fe88cc229d3a146bc7d410815de353, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -2179701315603180420, guid: 712f0d5cf049704448c3dec059458ba0, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 712f0d5cf049704448c3dec059458ba0, type: 3}
 --- !u!1 &7766991255841001572 stripped
 GameObject:
