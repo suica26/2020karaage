@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class ScreenQua1_M : MonoBehaviour
 {
+    private new CriAtomSource audio;
     void Start()
     {
-        
+        audio = (CriAtomSource)GetComponent("CriAtomSource");
     }
 
     // Update is called once per frame
@@ -18,5 +19,6 @@ public class ScreenQua1_M : MonoBehaviour
     public void OnClick()
     {
         QualitySettings.SetQualityLevel(0);
+        audio.Play("System_Decision");
     }
 }
