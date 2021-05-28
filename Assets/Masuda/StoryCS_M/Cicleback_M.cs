@@ -6,12 +6,13 @@ using UnityEngine.UI;
 public class Cicleback_M : MonoBehaviour
 {
     [SerializeField] GameObject objParam;
-    [SerializeField] private Image image1, image2, image3, image4;
+    [SerializeField] private Image image1, image2, image3, image4, gauge;
     private int esa;
     private Parameters_R scr;
     void Start()
     {
         scr = objParam.gameObject.GetComponent<Parameters_R>();
+        gauge.enabled = true;
         image1.enabled = true;
         image2.enabled = false;
         image3.enabled = false;

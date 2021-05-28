@@ -753,6 +753,7 @@ GameObject:
   - component: {fileID: 5648094165498150964}
   - component: {fileID: -1820234442514745817}
   - component: {fileID: 612243006388455239}
+  - component: {fileID: 3813313637588151860}
   m_Layer: 0
   m_Name: 1Black
   m_TagString: Untagged
@@ -802,10 +803,10 @@ MonoBehaviour:
   kickMag: 0.8
   blastMag: 3.5
   cutterMag: 1
-  chargeKickMag: 3
   fallAttackMag: 1.2
   breakScore: 100000
   breakPoint: 5
+  notLive: 0
   BreakEffect: {fileID: 2714036437048776495, guid: c1b6977c8b92845e3a1103d68f2de786,
     type: 3}
   ExplosionSound: {fileID: 8300000, guid: e454532e8e33d5d4cb74819fbd7d415e, type: 3}
@@ -813,9 +814,7 @@ MonoBehaviour:
   deleteTime: 3
   Torque: 10
   Power: 20
-  chainProbability: 5
   chainDamage: 30
-  superChainDamage: 1000
 --- !u!114 &7830728514585666560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -956,6 +955,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3813313637588151860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8200118160662228174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: 
+  _cueSheet: 
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &8751005054928508776
 GameObject:
   m_ObjectHideFlags: 0

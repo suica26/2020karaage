@@ -25,6 +25,10 @@ public class doorscore : MonoBehaviour
     public GameObject air;
     public GameObject arrow;
 
+    //ADX
+    public new CriAtomSource audio;
+    bool isOnce = true;
+
     int time;
 
     // Start is called before the first frame update
@@ -32,6 +36,7 @@ public class doorscore : MonoBehaviour
     {
         animCon = GetComponent<Animator>();
         Sound = GetComponent<AudioSource>();
+        audio = (CriAtomSource)GetComponent("CriAtomSource");
     }
 
     // Update is called once per frame
@@ -94,6 +99,13 @@ public class doorscore : MonoBehaviour
             nowanim = 6;
             time = 0;
 
+            if (isOnce)
+            {
+                audio.Play("door_broken00");
+                isOnce = false;
+            }
+            
+
         }
 
 
@@ -108,8 +120,10 @@ public class doorscore : MonoBehaviour
             {
 
                 damage = damage + 1;
+                audio.Play("Track_noise00");
 
             }
+
 
         }
     }

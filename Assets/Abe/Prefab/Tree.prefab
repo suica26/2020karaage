@@ -1,5 +1,28 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1049166665164392545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4629819601499206169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: BuildingExplosion00
+  _cueSheet: CueSheet_0
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &5444882638821059876
 GameObject:
   m_ObjectHideFlags: 0
@@ -66,25 +89,20 @@ MonoBehaviour:
   tier_WalkAttack: 1
   tier_ChargeKick: 0
   divideObject: {fileID: 0}
-  AttackSound: {fileID: 0}
-  ContactSound: {fileID: 0}
   HP: 200
   kickMag: 0.7
   blastMag: 0.7
   cutterMag: 1.5
-  chargeKickMag: 2
   fallAttackMag: 0.8
   breakScore: 100
   breakPoint: 1
+  objectID: 0
+  notLive: 0
   BreakEffect: {fileID: 0}
-  ExplosionSound: {fileID: 0}
-  CollapseSound: {fileID: 0}
   deleteTime: 3
   Torque: 5
   Power: 5
-  chainProbability: 5
   chainDamage: 5
-  superChainDamage: 200
 --- !u!82 &-4844768861795583518
 AudioSource:
   m_ObjectHideFlags: 0
@@ -217,10 +235,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8646632850040809695}
     m_Modifications:
+    - target: {fileID: 2489846694108311488, guid: 57c0f367bb0669a4db202efe65c72ad4,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5519965691047223306, guid: 57c0f367bb0669a4db202efe65c72ad4,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5767614945766714562, guid: 57c0f367bb0669a4db202efe65c72ad4,
         type: 3}
       propertyPath: m_Name
       value: tree
+      objectReference: {fileID: 0}
+    - target: {fileID: 5819025525724764742, guid: 57c0f367bb0669a4db202efe65c72ad4,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6575677190360856184, guid: 57c0f367bb0669a4db202efe65c72ad4,
         type: 3}
@@ -277,8 +310,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7790593432968485852, guid: 57c0f367bb0669a4db202efe65c72ad4, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 57c0f367bb0669a4db202efe65c72ad4, type: 3}
+--- !u!1 &4629819601499206169 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5767614945766714562, guid: 57c0f367bb0669a4db202efe65c72ad4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1173965444099907291}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5407623350324324515 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6575677190360856184, guid: 57c0f367bb0669a4db202efe65c72ad4,
