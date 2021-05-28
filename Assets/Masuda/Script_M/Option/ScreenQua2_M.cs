@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class ScreenQua2_M : MonoBehaviour
 {
-    
+    private new CriAtomSource audio;
     void Start()
     {
-        
+        audio = (CriAtomSource)GetComponent("CriAtomSource");
     }
 
     void Update()
@@ -17,5 +17,6 @@ public class ScreenQua2_M : MonoBehaviour
     public void OnClick()
     {
         QualitySettings.SetQualityLevel(2);
+        audio.Play("System_Decision");
     }
 }
