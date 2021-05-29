@@ -8,12 +8,17 @@ public class Car_R : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float rotSpeed;
 
-    private GameObject nowWaypoint;
-    private GameObject nextWaypoint;
+    private GameObject nowWaypoint;         //現在いる交差点
+    private GameObject nextWaypoint;        //次の交差点
+    private GameObject afterNextWaypoint;   //その次の交差点
     private Vector3 targetPos;
+    private bool isUturn;                   // Uターンに入ったか否か
+    private bool isFirstMeetEnd;            // 生成時にすぐに消えてしまうことを防ぐ
 
     public void Init(GameObject obj, int _speed)
     {
+        isFirstMeetEnd = true;
+        isUturn = false;
         speed = _speed;
         nextWaypoint = obj;
         transform.position = nextWaypoint.transform.position;
@@ -24,11 +29,25 @@ public class Car_R : MonoBehaviour
     {
         if(carMoving)
         {
-            //交差点情報更新
+            // 交差点情報更新
             nowWaypoint = nextWaypoint;
 
-            nextWaypoint = nextWaypoint.GetComponent<CarWaypoint_R>().SetNextWaypoint(nowWaypoint);
-            targetPos = nextWaypoint.GetComponent<CarWaypoint_R>().SetDistination();
+            // 次の交差点と　その次の交差点を取得
+            nextWaypoint = nowWaypoint.GetComponent<CarWaypoint_R>().SetNextWaypoint(nowWaypoint);
+            afterNextWaypoint = nextWaypoint.GetComponent<CarWaypoint_R>().SetNextWaypoint(nowWaypoint);
+
+            //初期移動先(インスタンス先)を設定
+            SetPosInit(nowWaypoint.transform.position);
+            transform.position = targetPos;
+
+            if(nextWaypoint.GetComponent<CarWaypoint_R>().uTurn)
+            {
+
+            }
+            else
+            {
+                targetPos = afterNextWaypoint.GetComponent<CarWaypoint_R>().SetNextTargetPos(nextWaypoint.transform.position, nowWaypoint.transform.position, targetPos);
+            }
         }
     }
 
@@ -37,6 +56,12 @@ public class Car_R : MonoBehaviour
     {
         if(carMoving)
         {
+            RaycastHit[] hits = Physics.RaycastAll(transform.position + transform.forward * 0.5f, transform.forward, 5.0f);
+            foreach(var obj in hits)
+            {
+                if (obj.transform.name == "Car(Clone)")
+                    return;
+            }    
             CarMove();
         }
     }
@@ -44,26 +69,93 @@ public class Car_R : MonoBehaviour
     //車の動き
     private void CarMove()
     {
-        if ((transform.position - targetPos).magnitude > 0.5f)
+        if ((transform.position - targetPos).magnitude > 0.5f)   // 移動先との距離が規定値より遠いとき
         {
             Vector3 newPos = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(newPos - transform.position), rotSpeed * Time.deltaTime);
-            transform.position = newPos;  
-        }    
-        else
-        {
-            if(nextWaypoint.GetComponent<CarWaypoint_R>().endWaypoint)
+            if (newPos - transform.position != Vector3.zero)
             {
-                Destroy(this.gameObject);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation((newPos - transform.position) * 10), rotSpeed * Time.deltaTime);
+            }
+            transform.position = newPos;  
+        }
+        else                                                     // 移動先との距離が規定値より近いとき
+        {
+            // 次の交差点が終端の場合
+            if (nowWaypoint.GetComponent<CarWaypoint_R>().endWaypoint)
+            {
+                if (isFirstMeetEnd)
+                    isFirstMeetEnd = false;
+                else
+                    Destroy(this.gameObject);
+            }
+
+            // Uターンの際に情報の更新を一回の移動分止める(これをしないと経路情報がバグる)
+            if((afterNextWaypoint.GetComponent<CarWaypoint_R>().uTurn || nextWaypoint.GetComponent<CarWaypoint_R>().uTurn) && !isUturn)
+                isUturn = true;
+            else
+            {
+                isUturn = false;
+
+                //交差点情報更新
+                nowWaypoint = nextWaypoint;
+                nextWaypoint = afterNextWaypoint;
+            }
+
+            //次の交差点がUターンの時
+            if (nextWaypoint.GetComponent<CarWaypoint_R>().uTurn)
+            {
+                SetPosInit(nextWaypoint.transform.position);
+                if (isUturn)
+                {
+                    afterNextWaypoint = nextWaypoint.GetComponent<CarWaypoint_R>().SetNextWaypoint(nowWaypoint);
+                    targetPos = afterNextWaypoint.GetComponent<CarWaypoint_R>().SetNextTargetPos(nextWaypoint.transform.position, nowWaypoint.transform.position, targetPos);
+                }
             }
             else
             {
-                //交差点情報更新
-                GameObject before = nowWaypoint;
-                nowWaypoint = nextWaypoint;
+                //次の次の交差点が終端である場合
+                if (afterNextWaypoint.GetComponent<CarWaypoint_R>().endWaypoint)
+                {
+                    targetPos = afterNextWaypoint.GetComponent<CarWaypoint_R>().SetNextTargetPos(nextWaypoint.transform.position, nowWaypoint.transform.position, targetPos);
+                }
+                else
+                {
+                    afterNextWaypoint = nextWaypoint.GetComponent<CarWaypoint_R>().SetNextWaypoint(nowWaypoint);
+                    targetPos = afterNextWaypoint.GetComponent<CarWaypoint_R>().SetNextTargetPos(nextWaypoint.transform.position, nowWaypoint.transform.position, targetPos);
+                }
+            }
 
-                nextWaypoint = nextWaypoint.GetComponent<CarWaypoint_R>().SetNextWaypoint(before);
-                targetPos = nextWaypoint.GetComponent<CarWaypoint_R>().SetDistination();
+            Debug.Log("CAR WAYPOINT LOG: " + nowWaypoint + " -> " + nextWaypoint + " -> " + afterNextWaypoint);
+        }
+    }
+
+    private void SetPosInit(Vector3 _origin)
+    {
+        Vector3 vec = nextWaypoint.transform.position - nowWaypoint.transform.position;
+        targetPos = _origin;
+        //targetPos.y = 0;
+
+        // X成分の方が大きい(X方向に移動する)とき
+        if (Mathf.Abs(vec.x) > Mathf.Abs(vec.z))
+        {
+            if (vec.x > 0) // X方向 正
+            {
+                targetPos.z -= 4;
+            }
+            else          // X方向 負
+            {
+                targetPos.z += 4;
+            }
+        }
+        else
+        {
+            if (vec.z > 0) // Z方向 正
+            {
+                targetPos.x += 4;
+            }
+            else          // Z方向 負
+            {
+                targetPos.x -= 4;
             }
         }
     }

@@ -6,7 +6,7 @@ public class CarWaypoint_R : MonoBehaviour
 {
     [SerializeField] private GameObject[] nextWaypoint;
     [SerializeField] public bool endWaypoint;
-    [SerializeField] private bool uTurn;
+    [SerializeField] public bool uTurn;
     private int num;
 
     private void Start()
@@ -14,7 +14,7 @@ public class CarWaypoint_R : MonoBehaviour
         num = nextWaypoint.Length;
     }
 
-    //次の交差点を設定する
+    // 次の交差点を設定する
     public GameObject SetNextWaypoint(GameObject _nowWaypoint)
     {
         GameObject waypoint = _nowWaypoint;
@@ -34,9 +34,40 @@ public class CarWaypoint_R : MonoBehaviour
         return waypoint;
     }
 
-    //車の移動先を決定する
-    public Vector3 SetDistination()
+    //次の移動先を設定する
+    public Vector3 SetNextTargetPos(Vector3 _nextWaypointPosition, Vector3 _nowWaypointPosition, Vector3 _beforeTargetPos)
     {
-        return transform.position;
+        Vector3 vec = transform.position - _nextWaypointPosition;
+        Vector3 targetPos = transform.position;
+        //targetPos.y = 0;
+
+        // X成分の方が大きい(X方向に移動する)とき
+        if (Mathf.Abs(vec.x) > Mathf.Abs(vec.z))
+        {
+            if (vec.x > 0) // X方向 正
+                targetPos.z -= 4;
+            else          // X方向 負
+                targetPos.z += 4;
+
+            // 直線移動の時
+            if (vec.normalized == (transform.position - _nowWaypointPosition).normalized)
+                targetPos.x = _nextWaypointPosition.x;
+            else
+                targetPos.x = _beforeTargetPos.x;
+        }
+        else
+        {
+            if (vec.z > 0) // Z方向 正
+                targetPos.x += 4;
+            else          // Z方向 負
+                targetPos.x -= 4;
+
+            // 直線移動の時
+            if (vec.normalized == (transform.position - _nowWaypointPosition).normalized)
+                targetPos.z = _nextWaypointPosition.z;
+            else
+                targetPos.z = _beforeTargetPos.z;
+        }
+        return targetPos;
     }
 }
