@@ -8,7 +8,7 @@ public class WayPointGraph_Y : MonoBehaviour
     private GameObject[] wayPointsArray;
     public GameObject[] endWayPoints;
     private WayPoint_Y[] wpScripts;
-    private int[] endPointNumbers;
+    private List<int> endPointNumbers;
     private int NOC = 0;   //計算回数
     private GameObject[] route;
 
@@ -29,19 +29,15 @@ public class WayPointGraph_Y : MonoBehaviour
         foreach (var wps in wpScripts)
         {
             wps.GetNeiNum();
-        }
-
-        //終着点候補を配列化
-        for (int i = 0; i < endWayPoints.Length; i++)
-        {
-            endPointNumbers[i] = endWayPoints[i].GetComponent<WayPoint_Y>().PointNumber;
+            //終着点候補をリストに追加していく
+            if (wps.endPointFlg) endPointNumbers.Add(wps.PointNumber);
         }
     }
 
     public void CulDijkstra(int startPoint)
     {
-        int endPoint = endPointNumbers[Random.Range(0, endPointNumbers.Length)];
-        while (endPoint == startPoint) endPoint = endPointNumbers[Random.Range(0, endPointNumbers.Length)];
+        int endPoint = endPointNumbers[Random.Range(0, endPointNumbers.Count)];
+        while (endPoint == startPoint) endPoint = endPointNumbers[Random.Range(0, endPointNumbers.Count)];
 
         bool finishFlg = false;
         var nextList = new List<int>();

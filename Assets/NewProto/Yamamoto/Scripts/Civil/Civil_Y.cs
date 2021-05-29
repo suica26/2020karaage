@@ -22,6 +22,9 @@ public class Civil_Y : MonoBehaviour
     [SerializeField] private float deleteTimer = 0f;
     private float deleteTiming = 60f;
     public bool avoidFlg = false;
+    [SerializeField] private Animator animator;
+    private string walkStr;
+    private string runStr;
 
     //ADX
     public new CriAtomSource audio;
@@ -83,7 +86,7 @@ public class Civil_Y : MonoBehaviour
                 rotTime = 0f;
                 deleteTimer = 0f;
                 preForward = nextForward;
-                nextForward = GetVectorXZNormalized(route[routeNum].transform.position, route[routeNum - 1].transform.position);
+                nextForward = GetVectorXZNormalized(route[routeNum].transform.position, transform.position);
             }
         }
     }
@@ -109,7 +112,7 @@ public class Civil_Y : MonoBehaviour
         return AB;
     }
 
-    //XZ平面における点Bから点Aへの方向ベクトルを返す。(yは0)
+    //GetVectorXZの単位ベクトル化まで
     private Vector3 GetVectorXZNormalized(Vector3 A, Vector3 B)
     {
         var AB = A - B;

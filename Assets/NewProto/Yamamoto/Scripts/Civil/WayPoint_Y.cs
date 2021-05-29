@@ -9,6 +9,7 @@ public class WayPoint_Y : MonoBehaviour
     public int RouteNumber { get; private set; }
     public int PointNumber { get; private set; }
     public int beforePoint { get; private set; }
+    public bool endPointFlg;
 
     private void Start()
     {
