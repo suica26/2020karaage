@@ -6,11 +6,16 @@ public class WayPointGraph_Y : MonoBehaviour
 {
     public GameObject wayPoints;
     private GameObject[] wayPointsArray;
-    public GameObject[] endWayPoints;
     private WayPoint_Y[] wpScripts;
     private List<int> endPointNumbers;
+    private List<SpawnerWaypoint_Y> scrSpawners;
     private int NOC = 0;   //計算回数
     private GameObject[] route;
+
+    [SerializeField] private int civilMaxNum;
+    public int civilNum;
+    public float routinTimer;
+    public float spawnTime;
 
     // Start is called before the first frame update
     void Start()
@@ -25,13 +30,35 @@ public class WayPointGraph_Y : MonoBehaviour
             wpScripts[i].SetPointNum(i);
         }
 
+        //リスト初期化
+        endPointNumbers = new List<int>();
+        scrSpawners = new List<SpawnerWaypoint_Y>();
+
         //隣接点の情報を取得
         foreach (var wps in wpScripts)
         {
-            wps.GetNeiNum();
+            //隣接点情報を各WayPointにセット
+            wps.SetNeiNum();
             //終着点候補をリストに追加していく
             if (wps.endPointFlg) endPointNumbers.Add(wps.PointNumber);
+            //スポーン候補をリストに追加していく
+            if (wps.spawnerPointFlg) scrSpawners.Add(wayPointsArray[wps.PointNumber].GetComponent<SpawnerWaypoint_Y>());
         }
+    }
+
+    void Update()
+    {
+        //一度に存在する市民の数を制御
+        if (civilNum < civilMaxNum) routinTimer += Time.deltaTime;
+        //スポーン処理
+        if (routinTimer >= spawnTime) Spawn();
+    }
+
+    private void Spawn()
+    {
+        routinTimer = 0f;
+        civilNum++;
+        scrSpawners[Random.Range(0, scrSpawners.Count)].SpawnCivil();
     }
 
     public void CulDijkstra(int startPoint)
@@ -104,5 +131,10 @@ public class WayPointGraph_Y : MonoBehaviour
             scr.ChangeRouteNumber(-1, -1);
             NOC = -1;
         }
+    }
+
+    public void Decrease()
+    {
+        civilNum--;
     }
 }

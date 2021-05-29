@@ -19,15 +19,16 @@ public class Civil_Y : MonoBehaviour
     private float rotSpeed;
     private float rotTime = 0f;
     //市民の内部時間
-    [SerializeField] private float deleteTimer = 0f;
-    private float deleteTiming = 60f;
+    private float deleteTimer = 0f;
+    [SerializeField] private float deleteTiming = 60f;
+    private WayPointGraph_Y wayPointGraph;
     public bool avoidFlg = false;
     [SerializeField] private Animator animator;
     private string walkStr;
     private string runStr;
 
     //ADX
-    public new CriAtomSource audio;
+    private CriAtomSource criAtomSource;
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +36,7 @@ public class Civil_Y : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         player = GameObject.Find("Player");
         rotSpeed = Random.Range(0.7f, 1.5f);
-        audio = (CriAtomSource)GetComponent("CriAtomSource");
+        criAtomSource = GetComponent<CriAtomSource>();
     }
 
     // Update is called once per frame
@@ -43,16 +44,10 @@ public class Civil_Y : MonoBehaviour
     {
         deleteTimer += Time.deltaTime;
         //迷子(次のWayPointに到着できなかった)になった時に自分を消去する処理
-        if (deleteTimer > deleteTiming) Destroy(gameObject);
+        if (deleteTimer > deleteTiming) Death();
 
-        if (escapeFlg)
-        {
-            Escape();
-        }
-        else
-        {
-            Walk();
-        }
+        if (escapeFlg) Escape();
+        else Walk();
     }
 
     void OnTriggerEnter(Collider other)
@@ -68,7 +63,7 @@ public class Civil_Y : MonoBehaviour
             {
                 Debug.Log("Damage!");
                 EscapeContagion();
-                audio.Play("Citizen00");
+                criAtomSource.Play("Citizen00");
 
             }
         }
@@ -187,5 +182,16 @@ public class Civil_Y : MonoBehaviour
     {
         preForward = transform.forward;
         rotTime = 0f;
+    }
+
+    public void SetWayPointGraph(WayPointGraph_Y wpGraph)
+    {
+        wayPointGraph = wpGraph;
+    }
+
+    private void Death()
+    {
+        wayPointGraph.Decrease();
+        Destroy(gameObject);
     }
 }

@@ -10,6 +10,7 @@ public class WayPoint_Y : MonoBehaviour
     public int PointNumber { get; private set; }
     public int beforePoint { get; private set; }
     public bool endPointFlg;
+    public bool spawnerPointFlg;
 
     private void Start()
     {
@@ -17,7 +18,7 @@ public class WayPoint_Y : MonoBehaviour
         beforePoint = -1;
     }
 
-    public void GetNeiNum()
+    public void SetNeiNum()
     {
         NeiNums = new int[neighbor.Length];
         for (int i = 0; i < neighbor.Length; i++)
