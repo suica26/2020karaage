@@ -10,7 +10,7 @@ public class WayPointGraph_Y : MonoBehaviour
     private List<int> endPointNumbers;
     private List<SpawnerWaypoint_Y> scrSpawners;
     private int NOC = 0;   //計算回数
-    private GameObject[] route;
+    public GameObject[] route;
 
     [SerializeField] private int civilMaxNum;
     public int civilNum;
@@ -73,6 +73,7 @@ public class WayPointGraph_Y : MonoBehaviour
         //開始地点(スポーン地点)の設定
         wpScripts[startPoint].ChangeRouteNumber(0, -100);
         checkPoints = wpScripts[startPoint].NeiNums;
+
         while (finishFlg)
         {
             NOC++;
@@ -92,6 +93,7 @@ public class WayPointGraph_Y : MonoBehaviour
                     }
                 }
             }
+            checkPoints = nextList.ToArray();
         }
         CreateRoute(endPoint);
     }
@@ -133,7 +135,7 @@ public class WayPointGraph_Y : MonoBehaviour
         }
     }
 
-    public void Decrease()
+    public void CivilNumDecrease()
     {
         civilNum--;
     }

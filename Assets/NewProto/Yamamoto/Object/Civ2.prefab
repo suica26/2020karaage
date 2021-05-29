@@ -1075,7 +1075,7 @@ GameObject:
   - component: {fileID: 7026735143315130746}
   m_Layer: 0
   m_Name: Civ2
-  m_TagString: Untagged
+  m_TagString: Civil
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1110,7 +1110,9 @@ MonoBehaviour:
   escapeSpeed: 8
   walkSpeed: 4
   contagionRange: 20
-  deleteTiming: 60
+  route: []
+  deleteTiming: 10
+  wayPointGraph: {fileID: 0}
   avoidFlg: 0
   animator: {fileID: 0}
 --- !u!114 &2322232715065583286

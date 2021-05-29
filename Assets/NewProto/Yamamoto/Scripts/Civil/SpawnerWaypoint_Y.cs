@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class SpawnerWaypoint_Y : WayPoint_Y
 {
-    private WayPointGraph_Y wayPointGraph;
+    public WayPointGraph_Y wayPointGraph;
     public GameObject[] civilPrefabs;
     private GameObject civil;
     public float blurScale;
-    private GameObject[] route;
+    public GameObject[] route;
     private Civil_Y scrCivil;
 
     private void Start()
@@ -19,12 +19,13 @@ public class SpawnerWaypoint_Y : WayPoint_Y
     public void SpawnCivil()
     {
         civil = Instantiate(civilPrefabs[(Random.Range(0, civilPrefabs.Length))], InstantiatePositionBlur(), Quaternion.identity);
-        wayPointGraph.CulDijkstra(this.PointNumber);
+        wayPointGraph.CulDijkstra(PointNumber);
         wayPointGraph.GetRoute(route);
 
         scrCivil = civil.GetComponent<Civil_Y>();
         scrCivil.RouteSetting(route);   //ルート情報付与
-        scrCivil.SetWayPointGraph(wayPointGraph);   //コストマップ情報付与
+
+        wayPointGraph.ResetDijkstraMap();
     }
 
     private Vector3 InstantiatePositionBlur()

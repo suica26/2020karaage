@@ -12,7 +12,7 @@ public class Civil_Y : MonoBehaviour
     private Vector3 fallenSpeed;
     private Rigidbody rb;
     private GameObject player;
-    private GameObject[] route;
+    public GameObject[] route;
     private int routeNum = 0;
     private Vector3 preForward;
     private Vector3 nextForward;
@@ -21,7 +21,7 @@ public class Civil_Y : MonoBehaviour
     //市民の内部時間
     private float deleteTimer = 0f;
     [SerializeField] private float deleteTiming = 60f;
-    private WayPointGraph_Y wayPointGraph;
+    public WayPointGraph_Y wayPointGraph;
     public bool avoidFlg = false;
     [SerializeField] private Animator animator;
     private string walkStr;
@@ -37,6 +37,7 @@ public class Civil_Y : MonoBehaviour
         player = GameObject.Find("Player");
         rotSpeed = Random.Range(0.7f, 1.5f);
         criAtomSource = GetComponent<CriAtomSource>();
+        wayPointGraph = GameObject.Find("GameAI_Y").GetComponent<WayPointGraph_Y>();
     }
 
     // Update is called once per frame
@@ -78,10 +79,11 @@ public class Civil_Y : MonoBehaviour
             }
             else
             {
+                Debug.Log("Arrive");
                 rotTime = 0f;
                 deleteTimer = 0f;
                 preForward = nextForward;
-                nextForward = GetVectorXZNormalized(route[routeNum].transform.position, transform.position);
+                nextForward = GetVectorXZNormalized(route[routeNum].transform.position, route[routeNum - 1].transform.position);
             }
         }
     }
@@ -184,14 +186,9 @@ public class Civil_Y : MonoBehaviour
         rotTime = 0f;
     }
 
-    public void SetWayPointGraph(WayPointGraph_Y wpGraph)
-    {
-        wayPointGraph = wpGraph;
-    }
-
     private void Death()
     {
-        wayPointGraph.Decrease();
+        wayPointGraph.CivilNumDecrease();
         Destroy(gameObject);
     }
 }
