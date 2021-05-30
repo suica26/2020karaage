@@ -19,7 +19,6 @@ public class SpawnerWaypoint_Y : WayPoint_Y
     public void SpawnCivil()
     {
         civil = Instantiate(civilPrefabs[(Random.Range(0, civilPrefabs.Length))], InstantiatePositionBlur(), Quaternion.identity);
-        wayPointGraph.CulDijkstra(PointNumber);
         wayPointGraph.GetRoute(route);
 
         scrCivil = civil.GetComponent<Civil_Y>();

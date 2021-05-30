@@ -16,6 +16,7 @@ public class WayPointGraph_Y : MonoBehaviour
     public int civilNum;
     public float routinTimer;
     public float spawnTime;
+    private bool finishFlg = false;
 
     // Start is called before the first frame update
     void Start()
@@ -46,7 +47,7 @@ public class WayPointGraph_Y : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
         //一度に存在する市民の数を制御
         if (civilNum < civilMaxNum) routinTimer += Time.deltaTime;
@@ -58,15 +59,19 @@ public class WayPointGraph_Y : MonoBehaviour
     {
         routinTimer = 0f;
         civilNum++;
-        scrSpawners[Random.Range(0, scrSpawners.Count)].SpawnCivil();
+        int randomNum = Random.Range(0, scrSpawners.Count);
+        CulDijkstra(scrSpawners[randomNum].PointNumber);
+        scrSpawners[randomNum].SpawnCivil();
     }
 
     public void CulDijkstra(int startPoint)
     {
-        int endPoint = endPointNumbers[Random.Range(0, endPointNumbers.Count)];
-        while (endPoint == startPoint) endPoint = endPointNumbers[Random.Range(0, endPointNumbers.Count)];
+        int endPoint;
+        do
+        {
+            endPoint = endPointNumbers[Random.Range(0, endPointNumbers.Count)];
+        } while (endPoint == startPoint);
 
-        bool finishFlg = false;
         var nextList = new List<int>();
         int[] checkPoints;
 
@@ -74,8 +79,9 @@ public class WayPointGraph_Y : MonoBehaviour
         wpScripts[startPoint].ChangeRouteNumber(0, -100);
         checkPoints = wpScripts[startPoint].NeiNums;
 
-        while (finishFlg)
+        while (finishFlg == false)
         {
+            Debug.Log("NOC");
             NOC++;
             foreach (var points in checkPoints)
             {
@@ -83,7 +89,6 @@ public class WayPointGraph_Y : MonoBehaviour
                 if (points == endPoint)
                 {
                     finishFlg = true;
-                    break;
                 }
                 foreach (var neighbors in wpScripts[points].NeiNums)
                 {
@@ -94,7 +99,9 @@ public class WayPointGraph_Y : MonoBehaviour
                 }
             }
             checkPoints = nextList.ToArray();
+            nextList = new List<int>();
         }
+        finishFlg = false;
         CreateRoute(endPoint);
     }
 
