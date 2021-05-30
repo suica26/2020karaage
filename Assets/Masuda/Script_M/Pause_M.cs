@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Pause_M : MonoBehaviour
 {
-    [SerializeField] private GameObject pausePanel,optionPanel;
+    [SerializeField] private GameObject pausePanel,optionPanel,how;
 
     void Start()
     {
@@ -17,6 +17,7 @@ public class Pause_M : MonoBehaviour
         {
             //ポーズのオンオフ
             pausePanel.SetActive(!pausePanel.activeSelf);
+            how.SetActive(!pausePanel.activeSelf);
 
             //ポーズ中に停止
             if (pausePanel.activeSelf)
@@ -29,6 +30,7 @@ public class Pause_M : MonoBehaviour
             {
                 Time.timeScale = 1f;
                 optionPanel.SetActive(false);
+                how.SetActive(false);
                 Cursor.visible = false;
             }
         }
