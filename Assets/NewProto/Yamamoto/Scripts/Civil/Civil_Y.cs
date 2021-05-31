@@ -61,10 +61,8 @@ public class Civil_Y : MonoBehaviour
                 other.gameObject.tag == "Chain" ||
                 other.gameObject.name == "fallAttackCircle(Clone)")
             {
-                Debug.Log("Damage!");
                 EscapeContagion();
                 criAtomSource.Play("Citizen00");
-
             }
         }
 

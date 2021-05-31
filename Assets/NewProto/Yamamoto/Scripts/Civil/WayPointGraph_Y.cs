@@ -27,6 +27,7 @@ public class WayPointGraph_Y : MonoBehaviour
         {
             wayPointsArray[i] = wayPoints.transform.GetChild(i).gameObject;
             wpScripts[i] = wayPointsArray[i].GetComponent<WayPoint_Y>();
+            //各WayPointにnumberを割り振り
             wpScripts[i].SetPointNum(i);
         }
 
@@ -58,6 +59,7 @@ public class WayPointGraph_Y : MonoBehaviour
     {
         routinTimer = 0f;
         civilNum++;
+        //セットしてあるPrefabの中から、Spawnする市民をランダムに選択
         int randomNum = Random.Range(0, scrSpawners.Count);
         CulDijkstra(scrSpawners[randomNum].PointNumber);
         scrSpawners[randomNum].SpawnCivil();
@@ -132,14 +134,14 @@ public class WayPointGraph_Y : MonoBehaviour
 
         while (!finish)
         {
-            if (wpScripts[before].beforePoint == -100)
+            if (wpScripts[before].BeforePoint == -100)
             {
                 finish = true;
             }
             else
             {
                 routeList.Add(wayPointsArray[before]);
-                before = wpScripts[before].beforePoint;
+                before = wpScripts[before].BeforePoint;
             }
         }
 
@@ -147,17 +149,12 @@ public class WayPointGraph_Y : MonoBehaviour
         route = routeList.ToArray();
     }
 
-    public void GetRoute(GameObject[] newRoute)
-    {
-        newRoute = route;
-    }
-
     public void ResetDijkstraMap()
     {
         foreach (var scr in wpScripts)
         {
             scr.ChangeRouteNumber(-1, -1);
-            NOC = -1;
+            NOC = 0;
         }
     }
 
