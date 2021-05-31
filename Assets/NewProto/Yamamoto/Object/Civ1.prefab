@@ -132,7 +132,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1254226410510067799}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -799,11 +799,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c2ed1fe5874af94499e574b3d72dd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  escapeFlg: 0
   escapeSpeed: 8
   walkSpeed: 4
   contagionRange: 20
   route: []
-  deleteTiming: 10
+  deleteTiming: 90
+  resetForwardTiming: 5
   wayPointGraph: {fileID: 0}
   avoidFlg: 0
   animator: {fileID: 747083478006564623}

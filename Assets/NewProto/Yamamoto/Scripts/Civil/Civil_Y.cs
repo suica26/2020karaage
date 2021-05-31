@@ -19,8 +19,10 @@ public class Civil_Y : MonoBehaviour
     private float rotSpeed;
     private float rotTime = 0f;
     //市民の内部時間
-    private float deleteTimer = 0f;
-    [SerializeField] private float deleteTiming = 60f;
+    private float deleteTimer;
+    private float timer;
+    [SerializeField] private float deleteTiming;
+    [SerializeField] private float resetForwardTiming;
     public WayPointGraph_Y wayPointGraph;
     public bool avoidFlg = false;
     [SerializeField] private Animator animator;
@@ -43,8 +45,11 @@ public class Civil_Y : MonoBehaviour
     void Update()
     {
         deleteTimer += Time.deltaTime;
+        timer += Time.deltaTime;
         //迷子(次のWayPointに到着できなかった)になった時に自分を消去する処理
         if (deleteTimer > deleteTiming) Death();
+        //進行方向を一定タイミングで再計算する
+        if (timer > resetForwardTiming) ResetNextForward();
 
         if (escapeFlg) Escape();
         else Walk();
@@ -141,7 +146,7 @@ public class Civil_Y : MonoBehaviour
         if (Vector3.Dot(transform.forward, nextForward) < 1f && !avoidFlg)
         {
             RotTimePlus();
-            //transform.forward = Vector3.Lerp(preForward, nextForward, rotTime);
+            transform.forward = Vector3.Lerp(preForward, nextForward, rotTime);
         }
     }
 
@@ -188,5 +193,11 @@ public class Civil_Y : MonoBehaviour
     {
         wayPointGraph.CivilNumDecrease();
         Destroy(gameObject);
+    }
+
+    private void ResetNextForward()
+    {
+        timer = 0f;
+        nextForward = GetVectorXZNormalized(route[routeNum].transform.position, transform.position);
     }
 }

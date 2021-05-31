@@ -9,7 +9,7 @@ public class WayPointGraph_Y : MonoBehaviour
     private WayPoint_Y[] wpScripts;
     private List<int> endPointNumbers;
     private List<SpawnerWaypoint_Y> scrSpawners;
-    private int NOC = 0;   //計算回数
+    private int NOC;   //計算回数
     public GameObject[] route;
 
     [SerializeField] private int civilMaxNum;
@@ -45,6 +45,8 @@ public class WayPointGraph_Y : MonoBehaviour
             //スポーン候補をリストに追加していく
             if (wps.spawnerPointFlg) scrSpawners.Add(wayPointsArray[wps.PointNumber].GetComponent<SpawnerWaypoint_Y>());
         }
+
+        ResetDijkstraMap();
     }
 
     private void Update()
@@ -93,16 +95,18 @@ public class WayPointGraph_Y : MonoBehaviour
 
         while (!finishFlg)
         {
-            Debug.Log("NOC = " + NOC);
             NOC++;
+            Debug.Log("NOC = " + NOC);
             for (int i = 0; i < checkPoints.Length; i++)
             {
+                //今回分の探索処理
                 wpScripts[checkPoints[i]].ChangeRouteNumber(NOC, beforeNums[i]);
                 if (checkPoints[i] == endPoint)
                 {
                     finishFlg = true;
                 }
-                foreach (var neighbors in wpScripts[checkPoints[i]].NeiNums)
+                //次回探索する分を作成
+                foreach (int neighbors in wpScripts[checkPoints[i]].NeiNums)
                 {
                     //すでに計算済みの物は再計算しないように
                     if (wpScripts[neighbors].RouteNumber < 0)
@@ -118,8 +122,6 @@ public class WayPointGraph_Y : MonoBehaviour
             nextNumList = new List<int>();
             checkPoints = nextList.ToArray();
             nextList = new List<int>();
-
-            break;
         }
 
         finishFlg = false;
