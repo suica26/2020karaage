@@ -3,7 +3,7 @@
     Properties
     {
 
-        _MainTex ("Select Texture", 2D) = "black" {}
+        _MainTex ("Select Texture", 2D) = "" {}
         _Ratio ("ratio", Range(0, 1)) = 0.1
     }
     
@@ -52,18 +52,16 @@
  
             fixed4 frag (v2f i) : SV_Target
             {
-                fixed radius = 0.5;
-                fixed r = distance(i.uv, fixed2(0.5,0.5));
+                fixed4 main = tex2D(_MainTex,i.uv);
                 float t = _Ratio + sin(_Time.w + i.uv.x * 8) / 40;                
 
                 if (i.uv.y < t)
                 {
                     return fixed4(.6, .6, .6, 0.2);
-                    
+                    clip(main - 0.5);
                 }
 
-                return smoothstep(radius, radius+0.02, r);
-                //return tex2D(_MainTex, i.uv);
+                return main;
                 //return step(radius, r);
             }
             ENDCG
