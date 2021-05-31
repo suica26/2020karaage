@@ -122,6 +122,12 @@ public class WayPointGraph_Y : MonoBehaviour
             nextNumList = new List<int>();
             checkPoints = nextList.ToArray();
             nextList = new List<int>();
+
+            if (NOC > 200)
+            {
+                Debug.Log("Infinite Loop Avoided!");
+                break;
+            }
         }
 
         finishFlg = false;
