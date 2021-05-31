@@ -6,17 +6,11 @@ public class WayPoint_Y : MonoBehaviour
 {
     public GameObject[] neighbor;
     public int[] NeiNums;
-    public int RouteNumber { get; private set; }
+    public int RouteNumber;
     public int PointNumber;
     public int BeforePoint;
     public bool endPointFlg;
     public bool spawnerPointFlg;
-
-    private void Start()
-    {
-        RouteNumber = -1;
-        BeforePoint = -1;
-    }
 
     public void SetNeiNum()
     {
