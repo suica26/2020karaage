@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Pause_M : MonoBehaviour
 {
-    [SerializeField] private GameObject pausePanel,optionPanel,how;
-
+    [SerializeField] private GameObject pausePanel, optionPanel, how;
+    private new CriAtomSource audio;
     void Start()
     {
         pausePanel.SetActive(false);
+        audio = (CriAtomSource)GetComponent("CriAtomSource");
     }
 
     void Update()
@@ -18,6 +19,7 @@ public class Pause_M : MonoBehaviour
             //ポーズのオンオフ
             pausePanel.SetActive(!pausePanel.activeSelf);
             how.SetActive(!pausePanel.activeSelf);
+            audio.Play("System_Decision");
 
             //ポーズ中に停止
             if (pausePanel.activeSelf)
