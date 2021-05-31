@@ -126,6 +126,8 @@ public class ObjectStateManagement_Y : MonoBehaviour
             {
                 Substitution();
             }
+
+            DeathCount();
             notLive = true;
         }
 
@@ -198,7 +200,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
                     case 6: contactSoundName = "BuildingContact00"; break;
                     case 7: contactSoundName = "KickTree00"; break;
                     case 8: contactSoundName = "Contact_FireHydrant00"; break;
-                    default: contactSoundName = "TrachcanContact00"; break; 
+                    default: contactSoundName = "TrachcanContact00"; break;
                 }
 
                 criAtomSource.cueName = contactSoundName;
@@ -314,4 +316,17 @@ public class ObjectStateManagement_Y : MonoBehaviour
         scr.death = true;
     }
 
+    private void DeathCount()
+    {
+        if (this.gameObject.tag == "Small")
+        {
+            //山本加筆　元:player.GetComponent<Stage1_Mission_M>().SmallNumberPlus();
+            playerScrS1M.SmallNumberPlus();
+        }
+        else if (this.gameObject.tag == "Big")
+        {
+            //山本加筆　元:player.GetComponent<Stage1_Mission_M>().BigNumberPlus();
+            playerScrS1M.BigNumberPlus();
+        }
+    }
 }

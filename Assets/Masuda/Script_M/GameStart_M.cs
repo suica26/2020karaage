@@ -8,19 +8,11 @@ public class GameStart_M : MonoBehaviour
     //タイトル画面でボタンをクリックするとゲーム画面を読み込みます
     //シーンGameStartのButtonに張っ付いてます
     [SerializeField] public GameObject load;
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
+    public string sceneName;
 
     public void OnStart()
     {
         load.SetActive(true);
-        SceneManager.LoadScene("stage1");
+        SceneManager.LoadScene(sceneName);
     }
 }

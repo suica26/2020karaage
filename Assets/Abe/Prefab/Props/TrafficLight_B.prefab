@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 3124691085480572052}
   m_Layer: 0
   m_Name: TrafficLight_B
-  m_TagString: Untagged
+  m_TagString: Small
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -142,26 +142,21 @@ MonoBehaviour:
   tier_WalkAttack: 2
   tier_ChargeKick: 1
   divideObject: {fileID: 0}
-  AttackSound: {fileID: 8300000, guid: 70a5e9b67ec89e84eb71df41da6e577a, type: 3}
-  ContactSound: {fileID: 8300000, guid: ccd8035a8244f2347a152a0086899149, type: 3}
   HP: 500
   kickMag: 1
   blastMag: 1.2
   cutterMag: 1.5
-  chargeKickMag: 2
   fallAttackMag: 1
   breakScore: 1000
   breakPoint: 2
+  objectID: 0
+  notLive: 0
   BreakEffect: {fileID: 2714036437048776495, guid: c1b6977c8b92845e3a1103d68f2de786,
     type: 3}
-  ExplosionSound: {fileID: 8300000, guid: 09e9e3f4d1c5c98449d7cf372877a4ea, type: 3}
-  CollapseSound: {fileID: 8300000, guid: c8609e1c65e54fb4ab552b0230f73bfe, type: 3}
   deleteTime: 3
   Torque: 3
   Power: 3
-  chainProbability: 5
   chainDamage: 30
-  superChainDamage: 500
 --- !u!114 &7628322967625085260
 MonoBehaviour:
   m_ObjectHideFlags: 0

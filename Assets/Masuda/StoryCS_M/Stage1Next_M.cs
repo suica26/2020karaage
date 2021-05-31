@@ -10,11 +10,6 @@ public class Stage1Next_M : MonoBehaviour
         panel.SetActive(false);
     }
 
-    void Update()
-    {
-        
-    }
-
     public void OnClick()
     {
         panel.SetActive(true);

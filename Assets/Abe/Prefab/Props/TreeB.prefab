@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 734236840649370226}
   m_Layer: 0
   m_Name: TreeB
-  m_TagString: Untagged
+  m_TagString: Small
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -80,25 +80,20 @@ MonoBehaviour:
   tier_WalkAttack: 1
   tier_ChargeKick: 0
   divideObject: {fileID: 0}
-  AttackSound: {fileID: 8300000, guid: ccd8035a8244f2347a152a0086899149, type: 3}
-  ContactSound: {fileID: 0}
   HP: 300
   kickMag: 0.7
   blastMag: 0.7
   cutterMag: 1.5
-  chargeKickMag: 2
   fallAttackMag: 1
   breakScore: 500
   breakPoint: 1
+  objectID: 0
+  notLive: 0
   BreakEffect: {fileID: 0}
-  ExplosionSound: {fileID: 8300000, guid: abc42f36fe5c4c240a548f5df50a0ecd, type: 3}
-  CollapseSound: {fileID: 0}
   deleteTime: 3
   Torque: 1
   Power: 1
-  chainProbability: 5
   chainDamage: 30
-  superChainDamage: 300
 --- !u!114 &1806165296661878783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,6 +205,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2139219006498568313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 3810876711140619533}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65d75e9e87665f948849d6408090c755, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildHP: 0
+  buildLife: 0
 --- !u!1001 &3810876711140619533
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -221,6 +230,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: tree (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5767614945766714562, guid: 57c0f367bb0669a4db202efe65c72ad4,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 5819025525724764742, guid: 57c0f367bb0669a4db202efe65c72ad4,
         type: 3}

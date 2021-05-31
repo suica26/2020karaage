@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -3618,6 +3618,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   load: {fileID: 696137275}
+  sceneName: prologue01
 --- !u!1 &581184389
 GameObject:
   m_ObjectHideFlags: 0
@@ -4836,7 +4837,7 @@ RectTransform:
   - {fileID: 515899707}
   - {fileID: 777443269}
   m_Father: {fileID: 988414593}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -5058,8 +5059,8 @@ RectTransform:
   - {fileID: 625764727}
   - {fileID: 453257187}
   - {fileID: 1111820000}
-  - {fileID: 933692886}
   - {fileID: 1097561728}
+  - {fileID: 933692886}
   - {fileID: 2135402948}
   - {fileID: 696137276}
   m_Father: {fileID: 0}
@@ -5329,7 +5330,7 @@ RectTransform:
   - {fileID: 896653457}
   - {fileID: 506842428}
   m_Father: {fileID: 988414593}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -11143,6 +11144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   load: {fileID: 696137275}
+  sceneName: prologue01
 --- !u!114 &2131773322
 MonoBehaviour:
   m_ObjectHideFlags: 0
