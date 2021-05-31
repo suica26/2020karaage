@@ -7,7 +7,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
     [Range(0, 4), SerializeField] private int tier_WalkAttack;
     [Range(0, 4), SerializeField] private int tier_ChargeKick;
     public GameObject divideObject = null;
-    private string attackSoundName, contactSoundName;
+    private string attackSoundName, contactSoundName, ExplosionSoundName;
     public int HP;                  //Inspector上から設定できます。
     [Header("ダメージ倍率")]
     public float kickMag;             //キックのダメージ倍率
@@ -83,6 +83,23 @@ public class ObjectStateManagement_Y : MonoBehaviour
             GameObject.Find("Canvas").GetComponent<Parameters_R>().ScoreManager(breakScore);
             scrKick.chargePoint += breakPoint;
 
+            switch (objectID)
+            {
+                case 0: ExplosionSoundName = "BuildingExplosion00"; break;
+                case 1: ExplosionSoundName = "PoleExplosion00"; break;
+                case 2: ExplosionSoundName = "Trashcan00"; break;
+                case 3: ExplosionSoundName = "PoleExplosion00"; break;
+                case 4: ExplosionSoundName = "BuildingExplosion00"; break;
+                case 5: ExplosionSoundName = "CarExplosion00"; break;
+                case 6: ExplosionSoundName = "GasExplosion00"; break;
+                case 7: ExplosionSoundName = "FallenTree00"; break;
+                case 8: ExplosionSoundName = "FireHydrant00"; break;
+                default: ExplosionSoundName = "PoleExplosion00"; break;
+            }
+
+            criAtomSource.cueName = ExplosionSoundName;
+            criAtomSource.Play(ExplosionSoundName);
+
             //M 
             if (tag == "Small")
             {
@@ -111,6 +128,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
             }
             notLive = true;
         }
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -156,11 +174,14 @@ public class ObjectStateManagement_Y : MonoBehaviour
         if (damage)
         {
             /// <summary>
-            /// 1 木
-            /// 2 消火栓
+            /// 1 信号機
+            /// 2 ゴミ箱
             /// 3 マンホール
-            /// 4 建物
+            /// 4 建物 0
             /// 5 車
+            /// 6 ガスタンク
+            /// 7　木
+            /// 8 消火栓
             /// </summary>
 
             //おはようブラストとカッターの時
@@ -168,25 +189,35 @@ public class ObjectStateManagement_Y : MonoBehaviour
             {
                 switch (objectID)
                 {
-                    case 2: contactSoundName = "Trashcan00"; break;
-                    case 3: contactSoundName = "Trashcan00"; break;
+                    case 0: contactSoundName = "BuildingContact00"; break;
+                    case 1: contactSoundName = "PoleContract00"; break;
+                    case 2: contactSoundName = "TrachcanContact00"; break;
+                    case 3: contactSoundName = "TrachcanContact00"; break;
                     case 4: contactSoundName = "BuildingContact00"; break;
-                    case 5: contactSoundName = "CarExplosion00"; break;
-                    default: contactSoundName = "BuildingExplosion00"; break;
+                    case 5: contactSoundName = "CarContact00"; break;
+                    case 6: contactSoundName = "BuildingContact00"; break;
+                    case 7: contactSoundName = "KickTree00"; break;
+                    case 8: contactSoundName = "Contact_FireHydrant00"; break;
+                    default: contactSoundName = "TrachcanContact00"; break; 
                 }
 
                 criAtomSource.cueName = contactSoundName;
-                criAtomSource.Play("BuildingContact00");
+                criAtomSource.Play(contactSoundName);
             }
             else //それ以外
             {
                 switch (objectID)
                 {
-                    case 2: attackSoundName = "GasExplosion00"; break;
-                    case 3: attackSoundName = "Trashcan00"; break;
-                    case 4: attackSoundName = "BuildingExplosion00"; break;
-                    case 5: attackSoundName = "CarExplosion00"; break;
-                    default: attackSoundName = "BuildingExplosion00"; break;
+                    case 0: attackSoundName = "BuildingContact00"; break;
+                    case 1: attackSoundName = "PoleContract00"; break;
+                    case 2: attackSoundName = "TrachcanContact00"; break;
+                    case 3: attackSoundName = "TrachcanContact00"; break;
+                    case 4: attackSoundName = "BuildingContact00"; break;
+                    case 5: attackSoundName = "CarContact00"; break;
+                    case 6: attackSoundName = "BuildingContact00"; break;
+                    case 7: attackSoundName = "KickTree00"; break;
+                    case 8: attackSoundName = "Contact_FireHydrant00"; break;
+                    default: attackSoundName = "TrachcanContact00"; break;
                 }
 
                 criAtomSource.cueName = attackSoundName;
@@ -208,11 +239,14 @@ public class ObjectStateManagement_Y : MonoBehaviour
 
             switch (objectID)
             {
-                case 2: attackSoundName = "Trashcan00"; break;
-                case 3: attackSoundName = "Trashcan00"; break;
-                case 4: attackSoundName = "BuildingExplosion00"; break;
-                case 5: attackSoundName = "CarExplosion00"; break;
-                default: attackSoundName = "BuildingExplosion00"; break;
+                case 0: attackSoundName = "BuildingContact00"; break;
+                case 2: attackSoundName = "TrashcanContact00"; break;
+                case 3: attackSoundName = "TrashcanContact00"; break;
+                case 4: attackSoundName = "BuildingContact00"; break;
+                case 5: attackSoundName = "CarContact00"; break;
+                case 6: attackSoundName = "BuildingContact00"; break;
+                case 7: attackSoundName = "KickTree00"; break;
+                default: attackSoundName = "TrashcanContact00"; break;
             }
 
             criAtomSource.cueName = attackSoundName;
@@ -279,4 +313,5 @@ public class ObjectStateManagement_Y : MonoBehaviour
         scr.chainDamage = chainDamage;
         scr.death = true;
     }
+
 }

@@ -119,6 +119,7 @@ public class CharaMoveRigid_R : MonoBehaviour
                 {
                     //audioSourceWalk.PlayOneShot(walkClip[scrEvo.EvolutionNum]);
                     audio.Play("footsteps00");
+                    audio.Play("Walk_Voice00");
 
                 }
                 scrAnim.SetAnimator(Transition_R.Anim.WALK, true);
@@ -150,12 +151,14 @@ public class CharaMoveRigid_R : MonoBehaviour
 
                 }
                 scrAnim.SetAnimator(Transition_R.Anim.WALK, false);
+                audio.Play("Idle_Voice00");
             }
 
             //ジャンプした際の処理
             if (Input.GetButtonDown("Jump"))
             {
                 //audioSourceCommon.PlayOneShot(JumpClip);
+                audio.Play("Idle_Voice00");
                 audio.Play("Jump00");
                 scrAnim.SetAnimator(Transition_R.Anim.JUMP, true);
                 rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
