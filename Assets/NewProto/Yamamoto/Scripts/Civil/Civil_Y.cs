@@ -5,7 +5,7 @@ using UnityEngine;
 public class Civil_Y : MonoBehaviour
 {
     //市民を実装する際には、必ずTagでCivilを設定すること
-    private bool escapeFlg = false;
+    public bool escapeFlg = false;
     public float escapeSpeed;
     public float walkSpeed;
     public float contagionRange;
@@ -24,8 +24,7 @@ public class Civil_Y : MonoBehaviour
     public WayPointGraph_Y wayPointGraph;
     public bool avoidFlg = false;
     [SerializeField] private Animator animator;
-    private string walkStr;
-    private string runStr;
+    private string escapeStr = "isEscape";
 
     //ADX
     private CriAtomSource criAtomSource;
@@ -62,10 +61,8 @@ public class Civil_Y : MonoBehaviour
                 other.gameObject.tag == "Chain" ||
                 other.gameObject.name == "fallAttackCircle(Clone)")
             {
-                Debug.Log("Damage!");
                 EscapeContagion();
                 criAtomSource.Play("Citizen00");
-
             }
         }
 
@@ -121,6 +118,7 @@ public class Civil_Y : MonoBehaviour
     public void Escape()
     {
         Debug.Log("Escape!");
+        animator.SetBool(escapeStr, true);
         if (!escapeFlg) escapeFlg = true;
         if (!avoidFlg)
         {

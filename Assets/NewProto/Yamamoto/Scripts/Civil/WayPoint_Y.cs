@@ -5,17 +5,17 @@ using UnityEngine;
 public class WayPoint_Y : MonoBehaviour
 {
     public GameObject[] neighbor;
-    public int[] NeiNums { get; private set; }
+    public int[] NeiNums;
     public int RouteNumber { get; private set; }
-    public int PointNumber { get; private set; }
-    public int beforePoint { get; private set; }
+    public int PointNumber;
+    public int BeforePoint;
     public bool endPointFlg;
     public bool spawnerPointFlg;
 
     private void Start()
     {
         RouteNumber = -1;
-        beforePoint = -1;
+        BeforePoint = -1;
     }
 
     public void SetNeiNum()
@@ -30,7 +30,7 @@ public class WayPoint_Y : MonoBehaviour
     public void ChangeRouteNumber(int num, int before)
     {
         RouteNumber = num;
-        beforePoint = before;
+        BeforePoint = before;
     }
     public void SetPointNum(int num)
     {
