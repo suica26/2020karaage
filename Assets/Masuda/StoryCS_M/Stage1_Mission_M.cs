@@ -11,7 +11,7 @@ public class Stage1_Mission_M : MonoBehaviour
     [SerializeField] public int smallNum, bigNum;
     [SerializeField] public int smallBorder1, smallBorder2, smallBorder3,
                                 bigBorder1, bigBorder2, bigBorder3;
-    private bool check = false, border = false;
+    private bool check = false, border = false, Language;
     private string txtData;
     private string[] splitText;
     [SerializeField] Animation missionSlide;
@@ -25,6 +25,7 @@ public class Stage1_Mission_M : MonoBehaviour
 
     void Update()
     {
+        Language = ChangeLanguage.getLanguage();//
         Vector3 playerPos = player.transform.position;
         Vector3 comPos = company.transform.position;
         float dis = Vector3.Distance(playerPos, comPos);
@@ -104,6 +105,11 @@ public class Stage1_Mission_M : MonoBehaviour
     public void SmallNumberPlus()
     {
         smallNum ++;
+    }
+
+    public void Japanese()
+    {
+       
     }
 
     /*public void OnTriggerEnter(Collider other)

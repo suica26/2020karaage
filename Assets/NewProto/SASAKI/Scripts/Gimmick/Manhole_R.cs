@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class Manhole_R : BlowerGimmickBase
 {
+    private new CriAtomSource audio;
     private GameObject _nullCheckObj;
+
+    private void Start()
+    {
+        audio = (CriAtomSource)GetComponent("CriAtomSource");
+    }
     private void OnTriggerEnter(Collider other)
     {
         //マンホールのギミック        
@@ -12,6 +18,7 @@ public class Manhole_R : BlowerGimmickBase
         {
             _nullCheckObj = InstanceObject();
             InstanceEffect();
+            audio.Play("Manhole00");
         }
     }
 }

@@ -598,6 +598,7 @@ GameObject:
   - component: {fileID: -3841543393369260767}
   - component: {fileID: 3065434737698102111}
   - component: {fileID: 1919600194428350488}
+  - component: {fileID: 4482594130916019210}
   m_Layer: 0
   m_Name: 1Brown6F
   m_TagString: Untagged
@@ -744,9 +745,9 @@ MonoBehaviour:
   fallAttackMag: 0.8
   breakScore: 400000
   breakPoint: 10
-  objectID: 0
+  objectID: 4
   notLive: 0
-  BreakEffect: {fileID: 2714036437048776495, guid: c1b6977c8b92845e3a1103d68f2de786,
+  BreakEffect: {fileID: 4267790152953556362, guid: 76dd1b57ce27a487db64614c36a17924,
     type: 3}
   deleteTime: 3
   Torque: 10
@@ -796,6 +797,29 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6, y: 19.31, z: 10}
   m_Center: {x: 0, y: 9.6, z: 0}
+--- !u!114 &4482594130916019210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3056265930575292414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: BuildingExplosion00
+  _cueSheet: Explosion
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &3672270427738871639
 GameObject:
   m_ObjectHideFlags: 0
