@@ -504,6 +504,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6519286045272539708}
   - component: {fileID: 5917442053069368688}
+  - component: {fileID: 1946416489287011982}
   m_Layer: 0
   m_Name: civ2
   m_TagString: Untagged
@@ -542,6 +543,25 @@ CapsuleCollider:
   m_Height: 1.5
   m_Direction: 1
   m_Center: {x: 0, y: 0.75, z: 0}
+--- !u!95 &1946416489287011982
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4467662052760198873}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 88e8c89c8bc20e64189a7974fbe42740, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4674988312921368242
 GameObject:
   m_ObjectHideFlags: 0
@@ -1107,6 +1127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c2ed1fe5874af94499e574b3d72dd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  escapeFlg: 0
   escapeSpeed: 8
   walkSpeed: 4
   contagionRange: 20
@@ -1114,7 +1135,7 @@ MonoBehaviour:
   deleteTiming: 10
   wayPointGraph: {fileID: 0}
   avoidFlg: 0
-  animator: {fileID: 0}
+  animator: {fileID: 1946416489287011982}
 --- !u!114 &2322232715065583286
 MonoBehaviour:
   m_ObjectHideFlags: 0
