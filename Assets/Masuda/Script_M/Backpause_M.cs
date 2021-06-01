@@ -10,12 +10,6 @@ public class Backpause_M : MonoBehaviour
     {
         audio = (CriAtomSource)GetComponent("CriAtomSource");
     }
-
-    void Update()
-    {
-        
-    }
-
     public void OnClick()
     {
         audio.Play("System_Cancel");

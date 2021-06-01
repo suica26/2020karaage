@@ -15,11 +15,6 @@ public class ChangeLanguage : MonoBehaviour
         s1M = GetComponent<Stage1_Mission_M>();
     }
 
-    void Update()
-    {
-        
-    }
-
     public void OnClick()
     {
         if (je == 0)
@@ -32,7 +27,7 @@ public class ChangeLanguage : MonoBehaviour
             japanese = false;
             Debug.Log("eigo");//
         }
-        
+
     }
 
     public static bool getLanguage()
