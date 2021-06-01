@@ -26,12 +26,14 @@ public class Stage1_BuildingBreak_M : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         //テスト
         if (Input.GetKeyDown(KeyCode.T))
         {
             //山本加筆　元:player.GetComponent<Stage1_Mission_M>().BigNumberPlus();
             scrStage1Mission.BigNumberPlus();
         }
+        */
 
         if (buildHP <= 0 && !buildLife)
         {
