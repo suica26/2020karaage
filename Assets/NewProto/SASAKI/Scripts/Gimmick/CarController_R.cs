@@ -5,7 +5,8 @@ using UnityEngine;
 public class CarController_R : MonoBehaviour
 {
     [SerializeField] private int maxCarNum;
-    [SerializeField] private GameObject preCar;
+    //山本加筆　複数のモデルを入れられるように配列化しました
+    [SerializeField] private GameObject[] preCar;
     [SerializeField] private int minSpeed;
     [SerializeField] private int maxSpeed;
 
@@ -21,15 +22,15 @@ public class CarController_R : MonoBehaviour
         endWaypoints = new List<GameObject>();
         carList = new List<GameObject>();
 
-        foreach(GameObject waypoint in waypoints)
+        foreach (GameObject waypoint in waypoints)
         {
-            if(waypoint.GetComponent<CarWaypoint_R>().endWaypoint)
+            if (waypoint.GetComponent<CarWaypoint_R>().endWaypoint)
             {
                 endWaypoints.Add(waypoint);
             }
         }
 
-        for(int i = 0; i < maxCarNum; i++)
+        for (int i = 0; i < maxCarNum; i++)
         {
             CarInstantiate();
         }
@@ -38,9 +39,9 @@ public class CarController_R : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for(int i = 0; i < carList.Count; i++)
+        for (int i = 0; i < carList.Count; i++)
         {
-            if(carList[i] == null)
+            if (carList[i] == null)
             {
                 carList.RemoveAt(i);
                 CarInstantiate();
@@ -51,7 +52,8 @@ public class CarController_R : MonoBehaviour
     //車を生成する
     public void CarInstantiate()
     {
-        var Car = Instantiate(preCar);
+        //山本加筆　モデルを複数の中からランダムに選ぶように変更
+        var Car = Instantiate(preCar[Random.Range(0, preCar.Length)]);
         var waypoint = endWaypoints[Random.Range(0, endWaypoints.Count)];
         Car.GetComponent<Car_R>().Init(waypoint, Random.Range(minSpeed, maxSpeed));
 
@@ -62,7 +64,7 @@ public class CarController_R : MonoBehaviour
     private GameObject[] GetAllChildObject()
     {
         GameObject[] objects = new GameObject[transform.childCount];
-        for(int i = 0; i < transform.childCount; i++)
+        for (int i = 0; i < transform.childCount; i++)
         {
             objects[i] = transform.GetChild(i).gameObject;
         }
