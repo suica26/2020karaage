@@ -4,18 +4,12 @@ using UnityEngine;
 
 public class BackThisObj_M : MonoBehaviour
 {
-    [SerializeField] GameObject it,it2;
+    [SerializeField] GameObject it, it2;
     [SerializeField] public int judge2;
     private new CriAtomSource audio;
     void Start()
     {
         audio = (CriAtomSource)GetComponent("CriAtomSource");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void OnClick()

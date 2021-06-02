@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -2110835296133084846}
   - component: {fileID: 1806165296661878783}
   - component: {fileID: 734236840649370226}
+  - component: {fileID: -1366896790936368580}
   m_Layer: 0
   m_Name: TreeB
   m_TagString: Small
@@ -205,20 +206,29 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2139219006498568313
+--- !u!114 &-1366896790936368580
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 3810876711140619533}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 6676714351667163613}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65d75e9e87665f948849d6408090c755, type: 3}
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildHP: 0
-  buildLife: 0
+  _playOnStart: 0
+  _cueName: 
+  _cueSheet: 
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1001 &3810876711140619533
 PrefabInstance:
   m_ObjectHideFlags: 0
