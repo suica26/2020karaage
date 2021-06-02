@@ -77,7 +77,6 @@ public class ObjectStateManagement_Y : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (HP <= 0 && !notLive)//HPがなくなると、分割オブジェクトに差し替え発生
         {
             GameObject.Find("Canvas").GetComponent<Parameters_R>().ScoreManager(breakScore);
@@ -101,18 +100,6 @@ public class ObjectStateManagement_Y : MonoBehaviour
             {
                 criAtomSource.cueName = ExplosionSoundName;
                 criAtomSource.Play(ExplosionSoundName);
-            }
-
-            //M 
-            if (tag == "Small")
-            {
-                playerScrS1M.SmallNumberPlus();
-                //smallObj++;
-            }
-            else if (tag == "Big")
-            {
-                playerScrS1M.BigNumberPlus();
-                //bigObj++;
             }
 
             if (scrFood != null)
