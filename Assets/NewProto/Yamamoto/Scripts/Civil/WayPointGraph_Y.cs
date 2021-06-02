@@ -123,7 +123,7 @@ public class WayPointGraph_Y : MonoBehaviour
             checkPoints = nextList.ToArray();
             nextList = new List<int>();
 
-            if (NOC > 200)
+            if (NOC > 100)
             {
                 Debug.Log("Infinite Loop Avoided!");
                 break;

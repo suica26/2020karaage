@@ -27,7 +27,7 @@ public class Car_R : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(carMoving)
+        if (carMoving)
         {
             // 交差点情報更新
             nowWaypoint = nextWaypoint;
@@ -40,7 +40,7 @@ public class Car_R : MonoBehaviour
             SetPosInit(nowWaypoint.transform.position);
             transform.position = targetPos;
 
-            if(nextWaypoint.GetComponent<CarWaypoint_R>().uTurn)
+            if (nextWaypoint.GetComponent<CarWaypoint_R>().uTurn)
             {
 
             }
@@ -54,14 +54,14 @@ public class Car_R : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(carMoving)
+        if (carMoving)
         {
             RaycastHit[] hits = Physics.RaycastAll(transform.position + transform.forward * 0.5f, transform.forward, 5.0f);
-            foreach(var obj in hits)
+            foreach (var obj in hits)
             {
                 if (obj.transform.name == "Car(Clone)")
                     return;
-            }    
+            }
             CarMove();
         }
     }
@@ -76,7 +76,7 @@ public class Car_R : MonoBehaviour
             {
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation((newPos - transform.position) * 10), rotSpeed * Time.deltaTime);
             }
-            transform.position = newPos;  
+            transform.position = newPos;
         }
         else                                                     // 移動先との距離が規定値より近いとき
         {
@@ -90,7 +90,7 @@ public class Car_R : MonoBehaviour
             }
 
             // Uターンの際に情報の更新を一回の移動分止める(これをしないと経路情報がバグる)
-            if((afterNextWaypoint.GetComponent<CarWaypoint_R>().uTurn || nextWaypoint.GetComponent<CarWaypoint_R>().uTurn) && !isUturn)
+            if ((afterNextWaypoint.GetComponent<CarWaypoint_R>().uTurn || nextWaypoint.GetComponent<CarWaypoint_R>().uTurn) && !isUturn)
                 isUturn = true;
             else
             {
@@ -125,7 +125,8 @@ public class Car_R : MonoBehaviour
                 }
             }
 
-            Debug.Log("CAR WAYPOINT LOG: " + nowWaypoint + " -> " + nextWaypoint + " -> " + afterNextWaypoint);
+            //山本加筆　ちょっとすごい頻度でDebug.Logに出てきちゃうので、コメントアウトしときます
+            //Debug.Log("CAR WAYPOINT LOG: " + nowWaypoint + " -> " + nextWaypoint + " -> " + afterNextWaypoint);
         }
     }
 

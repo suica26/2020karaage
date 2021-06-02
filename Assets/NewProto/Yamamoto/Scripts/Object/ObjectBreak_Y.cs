@@ -209,8 +209,11 @@ public class ObjectBreak_Y : MonoBehaviour
         rb.AddForce(F, ForceMode.Impulse);
         rb.AddTorque(TorquePower, ForceMode.Impulse);
 
-        criAtomSource.cueName = cueName_BreakSound;
-        criAtomSource.Play();
+        if (criAtomSource != null)
+        {
+            criAtomSource.cueName = cueName_BreakSound;
+            criAtomSource.Play();
+        }
     }
 
     private void FallenCollapse(GameObject obj, Vector3 P)
