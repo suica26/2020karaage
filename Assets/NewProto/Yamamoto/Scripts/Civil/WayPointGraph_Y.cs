@@ -6,11 +6,16 @@ public class WayPointGraph_Y : MonoBehaviour
 {
     public GameObject wayPoints;
     private GameObject[] wayPointsArray;
-    public GameObject[] endWayPoints;
     private WayPoint_Y[] wpScripts;
-    private int[] endPointNumbers;
-    private int NOC = 0;   //計算回数
-    private GameObject[] route;
+    private List<int> endPointNumbers;
+    private List<SpawnerWaypoint_Y> scrSpawners;
+    private int NOC;   //計算回数
+    public GameObject[] route;
+
+    [SerializeField] private int civilMaxNum;
+    public int civilNum;
+    public float routinTimer;
+    public float spawnTime;
 
     // Start is called before the first frame update
     void Start()
@@ -22,54 +27,110 @@ public class WayPointGraph_Y : MonoBehaviour
         {
             wayPointsArray[i] = wayPoints.transform.GetChild(i).gameObject;
             wpScripts[i] = wayPointsArray[i].GetComponent<WayPoint_Y>();
+            //各WayPointにnumberを割り振り
             wpScripts[i].SetPointNum(i);
         }
+
+        //リスト初期化
+        endPointNumbers = new List<int>();
+        scrSpawners = new List<SpawnerWaypoint_Y>();
 
         //隣接点の情報を取得
         foreach (var wps in wpScripts)
         {
-            wps.GetNeiNum();
+            //隣接点情報を各WayPointにセット
+            wps.SetNeiNum();
+            //終着点候補をリストに追加していく
+            if (wps.endPointFlg) endPointNumbers.Add(wps.PointNumber);
+            //スポーン候補をリストに追加していく
+            if (wps.spawnerPointFlg) scrSpawners.Add(wayPointsArray[wps.PointNumber].GetComponent<SpawnerWaypoint_Y>());
         }
 
-        //終着点候補を配列化
-        for (int i = 0; i < endWayPoints.Length; i++)
-        {
-            endPointNumbers[i] = endWayPoints[i].GetComponent<WayPoint_Y>().PointNumber;
-        }
+        ResetDijkstraMap();
+    }
+
+    private void Update()
+    {
+        //一度に存在する市民の数を制御
+        if (civilNum < civilMaxNum) routinTimer += Time.deltaTime;
+        //スポーン処理
+        if (routinTimer >= spawnTime) Spawn();
+    }
+
+    private void Spawn()
+    {
+        routinTimer = 0f;
+        civilNum++;
+        //セットしてあるPrefabの中から、Spawnする市民をランダムに選択
+        int randomNum = Random.Range(0, scrSpawners.Count);
+        CulDijkstra(scrSpawners[randomNum].PointNumber);
+        scrSpawners[randomNum].SpawnCivil();
     }
 
     public void CulDijkstra(int startPoint)
     {
-        int endPoint = endPointNumbers[Random.Range(0, endPointNumbers.Length)];
-        while (endPoint == startPoint) endPoint = endPointNumbers[Random.Range(0, endPointNumbers.Length)];
+        int endPoint;
+        do
+        {
+            endPoint = endPointNumbers[Random.Range(0, endPointNumbers.Count)];
+        } while (endPoint == startPoint);
 
-        bool finishFlg = false;
         var nextList = new List<int>();
+        var nextNumList = new List<int>();
         int[] checkPoints;
+        bool finishFlg = false;
 
         //開始地点(スポーン地点)の設定
         wpScripts[startPoint].ChangeRouteNumber(0, -100);
         checkPoints = wpScripts[startPoint].NeiNums;
-        while (finishFlg)
+
+        //beforeポイントの記録用配列とリストの宣言＆初期化
+        for (int i = 0; i < checkPoints.Length; i++)
+        {
+            nextNumList.Add(startPoint);
+        }
+        //beforePoint配列を次のものにして、リストのほうは初期化
+        int[] beforeNums = nextNumList.ToArray();
+        nextNumList = new List<int>();
+
+        while (!finishFlg)
         {
             NOC++;
-            foreach (var points in checkPoints)
+            Debug.Log("NOC = " + NOC);
+            for (int i = 0; i < checkPoints.Length; i++)
             {
-                wpScripts[points].ChangeRouteNumber(NOC, points);
-                if (points == endPoint)
+                //今回分の探索処理
+                wpScripts[checkPoints[i]].ChangeRouteNumber(NOC, beforeNums[i]);
+                if (checkPoints[i] == endPoint)
                 {
                     finishFlg = true;
-                    break;
                 }
-                foreach (var neighbors in wpScripts[points].NeiNums)
+                //次回探索する分を作成
+                foreach (int neighbors in wpScripts[checkPoints[i]].NeiNums)
                 {
+                    //すでに計算済みの物は再計算しないように
                     if (wpScripts[neighbors].RouteNumber < 0)
                     {
                         nextList.Add(neighbors);
+                        nextNumList.Add(checkPoints[i]);
                     }
                 }
             }
+
+            //配列とリストを次のものに更新
+            beforeNums = nextNumList.ToArray();
+            nextNumList = new List<int>();
+            checkPoints = nextList.ToArray();
+            nextList = new List<int>();
+
+            if (NOC > 100)
+            {
+                Debug.Log("Infinite Loop Avoided!");
+                break;
+            }
         }
+
+        finishFlg = false;
         CreateRoute(endPoint);
     }
 
@@ -79,16 +140,16 @@ public class WayPointGraph_Y : MonoBehaviour
         var routeList = new List<GameObject>();
         int before = endPoint;
 
-        while (finish)
+        while (!finish)
         {
-            if (wpScripts[before].beforePoint == -100)
+            if (wpScripts[before].BeforePoint == -100)
             {
                 finish = true;
             }
             else
             {
                 routeList.Add(wayPointsArray[before]);
-                before = wpScripts[before].beforePoint;
+                before = wpScripts[before].BeforePoint;
             }
         }
 
@@ -96,17 +157,17 @@ public class WayPointGraph_Y : MonoBehaviour
         route = routeList.ToArray();
     }
 
-    public void GetRoute(GameObject[] newRoute)
-    {
-        newRoute = route;
-    }
-
     public void ResetDijkstraMap()
     {
         foreach (var scr in wpScripts)
         {
             scr.ChangeRouteNumber(-1, -1);
-            NOC = -1;
+            NOC = 0;
         }
+    }
+
+    public void CivilNumDecrease()
+    {
+        civilNum--;
     }
 }

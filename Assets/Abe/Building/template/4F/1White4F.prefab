@@ -344,9 +344,10 @@ GameObject:
   - component: {fileID: 4680361415017247639}
   - component: {fileID: -1800752543948885792}
   - component: {fileID: -150783845278340371}
+  - component: {fileID: 6976380437116126694}
   m_Layer: 0
   m_Name: 1White4F
-  m_TagString: Untagged
+  m_TagString: Big
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -387,26 +388,21 @@ MonoBehaviour:
   tier_WalkAttack: 3
   tier_ChargeKick: 1
   divideObject: {fileID: 0}
-  AttackSound: {fileID: 8300000, guid: abc42f36fe5c4c240a548f5df50a0ecd, type: 3}
-  ContactSound: {fileID: 8300000, guid: 113f5ebf54c0069488819975ac9f88a2, type: 3}
   HP: 1500
   kickMag: 0.7
   blastMag: 3.5
   cutterMag: 1
-  chargeKickMag: 3
   fallAttackMag: 1
   breakScore: 200000
   breakPoint: 5
+  objectID: 0
+  notLive: 0
   BreakEffect: {fileID: 2714036437048776495, guid: c1b6977c8b92845e3a1103d68f2de786,
     type: 3}
-  ExplosionSound: {fileID: 8300000, guid: e454532e8e33d5d4cb74819fbd7d415e, type: 3}
-  CollapseSound: {fileID: 8300000, guid: 4bec759f4d32b044fb76a940aca32d43, type: 3}
   deleteTime: 3
   Torque: 10
   Power: 20
-  chainProbability: 5
   chainDamage: 40
-  superChainDamage: 1500
 --- !u!82 &5435564191741461797
 AudioSource:
   m_ObjectHideFlags: 0
@@ -547,6 +543,29 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6, y: 12.88, z: 10}
   m_Center: {x: 0, y: 6.39, z: 0}
+--- !u!114 &6976380437116126694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2550890774351455410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: 
+  _cueSheet: 
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &2927570072244994671
 GameObject:
   m_ObjectHideFlags: 0

@@ -1213,9 +1213,10 @@ GameObject:
   - component: {fileID: 8308693206467689862}
   - component: {fileID: 2630320041135359792}
   - component: {fileID: -4808046590485954923}
+  - component: {fileID: 2346493875396813538}
   m_Layer: 0
   m_Name: 2Black6F
-  m_TagString: Untagged
+  m_TagString: Big
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1352,26 +1353,21 @@ MonoBehaviour:
   tier_WalkAttack: 4
   tier_ChargeKick: 3
   divideObject: {fileID: 0}
-  AttackSound: {fileID: 8300000, guid: abc42f36fe5c4c240a548f5df50a0ecd, type: 3}
-  ContactSound: {fileID: 8300000, guid: 113f5ebf54c0069488819975ac9f88a2, type: 3}
   HP: 2500
   kickMag: 0.7
   blastMag: 3.5
   cutterMag: 1.1
-  chargeKickMag: 3
   fallAttackMag: 0.8
   breakScore: 400000
   breakPoint: 10
-  BreakEffect: {fileID: 4267790152953556362, guid: 76dd1b57ce27a487db64614c36a17924,
+  objectID: 0
+  notLive: 0
+  BreakEffect: {fileID: 2714036437048776495, guid: c1b6977c8b92845e3a1103d68f2de786,
     type: 3}
-  ExplosionSound: {fileID: 8300000, guid: e454532e8e33d5d4cb74819fbd7d415e, type: 3}
-  CollapseSound: {fileID: 8300000, guid: 4bec759f4d32b044fb76a940aca32d43, type: 3}
   deleteTime: 3
   Torque: 10
   Power: 20
-  chainProbability: 5
   chainDamage: 50
-  superChainDamage: 600
 --- !u!114 &8308693206467689862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1416,6 +1412,29 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6, y: 18.45, z: 10}
   m_Center: {x: 0, y: 9.2, z: 0.1}
+--- !u!114 &2346493875396813538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6224037329924530312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: 
+  _cueSheet: 
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &6825520316586141945
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,9 +18,10 @@ GameObject:
   - component: {fileID: 5870025687891253153}
   - component: {fileID: 6696394769682687237}
   - component: {fileID: 2823067930725471149}
+  - component: {fileID: 88982359392079409}
   m_Layer: 0
   m_Name: StreetLight_B
-  m_TagString: Untagged
+  m_TagString: Small
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -156,26 +157,21 @@ MonoBehaviour:
   tier_WalkAttack: 2
   tier_ChargeKick: 1
   divideObject: {fileID: 0}
-  AttackSound: {fileID: 8300000, guid: 70a5e9b67ec89e84eb71df41da6e577a, type: 3}
-  ContactSound: {fileID: 8300000, guid: ccd8035a8244f2347a152a0086899149, type: 3}
-  HP: 500
+  HP: 100
   kickMag: 1
   blastMag: 1.2
   cutterMag: 1.5
-  chargeKickMag: 2
   fallAttackMag: 1
   breakScore: 1000
   breakPoint: 2
+  objectID: 1
+  notLive: 0
   BreakEffect: {fileID: 2714036437048776495, guid: c1b6977c8b92845e3a1103d68f2de786,
     type: 3}
-  ExplosionSound: {fileID: 8300000, guid: 09e9e3f4d1c5c98449d7cf372877a4ea, type: 3}
-  CollapseSound: {fileID: 8300000, guid: c8609e1c65e54fb4ab552b0230f73bfe, type: 3}
   deleteTime: 3
   Torque: 3
   Power: 3
-  chainProbability: 5
   chainDamage: 30
-  superChainDamage: 500
 --- !u!114 &6696394769682687237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,3 +283,26 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &88982359392079409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3462733393100577994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: 
+  _cueSheet: 
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1

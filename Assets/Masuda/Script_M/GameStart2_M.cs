@@ -6,21 +6,11 @@ using UnityEngine.SceneManagement;
 public class GameStart2_M : MonoBehaviour
 {
     [SerializeField] public GameObject load;
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public string sceneName;
 
     public void OnStart()
     {
         load.SetActive(true);
-        SceneManager.LoadScene("stage1");
+        SceneManager.LoadScene(sceneName);
     }
-
 }

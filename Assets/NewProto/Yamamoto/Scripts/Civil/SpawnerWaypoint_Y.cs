@@ -4,38 +4,26 @@ using UnityEngine;
 
 public class SpawnerWaypoint_Y : WayPoint_Y
 {
-    private WayPointGraph_Y wayPointGraph;
+    public WayPointGraph_Y wayPointGraph;
     public GameObject[] civilPrefabs;
     private GameObject civil;
     public float blurScale;
-    private GameObject[] route;
+    public GameObject[] route;
+    private Civil_Y scrCivil;
 
-    public float routineTimer;
-    public float spawnTime;
-
-    void Start()
+    private void Start()
     {
         wayPointGraph = GameObject.Find("GameAI_Y").GetComponent<WayPointGraph_Y>();
-        //ステージを開始したときに市民がいるようにするため
-        routineTimer = spawnTime;
-    }
-
-    void Update()
-    {
-        routineTimer += Time.deltaTime;
-        if (routineTimer >= spawnTime)
-        {
-            SpawnCivil();
-        }
     }
 
     public void SpawnCivil()
     {
-        routineTimer = 0f;
         civil = Instantiate(civilPrefabs[(Random.Range(0, civilPrefabs.Length))], InstantiatePositionBlur(), Quaternion.identity);
-        wayPointGraph.CulDijkstra(this.PointNumber);
-        wayPointGraph.GetRoute(route);
-        civil.GetComponent<Civil_Y>().RouteSetting(route);
+        route = wayPointGraph.route;
+
+        scrCivil = civil.GetComponent<Civil_Y>();
+        wayPointGraph.ResetDijkstraMap();
+        scrCivil.RouteSetting(route);   //ルート情報付与
     }
 
     private Vector3 InstantiatePositionBlur()
