@@ -39,6 +39,7 @@ public class TpsCameraJC_R : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         // Get MouseMove
         mouse -= new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")) * Time.deltaTime * spinSpeed;
         // Clamp mouseY move

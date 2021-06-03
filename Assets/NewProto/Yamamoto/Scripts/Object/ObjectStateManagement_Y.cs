@@ -33,7 +33,6 @@ public class ObjectStateManagement_Y : MonoBehaviour
 
     //加筆(佐々木)
     private CharaMoveRigid_R scrCharaMove;
-    //
 
     private Vector3 chainStartPos;
     private FoodMaker_R scrFood;
@@ -96,11 +95,8 @@ public class ObjectStateManagement_Y : MonoBehaviour
                 default: ExplosionSoundName = "PoleExplosion00"; break;
             }
 
-            if (criAtomSource != null)
-            {
-                criAtomSource.cueName = ExplosionSoundName;
-                criAtomSource.Play(ExplosionSoundName);
-            }
+            if (criAtomSource != null) criAtomSource.cueName = ExplosionSoundName;
+            criAtomSource?.Play(ExplosionSoundName);
 
             if (scrFood != null)
             {
@@ -193,11 +189,8 @@ public class ObjectStateManagement_Y : MonoBehaviour
                     default: contactSoundName = "TrachcanContact00"; break;
                 }
 
-                if (criAtomSource != null)
-                {
-                    criAtomSource.cueName = contactSoundName;
-                    criAtomSource.Play(contactSoundName);
-                }
+                if (criAtomSource != null) criAtomSource.cueName = contactSoundName;
+                criAtomSource?.Play(contactSoundName);
             }
             else //それ以外
             {
@@ -215,11 +208,8 @@ public class ObjectStateManagement_Y : MonoBehaviour
                     default: attackSoundName = "TrachcanContact00"; break;
                 }
 
-                if (criAtomSource != null)
-                {
-                    criAtomSource.cueName = attackSoundName;
-                    criAtomSource.Play(attackSoundName);
-                }
+                if (criAtomSource != null) criAtomSource.cueName = attackSoundName;
+                criAtomSource?.Play(attackSoundName);
             }
             //振動させる
             StartCoroutine(DoShake(0.25f, 0.1f));
@@ -247,11 +237,9 @@ public class ObjectStateManagement_Y : MonoBehaviour
                 default: attackSoundName = "TrashcanContact00"; break;
             }
 
-            if (criAtomSource != null)
-            {
-                criAtomSource.cueName = attackSoundName;
-                criAtomSource.Play(attackSoundName);
-            }
+            //nullチェック
+            if (criAtomSource != null) criAtomSource.cueName = attackSoundName;
+            criAtomSource?.Play(attackSoundName);
         }
     }
 
