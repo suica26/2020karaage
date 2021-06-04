@@ -841,8 +841,8 @@ GameObject:
   - component: {fileID: 130152869}
   - component: {fileID: 130152868}
   - component: {fileID: 130152867}
-  - component: {fileID: 130152866}
   - component: {fileID: 130152870}
+  - component: {fileID: 130152866}
   m_Layer: 5
   m_Name: Back
   m_TagString: Untagged
@@ -4409,7 +4409,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: GRAPHICS
+  m_Text: Graphics
 --- !u!222 &738772933
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4586,8 +4586,8 @@ GameObject:
   - component: {fileID: 777443273}
   - component: {fileID: 777443272}
   - component: {fileID: 777443271}
-  - component: {fileID: 777443270}
   - component: {fileID: 777443274}
+  - component: {fileID: 777443270}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -4624,10 +4624,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 777443268}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26911e806ae657f4ba9e487d9fc025e2, type: 3}
+  m_Script: {fileID: 11500000, guid: 85253936b3248b54c9c36ba36d6903c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseOption: {fileID: 933692885}
+  it: {fileID: 933692885}
+  it2: {fileID: 1626635571}
+  judge2: 0
 --- !u!114 &777443271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6679,7 +6681,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1281577212}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e09bd29c7782a19489c753ecffade4d0, type: 3}
+  m_Script: {fileID: 11500000, guid: b2aca39cba74395458a0d31460668c39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1291649553
@@ -8529,6 +8531,7 @@ GameObject:
   - component: {fileID: 1497279469}
   - component: {fileID: 1497279468}
   - component: {fileID: 1497279467}
+  - component: {fileID: 1497279471}
   m_Layer: 5
   m_Name: Back
   m_TagString: Untagged
@@ -8545,7 +8548,7 @@ RectTransform:
   m_GameObject: {fileID: 1497279465}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.6666665, y: 1.6666665, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1154520452}
   m_Father: {fileID: 625764727}
@@ -8565,12 +8568,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1497279465}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85253936b3248b54c9c36ba36d6903c7, type: 3}
+  m_Script: {fileID: 11500000, guid: f7c51304ccc8e0c468a47a26818adfac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  it: {fileID: 625764726}
-  it2: {fileID: 1626635571}
-  judge2: 0
+  pausePanel: {fileID: 625764726}
 --- !u!114 &1497279468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8662,6 +8663,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1497279465}
   m_CullTransparentMesh: 0
+--- !u!114 &1497279471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497279465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: System_Decision
+  _cueSheet: System
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &1504823289
 GameObject:
   m_ObjectHideFlags: 0
@@ -9253,6 +9277,7 @@ GameObject:
   - component: {fileID: 1690635640}
   - component: {fileID: 1690635639}
   - component: {fileID: 1690635642}
+  - component: {fileID: 1690635643}
   m_Layer: 5
   m_Name: Screen
   m_TagString: Untagged
@@ -9384,6 +9409,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   setPanelP: {fileID: 453257186}
+--- !u!114 &1690635643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690635637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: System_Decision
+  _cueSheet: System
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &1696501024
 GameObject:
   m_ObjectHideFlags: 0
@@ -10415,6 +10463,7 @@ GameObject:
   - component: {fileID: 1846732908}
   - component: {fileID: 1846732907}
   - component: {fileID: 1846732906}
+  - component: {fileID: 1846732910}
   m_Layer: 5
   m_Name: Back (1)
   m_TagString: Untagged
@@ -10431,7 +10480,7 @@ RectTransform:
   m_GameObject: {fileID: 1846732904}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.6666665, y: 1.6666665, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1991643879}
   m_Father: {fileID: 453257187}
@@ -10548,6 +10597,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1846732904}
   m_CullTransparentMesh: 0
+--- !u!114 &1846732910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1846732904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: System_Decition
+  _cueSheet: System
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &1857941907
 GameObject:
   m_ObjectHideFlags: 0
