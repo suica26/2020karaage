@@ -18,12 +18,16 @@ public class Food_R : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
             audio.Play("FeedGet00");
             scrEP.EPManager(addEP);
-            collision.gameObject.GetComponent<AudioSource>().PlayOneShot(sound);
-            Destroy(gameObject);
+
+            //山本修正
+            //消去を1秒遅らせて取得音が鳴るように調整
+            Destroy(gameObject, 1f);
+            //消去が1秒遅れるので、非アクティブにして見えなくしとく
+            gameObject.SetActive(false);
         }
     }
 }
