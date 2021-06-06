@@ -98,19 +98,19 @@ public class Parameters_R : MonoBehaviour
             niwa.fillAmount += 5 / niwaPer;
             //epSlider.value += addEP;
             epText.text = "EP: " + ep;
-            if (ep == 30)
+            if (ep == evo1)
             {
                 niwa.fillAmount = 0;
                 niwaPer = evo2;
                 TimeManager(10);
             }
-            else if (ep == 100)
+            else if (ep == evo2)
             {
                 niwa.fillAmount = 0;
                 niwaPer = evo3;
                 TimeManager(10);
             }
-            else if (ep == 300)
+            else if (ep == evo3)
             {
                 TimeManager(10);
             }

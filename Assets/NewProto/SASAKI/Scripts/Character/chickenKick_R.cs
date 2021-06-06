@@ -8,7 +8,7 @@ public class chickenKick_R : MonoBehaviour
     [SerializeField] GameObject[] kickCollisions;
     [SerializeField] GameObject kickEffect;
     [SerializeField] AudioClip kickSound;
-    [SerializeField] Transition_R scrAnim;
+    [SerializeField] Transition_R[] scrAnim;
 
     EvolutionChicken_R scrEvo;
 
@@ -50,7 +50,7 @@ public class chickenKick_R : MonoBehaviour
                 var objKick = Instantiate(kickEffect, transform.position, Quaternion.identity);
                 Destroy(objKick, 0.5f);
                 kickCollisions[scrEvo.EvolutionNum].SetActive(true);
-                scrAnim.SetAnimator(Transition_R.Anim.KICK, true);
+                scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.KICK, true);
             }
             else
             {
@@ -60,7 +60,7 @@ public class chickenKick_R : MonoBehaviour
         else
         {
             kickCollisions[scrEvo.EvolutionNum].SetActive(false);
-            scrAnim.SetAnimator(Transition_R.Anim.KICK, false);
+            scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.KICK, false);
         }
     }
 }

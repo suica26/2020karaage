@@ -5,7 +5,6 @@ using UnityEngine;
 public class ObjectStateManagement_Y : MonoBehaviour
 {
     [Range(0, 4), SerializeField] private int tier_WalkAttack;
-    [Range(0, 4), SerializeField] private int tier_ChargeKick;
     public GameObject divideObject = null;
     private string attackSoundName, contactSoundName, ExplosionSoundName;
     public int HP;                  //Inspector上から設定できます。
@@ -26,15 +25,11 @@ public class ObjectStateManagement_Y : MonoBehaviour
     /// </summary>
     [SerializeField] private int objectID;
     private GameObject player;
-
     //M
     //[SerializeField] private int smallObj,bigObj;
     private Stage1_Mission_M s1Mis;//
-
     //加筆(佐々木)
     private CharaMoveRigid_R scrCharaMove;
-    //
-
     private Vector3 chainStartPos;
     private FoodMaker_R scrFood;
     private chickenKick_R scrKick;
@@ -44,34 +39,33 @@ public class ObjectStateManagement_Y : MonoBehaviour
     private bool damage = false;
     //M publicに変えました
     public bool notLive = false;
-
     [Header("破壊時の設定")]
     public GameObject BreakEffect;
     public float deleteTime = 3f;
     public float Torque = 1f;    //爆発でどれだけ回転するか
     public float Power = 1f;     //爆発でどれぐらい吹っ飛ぶか
-    [Header("連鎖破壊でのダメージ量(相手への)")] public int chainDamage;                 //連鎖破壊でのダメージ(自分の破片)
-
+    [Header("連鎖破壊でのダメージ量(相手への)")] public int chainDamage;    //連鎖破壊でのダメージ(自分の破片)
     private Stage1_Mission_M playerScrS1M;
+    private Collider[] colliders;   //Collider格納配列
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         player = GameObject.Find("Player");
-        //M
+        //M　ステージ1のミッションscript
         s1Mis = GetComponent<Stage1_Mission_M>();
-        //smallObj = s1Mis.smallNum;
-        //bigObj = s1Mis.bigNum;//
 
         //加筆(佐々木)
         scrCharaMove = player.GetComponent<CharaMoveRigid_R>();
-        //
         scrKick = player.GetComponent<chickenKick_R>();
         scrEvo = player.GetComponent<EvolutionChicken_R>();
         scrFood = GetComponent<FoodMaker_R>();
         criAtomSource = GetComponent<CriAtomSource>();
 
         playerScrS1M = player.GetComponent<Stage1_Mission_M>();
+
+        //複数のColliderがあっても対応できるように
+        colliders = GetComponents<Collider>();
     }
 
     // Update is called once per frame
@@ -96,16 +90,11 @@ public class ObjectStateManagement_Y : MonoBehaviour
                 default: ExplosionSoundName = "PoleExplosion00"; break;
             }
 
-            if (criAtomSource != null)
-            {
-                criAtomSource.cueName = ExplosionSoundName;
-                criAtomSource.Play(ExplosionSoundName);
-            }
+            if (criAtomSource != null) criAtomSource.cueName = ExplosionSoundName;
+            criAtomSource?.Play(ExplosionSoundName);
 
-            if (scrFood != null)
-            {
-                scrFood.DropFood();
-            }
+            //餌のスポーン処理
+            scrFood?.DropFood();
 
             //差し替え処理
             if (divideObject != null)
@@ -120,11 +109,19 @@ public class ObjectStateManagement_Y : MonoBehaviour
             DeathCount();
             notLive = true;
         }
-
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        switch (other.gameObject.name)
+        {
+            case "KickCollision": break;
+            case "MorningBlastSphere_Y(Clone)": break;
+            case "Cutter(Clone)": break;
+            case "fallAttackCircle(Clone)": break;
+        }
+
+
         //キックダメージ
         if (other.gameObject.name == "KickCollision")
         {
@@ -193,11 +190,8 @@ public class ObjectStateManagement_Y : MonoBehaviour
                     default: contactSoundName = "TrachcanContact00"; break;
                 }
 
-                if (criAtomSource != null)
-                {
-                    criAtomSource.cueName = contactSoundName;
-                    criAtomSource.Play(contactSoundName);
-                }
+                if (criAtomSource != null) criAtomSource.cueName = contactSoundName;
+                criAtomSource?.Play(contactSoundName);
             }
             else //それ以外
             {
@@ -215,11 +209,8 @@ public class ObjectStateManagement_Y : MonoBehaviour
                     default: attackSoundName = "TrachcanContact00"; break;
                 }
 
-                if (criAtomSource != null)
-                {
-                    criAtomSource.cueName = attackSoundName;
-                    criAtomSource.Play(attackSoundName);
-                }
+                if (criAtomSource != null) criAtomSource.cueName = attackSoundName;
+                criAtomSource?.Play(attackSoundName);
             }
             //振動させる
             StartCoroutine(DoShake(0.25f, 0.1f));
@@ -247,11 +238,9 @@ public class ObjectStateManagement_Y : MonoBehaviour
                 default: attackSoundName = "TrashcanContact00"; break;
             }
 
-            if (criAtomSource != null)
-            {
-                criAtomSource.cueName = attackSoundName;
-                criAtomSource.Play(attackSoundName);
-            }
+            //nullチェック
+            if (criAtomSource != null) criAtomSource.cueName = attackSoundName;
+            criAtomSource?.Play(attackSoundName);
         }
     }
 
