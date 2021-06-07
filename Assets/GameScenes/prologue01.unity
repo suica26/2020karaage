@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -778,6 +778,7 @@ GameObject:
   - component: {fileID: 4868635450030955770}
   - component: {fileID: 4868635450030955769}
   - component: {fileID: 4868635450030955774}
+  - component: {fileID: 4868635450030955775}
   m_Layer: 0
   m_Name: movie
   m_TagString: Untagged
@@ -901,7 +902,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4868635450030955768}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eaed82c464290b24f8e721b764ad36e9, type: 3}
   m_Name: 
@@ -924,3 +925,36 @@ MonoBehaviour:
   count: 1
   cursor: {fileID: 700859142}
   nextscene: {fileID: 1851914076}
+  len: 0
+  videoFrame: 0
+  videoFrameRate: 0
+  videoTime: 0
+--- !u!114 &4868635450030955775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4868635450030955768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47ef101e8cf410b45aac3132dd8146d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  videoPlayer: {fileID: 4868635450030955769}
+  cursor: {fileID: 700859142}
+  nextscene: {fileID: 1851914076}
+  timings:
+  - 1.4
+  - 8.8
+  - 11.7666
+  - 13.7666
+  - 15.7333
+  - 19.7
+  - 30.3
+  - 35.666
+  - 38.633
+  - 41.633
+  - 44.6
+  - 50
+  time: 0
