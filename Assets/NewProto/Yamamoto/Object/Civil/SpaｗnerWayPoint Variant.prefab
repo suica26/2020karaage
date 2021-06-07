@@ -13,12 +13,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbor: []
+  NeiNums: 
+  RouteNumber: 0
+  PointNumber: 0
+  BeforePoint: 0
   endPointFlg: 1
   spawnerPointFlg: 1
+  wayPointGraph: {fileID: 0}
   civilPrefabs:
   - {fileID: 7239609575710579885, guid: 68fe9c5af64fbce44806ceb29bb1c4d5, type: 3}
   - {fileID: 9124111091889982900, guid: 0ae5e38f052c93145bb66670f8d86884, type: 3}
   blurScale: 0
+  route: []
 --- !u!1001 &5409854718207849843
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -94,7 +100,7 @@ PrefabInstance:
     - target: {fileID: 2367291764601529623, guid: 712f0d5cf049704448c3dec059458ba0,
         type: 3}
       propertyPath: m_Layer
-      value: 11
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3193583972554919565, guid: 712f0d5cf049704448c3dec059458ba0,
         type: 3}

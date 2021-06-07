@@ -24,7 +24,7 @@ public class CharaMoveRigid_R : MonoBehaviour
     [SerializeField] private AudioClip JumpClip;
 
     [Header("アニメーション処理用")]
-    [SerializeField] private Transition_R scrAnim;
+    [SerializeField] private Transition_R[] scrAnim;
 
     private Rigidbody rb;
     private float h, v;
@@ -98,14 +98,14 @@ public class CharaMoveRigid_R : MonoBehaviour
         //以下接地時の処理を記述
         if (isGrounded)
         {
-            scrAnim.SetAnimator(Transition_R.Anim.JUMP, false);
+            scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.JUMP, false);
 
             //FallAttack中に接地した際の処理
             if (fallAttack)
             {
                 endHeight = transform.position.y; //着地時の高さを取得
-                scrAnim.SetAnimator(Transition_R.Anim.KICKFA, false);
-                scrAnim.SetAnimator(Transition_R.Anim.CUTTERFA, false);
+                scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.KICKFA, false);
+                scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.CUTTERFA, false);
                 fallAttack = false;
                 fallAttackCollisionCheck();
                 rb.velocity = Vector3.zero;
@@ -122,7 +122,7 @@ public class CharaMoveRigid_R : MonoBehaviour
                     audio.Play("Walk_Voice00");
 
                 }
-                scrAnim.SetAnimator(Transition_R.Anim.WALK, true);
+                scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.WALK, true);
 
                 //チキンの移動方向や移動量を計算
                 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
@@ -150,7 +150,7 @@ public class CharaMoveRigid_R : MonoBehaviour
                     audio.Stop();
 
                 }
-                scrAnim.SetAnimator(Transition_R.Anim.WALK, false);
+                scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.WALK, false);
                 audio.Play("Idle_Voice00");
             }
 
@@ -160,14 +160,14 @@ public class CharaMoveRigid_R : MonoBehaviour
                 //audioSourceCommon.PlayOneShot(JumpClip);
                 audio.Play("Idle_Voice00");
                 audio.Play("Jump00");
-                scrAnim.SetAnimator(Transition_R.Anim.JUMP, true);
+                scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.JUMP, true);
                 rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
             }
         }
         else
         {
-            scrAnim.SetAnimator(Transition_R.Anim.JUMP, true);
-            scrAnim.SetAnimator(Transition_R.Anim.WALK, false);
+            scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.JUMP, true);
+            scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.WALK, false);
 
             //空中での制動(移動量は地上の1/3程度)
             if (h != 0 || v != 0)
@@ -202,7 +202,7 @@ public class CharaMoveRigid_R : MonoBehaviour
                 }
             }
             //落下攻撃の処理(カッター)
-            else if (Input.GetMouseButton(1) && !fallAttack)
+            else if (Input.GetMouseButton(1) && !fallAttack && scrCutter.enabled)
             {
                 if (cutterFallAttackTimer <= cutterFallAttackTime)
                 {
@@ -252,7 +252,7 @@ public class CharaMoveRigid_R : MonoBehaviour
         if(fallAttackVer == 1)
         {
             startHeight = transform.position.y; //落下攻撃開始時の高さを取得
-            scrAnim.SetAnimator(Transition_R.Anim.KICKFA, true);
+            scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.KICKFA, true);
             rb.velocity = Vector3.zero;
             rb.AddForce(Vector3.up * scrEvo.Status_JUMP * 0.75f, ForceMode.Impulse);
             fallAttack = true;
@@ -266,7 +266,7 @@ public class CharaMoveRigid_R : MonoBehaviour
         //カッター
         else
         {
-            scrAnim.SetAnimator(Transition_R.Anim.CUTTERFA, true);
+            scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.CUTTERFA, true);
             rb.velocity = Vector3.zero;
             rb.AddForce(Vector3.up * scrEvo.Status_JUMP * 0.75f, ForceMode.Impulse);
             fallAttack = true;

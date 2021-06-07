@@ -3923,8 +3923,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_scene:
-    sceneAsset: {fileID: 102900000, guid: de63f91902b04594588da038369e5300, type: 3}
-    scenePath: Assets/GameScenes/stage1.unity
+    sceneAsset: {fileID: 102900000, guid: 79be3bfe7dcabe64990e15e055ecc5e0, type: 3}
+    scenePath: Assets/GameScenes/prologue02.unity
 --- !u!4 &1080559935
 Transform:
   m_ObjectHideFlags: 0
@@ -8599,6 +8599,7 @@ GameObject:
   - component: {fileID: 1968429869}
   - component: {fileID: 1968429864}
   - component: {fileID: 1968429868}
+  - component: {fileID: 1968429870}
   m_Layer: 0
   m_Name: rockeddoorR
   m_TagString: Untagged
@@ -8723,6 +8724,29 @@ MonoBehaviour:
   air: {fileID: 1804011116}
   arrow: {fileID: 274157317}
   audio: {fileID: 0}
+--- !u!114 &1968429870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1968429863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: 
+  _cueSheet: 
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &1974329672
 GameObject:
   m_ObjectHideFlags: 0
@@ -9533,7 +9557,8 @@ MonoBehaviour:
   kickEffect: {fileID: 6715095415447669578, guid: c38672bee64b74bcaa57d0a877f5dc6a,
     type: 3}
   kickSound: {fileID: 8300000, guid: f67ea4fc8b2c08141809c63bd2243348, type: 3}
-  scrAnim: {fileID: 1957268126}
+  scrAnim:
+  - {fileID: 1957268126}
   chargePoint: 0
   audio: {fileID: 2100359988}
 --- !u!114 &2100359988
@@ -9673,7 +9698,8 @@ MonoBehaviour:
   CutterFAClip: {fileID: 8300000, guid: 4c7003c3dff38d54b98daefc88d60f58, type: 3}
   KickFAClip: {fileID: 8300000, guid: 4c7003c3dff38d54b98daefc88d60f58, type: 3}
   JumpClip: {fileID: 8300000, guid: 230e7611a4dbd10478f3b299643c67b4, type: 3}
-  scrAnim: {fileID: 1957268126}
+  scrAnim:
+  - {fileID: 1957268126}
   damageBoost: 0
 --- !u!114 &2100359992
 MonoBehaviour:
