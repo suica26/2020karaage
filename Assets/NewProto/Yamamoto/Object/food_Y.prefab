@@ -108,8 +108,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5882868508514077054}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
+  m_Mass: 0.001
+  m_Drag: 10
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 8300000, guid: e90999ea27a6a3443a1b64501cf55ee2, type: 3}
-  addEP: 5
+  addEP: 10
 --- !u!114 &3546230860400123712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a84c5f8a700161f44b5c6bbbdf22272c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gatherSpeed: 15
+  gatherSpeed: 300
 --- !u!114 &7980856480439526893
 MonoBehaviour:
   m_ObjectHideFlags: 0
