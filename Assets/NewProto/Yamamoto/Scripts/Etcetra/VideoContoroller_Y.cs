@@ -11,9 +11,9 @@ public class VideoContoroller_Y : MonoBehaviour
     public double[] timings;
     private int nextCutTiming;
     private bool movingVideo;
-    public double time;
-
-    private void Start()
+    public double videoTime;
+    public double soundTime;
+    void Start()
     {
         videoPlayer.Play();
         movingVideo = true;
@@ -21,7 +21,7 @@ public class VideoContoroller_Y : MonoBehaviour
 
     private void Update()
     {
-        time = videoPlayer.time;
+        videoTime = videoPlayer.time;
 
         if (videoPlayer.time >= timings[nextCutTiming] && movingVideo)
         {
@@ -42,7 +42,7 @@ public class VideoContoroller_Y : MonoBehaviour
 
     private void StopCut()
     {
-        videoPlayer.Pause();
+        videoPlayer.Pause();        //停止
         movingVideo = false;
         cursor.SetActive(true);
     }
@@ -52,7 +52,7 @@ public class VideoContoroller_Y : MonoBehaviour
         movingVideo = true;
         videoPlayer.time = timings[nextCutTiming];  //一応、再生位置の補正をかける
         nextCutTiming++;
-        videoPlayer.Play();
+        videoPlayer.Play();             //再生
         cursor.SetActive(false);
     }
 
