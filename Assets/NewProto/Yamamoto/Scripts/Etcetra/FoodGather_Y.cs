@@ -7,7 +7,9 @@ public class FoodGather_Y : MonoBehaviour
     private GameObject player;
     private EvolutionChicken_R scrEvo;
     private Rigidbody rb;
+    public float gatherDistance;
     public float gatherSpeed;
+    public float centripetalRatio;  //向心力の比率
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +22,7 @@ public class FoodGather_Y : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (DistanceCul() < 20f)
+        if (DistanceCul() < gatherDistance)
         {
             GoToPlayer();
         }
@@ -34,9 +36,9 @@ public class FoodGather_Y : MonoBehaviour
     private void GoToPlayer()
     {
         Vector3 toPlayer = (player.transform.position - transform.position).normalized;
-        transform.forward = toPlayer;
+        Vector3 gatherDir = (Quaternion.Euler(0, 145, 0) * toPlayer + toPlayer * centripetalRatio).normalized;
         //速度のY成分を保持(一応)
         var currentSpeed_Y = new Vector3(0, rb.velocity.y, 0);
-        rb.velocity = toPlayer * gatherSpeed * Time.deltaTime + currentSpeed_Y;
+        rb.velocity = gatherDir * gatherSpeed * Time.deltaTime + currentSpeed_Y;
     }
 }
