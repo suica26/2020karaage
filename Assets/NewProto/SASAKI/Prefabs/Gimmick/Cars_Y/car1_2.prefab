@@ -172,7 +172,7 @@ GameObject:
   - component: {fileID: 5123889478579324442}
   - component: {fileID: 2165320340007743089}
   - component: {fileID: 7036124931048319392}
-  - component: {fileID: 9081629385267704089}
+  - component: {fileID: 5166329280200298883}
   m_Layer: 0
   m_Name: car1_2
   m_TagString: Untagged
@@ -195,6 +195,7 @@ Transform:
   - {fileID: 7306802758799513068}
   - {fileID: 4144412242158746388}
   - {fileID: 4206870412340628074}
+  - {fileID: 4458784517026355889}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -245,7 +246,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tier_WalkAttack: 2
-  tier_ChargeKick: 2
   divideObject: {fileID: 0}
   HP: 100
   kickMag: 1
@@ -292,7 +292,7 @@ MonoBehaviour:
   carMoving: 1
   speed: 0
   rotSpeed: 250
---- !u!114 &9081629385267704089
+--- !u!114 &5166329280200298883
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -304,9 +304,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playOnStart: 0
-  _cueName: 
-  _cueSheet: 
+  _playOnStart: 1
+  _cueName: "CarMove00\u3000\u3000"
+  _cueSheet: Town
   _regionOnStart: {fileID: 0}
   _listenerOnStart: {fileID: 0}
   _use3dPositioning: 1
@@ -394,6 +394,73 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1 &6203452960017256341
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4458784517026355889}
+  - component: {fileID: 7898027990093763741}
+  - component: {fileID: 4340840485808885192}
+  m_Layer: 0
+  m_Name: SoundRay
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4458784517026355889
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6203452960017256341}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.56, z: 5.83}
+  m_LocalScale: {x: 0.35999998, y: 0.35999998, z: 0.35999998}
+  m_Children: []
+  m_Father: {fileID: 5430651704915447112}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7898027990093763741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6203452960017256341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 494b79b7df7de4ee6bacd90a55a2ce9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4340840485808885192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6203452960017256341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: Hone00
+  _cueSheet: Town
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &6232679515423428993
 GameObject:
   m_ObjectHideFlags: 0

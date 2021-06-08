@@ -46,7 +46,7 @@ public class chickenKick_R : MonoBehaviour
             {
                 timer = 0.0f;
                 //audioSource.PlayOneShot(kickSound);
-                audio.Play("kick00");
+                audio.Play("Kick");
                 var objKick = Instantiate(kickEffect, transform.position, Quaternion.identity);
                 Destroy(objKick, 0.5f);
                 kickCollisions[scrEvo.EvolutionNum].SetActive(true);
