@@ -35,10 +35,17 @@ public class FoodGather_Y : MonoBehaviour
 
     private void GoToPlayer()
     {
-        Vector3 toPlayer = (player.transform.position - transform.position).normalized;
+        Vector3 toPlayer = GetVectorXZNormalized(player.transform.position, transform.position);
         Vector3 gatherDir = (Quaternion.Euler(0, 145, 0) * toPlayer + toPlayer * centripetalRatio).normalized;
         //速度のY成分を保持(一応)
         var currentSpeed_Y = new Vector3(0, rb.velocity.y, 0);
-        rb.velocity = gatherDir * gatherSpeed * Time.deltaTime + currentSpeed_Y;
+        rb.velocity = gatherDir * gatherSpeed + currentSpeed_Y;
+    }
+
+    private Vector3 GetVectorXZNormalized(Vector3 A, Vector3 B)
+    {
+        var AB = A - B;
+        AB = new Vector3(AB.x, 0, AB.z).normalized;
+        return AB;
     }
 }
