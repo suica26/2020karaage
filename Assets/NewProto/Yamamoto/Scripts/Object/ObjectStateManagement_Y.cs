@@ -25,7 +25,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
     /// 7　木
     /// 8 消火栓
     /// </summary>
-    public int objectID { get; private set; }
+    public int objectID;
     public GameObject player { get; private set; }
     //加筆(佐々木)
     private CharaMoveRigid_R scrCharaMove;
@@ -136,12 +136,13 @@ public class ObjectStateManagement_Y : MonoBehaviour
         switch (objectID)
         {
             case 0: attackSoundName = "BuildingContact00"; break;
-            case 2: attackSoundName = "TrashcanContact00"; break;
-            case 3: attackSoundName = "TrashcanContact00"; break;
+            case 2: attackSoundName = "TrachcanContact00"; break;
+            case 3: attackSoundName = "Contact_Manhole00"; break;
             case 4: attackSoundName = "BuildingContact00"; break;
             case 5: attackSoundName = "CarContact00"; break;
             case 6: attackSoundName = "BuildingContact00"; break;
             case 7: attackSoundName = "KickTree00"; break;
+            case 8: attackSoundName = "FireHydrant00"; break;
             default: attackSoundName = "TrashcanContact00"; break;
         }
     }
@@ -153,7 +154,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
             case 0: contactSoundName = "BuildingContact00"; break;
             case 1: contactSoundName = "PoleContract00"; break;
             case 2: contactSoundName = "TrachcanContact00"; break;
-            case 3: contactSoundName = "TrachcanContact00"; break;
+            case 3: contactSoundName = "Contact_Manhole00"; break;
             case 4: contactSoundName = "BuildingContact00"; break;
             case 5: contactSoundName = "CarContact00"; break;
             case 6: contactSoundName = "BuildingContact00"; break;
@@ -170,7 +171,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
             case 0: ExplosionSoundName = "BuildingExplosion00"; break;
             case 1: ExplosionSoundName = "PoleExplosion00"; break;
             case 2: ExplosionSoundName = "Trashcan00"; break;
-            case 3: ExplosionSoundName = "PoleExplosion00"; break;
+            case 3: ExplosionSoundName = "Manhole00"; break;
             case 4: ExplosionSoundName = "BuildingExplosion00"; break;
             case 5: ExplosionSoundName = "CarExplosion00"; break;
             case 6: ExplosionSoundName = "GasExplosion00"; break;

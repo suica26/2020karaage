@@ -38,6 +38,7 @@ public class EvolutionChicken_R : MonoBehaviour
     public float Status_JUMP { get { return status_JUMP; } }
 
     private CriAtomSource audioLavel;
+    private CriAtomSource BGM;
 
     void Start()
     {
@@ -82,6 +83,7 @@ public class EvolutionChicken_R : MonoBehaviour
 
             //ADX Selector Change
             audioLavel.player.SetSelectorLabel("Chicken_Form", "form2");
+            audioLavel.Play("ShockWave");
 
             status_HP = HP[evolutionNum];
             status_ATK = ATK[evolutionNum];
