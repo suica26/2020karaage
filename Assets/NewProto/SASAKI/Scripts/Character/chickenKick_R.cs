@@ -48,9 +48,11 @@ public class chickenKick_R : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
+            //山本加筆(&& coolTimer >= coolTimes[scrEvo.EvolutionNum])
             if (timer <= 0.5f && coolTimer >= coolTimes[scrEvo.EvolutionNum])
             {
                 timer = 0.0f;
+                coolTimer = 0f;
                 //audioSource.PlayOneShot(kickSound);
                 criAtomSource.Play("Kick");
                 var objKick = Instantiate(kickEffect, transform.position, Quaternion.identity);

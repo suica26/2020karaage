@@ -13,7 +13,7 @@ public class ADX_CollHoneSound : MonoBehaviour
     void Start()
     {
         audio = (CriAtomSource)GetComponent("CriAtomSource");
-        
+
     }
     // Update is called once per frame
     void Update()
@@ -24,7 +24,7 @@ public class ADX_CollHoneSound : MonoBehaviour
         //レイの判定(飛ばすレイ、レイが当たったものの情報、レイの長さ)
         if (Physics.Raycast(ray, out RaycastHit hit, 7.5f))
         {
-            Debug.Log(hit.transform.gameObject.name);
+            //Debug.Log(hit.transform.gameObject.name);
             if (hit.transform.gameObject.name == "Player")
             {
                 audio.Play("Hone00");
