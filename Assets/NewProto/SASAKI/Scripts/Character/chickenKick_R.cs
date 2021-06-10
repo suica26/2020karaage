@@ -15,8 +15,12 @@ public class chickenKick_R : MonoBehaviour
     public int chargePoint;
     private float timer;
 
+    //山本加筆　キックのクールタイム
+    [SerializeField] private float[] coolTimes;
+    private float coolTimer;
+
     //ADX
-    public new CriAtomSource audio;
+    private CriAtomSource criAtomSource;
 
     // Start is called before the first frame update
     void Start()
@@ -24,12 +28,14 @@ public class chickenKick_R : MonoBehaviour
         scrEvo = GetComponent<EvolutionChicken_R>();
         timer = 0.0f;
         chargePoint = 0;
-        audio = (CriAtomSource)GetComponent("CriAtomSource");
+        criAtomSource = GetComponent<CriAtomSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        coolTimer += Time.deltaTime;
+
         if (Mathf.Approximately(Time.timeScale, 0f))
         {
             return;
@@ -42,11 +48,11 @@ public class chickenKick_R : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
-            if(timer <= 0.5f)
+            if (timer <= 0.5f && coolTimer >= coolTimes[scrEvo.EvolutionNum])
             {
                 timer = 0.0f;
                 //audioSource.PlayOneShot(kickSound);
-                audio.Play("Kick");
+                criAtomSource.Play("Kick");
                 var objKick = Instantiate(kickEffect, transform.position, Quaternion.identity);
                 Destroy(objKick, 0.5f);
                 kickCollisions[scrEvo.EvolutionNum].SetActive(true);
