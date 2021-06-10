@@ -19,6 +19,7 @@ public class CharaMoveRigid_R : MonoBehaviour
     [Tooltip("各進化段階の落下攻撃の威力UP(2 => 3)"), SerializeField] private float[] fallAttackSecondHeight;
     [Tooltip("落下攻撃の倍率設定"), SerializeField] private float[] boostMag;
     [SerializeField] GameObject preCircle;
+    [SerializeField] private GameObject fallAttackKickEffect;
     [SerializeField] private AudioClip CutterFAClip;
     [SerializeField] private AudioClip KickFAClip;
     [SerializeField] private AudioClip JumpClip;
@@ -239,7 +240,11 @@ public class CharaMoveRigid_R : MonoBehaviour
             Debug.Log(damageBoost);
 
             scrCam.Shake();
-
+            if(fallAttackKickEffect != null)
+            {
+                GameObject effect = Instantiate(fallAttackKickEffect, transform.position, Quaternion.identity);
+                Destroy(effect, 0.5f);
+            }
             circleChecker = Instantiate(preCircle, transform.position, Quaternion.identity);
             circleChecker.transform.localScale = new Vector3(circleRange[scrEvo.EvolutionNum], 0.1f, circleRange[scrEvo.EvolutionNum]);
             Destroy(circleChecker, 0.5f);
