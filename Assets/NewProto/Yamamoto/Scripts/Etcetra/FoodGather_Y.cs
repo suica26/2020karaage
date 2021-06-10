@@ -14,7 +14,7 @@ public class FoodGather_Y : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.Find("Player");
         scrEvo = player.GetComponent<EvolutionChicken_R>();
         rb = GetComponent<Rigidbody>();
     }
@@ -35,7 +35,6 @@ public class FoodGather_Y : MonoBehaviour
 
     private void GoToPlayer()
     {
-
         Vector3 toPlayer = (player.transform.position - transform.position).normalized;
         Vector3 gatherDir = (Quaternion.Euler(0, 145, 0) * toPlayer + toPlayer * centripetalRatio).normalized;
         rb.velocity = gatherDir * gatherSpeed;

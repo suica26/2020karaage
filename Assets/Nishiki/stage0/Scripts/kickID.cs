@@ -12,12 +12,6 @@ public class kickID : MonoBehaviour
     public GameObject colider;
     public doorscore door;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -33,7 +27,6 @@ public class kickID : MonoBehaviour
 
             time = time + 1;
             colider.SetActive(true);
-
         }
 
         if (id == 1 && time >= cool)
