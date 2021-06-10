@@ -4,20 +4,14 @@ using UnityEngine;
 
 public class ADX_SoundPlay01 : MonoBehaviour
 {
-    private new CriAtomSource audio;
+    private CriAtomSource criAtomSource;
     // Start is called before the first frame update
     void Start()
     {
-        audio = (CriAtomSource)GetComponent("CriAtomSource");
+        criAtomSource = GetComponent<CriAtomSource>();
     }
     void OnEnable()
     {
-        audio.Play("JINGLE_Mission");
-    }
-
-        // Update is called once per frame
-        void Update()
-    {
-        
+        criAtomSource.Play("JINGLE_Mission");
     }
 }

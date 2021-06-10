@@ -86,7 +86,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
         }
     }
 
-    private void Damage(float mag, int skill)
+    public void Damage(float mag, int skill)
     {
         //すでに破壊済みの場合は何も起きないようにする
         if (!livingFlg) return;
@@ -145,7 +145,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
             case 7: attackSoundName = "KickTree00"; break;
             case 8: attackSoundName = "FireHydrant00"; break;
             case 9: attackSoundName = "TrafficExplosion00"; break;
-            default: attackSoundName = "TrashcanContact00"; break;
+            default: attackSoundName = "TrachcanContact00"; break;
         }
     }
 
@@ -154,7 +154,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
         switch (objectID)
         {
             case 0: contactSoundName = "BuildingContact00"; break;
-            case 1: contactSoundName = "PoleContract00"; break;
+            case 1: contactSoundName = "PoleContact00"; break;
             case 2: contactSoundName = "TrachcanContact00"; break;
             case 3: contactSoundName = "Contact_Manhole00"; break;
             case 4: contactSoundName = "BuildingContact00"; break;
@@ -162,7 +162,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
             case 6: contactSoundName = "BuildingContact00"; break;
             case 7: contactSoundName = "KickTree00"; break;
             case 8: contactSoundName = "Contact_FireHydrant00"; break;
-            case 9: contactSoundName = "PoleContract00"; break;
+            case 9: contactSoundName = "PoleContact00"; break;
             default: contactSoundName = "TrachcanContact00"; break;
         }
     }
@@ -206,6 +206,9 @@ public class ObjectStateManagement_Y : MonoBehaviour
 
     private void Death()
     {
+        //すでに破壊済みの場合は無視
+        if (!livingFlg) return;
+
         //一応、HPは0になるように補正をかける
         HP = 0;
 
