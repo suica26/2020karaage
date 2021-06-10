@@ -4,20 +4,10 @@ using UnityEngine;
 
 public class GameOff_M : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void OnClick()
     {
-        UnityEditor.EditorApplication.isPlaying = false;
+        //山本修正 UnityEditorの機能を使ったものはビルド後のexeでは機能しなくなってしまうみたいなので、変更しました
+        //UnityEditor.EditorApplication.isPlaying = false;
+        Application.Quit();
     }
 }
