@@ -17,10 +17,15 @@ public class AISAC_Con_Tset : MonoBehaviour
     {
         if (Input.GetMouseButtonUp(0))
         {
-            AISACUp();
+            Invoke("Wait", 1f);
         }
             AISACDown();
         //Debug.Log(BGM_AISACNUM);
+    }
+    private void Wait()
+    {
+
+        AISACUp();
     }
 
 
@@ -34,7 +39,7 @@ public class AISAC_Con_Tset : MonoBehaviour
     {
         if (BGM_AISACNUM >= 0.0f)
         {
-            BGM_AISACNUM -= Time.deltaTime / 50f;
+            BGM_AISACNUM -= Time.deltaTime / 20f;
             SetBGMControlValue(BGM_AISACNUM);
             
         }

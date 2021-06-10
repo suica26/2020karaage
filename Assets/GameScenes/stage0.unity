@@ -11469,8 +11469,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playOnStart: 0
-  _cueName: System_Cancel
-  _cueSheet: BGM
+  _cueName: System_Decision
+  _cueSheet: System
   _regionOnStart: {fileID: 0}
   _listenerOnStart: {fileID: 0}
   _use3dPositioning: 1
@@ -11908,7 +11908,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playOnStart: 0
   _cueName: System_Cancel
-  _cueSheet: BGM
+  _cueSheet: System
   _regionOnStart: {fileID: 0}
   _listenerOnStart: {fileID: 0}
   _use3dPositioning: 1
@@ -12597,7 +12597,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playOnStart: 0
   _cueName: System_Cancel
-  _cueSheet: BGM
+  _cueSheet: System
   _regionOnStart: {fileID: 0}
   _listenerOnStart: {fileID: 0}
   _use3dPositioning: 1
@@ -12642,6 +12642,7 @@ GameObject:
   - component: {fileID: 7180195736590317902}
   - component: {fileID: 7180195736590317904}
   - component: {fileID: 7180195736590317905}
+  - component: {fileID: 7180195736590317906}
   m_Layer: 5
   m_Name: Pause
   m_TagString: Untagged
@@ -12686,6 +12687,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7180195736590317906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7180195736590317903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4698bd5a9f3d14bfba80870bca782881, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  atomSource00: {fileID: 905172740}
+  atomSource01: {fileID: 2100359988}
+  atomSource02: {fileID: 0}
 --- !u!1 &7180195736775982996
 GameObject:
   m_ObjectHideFlags: 0
@@ -14737,8 +14753,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playOnStart: 0
-  _cueName: BGM00
-  _cueSheet: BGM
+  _cueName: System_Cancel
+  _cueSheet: System
   _regionOnStart: {fileID: 0}
   _listenerOnStart: {fileID: 0}
   _use3dPositioning: 1
@@ -15959,6 +15975,7 @@ GameObject:
   - component: {fileID: 7807124246577754324}
   - component: {fileID: 7807124246577754326}
   - component: {fileID: 7807124246577754327}
+  - component: {fileID: 7807124246577754328}
   m_Layer: 5
   m_Name: sound
   m_TagString: Untagged
@@ -16007,6 +16024,20 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Sound
+--- !u!114 &7807124246577754328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7807124246577754325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2281821560989145b3f0e64d55237ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volSlider: {fileID: 7807124245054978430}
+  cas: {fileID: 0}
 --- !u!114 &7807124246732208480
 MonoBehaviour:
   m_ObjectHideFlags: 0

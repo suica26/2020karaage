@@ -7,21 +7,28 @@ public class Audio_M : MonoBehaviour
 {
     public Slider volSlider;
     public CriAtomSource cas;
+    
     [SerializeField] public static float vol;
     void Start()
     {
-        cas = (CriAtomSource)GetComponent("CriAtomSource"); 
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        vol = volSlider.value;
+        CriAtom.SetCategoryVolume("BGM", vol);
+        CriAtom.SetCategoryVolume("SFX", vol);
+        CriAtom.SetCategoryVolume("Voice", vol);
+        CriAtom.SetCategoryVolume("Ambient", vol);
     }
 
-    public void SoundChanger()
+    /*
+    //ADX　Aisac値変更
+    private void VolumeControlValue(float value)
     {
-        cas.volume = volSlider.value;
-        vol = volSlider.value;
+        cas.SetAisacControl("Volume", value);
     }
+    */
 }
