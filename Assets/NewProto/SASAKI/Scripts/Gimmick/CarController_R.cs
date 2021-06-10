@@ -22,6 +22,7 @@ public class CarController_R : MonoBehaviour
         endWaypoints = new List<GameObject>();
         carList = new List<GameObject>();
 
+        //車を生成可能なウェイポイントのみを選別してリスト化
         foreach (GameObject waypoint in waypoints)
         {
             if (waypoint.GetComponent<CarWaypoint_R>().endWaypoint)
@@ -30,6 +31,7 @@ public class CarController_R : MonoBehaviour
             }
         }
 
+        //作成したリストを用いて車を設置
         for (int i = 0; i < maxCarNum; i++)
         {
             CarInstantiate();
@@ -39,6 +41,7 @@ public class CarController_R : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //車の数が減ったら補充する
         for (int i = 0; i < carList.Count; i++)
         {
             if (carList[i] == null)
