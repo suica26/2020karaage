@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: -5114314592907393439}
   m_Layer: 0
   m_Name: car3_2
-  m_TagString: Untagged
+  m_TagString: Car
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,7 +109,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 41266845489655528}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.1, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children:
   - {fileID: 6702154534092599099}
@@ -210,6 +210,7 @@ MonoBehaviour:
   carMoving: 1
   speed: 0
   rotSpeed: 250
+  initHeight: -0.1
 --- !u!114 &-5114314592907393439
 MonoBehaviour:
   m_ObjectHideFlags: 0
