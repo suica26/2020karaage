@@ -10,19 +10,34 @@ public class Audio_M : MonoBehaviour
 
     [SerializeField] public static float vol;
     public SoundVolumeController soundVolumeController;
-
-    void Start()
-    {
-        var soundVolumeObject = GameObject.Find("SoundVolume");
-        soundVolumeController = soundVolumeObject.GetComponent<SoundVolumeController>();
-        volSlider.value = soundVolumeController.soundVolume;
-    }
+    private int timer;
 
     // Update is called once per frame
     void Update()
     {
-        vol = volSlider.value;
-        soundVolumeController.soundVolume = vol;
+        timer++;
+        if (timer == 5)
+        {
+            var soundVolumeObject = GameObject.Find("SoundVolume");
+            soundVolumeController = soundVolumeObject.GetComponent<SoundVolumeController>();
+            volSlider.value = soundVolumeController.soundVolume;
+        }
+
+        if (timer > 6)
+        {
+            vol = volSlider.value;
+            if (soundVolumeController == null)
+            {
+                CriAtom.SetCategoryVolume("BGM", vol);
+                CriAtom.SetCategoryVolume("SFX", vol);
+                CriAtom.SetCategoryVolume("Voice", vol);
+                CriAtom.SetCategoryVolume("Ambient", vol);
+            }
+            else
+            {
+                soundVolumeController.soundVolume = vol;
+            }
+        }
     }
 
     /*
