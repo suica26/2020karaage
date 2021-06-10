@@ -127,7 +127,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tier_WalkAttack: 1
-  tier_ChargeKick: 0
   divideObject: {fileID: 0}
   HP: 300
   kickMag: 1.5
@@ -135,15 +134,11 @@ MonoBehaviour:
   cutterMag: 1.2
   fallAttackMag: 1.1
   breakScore: 1000
-  breakPoint: 2
   objectID: 2
-  notLive: 0
-  BreakEffect: {fileID: 2714036437048776495, guid: c1b6977c8b92845e3a1103d68f2de786,
-    type: 3}
+  breakEffect: {fileID: 0}
   deleteTime: 3
-  Torque: 1
-  Power: 1
-  chainDamage: 20
+  torque: 200
+  power: 30
 --- !u!114 &2770143928894634210
 MonoBehaviour:
   m_ObjectHideFlags: 0

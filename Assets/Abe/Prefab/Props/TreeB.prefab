@@ -79,7 +79,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tier_WalkAttack: 1
-  tier_ChargeKick: 0
   divideObject: {fileID: 0}
   HP: 300
   kickMag: 0.7
@@ -87,14 +86,11 @@ MonoBehaviour:
   cutterMag: 1.5
   fallAttackMag: 1
   breakScore: 500
-  breakPoint: 1
   objectID: 0
-  notLive: 0
-  BreakEffect: {fileID: 0}
+  breakEffect: {fileID: 0}
   deleteTime: 3
-  Torque: 1
-  Power: 1
-  chainDamage: 30
+  torque: 200
+  power: 30
 --- !u!114 &1806165296661878783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,6 +285,16 @@ PrefabInstance:
     - target: {fileID: 5819025525724764742, guid: 57c0f367bb0669a4db202efe65c72ad4,
         type: 3}
       propertyPath: fallAttackMag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5819025525724764742, guid: 57c0f367bb0669a4db202efe65c72ad4,
+        type: 3}
+      propertyPath: power
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5819025525724764742, guid: 57c0f367bb0669a4db202efe65c72ad4,
+        type: 3}
+      propertyPath: torque
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6354790628045462273, guid: 57c0f367bb0669a4db202efe65c72ad4,
