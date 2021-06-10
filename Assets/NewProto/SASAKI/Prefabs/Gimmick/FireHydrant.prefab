@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2527383316214841468}
   - component: {fileID: 8663573979528208312}
   - component: {fileID: -5282034740847405582}
+  - component: {fileID: 6184491439173604963}
   m_Layer: 0
   m_Name: FireHydrant
   m_TagString: Untagged
@@ -112,7 +113,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tier_WalkAttack: 2
-  tier_ChargeKick: 2
   divideObject: {fileID: 0}
   HP: 50
   kickMag: 1
@@ -120,14 +120,11 @@ MonoBehaviour:
   cutterMag: 1
   fallAttackMag: 1
   breakScore: 0
-  breakPoint: 0
   objectID: 8
-  notLive: 0
-  BreakEffect: {fileID: 0}
+  breakEffect: {fileID: 0}
   deleteTime: 3
-  Torque: 1
-  Power: 1
-  chainDamage: 0
+  torque: 0
+  power: 0
 --- !u!64 &8663573979528208312
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -163,3 +160,26 @@ MonoBehaviour:
   _xScale: 1
   _yScale: 10
   _zScale: 1
+--- !u!114 &6184491439173604963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2527383316214841470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: FireHydrant00
+  _cueSheet: Explosion
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1

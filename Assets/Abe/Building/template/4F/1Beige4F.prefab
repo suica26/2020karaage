@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1761072388762881492}
   - component: {fileID: 7774124483032099412}
   - component: {fileID: -4515825414847650415}
-  - component: {fileID: -8688449996352880443}
+  - component: {fileID: 7099939307430619573}
   m_Layer: 0
   m_Name: 1Beige4F
   m_TagString: Big
@@ -56,23 +56,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tier_WalkAttack: 3
-  tier_ChargeKick: 1
-  divideObject: {fileID: 0}
+  divideObject: {fileID: 5815251514028033214, guid: 0955a2ea4cbf7d64ab57e519763ce77c,
+    type: 3}
   HP: 1500
   kickMag: 0.7
   blastMag: 3.5
   cutterMag: 1
   fallAttackMag: 1
   breakScore: 200000
-  breakPoint: 5
   objectID: 0
-  notLive: 0
-  BreakEffect: {fileID: 2714036437048776495, guid: c1b6977c8b92845e3a1103d68f2de786,
+  breakEffect: {fileID: 6712329990759217117, guid: 53bf79c5ee1924f789ffbbd76bb24400,
     type: 3}
   deleteTime: 3
-  Torque: 10
-  Power: 20
-  chainDamage: 40
+  torque: 10
+  power: 50
 --- !u!82 &1808981008929483208
 AudioSource:
   m_ObjectHideFlags: 0
@@ -182,8 +179,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objFood: {fileID: 5882868508514077054, guid: 52bb1160a73b4b848953812cb2383dfc, type: 3}
-  minFood: 5
-  maxFood: 7
+  minFood: 15
+  maxFood: 20
 --- !u!54 &7774124483032099412
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -213,7 +210,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6.2655063, y: 12.788423, z: 10.517614}
   m_Center: {x: 0.025623083, y: 6.500789, z: 0.09482026}
---- !u!114 &-8688449996352880443
+--- !u!114 &7099939307430619573
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -226,8 +223,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playOnStart: 0
-  _cueName: 
-  _cueSheet: 
+  _cueName: BuildingContact00
+  _cueSheet: Explosion_R
   _regionOnStart: {fileID: 0}
   _listenerOnStart: {fileID: 0}
   _use3dPositioning: 1
@@ -1070,7 +1067,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7674169349806677586
 Transform:
   m_ObjectHideFlags: 0
@@ -1113,7 +1110,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8080494516867164623}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1425694917621484076}

@@ -7,6 +7,7 @@ public class Car_R : MonoBehaviour
     [SerializeField] private bool carMoving;    //車が走行するか否か
     [SerializeField] private float speed;
     [SerializeField] private float rotSpeed;
+    [SerializeField] private float initHeight;  //車種ごとに高さを設定して浮かないようにする(暫定的処理)
 
     private GameObject nowWaypoint;         //現在いる交差点
     private GameObject nextWaypoint;        //次の交差点
@@ -21,7 +22,6 @@ public class Car_R : MonoBehaviour
         isUturn = false;
         speed = _speed;
         nextWaypoint = obj;
-        transform.position = nextWaypoint.transform.position;
     }
 
     // Start is called before the first frame update
@@ -38,13 +38,10 @@ public class Car_R : MonoBehaviour
 
             //初期移動先(インスタンス先)を設定
             SetPosInit(nowWaypoint.transform.position);
+            targetPos.y += initHeight;
             transform.position = targetPos;
 
-            if (nextWaypoint.GetComponent<CarWaypoint_R>().uTurn)
-            {
-
-            }
-            else
+            if (!nextWaypoint.GetComponent<CarWaypoint_R>().uTurn)
             {
                 targetPos = afterNextWaypoint.GetComponent<CarWaypoint_R>().SetNextTargetPos(nextWaypoint.transform.position, nowWaypoint.transform.position, targetPos);
             }
@@ -56,10 +53,11 @@ public class Car_R : MonoBehaviour
     {
         if (carMoving)
         {
+            //前に車がいたら停止
             RaycastHit[] hits = Physics.RaycastAll(transform.position + transform.forward * 0.5f, transform.forward, 5.0f);
             foreach (var obj in hits)
             {
-                if (obj.transform.name == "Car(Clone)")
+                if (obj.transform.tag == "Car")
                     return;
             }
             CarMove();
@@ -134,35 +132,34 @@ public class Car_R : MonoBehaviour
     {
         Vector3 vec = nextWaypoint.transform.position - nowWaypoint.transform.position;
         targetPos = _origin;
-        //targetPos.y = 0;
 
         // X成分の方が大きい(X方向に移動する)とき
         if (Mathf.Abs(vec.x) > Mathf.Abs(vec.z))
         {
             if (vec.x > 0) // X方向 正
             {
-                targetPos.z -= 4;
+                targetPos.z -= 3;       //CarWaypoint_Rと同じ数値にすること
             }
             else          // X方向 負
             {
-                targetPos.z += 4;
+                targetPos.z += 3;
             }
         }
         else
         {
             if (vec.z > 0) // Z方向 正
             {
-                targetPos.x += 4;
+                targetPos.x += 3;
             }
             else          // Z方向 負
             {
-                targetPos.x -= 4;
+                targetPos.x -= 3;
             }
         }
     }
 
     private void Brakes()
     {
-
+        //どっかで実装したい
     }
 }

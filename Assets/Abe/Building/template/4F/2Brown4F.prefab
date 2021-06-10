@@ -786,7 +786,7 @@ GameObject:
   - component: {fileID: -6623569644826478736}
   - component: {fileID: -4758884897607761405}
   - component: {fileID: 7167690039588342639}
-  - component: {fileID: -3149009354728569590}
+  - component: {fileID: 7067946154288205186}
   m_Layer: 0
   m_Name: 2Brown4F
   m_TagString: Big
@@ -828,23 +828,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tier_WalkAttack: 3
-  tier_ChargeKick: 1
-  divideObject: {fileID: 0}
+  divideObject: {fileID: 5777630726250258165, guid: ee119d08f59d26d4684778e63e329373,
+    type: 3}
   HP: 1500
-  kickMag: 0.7
+  kickMag: 0.9
   blastMag: 3.5
   cutterMag: 1
   fallAttackMag: 1
   breakScore: 200000
-  breakPoint: 5
   objectID: 0
-  notLive: 0
-  BreakEffect: {fileID: 2714036437048776495, guid: c1b6977c8b92845e3a1103d68f2de786,
+  breakEffect: {fileID: 6712329990759217117, guid: 53bf79c5ee1924f789ffbbd76bb24400,
     type: 3}
   deleteTime: 3
-  Torque: 10
-  Power: 20
-  chainDamage: 40
+  torque: 10
+  power: 50
 --- !u!82 &-2970189359297469886
 AudioSource:
   m_ObjectHideFlags: 0
@@ -954,8 +951,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objFood: {fileID: 5882868508514077054, guid: 52bb1160a73b4b848953812cb2383dfc, type: 3}
-  minFood: 5
-  maxFood: 7
+  minFood: 15
+  maxFood: 20
 --- !u!54 &-4758884897607761405
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -985,7 +982,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6.521906, y: 12.788423, z: 10.517614}
   m_Center: {x: -0.10257661, y: 6.500789, z: 0.09482002}
---- !u!114 &-3149009354728569590
+--- !u!114 &7067946154288205186
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -998,8 +995,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playOnStart: 0
-  _cueName: 
-  _cueSheet: 
+  _cueName: BuildingContact00
+  _cueSheet: Explosion_R
   _regionOnStart: {fileID: 0}
   _listenerOnStart: {fileID: 0}
   _use3dPositioning: 1

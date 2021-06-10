@@ -118,7 +118,7 @@ public class CharaMoveRigid_R : MonoBehaviour
                 if(audioSourceWalk.isPlaying != walkClip[scrEvo.EvolutionNum])
                 {
                     //audioSourceWalk.PlayOneShot(walkClip[scrEvo.EvolutionNum]);
-                    audio.Play("footsteps00");
+                    audio.Play("FootSteps");
                     audio.Play("Walk_Voice00");
 
                 }
@@ -159,7 +159,7 @@ public class CharaMoveRigid_R : MonoBehaviour
             {
                 //audioSourceCommon.PlayOneShot(JumpClip);
                 audio.Play("Idle_Voice00");
-                audio.Play("Jump00");
+                audio.Play("Jump");
                 scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.JUMP, true);
                 rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
             }
@@ -226,8 +226,9 @@ public class CharaMoveRigid_R : MonoBehaviour
     void fallAttackCollisionCheck()
     {
         GameObject circleChecker;
-        if(fallAttackVer == 1)
+        if (fallAttackVer == 1)
         {
+        audio.Play("FallShock");
             //落下攻撃のダメージ上昇量を導出
             if (startHeight - endHeight < fallAttackFirstHeight[scrEvo.EvolutionNum])
                 damageBoost = boostMag[0];

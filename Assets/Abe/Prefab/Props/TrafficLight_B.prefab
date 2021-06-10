@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5663452601751058676}
   - component: {fileID: 7628322967625085260}
   - component: {fileID: 3124691085480572052}
-  - component: {fileID: -5181947309644558982}
+  - component: {fileID: 2409841999152357144}
   m_Layer: 0
   m_Name: TrafficLight_B
   m_TagString: Small
@@ -141,7 +141,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tier_WalkAttack: 2
-  tier_ChargeKick: 1
   divideObject: {fileID: 0}
   HP: 500
   kickMag: 1
@@ -149,15 +148,11 @@ MonoBehaviour:
   cutterMag: 1.5
   fallAttackMag: 1
   breakScore: 1000
-  breakPoint: 2
-  objectID: 0
-  notLive: 0
-  BreakEffect: {fileID: 2714036437048776495, guid: c1b6977c8b92845e3a1103d68f2de786,
-    type: 3}
+  objectID: 9
+  breakEffect: {fileID: 0}
   deleteTime: 3
-  Torque: 3
-  Power: 3
-  chainDamage: 30
+  torque: 200
+  power: 30
 --- !u!114 &7628322967625085260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,7 +264,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &-5181947309644558982
+--- !u!114 &2409841999152357144
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -282,8 +277,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playOnStart: 0
-  _cueName: 
-  _cueSheet: 
+  _cueName: PoleContact00
+  _cueSheet: Contact
   _regionOnStart: {fileID: 0}
   _listenerOnStart: {fileID: 0}
   _use3dPositioning: 1

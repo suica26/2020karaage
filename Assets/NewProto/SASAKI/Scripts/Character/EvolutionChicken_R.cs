@@ -37,6 +37,9 @@ public class EvolutionChicken_R : MonoBehaviour
     public float Status_SCORE { get { return status_SCORE; } }
     public float Status_JUMP { get { return status_JUMP; } }
 
+    private CriAtomSource audioLavel;
+    private CriAtomSource BGM;
+
     void Start()
     {
         scrParam = objParam.gameObject.GetComponent<Parameters_R>();
@@ -52,6 +55,11 @@ public class EvolutionChicken_R : MonoBehaviour
         chickens[1].SetActive(false);
         chickens[2].SetActive(false);
         chickens[3].SetActive(false);
+
+        audioLavel = (CriAtomSource)GetComponent("CriAtomSource");
+        //ADX Selector Change
+        audioLavel.player.SetSelectorLabel("Chicken_Form", "form1");
+
     }
 
     // Update is called once per frame
@@ -72,6 +80,10 @@ public class EvolutionChicken_R : MonoBehaviour
 
             chickens[evolutionNum - 1].SetActive(false);
             chickens[evolutionNum].SetActive(true);
+
+            //ADX Selector Change
+            audioLavel.player.SetSelectorLabel("Chicken_Form", "form2");
+            audioLavel.Play("ShockWave");
 
             status_HP = HP[evolutionNum];
             status_ATK = ATK[evolutionNum];
