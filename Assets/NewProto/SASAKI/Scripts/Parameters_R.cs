@@ -34,7 +34,7 @@ public class Parameters_R : MonoBehaviour
 
     private bool freeze = false;
     private float count,niwaPer;
-    [SerializeField] private int evo1, evo2, evo3;
+    [SerializeField] public int evo1, evo2, evo3;
 
     public void Start()
     {
@@ -95,7 +95,7 @@ public class Parameters_R : MonoBehaviour
         {
             ep += addEP;
             plusTime += 1;
-            niwa.fillAmount += 5 / niwaPer;
+            niwa.fillAmount += addEP / niwaPer;
             //epSlider.value += addEP;
             epText.text = "EP: " + ep;
             if (ep == evo1)
