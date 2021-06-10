@@ -5,14 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class SoundVolumeController : MonoBehaviour
 {
-    public float soundVolume;
+    public float soundVolume = 1f;
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
     }
-    // Use this for initialization
-    void Start()
-    {
 
+    void Update()
+    {
+        CriAtom.SetCategoryVolume("BGM", soundVolume);
+        CriAtom.SetCategoryVolume("SFX", soundVolume);
+        CriAtom.SetCategoryVolume("Voice", soundVolume);
+        CriAtom.SetCategoryVolume("Ambient", soundVolume);
     }
 }
