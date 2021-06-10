@@ -70,4 +70,10 @@ public class CarWaypoint_R : MonoBehaviour
         }
         return targetPos;
     }
+
+    //このWaypointでインスタンス化可能か返す
+    public bool Instantiable()
+    {
+        return endWaypoint && nextWaypoint.Length != 0 ? true : false;
+    }
 }
