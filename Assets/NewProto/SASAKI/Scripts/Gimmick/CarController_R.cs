@@ -25,7 +25,7 @@ public class CarController_R : MonoBehaviour
         //車を生成可能なウェイポイントのみを選別してリスト化
         foreach (GameObject waypoint in waypoints)
         {
-            if (waypoint.GetComponent<CarWaypoint_R>().endWaypoint)
+            if (waypoint.GetComponent<CarWaypoint_R>().Instantiable())
             {
                 endWaypoints.Add(waypoint);
             }
