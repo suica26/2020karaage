@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2127407318518666785}
   - component: {fileID: 4298405237507298395}
   - component: {fileID: 6213507955693389779}
+  - component: {fileID: 4087060670076069517}
   m_Layer: 0
   m_Name: vehicle2_C:body
   m_TagString: Untagged
@@ -79,6 +80,29 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &4087060670076069517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096077199415337734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 1
+  _cueName: "CarMove00\u3000\u3000"
+  _cueSheet: Town
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &3377913261543502291
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,7 +196,7 @@ GameObject:
   - component: {fileID: 5123889478579324442}
   - component: {fileID: 2165320340007743089}
   - component: {fileID: 7036124931048319392}
-  - component: {fileID: 5166329280200298883}
+  - component: {fileID: 214920109897509919}
   m_Layer: 0
   m_Name: car1_2
   m_TagString: Car
@@ -290,7 +314,7 @@ MonoBehaviour:
   speed: 0
   rotSpeed: 250
   initHeight: -0.4
---- !u!114 &5166329280200298883
+--- !u!114 &214920109897509919
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -302,9 +326,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playOnStart: 1
-  _cueName: "CarMove00\u3000\u3000"
-  _cueSheet: Town
+  _playOnStart: 0
+  _cueName: CarExplosion00
+  _cueSheet: Explosion
   _regionOnStart: {fileID: 0}
   _listenerOnStart: {fileID: 0}
   _use3dPositioning: 1
