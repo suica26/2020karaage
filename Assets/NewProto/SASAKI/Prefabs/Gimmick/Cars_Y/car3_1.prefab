@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9078352039430886718}
   - component: {fileID: 4995256705899868382}
   - component: {fileID: 1595237453073910429}
-  - component: {fileID: -2282580104985539722}
+  - component: {fileID: 3113602788831978780}
   m_Layer: 0
   m_Name: car3_1
   m_TagString: Car
@@ -132,7 +132,7 @@ MonoBehaviour:
   speed: 0
   rotSpeed: 250
   initHeight: -0.1
---- !u!114 &-2282580104985539722
+--- !u!114 &3113602788831978780
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,9 +144,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playOnStart: 1
-  _cueName: "CarMove00\u3000\u3000"
-  _cueSheet: Town
+  _playOnStart: 0
+  _cueName: CarExplosion00
+  _cueSheet: Explosion
   _regionOnStart: {fileID: 0}
   _listenerOnStart: {fileID: 0}
   _use3dPositioning: 1
@@ -324,6 +324,7 @@ GameObject:
   - component: {fileID: 6049426922592644554}
   - component: {fileID: 8490113064312745904}
   - component: {fileID: 1751654531296771128}
+  - component: {fileID: 1925822933604292413}
   m_Layer: 0
   m_Name: vehicle2_C:body
   m_TagString: Untagged
@@ -392,6 +393,29 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &1925822933604292413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6008702438033119469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 1
+  _cueName: "CarMove00\u3000\u3000"
+  _cueSheet: Town
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &6959523936676547128
 GameObject:
   m_ObjectHideFlags: 0

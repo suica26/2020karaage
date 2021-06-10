@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1179652166182725631}
   - component: {fileID: 8908764245447557722}
   - component: {fileID: 7990548262441760230}
-  - component: {fileID: -5008347019420884284}
+  - component: {fileID: 1275515004539815026}
   m_Layer: 0
   m_Name: TrafficLight_A
   m_TagString: Small
@@ -134,7 +134,7 @@ MonoBehaviour:
   cutterMag: 1.5
   fallAttackMag: 1
   breakScore: 1000
-  objectID: 0
+  objectID: 1
   breakEffect: {fileID: 0}
   deleteTime: 3
   torque: 200
@@ -250,7 +250,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &-5008347019420884284
+--- !u!114 &1275515004539815026
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -263,8 +263,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playOnStart: 0
-  _cueName: 
-  _cueSheet: 
+  _cueName: PoleContact00
+  _cueSheet: Contact
   _regionOnStart: {fileID: 0}
   _listenerOnStart: {fileID: 0}
   _use3dPositioning: 1

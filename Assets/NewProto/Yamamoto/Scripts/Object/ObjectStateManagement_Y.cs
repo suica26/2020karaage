@@ -130,6 +130,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
     /// 6 ガスタンク
     /// 7　木
     /// 8 消火栓
+    /// 9 信号機Big
     /// </summary>
     private void SetAttackCue()
     {
@@ -143,6 +144,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
             case 6: attackSoundName = "BuildingContact00"; break;
             case 7: attackSoundName = "KickTree00"; break;
             case 8: attackSoundName = "FireHydrant00"; break;
+            case 9: attackSoundName = "TrafficExplosion00"; break;
             default: attackSoundName = "TrashcanContact00"; break;
         }
     }
@@ -160,6 +162,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
             case 6: contactSoundName = "BuildingContact00"; break;
             case 7: contactSoundName = "KickTree00"; break;
             case 8: contactSoundName = "Contact_FireHydrant00"; break;
+            case 9: contactSoundName = "PoleContract00"; break;
             default: contactSoundName = "TrachcanContact00"; break;
         }
     }
@@ -177,6 +180,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
             case 6: ExplosionSoundName = "GasExplosion00"; break;
             case 7: ExplosionSoundName = "FallenTree00"; break;
             case 8: ExplosionSoundName = "FireHydrant00"; break;
+            case 9: ExplosionSoundName = "PoleContract00"; break;
             default: ExplosionSoundName = "PoleExplosion00"; break;
         }
     }
