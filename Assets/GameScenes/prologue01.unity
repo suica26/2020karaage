@@ -250,6 +250,10 @@ MonoBehaviour:
     acbFile: St0_Track.acb
     awbFile: 
     loaderStatus: 0
+  - name: Prologue
+    acbFile: Prologue.acb
+    awbFile: 
+    loaderStatus: 0
   dspBusSetting: 
   dontDestroyOnLoad: 0
   dontRemoveExistsCueSheet: 0
@@ -677,7 +681,7 @@ MonoBehaviour:
       streamingVoices: 0
     outputSamplingRate: 0
     usesInGamePreview: 0
-    inGamePreviewMode: 0
+    inGamePreviewMode: 1
     serverFrequency: 60
     asrOutputChannels: 2
     useRandomSeedWithTime: 0
@@ -779,6 +783,7 @@ GameObject:
   - component: {fileID: 4868635450030955769}
   - component: {fileID: 4868635450030955774}
   - component: {fileID: 4868635450030955775}
+  - component: {fileID: 4868635450030955776}
   m_Layer: 0
   m_Name: movie
   m_TagString: Untagged
@@ -957,4 +962,29 @@ MonoBehaviour:
   - 41.633
   - 44.6
   - 50
-  time: 0
+  videoTime: 0
+  soundTime: 0
+  SoundCount: 0
+--- !u!114 &4868635450030955776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4868635450030955768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: Prologue1_1
+  _cueSheet: Prologue
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1

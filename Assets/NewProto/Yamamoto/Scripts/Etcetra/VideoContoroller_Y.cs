@@ -13,10 +13,16 @@ public class VideoContoroller_Y : MonoBehaviour
     private bool movingVideo;
     public double videoTime;
     public double soundTime;
+
+    //ADX
+    public int SoundCount;
+    private CriAtomSource ProlSound;
+
     void Start()
     {
         videoPlayer.Play();
         movingVideo = true;
+        ProlSound = (CriAtomSource)GetComponent("CriAtomSource");
     }
 
     private void Update()
@@ -27,7 +33,12 @@ public class VideoContoroller_Y : MonoBehaviour
         {
             StopCut();
 
-            if (nextCutTiming >= timings.Length - 1) nextscene.SetActive(true);
+            if (nextCutTiming >= timings.Length - 1)
+            {
+                nextscene.SetActive(true);
+
+                ProlSound.Play(SoundCount);
+            }
         }
 
         if (!movingVideo && (Input.GetMouseButtonDown(0) || Input.GetKeyDown("return")))
@@ -38,6 +49,7 @@ public class VideoContoroller_Y : MonoBehaviour
         {
             SkipCurrentCut();
         }
+        Debug.Log(SoundCount);
     }
 
     private void StopCut()
@@ -54,10 +66,15 @@ public class VideoContoroller_Y : MonoBehaviour
         nextCutTiming++;
         videoPlayer.Play();             //再生
         cursor.SetActive(false);
+
+        ProlSound.Play(SoundCount); //音再生
+        SoundCount++;  //キューIDを増やす
     }
 
     private void SkipCurrentCut()
     {
         videoPlayer.time = timings[nextCutTiming];
+        //SoundCount++;  //キューIDを増やす
+        //ProlSound.Play(SoundCount);
     }
 }
