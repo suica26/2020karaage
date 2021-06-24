@@ -48,7 +48,10 @@ public class ObjectStateManagement_Y : MonoBehaviour
     private Stage1_Mission_M playerScrS1M;
     private bool livingFlg;
 
-    // Start is called before the first frame update
+    //破壊後のオブジェクトが地面(等)に接触したときの音
+    public string groundContactSoundName;
+
+    //Start is called before the first frame update
     private void Start()
     {
         player = GameObject.Find("Player");
@@ -79,10 +82,21 @@ public class ObjectStateManagement_Y : MonoBehaviour
     //踏み潰し攻撃
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player" && scrEvo.EvolutionNum >= tier_WalkAttack && livingFlg)
+        //踏み潰し攻撃が発生したとき
+        bool trampling = collision.gameObject.tag == "Player" && scrEvo.EvolutionNum >= tier_WalkAttack;
+        //破砕車がぶつかったとき
+        bool carHit = collision.gameObject.tag == "Car";
+
+        //即死条件と生存フラグがどちらも成り立つとき、即死発動
+        if ((trampling || carHit) && livingFlg)
         {
             hitSkilID = 0;
             Death();
+        }
+
+        if (!livingFlg && collision.gameObject.tag != "Player" && groundContactSoundName != null)
+        {
+            criAtomSource.Play(groundContactSoundName);
         }
     }
 
@@ -209,6 +223,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
         //すでに破壊済みの場合は無視
         if (!livingFlg) return;
 
+        livingFlg = false;
         //一応、HPは0になるように補正をかける
         HP = 0;
 
@@ -226,8 +241,6 @@ public class ObjectStateManagement_Y : MonoBehaviour
         //差し替え処理
         if (divideObject != null) ChangeObject();
         else Substitution();    //差し替えをしない場合
-
-        livingFlg = false;
     }
 
     public void DeathCount()
@@ -263,10 +276,6 @@ public class ObjectStateManagement_Y : MonoBehaviour
         var breakScr = gameObject.AddComponent<ObjectBreak_Y>();
         breakScr.InitSetting(this, false);
         breakScr.BreakAction();
-        foreach (var colliders in GetComponents<Collider>())
-        {
-            colliders.enabled = false;
-        }
         Destroy(gameObject, deleteTime);
     }
 
