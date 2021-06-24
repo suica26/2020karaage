@@ -6,13 +6,13 @@ using UnityEngine.UI;
 public class Stage1_Mission_M : MonoBehaviour
 {
     [SerializeField] public Text mission, submis, exmis, count, per;
-    [SerializeField] public GameObject player, shop, misBox, company;
+    [SerializeField] public GameObject player, shop, misBox, company,achievement;
     [SerializeField] public TextAsset txtFile;
     [SerializeField] public int smallNum, bigNum, achieve;
     [SerializeField] public int smallBorder1, smallBorder2, smallBorder3,
                                 bigBorder1, bigBorder2, bigBorder3,bigBorder4;
     [SerializeField] public int manhole, hydrant;
-    private bool first = true, second = false, third = false, fourth = false, final = false,
+    public bool first = true, second = false, third = false, fourth = false, final = false,
         Language;
     private string txtData;
     private string[] splitText;
@@ -23,6 +23,7 @@ public class Stage1_Mission_M : MonoBehaviour
         txtData = txtFile.text;
         splitText = txtData.Split(char.Parse("\n"));
         misBox.SetActive(false);
+        achievement.SetActive(false);
     }
 
     void Update()
@@ -35,6 +36,7 @@ public class Stage1_Mission_M : MonoBehaviour
         if (!shop && first)
         {
             misBox.SetActive(true);
+            achievement.SetActive(true);
             missionSlide.Play();
             mission.text = splitText[0];
             submis.text = splitText[1];
@@ -53,6 +55,8 @@ public class Stage1_Mission_M : MonoBehaviour
             count.text = "2";
             second = false;
             third = true;
+            achieve = 0;
+            per.text = achieve + "/ 3";
         }
         else if (bigNum >= bigBorder3 && smallNum >= smallBorder1 && second == true)
         {
@@ -63,6 +67,8 @@ public class Stage1_Mission_M : MonoBehaviour
             count.text = "2";
             second = false;
             third = true;
+            achieve = 0;
+            per.text = achieve + "/ 3";
         }
         else if (bigNum >= bigBorder2 && smallNum >= smallBorder2 && second == true)
         {
@@ -73,6 +79,8 @@ public class Stage1_Mission_M : MonoBehaviour
             count.text = "2";
             second = false;
             third = true;
+            achieve = 0;
+            per.text = achieve + "/ 3";
         }
         else if (bigNum >= bigBorder1 && smallNum >= smallBorder3 && second == true)
         {
@@ -83,6 +91,8 @@ public class Stage1_Mission_M : MonoBehaviour
             count.text = "2";
             second = false;
             third = true;
+            achieve = 0;
+            per.text = achieve + "/ 3";
         }
 
         if (hydrant >= 3 && third)
@@ -94,6 +104,8 @@ public class Stage1_Mission_M : MonoBehaviour
             submis.text = splitText[7];
             exmis.text = splitText[8];
             count.text = "3";
+            achieve = 0;
+            per.text = achieve + "/ 3";
         }
 
         if (manhole >= 3 && fourth)
@@ -105,6 +117,7 @@ public class Stage1_Mission_M : MonoBehaviour
             submis.text = splitText[10];
             exmis.text = splitText[11];
             count.text = "4";
+            achievement.SetActive(false);
         }
 
         if (dis <= 30 && final)
@@ -126,14 +139,20 @@ public class Stage1_Mission_M : MonoBehaviour
     public void BigNumberPlus()
     {
         bigNum ++;
-        achieve += 20;
-        per.text = achieve + "%";
+        if (second)
+        {
+            achieve += 20;
+            per.text = achieve + "%";
+        }
     }
     public void SmallNumberPlus()
     {
         smallNum ++;
-        achieve += 4;
-        per.text = achieve + "%";
+        if (second)
+        {
+            achieve += 4;
+            per.text = achieve + "%";
+        }
     }
 
     public void Manhole()

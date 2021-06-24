@@ -26,7 +26,12 @@ public class Manhole_R : BlowerGimmickBase
             InstanceEffect();
             audio.Play("Manhole00");
             //M
-            s1mm.manhole += 1;
+            if (s1mm.fourth)
+            {
+                s1mm.manhole += 1;
+                s1mm.achieve += 1;
+                s1mm.per.text = s1mm.achieve + "/ 3";
+            }
         }
     }
 }

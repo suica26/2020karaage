@@ -27,7 +27,12 @@ public class FireHydrant_R : BlowerGimmickBase
             InstanceObject();
             InstanceEffect();
             //M
-            s1mm.hydrant += 1;
+            if (s1mm.third)
+            {
+                s1mm.hydrant += 1;
+                s1mm.achieve += 1;
+                s1mm.per.text = s1mm.achieve + "/ 3";
+            }
         }
     }
 }

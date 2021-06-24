@@ -6,10 +6,15 @@ using UnityEngine.UI;
 public class Attention_Field_M : MonoBehaviour
 {
     [SerializeField] GameObject wall1, wall2, wall3, wall4, wall5, player, attention;
-    [SerializeField] public float safety;
+    [SerializeField] public float safety, count;
+    [SerializeField] Animator animator;
+    private string str1 = "isSwitch";
+    private string str2 = "isTap";
+    [SerializeField] private bool bar;
+
     void Start()
     {
-        attention.SetActive(false);
+        //this.animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -29,28 +34,71 @@ public class Attention_Field_M : MonoBehaviour
 
         if (dist1 <= safety)
         {
-            attention.SetActive(true);
+            animator.SetBool(str1, true);
+            bar = true;
         }
         else if (dist2 <= safety)
         {
-            attention.SetActive(true);
+            animator.SetBool(str1, true);
+            bar = true;
         }
         else if (dist3 <= safety)
         {
-            attention.SetActive(true);
+            animator.SetBool(str1, true);
+            bar = true;
         }
-        else if (dist3 <= safety)
+        else if (dist4 <= safety)
         {
-            attention.SetActive(true);
+            animator.SetBool(str1, true);
+            bar = true;
         }
-        else if (dist3 <= safety)
+        else if (dist5 <= safety)
         {
-            attention.SetActive(true);
+            animator.SetBool(str1, true);
+            bar = true;
         }
 
-        else
+        else if (dist1 > safety && bar)
         {
-            attention.SetActive(false);
+            animator.SetBool(str2, true);
+            Count();
         }
+
+        else if (dist2 > safety && bar)
+        {
+            animator.SetBool(str2, true);
+            Count();
+        }
+
+        else if (dist3 > safety && bar)
+        {
+            animator.SetBool(str2, true);
+            Count();
+        }
+
+        else if (dist4 > safety && bar)
+        {
+            animator.SetBool(str2, true);
+            Count();
+        }
+
+        else if (dist5 > safety && bar)
+        {
+            animator.SetBool(str2, true);
+            Count();
+        }
+
+        if (count >= 1.1f)
+        {
+            count = 0;
+            bar = false;
+            animator.SetBool(str1, false);
+            animator.SetBool(str2, false);
+        }
+    }
+
+    private void Count()
+    {
+        count += Time.deltaTime;
     }
 }
