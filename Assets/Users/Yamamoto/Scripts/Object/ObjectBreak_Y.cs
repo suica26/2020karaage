@@ -1,17 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BLINDED_AM_ME;
 
 public class ObjectBreak_Y : MonoBehaviour
 {
     private ObjectStateManagement_Y objScr;
-    public AudioClip ExplosionSound, CollapseSound;
-    public bool live = true;
-    public bool death = false;
-    private AudioSource audioSource;
     private GameObject player;
     private CriAtomSource criAtomSource;
-    private string cueName_BreakSound;
 
     // 自身の子要素を管理するリスト
     private List<GameObject> myParts = new List<GameObject>();
@@ -29,13 +25,14 @@ public class ObjectBreak_Y : MonoBehaviour
     {
         objScr = objectScript;
         player = objectScript.player;
-        Collapsions = new VoidFunc[6] { TramplingCollapse, KickCollapse, KickCollapse, KickCollapse, KickCollapse, KickCollapse };
+        Collapsions = new VoidFunc[6] { TramplingCollapse, KickCollapse, CutterCollapse, KickCollapse, KickCollapse, KickCollapse };
         criAtomSource = GetComponent<CriAtomSource>();
         //破壊済み状態にタグとレイヤーを変更
         tag = "Broken";
         this.gameObject.layer = LayerMask.NameToLayer("BrokenObject");
         //分割済みオブジェクトなのかを判定
         divided = isDivided;
+
         if (divided)
         {
             //自分の子要素をリストに格納
@@ -50,26 +47,6 @@ public class ObjectBreak_Y : MonoBehaviour
 
     public void BreakAction()
     {
-        /*
-        //破壊時のおはようブラストやカッターの位置を取得
-        GameObject morBla = GameObject.Find("MorningBlastSphere_Y(Clone)");
-        GameObject cutter = GameObject.Find("Cutter(Clone)");
-        var morBlaPos = new Vector3();
-        var cutterPos = new Vector3();
-        if (objScr.hitSkilID == 2) morBlaPos = morBla.transform.position;
-        if (objScr.hitSkilID == 3) cutterPos = cutter.transform.position;
-
-        //Gは建物の重心
-        var G = new Vector3();
-        var P = transform.position;
-
-        foreach (GameObject obj in myParts)
-        {
-            G += obj.transform.position;
-        }
-        G /= myParts.Count;
-        */
-
         if (divided)
         {
             foreach (var shard in myParts)
@@ -77,13 +54,12 @@ public class ObjectBreak_Y : MonoBehaviour
                 ShardSettings(shard);
                 Collapsions[objScr.hitSkilID](shard);
             }
-            objScr.Delete();
         }
         else
         {
             Collapsions[objScr.hitSkilID](gameObject);
-
         }
+
         if (objScr.breakEffect != null)
         {
             var effect = Instantiate(objScr.breakEffect, transform.position, Quaternion.identity);
@@ -107,51 +83,11 @@ public class ObjectBreak_Y : MonoBehaviour
         shard.layer = LayerMask.NameToLayer("Shard");
     }
 
-    private void StandardExplosion(GameObject obj)
-    {
-        if (live)
-        {
-            if (ExplosionSound != null) audioSource.PlayOneShot(ExplosionSound);
-            if (CollapseSound != null) audioSource.PlayOneShot(CollapseSound);
-            live = false;
-        }
-        Vector3 forcePower = new Vector3(Random.Range(-objScr.power, objScr.power), Random.Range(-objScr.power * 0.2f, objScr.power * 0.2f), Random.Range(-objScr.power * 0.75f, objScr.power * 0.75f));
-        Vector3 TorquePower = new Vector3(Random.Range(-objScr.torque, objScr.torque), Random.Range(-objScr.torque, objScr.torque), Random.Range(-objScr.torque, objScr.torque));
-        var rb = obj.GetComponent<Rigidbody>();
-        rb.AddForce(forcePower, ForceMode.Impulse);
-        rb.AddTorque(TorquePower, ForceMode.Impulse);
-        //エフェクト発生
-        if (objScr.breakEffect != null) Instantiate(objScr.breakEffect, transform.position, Quaternion.identity, transform);
-    }
-
-    //基本的な爆発
-    private IEnumerator StandardExplosionCoroutin(GameObject obj, Vector3 G)
-    {
-        var forceDir = (G - obj.transform.position).normalized;
-        var F = forceDir * 5f;
-        var rb = obj.GetComponent<Rigidbody>();
-        rb.AddForce(F, ForceMode.Impulse);
-        rb.useGravity = false;
-
-        yield return new WaitForSeconds(1f);
-
-        rb.isKinematic = false;
-        rb.useGravity = true;
-        StandardExplosion(obj);
-    }
-
-    private Vector3 GetVectorXZNormalized(Vector3 A, Vector3 B)
-    {
-        var AB = A - B;
-        AB = new Vector3(AB.x, 0, AB.z);
-        return AB.normalized;
-    }
-
     //踏み潰し攻撃
     private void TramplingCollapse(GameObject obj)
     {
         RigidOn(obj);
-        GetComponent<Rigidbody>().AddForce(0, -objScr.power, 0);
+        obj.GetComponent<Rigidbody>().AddForce(0, -objScr.power * 10, 0);
     }
 
     //チキンキック
@@ -168,18 +104,69 @@ public class ObjectBreak_Y : MonoBehaviour
     }
 
     //とさかカッター
-    private void CutterBreak(GameObject obj, Vector3 CP, Vector3 G)   //CPはカッターのposition　y座標比較に利用
+    private void CutterCollapse(GameObject obj)
     {
-        if (obj.transform.position.y > CP.y)
+        RigidOn(obj);
+        //GameObject cutter = GameObject.Find("Cutter (Clone)");
+        var forward = player.transform.forward;
+        //カッターの進行方向（XZ平面）を90度回転したものがカット平面
+        var normal = new Vector3(forward.z, 0, forward.x);
+        var leftObjects = new List<GameObject>();
+        var rightObjects = new List<GameObject>();
+
+        var left = new GameObject("leftObj", typeof(Rigidbody));
+        var right = new GameObject("rightObj", typeof(Rigidbody));
+
+        //Meshがついているか確認するリスト
+        var checkObjects = new List<GameObject>();
+        //最初は代入されたobjをとりあえず入れておく
+        checkObjects.Add(obj);
+        bool finish = false;
+
+        while (!finish)
         {
-            var force = new Vector3(Random.Range(-2f, 2f), 10f, Random.Range(-2f, 2f));
-            obj.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
+            var nextCheck = new List<GameObject>();
+            foreach (var cObj in checkObjects)
+            {
+                //メッシュが設定されている(＝空オブジェクトでない)オブジェクトの場合
+                if (cObj.GetComponent<MeshFilter>() != null)
+                {
+                    var divObjects = MeshCut.Cut(cObj, cObj.transform.position, normal, cObj.GetComponent<Renderer>().material);
+                    divObjects[0].transform.parent = left.transform;
+                    divObjects[1].transform.parent = right.transform;
+                }
+                else
+                {
+                    //子オブジェクトを所有しているかを確認
+                    if (cObj.transform.childCount > 0)
+                    {
+                        foreach (Transform children in cObj.transform)
+                        {
+                            nextCheck.Add(children.gameObject);
+                        }
+                    }
+                }
+            }
+
+            if (nextCheck.Count > 0)
+            {
+                checkObjects = new List<GameObject>(nextCheck);
+            }
+            else finish = true;
         }
-        else
-        {
-            obj.GetComponent<Rigidbody>().isKinematic = true;
-        }
-        StartCoroutine(StandardExplosionCoroutin(obj, G));
+
+        var rbL = left.GetComponent<Rigidbody>();
+        var rbR = right.GetComponent<Rigidbody>();
+
+        RigidOn(left);
+        RigidOn(right);
+
+        rbL.AddForce(-normal * objScr.power / 3, ForceMode.Impulse);
+        rbR.AddForce(normal * objScr.power / 3, ForceMode.Impulse);
+
+        Destroy(left, objScr.deleteTime);
+        Destroy(right, objScr.deleteTime);
+        obj.SetActive(false);
     }
 
     //おはようブラスト
@@ -191,12 +178,6 @@ public class ObjectBreak_Y : MonoBehaviour
         var rb = obj.GetComponent<Rigidbody>();
         rb.AddForce(F, ForceMode.Impulse);
         rb.AddTorque(TorquePower, ForceMode.Impulse);
-        if (live)
-        {
-            if (ExplosionSound != null) audioSource.PlayOneShot(ExplosionSound);
-            if (CollapseSound != null) audioSource.PlayOneShot(CollapseSound);
-            live = false;
-        }
     }
 
     //ヒップドロップ

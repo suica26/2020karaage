@@ -11619,13 +11619,16 @@ MonoBehaviour:
   submis: {fileID: 689518565}
   exmis: {fileID: 1941961494}
   count: {fileID: 1724809701}
+  per: {fileID: 0}
   player: {fileID: 2147035847}
   shop: {fileID: 0}
   misBox: {fileID: 1424501407}
   company: {fileID: 0}
+  achievement: {fileID: 0}
   txtFile: {fileID: 4900000, guid: 5c2d829dc47700940b06273ebcf0309d, type: 3}
   smallNum: 0
   bigNum: 0
+  achieve: 0
   smallBorder1: 5
   smallBorder2: 10
   smallBorder3: 15
@@ -11633,6 +11636,14 @@ MonoBehaviour:
   bigBorder2: 3
   bigBorder3: 4
   bigBorder4: 5
+  manhole: 0
+  hydrant: 0
+  first: 1
+  second: 0
+  third: 0
+  fourth: 0
+  final: 0
+  Language: 0
   missionSlide: {fileID: 1424501409}
 --- !u!82 &2147035851
 AudioSource:
@@ -12404,6 +12415,8 @@ MonoBehaviour:
   deleteTime: 3
   torque: 10
   power: 50
+  groundContactSoundName: 
+  capMaterial: {fileID: 0}
 --- !u!1 &3891776677744686054
 GameObject:
   m_ObjectHideFlags: 0
