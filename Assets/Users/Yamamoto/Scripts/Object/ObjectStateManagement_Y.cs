@@ -32,6 +32,9 @@ public class ObjectStateManagement_Y : MonoBehaviour
     private FoodMaker_R scrFood;
     private chickenKick_R scrKick;
     private EvolutionChicken_R scrEvo;
+    //加筆　undertreem 0625
+    private ADX_Ray_Rev ADX_RevLevel;
+    private string Rev; //ADXバス名
     /// <summary>
     /// 0:踏み潰し攻撃
     /// 1:チキンキック
@@ -64,6 +67,8 @@ public class ObjectStateManagement_Y : MonoBehaviour
         scrEvo = player.GetComponent<EvolutionChicken_R>();
         scrFood = GetComponent<FoodMaker_R>();
         criAtomSource = GetComponent<CriAtomSource>();
+        //加筆　undertreem 0625
+        ADX_RevLevel = player.GetComponent<ADX_Ray_Rev>();
 
         playerScrS1M = player.GetComponent<Stage1_Mission_M>();
         livingFlg = true;
@@ -235,6 +240,10 @@ public class ObjectStateManagement_Y : MonoBehaviour
         scrFood?.DropFood();
 
         SetBreakCue();
+        //加筆　undertreem 0625
+        float BusLevel = ADX_RevLevel.ADX_BusSendLevel;
+        SetBusSendLevelSet(Rev, BusLevel);
+        Debug.Log(BusLevel);
         criAtomSource?.Play(ExplosionSoundName);
 
         DeathCount();
@@ -282,5 +291,11 @@ public class ObjectStateManagement_Y : MonoBehaviour
     public void Delete()
     {
         Destroy(gameObject, deleteTime);
+    }
+
+    //undertreem 0625 ADXバスセンド量
+    private void SetBusSendLevelSet(string busName, float levelOffset)
+    {
+        criAtomSource.SetBusSendLevelOffset(busName, levelOffset);
     }
 }
