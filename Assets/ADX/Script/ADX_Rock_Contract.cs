@@ -5,8 +5,8 @@ using UnityEngine;
 public class ADX_Rock_Contract : MonoBehaviour
 {
     private  CriAtomSource ContractSound;
-    private ADX_Ray_Rev ADX_RevLevel;
-    private string Rev; //ADXバス名
+    private ADX_Ray_Rev ADX_RevLevel_L, ADX_RevLevel_R;
+    private string Rev_L,Rev_R; //ADXバス名
     public GameObject player { get; private set; }
     private bool isCalledOnce = false;
 
@@ -15,7 +15,8 @@ public class ADX_Rock_Contract : MonoBehaviour
     {
         player = GameObject.Find("Player");
         ContractSound = GetComponent<CriAtomSource>();
-        ADX_RevLevel = player.GetComponent<ADX_Ray_Rev>();
+        ADX_RevLevel_L = player.GetComponent<ADX_Ray_Rev>();
+        ADX_RevLevel_R = player.GetComponent<ADX_Ray_Rev>();
     }
 
     // Update is called once per frame
@@ -23,8 +24,11 @@ public class ADX_Rock_Contract : MonoBehaviour
     {
         if (!isCalledOnce)
         {
-            float BusLevel = ADX_RevLevel.ADX_BusSendLevel;
-            SetBusSendLevelSet(Rev, BusLevel); Debug.Log("Send" + BusLevel);
+            float BusLevel_L = ADX_RevLevel_L.ADX_BusSendLevel_L;
+            float BusLevel_R = ADX_RevLevel_R.ADX_BusSendLevel_R;
+
+            SetBusSendLevelSet(Rev_L, BusLevel_L); Debug.Log("L" + BusLevel_L);
+            SetBusSendLevelSet(Rev_R, BusLevel_R); Debug.Log("R" + BusLevel_R);
             isCalledOnce = true;
         }
     }
