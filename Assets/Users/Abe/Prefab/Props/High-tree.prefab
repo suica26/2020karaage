@@ -17,9 +17,10 @@ GameObject:
   - component: {fileID: 5359174071110268043}
   - component: {fileID: 9111595097055605846}
   - component: {fileID: -8082976854255320290}
+  - component: {fileID: 7994244683285883087}
   m_Layer: 0
   m_Name: High-tree
-  m_TagString: Small
+  m_TagString: Tree
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -219,6 +220,7 @@ MonoBehaviour:
   deleteTime: 3
   torque: 200
   power: 30
+  groundContactSoundName: 
 --- !u!114 &5359174071110268043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -273,3 +275,17 @@ MonoBehaviour:
   _pitch: 0
   _androidUseLowLatencyVoicePool: 0
   need_to_player_update_all: 1
+--- !u!136 &7994244683285883087
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4784497602924888904}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 687
+  m_Height: 2541.4
+  m_Direction: 1
+  m_Center: {x: 0, y: 1331, z: -17.99}
