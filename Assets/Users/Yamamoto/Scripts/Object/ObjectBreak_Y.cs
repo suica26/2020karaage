@@ -107,10 +107,9 @@ public class ObjectBreak_Y : MonoBehaviour
     private void CutterCollapse(GameObject obj)
     {
         RigidOn(obj);
-        //GameObject cutter = GameObject.Find("Cutter (Clone)");
-        var forward = player.transform.forward;
+        GameObject cutter = GameObject.Find("Cutter(Clone)");
         //カッターの進行方向（XZ平面）を90度回転したものがカット平面
-        var normal = new Vector3(forward.z, 0, forward.x);
+        var normal = cutter.transform.right;
         var leftObjects = new List<GameObject>();
         var rightObjects = new List<GameObject>();
 
@@ -131,7 +130,7 @@ public class ObjectBreak_Y : MonoBehaviour
                 //メッシュが設定されている(＝空オブジェクトでない)オブジェクトの場合
                 if (cObj.GetComponent<MeshFilter>() != null)
                 {
-                    var divObjects = MeshCut.Cut(cObj, cObj.transform.position, normal, cObj.GetComponent<Renderer>().material);
+                    var divObjects = MeshCut.Cut(cObj, cutter.transform.position, normal, cObj.GetComponent<Renderer>().material);
                     divObjects[0].transform.parent = left.transform;
                     divObjects[1].transform.parent = right.transform;
                 }

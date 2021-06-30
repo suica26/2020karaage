@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -79,7 +79,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
     {
         switch (other.gameObject.name)
         {
-            case "KickCollision": Damage(kickMag, 2); break;
+            case "KickCollision": Damage(kickMag, 1); break;
             case "Cutter(Clone)": Damage(cutterMag, 2); break;
             case "MorningBlastSphere_Y(Clone)": Damage(blastMag, 3); break;
             case "fallAttackCircle(Clone)": Damage(fallAttackMag * scrCharaMove.damageBoost, 4); break;
@@ -241,9 +241,9 @@ public class ObjectStateManagement_Y : MonoBehaviour
 
         SetBreakCue();
         //加筆　undertreem 0625
-        float BusLevel = ADX_RevLevel.ADX_BusSendLevel;
-        SetBusSendLevelSet(Rev, BusLevel);
-        Debug.Log(BusLevel);
+        //float BusLevel = ADX_RevLevel.ADX_BusSendLevel;
+        //SetBusSendLevelSet(Rev, BusLevel);
+        //Debug.Log(BusLevel);
         criAtomSource?.Play(ExplosionSoundName);
 
         DeathCount();

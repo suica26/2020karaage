@@ -98,7 +98,7 @@ public class ADX_Ray_Rev : MonoBehaviour
 
             TownNoizeEQNum = (a + b + c + d + e + f + g + h + j + k + l + m + o + p + q + r) / 20;
 
-            if(TownNoizeEQNum >= 0.55f)
+            if (TownNoizeEQNum >= 0.55f)
             {
                 if (EQNum <= 1.0f)
                 {
@@ -128,7 +128,7 @@ public class ADX_Ray_Rev : MonoBehaviour
         //Obj_angle AISAC
         TownNoizeCon.SetAisacControl("Obj_angle", Ypos);
 
-            this.RevSendLevel.text = "RevSendLevel_L:" + RevSendLev_L + "RevSendLevel_R:" + RevSendLev_R + "\n" + "TownNoise:" + TownNoizeNum + "EQ:" + EQNum + "\n" + "Pos:" + Ypos;
+        this.RevSendLevel.text = "RevSendLevel_L:" + RevSendLev_L + "RevSendLevel_R:" + RevSendLev_R + "\n" + "TownNoise:" + TownNoizeNum + "EQ:" + EQNum + "\n" + "Pos:" + Ypos;
         //接地＆材質判定
         OnGround = GloundRays(0.5f);
 
@@ -203,7 +203,7 @@ public class ADX_Ray_Rev : MonoBehaviour
         //Rayの可視化 
         Debug.DrawRay(Gray.origin, Gray.direction * Glounddistance, Color.black);
         //Rayにオブジェクトが衝突したら
-        if(Physics.Raycast(Gray, out Ghit, Glounddistance))
+        if (Physics.Raycast(Gray, out Ghit, Glounddistance))
         {
             OnGround = true;
 
