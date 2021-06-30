@@ -66,7 +66,7 @@ public class Cutter_R : MonoBehaviour
                 throwingCutter = true;
                 timer = 0.0f;
                 animTimer = 0.25f;
-                cutter = Instantiate(preCutter, cutterTransform[scrEvo.EvolutionNum].position, Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0, 0, -90)));
+                cutter = Instantiate(preCutter, cutterTransform[scrEvo.EvolutionNum].position, Quaternion.Euler(transform.rotation.eulerAngles));
                 cutter.transform.localScale = cutter.transform.localScale * cutterSize[scrEvo.EvolutionNum];
                 cutter.GetComponent<CutterMoveFA_R>().enabled = false;
                 CutterMove1_R scrCutter = cutter.GetComponent<CutterMove1_R>();
