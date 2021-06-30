@@ -6,17 +6,18 @@ using UnityEngine.UI;
 public class Stage1_Mission_M : MonoBehaviour
 {
     [SerializeField] public Text mission, submis, exmis, count, per;
-    [SerializeField] public GameObject player, shop, misBox, company,achievement;
+    [SerializeField] public GameObject player, shop, misBox, company,achievement, hip;
     [SerializeField] public TextAsset txtFile;
     [SerializeField] public int smallNum, bigNum, achieve;
     [SerializeField] public int smallBorder1, smallBorder2, smallBorder3,
                                 bigBorder1, bigBorder2, bigBorder3,bigBorder4;
     [SerializeField] public int manhole, hydrant;
     public bool first = true, second = false, third = false, fourth = false, final = false,
-        Language;
+        Language,hipStamp = false;
     private string txtData;
     private string[] splitText;
     [SerializeField] Animation missionSlide;
+    [SerializeField] float timer;
 
     void Start()
     {
@@ -24,6 +25,7 @@ public class Stage1_Mission_M : MonoBehaviour
         splitText = txtData.Split(char.Parse("\n"));
         misBox.SetActive(false);
         achievement.SetActive(false);
+        hip.SetActive(false);
     }
 
     void Update()
@@ -106,6 +108,38 @@ public class Stage1_Mission_M : MonoBehaviour
             count.text = "3";
             achieve = 0;
             per.text = achieve + "/ 3";
+            hipStamp = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            fourth = true;
+            hipStamp = true;
+        }
+
+        if (fourth && hipStamp)
+        {
+            timer += Time.unscaledDeltaTime/2;
+        }
+
+        if (timer >= 3.0f)
+        {
+            Time.timeScale = 0f;
+            hip.SetActive(true);
+            //Cursor.visible = true;
+        }
+
+        if (timer >= 5.0f)
+        {
+            Time.timeScale = 1f;
+            hip.SetActive(false);
+            hipStamp = false;
+        }
+
+        if (!hipStamp)
+        {
+            //Cursor.visible = false;
+            timer = 0;
         }
 
         if (manhole >= 3 && fourth)
@@ -164,6 +198,13 @@ public class Stage1_Mission_M : MonoBehaviour
     {
        
     }
+
+    /*public void OnClick()
+    {
+        Time.timeScale = 1f;
+        hip.SetActive(false);
+        hipStamp = false;
+    }*/
 
     /*public void OnTriggerEnter(Collider other)
     {
