@@ -55,7 +55,9 @@ public class CharaMoveRigid_R : MonoBehaviour
 
     //ADX
     private new CriAtomSource  audio;
-
+    //加筆　undertreem 0628
+    private ADX_Ray_Rev ADX_RevLevel_L, ADX_RevLevel_R;
+    private float BusLevel_L, BusLevel_R;
 
     void Start()
     {
@@ -64,6 +66,9 @@ public class CharaMoveRigid_R : MonoBehaviour
         scrEvo = GetComponent<EvolutionChicken_R>();
         scrCutter = GetComponent<Cutter_R>();
         audio = (CriAtomSource)GetComponent("CriAtomSource");
+        //加筆　undertreem 0628
+        ADX_RevLevel_L = GetComponent<ADX_Ray_Rev>();
+        ADX_RevLevel_R = GetComponent<ADX_Ray_Rev>();
     }
 
     void Update()
@@ -119,6 +124,12 @@ public class CharaMoveRigid_R : MonoBehaviour
                 if(audioSourceWalk.isPlaying != walkClip[scrEvo.EvolutionNum])
                 {
                     //audioSourceWalk.PlayOneShot(walkClip[scrEvo.EvolutionNum]);
+                    //加筆　undertreem 0628
+                    BusLevel_L = ADX_RevLevel_L.ADX_BusSendLevel_L;
+                    BusLevel_R = ADX_RevLevel_R.ADX_BusSendLevel_R;
+                    //警告出てるけど逆にこれ以外だとエラー吐くので現状このまま
+                    audio.SetBusSendLevelOffset(2, BusLevel_L);
+                    audio.SetBusSendLevelOffset(3, BusLevel_R);
                     audio.Play("FootSteps");
                     audio.Play("Walk_Voice00");
 

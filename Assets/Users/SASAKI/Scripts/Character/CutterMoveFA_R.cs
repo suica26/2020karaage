@@ -19,6 +19,9 @@ public class CutterMoveFA_R : MonoBehaviour
     private float rotSpeed = 360f;
     private float destroyTime;
     private bool touchGround;
+
+    private bool setRotate;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +31,8 @@ public class CutterMoveFA_R : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         rigid.AddForce(-transform.up * dropSpeed * evoSpeed, ForceMode.Impulse);
         audioSource = GetComponent<AudioSource>();
+
+        setRotate = true;
     }
 
     // Update is called once per frame
@@ -42,7 +47,13 @@ public class CutterMoveFA_R : MonoBehaviour
             }
             else if (destroyTime > 1.0f)
             {
-                transform.position = Vector3.MoveTowards(transform.position, backArea.position, cutterBaseSpeed * 2f * evoSpeed * Time.deltaTime);
+                if(setRotate)
+                {
+                    setRotate = false;
+                    transform.LookAt(player.transform.position);
+                    transform.Rotate(0, 180, 0);
+                }
+                transform.position = Vector3.MoveTowards(transform.position, backArea.position, cutterBaseSpeed * destroyTime * 1.5f * evoSpeed * Time.deltaTime);
             }
         }
         gameObject.transform.Rotate(rotSpeed * Time.deltaTime, 0, 0);

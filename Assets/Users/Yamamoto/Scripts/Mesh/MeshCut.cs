@@ -150,7 +150,6 @@ namespace BLINDED_AM_ME
             victim_mesh = victim.GetComponent<MeshFilter>().mesh;
 
             //ローカルスケールを取得
-            var localS = victim.transform.localScale;
             var lossyS = victim.transform.lossyScale;
 
             // reset values
@@ -168,7 +167,7 @@ namespace BLINDED_AM_ME
             int[] indices;
             int p1, p2, p3;
 
-            // go throught the submeshes
+            // go through the submeshes
             // サブメッシュの数だけループ
             for (int sub = 0; sub < victim_mesh.subMeshCount; sub++)
             {
@@ -238,7 +237,7 @@ namespace BLINDED_AM_ME
                 mats = newMats;
             }
 
-            // cap the opennings
+            // cap the openings
             // カット開始
             Capping();
 
@@ -275,21 +274,20 @@ namespace BLINDED_AM_ME
                 right_HalfMesh.SetIndices(right_side.subIndices[i].ToArray(), MeshTopology.Triangles, i);
             }
 
-
-            // assign the game objects
-
-            // 元のオブジェクトを左側のオブジェクトに
-            victim.name = "left side";
-            victim.GetComponent<MeshFilter>().mesh = left_HalfMesh;
-
-
             // 右側のオブジェクトは新規作成
-            GameObject leftSideObj = victim;
+            GameObject leftSideObj = new GameObject("left side", typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider));
+            leftSideObj.transform.position = victim.transform.position;
+            leftSideObj.transform.rotation = victim.transform.rotation;
+            leftSideObj.GetComponent<MeshFilter>().mesh = left_HalfMesh;
+            leftSideObj.GetComponent<MeshCollider>().convex = true;
+            leftSideObj.GetComponent<MeshCollider>().sharedMesh = left_HalfMesh;
 
-            GameObject rightSideObj = new GameObject("right side", typeof(MeshFilter), typeof(MeshRenderer));
+            GameObject rightSideObj = new GameObject("right side", typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider));
             rightSideObj.transform.position = victim.transform.position;
             rightSideObj.transform.rotation = victim.transform.rotation;
             rightSideObj.GetComponent<MeshFilter>().mesh = right_HalfMesh;
+            rightSideObj.GetComponent<MeshCollider>().convex = true;
+            rightSideObj.GetComponent<MeshCollider>().sharedMesh = right_HalfMesh;
 
             // assign mats
             // 新規生成したマテリアルリストをそれぞれのオブジェクトに適用する
@@ -297,7 +295,7 @@ namespace BLINDED_AM_ME
             rightSideObj.GetComponent<MeshRenderer>().materials = mats;
 
             //スケールを再設定
-            leftSideObj.transform.localScale = localS;
+            leftSideObj.transform.localScale = lossyS;
             rightSideObj.transform.localScale = lossyS;
 
             // 左右のGameObjectの配列を返す

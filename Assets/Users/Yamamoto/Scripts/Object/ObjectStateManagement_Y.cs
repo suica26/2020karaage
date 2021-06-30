@@ -40,7 +40,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
     /// 1:チキンキック
     /// 2:トサカカッター
     /// 3:おはようブラスト
-    /// 4:ヒップドロップ
+    /// 4:ヒップスタンプ
     /// 5:ドロップカッター
     /// </summary>
     public int hitSkilID { get; private set; }
@@ -53,6 +53,8 @@ public class ObjectStateManagement_Y : MonoBehaviour
 
     //破壊後のオブジェクトが地面(等)に接触したときの音
     public string groundContactSoundName;
+
+    public Material capMaterial;
 
     //Start is called before the first frame update
     private void Start()
@@ -77,7 +79,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
     {
         switch (other.gameObject.name)
         {
-            case "KickCollision": Damage(kickMag, 1); break;
+            case "KickCollision": Damage(kickMag, 2); break;
             case "Cutter(Clone)": Damage(cutterMag, 2); break;
             case "MorningBlastSphere_Y(Clone)": Damage(blastMag, 3); break;
             case "fallAttackCircle(Clone)": Damage(fallAttackMag * scrCharaMove.damageBoost, 4); break;
@@ -124,13 +126,11 @@ public class ObjectStateManagement_Y : MonoBehaviour
             if (hitSkilID == 2 || hitSkilID == 3)
             {
                 SetContactCue();
-                if (criAtomSource != null) criAtomSource.cueName = contactSoundName;
                 criAtomSource?.Play(contactSoundName);
             }
             else //それ以外
             {
                 SetAttackCue();
-                if (criAtomSource != null) criAtomSource.cueName = attackSoundName;
                 criAtomSource?.Play(attackSoundName);
             }
 
@@ -166,6 +166,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
             case 9: attackSoundName = "TrafficExplosion00"; break;
             default: attackSoundName = "TrachcanContact00"; break;
         }
+        if (criAtomSource != null) criAtomSource.cueName = attackSoundName;
     }
 
     private void SetContactCue()
@@ -184,6 +185,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
             case 9: contactSoundName = "PoleContact00"; break;
             default: contactSoundName = "TrachcanContact00"; break;
         }
+        if (criAtomSource != null) criAtomSource.cueName = contactSoundName;
     }
 
     private void SetBreakCue()
@@ -202,6 +204,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
             case 9: ExplosionSoundName = "PoleContract00"; break;
             default: ExplosionSoundName = "PoleExplosion00"; break;
         }
+        if (criAtomSource != null) criAtomSource.cueName = ExplosionSoundName;
     }
 
     //振動コルーチン
@@ -233,21 +236,20 @@ public class ObjectStateManagement_Y : MonoBehaviour
         HP = 0;
 
         GameObject.Find("Canvas").GetComponent<Parameters_R>().ScoreManager(breakScore);
-
-        SetBreakCue();
-        if (criAtomSource != null) criAtomSource.cueName = ExplosionSoundName;
-        //加筆　undertreem 0625
-        float BusLevel = ADX_RevLevel.ADX_BusSendLevel;
-        SetBusSendLevelSet(Rev, BusLevel);  Debug.Log(BusLevel);
-        criAtomSource?.Play(ExplosionSoundName);
-
         //餌のスポーン処理
         scrFood?.DropFood();
 
+        SetBreakCue();
+        //加筆　undertreem 0625
+        float BusLevel = ADX_RevLevel.ADX_BusSendLevel;
+        SetBusSendLevelSet(Rev, BusLevel);
+        Debug.Log(BusLevel);
+        criAtomSource?.Play(ExplosionSoundName);
+
         DeathCount();
 
-        //差し替え処理
-        if (divideObject != null) ChangeObject();
+        //差し替え処理  分割オブジェクトが設定されていないか技がカッターの時には無視する
+        if (divideObject != null && hitSkilID != 2) ChangeObject();
         else Substitution();    //差し替えをしない場合
     }
 
@@ -269,13 +271,12 @@ public class ObjectStateManagement_Y : MonoBehaviour
     private void ChangeObject()
     {
         var genPos = transform.position;
-        genPos.y = 0f;
         var dividedObject = Instantiate(divideObject, genPos, transform.rotation);
         var breakScr = dividedObject.AddComponent<ObjectBreak_Y>();
         breakScr.InitSetting(this, true);
         breakScr.BreakAction();
 
-        Destroy(gameObject, deleteTime);
+        Delete();
         gameObject.SetActive(false);
     }
     //差し替えしない場合
@@ -284,7 +285,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
         var breakScr = gameObject.AddComponent<ObjectBreak_Y>();
         breakScr.InitSetting(this, false);
         breakScr.BreakAction();
-        Destroy(gameObject, deleteTime);
+        Delete();
     }
 
     public void Delete()
