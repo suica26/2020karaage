@@ -11,6 +11,7 @@ public class chickenKick_R : MonoBehaviour
     [SerializeField] Transition_R[] scrAnim;
 
     EvolutionChicken_R scrEvo;
+    CharaMoveRigid_R scrMove;
 
     public int chargePoint;
     private float timer;
@@ -25,6 +26,7 @@ public class chickenKick_R : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        scrMove = GetComponent<CharaMoveRigid_R>();
         scrEvo = GetComponent<EvolutionChicken_R>();
         timer = 0.0f;
         chargePoint = 0;
@@ -53,6 +55,11 @@ public class chickenKick_R : MonoBehaviour
             {
                 if (coolTimer >= coolTimes[scrEvo.EvolutionNum])
                 {
+                    if (scrMove._isFlying)
+                    {
+                        scrMove._isFlying = false;
+                        GetComponent<Rigidbody>().useGravity = true;
+                    }
 
                     timer = 0.0f;
                     coolTimer = 0f;

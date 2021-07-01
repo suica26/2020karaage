@@ -22,10 +22,12 @@ public class Cutter_R : MonoBehaviour
     public bool throwingCutter = false;
 
     GameObject cutter;
+    CharaMoveRigid_R scrMove;
     EvolutionChicken_R scrEvo;
     // Start is called before the first frame update
     void Start()
     {
+        scrMove = GetComponent<CharaMoveRigid_R>();
         scrEvo = GetComponent<EvolutionChicken_R>();
         timer = 0.0f;
         catchableTimer = 0.0f;
@@ -63,6 +65,12 @@ public class Cutter_R : MonoBehaviour
         {
             if(!throwingCutter && timer <= 0.5f)
             {
+                if (scrMove._isFlying)
+                {
+                    scrMove._isFlying = false;
+                    GetComponent<Rigidbody>().useGravity = true;
+                }
+
                 throwingCutter = true;
                 timer = 0.0f;
                 animTimer = 0.25f;
