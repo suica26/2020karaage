@@ -28,6 +28,8 @@ public class Civil_Y : MonoBehaviour
     [SerializeField] private Animator animator;
     private string escapeStr = "isEscape";
 
+    private bool surprised;
+
     //ADX
     private CriAtomSource criAtomSource;
 
@@ -39,6 +41,7 @@ public class Civil_Y : MonoBehaviour
         rotSpeed = Random.Range(0.7f, 1.5f);
         criAtomSource = GetComponent<CriAtomSource>();
         wayPointGraph = GameObject.Find("GameAI_Y").GetComponent<WayPointGraph_Y>();
+        surprised = false;
     }
 
     // Update is called once per frame
@@ -46,13 +49,25 @@ public class Civil_Y : MonoBehaviour
     {
         deleteTimer += Time.deltaTime;
         timer += Time.deltaTime;
-        //迷子(次のWayPointに到着できなかった)になった時に自分を消去する処理
-        if (deleteTimer > deleteTiming) Death();
-        //進行方向を一定タイミングで再計算する
-        if (timer > resetForwardTiming) ResetNextForward();
 
-        if (escapeFlg) Escape();
-        else Walk();
+        if (!surprised)
+        {
+            //迷子(次のWayPointに到着できなかった)になった時に自分を消去する処理
+            if (deleteTimer > deleteTiming) Death();
+            //進行方向を一定タイミングで再計算する
+            if (timer > resetForwardTiming) ResetNextForward();
+
+            if (escapeFlg) Escape();
+            else Walk();
+        }
+        else
+        {
+            if (timer > 1f)
+            {
+                surprised = false;
+                rb.isKinematic = false;
+            }
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -87,6 +102,18 @@ public class Civil_Y : MonoBehaviour
                 preForward = nextForward;
                 nextForward = GetVectorXZNormalized(route[routeNum].transform.position, route[routeNum - 1].transform.position);
             }
+        }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            transform.forward = GetVectorXZNormalized(other.transform.position, transform.position);
+            surprised = true;
+            timer = 0f;
+            rb.isKinematic = true;
+            rotTime = 0f;
         }
     }
 

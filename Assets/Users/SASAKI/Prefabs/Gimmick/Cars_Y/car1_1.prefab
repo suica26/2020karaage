@@ -265,6 +265,7 @@ GameObject:
   - component: {fileID: 5719947340157909903}
   - component: {fileID: 6114364648267064057}
   - component: {fileID: 4653675481733359689}
+  - component: {fileID: -4587033105638560635}
   m_Layer: 0
   m_Name: car1_1
   m_TagString: Car
@@ -325,6 +326,7 @@ MonoBehaviour:
   _xScale: 6
   _yScale: 6
   _zScale: 6
+  player: {fileID: 0}
 --- !u!114 &1194037359711464667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,6 +352,8 @@ MonoBehaviour:
   deleteTime: 3
   torque: 0
   power: 0
+  groundContactSoundName: 
+  capMaterial: {fileID: 0}
 --- !u!54 &266868213028381101
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -420,6 +424,25 @@ MonoBehaviour:
   objFood: {fileID: 5882868508514077054, guid: 52bb1160a73b4b848953812cb2383dfc, type: 3}
   minFood: 0
   maxFood: 3
+--- !u!95 &-4587033105638560635
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4923865067689535392}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fb1d3c8e1997dae49af9d69a8eff52e2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 1
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4943443365212322650
 GameObject:
   m_ObjectHideFlags: 0
