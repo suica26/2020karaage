@@ -12,11 +12,24 @@ public class movebackground : MonoBehaviour
 	public float py;
 	public float pz;
 
+	public doorscore dHP;
+
+	public float spdown;
+	public shaker eq;
+
 	// Update is called once per frame
 	void Update()
 	{
 		
 		transform.position += transform.right * speed * Time.deltaTime;
+
+		if (dHP.nowanim >= 5 && speed >= 0)
+        {
+
+			speed -= spdown;
+			eq.duration -= spdown;
+
+        }
 		
 		
 	}

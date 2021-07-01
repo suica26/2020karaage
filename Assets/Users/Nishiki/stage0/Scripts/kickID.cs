@@ -12,6 +12,8 @@ public class kickID : MonoBehaviour
     public GameObject colider;
     public doorscore door;
 
+    public int boxscore;
+
     // Update is called once per frame
     void Update()
     {
