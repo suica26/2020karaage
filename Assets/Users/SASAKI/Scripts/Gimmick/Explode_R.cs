@@ -6,24 +6,31 @@ public class Explode_R : MonoBehaviour
 {
     public float force;
     public int usageEvo;
+    private float timer;
     Rigidbody rigid;
     EvolutionChicken_R scrEvo;
     void Start()
     {
+        timer = 0.0f;
         rigid = GameObject.Find("Player").GetComponent<Rigidbody>();
         scrEvo = GameObject.Find("Player").GetComponent<EvolutionChicken_R>();
+    }
+
+    private void Update()
+    {
+        if (timer <= 0.5f)
+            timer += Time.deltaTime;
+        else
+            Destroy(this);
     }
 
     //周辺のオブジェクトに影響を与える
     private void OnTriggerStay(Collider other)
     {
-        Vector3 pos = transform.position - new Vector3(0, 3, 0);
         if(other.gameObject.tag == "Player" && usageEvo >= scrEvo.EvolutionNum)
         {
-            rigid.velocity = Vector3.zero;
-            Vector3 XZmag = new Vector3(other.transform.position.x - pos.x, 0, other.transform.position.z - pos.z);
-            rigid.AddForce((XZmag + Vector3.up * 0.5f) * force, ForceMode.Impulse);
-            Destroy(this);
+            rigid.AddExplosionForce(force, transform.position - new Vector3(0.0f, 3.0f, 0.0f), 50.0f, 1.0f, ForceMode.Impulse);
+            //Destroy(this);
         }
     }
 }

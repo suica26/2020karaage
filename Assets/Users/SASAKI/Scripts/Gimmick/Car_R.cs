@@ -5,7 +5,7 @@ using UnityEngine;
 public class Car_R : MonoBehaviour
 {
     [SerializeField] private bool carMoving;    //車が走行するか否か
-    [SerializeField] private float speed;
+    [SerializeField] private float maxSpeed;
     [SerializeField] private float rotSpeed;
     [SerializeField] private float initHeight;  //車種ごとに高さを設定して浮かないようにする(暫定的処理)
 
@@ -16,11 +16,15 @@ public class Car_R : MonoBehaviour
     private bool isUturn;                   // Uターンに入ったか否か
     private bool isFirstMeetEnd;            // 生成時にすぐに消えてしまうことを防ぐ
 
+    public float speed;
+    private float frontCarSpeed;
+
     public void Init(GameObject obj, int _speed)
     {
         isFirstMeetEnd = true;
         isUturn = false;
-        speed = _speed;
+        maxSpeed = _speed;
+        speed = maxSpeed;
         nextWaypoint = obj;
     }
 
@@ -54,12 +58,23 @@ public class Car_R : MonoBehaviour
         if (carMoving)
         {
             //前に車がいたら停止
+            bool checkDoBrake = false;
             RaycastHit[] hits = Physics.RaycastAll(transform.position + transform.forward * 0.5f, transform.forward, 5.0f);
             foreach (var obj in hits)
             {
                 if (obj.transform.tag == "Car")
-                    return;
+                {
+                    checkDoBrake = true;
+                    frontCarSpeed = obj.transform.GetComponent<Car_R>().speed;
+                    break;
+                }
             }
+
+            if (checkDoBrake)
+                Brakes();
+            else
+                speed = Mathf.Min(maxSpeed, speed + 15.0f * Time.deltaTime);
+
             CarMove();
         }
     }
@@ -122,9 +137,6 @@ public class Car_R : MonoBehaviour
                     targetPos = afterNextWaypoint.GetComponent<CarWaypoint_R>().SetNextTargetPos(nextWaypoint.transform.position, nowWaypoint.transform.position, targetPos);
                 }
             }
-
-            //山本加筆　ちょっとすごい頻度でDebug.Logに出てきちゃうので、コメントアウトしときます
-            //Debug.Log("CAR WAYPOINT LOG: " + nowWaypoint + " -> " + nextWaypoint + " -> " + afterNextWaypoint);
         }
     }
 
@@ -160,6 +172,7 @@ public class Car_R : MonoBehaviour
 
     private void Brakes()
     {
+        speed = Mathf.Max(frontCarSpeed, speed - 15.0f * Time.deltaTime);
         //どっかで実装したい
     }
 }
