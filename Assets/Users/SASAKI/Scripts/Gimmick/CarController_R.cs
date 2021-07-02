@@ -13,6 +13,9 @@ public class CarController_R : MonoBehaviour
     private List<GameObject> carList;
     private List<GameObject> endWaypoints;
 
+    private const float instantiateInterval = 0.5f;
+    private float carInstantiateTimer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,24 +34,25 @@ public class CarController_R : MonoBehaviour
             }
         }
 
-        //作成したリストを用いて車を設置
-        for (int i = 0; i < maxCarNum; i++)
-        {
-            CarInstantiate();
-        }
+        carInstantiateTimer = instantiateInterval;
     }
 
     // Update is called once per frame
     void Update()
     {
+        carInstantiateTimer -= Time.deltaTime;
+
         //車の数が減ったら補充する
         for (int i = 0; i < carList.Count; i++)
-        {
             if (carList[i] == null)
-            {
                 carList.RemoveAt(i);
+
+        if (carInstantiateTimer <= 0)
+        {
+            carInstantiateTimer = instantiateInterval;
+            // 毎秒2つの車を生成
+            if (carList.Count < maxCarNum)
                 CarInstantiate();
-            }
         }
     }
 

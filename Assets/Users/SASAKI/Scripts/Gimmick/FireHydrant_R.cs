@@ -12,7 +12,7 @@ public class FireHydrant_R : BlowerGimmickBase
 
     void Start()
     {
-        scrObjManage = this.GetComponent<ObjectStateManagement_Y>();
+        scrObjManage = GetComponent<ObjectStateManagement_Y>();
         //M
         player = GameObject.Find("Player");
         s1mm = player.GetComponent<Stage1_Mission_M>();

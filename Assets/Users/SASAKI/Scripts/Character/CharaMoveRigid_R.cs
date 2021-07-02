@@ -53,6 +53,9 @@ public class CharaMoveRigid_R : MonoBehaviour
     private float endHeight;
     public float damageBoost;
 
+    private bool isFlying;
+    public bool _isFlying { get { return isFlying; } set { isFlying = value; } }
+
     //ADX
     private new CriAtomSource  audio;
     //加筆　undertreem 0628
@@ -65,6 +68,7 @@ public class CharaMoveRigid_R : MonoBehaviour
         scrCam = Camera.main.GetComponent<TpsCameraJC_R>();
         scrEvo = GetComponent<EvolutionChicken_R>();
         scrCutter = GetComponent<Cutter_R>();
+        isFlying = false;
         audio = (CriAtomSource)GetComponent("CriAtomSource");
         //加筆　undertreem 0628
         ADX_RevLevel_L = GetComponent<ADX_Ray_Rev>();
@@ -104,6 +108,12 @@ public class CharaMoveRigid_R : MonoBehaviour
         //以下接地時の処理を記述
         if (isGrounded)
         {
+            if (isFlying)
+            {
+                rb.useGravity = true;
+                isFlying = false;
+            }
+
             scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.JUMP, false);
 
             //FallAttack中に接地した際の処理
@@ -176,6 +186,7 @@ public class CharaMoveRigid_R : MonoBehaviour
                 rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
             }
         }
+        //空中の処理を記述
         else
         {
             scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.JUMP, true);
@@ -191,13 +202,32 @@ public class CharaMoveRigid_R : MonoBehaviour
 
                 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
                 moveDirection = cameraForward * v + Camera.main.transform.right * h;
-                rb.AddForce(moveDirection * speed * 0.33f, ForceMode.Force);
+
+                if (isFlying)
+                {
+                    if (rb.velocity.y < 0)
+                    {
+                        rb.useGravity = false;
+                        rb.AddForce(Vector3.down * 9.81f * 0.25f, ForceMode.Acceleration);
+                    }
+                    rb.AddForce(moveDirection * speed * 1.5f, ForceMode.Force);
+
+                    Quaternion qua = Quaternion.LookRotation(moveDirection);
+                    transform.rotation = Quaternion.RotateTowards(transform.rotation, qua, rotateSpeed * Time.deltaTime);
+                }
+                else
+                    rb.AddForce(moveDirection * speed * 0.33f, ForceMode.Force);
 
                 var velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-                if(velocity.magnitude > speed)
+                if (velocity.magnitude > speed)
                 {
                     rb.velocity = velocity.normalized * speed + rb.velocity.y * Vector3.up;
                 }
+            }
+            else
+            {
+                if (isFlying)
+                    rb.useGravity = true;
             }
 
             //落下攻撃の処理(キック)
@@ -265,6 +295,12 @@ public class CharaMoveRigid_R : MonoBehaviour
     //落下攻撃時の動きの処理
     IEnumerator FallAttack()
     {
+        if(isFlying)
+        {
+            isFlying = false;
+            rb.useGravity = true;
+        }
+
         //キック
         if(fallAttackVer == 1)
         {
