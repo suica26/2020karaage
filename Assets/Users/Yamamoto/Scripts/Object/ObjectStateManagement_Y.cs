@@ -260,6 +260,11 @@ public class ObjectStateManagement_Y : MonoBehaviour
             //山本加筆　元:player.GetComponent<Stage1_Mission_M>().SmallNumberPlus();
             playerScrS1M.SmallNumberPlus();
         }
+        else if (this.gameObject.tag == "Tree")
+        {
+            //山本加筆　元:player.GetComponent<Stage1_Mission_M>().SmallNumberPlus();
+            playerScrS1M.SmallNumberPlus();
+        }
         else if (this.gameObject.tag == "Big")
         {
             //山本加筆　元:player.GetComponent<Stage1_Mission_M>().BigNumberPlus();
