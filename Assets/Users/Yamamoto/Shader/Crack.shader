@@ -1,4 +1,4 @@
-﻿Shader "Custom/Crack"
+Shader "Custom/Crack"
 {
     Properties
     {
@@ -14,7 +14,8 @@
 
     SubShader
     {
-        Tags { "Queue" = "AlphaTest" "RenderType" = "Opaque" }
+        Tags { "Queue" = "AlphaTest" 
+                "RenderType" = "Opaque" }
         LOD 200
 
         CGPROGRAM
