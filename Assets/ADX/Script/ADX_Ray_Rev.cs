@@ -12,7 +12,7 @@ public class ADX_Ray_Rev : MonoBehaviour
     public GameObject Debug_RevSendLevel, HitPoint, SoundDebudPanel;
     private bool A, Once, OnGround;
     private float a, b, c, d, e, f, g, h, i, j, k, l, m, o, p, q, r, TownNoizeNum, Num, TownNoizeEQNum, EQNum;
-    private float Ypos;
+    private float Ypos, velocity;
     private bool DebugMode;
 
     public float span = 0f;
@@ -20,8 +20,10 @@ public class ADX_Ray_Rev : MonoBehaviour
     private float True_RevSendLev;
 
     private CriAtomSource Sound;
-    public CriAtomSource TownNoizeCon;
+
     private string GroundMaterial;
+
+    private new Rigidbody rigidbody;
 
     //プロパティー
     public float ADX_BusSendLevel_L
@@ -44,6 +46,7 @@ public class ADX_Ray_Rev : MonoBehaviour
         Once = true;
         //NoizeControl AISAC
         TownNoizeNum = 0.0f;
+        rigidbody = this.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -78,57 +81,15 @@ public class ADX_Ray_Rev : MonoBehaviour
 
             currentTime = 0f;
 
-            //TownNoizeNum = - (a + b + c + d + e + f + g + h + o + p + q + r)/8;
-
-            //木にレイがあったていれば
-            if (a == -1 | b == -1 | c == -1 | d == -1 | e == -1 | f == -1 | g == -1 | h == -1 | j == -1 | k == -1 | l == -1 | m == -1 | o == -1 | p == -1 | q == -1 | r == -1)
-            {
-                if (TownNoizeNum <= 1.0f)
-                {
-                    TownNoizeNum += 0.1f;
-                }
-            }
-            else
-            {
-                if (TownNoizeNum >= 0.0f)
-                {
-                    TownNoizeNum -= 0.1f;
-                }
-            }
-
-            TownNoizeEQNum = (a + b + c + d + e + f + g + h + j + k + l + m + o + p + q + r) / 20;
-
-            if (TownNoizeEQNum >= 0.55f)
-            {
-                if (EQNum <= 1.0f)
-                {
-                    EQNum += 0.15f;
-                }
-            }
-            else
-            {
-                if (EQNum >= 0.0f)
-                {
-                    EQNum -= 0.15f;
-                }
-            }
-
-
-
-            //NoizeControl AISAC
-            TownNoizeCon.SetAisacControl("NoizeControl", TownNoizeNum);
-            //NoizeEQControl AISAC
-            TownNoizeCon.SetAisacControl("NoizeEQControl", EQNum);
 
 
         }
         //高さ座標からAISAC値を決定
         Vector3 Pos = this.transform.position;
         Ypos = Pos.y / 24.0f;
-        //Obj_angle AISAC
-        TownNoizeCon.SetAisacControl("Obj_angle", Ypos);
 
-        this.RevSendLevel.text = "RevSendLevel_L:" + RevSendLev_L + "RevSendLevel_R:" + RevSendLev_R + "\n" + "TownNoise:" + TownNoizeNum + "EQ:" + EQNum + "\n" + "Pos:" + Ypos;
+
+        this.RevSendLevel.text = "RevSendLevel_L:" + RevSendLev_L + "RevSendLevel_R:" + RevSendLev_R + "\n" + "落下速度:" + velocity;
         //接地＆材質判定
         OnGround = GloundRays(0.5f);
 
@@ -138,6 +99,8 @@ public class ADX_Ray_Rev : MonoBehaviour
             Once = true;
         }
         Sound.player.SetSelectorLabel("Selector_Floor", GroundMaterial);
+
+
 
         //デバッグモードONOFF
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.L) & DebugMode == false)
@@ -150,6 +113,9 @@ public class ADX_Ray_Rev : MonoBehaviour
             DebugMode = false;
             SoundDebudPanel.gameObject.SetActive(false);
         }
+
+
+
     }
 
     //RayCastメソッド
@@ -205,6 +171,10 @@ public class ADX_Ray_Rev : MonoBehaviour
         //Rayにオブジェクトが衝突したら
         if (Physics.Raycast(Gray, out Ghit, Glounddistance))
         {
+            //落下速度をAISACに反映
+            velocity = rigidbody.velocity.y / -50;
+            Sound.SetAisacControl("VelocityControl", velocity);
+
             OnGround = true;
 
             if (Ghit.collider.tag == "Soil")
