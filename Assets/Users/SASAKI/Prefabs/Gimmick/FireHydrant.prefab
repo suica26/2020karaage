@@ -123,8 +123,10 @@ MonoBehaviour:
   objectID: 8
   breakEffect: {fileID: 0}
   deleteTime: 3
-  torque: 0
-  power: 0
+  torque: 20
+  power: 40
+  groundContactSoundName: 
+  capMaterial: {fileID: 0}
 --- !u!64 &8663573979528208312
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -160,6 +162,7 @@ MonoBehaviour:
   _xScale: 1
   _yScale: 10
   _zScale: 1
+  player: {fileID: 0}
 --- !u!114 &6184491439173604963
 MonoBehaviour:
   m_ObjectHideFlags: 0
