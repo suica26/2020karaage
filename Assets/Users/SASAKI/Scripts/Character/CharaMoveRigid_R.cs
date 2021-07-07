@@ -58,6 +58,7 @@ public class CharaMoveRigid_R : MonoBehaviour
 
     //ADX
     private new CriAtomSource  audio;
+    CriAtomExPlayback JumpS, WalkVoiceS, FootS, IdleVoiceS;
     //加筆　undertreem 0628
     private ADX_Ray_Rev ADX_RevLevel_L, ADX_RevLevel_R;
     private float BusLevel_L, BusLevel_R;
@@ -130,20 +131,15 @@ public class CharaMoveRigid_R : MonoBehaviour
             //チキンが移動している際の処理
             if (h != 0 || v != 0)
             {
-                //足音が再生されていない場合に足音を再生
-                if(audioSourceWalk.isPlaying != walkClip[scrEvo.EvolutionNum])
-                {
-                    //audioSourceWalk.PlayOneShot(walkClip[scrEvo.EvolutionNum]);
-                    //加筆　undertreem 0628
-                    BusLevel_L = ADX_RevLevel_L.ADX_BusSendLevel_L;
-                    BusLevel_R = ADX_RevLevel_R.ADX_BusSendLevel_R;
-                    //警告出てるけど逆にこれ以外だとエラー吐くので現状このまま
-                    audio.SetBusSendLevelOffset(2, BusLevel_L);
-                    audio.SetBusSendLevelOffset(3, BusLevel_R);
-                    audio.Play("FootSteps");
-                    audio.Play("Walk_Voice00");
+                BusLevel_L = ADX_RevLevel_L.ADX_BusSendLevel_L;
+                BusLevel_R = ADX_RevLevel_R.ADX_BusSendLevel_R;
+                //警告出てるけど逆にこれ以外だとエラー吐くので現状このまま
+                audio.SetBusSendLevelOffset(2, BusLevel_L);
+                audio.SetBusSendLevelOffset(3, BusLevel_R);
+                FootS = audio.Play("FootSteps");
+                WalkVoiceS = audio.Play("Walk_Voice00");
 
-                }
+
                 scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.WALK, true);
 
                 //チキンの移動方向や移動量を計算
@@ -165,23 +161,16 @@ public class CharaMoveRigid_R : MonoBehaviour
             }
             else
             {
-                //足音が再生されていた場合停止させる
-                if (audioSourceWalk.isPlaying == walkClip[scrEvo.EvolutionNum])
-                {
-                    //audioSourceWalk.Stop();
-                    audio.Stop();
-
-                }
                 scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.WALK, false);
-                audio.Play("Idle_Voice00");
+                WalkVoiceS.Stop();
+                IdleVoiceS = audio.Play("Idle_Voice00");
             }
 
             //ジャンプした際の処理
             if (Input.GetButtonDown("Jump"))
             {
-                //audioSourceCommon.PlayOneShot(JumpClip);
-                audio.Play("Idle_Voice00");
-                audio.Play("Jump");
+                audio.Stop();
+                JumpS = audio.Play("Jump");
                 scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.JUMP, true);
                 rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
             }
@@ -189,17 +178,15 @@ public class CharaMoveRigid_R : MonoBehaviour
         //空中の処理を記述
         else
         {
+
             scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.JUMP, true);
             scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.WALK, false);
 
             //空中での制動(移動量は地上の1/3程度)
             if (h != 0 || v != 0)
             {
-                if (audioSourceWalk.isPlaying == walkClip[scrEvo.EvolutionNum])
-                {
-                    audioSourceWalk.Stop();
-                }
-
+                audioSourceWalk.Stop();
+                IdleVoiceS.Stop();
                 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
                 moveDirection = cameraForward * v + Camera.main.transform.right * h;
 
@@ -261,6 +248,8 @@ public class CharaMoveRigid_R : MonoBehaviour
                 kickFallAttackTimer = 0f;
                 cutterFallAttackTimer = 0f;
             }
+            audioSourceWalk.Stop();
+            IdleVoiceS.Stop();
         }
     }
 
@@ -270,7 +259,7 @@ public class CharaMoveRigid_R : MonoBehaviour
         GameObject circleChecker;
         if (fallAttackVer == 1)
         {
-        audio.Play("FallShock");
+            audio.Play("FallShock");
             //落下攻撃のダメージ上昇量を導出
             if (startHeight - endHeight < fallAttackFirstHeight[scrEvo.EvolutionNum])
                 damageBoost = boostMag[0];
@@ -312,6 +301,7 @@ public class CharaMoveRigid_R : MonoBehaviour
             yield return new WaitForSeconds(0.95f);
 
             //audioSourceCommon.PlayOneShot(KickFAClip);
+            JumpS.Stop();
             audio.Play("FallAttack00");
             rb.AddForce(Vector3.down * jumpSpeed * 4f, ForceMode.Impulse);
             yield break;
@@ -325,7 +315,9 @@ public class CharaMoveRigid_R : MonoBehaviour
             fallAttack = true;
             yield return new WaitForSeconds(0.95f);
 
-            audioSourceCommon.PlayOneShot(CutterFAClip);
+            //audioSourceCommon.PlayOneShot(CutterFAClip);
+            JumpS.Stop();
+            audio.Play("FallAttack00");
             scrCutter.CutterAttack();
             rb.AddForce(Vector3.down * jumpSpeed * 2f, ForceMode.Impulse);
             yield break;
