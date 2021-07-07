@@ -797,7 +797,7 @@ Transform:
   m_LocalScale: {x: 30, y: 30, z: 30}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &57409630 stripped
 Transform:
@@ -890,12 +890,14 @@ MonoBehaviour:
   exmis: {fileID: 0}
   count: {fileID: 702587314}
   per: {fileID: 0}
+  tips: {fileID: 0}
   player: {fileID: 59268983}
   shop: {fileID: 0}
   misBox: {fileID: 0}
   company: {fileID: 0}
   achievement: {fileID: 0}
   hip: {fileID: 0}
+  tipsCircle: {fileID: 0}
   txtFile: {fileID: 4900000, guid: 5c2d829dc47700940b06273ebcf0309d, type: 3}
   smallNum: 0
   bigNum: 0
@@ -916,8 +918,10 @@ MonoBehaviour:
   final: 0
   Language: 0
   hipStamp: 0
+  tip: 0
   missionSlide: {fileID: 0}
   timer: 0
+  tipsTimer: 0
 --- !u!82 &59268987
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1351,6 +1355,7 @@ MonoBehaviour:
     type: 3}
   SoundDebudPanel: {fileID: 2135974361}
   span: 0.2
+  TownNoizeCon: {fileID: 1510182687}
 --- !u!1 &64015158
 GameObject:
   m_ObjectHideFlags: 0
@@ -1707,7 +1712,7 @@ PrefabInstance:
     - target: {fileID: 5273191336180947442, guid: 50726439624e83e4a943e61d58242ec8,
         type: 3}
       propertyPath: m_RootOrder
-      value: 23
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 5273191336180947442, guid: 50726439624e83e4a943e61d58242ec8,
         type: 3}
@@ -2244,7 +2249,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &170372819
 GameObject:
@@ -3750,7 +3755,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &374683046
 GameObject:
@@ -5572,7 +5577,7 @@ PrefabInstance:
     - target: {fileID: 5273191336180947442, guid: 50726439624e83e4a943e61d58242ec8,
         type: 3}
       propertyPath: m_RootOrder
-      value: 21
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5273191336180947442, guid: 50726439624e83e4a943e61d58242ec8,
         type: 3}
@@ -8180,7 +8185,7 @@ PrefabInstance:
     - target: {fileID: 5273191336180947442, guid: 50726439624e83e4a943e61d58242ec8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -103.67
+      value: -155.4
       objectReference: {fileID: 0}
     - target: {fileID: 5273191336180947442, guid: 50726439624e83e4a943e61d58242ec8,
         type: 3}
@@ -8190,7 +8195,7 @@ PrefabInstance:
     - target: {fileID: 5273191336180947442, guid: 50726439624e83e4a943e61d58242ec8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -629.87
+      value: -580.4
       objectReference: {fileID: 0}
     - target: {fileID: 5273191336180947442, guid: 50726439624e83e4a943e61d58242ec8,
         type: 3}
@@ -8215,7 +8220,7 @@ PrefabInstance:
     - target: {fileID: 5273191336180947442, guid: 50726439624e83e4a943e61d58242ec8,
         type: 3}
       propertyPath: m_RootOrder
-      value: 20
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 5273191336180947442, guid: 50726439624e83e4a943e61d58242ec8,
         type: 3}
@@ -10332,7 +10337,7 @@ Transform:
   - {fileID: 196257906}
   - {fileID: 1354554641}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1503282927
 PrefabInstance:
@@ -10517,6 +10522,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1510182686}
   - component: {fileID: 1510182685}
+  - component: {fileID: 1510182687}
   m_Layer: 0
   m_Name: SoundObject
   m_TagString: Untagged
@@ -10549,8 +10555,31 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1510182687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510182684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 1
+  _cueName: TownNoize00
+  _cueSheet: Town
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 0
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &1527575784
 GameObject:
   m_ObjectHideFlags: 0
@@ -10767,7 +10796,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1556344868
 MonoBehaviour:
@@ -11117,7 +11146,7 @@ PrefabInstance:
     - target: {fileID: 5273191336180947442, guid: 50726439624e83e4a943e61d58242ec8,
         type: 3}
       propertyPath: m_RootOrder
-      value: 22
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 5273191336180947442, guid: 50726439624e83e4a943e61d58242ec8,
         type: 3}
@@ -11699,7 +11728,7 @@ MonoBehaviour:
       streamingVoices: 0
     outputSamplingRate: 0
     usesInGamePreview: 0
-    inGamePreviewMode: 0
+    inGamePreviewMode: 1
     serverFrequency: 60
     asrOutputChannels: 2
     useRandomSeedWithTime: 0
@@ -11921,7 +11950,7 @@ PrefabInstance:
     - target: {fileID: 5273191336180947442, guid: 50726439624e83e4a943e61d58242ec8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -109.36
+      value: -171.8
       objectReference: {fileID: 0}
     - target: {fileID: 5273191336180947442, guid: 50726439624e83e4a943e61d58242ec8,
         type: 3}
@@ -11956,7 +11985,7 @@ PrefabInstance:
     - target: {fileID: 5273191336180947442, guid: 50726439624e83e4a943e61d58242ec8,
         type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 5273191336180947442, guid: 50726439624e83e4a943e61d58242ec8,
         type: 3}
@@ -12430,6 +12459,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SurroundSound
       objectReference: {fileID: 0}
+    - target: {fileID: 4893352364417223714, guid: f823e88fd2d4d4e9880b17962120e110,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8680414634436764971, guid: f823e88fd2d4d4e9880b17962120e110,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12468,7 +12502,7 @@ PrefabInstance:
     - target: {fileID: 8680414634436764971, guid: f823e88fd2d4d4e9880b17962120e110,
         type: 3}
       propertyPath: m_RootOrder
-      value: 25
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 8680414634436764971, guid: f823e88fd2d4d4e9880b17962120e110,
         type: 3}
@@ -13610,7 +13644,7 @@ PrefabInstance:
     - target: {fileID: 5273191336180947442, guid: 50726439624e83e4a943e61d58242ec8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -114.74
+      value: -148.6
       objectReference: {fileID: 0}
     - target: {fileID: 5273191336180947442, guid: 50726439624e83e4a943e61d58242ec8,
         type: 3}
@@ -13645,7 +13679,7 @@ PrefabInstance:
     - target: {fileID: 5273191336180947442, guid: 50726439624e83e4a943e61d58242ec8,
         type: 3}
       propertyPath: m_RootOrder
-      value: 17
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5273191336180947442, guid: 50726439624e83e4a943e61d58242ec8,
         type: 3}
@@ -14856,7 +14890,7 @@ Transform:
   m_LocalScale: {x: 30, y: 30, z: 30}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1757049734042114836
 GameObject:

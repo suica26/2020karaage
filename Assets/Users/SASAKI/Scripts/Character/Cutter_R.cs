@@ -24,6 +24,8 @@ public class Cutter_R : MonoBehaviour
     GameObject cutter;
     CharaMoveRigid_R scrMove;
     EvolutionChicken_R scrEvo;
+
+    private CriAtomSource Sound;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +35,7 @@ public class Cutter_R : MonoBehaviour
         catchableTimer = 0.0f;
         animTimer = 0f;
         throwingCutter = false;
+        Sound = GetComponent<CriAtomSource>();
     }
 
     // Update is called once per frame
@@ -83,6 +86,7 @@ public class Cutter_R : MonoBehaviour
                 scrCutter.backArea = backAreaTransform[scrEvo.EvolutionNum];
                 scrCutter.cutterBaseSpeed = cutterBaseSpeed;
                 scrAnim.SetAnimator(Transition_R.Anim.CUTTER, true);
+                Sound.Play("CutterMove");
             }
             else
             {

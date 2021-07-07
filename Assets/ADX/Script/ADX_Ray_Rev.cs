@@ -10,7 +10,7 @@ public class ADX_Ray_Rev : MonoBehaviour
     private float RevSendLev_R, RevSendLev_L;
     private Text RevSendLevel;
     public GameObject Debug_RevSendLevel, HitPoint, SoundDebudPanel;
-    private bool A, Once, OnGround;
+    private bool A, Once, Once1, OnGround;
     private float a, b, c, d, e, f, g, h, i, j, k, l, m, o, p, q, r, TownNoizeNum, Num, TownNoizeEQNum, EQNum;
     private float Ypos, velocity;
     private bool DebugMode;
@@ -20,10 +20,14 @@ public class ADX_Ray_Rev : MonoBehaviour
     private float True_RevSendLev;
 
     private CriAtomSource Sound;
+    public CriAtomSource TownNoizeCon;
+
 
     private string GroundMaterial;
 
     private new Rigidbody rigidbody;
+    CriAtomExPlayback playback1;
+    CharaMoveRigid_R scrMove;
 
     //プロパティー
     public float ADX_BusSendLevel_L
@@ -44,9 +48,11 @@ public class ADX_Ray_Rev : MonoBehaviour
         DebugMode = false;
         Sound = GetComponent<CriAtomSource>();
         Once = true;
+        Once1 = true;
         //NoizeControl AISAC
         TownNoizeNum = 0.0f;
         rigidbody = this.GetComponent<Rigidbody>();
+        scrMove = GetComponent<CharaMoveRigid_R>();
     }
 
     // Update is called once per frame
@@ -81,21 +87,44 @@ public class ADX_Ray_Rev : MonoBehaviour
 
             currentTime = 0f;
 
-
+            //落下速度
+            velocity = rigidbody.velocity.y / -50;
 
         }
         //高さ座標からAISAC値を決定
         Vector3 Pos = this.transform.position;
         Ypos = Pos.y / 24.0f;
+        TownNoizeCon.SetAisacControl("Obj_angle", Ypos);
 
 
         this.RevSendLevel.text = "RevSendLevel_L:" + RevSendLev_L + "RevSendLevel_R:" + RevSendLev_R + "\n" + "落下速度:" + velocity;
-        //接地＆材質判定
-        OnGround = GloundRays(0.5f);
+
+        //滑空中の音
+        if ((scrMove._isFlying == true & Once1 == false & velocity > 0) & (Input.GetKey(KeyCode.W) | Input.GetKey(KeyCode.A) | Input.GetKey(KeyCode.S) | Input.GetKey(KeyCode.D)))
+        {
+            playback1 = Sound.Play("Gliding");
+            Once1 = true;
+        }
+        if(velocity > 0.3)
+        {
+            playback1.Stop();
+        }
+
+        Debug.Log(scrMove._isFlying);
+
+
+
+
+
+
+
+            //接地＆材質判定
+            OnGround = GloundRays(0.5f);
 
         if (OnGround == true & Once == false)
         {
             Sound.Play("Landing");
+            
             Once = true;
         }
         Sound.player.SetSelectorLabel("Selector_Floor", GroundMaterial);
@@ -103,7 +132,7 @@ public class ADX_Ray_Rev : MonoBehaviour
 
 
         //デバッグモードONOFF
-        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.L) & DebugMode == false)
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.P) & DebugMode == false)
         {
             DebugMode = true;
             SoundDebudPanel.gameObject.SetActive(true);
@@ -171,11 +200,12 @@ public class ADX_Ray_Rev : MonoBehaviour
         //Rayにオブジェクトが衝突したら
         if (Physics.Raycast(Gray, out Ghit, Glounddistance))
         {
+            playback1.Stop();
             //落下速度をAISACに反映
-            velocity = rigidbody.velocity.y / -50;
             Sound.SetAisacControl("VelocityControl", velocity);
 
             OnGround = true;
+            Once1 = false;
 
             if (Ghit.collider.tag == "Soil")
             {
