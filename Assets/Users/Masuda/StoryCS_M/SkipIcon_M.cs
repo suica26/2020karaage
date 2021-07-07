@@ -5,11 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class SkipIcon_M : MonoBehaviour
 {
-    [SerializeField] GameObject skip;
-    public string sceneName;
+    [SerializeField] GameObject skip,next,canvas;
+    private CriAtomSource cas;
     void Start()
     {
         skip.SetActive(false);
+        cas = (CriAtomSource)GetComponent("CriAtomSource");
     }
 
     // Update is called once per frame
@@ -37,6 +38,9 @@ public class SkipIcon_M : MonoBehaviour
 
     public void SkipStory()
     {
-        SceneManager.LoadScene(sceneName);
+        Time.timeScale = 1;
+        next.SetActive(true);
+        skip.SetActive(false);
+        Destroy(canvas);
     }
 }
