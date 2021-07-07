@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class Stage1_Mission_M : MonoBehaviour
 {
     [SerializeField] public Text mission, submis, exmis, count, per, tips;
-    [SerializeField] public GameObject player, shop, misBox, company,achievement, hip,tipsCircle;
+    [SerializeField] public GameObject player, shop, misBox, company,achievement, hip,
+        tipsCircle, tipsChicken;
     [SerializeField] public TextAsset txtFile;
     [SerializeField] public int smallNum, bigNum, achieve;
     [SerializeField] public int smallBorder1, smallBorder2, smallBorder3,
@@ -27,6 +28,7 @@ public class Stage1_Mission_M : MonoBehaviour
         achievement.SetActive(false);
         hip.SetActive(false);
         tipsCircle.SetActive(false);
+        tipsChicken.SetActive(false);
     }
 
     void Update()
@@ -168,6 +170,7 @@ public class Stage1_Mission_M : MonoBehaviour
         {
             tips.text = "アジトは金色に輝いているみたい...？？";
             tip = true;
+            tipsChicken.SetActive(true);
         }
 
         else if (tipsTimer >= 300 && tip)
