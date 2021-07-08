@@ -6,8 +6,11 @@ public class GameOff_M : MonoBehaviour
 {
     public void OnClick()
     {
-        //山本修正 UnityEditorの機能を使ったものはビルド後のexeでは機能しなくなってしまうみたいなので、変更しました
-        //UnityEditor.EditorApplication.isPlaying = false;
-        Application.Quit();
+        //山本修正 プラットフォーム依存コンパイルに対応させました
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
     }
 }
