@@ -195,14 +195,12 @@ public class ObjectBreak_Y : MonoBehaviour
     }
 
     //ヒップドロップ
-    private void FallenCollapse(GameObject obj, Vector3 P)
+    private void FallenCollapse(GameObject obj)
     {
         RigidOn(obj);
 
-        var direction = obj.transform.position - P;
+        var direction = (obj.transform.position - objScr.player.transform.position);
         var rb = obj.GetComponent<Rigidbody>();
-
-        direction = direction.normalized;
         var F = direction * objScr.power;
         Vector3 TorquePower = new Vector3(Random.Range(-objScr.torque, objScr.torque), Random.Range(-objScr.torque, objScr.torque), Random.Range(-objScr.torque, objScr.torque));
         rb.AddForce(F, ForceMode.Impulse);
