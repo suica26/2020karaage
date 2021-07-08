@@ -37,6 +37,7 @@ public class doorscore : MonoBehaviour
         animCon = GetComponent<Animator>();
         Sound = GetComponent<AudioSource>();
         audio = (CriAtomSource)GetComponent("CriAtomSource");
+
     }
 
     // Update is called once per frame
@@ -113,6 +114,7 @@ public class doorscore : MonoBehaviour
 
     void OnTriggerStay(Collider collision)
     {
+        /*
         if (collision.gameObject.tag == "Player")
         {
 
@@ -125,6 +127,13 @@ public class doorscore : MonoBehaviour
             }
 
 
+        }
+        */
+
+        if (collision.gameObject.tag == "cutter0")
+        {
+            damage = damage + 1;
+            audio.Play("Track_noise00");
         }
     }
 
