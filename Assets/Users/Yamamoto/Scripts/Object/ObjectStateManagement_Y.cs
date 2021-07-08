@@ -92,12 +92,12 @@ public class ObjectStateManagement_Y : MonoBehaviour
         //踏み潰し攻撃が発生したとき
         bool trampling = collision.gameObject.tag == "Player" && scrEvo.EvolutionNum >= tier_WalkAttack;
         //破砕車がぶつかったとき
-        bool carHit = collision.gameObject.tag == "Car";
+        bool carHit = collision.gameObject.name.Contains("car");
 
         //即死条件と生存フラグがどちらも成り立つとき、即死発動
         if ((trampling || carHit) && livingFlg)
         {
-            hitSkilID = 0;
+            SetSkillID(0);
             Death();
         }
 
@@ -107,18 +107,23 @@ public class ObjectStateManagement_Y : MonoBehaviour
         }
     }
 
+    public void SetSkillID(int num)
+    {
+        hitSkilID = num;
+    }
+
     public void Damage(float mag, int skill)
     {
         //すでに破壊済みの場合は何も起きないようにする
         if (!livingFlg) return;
 
         HP -= (int)(scrEvo.Status_ATK * mag);
-        hitSkilID = skill;
+        SetSkillID(skill);
         //生死判定
         LivingCheck();
     }
 
-    private void LivingCheck()
+    public void LivingCheck()
     {
         if (HP > 0)     //単純にダメージを受けたときの処理
         {
@@ -245,6 +250,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
         //SetBusSendLevelSet(Rev, BusLevel);
         //Debug.Log(BusLevel);
         criAtomSource?.Play(ExplosionSoundName);
+        if (GetComponent<Car_R>() != null) Destroy(GetComponent<Car_R>());
 
         DeathCount();
 

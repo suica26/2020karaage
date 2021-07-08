@@ -41,6 +41,7 @@ public class ObjectBreak_Y : MonoBehaviour
                 var rb = child.gameObject.AddComponent<Rigidbody>();
                 rb.isKinematic = true;
                 myParts.Add(child.gameObject);
+                if (child.gameObject.GetComponent<Collider>() == null) child.gameObject.AddComponent<BoxCollider>();
             }
         }
     }
@@ -79,8 +80,18 @@ public class ObjectBreak_Y : MonoBehaviour
 
     private void ShardSettings(GameObject shard)
     {
-        if (shard.GetComponent<BoxCollider>() == null) shard.AddComponent<BoxCollider>();
         shard.layer = LayerMask.NameToLayer("Shard");
+
+        float rnd = 1f;
+        if (divided)
+        {
+            rnd = Random.Range(0f, 1f);
+        }
+        if (rnd > 0.9f)
+        {
+            var shardScr = shard.AddComponent<Shard_Y>();
+            shardScr.shardDamage = 10;
+        }
     }
 
     //踏み潰し攻撃
@@ -113,8 +124,8 @@ public class ObjectBreak_Y : MonoBehaviour
         var leftObjects = new List<GameObject>();
         var rightObjects = new List<GameObject>();
 
-        var left = new GameObject("leftObj", typeof(Rigidbody));
-        var right = new GameObject("rightObj", typeof(Rigidbody));
+        var left = new GameObject(gameObject.name + " leftObj", typeof(Rigidbody));
+        var right = new GameObject(gameObject.name + " rightObj", typeof(Rigidbody));
 
         //Meshがついているか確認するリスト
         var checkObjects = new List<GameObject>();
@@ -165,6 +176,10 @@ public class ObjectBreak_Y : MonoBehaviour
 
         Destroy(left, objScr.deleteTime);
         Destroy(right, objScr.deleteTime);
+
+        ShardSettings(left);
+        ShardSettings(right);
+
         obj.SetActive(false);
     }
 
@@ -180,14 +195,12 @@ public class ObjectBreak_Y : MonoBehaviour
     }
 
     //ヒップドロップ
-    private void FallenCollapse(GameObject obj, Vector3 P)
+    private void FallenCollapse(GameObject obj)
     {
         RigidOn(obj);
 
-        var direction = obj.transform.position - P;
+        var direction = (obj.transform.position - objScr.player.transform.position);
         var rb = obj.GetComponent<Rigidbody>();
-
-        direction = direction.normalized;
         var F = direction * objScr.power;
         Vector3 TorquePower = new Vector3(Random.Range(-objScr.torque, objScr.torque), Random.Range(-objScr.torque, objScr.torque), Random.Range(-objScr.torque, objScr.torque));
         rb.AddForce(F, ForceMode.Impulse);
