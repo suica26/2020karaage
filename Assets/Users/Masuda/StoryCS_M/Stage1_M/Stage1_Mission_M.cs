@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Stage1_Mission_M : MonoBehaviour
 {
     [SerializeField] public Text mission, submis, exmis, count, per, tips;
-    [SerializeField] public GameObject player, shop, misBox, company,achievement, hip,
+    [SerializeField] public GameObject player, shop, misBox, company, hip,
         tipsCircle, tipsChicken;
     [SerializeField] public TextAsset txtFile;
     [SerializeField] public int smallNum, bigNum, achieve;
@@ -25,7 +25,6 @@ public class Stage1_Mission_M : MonoBehaviour
         txtData = txtFile.text;
         splitText = txtData.Split(char.Parse("\n"));
         misBox.SetActive(false);
-        achievement.SetActive(false);
         hip.SetActive(false);
         tipsCircle.SetActive(false);
         tipsChicken.SetActive(false);
@@ -41,7 +40,6 @@ public class Stage1_Mission_M : MonoBehaviour
         if (!shop && first)
         {
             misBox.SetActive(true);
-            achievement.SetActive(true);
             missionSlide.Play();
             mission.text = splitText[0];
             submis.text = splitText[1];
@@ -49,6 +47,7 @@ public class Stage1_Mission_M : MonoBehaviour
             count.text = "1";
             first = false;
             second = true;
+            per.text = "0%";
         }
 
         if (bigNum >= bigBorder4 && second == true)
@@ -148,7 +147,7 @@ public class Stage1_Mission_M : MonoBehaviour
             submis.text = splitText[10];
             exmis.text = splitText[11];
             count.text = "4";
-            achievement.SetActive(false);
+            per.text = "";
         }
 
         if (final)
