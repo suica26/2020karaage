@@ -16,14 +16,7 @@ public class SkipIcon_M : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (skip)
-        {
-            Time.timeScale = 0;
-        }
-        else if (!skip)
-        {
-            Time.timeScale = 1;
-        }
+
     }
 
     public void OnSkip()
@@ -38,7 +31,6 @@ public class SkipIcon_M : MonoBehaviour
 
     public void SkipStory()
     {
-        Time.timeScale = 1;
         next.SetActive(true);
         skip.SetActive(false);
         Destroy(canvas);
