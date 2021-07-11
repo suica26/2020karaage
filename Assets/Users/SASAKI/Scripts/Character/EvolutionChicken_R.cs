@@ -42,7 +42,18 @@ public class EvolutionChicken_R : MonoBehaviour
 
     void Start()
     {
-        scrParam = objParam.gameObject.GetComponent<Parameters_R>();
+        // objParamが空の場合、Canvasオブジェクトを探す
+        if (objParam == null)
+            scrParam = objParam.gameObject.GetComponent<Parameters_R>();
+        else
+        {
+            GameObject findCanvas = GameObject.Find("Canvas");
+            if (findCanvas == null)
+                Debug.LogError("Error: Parameters_R が存在していません! 詳しくは Evolution_Chiken_R を確認してください");
+            else
+                scrParam = findCanvas.GetComponent<Parameters_R>();
+        }
+
         scrBlast = GetComponent<MorBlast_R>();
 
         evolutionNum = 0;
