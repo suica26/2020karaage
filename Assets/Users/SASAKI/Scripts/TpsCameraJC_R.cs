@@ -17,6 +17,18 @@ public class TpsCameraJC_R : MonoBehaviour
     Vector2 mouse = Vector2.zero;
     Vector3 camPos;
 
+    public bool evolutionAnimStart = false;
+    public bool evolved = false;
+    private float endEvolution = 0.25f;
+
+    private enum eCamWork
+    {
+        eNormal,
+        eEvolution,
+    }
+
+    private eCamWork eCameraWork = eCamWork.eNormal;
+
     private EvolutionChicken_R scrEvo;
 
     // Use this for initialization
@@ -39,30 +51,48 @@ public class TpsCameraJC_R : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        switch(eCameraWork)
+        {
+            case eCamWork.eNormal:
+                // Get MouseMove
+                mouse -= new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")) * Time.deltaTime * spinSpeed;
+                // Clamp mouseY move
+                mouse.y = Mathf.Clamp(mouse.y, 0.25f, 0.95f);
 
-        // Get MouseMove
-        mouse -= new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")) * Time.deltaTime * spinSpeed;
-        // Clamp mouseY move
-        mouse.y = Mathf.Clamp(mouse.y, 0.25f, 0.95f);
+                // sphere coordinates
+                pos.x = Mathf.Sin(mouse.y * Mathf.PI) * Mathf.Cos(mouse.x * Mathf.PI);
+                pos.y = Mathf.Cos(mouse.y * Mathf.PI);
+                pos.z = Mathf.Sin(mouse.y * Mathf.PI) * Mathf.Sin(mouse.x * Mathf.PI);
 
-        // sphere coordinates
-        pos.x = Mathf.Sin(mouse.y * Mathf.PI) * Mathf.Cos(mouse.x * Mathf.PI);
-        pos.y = Mathf.Cos(mouse.y * Mathf.PI);
-        pos.z = Mathf.Sin(mouse.y * Mathf.PI) * Mathf.Sin(mouse.x * Mathf.PI);
+                //SetRadius
+                pos *= radius[scrEvo.EvolutionNum];
 
-        //SetRadius
-        pos *= radius[scrEvo.EvolutionNum];
+                // r and upper
+                pos *= nowPos.z;
 
-        // r and upper
-        pos *= nowPos.z;
+                pos.y += nowPos.y;
+                //pos.x += nowPos.x; // if u need a formula,pls remove comment tag.
 
-        pos.y += nowPos.y;
-        //pos.x += nowPos.x; // if u need a formula,pls remove comment tag.
+                camPos = pos + focus[scrEvo.EvolutionNum].position;
 
-        camPos = pos + focus[scrEvo.EvolutionNum].position;
-        transform.position = camPos;
-        transform.LookAt(focus[scrEvo.EvolutionNum]);
-        SetCam();
+                if(endEvolution < 0.25f)
+                {
+                    endEvolution += Time.deltaTime;
+                    transform.position = Vector3.Lerp(transform.position, camPos, 0.25f);
+                }
+                else
+                {
+                    transform.position = camPos;
+                }
+                transform.LookAt(focus[scrEvo.EvolutionNum]);
+                SetCam();
+                break;
+
+            // 進化中のモーション(何も起こさない)
+            case eCamWork.eEvolution:
+
+                break;
+        }
     }
 
     void SetCam()
@@ -98,5 +128,54 @@ public class TpsCameraJC_R : MonoBehaviour
             elapsed += Time.deltaTime;
             yield return null;
         }
+    }
+
+    public IEnumerator CameraWorkEvolution()
+    {
+        var timer = 0f;
+        var camWorkPos = transform.position;
+        float angle = objPlayer.transform.rotation.eulerAngles.y * Mathf.Deg2Rad;
+        eCameraWork = eCamWork.eEvolution;
+        evolutionAnimStart = true;
+
+        while (timer < 5.0f)
+        {
+            Time.timeScale = 0.1f;
+
+            if (timer <= 0.25f)                                     // カメラを所定の位置に移動
+            {
+                transform.position = Vector3.Lerp(camWorkPos, objPlayer.transform.right * 2.0f + focus[scrEvo.EvolutionNum].position, timer * 4);
+            }
+            else if (timer >= 0.25f && timer <= 0.8f)               // カメラズーム
+            {
+                var distance = Vector3.Lerp(Vector3.right, Vector3.zero, (timer - 0.25f) / 0.75f);
+                transform.position = objPlayer.transform.position + objPlayer.transform.right * (2.0f + distance.x) + Vector3.up * 0.5f;
+            }
+            else if(timer > 1.0f && timer <= 5.0f)
+            {
+                // 進化フラグを設定
+                evolved = true;
+
+                var distance = new Vector3(0.0f, 0.0f, 0.0f);       // カメラを引く
+                if (timer <= 1.25f)
+                {
+                    distance = Vector3.Lerp(distance, Vector3.right, (timer - 1.0f) / 0.25f);
+                }
+                else
+                {
+                    distance = new Vector3(1.0f, 0.0f, 0.0f);
+                }
+
+                angle += Mathf.PI / 4.0f * Time.unscaledDeltaTime;
+                transform.position = objPlayer.transform.position + new Vector3(Mathf.Cos(angle), 1.0f, Mathf.Sin(angle)) * (2.0f + distance.x * 5.0f);     // カメラを回転させる
+            }
+
+            transform.LookAt(objPlayer.transform);
+            timer += Time.unscaledDeltaTime;
+            yield return null;
+        }
+        Time.timeScale = 1.0f;
+        endEvolution = 0.0f;
+        eCameraWork = eCamWork.eNormal;
     }
 }

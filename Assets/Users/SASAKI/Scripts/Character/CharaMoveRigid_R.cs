@@ -84,6 +84,12 @@ public class CharaMoveRigid_R : MonoBehaviour
         h = Input.GetAxis("Horizontal");
         v = Input.GetAxis("Vertical");
 
+        if(Camera.main.GetComponent<TpsCameraJC_R>().evolutionAnimStart)
+        {
+            Camera.main.transform.GetComponent<TpsCameraJC_R>().evolutionAnimStart = false;
+            scrAnim[scrEvo.EvolutionNum-1].SetAnimator(Transition_R.Anim.EVOLUTION, true);
+        }
+
         /*
         //足元から下へ向けて球状のRayを発射し，着地判定をする
         ray = new Ray(gameObject.transform.position + 0.15f * gameObject.transform.up, - gameObject.transform.up);
