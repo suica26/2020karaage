@@ -92,8 +92,6 @@ public class EvolutionChicken_R : MonoBehaviour
             chickens[evolutionNum - 1].SetActive(false);
             chickens[evolutionNum].SetActive(true);
 
-            //ADX Selector Change
-            audioLavel.player.SetSelectorLabel("Chicken_Form", "form2");
             audioLavel.Play("ShockWave");
 
             status_HP = HP[evolutionNum];
@@ -103,6 +101,20 @@ public class EvolutionChicken_R : MonoBehaviour
             status_JUMP = JUMP[evolutionNum];
 
             scrBlast.EvoBlast();
+        }
+
+        if(evolutionNum == 1)
+        {
+            //ADX Selector Change
+            audioLavel.player.SetSelectorLabel("Chicken_Form", "form2");
+        }
+        if (evolutionNum == 2)
+        {
+            audioLavel.player.SetSelectorLabel("Chicken_Form", "form3");
+        }
+        if (evolutionNum == 4)
+        {
+            audioLavel.player.SetSelectorLabel("Chicken_Form", "form4");
         }
     }
 }

@@ -53,6 +53,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
 
     //破壊後のオブジェクトが地面(等)に接触したときの音
     public string groundContactSoundName;
+    private Renderer Renderer;
 
     public Material capMaterial;
 
@@ -69,7 +70,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
         criAtomSource = GetComponent<CriAtomSource>();
         //加筆　undertreem 0625
         ADX_RevLevel = player.GetComponent<ADX_Ray_Rev>();
-
+        Renderer = GetComponent<Renderer>();
         playerScrS1M = player.GetComponent<Stage1_Mission_M>();
         livingFlg = true;
     }
@@ -94,14 +95,19 @@ public class ObjectStateManagement_Y : MonoBehaviour
         //破砕車がぶつかったとき
         bool carHit = collision.gameObject.name.Contains("car");
 
+        //破砕車が建物にぶつかったときキューを入れ替える
+        if (carHit && objectID == 0)
+        {
+            objectID = 10;
+        }
         //即死条件と生存フラグがどちらも成り立つとき、即死発動
         if ((trampling || carHit) && livingFlg)
         {
             SetSkillID(0);
             Death();
         }
-
-        if (!livingFlg && collision.gameObject.tag != "Player" && groundContactSoundName != null)
+        //画面内のときのみ鳴らす
+        if (!livingFlg && collision.gameObject.tag != "Player" && groundContactSoundName != null && Renderer.isVisible)
         {
             criAtomSource.Play(groundContactSoundName);
         }
@@ -207,6 +213,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
             case 7: ExplosionSoundName = "FallenTree00"; break;
             case 8: ExplosionSoundName = "FireHydrant00"; break;
             case 9: ExplosionSoundName = "PoleContract00"; break;
+            case 10: ExplosionSoundName = "BuildingFarExplosion00"; break;
             default: ExplosionSoundName = "PoleExplosion00"; break;
         }
         if (criAtomSource != null) criAtomSource.cueName = ExplosionSoundName;
