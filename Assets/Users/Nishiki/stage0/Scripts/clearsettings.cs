@@ -8,12 +8,15 @@ public class clearsettings : MonoBehaviour
     public GameObject whiteness;
     public SceneReference nextScene;
 
+    public float whiteOutTime;
+    public float sceneChangeTime;
+
     void OnTriggerStay(Collider collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            Invoke("OnWhiteness", 1.3f);
-            Invoke("SceneChange", 5f);
+            Invoke("OnWhiteness", whiteOutTime);
+            Invoke("SceneChange", sceneChangeTime);
         }
     }
 

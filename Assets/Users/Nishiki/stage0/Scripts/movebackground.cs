@@ -15,7 +15,12 @@ public class movebackground : MonoBehaviour
     public doorscore dHP;
 
     public float spdown;
-    public shaker eq;
+    private CameraShake shake;
+
+    private void Start()
+    {
+        shake = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShake>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -25,16 +30,14 @@ public class movebackground : MonoBehaviour
         if (dHP.nowanim >= 5 && speed >= 0)
         {
             speed -= spdown;
-            eq.duration -= spdown;
+            shake.duration -= spdown;
         }
     }
 
     void OnTriggerEnter(Collider collision)
     {
-
         if (collision.gameObject.name == "backgroundhiter")
         {
-
             transform.position = new Vector3(px, py, pz);
         }
     }
