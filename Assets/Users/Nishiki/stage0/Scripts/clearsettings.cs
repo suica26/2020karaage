@@ -1,18 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class clearsettings : MonoBehaviour
 {
     public GameObject whiteness;
-    public GameObject Schanger;
+    public SceneReference nextScene;
 
     void OnTriggerStay(Collider collision)
     {
         if (collision.gameObject.tag == "Player")
         {
             Invoke("OnWhiteness", 1.3f);
-            Invoke("OnSceneChanger", 5f);
+            Invoke("SceneChange", 5f);
         }
     }
 
@@ -20,8 +21,9 @@ public class clearsettings : MonoBehaviour
     {
         whiteness.SetActive(true);
     }
-    private void OnSceneChanger()
+    private void SceneChange()
     {
-        Schanger.SetActive(true);
+        // シーン遷移
+        SceneManager.LoadScene(nextScene);
     }
 }
