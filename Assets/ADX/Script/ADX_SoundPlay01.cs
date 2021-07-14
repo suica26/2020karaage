@@ -12,6 +12,6 @@ public class ADX_SoundPlay01 : MonoBehaviour
     }
     void OnEnable()
     {
-        criAtomSource.Play("JINGLE_Mission");
+        criAtomSource?.Play("JINGLE_Mission");
     }
 }

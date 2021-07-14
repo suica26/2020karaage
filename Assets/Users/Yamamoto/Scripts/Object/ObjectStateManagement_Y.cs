@@ -6,7 +6,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
 {
     [Range(0, 4), SerializeField] private int tier_WalkAttack;
     [SerializeField] private GameObject divideObject;
-    private string attackSoundName, contactSoundName, ExplosionSoundName;
+    private string attackSoundName, contactSoundName, ExplosionSoundName, CutterContactSoundName;
     public int HP;                  //Inspector上から設定できます。
     [Header("ダメージ倍率")]
     public float kickMag;       //キックのダメージ倍率
@@ -133,8 +133,13 @@ public class ObjectStateManagement_Y : MonoBehaviour
     {
         if (HP > 0)     //単純にダメージを受けたときの処理
         {
-            //おはようブラストとカッターの時
-            if (hitSkilID == 2 || hitSkilID == 3)
+            //カッターの時
+            if (hitSkilID == 2)
+            {
+                //SetCutterContractCue();
+                //criAtomSource?.Play(CutterContactSoundName);
+            }
+            else if (hitSkilID == 3)//おはようブラストの時
             {
                 SetContactCue();
                 criAtomSource?.Play(contactSoundName);
@@ -178,6 +183,15 @@ public class ObjectStateManagement_Y : MonoBehaviour
             default: attackSoundName = "TrachcanContact00"; break;
         }
         if (criAtomSource != null) criAtomSource.cueName = attackSoundName;
+    }
+
+    private void SetCutterContractCue()
+    {
+        switch (objectID)
+        {
+            //後で入れます
+        }
+        if (criAtomSource != null) criAtomSource.cueName = CutterContactSoundName;
     }
 
     private void SetContactCue()
@@ -256,7 +270,9 @@ public class ObjectStateManagement_Y : MonoBehaviour
         //float BusLevel = ADX_RevLevel.ADX_BusSendLevel;
         //SetBusSendLevelSet(Rev, BusLevel);
         //Debug.Log(BusLevel);
-        criAtomSource?.Play(ExplosionSoundName);
+        //カッターのときはカッターキューを鳴らす
+        if (hitSkilID == 2) criAtomSource.Play("CutterCut00");
+        else criAtomSource?.Play(ExplosionSoundName);
         if (GetComponent<Car_R>() != null) Destroy(GetComponent<Car_R>());
 
         DeathCount();
@@ -309,11 +325,5 @@ public class ObjectStateManagement_Y : MonoBehaviour
     public void Delete()
     {
         Destroy(gameObject, deleteTime);
-    }
-
-    //undertreem 0625 ADXバスセンド量
-    private void SetBusSendLevelSet(string busName, float levelOffset)
-    {
-        criAtomSource.SetBusSendLevelOffset(busName, levelOffset);
     }
 }
