@@ -180,7 +180,13 @@ public class ObjectBreak_Y : MonoBehaviour
         ShardSettings(left);
         ShardSettings(right);
 
-        obj.SetActive(false);
+        //破壊時のアクションを動作させるために少し遅延させる
+        Invoke("SetNonActive", 0.1f);
+    }
+
+    private void SetNonActive()
+    {
+        gameObject.SetActive(false);
     }
 
     //おはようブラスト

@@ -53,6 +53,7 @@ public class EvolutionChicken_R : MonoBehaviour
             else
                 scrParam = findCanvas.GetComponent<Parameters_R>();
         }
+        scrParam = objParam.gameObject.GetComponent<Parameters_R>();
 
         scrBlast = GetComponent<MorBlast_R>();
 
@@ -85,7 +86,7 @@ public class EvolutionChicken_R : MonoBehaviour
         }
         EP = scrParam.ep;
 
-        if(evolutionNum < evolutionPoint.Length && EP >= evolutionPoint[evolutionNum])
+        if (evolutionNum < evolutionPoint.Length && EP >= evolutionPoint[evolutionNum])
         {
             evolutionNum++;
 
@@ -103,7 +104,7 @@ public class EvolutionChicken_R : MonoBehaviour
             scrBlast.EvoBlast();
         }
 
-        if(evolutionNum == 1)
+        if (evolutionNum == 1)
         {
             //ADX Selector Change
             audioLavel.player.SetSelectorLabel("Chicken_Form", "form2");
