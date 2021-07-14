@@ -21,37 +21,27 @@ public class commentplaykick : MonoBehaviour
     {
         if (mode == 1)
         {
-
             animCon.SetInteger("play", 1);
-
         }
 
         if (p.boxscore >= 2)
         {
-
             animCon.SetInteger("play", 0);
             GetComponent<BoxCollider>().enabled = false;
             mode = 2;
-
         }
 
         if (mode == 2)
         {
-
             GetComponent<BoxCollider>().enabled = false;
-
         }
-
-
     }
 
     void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag == "Player" && p.boxscore != 2)
         {
-
             mode = 1;
-
         }
     }
 }
