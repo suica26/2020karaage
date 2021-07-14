@@ -5,41 +5,40 @@ using UnityEngine;
 
 public class movebackground : MonoBehaviour
 {
-	
-	public float speed = 4.0f;
 
-	public float px;
-	public float py;
-	public float pz;
+    public float speed = 4.0f;
 
-	public doorscore dHP;
+    public float px;
+    public float py;
+    public float pz;
 
-	public float spdown;
-	public shaker eq;
+    public doorscore dHP;
 
-	// Update is called once per frame
-	void Update()
-	{
-		
-		transform.position += transform.right * speed * Time.deltaTime;
+    public float spdown;
+    private CameraShake shake;
 
-		if (dHP.nowanim >= 5 && speed >= 0)
+    private void Start()
+    {
+        shake = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShake>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        transform.position += transform.right * speed * Time.deltaTime;
+
+        if (dHP.nowanim >= 5 && speed >= 0)
         {
-
-			speed -= spdown;
-			eq.duration -= spdown;
-
+            speed -= spdown;
+            shake.duration -= spdown;
         }
-		
-		
-	}
-	void OnTriggerEnter(Collider collision)
-	{
+    }
 
-		if (collision.gameObject.name == "backgroundhiter")
-		{
-
-			transform.position = new Vector3(px, py, pz);
-		}
-	}
+    void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.name == "backgroundhiter")
+        {
+            transform.position = new Vector3(px, py, pz);
+        }
+    }
 }
