@@ -4,11 +4,8 @@ using UnityEngine;
 
 public class commentplaykick : MonoBehaviour
 {
-
-    public int mode = 0;
     private Animator animCon;
-
-    public kickID p;
+    private int breakNum;
 
     // Start is called before the first frame update
     void Start()
@@ -16,32 +13,21 @@ public class commentplaykick : MonoBehaviour
         animCon = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnTriggerEnter(Collider collision)
     {
-        if (mode == 1)
+        if (collision.gameObject.tag == "Player" && breakNum != 2)
         {
             animCon.SetInteger("play", 1);
         }
+    }
 
-        if (p.boxscore >= 2)
+    public void BreakNumPlus()
+    {
+        breakNum++;
+        if (breakNum >= 2)
         {
             animCon.SetInteger("play", 0);
             GetComponent<BoxCollider>().enabled = false;
-            mode = 2;
-        }
-
-        if (mode == 2)
-        {
-            GetComponent<BoxCollider>().enabled = false;
-        }
-    }
-
-    void OnTriggerEnter(Collider collision)
-    {
-        if (collision.gameObject.tag == "Player" && p.boxscore != 2)
-        {
-            mode = 1;
         }
     }
 }

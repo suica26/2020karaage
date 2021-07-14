@@ -24,7 +24,8 @@ public class doorscore : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (damage >= breakPoints[nowanim])
+
+        if (nowanim < breakPoints.Length && damage >= breakPoints[nowanim])
         {
             //nowanimは加算されてから下の式に代入される
             animCon.SetInteger("bp", ++nowanim);
