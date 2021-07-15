@@ -11,11 +11,8 @@ public class boxhp : MonoBehaviour
     public Slider slider;
     public GameObject uipanel;
     //ADX
-    /*
     public new CriAtomSource audio;
-    bool isOnce = true;
-    private AudioSource Sound;
-    */
+
     private Animator animCon;
     private bool death;
     public commentplaykick scrCommentKick;
@@ -24,10 +21,8 @@ public class boxhp : MonoBehaviour
     void Start()
     {
         animCon = GetComponent<Animator>();
-        /*
-        Sound = GetComponent<AudioSource>();
-        audio = (CriAtomSource)GetComponent("CriAtomSource");
-        */
+
+        audio = GetComponent<CriAtomSource>();
 
         slider.value = 1;
         currentHp = maxHp;
@@ -43,6 +38,7 @@ public class boxhp : MonoBehaviour
         //破壊したとき
         if (currentHp <= 0 && !death)
         {
+            audio.Play("BoxBreak");
             death = true;
             currentHp = 0;
             scrCommentKick.BreakNumPlus();
@@ -58,7 +54,7 @@ public class boxhp : MonoBehaviour
             currentHp -= damage;
             uipanel.SetActive(true);
             Invoke("UISetNonActive", 1.2f);
-            //audio.Play("Track_noise00");
+            audio.Play("BoxContract");
         }
     }
 

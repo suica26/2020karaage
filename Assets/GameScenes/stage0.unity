@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.30687088, g: 0.6233962, b: 0.85549104, a: 1}
+  m_IndirectSpecularColor: {r: 0.30689147, g: 0.6234039, b: 0.8556689, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -248,7 +248,7 @@ Transform:
   - {fileID: 942106666}
   - {fileID: 1998470680}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &40312679
 GameObject:
@@ -769,6 +769,7 @@ GameObject:
   - component: {fileID: 97359403}
   - component: {fileID: 97359402}
   - component: {fileID: 97359401}
+  - component: {fileID: 97359407}
   m_Layer: 0
   m_Name: Box (12)
   m_TagString: Untagged
@@ -856,6 +857,7 @@ MonoBehaviour:
   maxHp: 60
   slider: {fileID: 1016725743}
   uipanel: {fileID: 1713383290}
+  audio: {fileID: 0}
   scrCommentKick: {fileID: 949892997}
 --- !u!23 &97359405
 MeshRenderer:
@@ -905,6 +907,29 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 97359399}
   m_Mesh: {fileID: 1086329966279329586, guid: 3230b18a16e0fc24596d63c7ab523e00, type: 3}
+--- !u!114 &97359407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97359399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: BoxBreak
+  _cueSheet: St0_Track
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &104010857
 GameObject:
   m_ObjectHideFlags: 0
@@ -2087,6 +2112,7 @@ GameObject:
   - component: {fileID: 262852714}
   - component: {fileID: 262852713}
   - component: {fileID: 262852712}
+  - component: {fileID: 262852718}
   m_Layer: 0
   m_Name: Box (16)
   m_TagString: Untagged
@@ -2174,6 +2200,7 @@ MonoBehaviour:
   maxHp: 60
   slider: {fileID: 811690769}
   uipanel: {fileID: 1062027455}
+  audio: {fileID: 0}
   scrCommentKick: {fileID: 949892997}
 --- !u!23 &262852716
 MeshRenderer:
@@ -2223,6 +2250,29 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 262852710}
   m_Mesh: {fileID: 1086329966279329586, guid: 3230b18a16e0fc24596d63c7ab523e00, type: 3}
+--- !u!114 &262852718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 262852710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: BoxBreak
+  _cueSheet: St0_Track
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &274157317
 GameObject:
   m_ObjectHideFlags: 0
@@ -2577,6 +2627,7 @@ GameObject:
   - component: {fileID: 300428612}
   - component: {fileID: 300428611}
   - component: {fileID: 300428617}
+  - component: {fileID: 300428618}
   m_Layer: 0
   m_Name: Box (2)
   m_TagString: Untagged
@@ -2632,6 +2683,7 @@ MonoBehaviour:
   maxHp: 60
   slider: {fileID: 1660122394}
   uipanel: {fileID: 930971595}
+  audio: {fileID: 0}
   scrCommentKick: {fileID: 949892997}
 --- !u!23 &300428614
 MeshRenderer:
@@ -2713,6 +2765,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 122
   m_CollisionDetection: 0
+--- !u!114 &300428618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300428610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: BoxBreak
+  _cueSheet: St0_Track
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1001 &307065839
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3964,6 +4039,7 @@ GameObject:
   - component: {fileID: 447814196}
   - component: {fileID: 447814195}
   - component: {fileID: 447814201}
+  - component: {fileID: 447814202}
   m_Layer: 0
   m_Name: Box (3)
   m_TagString: Untagged
@@ -4019,6 +4095,7 @@ MonoBehaviour:
   maxHp: 60
   slider: {fileID: 2031388554}
   uipanel: {fileID: 2122955638}
+  audio: {fileID: 0}
   scrCommentKick: {fileID: 949892997}
 --- !u!23 &447814198
 MeshRenderer:
@@ -4100,6 +4177,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 122
   m_CollisionDetection: 0
+--- !u!114 &447814202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 447814194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: BoxBreak
+  _cueSheet: St0_Track
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &450152450
 GameObject:
   m_ObjectHideFlags: 0
@@ -4338,7 +4438,7 @@ Transform:
   - {fileID: 673419737}
   - {fileID: 2109468339}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &487923100
 GameObject:
@@ -6710,6 +6810,7 @@ GameObject:
   - component: {fileID: 752737595}
   - component: {fileID: 752737594}
   - component: {fileID: 752737593}
+  - component: {fileID: 752737599}
   m_Layer: 0
   m_Name: Box (17)
   m_TagString: Untagged
@@ -6797,6 +6898,7 @@ MonoBehaviour:
   maxHp: 60
   slider: {fileID: 1782882432}
   uipanel: {fileID: 1434929092}
+  audio: {fileID: 0}
   scrCommentKick: {fileID: 949892997}
 --- !u!23 &752737597
 MeshRenderer:
@@ -6846,6 +6948,29 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 752737591}
   m_Mesh: {fileID: 1086329966279329586, guid: 3230b18a16e0fc24596d63c7ab523e00, type: 3}
+--- !u!114 &752737599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752737591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: BoxBreak
+  _cueSheet: St0_Track
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &766690710
 GameObject:
   m_ObjectHideFlags: 0
@@ -7528,7 +7653,7 @@ Transform:
   - {fileID: 1691646804}
   - {fileID: 1730981151}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &858414497
 GameObject:
@@ -7693,6 +7818,7 @@ GameObject:
   - component: {fileID: 873731029}
   - component: {fileID: 873731028}
   - component: {fileID: 873731027}
+  - component: {fileID: 873731033}
   m_Layer: 0
   m_Name: Box (13)
   m_TagString: Untagged
@@ -7780,6 +7906,7 @@ MonoBehaviour:
   maxHp: 60
   slider: {fileID: 717997012}
   uipanel: {fileID: 1710359090}
+  audio: {fileID: 0}
   scrCommentKick: {fileID: 949892997}
 --- !u!23 &873731031
 MeshRenderer:
@@ -7829,6 +7956,29 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 873731025}
   m_Mesh: {fileID: 1086329966279329586, guid: 3230b18a16e0fc24596d63c7ab523e00, type: 3}
+--- !u!114 &873731033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 873731025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: BoxBreak
+  _cueSheet: St0_Track
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &883265846
 GameObject:
   m_ObjectHideFlags: 0
@@ -7942,8 +8092,8 @@ GameObject:
   - component: {fileID: 905172738}
   - component: {fileID: 905172744}
   - component: {fileID: 905172743}
-  - component: {fileID: 905172740}
   - component: {fileID: 905172745}
+  - component: {fileID: 905172740}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -8662,6 +8812,7 @@ GameObject:
   - component: {fileID: 994506837}
   - component: {fileID: 994506836}
   - component: {fileID: 994506842}
+  - component: {fileID: 994506843}
   m_Layer: 0
   m_Name: Box (1)
   m_TagString: Untagged
@@ -8717,6 +8868,7 @@ MonoBehaviour:
   maxHp: 60
   slider: {fileID: 2102386059}
   uipanel: {fileID: 1265378118}
+  audio: {fileID: 0}
   scrCommentKick: {fileID: 949892997}
 --- !u!23 &994506839
 MeshRenderer:
@@ -8798,6 +8950,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 122
   m_CollisionDetection: 0
+--- !u!114 &994506843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 994506835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: BoxBreak
+  _cueSheet: St0_Track
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &1007769273
 GameObject:
   m_ObjectHideFlags: 0
@@ -9227,7 +9402,7 @@ MonoBehaviour:
       streamingVoices: 0
     outputSamplingRate: 0
     usesInGamePreview: 0
-    inGamePreviewMode: 1
+    inGamePreviewMode: 0
     serverFrequency: 60
     asrOutputChannels: 2
     useRandomSeedWithTime: 0
@@ -9751,7 +9926,7 @@ Transform:
   - {fileID: 1968429867}
   - {fileID: 1804011117}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1102087623 stripped
 Transform:
@@ -9799,6 +9974,7 @@ GameObject:
   - component: {fileID: 1106869640}
   - component: {fileID: 1106869639}
   - component: {fileID: 1106869638}
+  - component: {fileID: 1106869644}
   m_Layer: 0
   m_Name: Box (14)
   m_TagString: Untagged
@@ -9886,6 +10062,7 @@ MonoBehaviour:
   maxHp: 60
   slider: {fileID: 1636891417}
   uipanel: {fileID: 636193899}
+  audio: {fileID: 0}
   scrCommentKick: {fileID: 949892997}
 --- !u!23 &1106869642
 MeshRenderer:
@@ -9935,6 +10112,29 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1106869636}
   m_Mesh: {fileID: 1086329966279329586, guid: 3230b18a16e0fc24596d63c7ab523e00, type: 3}
+--- !u!114 &1106869644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106869636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: BoxBreak
+  _cueSheet: St0_Track
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &1139830976
 GameObject:
   m_ObjectHideFlags: 0
@@ -10117,6 +10317,7 @@ GameObject:
   - component: {fileID: 1165141124}
   - component: {fileID: 1165141123}
   - component: {fileID: 1165141122}
+  - component: {fileID: 1165141128}
   m_Layer: 0
   m_Name: Box (10)
   m_TagString: Untagged
@@ -10204,6 +10405,7 @@ MonoBehaviour:
   maxHp: 60
   slider: {fileID: 936628218}
   uipanel: {fileID: 1648564540}
+  audio: {fileID: 0}
   scrCommentKick: {fileID: 949892997}
 --- !u!23 &1165141126
 MeshRenderer:
@@ -10253,6 +10455,29 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1165141120}
   m_Mesh: {fileID: 1086329966279329586, guid: 3230b18a16e0fc24596d63c7ab523e00, type: 3}
+--- !u!114 &1165141128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1165141120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: BoxBreak
+  _cueSheet: St0_Track
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &1169596814
 GameObject:
   m_ObjectHideFlags: 0
@@ -10852,6 +11077,7 @@ GameObject:
   - component: {fileID: 1235337425}
   - component: {fileID: 1235337424}
   - component: {fileID: 1235337423}
+  - component: {fileID: 1235337429}
   m_Layer: 0
   m_Name: Box (11)
   m_TagString: Untagged
@@ -10939,6 +11165,7 @@ MonoBehaviour:
   maxHp: 60
   slider: {fileID: 595702143}
   uipanel: {fileID: 2082301613}
+  audio: {fileID: 0}
   scrCommentKick: {fileID: 949892997}
 --- !u!23 &1235337427
 MeshRenderer:
@@ -10988,6 +11215,29 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1235337421}
   m_Mesh: {fileID: 1086329966279329586, guid: 3230b18a16e0fc24596d63c7ab523e00, type: 3}
+--- !u!114 &1235337429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1235337421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: BoxBreak
+  _cueSheet: St0_Track
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1001 &1245508753
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11853,6 +12103,7 @@ GameObject:
   - component: {fileID: 1321669574}
   - component: {fileID: 1321669573}
   - component: {fileID: 1321669579}
+  - component: {fileID: 1321669580}
   m_Layer: 0
   m_Name: Box (4)
   m_TagString: Untagged
@@ -11908,6 +12159,7 @@ MonoBehaviour:
   maxHp: 60
   slider: {fileID: 348044897}
   uipanel: {fileID: 1669106127}
+  audio: {fileID: 0}
   scrCommentKick: {fileID: 949892997}
 --- !u!23 &1321669576
 MeshRenderer:
@@ -11989,6 +12241,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 122
   m_CollisionDetection: 0
+--- !u!114 &1321669580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1321669572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: BoxBreak
+  _cueSheet: St0_Track
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &1325632875
 GameObject:
   m_ObjectHideFlags: 0
@@ -12004,6 +12279,7 @@ GameObject:
   - component: {fileID: 1325632879}
   - component: {fileID: 1325632878}
   - component: {fileID: 1325632877}
+  - component: {fileID: 1325632883}
   m_Layer: 0
   m_Name: Box (9)
   m_TagString: Untagged
@@ -12091,6 +12367,7 @@ MonoBehaviour:
   maxHp: 60
   slider: {fileID: 1313288827}
   uipanel: {fileID: 54425621}
+  audio: {fileID: 0}
   scrCommentKick: {fileID: 949892997}
 --- !u!23 &1325632881
 MeshRenderer:
@@ -12140,6 +12417,29 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1325632875}
   m_Mesh: {fileID: 1086329966279329586, guid: 3230b18a16e0fc24596d63c7ab523e00, type: 3}
+--- !u!114 &1325632883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325632875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: BoxBreak
+  _cueSheet: St0_Track
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &1351510027
 GameObject:
   m_ObjectHideFlags: 0
@@ -12680,7 +12980,7 @@ Transform:
   - {fileID: 262852711}
   - {fileID: 752737592}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1459170145
 GameObject:
@@ -12815,6 +13115,94 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1480453191}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1503356292
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1503356294}
+  - component: {fileID: 1503356293}
+  m_Layer: 0
+  m_Name: CRIWARE
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1503356293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503356292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91f529aa944b914449d62b8c40f188fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  acfFile: GamingKaraage.acf
+  cueSheets:
+  - name: Chicken
+    acbFile: Chicken.acb
+    awbFile: 
+    loaderStatus: 0
+  - name: Town
+    acbFile: Town.acb
+    awbFile: 
+    loaderStatus: 0
+  - name: BGM
+    acbFile: BGM.acb
+    awbFile: 
+    loaderStatus: 0
+  - name: System
+    acbFile: System.acb
+    awbFile: 
+    loaderStatus: 0
+  - name: Contact
+    acbFile: Contact.acb
+    awbFile: 
+    loaderStatus: 0
+  - name: Explosion
+    acbFile: Explosion.acb
+    awbFile: 
+    loaderStatus: 0
+  - name: Explosion_R
+    acbFile: Explosion_R.acb
+    awbFile: 
+    loaderStatus: 0
+  - name: JINGLE
+    acbFile: JINGLE.acb
+    awbFile: 
+    loaderStatus: 0
+  - name: CueSheet_0
+    acbFile: CueSheet_0.acb
+    awbFile: 
+    loaderStatus: 0
+  - name: St0_Track
+    acbFile: St0_Track.acb
+    awbFile: 
+    loaderStatus: 0
+  dspBusSetting: 
+  dontDestroyOnLoad: 0
+  dontRemoveExistsCueSheet: 0
+--- !u!4 &1503356294
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503356292}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1509703904
 GameObject:
   m_ObjectHideFlags: 0
@@ -15623,6 +16011,7 @@ GameObject:
   - component: {fileID: 1801331974}
   - component: {fileID: 1801331973}
   - component: {fileID: 1801331979}
+  - component: {fileID: 1801331980}
   m_Layer: 0
   m_Name: Box (5)
   m_TagString: Untagged
@@ -15678,6 +16067,7 @@ MonoBehaviour:
   maxHp: 60
   slider: {fileID: 125722936}
   uipanel: {fileID: 826503186}
+  audio: {fileID: 0}
   scrCommentKick: {fileID: 949892997}
 --- !u!23 &1801331976
 MeshRenderer:
@@ -15759,6 +16149,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 122
   m_CollisionDetection: 0
+--- !u!114 &1801331980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801331972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: BoxBreak
+  _cueSheet: St0_Track
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &1804011116
 GameObject:
   m_ObjectHideFlags: 0
@@ -16030,6 +16443,7 @@ GameObject:
   - component: {fileID: 1850690992}
   - component: {fileID: 1850690991}
   - component: {fileID: 1850690990}
+  - component: {fileID: 1850690996}
   m_Layer: 0
   m_Name: Box (7)
   m_TagString: Untagged
@@ -16117,6 +16531,7 @@ MonoBehaviour:
   maxHp: 60
   slider: {fileID: 1271702659}
   uipanel: {fileID: 104010857}
+  audio: {fileID: 0}
   scrCommentKick: {fileID: 949892997}
 --- !u!23 &1850690994
 MeshRenderer:
@@ -16166,6 +16581,29 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1850690988}
   m_Mesh: {fileID: 1086329966279329586, guid: 3230b18a16e0fc24596d63c7ab523e00, type: 3}
+--- !u!114 &1850690996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1850690988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: BoxBreak
+  _cueSheet: St0_Track
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &1858934888
 GameObject:
   m_ObjectHideFlags: 0
@@ -17522,6 +17960,7 @@ GameObject:
   - component: {fileID: 1998677859}
   - component: {fileID: 1998677858}
   - component: {fileID: 1998677857}
+  - component: {fileID: 1998677863}
   m_Layer: 0
   m_Name: Box (15)
   m_TagString: Untagged
@@ -17609,6 +18048,7 @@ MonoBehaviour:
   maxHp: 60
   slider: {fileID: 235525626}
   uipanel: {fileID: 626959426}
+  audio: {fileID: 0}
   scrCommentKick: {fileID: 949892997}
 --- !u!23 &1998677861
 MeshRenderer:
@@ -17658,6 +18098,29 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1998677855}
   m_Mesh: {fileID: 1086329966279329586, guid: 3230b18a16e0fc24596d63c7ab523e00, type: 3}
+--- !u!114 &1998677863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998677855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: BoxBreak
+  _cueSheet: St0_Track
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!4 &2008903558 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6715095415447669577, guid: c38672bee64b74bcaa57d0a877f5dc6a,
@@ -17679,6 +18142,7 @@ GameObject:
   - component: {fileID: 2011449446}
   - component: {fileID: 2011449445}
   - component: {fileID: 2011449451}
+  - component: {fileID: 2011449452}
   m_Layer: 0
   m_Name: Box (6)
   m_TagString: Untagged
@@ -17734,6 +18198,7 @@ MonoBehaviour:
   maxHp: 60
   slider: {fileID: 959425749}
   uipanel: {fileID: 1953865287}
+  audio: {fileID: 0}
   scrCommentKick: {fileID: 949892997}
 --- !u!23 &2011449448
 MeshRenderer:
@@ -17815,6 +18280,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 122
   m_CollisionDetection: 0
+--- !u!114 &2011449452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2011449444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: BoxBreak
+  _cueSheet: St0_Track
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &2031388552
 GameObject:
   m_ObjectHideFlags: 0
@@ -18052,6 +18540,7 @@ GameObject:
   - component: {fileID: 2049273508}
   - component: {fileID: 2049273513}
   - component: {fileID: 2049273514}
+  - component: {fileID: 2049273515}
   m_Layer: 0
   m_Name: Box
   m_TagString: Untagged
@@ -18088,6 +18577,7 @@ MonoBehaviour:
   maxHp: 60
   slider: {fileID: 744888925}
   uipanel: {fileID: 488055646}
+  audio: {fileID: 0}
   scrCommentKick: {fileID: 949892997}
 --- !u!23 &2049273510
 MeshRenderer:
@@ -18188,6 +18678,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 122
   m_CollisionDetection: 0
+--- !u!114 &2049273515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2049273507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: BoxBreak
+  _cueSheet: St0_Track
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &2050786082
 GameObject:
   m_ObjectHideFlags: 0
@@ -18203,6 +18716,7 @@ GameObject:
   - component: {fileID: 2050786086}
   - component: {fileID: 2050786085}
   - component: {fileID: 2050786084}
+  - component: {fileID: 2050786090}
   m_Layer: 0
   m_Name: Box (8)
   m_TagString: Untagged
@@ -18290,6 +18804,7 @@ MonoBehaviour:
   maxHp: 60
   slider: {fileID: 1379693040}
   uipanel: {fileID: 275877852}
+  audio: {fileID: 0}
   scrCommentKick: {fileID: 949892997}
 --- !u!23 &2050786088
 MeshRenderer:
@@ -18339,6 +18854,29 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2050786082}
   m_Mesh: {fileID: 1086329966279329586, guid: 3230b18a16e0fc24596d63c7ab523e00, type: 3}
+--- !u!114 &2050786090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2050786082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: BoxBreak
+  _cueSheet: St0_Track
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &2066723469
 GameObject:
   m_ObjectHideFlags: 0
@@ -18555,70 +19093,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &2088512768
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2088512770}
-  - component: {fileID: 2088512769}
-  m_Layer: 0
-  m_Name: CRIWARE
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2088512769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2088512768}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91f529aa944b914449d62b8c40f188fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  acfFile: GamingKaraage.acf
-  cueSheets:
-  - name: St0_Track
-    acbFile: St0_Track.acb
-    awbFile: 
-    loaderStatus: 0
-  - name: Chicken
-    acbFile: Chicken.acb
-    awbFile: 
-    loaderStatus: 0
-  - name: System
-    acbFile: System.acb
-    awbFile: 
-    loaderStatus: 0
-  - name: BGM
-    acbFile: BGM.acb
-    awbFile: 
-    loaderStatus: 0
-  dspBusSetting: 
-  dontDestroyOnLoad: 0
-  dontRemoveExistsCueSheet: 0
---- !u!4 &2088512770
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2088512768}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2102386057
 GameObject:
   m_ObjectHideFlags: 0
@@ -19114,6 +19588,11 @@ PrefabInstance:
       propertyPath: JUMP.Array.data[0]
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 142731159246388820, guid: 6917cbfc87619ff4198ca8fde270bf21,
+        type: 3}
+      propertyPath: span
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 142731160078300709, guid: 6917cbfc87619ff4198ca8fde270bf21,
         type: 3}
       propertyPath: m_IsActive
@@ -19167,6 +19646,11 @@ PrefabInstance:
     - target: {fileID: 2781359075652610614, guid: 6917cbfc87619ff4198ca8fde270bf21,
         type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3051248696776623923, guid: 6917cbfc87619ff4198ca8fde270bf21,
+        type: 3}
+      propertyPath: _playOnStart
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3051248696845293925, guid: 6917cbfc87619ff4198ca8fde270bf21,
@@ -19227,7 +19711,7 @@ PrefabInstance:
     - target: {fileID: 3051248697233895099, guid: 6917cbfc87619ff4198ca8fde270bf21,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3051248697233895099, guid: 6917cbfc87619ff4198ca8fde270bf21,
         type: 3}
