@@ -57,6 +57,7 @@ public class EvolutionChicken_R : MonoBehaviour
             else
                 scrParam = findCanvas.GetComponent<Parameters_R>();
         }
+        scrParam = objParam.gameObject.GetComponent<Parameters_R>();
 
         scrCam = Camera.main.GetComponent<TpsCameraJC_R>();
 
@@ -91,7 +92,7 @@ public class EvolutionChicken_R : MonoBehaviour
         }
         EP = scrParam.ep;
 
-        if(evolutionNum < evolutionPoint.Length && EP >= evolutionPoint[evolutionNum])
+        if (evolutionNum < evolutionPoint.Length && EP >= evolutionPoint[evolutionNum])
         {
             evolutionNum++;
 
@@ -105,8 +106,6 @@ public class EvolutionChicken_R : MonoBehaviour
             chickens[evolutionNum - 1].SetActive(false);
             chickens[evolutionNum].SetActive(true);
 
-            //ADX Selector Change
-            audioLavel.player.SetSelectorLabel("Chicken_Form", "form2");
             audioLavel.Play("ShockWave");
 
             status_HP = HP[evolutionNum];
@@ -118,6 +117,20 @@ public class EvolutionChicken_R : MonoBehaviour
             scrBlast.EvoBlast();
 
             scrCam.evolved = false;
+        }
+
+        if (evolutionNum == 1)
+        {
+            //ADX Selector Change
+            audioLavel.player.SetSelectorLabel("Chicken_Form", "form2");
+        }
+        if (evolutionNum == 2)
+        {
+            audioLavel.player.SetSelectorLabel("Chicken_Form", "form3");
+        }
+        if (evolutionNum == 4)
+        {
+            audioLavel.player.SetSelectorLabel("Chicken_Form", "form4");
         }
     }
 }

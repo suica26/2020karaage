@@ -28,6 +28,8 @@ public class ADX_Ray_Rev : MonoBehaviour
     private new Rigidbody rigidbody;
     CriAtomExPlayback playback1;
     CharaMoveRigid_R scrMove;
+    EvolutionChicken_R scrEvo;
+
 
     //プロパティー
     public float ADX_BusSendLevel_L
@@ -53,6 +55,7 @@ public class ADX_Ray_Rev : MonoBehaviour
         TownNoizeNum = 0.0f;
         rigidbody = this.GetComponent<Rigidbody>();
         scrMove = GetComponent<CharaMoveRigid_R>();
+        scrEvo = GetComponent<EvolutionChicken_R>();
     }
 
     // Update is called once per frame
@@ -110,7 +113,7 @@ public class ADX_Ray_Rev : MonoBehaviour
             playback1.Stop();
         }
 
-        Debug.Log(scrMove._isFlying);
+        //Debug.Log(scrMove._isFlying);
 
 
 
@@ -211,10 +214,11 @@ public class ADX_Ray_Rev : MonoBehaviour
             {
                 GroundMaterial = "soil";
             }
-            else
+            else if (Ghit.collider.tag == "Road")
             {
                 GroundMaterial = "asphalt";
             }
+            else GroundMaterial = "tile";
         }
         else
         {
@@ -232,5 +236,21 @@ public class ADX_Ray_Rev : MonoBehaviour
             yield return null;
         }
         action();
+    }
+
+    private void EvoNumCheck()
+    {
+        if(scrEvo.EvolutionNum == 1)
+        {
+
+        }
+        if (scrEvo.EvolutionNum == 1)
+        {
+
+        }
+        if (scrEvo.EvolutionNum == 1)
+        {
+
+        }
     }
 }

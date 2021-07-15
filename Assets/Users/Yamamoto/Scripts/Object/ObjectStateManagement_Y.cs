@@ -6,7 +6,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
 {
     [Range(0, 4), SerializeField] private int tier_WalkAttack;
     [SerializeField] private GameObject divideObject;
-    private string attackSoundName, contactSoundName, ExplosionSoundName;
+    private string attackSoundName, contactSoundName, ExplosionSoundName, CutterContactSoundName;
     public int HP;                  //Inspector上から設定できます。
     [Header("ダメージ倍率")]
     public float kickMag;       //キックのダメージ倍率
@@ -53,6 +53,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
 
     //破壊後のオブジェクトが地面(等)に接触したときの音
     public string groundContactSoundName;
+    private Renderer Renderer;
 
     public Material capMaterial;
 
@@ -69,7 +70,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
         criAtomSource = GetComponent<CriAtomSource>();
         //加筆　undertreem 0625
         ADX_RevLevel = player.GetComponent<ADX_Ray_Rev>();
-
+        Renderer = GetComponent<Renderer>();
         playerScrS1M = player.GetComponent<Stage1_Mission_M>();
         livingFlg = true;
     }
@@ -94,14 +95,19 @@ public class ObjectStateManagement_Y : MonoBehaviour
         //破砕車がぶつかったとき
         bool carHit = collision.gameObject.name.Contains("car");
 
+        //破砕車が建物にぶつかったときキューを入れ替える
+        if (carHit && objectID == 0)
+        {
+            objectID = 10;
+        }
         //即死条件と生存フラグがどちらも成り立つとき、即死発動
         if ((trampling || carHit) && livingFlg)
         {
             SetSkillID(0);
             Death();
         }
-
-        if (!livingFlg && collision.gameObject.tag != "Player" && groundContactSoundName != null)
+        //画面内のときのみ鳴らす
+        if (!livingFlg && collision.gameObject.tag != "Player" && groundContactSoundName != null && Renderer.isVisible)
         {
             criAtomSource.Play(groundContactSoundName);
         }
@@ -127,8 +133,13 @@ public class ObjectStateManagement_Y : MonoBehaviour
     {
         if (HP > 0)     //単純にダメージを受けたときの処理
         {
-            //おはようブラストとカッターの時
-            if (hitSkilID == 2 || hitSkilID == 3)
+            //カッターの時
+            if (hitSkilID == 2)
+            {
+                //SetCutterContractCue();
+                //criAtomSource?.Play(CutterContactSoundName);
+            }
+            else if (hitSkilID == 3)//おはようブラストの時
             {
                 SetContactCue();
                 criAtomSource?.Play(contactSoundName);
@@ -174,6 +185,15 @@ public class ObjectStateManagement_Y : MonoBehaviour
         if (criAtomSource != null) criAtomSource.cueName = attackSoundName;
     }
 
+    private void SetCutterContractCue()
+    {
+        switch (objectID)
+        {
+            //後で入れます
+        }
+        if (criAtomSource != null) criAtomSource.cueName = CutterContactSoundName;
+    }
+
     private void SetContactCue()
     {
         switch (objectID)
@@ -207,6 +227,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
             case 7: ExplosionSoundName = "FallenTree00"; break;
             case 8: ExplosionSoundName = "FireHydrant00"; break;
             case 9: ExplosionSoundName = "PoleContract00"; break;
+            case 10: ExplosionSoundName = "BuildingFarExplosion00"; break;
             default: ExplosionSoundName = "PoleExplosion00"; break;
         }
         if (criAtomSource != null) criAtomSource.cueName = ExplosionSoundName;
@@ -249,7 +270,9 @@ public class ObjectStateManagement_Y : MonoBehaviour
         //float BusLevel = ADX_RevLevel.ADX_BusSendLevel;
         //SetBusSendLevelSet(Rev, BusLevel);
         //Debug.Log(BusLevel);
-        criAtomSource?.Play(ExplosionSoundName);
+        //カッターのときはカッターキューを鳴らす
+        if (hitSkilID == 2) criAtomSource.Play("CutterCut00");
+        else criAtomSource?.Play(ExplosionSoundName);
         if (GetComponent<Car_R>() != null) Destroy(GetComponent<Car_R>());
 
         DeathCount();
@@ -302,11 +325,5 @@ public class ObjectStateManagement_Y : MonoBehaviour
     public void Delete()
     {
         Destroy(gameObject, deleteTime);
-    }
-
-    //undertreem 0625 ADXバスセンド量
-    private void SetBusSendLevelSet(string busName, float levelOffset)
-    {
-        criAtomSource.SetBusSendLevelOffset(busName, levelOffset);
     }
 }

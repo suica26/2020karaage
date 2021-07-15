@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -62,7 +62,7 @@ public class CharaMoveRigid_R : MonoBehaviour
     private float timer;
 
     //ADX
-    private new CriAtomSource  audio;
+    private new CriAtomSource audio;
     CriAtomExPlayback JumpS, WalkVoiceS, FootS, IdleVoiceS;
     //加筆　undertreem 0628
     private ADX_Ray_Rev ADX_RevLevel_L, ADX_RevLevel_R;
@@ -80,6 +80,8 @@ public class CharaMoveRigid_R : MonoBehaviour
         //加筆　undertreem 0628
         ADX_RevLevel_L = GetComponent<ADX_Ray_Rev>();
         ADX_RevLevel_R = GetComponent<ADX_Ray_Rev>();
+
+        //山本加筆 BusLevelがStage0でNullException吐きまくってたので、初期化付けました
     }
 
     void Update()
@@ -109,10 +111,10 @@ public class CharaMoveRigid_R : MonoBehaviour
                            Quaternion.Euler(transform.rotation.eulerAngles), 0.1f);
         isGrounded = false;
 
-        foreach(RaycastHit hit in  hits)
+        foreach (RaycastHit hit in hits)
         {
             //Debug.Log(hit.transform.gameObject.name);
-            if(hit.transform.gameObject.tag != "Player")
+            if (hit.transform.gameObject.tag != "Player")
             {
                 isGrounded = true;
             }
@@ -175,7 +177,7 @@ public class CharaMoveRigid_R : MonoBehaviour
                 rb.velocity = moveDirection * speed;
 
                 //チキンの身体の向きを修正
-                if(Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
+                if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
                 {
                     Quaternion qua = Quaternion.LookRotation(moveDirection);
                     transform.rotation = Quaternion.RotateTowards(transform.rotation, qua, rotateSpeed * Time.deltaTime);
@@ -240,9 +242,9 @@ public class CharaMoveRigid_R : MonoBehaviour
             }
 
             //落下攻撃の処理(キック)
-            if(Input.GetMouseButton(0) && !fallAttack)
+            if (Input.GetMouseButton(0) && !fallAttack)
             {
-                if(kickFallAttackTimer <= kickFallAttackTime)
+                if (kickFallAttackTimer <= kickFallAttackTime)
                 {
                     kickFallAttackTimer += Time.deltaTime;
                 }
@@ -287,12 +289,12 @@ public class CharaMoveRigid_R : MonoBehaviour
                 damageBoost = boostMag[0];
             else if (startHeight - endHeight > fallAttackFirstHeight[scrEvo.EvolutionNum] && startHeight - endHeight < fallAttackSecondHeight[scrEvo.EvolutionNum])
                 damageBoost = boostMag[1];
-            else 
+            else
                 damageBoost = boostMag[2];
             Debug.Log(damageBoost);
 
             scrCam.Shake();
-            if(fallAttackKickEffect != null)
+            if (fallAttackKickEffect != null)
             {
                 GameObject effect = Instantiate(fallAttackKickEffect, transform.position, Quaternion.identity);
                 Destroy(effect, 0.5f);
@@ -306,14 +308,14 @@ public class CharaMoveRigid_R : MonoBehaviour
     //落下攻撃時の動きの処理
     IEnumerator FallAttack()
     {
-        if(isFlying)
+        if (isFlying)
         {
             isFlying = false;
             rb.useGravity = true;
         }
 
         //キック
-        if(fallAttackVer == 1)
+        if (fallAttackVer == 1)
         {
             startHeight = transform.position.y; //落下攻撃開始時の高さを取得
             scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.KICKFA, true);

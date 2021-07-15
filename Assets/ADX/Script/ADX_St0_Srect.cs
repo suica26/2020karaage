@@ -10,7 +10,7 @@ public class ADX_St0_Srect : MonoBehaviour
     {
         audioLavel = (CriAtomSource)GetComponent("CriAtomSource");
     }
-     void Update()
+    void Update()
     {
         audioLavel.player.SetSelectorLabel("Chicken_Form", "St0");
         audioLavel.player.SetSelectorLabel("Selector_Floor", "wood");

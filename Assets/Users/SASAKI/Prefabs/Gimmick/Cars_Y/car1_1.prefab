@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4603885694970061833}
   - component: {fileID: 5942950504414279553}
   - component: {fileID: 2886977851165258822}
+  - component: {fileID: 1967741717619605989}
   m_Layer: 0
   m_Name: vehicle2_C:body
   m_TagString: Untagged
@@ -92,7 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playOnStart: 1
+  _playOnStart: 0
   _cueName: "CarMove00\u3000\u3000"
   _cueSheet: Town
   _regionOnStart: {fileID: 0}
@@ -103,6 +104,19 @@ MonoBehaviour:
   _pitch: 0
   _androidUseLowLatencyVoicePool: 0
   need_to_player_update_all: 1
+--- !u!114 &1967741717619605989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825517458909172564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4302c2447a59484db44a8bc0d23ddd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 20
 --- !u!1 &3072452586995827073
 GameObject:
   m_ObjectHideFlags: 0
