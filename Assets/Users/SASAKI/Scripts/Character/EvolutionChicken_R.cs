@@ -102,7 +102,6 @@ public class EvolutionChicken_R : MonoBehaviour
         if(scrCam.evolved && evolutionNum == nowEvoNum + 1)
         {
             nowEvoNum++;
-            scrCam.evolved = false;
             chickens[evolutionNum - 1].SetActive(false);
             chickens[evolutionNum].SetActive(true);
 
@@ -117,6 +116,8 @@ public class EvolutionChicken_R : MonoBehaviour
             status_JUMP = JUMP[evolutionNum];
 
             scrBlast.EvoBlast();
+
+            scrCam.evolved = false;
         }
     }
 }

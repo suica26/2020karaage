@@ -8,6 +8,9 @@ public class TpsCameraJC_R : MonoBehaviour
     [SerializeField] Transform target;
     [SerializeField] Transform[] focus;
     [SerializeField] float[] radius;
+    [SerializeField] float[] EvolutionCamWorkHeight;
+    [SerializeField] float[] EvolutionCamWorkMinRadius;
+    [SerializeField] float[] EvolutionCamWorkMaxRadius;
     [SerializeField] float spinSpeed = 1.0f;
     [Header("カメラの振動"), SerializeField] float duration;
     [Tooltip("最大振幅の設定(進化段階ごと)"), SerializeField] private float[] magnitude;
@@ -134,44 +137,48 @@ public class TpsCameraJC_R : MonoBehaviour
     {
         var timer = 0f;
         var camWorkPos = transform.position;
-        float angle = objPlayer.transform.rotation.eulerAngles.y * Mathf.Deg2Rad;
+        float angle = objPlayer.transform.eulerAngles.y * Mathf.Deg2Rad;
+
         eCameraWork = eCamWork.eEvolution;
         evolutionAnimStart = true;
 
         while (timer < 5.0f)
         {
-            Time.timeScale = 0.1f;
+            if(Time.timeScale != 0)
+            {
+                Time.timeScale = 0.1f;
 
-            if (timer <= 0.25f)                                     // カメラを所定の位置に移動
-            {
-                transform.position = Vector3.Lerp(camWorkPos, objPlayer.transform.right * 2.0f + focus[scrEvo.EvolutionNum].position, timer * 4);
-            }
-            else if (timer >= 0.25f && timer <= 0.8f)               // カメラズーム
-            {
-                var distance = Vector3.Lerp(Vector3.right, Vector3.zero, (timer - 0.25f) / 0.75f);
-                transform.position = objPlayer.transform.position + objPlayer.transform.right * (2.0f + distance.x) + Vector3.up * 0.5f;
-            }
-            else if(timer > 1.0f && timer <= 5.0f)
-            {
-                // 進化フラグを設定
-                evolved = true;
-
-                var distance = new Vector3(0.0f, 0.0f, 0.0f);       // カメラを引く
-                if (timer <= 1.25f)
+                if (timer <= 0.25f)                                     // カメラを所定の位置に移動
                 {
-                    distance = Vector3.Lerp(distance, Vector3.right, (timer - 1.0f) / 0.25f);
+                    transform.position = Vector3.Lerp(camWorkPos, Vector3.up * EvolutionCamWorkHeight[scrEvo.EvolutionNum] + objPlayer.transform.right * EvolutionCamWorkMinRadius[scrEvo.EvolutionNum] + focus[scrEvo.EvolutionNum].position, timer * 4);
                 }
-                else
+                else if (timer >= 0.25f && timer <= 0.8f)               // カメラズーム
                 {
-                    distance = new Vector3(1.0f, 0.0f, 0.0f);
+                    var distance = Vector3.Lerp(Vector3.right * (scrEvo.EvolutionNum + 1), Vector3.zero, (timer - 0.25f) / 0.75f);
+                    transform.position = Vector3.up * EvolutionCamWorkHeight[scrEvo.EvolutionNum] + objPlayer.transform.position + objPlayer.transform.right * (EvolutionCamWorkMinRadius[scrEvo.EvolutionNum] + distance.x);
+                }
+                else if (timer > 1.0f && timer <= 5.0f)
+                {
+                    // 進化フラグを設定
+                    evolved = true;
+
+                    var distance = new Vector3(0.0f, 0.0f, 0.0f);       // カメラを引く
+                    if (timer <= 1.25f)
+                    {
+                        distance = Vector3.Lerp(distance, Vector3.right, (timer - 1.0f) / 0.25f);
+                    }
+                    else
+                    {
+                        distance = new Vector3(1.0f, 0.0f, 0.0f);
+                    }
+
+                    angle += Mathf.PI / 4.0f * Time.unscaledDeltaTime;
+                    transform.position = objPlayer.transform.position + new Vector3(Mathf.Cos(angle), 1.0f, Mathf.Sin(angle)) * (EvolutionCamWorkMinRadius[scrEvo.EvolutionNum] + distance.x * EvolutionCamWorkMinRadius[scrEvo.EvolutionNum]);     // カメラを回転させる
                 }
 
-                angle += Mathf.PI / 4.0f * Time.unscaledDeltaTime;
-                transform.position = objPlayer.transform.position + new Vector3(Mathf.Cos(angle), 1.0f, Mathf.Sin(angle)) * (2.0f + distance.x * 5.0f);     // カメラを回転させる
+                transform.LookAt(objPlayer.transform);
+                timer += Time.unscaledDeltaTime;
             }
-
-            transform.LookAt(objPlayer.transform);
-            timer += Time.unscaledDeltaTime;
             yield return null;
         }
         Time.timeScale = 1.0f;
