@@ -15,7 +15,8 @@ public class Transition_R : MonoBehaviour
         KICKFA,
         CUTTER,
         BLAST,
-        CUTTERFA
+        CUTTERFA,
+        EVOLUTION,
     }
 
     void Start()
@@ -53,6 +54,10 @@ public class Transition_R : MonoBehaviour
 
             case Anim.BLAST:
                 animator.SetBool("Blast", setAnim);
+                break;
+
+            case Anim.EVOLUTION:
+                animator.SetBool("Evolution", setAnim);
                 break;
         }
     }

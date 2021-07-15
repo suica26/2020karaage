@@ -56,6 +56,11 @@ public class CharaMoveRigid_R : MonoBehaviour
     private bool isFlying;
     public bool _isFlying { get { return isFlying; } set { isFlying = value; } }
 
+    // 行動可能か判定
+    public bool stunFlag;
+    private bool stunned;
+    private float timer;
+
     //ADX
     private new CriAtomSource audio;
     CriAtomExPlayback JumpS, WalkVoiceS, FootS, IdleVoiceS;
@@ -70,6 +75,7 @@ public class CharaMoveRigid_R : MonoBehaviour
         scrEvo = GetComponent<EvolutionChicken_R>();
         scrCutter = GetComponent<Cutter_R>();
         isFlying = false;
+        stunned = false;
         audio = (CriAtomSource)GetComponent("CriAtomSource");
         //加筆　undertreem 0628
         ADX_RevLevel_L = GetComponent<ADX_Ray_Rev>();
@@ -85,6 +91,12 @@ public class CharaMoveRigid_R : MonoBehaviour
 
         h = Input.GetAxis("Horizontal");
         v = Input.GetAxis("Vertical");
+
+        if(Camera.main.GetComponent<TpsCameraJC_R>().evolutionAnimStart)
+        {
+            Camera.main.transform.GetComponent<TpsCameraJC_R>().evolutionAnimStart = false;
+            scrAnim[scrEvo.EvolutionNum-1].SetAnimator(Transition_R.Anim.EVOLUTION, true);
+        }
 
         /*
         //足元から下へ向けて球状のRayを発射し，着地判定をする
@@ -107,10 +119,20 @@ public class CharaMoveRigid_R : MonoBehaviour
                 isGrounded = true;
             }
         }
+        // もしスタン中なら何もしない。
+        if(stunned)
+            return;
 
         //以下接地時の処理を記述
         if (isGrounded)
         {
+            if(stunFlag)
+            {
+                stunFlag = false;
+                StartCoroutine("StunnedChicken");
+                return;
+            }
+
             if (isFlying)
             {
                 rb.useGravity = true;
@@ -324,5 +346,18 @@ public class CharaMoveRigid_R : MonoBehaviour
             rb.AddForce(Vector3.down * jumpSpeed * 2f, ForceMode.Impulse);
             yield break;
         }
+    }
+
+    // スタン
+    public IEnumerator StunnedChicken()
+    {
+        timer = 0.0f;
+        stunned = true;
+        while (timer < 1.0f)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        stunned = false;
     }
 }

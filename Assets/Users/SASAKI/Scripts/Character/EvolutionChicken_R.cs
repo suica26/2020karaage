@@ -21,6 +21,8 @@ public class EvolutionChicken_R : MonoBehaviour
     private MorBlast_R scrBlast;
     private int EP;
 
+    private TpsCameraJC_R scrCam;
+
     //ステータス設定用変数
     private int evolutionNum;
     private float status_HP;
@@ -28,6 +30,8 @@ public class EvolutionChicken_R : MonoBehaviour
     private float status_SPD;
     private float status_SCORE;
     private float status_JUMP;
+
+    private int nowEvoNum = 0;
 
     //カプセル化
     public int EvolutionNum { get { return evolutionNum; } }
@@ -54,6 +58,8 @@ public class EvolutionChicken_R : MonoBehaviour
                 scrParam = findCanvas.GetComponent<Parameters_R>();
         }
         scrParam = objParam.gameObject.GetComponent<Parameters_R>();
+
+        scrCam = Camera.main.GetComponent<TpsCameraJC_R>();
 
         scrBlast = GetComponent<MorBlast_R>();
 
@@ -90,6 +96,13 @@ public class EvolutionChicken_R : MonoBehaviour
         {
             evolutionNum++;
 
+            Camera.main.GetComponent<TpsCameraJC_R>().StartCoroutine("CameraWorkEvolution");
+        }
+
+        // 進化用
+        if(scrCam.evolved && evolutionNum == nowEvoNum + 1)
+        {
+            nowEvoNum++;
             chickens[evolutionNum - 1].SetActive(false);
             chickens[evolutionNum].SetActive(true);
 
@@ -102,6 +115,8 @@ public class EvolutionChicken_R : MonoBehaviour
             status_JUMP = JUMP[evolutionNum];
 
             scrBlast.EvoBlast();
+
+            scrCam.evolved = false;
         }
 
         if (evolutionNum == 1)
