@@ -29,6 +29,7 @@ public class Civil_Y : MonoBehaviour
     private string escapeStr = "isEscape";
 
     private bool surprised;
+    private bool death;
 
     //ADX
     private CriAtomSource criAtomSource;
@@ -47,25 +48,28 @@ public class Civil_Y : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        deleteTimer += Time.deltaTime;
-        timer += Time.deltaTime;
-
-        if (!surprised)
+        if (!death)
         {
-            //迷子(次のWayPointに到着できなかった)になった時に自分を消去する処理
-            if (deleteTimer > deleteTiming) Death();
-            //進行方向を一定タイミングで再計算する
-            if (timer > resetForwardTiming) ResetNextForward();
+            deleteTimer += Time.deltaTime;
+            timer += Time.deltaTime;
 
-            if (escapeFlg) Escape();
-            else Walk();
-        }
-        else
-        {
-            if (timer > 1f)
+            if (!surprised)
             {
-                surprised = false;
-                rb.isKinematic = false;
+                //迷子(次のWayPointに到着できなかった)になった時に自分を消去する処理
+                if (deleteTimer > deleteTiming) Death();
+                //進行方向を一定タイミングで再計算する
+                if (timer > resetForwardTiming) ResetNextForward();
+
+                if (escapeFlg) Escape();
+                else Walk();
+            }
+            else
+            {
+                if (timer > 1f)
+                {
+                    surprised = false;
+                    rb.isKinematic = false;
+                }
             }
         }
     }
@@ -109,11 +113,29 @@ public class Civil_Y : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            transform.forward = GetVectorXZNormalized(other.transform.position, transform.position);
-            surprised = true;
-            timer = 0f;
-            rb.isKinematic = true;
-            rotTime = 0f;
+            if (other.gameObject.GetComponent<EvolutionChicken_R>().EvolutionNum > 1)
+            {
+                //キックとほぼ同じ
+                GetComponentInChildren<Collider>().isTrigger = true;
+                var D = (transform.position - other.gameObject.transform.position).normalized;   //力の方向
+                D = new Vector3(D.x, 0.2f, D.z);
+                var F = D * 500f;
+                Vector3 TorquePower = new Vector3(Random.Range(-100f, 100f), Random.Range(-100f, 100f), Random.Range(-100f, 100f));
+                rb.AddForce(F, ForceMode.Impulse);
+                rb.AddTorque(TorquePower, ForceMode.Impulse);
+                Destroy(gameObject, 2f);
+                Escape();
+                death = true;
+            }
+            else
+            {
+                //その場で停止する
+                transform.forward = GetVectorXZNormalized(other.transform.position, transform.position);
+                surprised = true;
+                timer = 0f;
+                rb.isKinematic = true;
+                rotTime = 0f;
+            }
         }
     }
 
