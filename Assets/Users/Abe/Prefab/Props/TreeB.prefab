@@ -89,8 +89,11 @@ MonoBehaviour:
   objectID: 0
   breakEffect: {fileID: 0}
   deleteTime: 3
-  torque: 200
+  torque: 100
   power: 30
+  groundContactSoundName: 
+  shardDamage: 50
+  shardDamage_nonDiv: 300
 --- !u!114 &1806165296661878783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,6 +298,21 @@ PrefabInstance:
     - target: {fileID: 5819025525724764742, guid: 57c0f367bb0669a4db202efe65c72ad4,
         type: 3}
       propertyPath: torque
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5819025525724764742, guid: 57c0f367bb0669a4db202efe65c72ad4,
+        type: 3}
+      propertyPath: shardDamage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5819025525724764742, guid: 57c0f367bb0669a4db202efe65c72ad4,
+        type: 3}
+      propertyPath: shardDamage_cutting
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5819025525724764742, guid: 57c0f367bb0669a4db202efe65c72ad4,
+        type: 3}
+      propertyPath: shardDamage_nonDiv
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6354790628045462273, guid: 57c0f367bb0669a4db202efe65c72ad4,

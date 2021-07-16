@@ -54,8 +54,8 @@ public class ObjectStateManagement_Y : MonoBehaviour
     //破壊後のオブジェクトが地面(等)に接触したときの音
     public string groundContactSoundName;
     private Renderer Renderer;
-
-    public Material capMaterial;
+    public int shardDamage;
+    public int shardDamage_nonDiv;
 
     //Start is called before the first frame update
     private void Start()
@@ -93,7 +93,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
         //踏み潰し攻撃が発生したとき
         bool trampling = collision.gameObject.tag == "Player" && scrEvo.EvolutionNum >= tier_WalkAttack;
         //破砕車がぶつかったとき
-        bool carHit = collision.gameObject.name.Contains("car");
+        bool carHit = collision.gameObject.name.Contains("car") && collision.gameObject.GetComponentInParent<Rigidbody>().velocity.magnitude > 5f;
 
         //破砕車が建物にぶつかったときキューを入れ替える
         if (carHit && objectID == 0)
@@ -190,6 +190,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
         switch (objectID)
         {
             //後で入れます
+            default: break;
         }
         if (criAtomSource != null) criAtomSource.cueName = CutterContactSoundName;
     }

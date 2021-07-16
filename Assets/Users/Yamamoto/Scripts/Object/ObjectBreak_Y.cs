@@ -52,12 +52,13 @@ public class ObjectBreak_Y : MonoBehaviour
         {
             foreach (var shard in myParts)
             {
-                ShardSettings(shard);
+                ShardSettings(shard, objScr.shardDamage);
                 Collapsions[objScr.hitSkilID](shard);
             }
         }
         else
         {
+            ShardSettings(gameObject, objScr.shardDamage_nonDiv);
             Collapsions[objScr.hitSkilID](gameObject);
         }
 
@@ -78,7 +79,7 @@ public class ObjectBreak_Y : MonoBehaviour
         rb.useGravity = true;
     }
 
-    private void ShardSettings(GameObject shard)
+    private void ShardSettings(GameObject shard, int shardDamage)
     {
         shard.layer = LayerMask.NameToLayer("Shard");
 
@@ -90,7 +91,7 @@ public class ObjectBreak_Y : MonoBehaviour
         if (rnd > 0.9f)
         {
             var shardScr = shard.AddComponent<Shard_Y>();
-            shardScr.shardDamage = 10;
+            shardScr.shardDamage = shardDamage;
         }
     }
 
@@ -126,6 +127,10 @@ public class ObjectBreak_Y : MonoBehaviour
 
         var left = new GameObject(gameObject.name + " leftObj", typeof(Rigidbody));
         var right = new GameObject(gameObject.name + " rightObj", typeof(Rigidbody));
+
+        //MeshCutがException吐いた時のために、一応先に宣言しておく
+        Destroy(left, objScr.deleteTime);
+        Destroy(right, objScr.deleteTime);
 
         //Meshがついているか確認するリスト
         var checkObjects = new List<GameObject>();
@@ -174,11 +179,8 @@ public class ObjectBreak_Y : MonoBehaviour
         rbL.AddForce(-normal * objScr.power / 3, ForceMode.Impulse);
         rbR.AddForce(normal * objScr.power / 3, ForceMode.Impulse);
 
-        Destroy(left, objScr.deleteTime);
-        Destroy(right, objScr.deleteTime);
-
-        ShardSettings(left);
-        ShardSettings(right);
+        ShardSettings(left, objScr.shardDamage_nonDiv / 2);
+        ShardSettings(right, objScr.shardDamage_nonDiv / 2);
 
         //破壊時のアクションを動作させるために少し遅延させる
         Invoke("SetNonActive", 0.1f);
