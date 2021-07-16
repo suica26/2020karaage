@@ -65,7 +65,7 @@ public class Civil_Y : MonoBehaviour
             }
             else
             {
-                if (timer > 1f)
+                if (timer > 1f || escapeFlg)
                 {
                     surprised = false;
                     rb.isKinematic = false;
