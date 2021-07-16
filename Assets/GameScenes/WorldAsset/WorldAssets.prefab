@@ -3455,7 +3455,7 @@ GameObject:
   - component: {fileID: 142731160190032495}
   - component: {fileID: 142731160190032488}
   - component: {fileID: 142731160190032489}
-  - component: {fileID: 142731160190032482}
+  - component: {fileID: 2482979785076293278}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3608,7 +3608,7 @@ MonoBehaviour:
   - 1
   evolutionAnimStart: 0
   evolved: 0
---- !u!114 &142731160190032482
+--- !u!114 &2482979785076293278
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3625,9 +3625,9 @@ MonoBehaviour:
   _cueSheet: BGM
   _regionOnStart: {fileID: 0}
   _listenerOnStart: {fileID: 0}
-  _use3dPositioning: 0
+  _use3dPositioning: 1
   _loop: 0
-  _volume: 0.793
+  _volume: 1
   _pitch: 0
   _androidUseLowLatencyVoicePool: 0
   need_to_player_update_all: 1
@@ -6758,7 +6758,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce04980091be44acca1b48f22bc6de1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgmCriAtomSource: {fileID: 142731160190032482}
+  bgmCriAtomSource: {fileID: 2482979785076293278}
 --- !u!114 &3051248696776623923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8219,7 +8219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4698bd5a9f3d14bfba80870bca782881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  atomSource00: {fileID: 142731160190032482}
+  atomSource00: {fileID: 0}
   atomSource01: {fileID: 0}
   atomSource02: {fileID: 142731159246388822}
 --- !u!1 &3051248698051566956
@@ -11378,7 +11378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4698bd5a9f3d14bfba80870bca782881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  atomSource00: {fileID: 142731160190032482}
+  atomSource00: {fileID: 0}
   atomSource01: {fileID: 0}
   atomSource02: {fileID: 142731159246388822}
 --- !u!1 &4367141473935416434
@@ -15211,7 +15211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volSlider: {fileID: 7615885361019867455}
-  cas: {fileID: 142731160190032482}
+  cas: {fileID: 0}
   soundVolumeController: {fileID: 0}
 --- !u!1 &7615885360832788786
 GameObject:

@@ -16,10 +16,15 @@ public class movebackground : MonoBehaviour
 
     public float spdown;
     private CameraShake shake;
-
+    private  CriAtomSource audio;
+    private float AISAC;
+    private GameObject MainCamera;
     private void Start()
     {
         shake = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShake>();
+        audio = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CriAtomSource>();
+        AISAC = 0.45f;
+        audio.SetAisacControl("Volume", AISAC);
     }
 
     // Update is called once per frame
@@ -31,7 +36,10 @@ public class movebackground : MonoBehaviour
         {
             speed -= spdown;
             shake.duration -= spdown;
+            AISAC += spdown;
+            audio.SetAisacControl("Volume", AISAC);
         }
+
     }
 
     void OnTriggerEnter(Collider collision)

@@ -137,7 +137,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
             if (hitSkilID == 2)
             {
                 //SetCutterContractCue();
-                //criAtomSource?.Play(CutterContactSoundName);
+                criAtomSource.Play("CutterContract");
             }
             else if (hitSkilID == 3)//おはようブラストの時
             {
