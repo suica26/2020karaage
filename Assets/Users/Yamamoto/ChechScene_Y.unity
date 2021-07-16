@@ -8566,6 +8566,9 @@ MonoBehaviour:
   - 1
   - 3
   - 4
+  EvolutionCamWorkHeight: []
+  EvolutionCamWorkMinRadius: []
+  EvolutionCamWorkMaxRadius: []
   spinSpeed: 1
   duration: 0
   magnitude:
@@ -8573,6 +8576,8 @@ MonoBehaviour:
   - 1
   - 1
   - 1
+  evolutionAnimStart: 0
+  evolved: 0
 --- !u!114 &1525311183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12579,6 +12584,7 @@ MonoBehaviour:
   - {fileID: 187362781}
   - {fileID: 187362781}
   damageBoost: 0
+  stunFlag: 0
 --- !u!114 &2147035857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12995,7 +13001,8 @@ MonoBehaviour:
   torque: 10
   power: 50
   groundContactSoundName: 
-  capMaterial: {fileID: 0}
+  shardDamage: 0
+  shardDamage_nonDiv: 0
 --- !u!1 &3891776677744686054
 GameObject:
   m_ObjectHideFlags: 0
