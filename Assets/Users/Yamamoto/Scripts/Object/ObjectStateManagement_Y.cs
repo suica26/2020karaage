@@ -56,6 +56,8 @@ public class ObjectStateManagement_Y : MonoBehaviour
     private Renderer Renderer;
     public int shardDamage;
     public int shardDamage_nonDiv;
+    public bool specialObjectFlg;
+    [SerializeField] private bool notDamage;
 
     //Start is called before the first frame update
     private void Start()
@@ -74,16 +76,23 @@ public class ObjectStateManagement_Y : MonoBehaviour
         playerScrS1M = player.GetComponent<Stage1_Mission_M>();
         livingFlg = true;
     }
+    public void changeDamageFlg()
+    {
+        notDamage = false;
+    }
 
     //通常攻撃
     private void OnTriggerEnter(Collider other)
     {
-        switch (other.gameObject.name)
+        if (!notDamage)
         {
-            case "KickCollision": Damage(kickMag, 1); break;
-            case "Cutter(Clone)": Damage(cutterMag, 2); break;
-            case "MorningBlastSphere_Y(Clone)": Damage(blastMag, 3); break;
-            case "fallAttackCircle(Clone)": Damage(fallAttackMag * scrCharaMove.damageBoost, 4); break;
+            switch (other.gameObject.name)
+            {
+                case "KickCollision": Damage(kickMag, 1); break;
+                case "Cutter(Clone)": Damage(cutterMag, 2); break;
+                case "MorningBlastSphere_Y(Clone)": Damage(blastMag, 3); break;
+                case "fallAttackCircle(Clone)": Damage(fallAttackMag * scrCharaMove.damageBoost, 4); break;
+            }
         }
     }
 
@@ -96,12 +105,12 @@ public class ObjectStateManagement_Y : MonoBehaviour
         bool carHit = collision.gameObject.name.Contains("car") && collision.gameObject.GetComponentInParent<Rigidbody>().velocity.magnitude > 5f;
 
         //破砕車が建物にぶつかったときキューを入れ替える
-        if (carHit && objectID == 0)
+        if (carHit && objectID == 0 && !specialObjectFlg)
         {
             objectID = 10;
         }
         //即死条件と生存フラグがどちらも成り立つとき、即死発動
-        if ((trampling || carHit) && livingFlg)
+        if ((trampling || carHit) && livingFlg && !specialObjectFlg)
         {
             SetSkillID(0);
             Death();
