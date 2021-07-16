@@ -15,6 +15,8 @@ public class EvolutionChicken_R : MonoBehaviour
     [SerializeField] private float[] SCORE;
     [SerializeField] private float[] JUMP;
 
+    [SerializeField] private GameObject EvoEffect;
+
     [SerializeField] private bool DEBUG_MODE;
 
     private Parameters_R scrParam;
@@ -97,6 +99,10 @@ public class EvolutionChicken_R : MonoBehaviour
             evolutionNum++;
 
             Camera.main.GetComponent<TpsCameraJC_R>().StartCoroutine("CameraWorkEvolution");
+
+            var effect = Instantiate(EvoEffect, transform);
+            effect.transform.localScale *= evolutionNum;
+            Destroy(effect, 0.75f);
         }
 
         // 進化用
