@@ -54,7 +54,6 @@ public class ObjectStateManagement_Y : MonoBehaviour
     //破壊後のオブジェクトが地面(等)に接触したときの音
     public string groundContactSoundName;
     private Renderer Renderer;
-    public int shardDamage;
     public int shardDamage_nonDiv;
     public bool specialObjectFlg;
     [SerializeField] private bool notDamage;
@@ -96,7 +95,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
         }
     }
 
-    //踏み潰し攻撃
+    //踏み潰し攻撃などなど
     private void OnCollisionEnter(Collision collision)
     {
         //踏み潰し攻撃が発生したとき
