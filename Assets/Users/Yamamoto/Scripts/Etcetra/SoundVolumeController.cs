@@ -23,9 +23,12 @@ public class SoundVolumeController : MonoBehaviour
     void Update()
     {
         loadSceneTimes++;
+        /*
         CriAtom.SetCategoryVolume("BGM", soundVolume);
         CriAtom.SetCategoryVolume("SFX", soundVolume);
         CriAtom.SetCategoryVolume("Voice", soundVolume);
         CriAtom.SetCategoryVolume("Ambient", soundVolume);
+        */
+        CriAtom.SetCategoryVolume("", soundVolume);
     }
 }

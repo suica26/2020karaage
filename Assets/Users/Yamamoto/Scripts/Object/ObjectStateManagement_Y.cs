@@ -53,7 +53,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
 
     //破壊後のオブジェクトが地面(等)に接触したときの音
     public string groundContactSoundName;
-    private Renderer Renderer;
+    private Renderer[] renderers;
     public int shardDamage_nonDiv;
     public bool specialObjectFlg;
     [SerializeField] private bool notDamage;
@@ -71,7 +71,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
         criAtomSource = GetComponent<CriAtomSource>();
         //加筆　undertreem 0625
         ADX_RevLevel = player.GetComponent<ADX_Ray_Rev>();
-        Renderer = GetComponent<Renderer>();
+        renderers = CheckRenderer();
         playerScrS1M = player.GetComponent<Stage1_Mission_M>();
         livingFlg = true;
     }
@@ -115,10 +115,65 @@ public class ObjectStateManagement_Y : MonoBehaviour
             Death();
         }
         //画面内のときのみ鳴らす
-        if (!livingFlg && collision.gameObject.tag != "Player" && groundContactSoundName != null && Renderer.isVisible)
+        if (!livingFlg && collision.gameObject.tag != "Player" && groundContactSoundName != null && CheckRenVisible())
         {
             criAtomSource.Play(groundContactSoundName);
         }
+    }
+
+    private Renderer[] CheckRenderer()
+    {
+        //Rendererがついているか確認するリスト
+        var checkObjects = new List<GameObject>();
+        //最初は代入されたobjをとりあえず入れておく
+        checkObjects.Add(gameObject);
+        //返り値のRenderer
+        var renderers = new List<Renderer>();
+
+        bool finish = false;
+
+        while (!finish)
+        {
+            var nextCheck = new List<GameObject>();
+            foreach (var cObj in checkObjects)
+            {
+                //メッシュが設定されている(＝空オブジェクトでない)オブジェクトの場合
+                if (cObj.GetComponent<Renderer>() != null)
+                {
+                    renderers.Add(cObj.GetComponent<Renderer>());
+                }
+                else
+                {
+                    //子オブジェクトを所有しているかを確認
+                    if (cObj.transform.childCount > 0)
+                    {
+                        foreach (Transform children in cObj.transform)
+                        {
+                            nextCheck.Add(children.gameObject);
+                        }
+                    }
+                }
+            }
+
+            if (nextCheck.Count > 0)
+            {
+                checkObjects = new List<GameObject>(nextCheck);
+            }
+            else finish = true;
+        }
+
+        return renderers.ToArray();
+    }
+
+    private bool CheckRenVisible()
+    {
+        //構成Rendererのどれか一つでも画面内にあればtrueを返す
+        foreach (var ren in renderers)
+        {
+            if (ren.isVisible) return true;
+        }
+        //全てが画面街にある時はfalseを返す
+        return false;
     }
 
     public void SetSkillID(int num)
@@ -282,7 +337,11 @@ public class ObjectStateManagement_Y : MonoBehaviour
         //カッターのときはカッターキューを鳴らす
         if (hitSkilID == 2) criAtomSource.Play("CutterCut00");
         else criAtomSource?.Play(ExplosionSoundName);
-        if (GetComponent<Car_R>() != null) Destroy(GetComponent<Car_R>());
+        if (GetComponent<Car_R>() != null)
+        {
+            Destroy(GetComponent<Animator>());
+            Destroy(GetComponent<Car_R>());
+        }
 
         DeathCount();
 

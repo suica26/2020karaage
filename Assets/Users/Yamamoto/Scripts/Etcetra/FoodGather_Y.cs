@@ -22,21 +22,16 @@ public class FoodGather_Y : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (DistanceCul() < gatherDistance)
+        if ((player.transform.position - transform.position).magnitude - 3f * scrEvo.EvolutionNum < gatherDistance)
         {
             GoToPlayer();
         }
-    }
-
-    private float DistanceCul()
-    {
-        return (player.transform.position - transform.position).magnitude - 5f * scrEvo.EvolutionNum;
     }
 
     private void GoToPlayer()
     {
         Vector3 toPlayer = (player.transform.position - transform.position).normalized;
         Vector3 gatherDir = (Quaternion.Euler(0, 145, 0) * toPlayer + toPlayer * centripetalRatio).normalized;
-        rb.velocity = gatherDir * gatherSpeed;
+        rb.velocity = gatherDir * gatherSpeed * (scrEvo.EvolutionNum + 1);
     }
 }
