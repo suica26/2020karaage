@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -901,6 +901,7 @@ GameObject:
   - component: {fileID: 892643525}
   - component: {fileID: 892643524}
   - component: {fileID: 892643523}
+  - component: {fileID: 892643527}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -989,6 +990,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &892643527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 892643522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08c39d99bb77118478ba4cf0f4258417, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameMode: 0
 --- !u!1 &952934784
 GameObject:
   m_ObjectHideFlags: 0
@@ -1596,7 +1610,6 @@ GameObject:
   - component: {fileID: 4868635450030955771}
   - component: {fileID: 4868635450030955770}
   - component: {fileID: 4868635450030955769}
-  - component: {fileID: 4868635450030955774}
   - component: {fileID: 4868635450030955775}
   - component: {fileID: 4868635450030955776}
   m_Layer: 0
@@ -1715,40 +1728,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
---- !u!114 &4868635450030955774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4868635450030955768}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eaed82c464290b24f8e721b764ad36e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  videoClip: {fileID: 32900000, guid: 8487176edb600524490bf82f445199fc, type: 3}
-  screen: {fileID: 4868635450030955768}
-  time: 0
-  stoptime01: 100
-  stoptime02: 260
-  stoptime03: 450
-  stoptime04: 890
-  stoptime05: 1250
-  stoptime06: 0
-  stoptime07: 0
-  stoptime08: 0
-  stoptime09: 0
-  stoptime10: 0
-  stoptime11: 0
-  finaltime: 1500
-  count: 1
-  cursor: {fileID: 700859142}
-  nextscene: {fileID: 1851914076}
-  len: 0
-  videoFrame: 0
-  videoFrameRate: 0
-  videoTime: 0
 --- !u!114 &4868635450030955775
 MonoBehaviour:
   m_ObjectHideFlags: 0
