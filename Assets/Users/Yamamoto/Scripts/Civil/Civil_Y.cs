@@ -115,11 +115,14 @@ public class Civil_Y : MonoBehaviour
         {
             if (other.gameObject.GetComponent<EvolutionChicken_R>().EvolutionNum > 1)
             {
-                //キックとほぼ同じ
+                //吹っ飛ばす用の設定
                 GetComponentInChildren<Collider>().isTrigger = true;
+                Destroy(GetComponentInChildren<Animator>());
+
+                //キックとほぼ同じ
                 var D = (transform.position - other.gameObject.transform.position).normalized;   //力の方向
                 D = new Vector3(D.x, 0.2f, D.z);
-                var F = D * 500f;
+                var F = D * 100f;
                 Vector3 TorquePower = new Vector3(Random.Range(-100f, 100f), Random.Range(-100f, 100f), Random.Range(-100f, 100f));
                 rb.AddForce(F, ForceMode.Impulse);
                 rb.AddTorque(TorquePower, ForceMode.Impulse);

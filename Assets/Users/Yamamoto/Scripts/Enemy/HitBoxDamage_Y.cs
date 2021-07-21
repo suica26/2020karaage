@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitBoxDamage : MonoBehaviour
+public class HitBoxDamage_Y : MonoBehaviour
 {
     public int damage;
     private Parameters_R param;

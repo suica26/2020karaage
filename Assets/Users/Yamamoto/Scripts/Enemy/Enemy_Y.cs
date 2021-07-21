@@ -16,7 +16,6 @@ public class Enemy_Y : MonoBehaviour
     public float fallAttackMag;     //落下攻撃のダメージ倍率
     public float KnockBackPower;    //ノックバックする量
     [Header("破壊時のスコア")] public int breakScore;                          //建物を破壊したときに得られるスコア
-    [Header("破壊時のチャージポイント")] public int breakPoint;                //建物を破壊したときに得られるチャージポイント
     private Animator animator;
     private GameObject player;
     private FoodMaker_R scrFood;
@@ -41,7 +40,7 @@ public class Enemy_Y : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(HP <= 0 && live)
+        if (HP <= 0 && live)
         {
             GameObject.Find("Canvas").GetComponent<Parameters_R>().ScoreManager(breakScore);
             if (scrFood != null)
@@ -125,9 +124,9 @@ public class Enemy_Y : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         //踏みつぶし攻撃
-        if (collision.gameObject.tag == "Player" && 
-            scrEvo.EvolutionNum >= tier_WalkAttack && 
-            collision.gameObject.GetComponent<Rigidbody >().velocity.magnitude > 1f)
+        if (collision.gameObject.tag == "Player" &&
+            scrEvo.EvolutionNum >= tier_WalkAttack &&
+            collision.gameObject.GetComponent<Rigidbody>().velocity.magnitude > 1f)
         {
             HP = 0;
             hitSkilID = 5;
@@ -168,7 +167,7 @@ public class Enemy_Y : MonoBehaviour
         Destroy(GetComponent<EnemyNav_Y>());
         GetComponent<NavMeshAgent>().enabled = false;
         Destroy(this.gameObject, 3f);
-        if (GetComponent<CapsuleCollider>() != null) Destroy(GetComponent<CapsuleCollider>());
+        if (GetComponent<Collider>() != null) Destroy(GetComponent<Collider>());
         live = false;
         animator.SetBool("isDeath", true);
         if (hitSkilID == 3 || hitSkilID == 8)
