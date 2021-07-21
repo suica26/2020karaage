@@ -335,7 +335,8 @@ public class ObjectStateManagement_Y : MonoBehaviour
         //SetBusSendLevelSet(Rev, BusLevel);
         //Debug.Log(BusLevel);
         //カッターのときはカッターキューを鳴らす
-        if (hitSkilID == 2) criAtomSource.Play("CutterCut00");
+        if (hitSkilID == 2 && objectID == 0) criAtomSource.Play("CutterBuilExplosion");
+        else if(hitSkilID == 2) criAtomSource.Play("CutterCut00");
         else criAtomSource?.Play(ExplosionSoundName);
         if (GetComponent<Car_R>() != null)
         {

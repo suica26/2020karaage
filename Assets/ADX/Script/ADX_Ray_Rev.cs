@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ADX_Ray_Rev : MonoBehaviour
 {
-    //Rayを飛ばす距離
+
     private float RevSendLev_R, RevSendLev_L;
     private Text RevSendLevel;
     public GameObject Debug_RevSendLevel, HitPoint, SoundDebudPanel;
