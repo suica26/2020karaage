@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ClerkMove : MonoBehaviour
+public class ChefMove_Y : MonoBehaviour
 {
     private EnemyNav_Y navScript;
     [SerializeField] private float routineTimer = 0f;
@@ -61,8 +61,8 @@ public class ClerkMove : MonoBehaviour
         var genPos = transform.position + transform.forward * 2f;
         genPos.y = 0.5f;
         hitBox = Instantiate(hitBoxPrefab, genPos, Quaternion.identity, transform.Find("Body"));
-        hitBox.GetComponent<BoxCollider>().isTrigger = true;
-        hitBox.GetComponent<HitBoxDamage>().damage = hitDamage;
+        hitBox.GetComponent<Collider>().isTrigger = true;
+        hitBox.GetComponent<HitBoxDamage_Y>().damage = hitDamage;
     }
 
     private void DeleteHitBox()
