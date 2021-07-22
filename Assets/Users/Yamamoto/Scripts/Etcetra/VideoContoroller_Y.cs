@@ -22,6 +22,7 @@ public class VideoContoroller_Y : MonoBehaviour
     {
         videoPlayer.Play();
         movingVideo = true;
+        Cursor.visible = true;//M
         ProlSound = (CriAtomSource)GetComponent("CriAtomSource");
     }
 

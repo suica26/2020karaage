@@ -14,7 +14,7 @@ public class ScreenQua2_M : MonoBehaviour
     {
         
     }
-    public void OnClick()
+    void OnClick()
     {
         QualitySettings.SetQualityLevel(2);
         audio.Play("System_Decision");

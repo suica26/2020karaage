@@ -23,6 +23,8 @@ public class TpsCameraJC_R : MonoBehaviour
     public bool evolutionAnimStart = false;
     public bool evolved = false;
     private float endEvolution = 0.25f;
+    //M
+    public float minY;
 
     private enum eCamWork
     {
@@ -60,7 +62,9 @@ public class TpsCameraJC_R : MonoBehaviour
                 // Get MouseMove
                 mouse -= new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")) * Time.deltaTime * spinSpeed;
                 // Clamp mouseY move
-                mouse.y = Mathf.Clamp(mouse.y, 0.25f, 0.95f);
+                //mouse.y = Mathf.Clamp(mouse.y, 0.25f, 0.95f);
+                //M
+                mouse.y = Mathf.Clamp(mouse.y, minY, 0.95f);
 
                 // sphere coordinates
                 pos.x = Mathf.Sin(mouse.y * Mathf.PI) * Mathf.Cos(mouse.x * Mathf.PI);
