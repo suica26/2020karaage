@@ -16,9 +16,10 @@ public class ScreenQua1_M : MonoBehaviour
         
     }
 
-    public void OnClick()
+    void OnClick()
     {
-        QualitySettings.SetQualityLevel(0);
+        //一応mediumに変更
+        QualitySettings.SetQualityLevel(1);
         audio.Play("System_Decision");
     }
 }

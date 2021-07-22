@@ -192,7 +192,7 @@ public class Stage1_Mission_M : MonoBehaviour
         }
 
         //後で消す
-        if (Input.GetKeyDown(KeyCode.Q))
+        /*if (Input.GetKeyDown(KeyCode.Q))
         {
             fourth = true;
             hipStamp = true;
@@ -204,7 +204,7 @@ public class Stage1_Mission_M : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.X))
         {
             tipsTimer += 60;
-        }
+        }*/
 
     }
 
