@@ -22,15 +22,5 @@ public class Stage1Clear_M : MonoBehaviour
             clear.SetActive(true);
             next.SetActive(true);
         }
-
-        //テスト用、本当は!company
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            //Time.timeScale = 0;
-            Destroy(pause);
-            Cursor.visible = true;
-            clear.SetActive(true);
-            next.SetActive(true);
-        }
     }
 }

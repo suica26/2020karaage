@@ -3,40 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Stage1_Mission_M : MonoBehaviour
+public class Mission1_M : Missions_M
 {
-    [SerializeField] public Text mission, submis, exmis, count, per, tips;
-    [SerializeField]
-    public GameObject player, shop, misBox, company, hip,
-        tipsCircle, tipsChicken;
-    [SerializeField] public TextAsset txtFile;
-    [SerializeField] public int smallNum, bigNum, achieve;
-    [SerializeField]
-    public int smallBorder1, smallBorder2, smallBorder3,
-                                bigBorder1, bigBorder2, bigBorder3, bigBorder4;
-    [SerializeField] public int manhole, hydrant;
-    public bool first = true, second = false, third = false, fourth = false, final = false,
-        Language, hipStamp = false, tip = false;
-    private string txtData;
-    private string[] splitText;
-    [SerializeField] Animation missionSlide;
-    [SerializeField] float timer, tipsTimer;
-
-    [SerializeField] private ObjectStateManagement_Y eneBillScr;
-
-    void Start()
+    new void Start()
     {
-        txtData = txtFile.text;
-        splitText = txtData.Split(char.Parse("\n"));
-        misBox.SetActive(false);
-        hip.SetActive(false);
-        tipsCircle.SetActive(false);
-        tipsChicken.SetActive(false);
+        base.Start();
     }
 
     void Update()
     {
-        Language = ChangeLanguage.getLanguage();//
         Vector3 playerPos = player.transform.position;
         Vector3 comPos = company.transform.position;
         float dis = Vector3.Distance(playerPos, comPos);
@@ -182,8 +157,7 @@ public class Stage1_Mission_M : MonoBehaviour
         else if (tipsTimer >= 300 && tip)
         {
             tips.text = "消火栓やマンホールを使って\n見渡してみよう...！";
-            tipsCircle.SetActive(true);
-
+            buildTips.SetActive(true);
         }
 
         if (achieve >= 99)
@@ -211,32 +185,4 @@ public class Stage1_Mission_M : MonoBehaviour
             per.text = achieve + "%";
         }
     }
-
-    public void Manhole()
-    {
-
-    }
-
-    public void Japanese()
-    {
-
-    }
-
-    /*public void OnClick()
-    {
-        Time.timeScale = 1f;
-        hip.SetActive(false);
-        hipStamp = false;
-    }*/
-
-    /*public void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "jama")
-        {
-            Destroy(check);
-            missionSlide.Play();
-            mission.text = splitText[4];
-            submis.text = splitText[5];
-        }
-    }*/
 }
