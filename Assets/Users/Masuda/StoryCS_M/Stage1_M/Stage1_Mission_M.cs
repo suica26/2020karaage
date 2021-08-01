@@ -191,21 +191,6 @@ public class Stage1_Mission_M : MonoBehaviour
             achieve = 0;
         }
 
-        //後で消す
-        /*if (Input.GetKeyDown(KeyCode.Q))
-        {
-            fourth = true;
-            hipStamp = true;
-        }
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            manhole += 3;
-        }
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            tipsTimer += 60;
-        }*/
-
     }
 
     public void BigNumberPlus()

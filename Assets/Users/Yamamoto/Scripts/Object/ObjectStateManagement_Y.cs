@@ -49,6 +49,8 @@ public class ObjectStateManagement_Y : MonoBehaviour
     public float torque;    //爆発でどれだけ回転するか
     public float power;     //爆発でどれぐらい吹っ飛ぶか
     private Stage1_Mission_M playerScrS1M;
+    //M Missions_M（親）だと効果なし←そんなことなかった
+    private Missions_M mm;
     private bool livingFlg;
 
     //破壊後のオブジェクトが地面(等)に接触したときの音
@@ -74,6 +76,8 @@ public class ObjectStateManagement_Y : MonoBehaviour
         renderers = CheckRenderer();
         playerScrS1M = player.GetComponent<Stage1_Mission_M>();
         livingFlg = true;
+        //M
+        mm = player.GetComponent<Missions_M>();
     }
     public void changeDamageFlg()
     {
@@ -356,17 +360,20 @@ public class ObjectStateManagement_Y : MonoBehaviour
         if (this.gameObject.tag == "Small")
         {
             //山本加筆　元:player.GetComponent<Stage1_Mission_M>().SmallNumberPlus();
-            playerScrS1M.SmallNumberPlus();
+            //playerScrS1M.SmallNumberPlus();
+            mm.SmallNumberPlus();//M
         }
         else if (this.gameObject.tag == "Tree")
         {
             //山本加筆　元:player.GetComponent<Stage1_Mission_M>().SmallNumberPlus();
-            playerScrS1M.SmallNumberPlus();
+            //playerScrS1M.SmallNumberPlus();
+            mm.SmallNumberPlus();//M
         }
         else if (this.gameObject.tag == "Big")
         {
             //山本加筆　元:player.GetComponent<Stage1_Mission_M>().BigNumberPlus();
-            playerScrS1M.BigNumberPlus();
+            //playerScrS1M.BigNumberPlus();
+            mm.BigNumberPlus();//M
         }
     }
 
