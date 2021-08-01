@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8663573979528208312}
   - component: {fileID: -5282034740847405582}
   - component: {fileID: 6184491439173604963}
+  - component: {fileID: 6286301486544636840}
   m_Layer: 0
   m_Name: FireHydrant
   m_TagString: Untagged
@@ -126,8 +127,9 @@ MonoBehaviour:
   torque: 20
   power: 40
   groundContactSoundName: 
-  shardDamage: 50
   shardDamage_nonDiv: 50
+  specialObjectFlg: 0
+  notDamage: 0
 --- !u!64 &8663573979528208312
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -187,3 +189,17 @@ MonoBehaviour:
   _pitch: 0
   _androidUseLowLatencyVoicePool: 0
   need_to_player_update_all: 1
+--- !u!114 &6286301486544636840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2527383316214841470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 407fd233ca5649e4998ee6d6db7cc61c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m1m: {fileID: 0}
+  player: {fileID: 0}

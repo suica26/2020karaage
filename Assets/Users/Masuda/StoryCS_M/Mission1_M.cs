@@ -5,9 +5,14 @@ using UnityEngine.UI;
 
 public class Mission1_M : Missions_M
 {
-    new void Start()
+    public GameObject hip;
+    public int manhole, hydrant;
+    public bool hipStamp = false;
+
+    public override void Start()
     {
         base.Start();
+        hip.SetActive(false);
     }
 
     void Update()
@@ -162,27 +167,33 @@ public class Mission1_M : Missions_M
 
         if (achieve >= 99)
         {
+            missionSlide.Play();
+            mission.text = splitText[3];
+            submis.text = splitText[4];
+            exmis.text = splitText[5];
+            count.text = "2";
+            second = false;
+            third = true;
             achieve = 0;
+            per.text = achieve + "/ 3";
         }
 
     }
 
-    public void BigNumberPlus()
+    /*new void BigNumberPlus()
     {
         bigNum++;
         if (second)
         {
-            achieve += 20;
-            per.text = achieve + "%";
+            base.BigNumberPlus();
         }
     }
-    public void SmallNumberPlus()
+    new void SmallNumberPlus()
     {
         smallNum++;
         if (second)
         {
-            achieve += 4;
-            per.text = achieve + "%";
+            base.SmallNumberPlus();
         }
-    }
+    }*/
 }
