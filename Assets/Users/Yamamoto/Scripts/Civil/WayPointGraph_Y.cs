@@ -16,6 +16,7 @@ public class WayPointGraph_Y : MonoBehaviour
     public int civilNum;
     public float routinTimer;
     public float spawnTime;
+    private const float DISTAREA = 50f;
 
     // Start is called before the first frame update
     void Start()
@@ -61,10 +62,18 @@ public class WayPointGraph_Y : MonoBehaviour
     {
         routinTimer = 0f;
         civilNum++;
-        //セットしてあるPrefabの中から、Spawnする市民をランダムに選択
-        int randomNum = Random.Range(0, scrSpawners.Count);
-        CulDijkstra(scrSpawners[randomNum].PointNumber);
-        scrSpawners[randomNum].SpawnCivil();
+        while (true)
+        {
+            //セットしてあるPrefabの中から、Spawnする市民をランダムに選択
+            int randomNum = Random.Range(0, scrSpawners.Count);
+            if (Vector3.Distance(wayPointsArray[scrSpawners[randomNum].PointNumber].transform.position, GameObject.Find("Player").transform.position) >= DISTAREA)
+            {
+                CulDijkstra(scrSpawners[randomNum].PointNumber);
+                scrSpawners[randomNum].SpawnCivil();
+                break;
+            }
+        }
+
     }
 
     public void CulDijkstra(int startPoint)
