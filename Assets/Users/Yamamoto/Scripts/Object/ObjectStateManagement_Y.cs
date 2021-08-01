@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class ObjectStateManagement_Y : MonoBehaviour
 {
-    [Range(0, 4), SerializeField] private int tier_WalkAttack;
+    [Range(0, 4), SerializeField] protected int tier_WalkAttack;
     [SerializeField] private GameObject divideObject;
-    private string attackSoundName, contactSoundName, ExplosionSoundName, CutterContactSoundName;
+    protected string attackSoundName, contactSoundName, ExplosionSoundName, CutterContactSoundName;
     public int HP;                  //Inspector上から設定できます。
     [Header("ダメージ倍率")]
     public float kickMag;       //キックのダメージ倍率
@@ -14,7 +14,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
     public float cutterMag;     //カッターのダメージ倍率
     public float fallAttackMag;     //落下攻撃のダメージ倍率
     [Header("破壊時のスコア")] public int breakScore;       //建物を破壊したときに得られるスコア
-    private CriAtomSource criAtomSource;
+    protected CriAtomSource criAtomSource;
     /// <summary>
     /// 1 信号機
     /// 2 ゴミ箱
@@ -28,53 +28,47 @@ public class ObjectStateManagement_Y : MonoBehaviour
     public int objectID;
     public GameObject player { get; private set; }
     //加筆(佐々木)
-    private CharaMoveRigid_R scrCharaMove;
-    private FoodMaker_R scrFood;
-    private chickenKick_R scrKick;
-    private EvolutionChicken_R scrEvo;
+    protected CharaMoveRigid_R scrCharaMove;
+    protected FoodMaker_R scrFood;
+    protected EvolutionChicken_R scrEvo;
     //加筆　undertreem 0625
-    private ADX_Ray_Rev ADX_RevLevel;
-    private string Rev; //ADXバス名
+    protected ADX_Ray_Rev ADX_RevLevel;
+    protected string Rev; //ADXバス名
     /// <summary>
     /// 0:踏み潰し攻撃
     /// 1:チキンキック
     /// 2:トサカカッター
     /// 3:おはようブラスト
     /// 4:ヒップスタンプ
-    /// 5:ドロップカッター
     /// </summary>
     public int hitSkilID { get; private set; }
     public GameObject breakEffect;
     public float deleteTime = 3f;
     public float torque;    //爆発でどれだけ回転するか
     public float power;     //爆発でどれぐらい吹っ飛ぶか
-    private Stage1_Mission_M playerScrS1M;
     //M Missions_M（親）だと効果なし←そんなことなかった
-    private Missions_M mm;
-    private bool livingFlg;
-
+    protected Missions_M mm;
+    protected bool livingFlg;
     //破壊後のオブジェクトが地面(等)に接触したときの音
     public string groundContactSoundName;
-    private Renderer[] renderers;
+    protected Renderer[] renderers;
     public int shardDamage_nonDiv;
     public bool specialObjectFlg;
-    [SerializeField] private bool notDamage;
+    [SerializeField] protected bool notDamage;
 
     //Start is called before the first frame update
-    private void Start()
+    protected virtual void Start()
     {
         player = GameObject.Find("Player");
 
         //加筆(佐々木)
         scrCharaMove = player.GetComponent<CharaMoveRigid_R>();
-        scrKick = player.GetComponent<chickenKick_R>();
         scrEvo = player.GetComponent<EvolutionChicken_R>();
         scrFood = GetComponent<FoodMaker_R>();
         criAtomSource = GetComponent<CriAtomSource>();
         //加筆　undertreem 0625
         ADX_RevLevel = player.GetComponent<ADX_Ray_Rev>();
         renderers = CheckRenderer();
-        playerScrS1M = player.GetComponent<Stage1_Mission_M>();
         livingFlg = true;
         //M
         mm = player.GetComponent<Missions_M>();
@@ -85,7 +79,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
     }
 
     //通常攻撃
-    private void OnTriggerEnter(Collider other)
+    protected void OnTriggerEnter(Collider other)
     {
         if (!notDamage)
         {
@@ -100,7 +94,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
     }
 
     //踏み潰し攻撃などなど
-    private void OnCollisionEnter(Collision collision)
+    protected void OnCollisionEnter(Collision collision)
     {
         //踏み潰し攻撃が発生したとき
         bool trampling = collision.gameObject.tag == "Player" && scrEvo.EvolutionNum >= tier_WalkAttack;
@@ -125,7 +119,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
         }
     }
 
-    private Renderer[] CheckRenderer()
+    protected Renderer[] CheckRenderer()
     {
         //Rendererがついているか確認するリスト
         var checkObjects = new List<GameObject>();
@@ -169,7 +163,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
         return renderers.ToArray();
     }
 
-    private bool CheckRenVisible()
+    protected bool CheckRenVisible()
     {
         //構成Rendererのどれか一つでも画面内にあればtrueを返す
         foreach (var ren in renderers)
@@ -182,7 +176,9 @@ public class ObjectStateManagement_Y : MonoBehaviour
 
     public void SetSkillID(int num)
     {
-        hitSkilID = num;
+        if (num < 0) hitSkilID = 0;
+        else if (num > 4) hitSkilID = 4;
+        else hitSkilID = num;
     }
 
     public void Damage(float mag, int skill)
@@ -196,14 +192,14 @@ public class ObjectStateManagement_Y : MonoBehaviour
         LivingCheck();
     }
 
-    public void LivingCheck()
+    public virtual void LivingCheck()
     {
         if (HP > 0)     //単純にダメージを受けたときの処理
         {
             //カッターの時
             if (hitSkilID == 2)
             {
-                //SetCutterContractCue();
+                //SetCutterContactCue();
                 criAtomSource.Play("CutterContract");
             }
             else if (hitSkilID == 3)//おはようブラストの時
@@ -234,7 +230,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
     /// 8 消火栓
     /// 9 信号機Big
     /// </summary>
-    private void SetAttackCue()
+    protected void SetAttackCue()
     {
         switch (objectID)
         {
@@ -252,7 +248,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
         if (criAtomSource != null) criAtomSource.cueName = attackSoundName;
     }
 
-    private void SetCutterContractCue()
+    protected void SetCutterContactCue()
     {
         switch (objectID)
         {
@@ -262,7 +258,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
         if (criAtomSource != null) criAtomSource.cueName = CutterContactSoundName;
     }
 
-    private void SetContactCue()
+    protected void SetContactCue()
     {
         switch (objectID)
         {
@@ -281,7 +277,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
         if (criAtomSource != null) criAtomSource.cueName = contactSoundName;
     }
 
-    private void SetBreakCue()
+    protected void SetBreakCue()
     {
         switch (objectID)
         {
@@ -320,10 +316,11 @@ public class ObjectStateManagement_Y : MonoBehaviour
         transform.localPosition = pos;
     }
 
-    private void Death()
+    //派生クラス用にメソッドを分化しました
+    protected bool ChangeToDeath()
     {
         //すでに破壊済みの場合は無視
-        if (!livingFlg) return;
+        if (!livingFlg) return false;
 
         livingFlg = false;
         //一応、HPは0になるように補正をかける
@@ -340,8 +337,17 @@ public class ObjectStateManagement_Y : MonoBehaviour
         //Debug.Log(BusLevel);
         //カッターのときはカッターキューを鳴らす
         if (hitSkilID == 2 && objectID == 0) criAtomSource.Play("CutterBuilExplosion");
-        else if(hitSkilID == 2) criAtomSource.Play("CutterCut00");
+        else if (hitSkilID == 2) criAtomSource.Play("CutterCut00");
         else criAtomSource?.Play(ExplosionSoundName);
+
+        //全て処理しきった場合は次のDeathメソッドを実行
+        return true;
+    }
+
+    protected virtual void Death()
+    {
+        if (!ChangeToDeath()) return;
+
         if (GetComponent<Car_R>() != null)
         {
             Destroy(GetComponent<Animator>());
@@ -357,23 +363,12 @@ public class ObjectStateManagement_Y : MonoBehaviour
 
     public void DeathCount()
     {
-        if (this.gameObject.tag == "Small")
+        switch (gameObject.tag)
         {
-            //山本加筆　元:player.GetComponent<Stage1_Mission_M>().SmallNumberPlus();
-            //playerScrS1M.SmallNumberPlus();
-            mm.SmallNumberPlus();//M
-        }
-        else if (this.gameObject.tag == "Tree")
-        {
-            //山本加筆　元:player.GetComponent<Stage1_Mission_M>().SmallNumberPlus();
-            //playerScrS1M.SmallNumberPlus();
-            mm.SmallNumberPlus();//M
-        }
-        else if (this.gameObject.tag == "Big")
-        {
-            //山本加筆　元:player.GetComponent<Stage1_Mission_M>().BigNumberPlus();
-            //playerScrS1M.BigNumberPlus();
-            mm.BigNumberPlus();//M
+            case "Small": mm.SmallNumberPlus(); break;
+            case "Tree": mm.SmallNumberPlus(); break;
+            case "Big": mm.BigNumberPlus(); break;
+            default: break;
         }
     }
 
@@ -390,7 +385,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
         gameObject.SetActive(false);
     }
     //差し替えしない場合
-    private void Substitution()
+    protected void Substitution()
     {
         var breakScr = gameObject.AddComponent<ObjectBreak_Y>();
         breakScr.InitSetting(this, false);
