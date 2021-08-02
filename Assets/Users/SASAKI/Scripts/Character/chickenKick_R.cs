@@ -13,6 +13,7 @@ public class chickenKick_R : MonoBehaviour
     EvolutionChicken_R scrEvo;
     CharaMoveRigid_R scrMove;
 
+    public bool CanKick { get; set; }
     public int chargePoint;
     private float timer;
 
@@ -29,6 +30,7 @@ public class chickenKick_R : MonoBehaviour
         scrMove = GetComponent<CharaMoveRigid_R>();
         scrEvo = GetComponent<EvolutionChicken_R>();
         timer = 0.0f;
+        CanKick = true;
         chargePoint = 0;
         criAtomSource = GetComponent<CriAtomSource>();
     }
@@ -43,12 +45,12 @@ public class chickenKick_R : MonoBehaviour
             return;
         }
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && CanKick)
         {
             timer += Time.deltaTime;
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && CanKick)
         {
             //山本加筆(&& coolTimer >= coolTimes[scrEvo.EvolutionNum])
             if (timer <= 0.5f)
