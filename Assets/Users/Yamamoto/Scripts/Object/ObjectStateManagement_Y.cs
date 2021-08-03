@@ -47,8 +47,8 @@ public class ObjectStateManagement_Y : MonoBehaviour
     public float torque;    //爆発でどれだけ回転するか
     public float power;     //爆発でどれぐらい吹っ飛ぶか
     //M Missions_M（親）だと効果なし←そんなことなかった
-    protected Missions_M mm;
-    protected bool livingFlg;
+    protected Missions_M missionScr;
+    protected bool livingFlg = true;
     //破壊後のオブジェクトが地面(等)に接触したときの音
     public string groundContactSoundName;
     protected Renderer[] renderers;
@@ -69,9 +69,6 @@ public class ObjectStateManagement_Y : MonoBehaviour
         //加筆　undertreem 0625
         ADX_RevLevel = player.GetComponent<ADX_Ray_Rev>();
         renderers = CheckRenderer();
-        livingFlg = true;
-        //M
-        mm = player.GetComponent<Missions_M>();
     }
     public void changeDamageFlg()
     {
@@ -94,7 +91,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
     }
 
     //踏み潰し攻撃などなど
-    protected void OnCollisionEnter(Collision collision)
+    protected virtual void OnCollisionEnter(Collision collision)
     {
         //踏み潰し攻撃が発生したとき
         bool trampling = collision.gameObject.tag == "Player" && scrEvo.EvolutionNum >= tier_WalkAttack;
@@ -363,11 +360,12 @@ public class ObjectStateManagement_Y : MonoBehaviour
 
     public void DeathCount()
     {
+        missionScr = player.GetComponent<Missions_M>();
         switch (gameObject.tag)
         {
-            case "Small": mm.SmallNumberPlus(); break;
-            case "Tree": mm.SmallNumberPlus(); break;
-            case "Big": mm.BigNumberPlus(); break;
+            case "Small": missionScr.SmallNumberPlus(); break;
+            case "Tree": missionScr.SmallNumberPlus(); break;
+            case "Big": missionScr.BigNumberPlus(); break;
             default: break;
         }
     }

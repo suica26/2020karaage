@@ -105,7 +105,6 @@ public class WayPointGraph_Y : MonoBehaviour
         while (!finishFlg)
         {
             NOC++;
-            Debug.Log("NOC = " + NOC);
             for (int i = 0; i < checkPoints.Length; i++)
             {
                 //今回分の探索処理
@@ -134,7 +133,7 @@ public class WayPointGraph_Y : MonoBehaviour
 
             if (NOC > 100)
             {
-                Debug.Log("Infinite Loop Avoided!");
+                Debug.Log($"Infinite Loop Avoided! Start is {wpScripts[startPoint].PointNumber}. End is {wpScripts[endPoint].PointNumber}");
                 break;
             }
         }

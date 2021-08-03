@@ -100,7 +100,6 @@ public class Civil_Y : MonoBehaviour
             }
             else
             {
-                Debug.Log("Arrive");
                 rotTime = 0f;
                 deleteTimer = 0f;
                 preForward = nextForward;

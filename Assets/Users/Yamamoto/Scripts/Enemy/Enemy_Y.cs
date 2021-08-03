@@ -18,8 +18,8 @@ public class Enemy_Y : ObjectStateManagement_Y
         rb = GetComponent<Rigidbody>();
     }
 
-    //挙動を記述
-    void Update()
+    //基本挙動を記述
+    protected virtual void Update()
     {
     }
 
