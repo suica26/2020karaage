@@ -26,8 +26,7 @@ public class Missions_M : MonoBehaviour
         mainCount.text += main;
         txtData = txtFile.text;
         splitText = txtData.Split(char.Parse("\n"));
-        misBox.SetActive(false);
-        //hip.SetActive(false);
+        //misBox.SetActive(false);
         buildTips.SetActive(false);
         tipsChicken.SetActive(false);
     }
@@ -35,7 +34,7 @@ public class Missions_M : MonoBehaviour
     public virtual void BigNumberPlus()
     {
         bigNum++;
-        if (second)
+        if (second || first)
         {
             achieve += 20;
             per.text = achieve + "%";
@@ -44,7 +43,7 @@ public class Missions_M : MonoBehaviour
     public virtual void SmallNumberPlus()
     {
         smallNum++;
-        if (second)
+        if (second || first)
         {
             achieve += 4;
             per.text = achieve + "%";

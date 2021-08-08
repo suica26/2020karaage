@@ -13,6 +13,7 @@ public class Mission1_M : Missions_M
     {
         base.Start();
         hip.SetActive(false);
+        misBox.SetActive(false);
     }
 
     void Update()
