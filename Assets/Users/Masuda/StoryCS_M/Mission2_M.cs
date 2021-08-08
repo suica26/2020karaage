@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Mission2_M : Missions_M
 {
-    public int gasStand, gasTank;
+    public int gasStand, gasTank, blastCount;
     // Start is called before the first frame update
     public override void Start()
     {
@@ -102,6 +102,16 @@ public class Mission2_M : Missions_M
             per.text = achieve + "/ 3";
         }
 
+        if (fourth)
+        {
+            tipsTimer += Time.deltaTime;
+        }
+
+        if (tipsTimer >= 180)
+        {
+            buildTips.SetActive(true);
+        }
+
         if (fourth && dis <= 30)
         {
             eneBillScr.changeDamageFlg();
@@ -115,6 +125,18 @@ public class Mission2_M : Missions_M
             final = true;
             achieve = 0;
             per.text = "";
+        }
+    }
+
+    public void BlastBreak()
+    {
+        /*switch(eneBillScr.hitSkilID)
+        {
+            case 3: blastCount++; break;
+        }*/
+        if (eneBillScr.hitSkilID == 3)
+        {
+            blastCount++;
         }
     }
 }

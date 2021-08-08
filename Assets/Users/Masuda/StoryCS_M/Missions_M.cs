@@ -7,7 +7,7 @@ public class Missions_M : MonoBehaviour
 {
     [SerializeField] public Text mission, submis, exmis, count, per, tips, mainCount;
     [SerializeField]
-    public GameObject player, shop, misBox, company, buildTips, tipsChicken;
+    public GameObject player, misBox, company, buildTips, tipsChicken;
     [SerializeField] public TextAsset txtFile;
     [SerializeField] public int smallNum, bigNum, achieve, main;
     [SerializeField]
