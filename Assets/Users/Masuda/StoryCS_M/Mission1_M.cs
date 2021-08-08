@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Mission1_M : Missions_M
 {
-    public GameObject hip;
+    public GameObject hip,shop;
     public int manhole, hydrant;
     public bool hipStamp = false;
 
@@ -13,6 +13,7 @@ public class Mission1_M : Missions_M
     {
         base.Start();
         hip.SetActive(false);
+        misBox.SetActive(false);
     }
 
     void Update()
