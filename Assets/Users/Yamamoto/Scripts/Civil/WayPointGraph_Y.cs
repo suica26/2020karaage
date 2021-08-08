@@ -16,7 +16,7 @@ public class WayPointGraph_Y : MonoBehaviour
     public int civilNum;
     public float routinTimer;
     public float spawnTime;
-    private const float DISTAREA = 50f;
+    private const float DISTAREA = 20f;
 
     // Start is called before the first frame update
     void Start()
