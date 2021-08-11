@@ -327,6 +327,8 @@ GameObject:
   - component: {fileID: 6755623837176031388}
   - component: {fileID: 5388753103818789828}
   - component: {fileID: 5218987055828392503}
+  - component: {fileID: 6242945653910630994}
+  - component: {fileID: 4876440531824577804}
   m_Layer: 0
   m_Name: polySurface5
   m_TagString: Untagged
@@ -395,6 +397,49 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &6242945653910630994
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3141753258631449566}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4545423930167495100, guid: 0abf54966bb4c444da4d943b6f78c1c4, type: 3}
+--- !u!114 &4876440531824577804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3141753258631449566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8075661621763774d8231cabafe12bb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tier_WalkAttack: 2
+  divideObject: {fileID: 0}
+  HP: 100
+  kickMag: 1
+  blastMag: 1
+  cutterMag: 1
+  fallAttackMag: 1
+  breakScore: 0
+  objectID: 0
+  breakEffect: {fileID: 0}
+  deleteTime: 3
+  torque: 0
+  power: 0
+  groundContactSoundName: 
+  shardDamage_nonDiv: 0
+  specialObjectFlg: 0
+  notDamage: 0
 --- !u!1 &3148532803460801092
 GameObject:
   m_ObjectHideFlags: 0
@@ -643,6 +688,8 @@ GameObject:
   - component: {fileID: 6582517062291377245}
   - component: {fileID: 511108886746723075}
   - component: {fileID: 4758180385735230393}
+  - component: {fileID: 516283879256439069}
+  - component: {fileID: 951802520336040460}
   m_Layer: 0
   m_Name: polySurface6
   m_TagString: Untagged
@@ -711,6 +758,49 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &516283879256439069
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4290645545161438529}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5546347261141537002, guid: 0abf54966bb4c444da4d943b6f78c1c4, type: 3}
+--- !u!114 &951802520336040460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4290645545161438529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8075661621763774d8231cabafe12bb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tier_WalkAttack: 2
+  divideObject: {fileID: 0}
+  HP: 100
+  kickMag: 1
+  blastMag: 1
+  cutterMag: 1
+  fallAttackMag: 1
+  breakScore: 0
+  objectID: 0
+  breakEffect: {fileID: 0}
+  deleteTime: 3
+  torque: 0
+  power: 0
+  groundContactSoundName: 
+  shardDamage_nonDiv: 0
+  specialObjectFlg: 0
+  notDamage: 0
 --- !u!1 &4543166570822050453
 GameObject:
   m_ObjectHideFlags: 0
@@ -722,6 +812,8 @@ GameObject:
   - component: {fileID: 5772587379969097166}
   - component: {fileID: 6410911983301971011}
   - component: {fileID: 7545310774129230314}
+  - component: {fileID: 2852534742056906878}
+  - component: {fileID: 6322744644826943959}
   m_Layer: 0
   m_Name: polySurface7
   m_TagString: Untagged
@@ -790,6 +882,49 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &2852534742056906878
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4543166570822050453}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7843526606762953986, guid: 0abf54966bb4c444da4d943b6f78c1c4, type: 3}
+--- !u!114 &6322744644826943959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4543166570822050453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8075661621763774d8231cabafe12bb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tier_WalkAttack: 2
+  divideObject: {fileID: 0}
+  HP: 100
+  kickMag: 1
+  blastMag: 1
+  cutterMag: 1
+  fallAttackMag: 1
+  breakScore: 0
+  objectID: 0
+  breakEffect: {fileID: 0}
+  deleteTime: 3
+  torque: 0
+  power: 0
+  groundContactSoundName: 
+  shardDamage_nonDiv: 0
+  specialObjectFlg: 0
+  notDamage: 0
 --- !u!1 &5232680806691003816
 GameObject:
   m_ObjectHideFlags: 0
@@ -880,7 +1015,11 @@ GameObject:
   - component: {fileID: 2328819870670982729}
   - component: {fileID: 7752112340678798718}
   - component: {fileID: 3784584333189120554}
-  m_Layer: 0
+  - component: {fileID: 7248231595986234104}
+  - component: {fileID: 3463797715863761744}
+  - component: {fileID: 4109913316854149079}
+  - component: {fileID: 6719764043381876783}
+  m_Layer: 14
   m_Name: mainTank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -895,9 +1034,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5349288407437361755}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: -0.00006315589, z: 0}
+  m_LocalPosition: {x: 0, y: -0.00006315589, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 7251188835228010677}
   m_Father: {fileID: 6427663991607659285}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -948,6 +1088,88 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!54 &7248231595986234104
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5349288407437361755}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!64 &3463797715863761744
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5349288407437361755}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 6145000901595743257, guid: 0abf54966bb4c444da4d943b6f78c1c4, type: 3}
+--- !u!114 &4109913316854149079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5349288407437361755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8075661621763774d8231cabafe12bb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tier_WalkAttack: 4
+  divideObject: {fileID: 0}
+  HP: 500
+  kickMag: 1
+  blastMag: 1
+  cutterMag: 1
+  fallAttackMag: 1
+  breakScore: 0
+  objectID: 0
+  breakEffect: {fileID: 0}
+  deleteTime: 3
+  torque: 0
+  power: 0
+  groundContactSoundName: 
+  shardDamage_nonDiv: 0
+  specialObjectFlg: 0
+  notDamage: 0
+--- !u!114 &6719764043381876783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5349288407437361755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0febbb3db640e234b8d1da33c0dbc0a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _obj: {fileID: 7430103647231780757, guid: 3a87acf169f5aad4a9e7910be0e61470, type: 3}
+  _effect: {fileID: 6712329990759217117, guid: 53bf79c5ee1924f789ffbbd76bb24400, type: 3}
+  _usageEvo: 3
+  _force: 10
+  _time: 2
+  _ySize: 1
+  _xScale: 10
+  _yScale: 10
+  _zScale: 10
+  player: {fileID: 0}
+  hyd: 0
 --- !u!1 &5752068257857305056
 GameObject:
   m_ObjectHideFlags: 0
@@ -1073,6 +1295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 573e1988ca640194bab8308273278e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
 --- !u!1 &6078038276563012175
 GameObject:
   m_ObjectHideFlags: 0
@@ -1242,6 +1465,8 @@ GameObject:
   - component: {fileID: 1064996357925743353}
   - component: {fileID: 3891952919112969961}
   - component: {fileID: 6995752368177860548}
+  - component: {fileID: 6086275107782931591}
+  - component: {fileID: 1471363230132785952}
   m_Layer: 0
   m_Name: polySurface4
   m_TagString: Untagged
@@ -1310,6 +1535,49 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &6086275107782931591
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6711132921063099589}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2381890483179193753, guid: 0abf54966bb4c444da4d943b6f78c1c4, type: 3}
+--- !u!114 &1471363230132785952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6711132921063099589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8075661621763774d8231cabafe12bb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tier_WalkAttack: 2
+  divideObject: {fileID: 0}
+  HP: 100
+  kickMag: 1
+  blastMag: 1
+  cutterMag: 1
+  fallAttackMag: 1
+  breakScore: 0
+  objectID: 0
+  breakEffect: {fileID: 0}
+  deleteTime: 3
+  torque: 0
+  power: 0
+  groundContactSoundName: 
+  shardDamage_nonDiv: 0
+  specialObjectFlg: 0
+  notDamage: 0
 --- !u!1 &7402703194428963477
 GameObject:
   m_ObjectHideFlags: 0
@@ -1398,6 +1666,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5700692635540599772}
+  - component: {fileID: 3706476872967358691}
   m_Layer: 0
   m_Name: prop
   m_TagString: Untagged
@@ -1426,6 +1695,21 @@ Transform:
   m_Father: {fileID: 6427663991607659285}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3706476872967358691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7657456057625179822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 039516b85c8ff6344b195248f052fd94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onTheBuilding: 0
+  mainTankRigid: {fileID: 7248231595986234104}
+  speed: 2
 --- !u!1 &7683542193724585035
 GameObject:
   m_ObjectHideFlags: 0
@@ -1481,6 +1765,8 @@ GameObject:
   - component: {fileID: 1837704977268531658}
   - component: {fileID: 6747695797263930140}
   - component: {fileID: 5816643601473680068}
+  - component: {fileID: 8983245038757361345}
+  - component: {fileID: 6067904957164958224}
   m_Layer: 0
   m_Name: polySurface2
   m_TagString: Untagged
@@ -1549,6 +1835,49 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &8983245038757361345
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8204320027967197940}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5597002278806442958, guid: 0abf54966bb4c444da4d943b6f78c1c4, type: 3}
+--- !u!114 &6067904957164958224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8204320027967197940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8075661621763774d8231cabafe12bb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tier_WalkAttack: 2
+  divideObject: {fileID: 0}
+  HP: 100
+  kickMag: 1
+  blastMag: 1
+  cutterMag: 1
+  fallAttackMag: 1
+  breakScore: 0
+  objectID: 0
+  breakEffect: {fileID: 0}
+  deleteTime: 3
+  torque: 0
+  power: 0
+  groundContactSoundName: 
+  shardDamage_nonDiv: 0
+  specialObjectFlg: 0
+  notDamage: 0
 --- !u!1 &8366524272443326867
 GameObject:
   m_ObjectHideFlags: 0
@@ -1639,6 +1968,8 @@ GameObject:
   - component: {fileID: 7127515084657758481}
   - component: {fileID: 3830602341291936388}
   - component: {fileID: 3505081133643752944}
+  - component: {fileID: 5174649053084842568}
+  - component: {fileID: 47732959467825111}
   m_Layer: 0
   m_Name: polySurface1
   m_TagString: Untagged
@@ -1707,6 +2038,49 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &5174649053084842568
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8510610361016859167}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 6329158148709259305, guid: 0abf54966bb4c444da4d943b6f78c1c4, type: 3}
+--- !u!114 &47732959467825111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8510610361016859167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8075661621763774d8231cabafe12bb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tier_WalkAttack: 2
+  divideObject: {fileID: 0}
+  HP: 100
+  kickMag: 1
+  blastMag: 1
+  cutterMag: 1
+  fallAttackMag: 1
+  breakScore: 0
+  objectID: 0
+  breakEffect: {fileID: 0}
+  deleteTime: 3
+  torque: 0
+  power: 0
+  groundContactSoundName: 
+  shardDamage_nonDiv: 0
+  specialObjectFlg: 0
+  notDamage: 0
 --- !u!1 &8846156298500137363
 GameObject:
   m_ObjectHideFlags: 0
@@ -1797,6 +2171,8 @@ GameObject:
   - component: {fileID: 7346594839837869742}
   - component: {fileID: 6272732269910530815}
   - component: {fileID: 6282204740705542172}
+  - component: {fileID: 4477867939270853660}
+  - component: {fileID: 208652635494781219}
   m_Layer: 0
   m_Name: polySurface3
   m_TagString: Untagged
@@ -1865,3 +2241,103 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &4477867939270853660
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9026071686813311500}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4164511204261677510, guid: 0abf54966bb4c444da4d943b6f78c1c4, type: 3}
+--- !u!114 &208652635494781219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9026071686813311500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8075661621763774d8231cabafe12bb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tier_WalkAttack: 2
+  divideObject: {fileID: 0}
+  HP: 100
+  kickMag: 1
+  blastMag: 1
+  cutterMag: 1
+  fallAttackMag: 1
+  breakScore: 0
+  objectID: 0
+  breakEffect: {fileID: 0}
+  deleteTime: 3
+  torque: 0
+  power: 0
+  groundContactSoundName: 
+  shardDamage_nonDiv: 0
+  specialObjectFlg: 0
+  notDamage: 0
+--- !u!1 &9116412249516826439
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7251188835228010677}
+  - component: {fileID: 6117956624022268241}
+  - component: {fileID: 3041782271938283974}
+  m_Layer: 0
+  m_Name: collisionChecker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7251188835228010677
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9116412249516826439}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2328819870670982729}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6117956624022268241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9116412249516826439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56fcf0bdf867f6943b4faed600c27775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!135 &3041782271938283974
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9116412249516826439}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.0098
+  m_Center: {x: 0, y: 0.016, z: 0}
