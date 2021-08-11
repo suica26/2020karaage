@@ -18,6 +18,9 @@ public class GasTankMT_R : MonoBehaviour
 
     void Update()
     {
+        if (transform.parent.GetComponent<ObjectStateManagement_Y>().HP == 0)
+            Destroy(transform.parent.gameObject);
+
         if(CollisionCount >= 5)
         {
             transform.parent.GetComponent<ObjectStateManagement_Y>().HP = 0;
