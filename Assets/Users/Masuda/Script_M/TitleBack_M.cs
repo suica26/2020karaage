@@ -16,11 +16,7 @@ public class TitleBack_M : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            clearPanel.SetActive(true);
-            Cursor.visible = true;
-        }
+        
     }
 
     public void OnClick()

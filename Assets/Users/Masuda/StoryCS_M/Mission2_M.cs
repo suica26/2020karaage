@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Mission2_M : Missions_M
 {
-    public int gasStand, gasTank, blastCount;
+    public int blastCount, gasStand, gasTank;
     // Start is called before the first frame update
     public override void Start()
     {
@@ -18,6 +18,7 @@ public class Mission2_M : Missions_M
         count.text = "1";
         per.text = "0%";
         first = true;
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
@@ -26,6 +27,12 @@ public class Mission2_M : Missions_M
         Vector3 playerPos = player.transform.position;
         Vector3 comPos = company.transform.position;
         float dis = Vector3.Distance(playerPos, comPos);
+        //???チェック
+        blastCount = anythingCount;
+        if (blastCount == 3)
+        {
+            Debug.Log("イェーイ");   
+        }
 
         if (bigNum >= bigBorder4 && first == true)
         {
@@ -75,6 +82,20 @@ public class Mission2_M : Missions_M
             achieve = 0;
             per.text = achieve + "/ 1";
         }
+
+        //後で消せ
+        /*else if (first && smallNum == smallBorder3)
+        {
+            missionSlide.Play();
+            mission.text = splitText[3];
+            submis.text = splitText[4];
+            exmis.text = splitText[5];
+            count.text = "2";
+            first = false;
+            second = true;
+            achieve = 0;
+            per.text = achieve + "/ 1";
+        }*/
 
         if (second && gasStand >= 1)
         {
@@ -126,17 +147,18 @@ public class Mission2_M : Missions_M
             achieve = 0;
             per.text = "";
         }
-    }
 
-    public void BlastBreak()
-    {
-        /*switch(eneBillScr.hitSkilID)
+        if (achieve >= 99)
         {
-            case 3: blastCount++; break;
-        }*/
-        if (eneBillScr.hitSkilID == 3)
-        {
-            blastCount++;
+            missionSlide.Play();
+            mission.text = splitText[3];
+            submis.text = splitText[4];
+            exmis.text = splitText[5];
+            count.text = "2";
+            first = false;
+            second = true;
+            achieve = 0;
+            per.text = achieve + "/ 1";
         }
     }
 }

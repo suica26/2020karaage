@@ -214,6 +214,8 @@ public class ObjectStateManagement_Y : MonoBehaviour
             StartCoroutine(DoShake(0.25f, 0.1f));
         }
         else Death();    //破壊したときの処理
+
+
     }
 
     /// <summary>
@@ -356,11 +358,15 @@ public class ObjectStateManagement_Y : MonoBehaviour
         //差し替え処理  分割オブジェクトが設定されていないか技がカッターの時には無視する
         if (divideObject != null && hitSkilID != 2) ChangeObject();
         else Substitution();    //差し替えをしない場合
+
     }
 
     public void DeathCount()
     {
         missionScr = player.GetComponent<Missions_M>();
+        //M 追加
+        missionScr.hitID = hitSkilID;
+
         switch (gameObject.tag)
         {
             case "Small": missionScr.SmallNumberPlus(); break;
