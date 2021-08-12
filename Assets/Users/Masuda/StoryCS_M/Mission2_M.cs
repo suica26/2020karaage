@@ -31,7 +31,7 @@ public class Mission2_M : Missions_M
         blastCount = anythingCount;
         if (blastCount == 3)
         {
-            Debug.Log("イェーイ");   
+            //Debug.Log("イェーイ");   
         }
 
         if (bigNum >= bigBorder4 && first == true)

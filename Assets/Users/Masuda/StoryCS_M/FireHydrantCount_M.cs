@@ -25,7 +25,7 @@ public class FireHydrantCount_M : MonoBehaviour
             m1m.per.text = s1mm.achieve + "/ 3";
         }
 
-        if(!this)
+        if (!this)
         {
             m1m.hydrant += 1;
             m1m.achieve += 1;
