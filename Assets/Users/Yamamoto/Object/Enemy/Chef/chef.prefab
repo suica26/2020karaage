@@ -140,6 +140,7 @@ GameObject:
   - component: {fileID: 3743593121100377898}
   - component: {fileID: 3613660688037932543}
   - component: {fileID: 3465619958055138601}
+  - component: {fileID: -6854739156859251007}
   m_Layer: 0
   m_Name: chef
   m_TagString: Untagged
@@ -154,7 +155,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 502009927202614386}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 3.525, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -163,7 +164,7 @@ Transform:
   - {fileID: 8499816301519190878}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!54 &6868586860015173895
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -241,16 +242,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tier_WalkAttack: 1
-  tier_ChargeKick: 0
+  divideObject: {fileID: 0}
   HP: 500
   kickMag: 1.5
   blastMag: 3
   cutterMag: 2
-  chargeKickMag: 5
   fallAttackMag: 1.5
-  KnockBackPower: 20
   breakScore: 500
-  breakPoint: 1
+  objectID: 0
+  breakEffect: {fileID: 0}
+  deleteTime: 3
+  torque: 0
+  power: 0
+  groundContactSoundName: 
+  shardDamage_nonDiv: 0
+  specialObjectFlg: 0
+  notDamage: 0
+  attackDistance: 0
+  attackInterval: 0
+  weapon: {fileID: 0}
+  attackClip: {fileID: 0}
+  attackDamage: 0
 --- !u!114 &3743593121100377898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,7 +292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 400540f14b6981848a8da03f843b8495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objFood: {fileID: 6224625970994948174, guid: 432283639b2517e4cb2744030344a38c, type: 3}
+  objFood: {fileID: 5882868508514077054, guid: 52bb1160a73b4b848953812cb2383dfc, type: 3}
   minFood: 2
   maxFood: 4
 --- !u!195 &3465619958055138601
@@ -305,6 +317,43 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &-6854739156859251007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502009927202614386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c47280ff66cad724f94a5455ef1da987, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tier_WalkAttack: 3
+  divideObject: {fileID: 0}
+  HP: 150
+  kickMag: 1
+  blastMag: 1
+  cutterMag: 1
+  fallAttackMag: 1
+  breakScore: 100
+  objectID: 10
+  breakEffect: {fileID: 0}
+  deleteTime: 3
+  torque: 0
+  power: 0
+  groundContactSoundName: 
+  shardDamage_nonDiv: 0
+  specialObjectFlg: 1
+  notDamage: 0
+  attackDistance: 10
+  attackInterval: 8
+  weapon: {fileID: 7023606130072122206}
+  attackClip: {fileID: 1827226128182048838, guid: 9db3317666acb8946bfa7f07ae3ef795,
+    type: 3}
+  attackDamage: 10
+  hitBoxPrefab: {fileID: 3531957827537779740, guid: a150f44f619a03c4789834dc1d0d0ef4,
+    type: 3}
 --- !u!1 &617742287419781676
 GameObject:
   m_ObjectHideFlags: 0
@@ -1155,7 +1204,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4989027494720764613}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -0, y: -0.015459594, z: 0.04604102}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1180,7 +1229,7 @@ Transform:
   - {fileID: 8699578710939409371}
   m_Father: {fileID: 989859475824441032}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &5166392708162665489
 GameObject:
   m_ObjectHideFlags: 0
@@ -1823,13 +1872,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7184597259059771767}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 989859475824441032}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!137 &4390909007366811908
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
@@ -2143,14 +2192,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8288452020869724383}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -0, y: -0.015459594, z: 0.04604102}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3368896935423786377}
   m_Father: {fileID: 989859475824441032}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &8349445205104892846
 GameObject:
   m_ObjectHideFlags: 0
@@ -2417,6 +2466,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60700748fe9a5d849a49bfd1ea766723, type: 3}
+--- !u!1 &7023606130072122206 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 60700748fe9a5d849a49bfd1ea766723,
+    type: 3}
+  m_PrefabInstance: {fileID: 7906549915583073807}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7652473646145087972 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 60700748fe9a5d849a49bfd1ea766723,

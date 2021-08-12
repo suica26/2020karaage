@@ -61,6 +61,9 @@ public class CharaMoveRigid_R : MonoBehaviour
     private bool stunned;
     private float timer;
 
+    // ブラストの移動制御用変数
+    public float MoveMag { get; set; }
+
     //ADX
     private new CriAtomSource audio;
     CriAtomExPlayback JumpS, WalkVoiceS, FootS, IdleVoiceS;
@@ -74,6 +77,7 @@ public class CharaMoveRigid_R : MonoBehaviour
         scrCam = Camera.main.GetComponent<TpsCameraJC_R>();
         scrEvo = GetComponent<EvolutionChicken_R>();
         scrCutter = GetComponent<Cutter_R>();
+        MoveMag = 1.0f;
         isFlying = false;
         stunned = false;
         audio = (CriAtomSource)GetComponent("CriAtomSource");
@@ -174,7 +178,7 @@ public class CharaMoveRigid_R : MonoBehaviour
                     moveDirection.Normalize();
                 }
 
-                rb.velocity = moveDirection * speed;
+                rb.velocity = moveDirection * speed * MoveMag;
 
                 //チキンの身体の向きを修正
                 if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
@@ -232,7 +236,7 @@ public class CharaMoveRigid_R : MonoBehaviour
                 var velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
                 if (velocity.magnitude > speed)
                 {
-                    rb.velocity = velocity.normalized * speed + rb.velocity.y * Vector3.up;
+                    rb.velocity = velocity.normalized * speed * MoveMag + rb.velocity.y * Vector3.up;
                 }
             }
             else

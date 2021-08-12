@@ -12,6 +12,7 @@ public class Backpause_M : MonoBehaviour
     }
     public void OnClick()
     {
+        Cursor.visible = false;
         audio.Play("System_Cancel");
         pausePanel.SetActive(false);
         Time.timeScale = 1f;

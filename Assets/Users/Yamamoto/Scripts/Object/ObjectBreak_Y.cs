@@ -48,16 +48,17 @@ public class ObjectBreak_Y : MonoBehaviour
 
     public void BreakAction()
     {
+        //破砕片になる場合とオブジェクトが差し替えられない場合で動作を変更
         if (divided)
         {
             foreach (var shard in myParts)
             {
-                ShardSettings(shard);
                 Collapsions[objScr.hitSkilID](shard);
             }
         }
         else
         {
+            ShardSettings(gameObject, objScr.shardDamage_nonDiv);
             Collapsions[objScr.hitSkilID](gameObject);
         }
 
@@ -78,27 +79,20 @@ public class ObjectBreak_Y : MonoBehaviour
         rb.useGravity = true;
     }
 
-    private void ShardSettings(GameObject shard)
+    //オブジェクト単体の場合の設定関数
+    private void ShardSettings(GameObject obj, int nonDivDamage)
     {
-        shard.layer = LayerMask.NameToLayer("Shard");
+        obj.layer = LayerMask.NameToLayer("Shard");
 
-        float rnd = 1f;
-        if (divided)
-        {
-            rnd = Random.Range(0f, 1f);
-        }
-        if (rnd > 0.9f)
-        {
-            var shardScr = shard.AddComponent<Shard_Y>();
-            shardScr.shardDamage = 10;
-        }
+        var shardScr = obj.AddComponent<Shard_Y>();
+        shardScr.shardDamage = nonDivDamage;
     }
 
     //踏み潰し攻撃
     private void TramplingCollapse(GameObject obj)
     {
         RigidOn(obj);
-        obj.GetComponent<Rigidbody>().AddForce(0, -objScr.power * 10, 0);
+        obj.GetComponent<Rigidbody>().AddForce(Random.Range(0, objScr.power / 10), -objScr.power * 10, Random.Range(0, objScr.power / 10));
     }
 
     //チキンキック
@@ -124,8 +118,12 @@ public class ObjectBreak_Y : MonoBehaviour
         var leftObjects = new List<GameObject>();
         var rightObjects = new List<GameObject>();
 
-        var left = new GameObject(gameObject.name + " leftObj", typeof(Rigidbody));
-        var right = new GameObject(gameObject.name + " rightObj", typeof(Rigidbody));
+        var left = new GameObject(gameObject.name + "_leftObj", typeof(Rigidbody));
+        var right = new GameObject(gameObject.name + "_rightObj", typeof(Rigidbody));
+
+        //MeshCutがException吐いた時のために、一応先に宣言しておく
+        Destroy(left, objScr.deleteTime);
+        Destroy(right, objScr.deleteTime);
 
         //Meshがついているか確認するリスト
         var checkObjects = new List<GameObject>();
@@ -174,11 +172,8 @@ public class ObjectBreak_Y : MonoBehaviour
         rbL.AddForce(-normal * objScr.power / 3, ForceMode.Impulse);
         rbR.AddForce(normal * objScr.power / 3, ForceMode.Impulse);
 
-        Destroy(left, objScr.deleteTime);
-        Destroy(right, objScr.deleteTime);
-
-        ShardSettings(left);
-        ShardSettings(right);
+        ShardSettings(left, objScr.shardDamage_nonDiv / 2);
+        ShardSettings(right, objScr.shardDamage_nonDiv / 2);
 
         //破壊時のアクションを動作させるために少し遅延させる
         Invoke("SetNonActive", 0.1f);

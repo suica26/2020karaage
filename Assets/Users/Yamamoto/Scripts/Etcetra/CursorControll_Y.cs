@@ -4,10 +4,20 @@ using UnityEngine;
 
 public class CursorControll_Y : MonoBehaviour
 {
+    public bool gameMode;
+
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Confined;
+        if (gameMode)
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+        else
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
 }

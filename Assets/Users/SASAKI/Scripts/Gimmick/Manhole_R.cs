@@ -7,7 +7,7 @@ public class Manhole_R : BlowerGimmickBase
     private new CriAtomSource audio;
     private GameObject _nullCheckObj;
     //M
-    private Stage1_Mission_M s1mm;
+    private Mission1_M m1m;
     public GameObject player;
 
     private void Start()
@@ -15,7 +15,7 @@ public class Manhole_R : BlowerGimmickBase
         audio = (CriAtomSource)GetComponent("CriAtomSource");
         //M
         player = GameObject.Find("Player");
-        s1mm = player.GetComponent<Stage1_Mission_M>();
+        m1m = player.GetComponent<Mission1_M>();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -26,11 +26,11 @@ public class Manhole_R : BlowerGimmickBase
             InstanceEffect();
             audio.Play("Manhole00");
             //M
-            if (s1mm.fourth)
+            if (m1m.fourth)
             {
-                s1mm.manhole += 1;
-                s1mm.achieve += 1;
-                s1mm.per.text = s1mm.achieve + "/ 3";
+                m1m.manhole += 1;
+                m1m.achieve += 1;
+                m1m.per.text = m1m.achieve + "/ 3";
             }
         }
     }

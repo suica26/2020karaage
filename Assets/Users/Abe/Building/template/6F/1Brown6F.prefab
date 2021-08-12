@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8900582431386990481}
   - component: {fileID: 6506631162918047439}
   - component: {fileID: 8945382656474929611}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F2_B_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 7173448211373197009}
   - component: {fileID: 4501258930852104220}
   - component: {fileID: 6712789345577295602}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Ft_B_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 3626524154633309036}
   - component: {fileID: 449406322400206394}
   - component: {fileID: 8965841628492292073}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F2_B_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -248,7 +248,7 @@ GameObject:
   - component: {fileID: 3701143919397756920}
   - component: {fileID: 1852438349113475542}
   - component: {fileID: 6682570691928595973}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F2_A_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,7 +327,7 @@ GameObject:
   - component: {fileID: 7374505537353651936}
   - component: {fileID: 6565878042701684255}
   - component: {fileID: 1207449684124261688}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F2_B_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -406,7 +406,7 @@ GameObject:
   - component: {fileID: 9079127530658888998}
   - component: {fileID: 4875314528064177987}
   - component: {fileID: 844624209464311395}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F2_A_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -485,7 +485,7 @@ GameObject:
   - component: {fileID: 4527703085451707081}
   - component: {fileID: 4081093802504027811}
   - component: {fileID: 215331647486753010}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F2_B_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -562,7 +562,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7257005885380480863}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 1A Brown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -599,7 +599,7 @@ GameObject:
   - component: {fileID: 3065434737698102111}
   - component: {fileID: 1919600194428350488}
   - component: {fileID: 4482594130916019210}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 1Brown6F
   m_TagString: Big
   m_Icon: {fileID: 0}
@@ -735,8 +735,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8075661621763774d8231cabafe12bb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tier_WalkAttack: 4
-  divideObject: {fileID: 8489939278652910571, guid: 3aa1f4e384998224c9bee9a9a0388423,
+  tier_WalkAttack: 3
+  divideObject: {fileID: 1435620989390794633, guid: 5f33ff5e3dfa8cc43aa6f9300e0686a6,
     type: 3}
   HP: 2500
   kickMag: 0.7
@@ -750,6 +750,10 @@ MonoBehaviour:
   deleteTime: 3
   torque: 0
   power: 0
+  groundContactSoundName: 
+  shardDamage_nonDiv: 2500
+  specialObjectFlg: 0
+  notDamage: 0
 --- !u!114 &-3841543393369260767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -826,7 +830,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7138539420174885374}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 1B Brown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -857,7 +861,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8431053996333423948}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 2B Brown (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -888,7 +892,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 396879496395670519}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 2A Brown (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -921,7 +925,7 @@ GameObject:
   - component: {fileID: 3874656672792923261}
   - component: {fileID: 8188550491685997884}
   - component: {fileID: 813731999709157697}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F2_A_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -998,7 +1002,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1166490741797575295}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 2B Brown (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1031,7 +1035,7 @@ GameObject:
   - component: {fileID: 5613898711854484960}
   - component: {fileID: 8698158700494844318}
   - component: {fileID: 1726916582314618296}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F1_B_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1108,7 +1112,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3341467432044304476}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 1D Brown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1141,7 +1145,7 @@ GameObject:
   - component: {fileID: 6159726589631152391}
   - component: {fileID: 588832141053392222}
   - component: {fileID: 2823613626704857833}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F1_C_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1220,7 +1224,7 @@ GameObject:
   - component: {fileID: 4986103261978762849}
   - component: {fileID: 8222478162961086759}
   - component: {fileID: 53750306288358702}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F1_A_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1297,7 +1301,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3679353825537516401}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 2A Brown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1333,7 +1337,7 @@ GameObject:
   - component: {fileID: 6888529475297721608}
   - component: {fileID: 2806559229825065006}
   - component: {fileID: 4531123565374167833}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F1_D_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1410,7 +1414,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 418257905303521125}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 1C Brown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1441,7 +1445,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6581112150054416174}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 2B Brown (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1472,7 +1476,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7332273267507370664}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 2A Brown (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1505,7 +1509,7 @@ GameObject:
   - component: {fileID: 1894376674737688975}
   - component: {fileID: 3087160234453088454}
   - component: {fileID: 8096621059348064329}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F2_A_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1582,7 +1586,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5094417785040466381}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: R Brown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1613,7 +1617,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1340292508518590594}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 2A Brown (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1644,7 +1648,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8740225853496747915}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 2B Brown
   m_TagString: Untagged
   m_Icon: {fileID: 0}

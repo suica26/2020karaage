@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3750619939073469326}
   - component: {fileID: 5649398748820177432}
   - component: {fileID: 7569854840233404264}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F1_B_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 5007500245408994131}
   - component: {fileID: 5974651138723105054}
   - component: {fileID: 4874997616150198830}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Ft_B_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167,7 +167,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4896483386031605397}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 1B White
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ GameObject:
   - component: {fileID: -9012503724384169162}
   - component: {fileID: -8983073558629411053}
   - component: {fileID: 6039143915510711651}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 1White
   m_TagString: Big
   m_Icon: {fileID: 0}
@@ -244,8 +244,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8075661621763774d8231cabafe12bb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tier_WalkAttack: 2
-  divideObject: {fileID: 1824873167607662746, guid: 1daf2487134ceb44395d177253f40727,
+  tier_WalkAttack: 3
+  divideObject: {fileID: 6629788260904458924, guid: c0ba0590ebc67a24bad060b99e930921,
     type: 3}
   HP: 1000
   kickMag: 0.8
@@ -259,6 +259,10 @@ MonoBehaviour:
   deleteTime: 3
   torque: 10
   power: 50
+  groundContactSoundName: 
+  shardDamage_nonDiv: 1000
+  specialObjectFlg: 0
+  notDamage: 0
 --- !u!114 &-8622860811125903906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -431,7 +435,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5899295686660877005}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: R White
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -464,7 +468,7 @@ GameObject:
   - component: {fileID: 5989862341546041155}
   - component: {fileID: 6453965107023216498}
   - component: {fileID: 7354630410295038048}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F2_B_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -543,7 +547,7 @@ GameObject:
   - component: {fileID: 3217157056782699057}
   - component: {fileID: 5887542852593542839}
   - component: {fileID: 2461013174623141572}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F1_D_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -620,7 +624,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8523498538728705494}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 1D White
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -651,7 +655,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5020933733673268534}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 1A White
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -682,7 +686,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1476764279262312971}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 1C White
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -715,7 +719,7 @@ GameObject:
   - component: {fileID: 5333617581166019553}
   - component: {fileID: 2640783709852589832}
   - component: {fileID: 5596461770405745417}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F2_A_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -794,7 +798,7 @@ GameObject:
   - component: {fileID: 8964453292006864547}
   - component: {fileID: 6750092521683051781}
   - component: {fileID: 9047804128084291671}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F1_C_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -871,7 +875,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 94991463050836993}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 2B White
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -902,7 +906,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5383320180427877545}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 2A White
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -935,7 +939,7 @@ GameObject:
   - component: {fileID: 5037754033634331542}
   - component: {fileID: 1182918670942385238}
   - component: {fileID: 5252599620648535733}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F1_A_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}

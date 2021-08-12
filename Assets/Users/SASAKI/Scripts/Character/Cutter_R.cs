@@ -21,6 +21,8 @@ public class Cutter_R : MonoBehaviour
     private float animTimer;
     public bool throwingCutter = false;
 
+    public bool CanCutter { get; set; }
+
     GameObject cutter;
     CharaMoveRigid_R scrMove;
     EvolutionChicken_R scrEvo;
@@ -35,6 +37,7 @@ public class Cutter_R : MonoBehaviour
         catchableTimer = 0.0f;
         animTimer = 0f;
         throwingCutter = false;
+        CanCutter = true;
         Sound = GetComponent<CriAtomSource>();
     }
 
@@ -45,8 +48,9 @@ public class Cutter_R : MonoBehaviour
         {
             return;
         }
-            //カッターを投げている際にタイマー(カッター取得用)を加算
-            if (throwingCutter)
+        
+        //カッターを投げている際にタイマー(カッター取得用)を加算    
+        if (throwingCutter)
         {
             catchableTimer += Time.deltaTime;
 
@@ -58,13 +62,11 @@ public class Cutter_R : MonoBehaviour
         }
 
         //マウスクリック中にタイマー(通常or落下攻撃判定用)を加算
-        if (Input.GetMouseButton(1))
-        {
+        if (Input.GetMouseButton(1) && CanCutter)
             timer += Time.deltaTime;
-        }
 
         //以下通常のカッター攻撃の記述
-        if (Input.GetMouseButtonUp(1))
+        if (Input.GetMouseButtonUp(1) && CanCutter)
         {
             if(!throwingCutter && timer <= 0.5f)
             {

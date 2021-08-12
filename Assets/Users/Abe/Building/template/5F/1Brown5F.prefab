@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2862809255551500986}
   - component: {fileID: 959981186387385492}
   - component: {fileID: 5213732079157822279}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F2_A_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 8604850793957972883}
   - component: {fileID: 3066960377446880606}
   - component: {fileID: 5318532669195977648}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Ft_B_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 2788756837713778222}
   - component: {fileID: 1358745390902363000}
   - component: {fileID: 7533033875399017131}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F2_B_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -248,7 +248,7 @@ GameObject:
   - component: {fileID: 7572852742783344740}
   - component: {fileID: 6291317209054894593}
   - component: {fileID: 2260545530889593633}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F2_A_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,7 +327,7 @@ GameObject:
   - component: {fileID: 8264147811814624162}
   - component: {fileID: 5762646382839104349}
   - component: {fileID: 298959442844024954}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F2_B_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -404,7 +404,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1253787249189396149}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 2A Brown (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -435,7 +435,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8644246993128946876}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 1B Brown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -468,7 +468,7 @@ GameObject:
   - component: {fileID: 6417405387129606306}
   - component: {fileID: 7805220085876010204}
   - component: {fileID: 220846169432912122}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F1_B_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -545,7 +545,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4231380323723396382}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 1D Brown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -576,7 +576,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 348908259324036925}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 2B Brown (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -607,7 +607,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8093451731009016349}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 1A Brown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -640,7 +640,7 @@ GameObject:
   - component: {fileID: 3040500287809773451}
   - component: {fileID: 3190046210532123617}
   - component: {fileID: 1592767862933366192}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F2_B_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -723,7 +723,7 @@ GameObject:
   - component: {fileID: -1896195223510331000}
   - component: {fileID: -6670606234120980032}
   - component: {fileID: -7819152520483901022}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 1Brown5F
   m_TagString: Big
   m_Icon: {fileID: 0}
@@ -763,8 +763,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8075661621763774d8231cabafe12bb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tier_WalkAttack: 4
-  divideObject: {fileID: 6609125378244047088, guid: b3d60af291f77a24da7d8a1ec263b01e,
+  tier_WalkAttack: 3
+  divideObject: {fileID: 8810331402166788418, guid: 1fae59a840b58cf4eaf2dc077fb2246d,
     type: 3}
   HP: 2000
   kickMag: 0.7
@@ -778,6 +778,10 @@ MonoBehaviour:
   deleteTime: 3
   torque: 10
   power: 40
+  groundContactSoundName: 
+  shardDamage_nonDiv: 2000
+  specialObjectFlg: 0
+  notDamage: 0
 --- !u!114 &5589738340966883982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -952,7 +956,7 @@ GameObject:
   - component: {fileID: 5440170362886709322}
   - component: {fileID: 3608862897561992556}
   - component: {fileID: 3028230878469981787}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F1_D_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1031,7 +1035,7 @@ GameObject:
   - component: {fileID: 5896783592918139683}
   - component: {fileID: 7420730710650414181}
   - component: {fileID: 1466293926921439340}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F1_A_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1110,7 +1114,7 @@ GameObject:
   - component: {fileID: 4727681893396094021}
   - component: {fileID: 2075126603561838620}
   - component: {fileID: 3731472751465584555}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F1_C_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1187,7 +1191,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2875574612055735859}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 2A Brown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1220,7 +1224,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 467824604691035584}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 2A Brown (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1251,7 +1255,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7902728878996470473}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 2B Brown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1284,7 +1288,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5932550138681699471}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: R Brown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1315,7 +1319,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1236893724144327207}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 1C Brown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1346,7 +1350,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5743050160797512300}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 2B Brown (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1379,7 +1383,7 @@ GameObject:
   - component: {fileID: 1057653890693156045}
   - component: {fileID: 4481201410802476420}
   - component: {fileID: 7258499557950403851}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F2_A_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

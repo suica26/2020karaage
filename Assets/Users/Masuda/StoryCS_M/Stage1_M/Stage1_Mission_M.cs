@@ -6,19 +6,23 @@ using UnityEngine.UI;
 public class Stage1_Mission_M : MonoBehaviour
 {
     [SerializeField] public Text mission, submis, exmis, count, per, tips;
-    [SerializeField] public GameObject player, shop, misBox, company, hip,
+    [SerializeField]
+    public GameObject player, shop, misBox, company, hip,
         tipsCircle, tipsChicken;
     [SerializeField] public TextAsset txtFile;
     [SerializeField] public int smallNum, bigNum, achieve;
-    [SerializeField] public int smallBorder1, smallBorder2, smallBorder3,
-                                bigBorder1, bigBorder2, bigBorder3,bigBorder4;
+    [SerializeField]
+    public int smallBorder1, smallBorder2, smallBorder3,
+                                bigBorder1, bigBorder2, bigBorder3, bigBorder4;
     [SerializeField] public int manhole, hydrant;
     public bool first = true, second = false, third = false, fourth = false, final = false,
-        Language,hipStamp = false, tip = false;
+        Language, hipStamp = false, tip = false;
     private string txtData;
     private string[] splitText;
     [SerializeField] Animation missionSlide;
-    [SerializeField] float timer,tipsTimer;
+    [SerializeField] float timer, tipsTimer;
+
+    [SerializeField] private ObjectStateManagement_Y eneBillScr;
 
     void Start()
     {
@@ -115,7 +119,7 @@ public class Stage1_Mission_M : MonoBehaviour
 
         if (fourth && hipStamp)
         {
-            timer += Time.unscaledDeltaTime/2;
+            timer += Time.unscaledDeltaTime / 2;
         }
 
         if (timer >= 3.0f)
@@ -157,6 +161,9 @@ public class Stage1_Mission_M : MonoBehaviour
 
         if (dis <= 30 && final)
         {
+            //山本加筆
+            eneBillScr.changeDamageFlg();
+
             missionSlide.Play();
             mission.text = splitText[12];
             submis.text = splitText[13];
@@ -184,26 +191,11 @@ public class Stage1_Mission_M : MonoBehaviour
             achieve = 0;
         }
 
-        //後で消す
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            fourth = true;
-            hipStamp = true;
-        }
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            manhole += 3;
-        }
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            tipsTimer += 60;
-        }
-
     }
 
     public void BigNumberPlus()
     {
-        bigNum ++;
+        bigNum++;
         if (second)
         {
             achieve += 20;
@@ -212,7 +204,7 @@ public class Stage1_Mission_M : MonoBehaviour
     }
     public void SmallNumberPlus()
     {
-        smallNum ++;
+        smallNum++;
         if (second)
         {
             achieve += 4;
@@ -227,7 +219,7 @@ public class Stage1_Mission_M : MonoBehaviour
 
     public void Japanese()
     {
-       
+
     }
 
     /*public void OnClick()

@@ -1326,10 +1326,8 @@ GameObject:
   - component: {fileID: 1034827481793208696}
   - component: {fileID: 7877948689474673713}
   - component: {fileID: 6693130104330208957}
-  - component: {fileID: 7775279504131752488}
   - component: {fileID: 7861683539303365580}
-  - component: {fileID: 8741215777326403523}
-  - component: {fileID: 1734944633878742134}
+  - component: {fileID: -3497946707093904779}
   m_Layer: 0
   m_Name: police
   m_TagString: Untagged
@@ -1425,29 +1423,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &7775279504131752488
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5552524597018552477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be6f231d80391bd46aa7c814fe5f3607, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tier_WalkAttack: 2
-  tier_ChargeKick: 1
-  HP: 1000
-  kickMag: 1
-  blastMag: 0.6
-  cutterMag: 1.2
-  chargeKickMag: 5
-  fallAttackMag: 0.8
-  KnockBackPower: 10
-  breakScore: 1000
-  breakPoint: 2
 --- !u!114 &7861683539303365580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1460,10 +1435,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 400540f14b6981848a8da03f843b8495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objFood: {fileID: 6224625970994948174, guid: 432283639b2517e4cb2744030344a38c, type: 3}
+  objFood: {fileID: 5882868508514077054, guid: 52bb1160a73b4b848953812cb2383dfc, type: 3}
   minFood: 4
   maxFood: 6
---- !u!114 &8741215777326403523
+--- !u!114 &-3497946707093904779
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1472,33 +1447,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 5552524597018552477}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48c95c6e9f20f1c4ea35fa0fd0f25f2e, type: 3}
+  m_Script: {fileID: 11500000, guid: a1c734f8f1dd5fe49871469f2180a14d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  routineTimer: 0
-  fireFreeze: 3
-  hitFleeze: 1
+  tier_WalkAttack: 4
+  divideObject: {fileID: 0}
+  HP: 300
+  kickMag: 1
+  blastMag: 1
+  cutterMag: 1
+  fallAttackMag: 1
+  breakScore: 50
+  objectID: 10
+  breakEffect: {fileID: 0}
+  deleteTime: 3
+  torque: 0
+  power: 0
+  groundContactSoundName: 
+  shardDamage_nonDiv: 0
+  specialObjectFlg: 1
+  notDamage: 0
+  attackDistance: 20
+  attackInterval: 5
+  weapon: {fileID: 6608533013224504180}
+  attackClip: {fileID: 1827226128182048838, guid: efac8d8a96e94ef43bd6422e959340de,
+    type: 3}
+  attackDamage: 15
   bulletPrefab: {fileID: 8871777121355791282, guid: 265a824829aba0d4aa6e6875340839c8,
     type: 3}
-  hitDamage: 15
-  bulletDamage: 15
-  hitBoxPrefab: {fileID: 3531957827537779740, guid: a150f44f619a03c4789834dc1d0d0ef4,
-    type: 3}
---- !u!114 &1734944633878742134
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5552524597018552477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e74c95f74d84214086feb9bdf035c0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eneDis: 50
-  navFlg: 0
-  live: 1
 --- !u!1 &5553565784712921985
 GameObject:
   m_ObjectHideFlags: 0
@@ -2345,6 +2321,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 665ce4ff0d56dd24fa3b8d731612e255, type: 3}
+--- !u!1 &6608533013224504180 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 665ce4ff0d56dd24fa3b8d731612e255,
+    type: 3}
+  m_PrefabInstance: {fileID: 6302594245924292133}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5836077357391176142 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 665ce4ff0d56dd24fa3b8d731612e255,

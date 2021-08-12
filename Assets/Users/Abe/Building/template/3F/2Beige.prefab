@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1398286508068575791}
   - component: {fileID: 3935026938164093185}
   - component: {fileID: 3117145245928921487}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F1_A_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 7365197349604802779}
   - component: {fileID: 3709989768081075370}
   - component: {fileID: 1415579282295551533}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F2_B_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167,7 +167,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1062506687718910869}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 2B Beige
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 4596352988024115903}
   - component: {fileID: 5181658045483450445}
   - component: {fileID: 5715564465525431883}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Ft_B_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 4040519983708413601}
   - component: {fileID: 3627508282709690446}
   - component: {fileID: 8066453788823852115}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F1_D_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -356,7 +356,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4641913098261464985}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 1B Beige
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -387,7 +387,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6660284481847863861}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 1D Beige
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -418,7 +418,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5996394468521224157}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: R Beige
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -449,7 +449,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5801858640861182441}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 1C Beige
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -482,7 +482,7 @@ GameObject:
   - component: {fileID: 9165901330573943873}
   - component: {fileID: 7880871813719985254}
   - component: {fileID: 5195021151817739520}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F2_A_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -561,7 +561,7 @@ GameObject:
   - component: {fileID: 2457601301897212950}
   - component: {fileID: 5421861518780805046}
   - component: {fileID: 210278598753581552}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F1_B_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -644,7 +644,7 @@ GameObject:
   - component: {fileID: -7339402167193505496}
   - component: {fileID: 1007097483038677147}
   - component: {fileID: 4242258160768875223}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 2Beige
   m_TagString: Big
   m_Icon: {fileID: 0}
@@ -684,8 +684,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8075661621763774d8231cabafe12bb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tier_WalkAttack: 2
-  divideObject: {fileID: 4053148652192961102, guid: f9daf336f0306b04f906fed261663cad,
+  tier_WalkAttack: 3
+  divideObject: {fileID: 6629788260904458924, guid: c0ba0590ebc67a24bad060b99e930921,
     type: 3}
   HP: 1000
   kickMag: 0.8
@@ -699,6 +699,10 @@ MonoBehaviour:
   deleteTime: 3
   torque: 10
   power: 50
+  groundContactSoundName: 
+  shardDamage_nonDiv: 1000
+  specialObjectFlg: 0
+  notDamage: 0
 --- !u!114 &4246581623226026581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -871,7 +875,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7069196406160877491}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 1A Beige
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -902,7 +906,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7353347314154543889}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 2A Beige
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -935,7 +939,7 @@ GameObject:
   - component: {fileID: 3119403968389533944}
   - component: {fileID: 8476097119909631321}
   - component: {fileID: 1577584765606029528}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F1_C_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

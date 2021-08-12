@@ -16,6 +16,7 @@ public class WayPointGraph_Y : MonoBehaviour
     public int civilNum;
     public float routinTimer;
     public float spawnTime;
+    private const float DISTAREA = 20f;
 
     // Start is called before the first frame update
     void Start()
@@ -61,10 +62,18 @@ public class WayPointGraph_Y : MonoBehaviour
     {
         routinTimer = 0f;
         civilNum++;
-        //セットしてあるPrefabの中から、Spawnする市民をランダムに選択
-        int randomNum = Random.Range(0, scrSpawners.Count);
-        CulDijkstra(scrSpawners[randomNum].PointNumber);
-        scrSpawners[randomNum].SpawnCivil();
+        while (true)
+        {
+            //セットしてあるPrefabの中から、Spawnする市民をランダムに選択
+            int randomNum = Random.Range(0, scrSpawners.Count);
+            if (Vector3.Distance(wayPointsArray[scrSpawners[randomNum].PointNumber].transform.position, GameObject.Find("Player").transform.position) >= DISTAREA)
+            {
+                CulDijkstra(scrSpawners[randomNum].PointNumber);
+                scrSpawners[randomNum].SpawnCivil();
+                break;
+            }
+        }
+
     }
 
     public void CulDijkstra(int startPoint)
@@ -96,7 +105,6 @@ public class WayPointGraph_Y : MonoBehaviour
         while (!finishFlg)
         {
             NOC++;
-            Debug.Log("NOC = " + NOC);
             for (int i = 0; i < checkPoints.Length; i++)
             {
                 //今回分の探索処理
@@ -125,7 +133,7 @@ public class WayPointGraph_Y : MonoBehaviour
 
             if (NOC > 100)
             {
-                Debug.Log("Infinite Loop Avoided!");
+                Debug.Log($"Infinite Loop Avoided! Start is {wpScripts[startPoint].PointNumber}. End is {wpScripts[endPoint].PointNumber}");
                 break;
             }
         }

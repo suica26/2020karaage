@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1402634760609228365}
   - component: {fileID: 1815681785565425826}
   - component: {fileID: 4941622645390568639}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F1_D_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2727826043091194745}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 2B Beige
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 5571947320685312055}
   - component: {fileID: 1736541654828618822}
   - component: {fileID: 4089482582680669889}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F2_B_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 4035877608050844355}
   - component: {fileID: 2160005162665105901}
   - component: {fileID: 11175931843502435}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F1_A_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -278,7 +278,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8811733929870571357}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 2A Beige (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -311,7 +311,7 @@ GameObject:
   - component: {fileID: 1489673149410667091}
   - component: {fileID: 7821932245998041249}
   - component: {fileID: 7220436783522768551}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Ft_B_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -388,7 +388,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5296008637068287839}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 1A Beige
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -419,7 +419,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5578184273023067133}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 2A Beige
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -457,7 +457,7 @@ GameObject:
   - component: {fileID: -8549739830011011132}
   - component: {fileID: 2363043943579648735}
   - component: {fileID: 8535844162676584352}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 2Beige4F
   m_TagString: Big
   m_Icon: {fileID: 0}
@@ -498,9 +498,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tier_WalkAttack: 3
-  divideObject: {fileID: 5777630726250258165, guid: ee119d08f59d26d4684778e63e329373,
+  divideObject: {fileID: 4335324882014237294, guid: 6eacbba31e6c5f84386d8655d9bc4a70,
     type: 3}
-  HP: 900
+  HP: 1500
   kickMag: 0.9
   blastMag: 3.5
   cutterMag: 1
@@ -512,6 +512,10 @@ MonoBehaviour:
   deleteTime: 3
   torque: 10
   power: 50
+  groundContactSoundName: 
+  shardDamage_nonDiv: 1500
+  specialObjectFlg: 0
+  notDamage: 0
 --- !u!82 &-3493773347669527233
 AudioSource:
   m_ObjectHideFlags: 0
@@ -686,7 +690,7 @@ GameObject:
   - component: {fileID: 684195550499310842}
   - component: {fileID: 6943342492565559130}
   - component: {fileID: 2994586043059405084}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F1_B_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -765,7 +769,7 @@ GameObject:
   - component: {fileID: 13438262684788756}
   - component: {fileID: 6828796285464096181}
   - component: {fileID: 4503973027439382580}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F1_C_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -844,7 +848,7 @@ GameObject:
   - component: {fileID: 7865781591173455669}
   - component: {fileID: 7169149580603831979}
   - component: {fileID: 7385424114730204439}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F2_B_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -923,7 +927,7 @@ GameObject:
   - component: {fileID: 8557873843968472753}
   - component: {fileID: 6336793144960536732}
   - component: {fileID: 5714949263327436341}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F2_A_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1000,7 +1004,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7714248591735226229}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 1B Beige
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1031,7 +1035,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1213534393271278834}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 2B Beige (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1062,7 +1066,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8926610374476382469}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 1C Beige
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1093,7 +1097,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8670167712827694897}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: R Beige
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1126,7 +1130,7 @@ GameObject:
   - component: {fileID: 6077103935730425005}
   - component: {fileID: 5060810466954048650}
   - component: {fileID: 7169039357788575212}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F2_A_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1203,7 +1207,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8578216084260410073}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 1D Beige
   m_TagString: Untagged
   m_Icon: {fileID: 0}

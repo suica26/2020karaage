@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 548335459723822264}
   - component: {fileID: 9148512347762612638}
   - component: {fileID: 7414373995790475945}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F1_D_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7713362084646886081}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 2A Brown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 972587918466300087}
   - component: {fileID: 5777870433293077742}
   - component: {fileID: 9163576882271712089}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F1_C_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 2105115351591315409}
   - component: {fileID: 3033439806295687319}
   - component: {fileID: 6393449713149521054}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F1_A_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -277,7 +277,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2213498078764173437}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: R Brown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -308,7 +308,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2400251641767960123}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 2B Brown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -341,7 +341,7 @@ GameObject:
   - component: {fileID: 4777968121296054335}
   - component: {fileID: 8273999675236991350}
   - component: {fileID: 2907096413560639993}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F2_A_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -418,7 +418,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6757966134037118677}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 1C Brown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -451,7 +451,7 @@ GameObject:
   - component: {fileID: 4290197725371498337}
   - component: {fileID: 7382316900438897068}
   - component: {fileID: 372799748980221762}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Ft_B_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -530,7 +530,7 @@ GameObject:
   - component: {fileID: 1579776245009708112}
   - component: {fileID: 2356223170472347694}
   - component: {fileID: 5761177351377605640}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F1_B_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -607,7 +607,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8528599235555418604}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 1D Brown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -638,7 +638,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4257523403824486478}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 1B Brown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -675,7 +675,7 @@ GameObject:
   - component: {fileID: -9061225860694690242}
   - component: {fileID: -6131597744167082777}
   - component: {fileID: 1038637047672313766}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 1Brown
   m_TagString: Big
   m_Icon: {fileID: 0}
@@ -715,8 +715,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8075661621763774d8231cabafe12bb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tier_WalkAttack: 2
-  divideObject: {fileID: 1824873167607662746, guid: 1daf2487134ceb44395d177253f40727,
+  tier_WalkAttack: 3
+  divideObject: {fileID: 6629788260904458924, guid: c0ba0590ebc67a24bad060b99e930921,
     type: 3}
   HP: 1000
   kickMag: 0.8
@@ -730,6 +730,10 @@ MonoBehaviour:
   deleteTime: 3
   torque: 10
   power: 50
+  groundContactSoundName: 
+  shardDamage_nonDiv: 1000
+  specialObjectFlg: 0
+  notDamage: 0
 --- !u!114 &4984045867753360663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -904,7 +908,7 @@ GameObject:
   - component: {fileID: 7408787293033560953}
   - component: {fileID: 6964280319234508563}
   - component: {fileID: 6555534356031701314}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: F2_B_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -981,7 +985,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4373836754382141167}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: 1A Brown
   m_TagString: Untagged
   m_Icon: {fileID: 0}

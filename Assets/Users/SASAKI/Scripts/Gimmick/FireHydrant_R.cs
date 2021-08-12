@@ -7,15 +7,22 @@ public class FireHydrant_R : BlowerGimmickBase
     private bool makeHydrant = false;
     private ObjectStateManagement_Y scrObjManage;
     //M
-    private Stage1_Mission_M s1mm;
+    //private Stage1_Mission_M s1mm;
+    private Mission1_M m1m;
     public GameObject player;
+    public bool hyd;
 
     void Start()
     {
         scrObjManage = GetComponent<ObjectStateManagement_Y>();
         //M
         player = GameObject.Find("Player");
-        s1mm = player.GetComponent<Stage1_Mission_M>();
+        //s1mm = player.GetComponent<Stage1_Mission_M>();
+        m1m = player.GetComponent<Mission1_M>();
+        if (this.gameObject.tag == "Small")
+        {
+            hyd = true;
+        }
     }
 
     // Update is called once per frame
@@ -27,11 +34,11 @@ public class FireHydrant_R : BlowerGimmickBase
             InstanceObject();
             InstanceEffect();
             //M
-            if (s1mm.third)
+            if (m1m.third && hyd)
             {
-                s1mm.hydrant += 1;
-                s1mm.achieve += 1;
-                s1mm.per.text = s1mm.achieve + "/ 3";
+                m1m.hydrant += 1;
+                m1m.achieve += 1;
+                m1m.per.text = m1m.achieve + "/ 3";
             }
         }
     }
