@@ -140,6 +140,7 @@ GameObject:
   - component: {fileID: 3743593121100377898}
   - component: {fileID: 3613660688037932543}
   - component: {fileID: 3465619958055138601}
+  - component: {fileID: -6854739156859251007}
   m_Layer: 0
   m_Name: chef
   m_TagString: Untagged
@@ -241,16 +242,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tier_WalkAttack: 1
-  tier_ChargeKick: 0
+  divideObject: {fileID: 0}
   HP: 500
   kickMag: 1.5
   blastMag: 3
   cutterMag: 2
-  chargeKickMag: 5
   fallAttackMag: 1.5
-  KnockBackPower: 20
   breakScore: 500
-  breakPoint: 1
+  objectID: 0
+  breakEffect: {fileID: 0}
+  deleteTime: 3
+  torque: 0
+  power: 0
+  groundContactSoundName: 
+  shardDamage_nonDiv: 0
+  specialObjectFlg: 0
+  notDamage: 0
+  attackDistance: 0
+  attackInterval: 0
+  weapon: {fileID: 0}
+  attackClip: {fileID: 0}
+  attackDamage: 0
 --- !u!114 &3743593121100377898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,6 +317,40 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &-6854739156859251007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502009927202614386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c47280ff66cad724f94a5455ef1da987, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tier_WalkAttack: 3
+  divideObject: {fileID: 0}
+  HP: 0
+  kickMag: 0
+  blastMag: 0
+  cutterMag: 0
+  fallAttackMag: 0
+  breakScore: 0
+  objectID: 0
+  breakEffect: {fileID: 0}
+  deleteTime: 3
+  torque: 0
+  power: 0
+  groundContactSoundName: 
+  shardDamage_nonDiv: 0
+  specialObjectFlg: 1
+  notDamage: 0
+  attackDistance: 0
+  attackInterval: 0
+  weapon: {fileID: 0}
+  attackClip: {fileID: 0}
+  attackDamage: 0
 --- !u!1 &617742287419781676
 GameObject:
   m_ObjectHideFlags: 0
