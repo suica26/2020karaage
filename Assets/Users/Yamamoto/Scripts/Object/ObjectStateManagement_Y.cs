@@ -97,14 +97,16 @@ public class ObjectStateManagement_Y : MonoBehaviour
         bool trampling = collision.gameObject.tag == "Player" && scrEvo.EvolutionNum >= tier_WalkAttack;
         //破砕車がぶつかったとき
         bool carHit = collision.gameObject.name.Contains("car") && collision.gameObject.GetComponentInParent<Rigidbody>().velocity.magnitude > 5f;
+        //ガスタンクがぶつかったとき
+        bool gasTankHit = collision.gameObject.name.Contains("mainTank") && collision.gameObject.GetComponentInParent<Rigidbody>().velocity.magnitude > 5f;
 
-        //破砕車が建物にぶつかったときキューを入れ替える
-        if (carHit && objectID == 0 && !specialObjectFlg)
+        //破砕車、ガスタンクが建物にぶつかったときキューを入れ替える
+        if ((carHit || gasTankHit) && objectID == 0 && !specialObjectFlg)
         {
             objectID = 10;
         }
         //即死条件と生存フラグがどちらも成り立つとき、即死発動
-        if ((trampling || carHit) && livingFlg && !specialObjectFlg)
+        if ((trampling || carHit || gasTankHit) && livingFlg && !specialObjectFlg)
         {
             SetSkillID(0);
             Death();
@@ -214,8 +216,6 @@ public class ObjectStateManagement_Y : MonoBehaviour
             StartCoroutine(DoShake(0.25f, 0.1f));
         }
         else Death();    //破壊したときの処理
-
-
     }
 
     /// <summary>

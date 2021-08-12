@@ -5,10 +5,17 @@ using UnityEngine.AI;
 
 public class Enemy_Y : ObjectStateManagement_Y
 {
-    public float KnockBackPower;    //ノックバックする量
-    private Animator animator;
-    private NavMeshAgent agent;
-    private Rigidbody rb;
+    [Header("ここから敵の設定")]
+    protected Animator animator;
+    protected NavMeshAgent agent;
+    protected Rigidbody rb;
+    //攻撃を行うプレイヤーとの距離
+    public float attackDistance;
+    protected float routineTimer;
+    public float attackInterval;
+    public GameObject weapon;
+    public AnimationClip attackClip;
+    public int attackDamage;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -16,22 +23,38 @@ public class Enemy_Y : ObjectStateManagement_Y
         base.Start();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
+        agent = GetComponent<NavMeshAgent>();
+        agent.destination = player.transform.position;
     }
 
     //基本挙動を記述
-    protected virtual void Update()
+    protected void Update()
     {
+        routineTimer += Time.deltaTime;
+        if (Vector3.Distance(player.transform.position, transform.position) <= attackDistance && routineTimer > attackInterval)
+        {
+            routineTimer = 0f;
+            Attack();
+        }
     }
 
-    protected void KnockBack()
+    protected void StopMove()
     {
         agent.enabled = false;
         rb.isKinematic = true;
+    }
 
-        animator.SetTrigger("KnockBack");
-
+    protected IEnumerator RestartMove()
+    {
+        yield return new WaitForSeconds(attackClip.length);
         rb.isKinematic = false;
         agent.enabled = true;
+    }
+
+    protected virtual void Attack()
+    {
+        StopMove();
+        animator.SetTrigger("Attack");
     }
 
     protected override void Death()
@@ -40,8 +63,7 @@ public class Enemy_Y : ObjectStateManagement_Y
         if (!ChangeToDeath()) return;
 
         //アニメーション以外の要素を停止
-        agent.enabled = false;
-        rb.isKinematic = true;
+        StopMove();
 
         animator.SetTrigger("Death");
     }
