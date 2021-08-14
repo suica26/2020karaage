@@ -357,6 +357,12 @@ public class CharaMoveRigid_R : MonoBehaviour
     {
         timer = 0.0f;
         stunned = true;
+        //Sound
+        WalkVoiceS.Stop();
+        audioSourceWalk.Stop();
+        IdleVoiceS.Stop();
+        audio.Play("Confusion");
+
         while (timer < 1.0f)
         {
             timer += Time.deltaTime;

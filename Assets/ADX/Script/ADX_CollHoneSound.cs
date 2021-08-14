@@ -5,7 +5,8 @@ using UnityEngine;
 public class ADX_CollHoneSound : MonoBehaviour
 {
     private new CriAtomSource audio;
-
+    private float currentTime = 0f;
+    private float span = 0.1f;
     // Start is called before the first frame update
 
     Ray ray;
@@ -18,19 +19,20 @@ public class ADX_CollHoneSound : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        //レイの生成(レイの原点、レイの飛ぶ方向)
-        ray = new Ray(transform.position, transform.forward);
-        //レイの判定(飛ばすレイ、レイが当たったものの情報、レイの長さ)
-        if (Physics.Raycast(ray, out RaycastHit hit, 7.5f))
+        currentTime += Time.deltaTime;
+        if (currentTime > span)
         {
-            //Debug.Log(hit.transform.gameObject.name);
-            if (hit.transform.gameObject.name == "Player")
+            ray = new Ray(transform.position, transform.forward);
+            RaycastHit hit;
+            if (Physics.BoxCast(transform.position, Vector3.one * 0.5f, transform.forward, out hit, Quaternion.identity, 7.5f))
             {
-                audio.Play("Hone00");
+                if (hit.transform.gameObject.name == "Player")
+                {
+                    audio.Play("Hone00");
+                }
             }
+            currentTime = 0f;
         }
-        //Debug.DrawRay(transform.position, transform.forward * 10.0f, Color.red);
     }
 
 }
