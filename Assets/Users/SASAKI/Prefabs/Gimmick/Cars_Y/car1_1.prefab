@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 5960302639504806917}
   - component: {fileID: 7051880282389492300}
   - component: {fileID: 8451317295301250845}
+  - component: {fileID: 7875435183810994524}
+  - component: {fileID: 5838333099083911020}
   m_Layer: 0
   m_Name: FrontHitBox
   m_TagString: Untagged
@@ -57,6 +59,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc53ef22093b2ae41be0f680a3a5145e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7875435183810994524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2478605570254750621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 494b79b7df7de4ee6bacd90a55a2ce9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5838333099083911020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2478605570254750621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: Hone00
+  _cueSheet: Town
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &3805675486055971564
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,6 +412,7 @@ MonoBehaviour:
   _yScale: 6
   _zScale: 6
   player: {fileID: 0}
+  hyd: 0
 --- !u!114 &-6792726243442730570
 MonoBehaviour:
   m_ObjectHideFlags: 0
