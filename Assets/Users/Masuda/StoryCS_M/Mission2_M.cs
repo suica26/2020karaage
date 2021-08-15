@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Mission2_M : Missions_M
 {
-    public int blastCount, gasStand, gasTank;
+    public int gasStand, gasTank;
     // Start is called before the first frame update
     public override void Start()
     {
@@ -27,12 +27,6 @@ public class Mission2_M : Missions_M
         Vector3 playerPos = player.transform.position;
         Vector3 comPos = company.transform.position;
         float dis = Vector3.Distance(playerPos, comPos);
-        //???チェック
-        blastCount = anythingCount;
-        if (blastCount == 3)
-        {
-            //Debug.Log("イェーイ");   
-        }
 
         if (bigNum >= bigBorder4 && first == true)
         {
@@ -84,7 +78,7 @@ public class Mission2_M : Missions_M
         }
 
         //後で消せ
-        /*else if (first && smallNum == smallBorder3)
+        else if (first && smallNum == smallBorder3)
         {
             missionSlide.Play();
             mission.text = splitText[3];
@@ -95,7 +89,7 @@ public class Mission2_M : Missions_M
             second = true;
             achieve = 0;
             per.text = achieve + "/ 1";
-        }*/
+        }
 
         if (second && gasStand >= 1)
         {
@@ -107,7 +101,7 @@ public class Mission2_M : Missions_M
             second = false;
             third = true;
             achieve = 0;
-            per.text = achieve + "/ 1";
+            per.text = achieve + "/ 3";
         }
 
         if (third && gasTank >= 3)
@@ -120,7 +114,7 @@ public class Mission2_M : Missions_M
             third = false;
             fourth = true;
             achieve = 0;
-            per.text = achieve + "/ 3";
+            per.text = "";
         }
 
         if (fourth)

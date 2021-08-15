@@ -1017,6 +1017,7 @@ GameObject:
   - component: {fileID: 3784584333189120554}
   - component: {fileID: 7248231595986234104}
   - component: {fileID: 3463797715863761744}
+  - component: {fileID: 5018614854099601550}
   - component: {fileID: 4109913316854149079}
   - component: {fileID: 6719764043381876783}
   m_Layer: 14
@@ -1118,6 +1119,22 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 6145000901595743257, guid: 0abf54966bb4c444da4d943b6f78c1c4, type: 3}
+--- !u!114 &5018614854099601550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5349288407437361755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 573e1988ca640194bab8308273278e93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  pos: {x: 0, y: 0, z: 0}
+  prePos: {x: 0, y: 0, z: 0}
+  drop: 0
 --- !u!114 &4109913316854149079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1258,7 +1275,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6427663991607659285}
-  - component: {fileID: 4164022130467062464}
   m_Layer: 0
   m_Name: gasTank
   m_TagString: Untagged
@@ -1283,19 +1299,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4164022130467062464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5942630501912695215}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 573e1988ca640194bab8308273278e93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
 --- !u!1 &6078038276563012175
 GameObject:
   m_ObjectHideFlags: 0

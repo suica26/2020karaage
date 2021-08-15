@@ -46,8 +46,10 @@ public class Missions_M : MonoBehaviour
             if (hitID == 1)
             {
                 bigNum++;
-                anythingCount += 1;
+                //anythingCount += 1;
                 hitID = 0;
+                achieve += 14;
+                per.text = achieve + "%";
             }
             else
             {
@@ -69,8 +71,10 @@ public class Missions_M : MonoBehaviour
             if (hitID == 1)
             {
                 smallNum++;
-                anythingCount += 1;
+                //anythingCount += 1;
                 hitID = 0;
+                achieve += 3;
+                per.text = achieve + "%";
             }
             else
             {
