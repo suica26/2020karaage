@@ -77,20 +77,6 @@ public class Mission2_M : Missions_M
             per.text = achieve + "/ 1";
         }
 
-        //後で消せ
-        else if (first && smallNum == smallBorder3)
-        {
-            missionSlide.Play();
-            mission.text = splitText[3];
-            submis.text = splitText[4];
-            exmis.text = splitText[5];
-            count.text = "2";
-            first = false;
-            second = true;
-            achieve = 0;
-            per.text = achieve + "/ 1";
-        }
-
         if (second && gasStand >= 1)
         {
             missionSlide.Play();

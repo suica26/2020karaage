@@ -43,7 +43,7 @@ public class Missions_M : MonoBehaviour
         else if (first && stage2)
         {
             
-            if (hitID == 1)
+            if (hitID == 3)
             {
                 bigNum++;
                 //anythingCount += 1;
@@ -68,7 +68,7 @@ public class Missions_M : MonoBehaviour
 
         else if (first && stage2)
         {
-            if (hitID == 1)
+            if (hitID == 3)
             {
                 smallNum++;
                 //anythingCount += 1;
