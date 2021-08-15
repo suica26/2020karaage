@@ -5,29 +5,23 @@ using UnityEngine;
 public class Chef_Y : Enemy_Y
 {
     public GameObject hitBoxPrefab;
+    private GameObject hitBox;
 
-    protected override void Attack()
-    {
-        base.Attack();
-
-        var hitBox = CreateDamageBox();
-
-        StartCoroutine(RestartMove());
-        DeleteHitBox(hitBox);
-    }
-
-    private GameObject CreateDamageBox()
+    private void CreateHitBox()
     {
         var genPos = transform.position + transform.forward * 2f;
-        genPos.y = 0.5f;
-        var hitBox = Instantiate(hitBoxPrefab, genPos, Quaternion.identity, transform.Find("Body"));
+        hitBox = Instantiate(hitBoxPrefab, genPos, Quaternion.identity);
         hitBox.GetComponent<Collider>().isTrigger = true;
         hitBox.GetComponent<HitBoxDamage_Y>().damage = attackDamage;
-        return hitBox;
     }
 
-    private void DeleteHitBox(GameObject _hitBox)
+    private void DeleteHitBox()
     {
-        Destroy(_hitBox);
+        Destroy(hitBox);
+    }
+
+    private void OnDestroy()
+    {
+        if (hitBox != null) Destroy(hitBox);
     }
 }
