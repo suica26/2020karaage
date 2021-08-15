@@ -125,13 +125,19 @@ public class Parameters_R : MonoBehaviour
     }
     //引数で指定した分だけEPを加算します。
 
+    //M
+    public float HPper,damage;
     public void HPManager(int addHP)
-    {
+    {   
         if (!freeze)
         {
             TimeManager(-damTime);
             hp -= addHP;
-            circle.fillAmount -= addHP / 10;
+            //M
+            damage = addHP * HPper;
+            Debug.Log(addHP);
+
+            circle.fillAmount -= damage;
             //hpSlider.value -= addHP;
             if (hp <= 0)
             {
