@@ -364,7 +364,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1064378930153504298}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -0, y: -0.015459594, z: 0.04604102}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -389,7 +389,7 @@ Transform:
   - {fileID: 3693765691180146484}
   m_Father: {fileID: 5063549147934143015}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &1231135222481593105
 GameObject:
   m_ObjectHideFlags: 0
@@ -1060,14 +1060,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4107150778148830256}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -0, y: -0.015459594, z: 0.04604102}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7293932558207646054}
   m_Father: {fileID: 5063549147934143015}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &4315294746278658682
 GameObject:
   m_ObjectHideFlags: 0
@@ -1328,6 +1328,7 @@ GameObject:
   - component: {fileID: 6693130104330208957}
   - component: {fileID: 7861683539303365580}
   - component: {fileID: -3497946707093904779}
+  - component: {fileID: -7086612977895087036}
   m_Layer: 0
   m_Name: police
   m_TagString: Untagged
@@ -1475,6 +1476,29 @@ MonoBehaviour:
   attackDamage: 15
   bulletPrefab: {fileID: 8871777121355791282, guid: 265a824829aba0d4aa6e6875340839c8,
     type: 3}
+--- !u!114 &-7086612977895087036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5552524597018552477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: 
+  _cueSheet: 
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &5553565784712921985
 GameObject:
   m_ObjectHideFlags: 0
@@ -1867,13 +1891,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7661683525036446661}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5063549147934143015}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!137 &8383966795254436396
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0

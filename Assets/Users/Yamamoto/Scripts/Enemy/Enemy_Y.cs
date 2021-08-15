@@ -24,7 +24,6 @@ public class Enemy_Y : ObjectStateManagement_Y
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         navAgent = GetComponent<NavMeshAgent>();
-        navAgent.destination = player.transform.position;
         animator.SetBool("isWalk", true);
     }
 
@@ -59,6 +58,7 @@ public class Enemy_Y : ObjectStateManagement_Y
 
     protected void Move()
     {
+        navAgent.destination = player.transform.position;
         navAgent.isStopped = false;
         rb.isKinematic = false;
     }
@@ -83,10 +83,11 @@ public class Enemy_Y : ObjectStateManagement_Y
         animator.SetBool("isWalk", true);
     }
 
-    protected virtual void Attack()
+    protected void Attack()
     {
         StopMove();
         animator.SetTrigger("Attack");
+        StartCoroutine(RestartMove());
     }
 
     protected override void Death()
@@ -97,7 +98,7 @@ public class Enemy_Y : ObjectStateManagement_Y
         //アニメーション以外の要素を停止
         StopMove();
 
-        animator.SetTrigger("Death");
         Destroy(gameObject, 0.5f);
+        animator.SetTrigger("Death");
     }
 }

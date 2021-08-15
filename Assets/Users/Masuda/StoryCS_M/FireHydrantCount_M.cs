@@ -18,18 +18,21 @@ public class FireHydrantCount_M : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (m1m.third && !this)
+        if (m1m != null)
         {
-            m1m.hydrant += 1;
-            m1m.achieve += 1;
-            m1m.per.text = s1mm.achieve + "/ 3";
-        }
+            if (m1m.third && !this)
+            {
+                m1m.hydrant += 1;
+                m1m.achieve += 1;
+                m1m.per.text = s1mm.achieve + "/ 3";
+            }
 
-        if (!this)
-        {
-            m1m.hydrant += 1;
-            m1m.achieve += 1;
-            m1m.per.text = s1mm.achieve + "/ 3";
+            if (!this)
+            {
+                m1m.hydrant += 1;
+                m1m.achieve += 1;
+                m1m.per.text = s1mm.achieve + "/ 3";
+            }
         }
     }
 }
