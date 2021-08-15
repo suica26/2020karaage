@@ -6,6 +6,7 @@ public class HitBoxDamage_Y : MonoBehaviour
 {
     public int damage;
     private Parameters_R param;
+    private bool isHit = false;
 
     void Start()
     {
@@ -14,8 +15,9 @@ public class HitBoxDamage_Y : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && !isHit)
         {
+            isHit = true;
             param.HPManager(damage);
         }
     }

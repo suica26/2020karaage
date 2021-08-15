@@ -8,6 +8,7 @@ public class BulletDamage : MonoBehaviour
 
     public int damage;
     private Parameters_R param;
+    private bool isHit = false;
 
     void Start()
     {
@@ -16,8 +17,9 @@ public class BulletDamage : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && !isHit)
         {
+            isHit = true;
             param.HPManager(damage);
             Destroy(this.gameObject);
         }

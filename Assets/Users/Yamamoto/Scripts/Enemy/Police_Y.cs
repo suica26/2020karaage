@@ -18,7 +18,6 @@ public class Police_Y : Enemy_Y
     private void Fire()
     {
         var genPos = weapon.transform.position;
-        genPos.y = transform.localScale.y;
         GameObject bullet = Instantiate(bulletPrefab, genPos, transform.rotation);
         bullet.transform.Rotate(90f, 0f, 0f);
         bullet.GetComponent<Rigidbody>().velocity = transform.forward * 20f;

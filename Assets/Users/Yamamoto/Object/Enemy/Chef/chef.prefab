@@ -135,9 +135,6 @@ GameObject:
   - component: {fileID: 6868586860015173895}
   - component: {fileID: 5413859196508257616}
   - component: {fileID: 7404570347808825735}
-  - component: {fileID: 1311004955278058275}
-  - component: {fileID: 2462789716210110671}
-  - component: {fileID: 3743593121100377898}
   - component: {fileID: 3613660688037932543}
   - component: {fileID: 3465619958055138601}
   - component: {fileID: -6854739156859251007}
@@ -214,72 +211,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1311004955278058275
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 502009927202614386}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e74c95f74d84214086feb9bdf035c0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eneDis: 30
-  navFlg: 0
-  live: 1
---- !u!114 &2462789716210110671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 502009927202614386}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be6f231d80391bd46aa7c814fe5f3607, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tier_WalkAttack: 1
-  divideObject: {fileID: 0}
-  HP: 500
-  kickMag: 1.5
-  blastMag: 3
-  cutterMag: 2
-  fallAttackMag: 1.5
-  breakScore: 500
-  objectID: 0
-  breakEffect: {fileID: 0}
-  deleteTime: 3
-  torque: 0
-  power: 0
-  groundContactSoundName: 
-  shardDamage_nonDiv: 0
-  specialObjectFlg: 0
-  notDamage: 0
-  attackDistance: 0
-  attackInterval: 0
-  weapon: {fileID: 0}
-  attackClip: {fileID: 0}
-  attackDamage: 0
---- !u!114 &3743593121100377898
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 502009927202614386}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b627a909f18ddf8489f2917e9871f30d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  routineTimer: 0
-  hitFreeze: 5
-  hitBoxPrefab: {fileID: 3531957827537779740, guid: a150f44f619a03c4789834dc1d0d0ef4,
-    type: 3}
-  hitDamage: 10
 --- !u!114 &3613660688037932543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -329,7 +260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c47280ff66cad724f94a5455ef1da987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tier_WalkAttack: 3
+  tier_WalkAttack: 4
   divideObject: {fileID: 0}
   HP: 150
   kickMag: 1
@@ -346,7 +277,7 @@ MonoBehaviour:
   shardDamage_nonDiv: 0
   specialObjectFlg: 1
   notDamage: 0
-  attackDistance: 10
+  attackDistance: 4
   attackInterval: 8
   weapon: {fileID: 7023606130072122206}
   attackClip: {fileID: 1827226128182048838, guid: 9db3317666acb8946bfa7f07ae3ef795,
@@ -354,6 +285,7 @@ MonoBehaviour:
   attackDamage: 10
   hitBoxPrefab: {fileID: 3531957827537779740, guid: a150f44f619a03c4789834dc1d0d0ef4,
     type: 3}
+  hitBox: {fileID: 0}
 --- !u!1 &617742287419781676
 GameObject:
   m_ObjectHideFlags: 0
