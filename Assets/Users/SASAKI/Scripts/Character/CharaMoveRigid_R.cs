@@ -11,6 +11,7 @@ public class CharaMoveRigid_R : MonoBehaviour
 
     [Header("接地判定用")]
     [Tooltip("BoxCast(足元検知用)のX成分指定(1~4段階まで)"), SerializeField] private float[] raycastCubeX;
+    [Tooltip("BoxCast(足元検知用)のY成分指定(1~4段階まで)"), SerializeField] private float[] raycastCubeY;
     [Tooltip("BoxCast(足元検知用)のZ成分指定(1~4段階まで)"), SerializeField] private float[] raycastCubeZ;
 
     [Header("落下攻撃設定")]
@@ -111,7 +112,7 @@ public class CharaMoveRigid_R : MonoBehaviour
         */
 
         //BoxCastで設置判定
-        RaycastHit[] hits = Physics.BoxCastAll(transform.position + transform.up * 0.1f, new Vector3(raycastCubeX[scrEvo.EvolutionNum] * 0.5f, 0.05f, raycastCubeZ[scrEvo.EvolutionNum] * 0.5f), -transform.up,
+        RaycastHit[] hits = Physics.BoxCastAll(transform.position + transform.up * 0.1f, new Vector3(raycastCubeX[scrEvo.EvolutionNum], raycastCubeY[scrEvo.EvolutionNum], raycastCubeZ[scrEvo.EvolutionNum]) * 0.5f, -transform.up,
                            Quaternion.Euler(transform.rotation.eulerAngles), 0.1f);
         isGrounded = false;
 

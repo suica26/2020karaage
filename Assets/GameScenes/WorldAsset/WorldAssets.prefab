@@ -1531,11 +1531,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59eae1805754e2c49b1d12aa6c04009a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wall1: {fileID: 0}
-  wall2: {fileID: 0}
-  wall3: {fileID: 0}
-  wall4: {fileID: 0}
-  wall5: {fileID: 0}
+  walls: []
   player: {fileID: 142731159246388825}
   attention: {fileID: 3051248697276942449}
   safety: 50
@@ -1931,12 +1927,17 @@ MonoBehaviour:
   raycastCubeX:
   - 0.2
   - 1.3
-  - 4.5
+  - 4.8
   - 8
+  raycastCubeY:
+  - 0.05
+  - 0.05
+  - 0.5
+  - 0.5
   raycastCubeZ:
   - 0.2
   - 0.8
-  - 4.8
+  - 5.2
   - 7.8
   circleRange:
   - 20
@@ -2013,7 +2014,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 142731159246388825}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1eb93e20c99a5b94ea26dc9fbfe0e4b3, type: 3}
   m_Name: 
@@ -2021,11 +2022,14 @@ MonoBehaviour:
   chargeClip: {fileID: 8300000, guid: c700a1f33278c244bbd20375f4bb131c, type: 3}
   blastClip: {fileID: 8300000, guid: 3c58f9f3131016d4ead5201f88d691d7, type: 3}
   evoBlastClip: {fileID: 8300000, guid: 7feef3793d690574195ef850f68cced9, type: 3}
-  audioSource: {fileID: 0}
-  scrAnim: {fileID: 0}
+  audioSource: {fileID: 4177734382547650486}
+  scrAnim: {fileID: 3051248696907035337}
   secondBlastTime: 0.5
   thirdBlastTime: 0.5
-  pullTimes: []
+  pullTimes:
+  - 1
+  - 2
+  - 3
   spreadScale:
   - 7
   - 10.5
@@ -2035,10 +2039,18 @@ MonoBehaviour:
   - 1.5
   - 2
   - 3
-  moveSpeedMag: 0
-  _effect: {fileID: 0}
-  center: []
-  effectScale: []
+  moveSpeedMag: 0.25
+  _effect: {fileID: 2488817162387465672, guid: fecc40e176147bc4399bc7d8f152c48d, type: 3}
+  center:
+  - {fileID: 3051248698363037137}
+  - {fileID: 142731160507605258}
+  - {fileID: 142731159370234586}
+  - {fileID: 142731159515367609}
+  effectScale:
+  - 1
+  - 2
+  - 3
+  - 4
   morBlaSphere: {fileID: 5946415761110413900, guid: c23533bcfef72204c8283a93a07fbf9b,
     type: 3}
   spreadTime: 0.5
