@@ -114,7 +114,8 @@ public class ObjectStateManagement_Y : MonoBehaviour
         //画面内のときのみ鳴らす
         if (!livingFlg && collision.gameObject.tag != "Player" && groundContactSoundName != null && CheckRenVisible())
         {
-            criAtomSource.Play(groundContactSoundName);
+            if (groundContactSoundName != "")
+                criAtomSource?.Play(groundContactSoundName);
         }
     }
 
@@ -336,7 +337,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
         //Debug.Log(BusLevel);
         //カッターのときはカッターキューを鳴らす
         if (hitSkilID == 2 && objectID == 0) criAtomSource.Play("CutterBuilExplosion");
-        else if (hitSkilID == 2) criAtomSource.Play("CutterCut00");
+        else if (hitSkilID == 2) criAtomSource?.Play("CutterCut00");
         else criAtomSource?.Play(ExplosionSoundName);
 
         //全て処理しきった場合は次のDeathメソッドを実行

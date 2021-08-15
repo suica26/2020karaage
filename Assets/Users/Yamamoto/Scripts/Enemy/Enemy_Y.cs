@@ -83,10 +83,11 @@ public class Enemy_Y : ObjectStateManagement_Y
         animator.SetBool("isWalk", true);
     }
 
-    protected virtual void Attack()
+    protected void Attack()
     {
         StopMove();
         animator.SetTrigger("Attack");
+        StartCoroutine(RestartMove());
     }
 
     protected override void Death()

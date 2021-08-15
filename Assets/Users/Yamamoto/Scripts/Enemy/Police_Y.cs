@@ -6,15 +6,6 @@ public class Police_Y : Enemy_Y
 {
     public GameObject bulletPrefab;
 
-    protected override void Attack()
-    {
-        base.Attack();
-
-        Fire();
-
-        StartCoroutine(RestartMove());
-    }
-
     private void Fire()
     {
         var genPos = weapon.transform.position;
