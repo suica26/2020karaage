@@ -7,13 +7,18 @@ public class GasTank_R : MonoBehaviour
     [SerializeField] private bool onTheBuilding;
     [SerializeField] private Rigidbody mainTankRigid;
     [SerializeField] private int speed;
+    [SerializeField] private GameObject subprops;
     private GameObject[] props;
 
     private Vector3 moveVec;    // 転がる方向
+    private bool isDelete;
+    private float timer;
 
     // Start is called before the first frame update
     void Start()
     {
+        isDelete = false;
+        timer = 0;
         props = new GameObject[transform.childCount];
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -39,10 +44,22 @@ public class GasTank_R : MonoBehaviour
                 }
             }
         }
+
+        // 暫定処理
+        if(isDelete)
+        {
+            timer += Time.deltaTime;
+            if (timer >= 3.0)
+            {
+                Destroy(this.gameObject);
+                Destroy(this.subprops);
+            }
+        }
     }
 
     private void SetPropsIsTrigger()
     {
+        isDelete = true;
         foreach (var obj in props)
         {
             obj.GetComponent<MeshCollider>().isTrigger = true;
