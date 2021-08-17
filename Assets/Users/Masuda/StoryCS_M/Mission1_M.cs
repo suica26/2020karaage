@@ -5,15 +5,20 @@ using UnityEngine.UI;
 
 public class Mission1_M : Missions_M
 {
-    public GameObject hip,shop;
-    public int manhole, hydrant;
-    public bool hipStamp = false;
+    public GameObject hip,shop,evoPanel;
+    public int manhole, hydrant, evoCount;
+    public bool hipStamp = false, evolution = false;
+    public Parameters_R scrParame;
+    public float timer2;
 
     public override void Start()
     {
         base.Start();
         hip.SetActive(false);
+        evoPanel.SetActive(false);
         misBox.SetActive(false);
+        GameObject findCanvas = GameObject.Find("Canvas");
+        scrParame = findCanvas.GetComponent<Parameters_R>();
     }
 
     void Update()
@@ -21,6 +26,7 @@ public class Mission1_M : Missions_M
         Vector3 playerPos = player.transform.position;
         Vector3 comPos = company.transform.position;
         float dis = Vector3.Distance(playerPos, comPos);
+        evoCount = scrParame.ep;
 
         if (!shop && first)
         {
@@ -177,6 +183,23 @@ public class Mission1_M : Missions_M
             third = true;
             achieve = 0;
             per.text = achieve + "/ 3";
+        }
+
+        if (evoCount >= scrParame.evo1 * 0.5 && !evolution)
+        {
+            timer2 += Time.unscaledDeltaTime;
+        }
+        if (timer2 >= 0.1f)
+        {
+            evoPanel.SetActive(true);
+            Time.timeScale = 0f;
+        }
+        if (timer2 >= 3.0f)
+        {
+            evoPanel.SetActive(false);
+            timer2 = 0;
+            Time.timeScale = 1f;
+            evolution = true;
         }
 
     }
