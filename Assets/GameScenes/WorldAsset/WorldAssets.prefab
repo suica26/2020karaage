@@ -1968,6 +1968,13 @@ MonoBehaviour:
   CutterFAClip: {fileID: 8300000, guid: 4c7003c3dff38d54b98daefc88d60f58, type: 3}
   KickFAClip: {fileID: 8300000, guid: 4c7003c3dff38d54b98daefc88d60f58, type: 3}
   JumpClip: {fileID: 8300000, guid: 230e7611a4dbd10478f3b299643c67b4, type: 3}
+  effectScale:
+  - 1
+  - 1
+  - 1
+  - 1
+  confuseEffect: {fileID: 2310564217784933777, guid: 3152b9a2b6fd6f448bfd1e07257dc4b9,
+    type: 3}
   scrAnim:
   - {fileID: 3051248696907035337}
   - {fileID: 3051248697587799907}
@@ -2002,9 +2009,9 @@ MonoBehaviour:
   - {fileID: 142731159515367609}
   cutterSize:
   - 1
-  - 1.5
-  - 2
-  - 3
+  - 5
+  - 15
+  - 30
   cutterBaseSpeed: 12
   cutterFABaseSpeed: 18
   dropSpeed: 24
@@ -2042,6 +2049,11 @@ MonoBehaviour:
   - 1.5
   - 2
   - 3
+  blastCenter:
+  - {fileID: 3051248697275458848}
+  - {fileID: 142731159793709081}
+  - {fileID: 142731158925483783}
+  - {fileID: 142731159885429955}
   moveSpeedMag: 0.25
   _effect: {fileID: 2488817162387465672, guid: fecc40e176147bc4399bc7d8f152c48d, type: 3}
   center:

@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: -1648660066193379979}
   - component: {fileID: 1851862116055528291}
   - component: {fileID: -1443858533272254348}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: StreetLight_A
   m_TagString: Small
   m_Icon: {fileID: 0}
@@ -154,8 +154,9 @@ MonoBehaviour:
   torque: 100
   power: 30
   groundContactSoundName: PoleContact00
-  shardDamage: 50
   shardDamage_nonDiv: 500
+  specialObjectFlg: 0
+  notDamage: 0
 --- !u!114 &-1648660066193379979
 MonoBehaviour:
   m_ObjectHideFlags: 0

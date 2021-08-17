@@ -17,6 +17,7 @@ public class Transition_R : MonoBehaviour
         BLAST,
         CUTTERFA,
         EVOLUTION,
+        GLIDING,
     }
 
     void Start()
@@ -58,6 +59,10 @@ public class Transition_R : MonoBehaviour
 
             case Anim.EVOLUTION:
                 animator.SetBool("Evolution", setAnim);
+                break;
+
+            case Anim.GLIDING:
+                animator.SetBool("Gliding", setAnim);
                 break;
         }
     }
