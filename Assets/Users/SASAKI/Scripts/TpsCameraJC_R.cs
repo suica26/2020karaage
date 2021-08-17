@@ -108,11 +108,31 @@ public class TpsCameraJC_R : MonoBehaviour
         Vector3 distance = camPos - focus[scrEvo.EvolutionNum].position;
         Ray ray = new Ray(focus[scrEvo.EvolutionNum].position, distance);
         Debug.DrawRay(ray.origin, ray.direction * distance.magnitude, Color.red, 0.1f,false);
-        if(Physics.Raycast(ray, out RaycastHit hit, distance.magnitude) == true)
+        RaycastHit[] hits = Physics.RaycastAll(ray, distance.magnitude);
+
+        // カメラとチキン間に障害物が無かったら処理を終了する
+        if (hits == null)
+            return;
+
+        // 順次処理を行う(Shard は無視する)
+        foreach(var hit in hits)
         {
-            setCamPos = hit.point;
-            transform.position = setCamPos;
+            if(hit.transform.gameObject.layer != 10)
+            {
+                setCamPos = hit.point;
+                transform.position = setCamPos;
+                return;
+            }
         }
+        /*if(Physics.Raycast(ray, out RaycastHit hit, distance.magnitude) == true)
+        {
+            // レイヤーがShardの場合は貫通
+            if(hit.transform.gameObject.layer != 8)
+            {
+                setCamPos = hit.point;
+                transform.position = setCamPos;
+            }
+        }*/
     }
 
     public void Shake()

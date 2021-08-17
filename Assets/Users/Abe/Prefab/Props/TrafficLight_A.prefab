@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8908764245447557722}
   - component: {fileID: 7990548262441760230}
   - component: {fileID: 1275515004539815026}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: TrafficLight_A
   m_TagString: Small
   m_Icon: {fileID: 0}
@@ -140,8 +140,9 @@ MonoBehaviour:
   torque: 100
   power: 30
   groundContactSoundName: 
-  shardDamage: 50
   shardDamage_nonDiv: 500
+  specialObjectFlg: 0
+  notDamage: 0
 --- !u!114 &8908764245447557722
 MonoBehaviour:
   m_ObjectHideFlags: 0

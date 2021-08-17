@@ -79,12 +79,12 @@ public class Cutter_R : MonoBehaviour
                 throwingCutter = true;
                 timer = 0.0f;
                 animTimer = 0.25f;
-                cutter = Instantiate(preCutter, cutterTransform[scrEvo.EvolutionNum].position, Quaternion.Euler(transform.rotation.eulerAngles));
+                cutter = Instantiate(preCutter, cutterTransform[scrEvo.EvolutionNum].position, Quaternion.Euler(Camera.main.transform.rotation.eulerAngles));
                 cutter.transform.localScale = cutter.transform.localScale * cutterSize[scrEvo.EvolutionNum];
                 cutter.GetComponent<CutterMoveFA_R>().enabled = false;
                 CutterMove1_R scrCutter = cutter.GetComponent<CutterMove1_R>();
                 scrCutter.enabled = true;
-                scrCutter.evoSpeed = cutterSize[scrEvo.EvolutionNum];
+                scrCutter.evoSpeed = 1.0f + scrEvo.EvolutionNum * 4.0f;
                 scrCutter.backArea = backAreaTransform[scrEvo.EvolutionNum];
                 scrCutter.cutterBaseSpeed = cutterBaseSpeed;
                 scrAnim.SetAnimator(Transition_R.Anim.CUTTER, true);
@@ -118,7 +118,7 @@ public class Cutter_R : MonoBehaviour
         cutter.GetComponent<CutterMove1_R>().enabled = false;
         CutterMoveFA_R scrCutter = cutter.GetComponent<CutterMoveFA_R>();
         scrCutter.enabled = true;
-        scrCutter.evoSpeed = cutterSize[scrEvo.EvolutionNum];
+        scrCutter.evoSpeed = 1.0f + scrEvo.EvolutionNum * 4.0f;
         scrCutter.backArea = backAreaTransform[scrEvo.EvolutionNum];
         scrCutter.cutterBaseSpeed = cutterFABaseSpeed;
         scrCutter.dropSpeed = dropSpeed;

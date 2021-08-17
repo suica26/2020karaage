@@ -13,6 +13,7 @@ public class MorBlast_R : MonoBehaviour
     [SerializeField] private float[] pullTimes;     // チャージの時間を設定する
     [SerializeField] private float[] spreadScale;
     [SerializeField] private float[] spreadEvoScale;
+    [SerializeField] private Transform[] blastCenter;  // ブラストの中心位置
     [SerializeField] private float moveSpeedMag;    // 減衰率(0 ~ 1で設定)
 
     [SerializeField] private GameObject _effect;
@@ -126,6 +127,7 @@ public class MorBlast_R : MonoBehaviour
         {
             if (morningBlast[i] != null)
             {
+                morningBlast[i].transform.position = blastCenter[scrEvo.EvolutionNum].position;
                 morningBlast[i].transform.localScale += new Vector3(plusScale, plusScale, plusScale) / spreadTime * Time.deltaTime;
             }   
         }

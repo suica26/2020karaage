@@ -24,7 +24,7 @@ public class CutterMove1_R : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        moveVec = player.transform.forward;
+        moveVec = transform.forward;
 
         setRotate = true;
 
