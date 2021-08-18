@@ -29,7 +29,7 @@ public class Parameters_R : MonoBehaviour
     [SerializeField] private GameObject resultPanel = null;
 
     [SerializeField] public int score, time, ep, hp, maxEP1, maxEP2, maxEP3, maxHP1, maxHP2, maxHP3, plusHP1, plusHP2, plusHP3, sp, maxSP, damTime, plusTime;
-    //[SerializeField] public Slider hpSlider, epSlider, kickSlider;
+    [SerializeField] public Slider /*hpSlider,*/ epSlider;
     [SerializeField] public Image circle,niwa;
 
     private bool freeze = false;
@@ -44,11 +44,9 @@ public class Parameters_R : MonoBehaviour
         epText.text = "EP: " + ep;
         hpText.text = "HP: " + hp;
         /*hpSlider.value = 100;
-        hpSlider.maxValue = 100;
+        hpSlider.maxValue = 100;*/
         epSlider.value = 0;
-        epSlider.maxValue = 30;
-        kickSlider.value = 0;
-        kickSlider.maxValue = maxSP;*/
+        epSlider.maxValue = evo1;
         count = time;
         niwaPer = evo1;
     }
@@ -59,15 +57,7 @@ public class Parameters_R : MonoBehaviour
         {
             score += addScore;
             scoreText.text = "Price:$ " + score;
-            //kickSlider.value += 1;
-  
-            /*if (Input.GetMouseButton(0))
-            {
-                if (kickSlider.value == sp)
-                {
-                    kickSlider.value = 0;
-                }
-            }*/
+        
         }
     }
     //引数で指定した分だけスコアを加算します。
@@ -95,19 +85,23 @@ public class Parameters_R : MonoBehaviour
         {
             ep += addEP;
             plusTime += 1;
-            niwa.fillAmount += addEP / niwaPer;
-            //epSlider.value += addEP;
-            epText.text = "EP: " + ep;
+            //niwa.fillAmount += addEP / niwaPer;
+            epSlider.value += addEP;
+            //epText.text = "EP: " + ep;
             if (ep == evo1)
             {
-                niwa.fillAmount = 0;
-                niwaPer = evo2;
+                //niwa.fillAmount = 0;
+                //niwaPer = evo2;
+                epSlider.value = 0;
+                epSlider.maxValue = evo2 - evo1;
                 TimeManager(10);
             }
             else if (ep == evo2)
             {
-                niwa.fillAmount = 0;
-                niwaPer = evo3;
+                //niwa.fillAmount = 0;
+                //niwaPer = evo3;
+                epSlider.value = 0;
+                epSlider.maxValue = evo3 - evo2;
                 TimeManager(10);
             }
             else if (ep == evo3)

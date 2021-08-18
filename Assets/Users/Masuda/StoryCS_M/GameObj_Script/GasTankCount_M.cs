@@ -26,14 +26,14 @@ public class GasTankCount_M : MonoBehaviour
     {
         pos = this.gameObject.gameObject.transform.position;
         tankHP = osmY.HP;
-        if (tankHP == 0 && m2m.third)
+        /*if (tankHP == 0 && m2m.third)
         {
             m2m.gasTank += 1;
             m2m.achieve += 1;
             achieve.text = m2m.achieve + " / 3";
-        }
+        }*/
 
-        else if (pos.y <= prePos.y-5 && m2m.third)
+        if (pos.y <= prePos.y-5 && m2m.third)
         {
             prePos.y = -1000;
             m2m.gasTank += 1;
