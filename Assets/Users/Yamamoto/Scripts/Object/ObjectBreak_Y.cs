@@ -187,6 +187,8 @@ public class ObjectBreak_Y : MonoBehaviour
     //おはようブラスト
     private void MorBlaBreak(GameObject obj)     //MPはおはようブラストのposition
     {
+        RigidOn(obj);
+
         var dir = (obj.transform.position - objScr.player.transform.position);
         dir.y = 0f;
         dir = dir.normalized;
