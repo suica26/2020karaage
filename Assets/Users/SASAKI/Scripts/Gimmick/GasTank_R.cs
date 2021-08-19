@@ -8,6 +8,7 @@ public class GasTank_R : MonoBehaviour
     [SerializeField] private Rigidbody mainTankRigid;
     [SerializeField] private int speed;
     [SerializeField] private GameObject subprops;
+    [SerializeField] private ObjectStateManagement_Y underObject;
     private GameObject[] props;
 
     private Vector3 moveVec;    // 転がる方向
@@ -44,12 +45,22 @@ public class GasTank_R : MonoBehaviour
                 }
             }
         }
+        else
+        {
+            if(underObject.HP == 0 && !isDelete)
+            {
+                SetPropsIsTrigger();
+                mainTankRigid.isKinematic = false;
+                moveVec = new Vector3(20.0f, 0.0f, 0.0f);
+                mainTankRigid.AddForce(moveVec, ForceMode.Impulse);
+            }
+        }
 
         // 暫定処理
         if(isDelete)
         {
             timer += Time.deltaTime;
-            if (timer >= 3.0)
+            if (timer >= 2.0)
             {
                 Destroy(this.gameObject);
                 Destroy(this.subprops);
@@ -57,6 +68,7 @@ public class GasTank_R : MonoBehaviour
         }
     }
 
+    // 他の足場も削除する
     private void SetPropsIsTrigger()
     {
         isDelete = true;
