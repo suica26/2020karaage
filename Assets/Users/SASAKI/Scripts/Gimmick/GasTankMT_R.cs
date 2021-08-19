@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GasTankMT_R : MonoBehaviour
 {
+    [SerializeField] private bool onTheBuilding;
+    [SerializeField] private GameObject enemyBill;
     private List<GameObject> buildings;
 
     public int CollisionCount { get { return buildings.Count; } }
@@ -18,22 +20,25 @@ public class GasTankMT_R : MonoBehaviour
 
     void Update()
     {
-        if (transform.parent.GetComponent<ObjectStateManagement_Y>().HP == 0)
-            Destroy(transform.parent.gameObject);
-
-        if(CollisionCount >= 5)
+        if(!onTheBuilding)
         {
-            transform.parent.GetComponent<ObjectStateManagement_Y>().HP = 0;
-        }
+            if (transform.parent.GetComponent<ObjectStateManagement_Y>().HP == 0)
+                Destroy(transform.parent.gameObject);
 
-        if(!transform.parent.GetComponent<Rigidbody>().isKinematic)
-        {
-            timer += Time.deltaTime;
-            if (timer >= 2.0 && transform.parent.GetComponent<Rigidbody>().velocity.magnitude < 2.0)
+            if (CollisionCount >= 5)
             {
                 transform.parent.GetComponent<ObjectStateManagement_Y>().HP = 0;
             }
-        }    
+
+            if (!transform.parent.GetComponent<Rigidbody>().isKinematic)
+            {
+                timer += Time.deltaTime;
+                if (timer >= 2.0 && transform.parent.GetComponent<Rigidbody>().velocity.magnitude < 2.0)
+                {
+                    transform.parent.GetComponent<ObjectStateManagement_Y>().HP = 0;
+                }
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -49,6 +54,12 @@ public class GasTankMT_R : MonoBehaviour
             }
         }
         buildings.Add(other.gameObject);
-        Debug.Log(buildings.Count);
+
+
+        if(onTheBuilding && other.gameObject == enemyBill)
+        {
+            Debug.Log("HIHIHIHIHIHI");
+            Destroy(transform.parent.gameObject);
+        }
     }
 }
