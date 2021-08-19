@@ -25,7 +25,7 @@ public class ObjectBreak_Y : MonoBehaviour
     {
         objScr = objectScript;
         player = objectScript.player;
-        Collapsions = new VoidFunc[6] { TramplingCollapse, KickCollapse, CutterCollapse, KickCollapse, KickCollapse, KickCollapse };
+        Collapsions = new VoidFunc[6] { TramplingCollapse, KickCollapse, CutterCollapse, MorBlaBreak, KickCollapse, KickCollapse };
         criAtomSource = GetComponent<CriAtomSource>();
         //破壊済み状態にタグとレイヤーを変更
         tag = "Broken";
@@ -185,10 +185,12 @@ public class ObjectBreak_Y : MonoBehaviour
     }
 
     //おはようブラスト
-    private void MorBlaBreak(GameObject obj, Vector3 MP)     //MPはおはようブラストのposition
+    private void MorBlaBreak(GameObject obj)     //MPはおはようブラストのposition
     {
-        var pos = obj.transform.position;
-        var F = pos - MP;
+        var dir = (obj.transform.position - objScr.player.transform.position);
+        dir.y = 0f;
+        dir = dir.normalized;
+        var F = dir * objScr.power;
         Vector3 TorquePower = new Vector3(Random.Range(-objScr.torque, objScr.torque), Random.Range(-objScr.torque, objScr.torque), Random.Range(-objScr.torque, objScr.torque));
         var rb = obj.GetComponent<Rigidbody>();
         rb.AddForce(F, ForceMode.Impulse);
