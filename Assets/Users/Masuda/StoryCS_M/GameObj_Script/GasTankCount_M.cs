@@ -41,5 +41,13 @@ public class GasTankCount_M : MonoBehaviour
             achieve.text = m2m.achieve + " / 3";
         }
 
+        //救済
+        if (!this.gameObject)
+        {
+            m2m.gasTank += 1;
+            m2m.achieve += 1;
+            achieve.text = m2m.achieve + " / 3";
+        }
+
     }
 }

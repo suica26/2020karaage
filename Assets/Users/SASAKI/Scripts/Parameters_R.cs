@@ -163,7 +163,7 @@ public class Parameters_R : MonoBehaviour
             TimeManager(-1);
         }
 
-        if (epSlider.value == evo1)
+        /*if (epSlider.value == evo1)
         {
             epSlider.value = 0;
             epSlider.maxValue = evo2;
@@ -180,7 +180,7 @@ public class Parameters_R : MonoBehaviour
         else if (epSlider.value == evo3)
         {
             hp4.SetActive(true);
-        }
+        }*/
 
         if (hp >= maxHP)
         {
