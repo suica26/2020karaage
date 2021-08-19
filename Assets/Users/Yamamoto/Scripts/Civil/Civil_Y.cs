@@ -173,7 +173,6 @@ public class Civil_Y : MonoBehaviour
 
     public void Escape()
     {
-        Debug.Log("Escape!");
         animator.SetBool(escapeStr, true);
         if (!escapeFlg) escapeFlg = true;
         if (!avoidFlg)
