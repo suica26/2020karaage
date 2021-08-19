@@ -235,6 +235,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
         switch (objectID)
         {
             case 0: attackSoundName = "BuildingContact00"; break;
+            case 1: attackSoundName = "PoleContact00"; break;
             case 2: attackSoundName = "TrachcanContact00"; break;
             case 3: attackSoundName = "Contact_Manhole00"; break;
             case 4: attackSoundName = "BuildingContact00"; break;
