@@ -36,7 +36,7 @@ public class Car_R : MonoBehaviour
             // 交差点情報更新
             nowWaypoint = nextWaypoint;
 
-            // 次の交差点と　その次の交差点を取得
+            // 次の交差点と、その次の交差点を取得
             nextWaypoint = nowWaypoint.GetComponent<CarWaypoint_R>().SetNextWaypoint(nowWaypoint);
             afterNextWaypoint = nextWaypoint.GetComponent<CarWaypoint_R>().SetNextWaypoint(nowWaypoint);
 
@@ -126,16 +126,13 @@ public class Car_R : MonoBehaviour
             }
             else
             {
-                //次の次の交差点が終端である場合
-                if (afterNextWaypoint.GetComponent<CarWaypoint_R>().endWaypoint)
-                {
-                    targetPos = afterNextWaypoint.GetComponent<CarWaypoint_R>().SetNextTargetPos(nextWaypoint.transform.position, nowWaypoint.transform.position, targetPos);
-                }
-                else
+                //次の次の交差点が終端でない場合は次のwaypointを取得する
+                if (!afterNextWaypoint.GetComponent<CarWaypoint_R>().endWaypoint)
                 {
                     afterNextWaypoint = nextWaypoint.GetComponent<CarWaypoint_R>().SetNextWaypoint(nowWaypoint);
-                    targetPos = afterNextWaypoint.GetComponent<CarWaypoint_R>().SetNextTargetPos(nextWaypoint.transform.position, nowWaypoint.transform.position, targetPos);
                 }
+                    
+                targetPos = afterNextWaypoint.GetComponent<CarWaypoint_R>().SetNextTargetPos(nextWaypoint.transform.position, nowWaypoint.transform.position, targetPos);
             }
         }
     }

@@ -27,14 +27,15 @@ public class Parameters_R : MonoBehaviour
 {
     [SerializeField] private Text scoreText, finalScoreText, timeText, epText, hpText;
     [SerializeField] private GameObject resultPanel = null;
-
-    [SerializeField] public int score, time, ep, hp, maxEP1, maxEP2, maxEP3, maxHP1, maxHP2, maxHP3, plusHP1, plusHP2, plusHP3, sp, maxSP, damTime, plusTime;
-    //[SerializeField] public Slider hpSlider, epSlider, kickSlider;
+    [SerializeField] private GameObject hp1, hp2, hp3, hp4;
+    [SerializeField] public int score, time, ep, hp, damTime, plusTime, maxHP;
+    [SerializeField] public Slider epSlider, hpSlider, hpSlider2, hpSlider3, hpSlider4, mainSlider;
     [SerializeField] public Image circle,niwa;
 
     private bool freeze = false;
     private float count,niwaPer;
     [SerializeField] public int evo1, evo2, evo3;
+    public bool finalChicken;
 
     public void Start()
     {
@@ -43,14 +44,18 @@ public class Parameters_R : MonoBehaviour
         timeText.text = "Time: " + time;
         epText.text = "EP: " + ep;
         hpText.text = "HP: " + hp;
-        /*hpSlider.value = 100;
+        hpSlider.value = 100;
         hpSlider.maxValue = 100;
         epSlider.value = 0;
-        epSlider.maxValue = 30;
-        kickSlider.value = 0;
-        kickSlider.maxValue = maxSP;*/
+        epSlider.maxValue = evo1;
         count = time;
         niwaPer = evo1;
+        hp1.SetActive(true);
+        hp2.SetActive(false);
+        hp3.SetActive(false);
+        hp4.SetActive(false);
+        mainSlider = hpSlider;
+        maxHP = 100;
     }
 
     public void ScoreManager(int addScore)      //山本加筆：publicにすることで他Scriptで参照できるようにしました
@@ -59,15 +64,7 @@ public class Parameters_R : MonoBehaviour
         {
             score += addScore;
             scoreText.text = "Price:$ " + score;
-            //kickSlider.value += 1;
-  
-            /*if (Input.GetMouseButton(0))
-            {
-                if (kickSlider.value == sp)
-                {
-                    kickSlider.value = 0;
-                }
-            }*/
+        
         }
     }
     //引数で指定した分だけスコアを加算します。
@@ -95,24 +92,37 @@ public class Parameters_R : MonoBehaviour
         {
             ep += addEP;
             plusTime += 1;
-            niwa.fillAmount += addEP / niwaPer;
-            //epSlider.value += addEP;
-            epText.text = "EP: " + ep;
+            epSlider.value += addEP;
+            hp += 1;
+            mainSlider.value += 1;
+            //epText.text = "EP: " + ep;
             if (ep == evo1)
             {
-                niwa.fillAmount = 0;
-                niwaPer = evo2;
+                epSlider.value = 0;
+                epSlider.maxValue = evo2 - evo1;
+                hp1.SetActive(false);
+                hp2.SetActive(true);
+                hpSlider2.value = hp;
+                mainSlider = hpSlider2;
                 TimeManager(10);
+                maxHP = 150;
             }
             else if (ep == evo2)
             {
-                niwa.fillAmount = 0;
-                niwaPer = evo3;
+                epSlider.value = 0;
+                epSlider.maxValue = evo3 - evo2;
+                hp2.SetActive(false);
+                hp3.SetActive(true);
+                hpSlider3.value = hp;
+                mainSlider = hpSlider3;
                 TimeManager(10);
+                maxHP = 500;
             }
             else if (ep == evo3)
             {
+                hp4.SetActive(true);
                 TimeManager(10);
+                maxHP = 1000;
             }
 
             if (plusTime == 10)
@@ -126,13 +136,13 @@ public class Parameters_R : MonoBehaviour
     //引数で指定した分だけEPを加算します。
 
     public void HPManager(int addHP)
-    {
+    {   
         if (!freeze)
         {
             TimeManager(-damTime);
             hp -= addHP;
-            circle.fillAmount -= addHP / 10;
-            //hpSlider.value -= addHP;
+            mainSlider.value -= addHP;
+
             if (hp <= 0)
             {
                 freeze = true;
@@ -153,32 +163,29 @@ public class Parameters_R : MonoBehaviour
             TimeManager(-1);
         }
 
-        /*if (epSlider.value == maxEP1)
+        /*if (epSlider.value == evo1)
         {
             epSlider.value = 0;
-            epSlider.maxValue = maxEP2;
-            maxEP1 = 10000;
-            /*hpSlider.maxValue = maxHP1;
-            hpSlider.value += plusHP1;
-            hp += plusHP1; 
-        }*/
-        /*else if (epSlider.value == maxEP2)
-        {
-            epSlider.value = 0;
-            epSlider.maxValue = maxEP3;
-            maxEP2 = 10000;
-            /*hpSlider.maxValue = maxHP2;
-            hpSlider.value += plusHP2;
-            hp += plusHP2;
-            
-        }*/
-        /*else if (epSlider.value == maxEP3)
-        {
-            hpSlider.maxValue = maxHP3;
-            hpSlider.value += plusHP3;
-            hp += plusHP3;
+            epSlider.maxValue = evo2;
+            evo1 = 100000;
         }
-        */
+
+        else if (epSlider.value == evo2)
+        {
+            epSlider.value = 0;
+            epSlider.maxValue = evo3;
+            evo2 = 100000;
+        }
+
+        else if (epSlider.value == evo3)
+        {
+            hp4.SetActive(true);
+        }*/
+
+        if (hp >= maxHP)
+        {
+            hp = maxHP;
+        }
     }
     //タイマーです。一秒ごとにTimeManager()で一秒減らしてます。
 }

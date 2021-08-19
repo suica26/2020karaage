@@ -1329,6 +1329,7 @@ GameObject:
   - component: {fileID: 7861683539303365580}
   - component: {fileID: -3497946707093904779}
   - component: {fileID: -7086612977895087036}
+  - component: {fileID: 8415660686470368927}
   m_Layer: 0
   m_Name: police
   m_TagString: Untagged
@@ -1459,7 +1460,7 @@ MonoBehaviour:
   cutterMag: 1
   fallAttackMag: 1
   breakScore: 50
-  objectID: 10
+  objectID: 11
   breakEffect: {fileID: 0}
   deleteTime: 3
   torque: 0
@@ -1499,6 +1500,19 @@ MonoBehaviour:
   _pitch: 0
   _androidUseLowLatencyVoicePool: 0
   need_to_player_update_all: 1
+--- !u!114 &8415660686470368927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5552524597018552477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72767151191ab4f65b6c773227e46232, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audio: {fileID: -7086612977895087036}
 --- !u!1 &5553565784712921985
 GameObject:
   m_ObjectHideFlags: 0

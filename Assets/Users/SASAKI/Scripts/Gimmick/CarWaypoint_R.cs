@@ -39,7 +39,9 @@ public class CarWaypoint_R : MonoBehaviour
     {
         Vector3 vec = transform.position - _nextWaypointPosition;
         Vector3 targetPos = transform.position;
-        targetPos.y = _beforeTargetPos.y;           //暫定的処理(高さを固定することで平面的な移動では対応できる。坂道は対応できないので 後で修正)
+
+        Vector3 vecXZ = new Vector3(vec.x, 0, vec.z).normalized;
+        Vector3 checkStraightXZ = (new Vector3(transform.position.x, 0, transform.position.z) - new Vector3(_nowWaypointPosition.x, 0, _nowWaypointPosition.z)).normalized;
 
         // X成分の方が大きい(X方向に移動する)とき
         if (Mathf.Abs(vec.x) > Mathf.Abs(vec.z))
@@ -50,7 +52,7 @@ public class CarWaypoint_R : MonoBehaviour
                 targetPos.z += 3;
 
             // 直線移動の時
-            if (vec.normalized == (transform.position - _nowWaypointPosition).normalized)
+            if (vecXZ == checkStraightXZ)
                 targetPos.x = _nextWaypointPosition.x;
             else
                 targetPos.x = _beforeTargetPos.x;
@@ -63,11 +65,13 @@ public class CarWaypoint_R : MonoBehaviour
                 targetPos.x -= 3;
 
             // 直線移動の時
-            if (vec.normalized == (transform.position - _nowWaypointPosition).normalized)
+            if (vecXZ == checkStraightXZ)
                 targetPos.z = _nextWaypointPosition.z;
             else
                 targetPos.z = _beforeTargetPos.z;
         }
+
+        targetPos.y = _nextWaypointPosition.y;
         return targetPos;
     }
 

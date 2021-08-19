@@ -235,6 +235,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
         switch (objectID)
         {
             case 0: attackSoundName = "BuildingContact00"; break;
+            case 1: attackSoundName = "PoleContact00"; break;
             case 2: attackSoundName = "TrachcanContact00"; break;
             case 3: attackSoundName = "Contact_Manhole00"; break;
             case 4: attackSoundName = "BuildingContact00"; break;
@@ -243,6 +244,9 @@ public class ObjectStateManagement_Y : MonoBehaviour
             case 7: attackSoundName = "KickTree00"; break;
             case 8: attackSoundName = "FireHydrant00"; break;
             case 9: attackSoundName = "TrafficExplosion00"; break;
+            case 10: attackSoundName = "BuildingContact00"; break;
+            case 11: attackSoundName = "ChefContact"; break;
+            case 12: attackSoundName = "PoliceContact"; break;
             default: attackSoundName = "TrachcanContact00"; break;
         }
         if (criAtomSource != null) criAtomSource.cueName = attackSoundName;
@@ -272,6 +276,9 @@ public class ObjectStateManagement_Y : MonoBehaviour
             case 7: contactSoundName = "KickTree00"; break;
             case 8: contactSoundName = "Contact_FireHydrant00"; break;
             case 9: contactSoundName = "PoleContact00"; break;
+            case 10: contactSoundName = "BuildingContact00"; break;
+            case 11: contactSoundName = "ChefContact"; break;
+            case 12: contactSoundName = "PoliceContact"; break;
             default: contactSoundName = "TrachcanContact00"; break;
         }
         if (criAtomSource != null) criAtomSource.cueName = contactSoundName;
@@ -291,7 +298,9 @@ public class ObjectStateManagement_Y : MonoBehaviour
             case 7: ExplosionSoundName = "FallenTree00"; break;
             case 8: ExplosionSoundName = "FireHydrant00"; break;
             case 9: ExplosionSoundName = "PoleContract00"; break;
-            case 10: ExplosionSoundName = "BuildingFarExplosion00"; break;
+            case 10: ExplosionSoundName = "GasStation00"; break;
+            case 11: ExplosionSoundName = "ChefDie"; break;
+            case 12: ExplosionSoundName = "PoliceDie"; break;
             default: ExplosionSoundName = "PoleExplosion00"; break;
         }
         if (criAtomSource != null) criAtomSource.cueName = ExplosionSoundName;

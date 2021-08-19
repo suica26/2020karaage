@@ -17,7 +17,8 @@ public class Missions_M : MonoBehaviour
     public string[] splitText;
     [SerializeField] public Animation missionSlide;
     [SerializeField] public float timer, tipsTimer;
-
+    public Animator animator;
+    public string misStr = "isMission";
     [SerializeField] public ObjectStateManagement_Y eneBillScr;
     public bool stage2;
 
@@ -29,6 +30,7 @@ public class Missions_M : MonoBehaviour
         //misBox.SetActive(false);
         buildTips.SetActive(false);
         tipsChicken.SetActive(false);
+        animator = misBox.GetComponent<Animator>();
     }
 
     public virtual void BigNumberPlus()
@@ -43,11 +45,13 @@ public class Missions_M : MonoBehaviour
         else if (first && stage2)
         {
             
-            if (hitID == 1)
+            if (hitID == 3)
             {
                 bigNum++;
-                anythingCount += 1;
+                //anythingCount += 1;
                 hitID = 0;
+                achieve += 14;
+                per.text = achieve + "%";
             }
             else
             {
@@ -66,11 +70,13 @@ public class Missions_M : MonoBehaviour
 
         else if (first && stage2)
         {
-            if (hitID == 1)
+            if (hitID == 3)
             {
                 smallNum++;
-                anythingCount += 1;
+                //anythingCount += 1;
                 hitID = 0;
+                achieve += 3;
+                per.text = achieve + "%";
             }
             else
             {

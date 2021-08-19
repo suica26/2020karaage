@@ -25,6 +25,10 @@ public class CharaMoveRigid_R : MonoBehaviour
     [SerializeField] private AudioClip KickFAClip;
     [SerializeField] private AudioClip JumpClip;
 
+    [Header("混乱用")]
+    [SerializeField] private float[] effectScale;
+    [SerializeField] GameObject confuseEffect;
+
     [Header("アニメーション処理用")]
     [SerializeField] private Transition_R[] scrAnim;
 
@@ -45,9 +49,9 @@ public class CharaMoveRigid_R : MonoBehaviour
     private int fallAttackVer = 0;
 
     private float kickFallAttackTimer = 0f;
-    private float kickFallAttackTime = 0.5f;
+    private float kickFallAttackTime = 0.3f;
     private float cutterFallAttackTimer = 0f;
-    private float cutterFallAttackTime = 0.5f;
+    private float cutterFallAttackTime = 0.3f;
 
     //落下攻撃威力変動用
     private float startHeight;
@@ -138,8 +142,10 @@ public class CharaMoveRigid_R : MonoBehaviour
                 return;
             }
 
+            // 滑空の接地時の処理
             if (isFlying)
             {
+                scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.GLIDING, false);
                 rb.useGravity = true;
                 isFlying = false;
             }
@@ -207,6 +213,10 @@ public class CharaMoveRigid_R : MonoBehaviour
         //空中の処理を記述
         else
         {
+            if (isFlying == false)
+            {
+                scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.GLIDING, false);
+            }
 
             scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.JUMP, true);
             scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.WALK, false);
@@ -243,7 +253,10 @@ public class CharaMoveRigid_R : MonoBehaviour
             else
             {
                 if (isFlying)
+                {
+                    scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.GLIDING, true);
                     rb.useGravity = true;
+                }
             }
 
             //落下攻撃の処理(キック)
@@ -315,6 +328,7 @@ public class CharaMoveRigid_R : MonoBehaviour
     {
         if (isFlying)
         {
+            scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.GLIDING, false);
             isFlying = false;
             rb.useGravity = true;
         }
@@ -363,6 +377,18 @@ public class CharaMoveRigid_R : MonoBehaviour
         audioSourceWalk.Stop();
         IdleVoiceS.Stop();
         audio.Play("Confusion");
+
+        GameObject effect = Instantiate(confuseEffect, transform);
+        if (effect.GetComponent<ParticleSystem>() != null)
+            effect.GetComponent<ParticleSystem>().Play();
+
+        //子オブジェクトのパーティクルを再生
+        foreach (var childObj in effect.GetComponentsInChildren<ParticleSystem>())
+        {
+            childObj.Play();
+        }
+        Destroy(effect, 1.0f);
+        effect.transform.localScale *= effectScale[scrEvo.EvolutionNum];
 
         while (timer < 1.0f)
         {

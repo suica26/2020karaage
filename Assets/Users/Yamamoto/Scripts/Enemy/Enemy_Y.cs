@@ -16,6 +16,7 @@ public class Enemy_Y : ObjectStateManagement_Y
     public GameObject weapon;
     public AnimationClip attackClip;
     public int attackDamage;
+    public float searchArea = 50f;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -32,21 +33,29 @@ public class Enemy_Y : ObjectStateManagement_Y
     {
         routineTimer += Time.deltaTime;
 
-        if (Vector3.Distance(player.transform.position, transform.position) <= attackDistance)
+        if (Vector3.Distance(player.transform.position, transform.position) <= searchArea)
         {
-            if (routineTimer > attackInterval)
+
+            if (Vector3.Distance(player.transform.position, transform.position) <= attackDistance)
             {
-                routineTimer = 0f;
-                Attack();
+                if (routineTimer > attackInterval)
+                {
+                    routineTimer = 0f;
+                    Attack();
+                }
+                else
+                {
+                    Wait();
+                }
             }
             else
             {
-                Wait();
+                Walk();
             }
         }
         else
         {
-            Walk();
+            Wait();
         }
     }
 

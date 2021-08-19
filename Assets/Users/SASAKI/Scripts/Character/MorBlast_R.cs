@@ -13,6 +13,7 @@ public class MorBlast_R : MonoBehaviour
     [SerializeField] private float[] pullTimes;     // チャージの時間を設定する
     [SerializeField] private float[] spreadScale;
     [SerializeField] private float[] spreadEvoScale;
+    [SerializeField] private Transform[] blastCenter;  // ブラストの中心位置
     [SerializeField] private float moveSpeedMag;    // 減衰率(0 ~ 1で設定)
 
     [SerializeField] private GameObject _effect;
@@ -37,6 +38,8 @@ public class MorBlast_R : MonoBehaviour
     private chickenKick_R scrKick;
     private Cutter_R scrCutter;
 
+    private new CriAtomSource audio;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +47,7 @@ public class MorBlast_R : MonoBehaviour
         scrMove = GetComponent<CharaMoveRigid_R>();
         scrKick = GetComponent<chickenKick_R>();
         scrCutter = GetComponent<Cutter_R>();
+        audio = GetComponent<CriAtomSource>();
         Debug.LogError("scrKick: " + scrKick);
         Debug.LogError("scrCutter: " + scrCutter);
         isBlast = false;
@@ -78,12 +82,10 @@ public class MorBlast_R : MonoBehaviour
                 PlayEffect();
             }
 
-            if(charge < 3)
-            {
-                //チャージ音を鳴らす
-                if (!(audioSource.isPlaying == chargeClip))
-                    audioSource.PlayOneShot(chargeClip);
-            }
+
+            //チャージ音を鳴らす
+            audio.Play("BlastSub01");
+           
 
             //チャージ段階の判定
             pullTime += Time.deltaTime;
@@ -119,6 +121,9 @@ public class MorBlast_R : MonoBehaviour
                 isBlast = true;
                 StartCoroutine("ReleaseBlast");
             }
+
+            audio.Stop();
+            audio.Play("BlastSub02");
         }
 
         
@@ -126,6 +131,7 @@ public class MorBlast_R : MonoBehaviour
         {
             if (morningBlast[i] != null)
             {
+                morningBlast[i].transform.position = blastCenter[scrEvo.EvolutionNum].position;
                 morningBlast[i].transform.localScale += new Vector3(plusScale, plusScale, plusScale) / spreadTime * Time.deltaTime;
             }   
         }
