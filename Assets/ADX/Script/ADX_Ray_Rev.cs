@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ADX_Ray_Rev : MonoBehaviour
 {
@@ -26,9 +27,11 @@ public class ADX_Ray_Rev : MonoBehaviour
     private string GroundMaterial;
 
     private new Rigidbody rigidbody;
-    CriAtomExPlayback playback1;
+    CriAtomExPlayback playback1, playback2;
     CharaMoveRigid_R scrMove;
     EvolutionChicken_R scrEvo;
+
+    private string Stagename;
 
 
     //プロパティー
@@ -56,6 +59,19 @@ public class ADX_Ray_Rev : MonoBehaviour
         rigidbody = this.GetComponent<Rigidbody>();
         scrMove = GetComponent<CharaMoveRigid_R>();
         scrEvo = GetComponent<EvolutionChicken_R>();
+
+        if (SceneManager.GetActiveScene().name == "stage1")
+        {
+            Stagename = "St1";
+        }
+        else if (SceneManager.GetActiveScene().name == "Stage2")
+        {
+            Stagename = "St2";
+        }
+        else
+        {
+            Stagename = "Other";
+        }
     }
 
     // Update is called once per frame
@@ -95,12 +111,27 @@ public class ADX_Ray_Rev : MonoBehaviour
 
         }
         //高さ座標からAISAC値を決定
-        Vector3 Pos = this.transform.position;
-        Ypos = Pos.y / 24.0f;
-        TownNoizeCon.SetAisacControl("Obj_angle", Ypos);
+        //ステージに応じて変更（いつか汎用的なのに変えましょう戒め）
+        if(Stagename == "St1")
+        {
+            Vector3 Pos = this.transform.position;
+            Ypos = Pos.y / 24.0f;
+            TownNoizeCon.SetAisacControl("Obj_angle", Ypos);
+        }
+        if (Stagename == "St2")
+        {
+            Vector3 Pos = this.transform.position;
+            Ypos = (Pos.y -90) / 28.0f;
+            TownNoizeCon.SetAisacControl("Obj_angle", Ypos);
+        }
+        if (Stagename == "Other")
+        {
+            TownNoizeCon.SetAisacControl("Obj_angle", 0f);
+        }
 
 
-        this.RevSendLevel.text = "RevSendLevel_L:" + RevSendLev_L + "RevSendLevel_R:" + RevSendLev_R + "\n" + "落下速度:" + velocity;
+
+            this.RevSendLevel.text = "RevSendLevel_L:" + RevSendLev_L + "RevSendLevel_R:" + RevSendLev_R + "\n" + "落下速度:" + velocity;
 
         //滑空中の音
         if ((scrMove._isFlying == true & Once1 == false & velocity > 0) & (Input.GetKey(KeyCode.W) | Input.GetKey(KeyCode.A) | Input.GetKey(KeyCode.S) | Input.GetKey(KeyCode.D)))
@@ -251,6 +282,16 @@ public class ADX_Ray_Rev : MonoBehaviour
         if (scrEvo.EvolutionNum == 1)
         {
 
+        }
+    }
+
+    //DamegeSound
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "EnemyItem")
+        {
+            playback2 = Sound.Play("Damage");
+            Debug.Log("hit");
         }
     }
 }

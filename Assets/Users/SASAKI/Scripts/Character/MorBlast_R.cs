@@ -38,6 +38,8 @@ public class MorBlast_R : MonoBehaviour
     private chickenKick_R scrKick;
     private Cutter_R scrCutter;
 
+    private new CriAtomSource audio;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +47,7 @@ public class MorBlast_R : MonoBehaviour
         scrMove = GetComponent<CharaMoveRigid_R>();
         scrKick = GetComponent<chickenKick_R>();
         scrCutter = GetComponent<Cutter_R>();
+        audio = GetComponent<CriAtomSource>();
         Debug.LogError("scrKick: " + scrKick);
         Debug.LogError("scrCutter: " + scrCutter);
         isBlast = false;
@@ -79,12 +82,10 @@ public class MorBlast_R : MonoBehaviour
                 PlayEffect();
             }
 
-            if(charge < 3)
-            {
-                //チャージ音を鳴らす
-                if (!(audioSource.isPlaying == chargeClip))
-                    audioSource.PlayOneShot(chargeClip);
-            }
+
+            //チャージ音を鳴らす
+            audio.Play("BlastSub01");
+           
 
             //チャージ段階の判定
             pullTime += Time.deltaTime;
@@ -120,6 +121,9 @@ public class MorBlast_R : MonoBehaviour
                 isBlast = true;
                 StartCoroutine("ReleaseBlast");
             }
+
+            audio.Stop();
+            audio.Play("BlastSub02");
         }
 
         
