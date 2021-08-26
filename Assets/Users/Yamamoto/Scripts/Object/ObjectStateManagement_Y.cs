@@ -55,6 +55,8 @@ public class ObjectStateManagement_Y : MonoBehaviour
     public int shardDamage_nonDiv;
     public bool specialObjectFlg;
     [SerializeField] protected bool notDamage;
+    public float magnitude = 0.1f;
+    public float duration = 0.25f;
 
     //Start is called before the first frame update
     protected virtual void Start()
@@ -214,7 +216,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
             }
 
             //振動させる
-            StartCoroutine(DoShake(0.25f, 0.1f));
+            StartCoroutine(DoShake(duration, magnitude));
         }
         else Death();    //破壊したときの処理
     }
