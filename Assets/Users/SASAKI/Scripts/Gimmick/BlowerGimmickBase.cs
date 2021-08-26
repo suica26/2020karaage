@@ -9,7 +9,9 @@ public class BlowerGimmickBase : MonoBehaviour
     [SerializeField, Range(0, 3)] private int _usageEvo;
     [SerializeField] private float _force;
     [SerializeField] private float _time;
-    [SerializeField, Tooltip("オブジェクトの高さ(全長)を設定")] private float _ySize;
+    [SerializeField, Tooltip("オブジェクトの高さを設定(地面からエフェクトを出す場合)")] private float _ySize;
+    [SerializeField] private float _ySizeAdditional;
+    [SerializeField] private float _ySizeAdditionalObj;
 
     [Header("判定サイズ設定")]
     [SerializeField] private float _xScale;
@@ -19,7 +21,7 @@ public class BlowerGimmickBase : MonoBehaviour
     //オブジェクト(当たり判定)を生成
     protected GameObject InstanceObject()
     {
-        Vector3 pos = transform.position + new Vector3(0, (_yScale - _ySize) / 2.0f, 0);
+        Vector3 pos = transform.position + transform.up * (_yScale - _ySize + _ySizeAdditionalObj) / 2.0f;
         GameObject obj = Instantiate(_obj, pos, Quaternion.identity);
         obj.transform.localScale = new Vector3(_xScale, _yScale, _zScale);
 
@@ -42,7 +44,7 @@ public class BlowerGimmickBase : MonoBehaviour
     //エフェクトを生成
     protected void InstanceEffect()
     {
-        Vector3 pos = transform.position - new Vector3(0, _ySize / 2.0f, 0);
+        Vector3 pos = transform.position - new Vector3(0, _ySize / 2.0f, 0) + transform.up * _ySizeAdditional;
         GameObject effect = Instantiate(_effect, pos, Quaternion.identity);
 
         if(effect.GetComponent<ParticleSystem>() != null)

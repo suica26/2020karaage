@@ -58,7 +58,6 @@ public class GasTankMT_R : MonoBehaviour
 
         if(onTheBuilding && other.gameObject == enemyBill)
         {
-            Debug.Log("HIHIHIHIHIHI");
             Destroy(transform.parent.gameObject);
         }
     }

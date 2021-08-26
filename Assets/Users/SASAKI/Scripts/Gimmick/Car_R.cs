@@ -48,6 +48,7 @@ public class Car_R : MonoBehaviour
             if (!nextWaypoint.GetComponent<CarWaypoint_R>().uTurn)
             {
                 targetPos = afterNextWaypoint.GetComponent<CarWaypoint_R>().SetNextTargetPos(nextWaypoint.transform.position, nowWaypoint.transform.position, targetPos);
+                targetPos.y += initHeight;
             }
         }
     }
@@ -122,6 +123,7 @@ public class Car_R : MonoBehaviour
                 {
                     afterNextWaypoint = nextWaypoint.GetComponent<CarWaypoint_R>().SetNextWaypoint(nowWaypoint);
                     targetPos = afterNextWaypoint.GetComponent<CarWaypoint_R>().SetNextTargetPos(nextWaypoint.transform.position, nowWaypoint.transform.position, targetPos);
+                    targetPos.y += initHeight;
                 }
             }
             else
@@ -133,6 +135,7 @@ public class Car_R : MonoBehaviour
                 }
                     
                 targetPos = afterNextWaypoint.GetComponent<CarWaypoint_R>().SetNextTargetPos(nextWaypoint.transform.position, nowWaypoint.transform.position, targetPos);
+                targetPos.y += initHeight;
             }
         }
     }
