@@ -50,7 +50,8 @@ public class Enemy_Y : ObjectStateManagement_Y
             }
             else
             {
-                Walk();
+                if (!animator.GetCurrentAnimatorStateInfo(0).IsTag("StopMove"))
+                    Walk();
             }
         }
         else
@@ -80,7 +81,13 @@ public class Enemy_Y : ObjectStateManagement_Y
 
     protected void Wait()
     {
+        //すでに死亡済の場合は無効
+        if (animator.GetNextAnimatorStateInfo(0).IsName("Death")) return;
+
         StopMove();
+        var p = player.transform.position;
+        p.y = 0f;
+        transform.LookAt(p);
         animator.SetBool("isWait", true);
         animator.SetBool("isWalk", false);
     }
@@ -99,6 +106,19 @@ public class Enemy_Y : ObjectStateManagement_Y
         StartCoroutine(RestartMove());
     }
 
+    public override void Damage(float mag, int skill)
+    {
+        //すでに破壊済みの場合は何も起きないようにする
+        if (!livingFlg) return;
+
+        HP -= (int)(scrEvo.Status_ATK * mag);
+        SetSkillID(skill);
+        animator.SetTrigger("Damage");
+
+        //生死判定
+        LivingCheck();
+    }
+
     protected override void Death()
     {
         //すでに破壊済みの場合は無視
@@ -107,7 +127,7 @@ public class Enemy_Y : ObjectStateManagement_Y
         //アニメーション以外の要素を停止
         StopMove();
 
-        Destroy(gameObject, 0.5f);
+        Destroy(gameObject, 1.5f);
         animator.SetTrigger("Death");
     }
 }
