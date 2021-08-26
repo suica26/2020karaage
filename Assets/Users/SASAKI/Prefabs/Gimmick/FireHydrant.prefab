@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -5282034740847405582}
   - component: {fileID: 6184491439173604963}
   - component: {fileID: 6286301486544636840}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: FireHydrant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,10 +162,13 @@ MonoBehaviour:
   _force: 100
   _time: 5
   _ySize: 2
+  _ySizeAdditional: 0
+  _ySizeAdditionalObj: 0
   _xScale: 1
   _yScale: 10
   _zScale: 1
   player: {fileID: 0}
+  hyd: 0
 --- !u!114 &6184491439173604963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,5 +204,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 407fd233ca5649e4998ee6d6db7cc61c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m1m: {fileID: 0}
   player: {fileID: 0}
