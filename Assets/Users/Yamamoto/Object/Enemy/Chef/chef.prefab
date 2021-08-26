@@ -138,8 +138,8 @@ GameObject:
   - component: {fileID: 3613660688037932543}
   - component: {fileID: 3465619958055138601}
   - component: {fileID: -6854739156859251007}
-  - component: {fileID: 1621826212556266344}
   - component: {fileID: 2419253639629568097}
+  - component: {fileID: 6108097378210313830}
   m_Layer: 0
   m_Name: chef
   m_TagString: Untagged
@@ -285,9 +285,23 @@ MonoBehaviour:
   attackClip: {fileID: 1827226128182048838, guid: 9db3317666acb8946bfa7f07ae3ef795,
     type: 3}
   attackDamage: 10
+  searchArea: 50
   hitBoxPrefab: {fileID: 3531957827537779740, guid: a150f44f619a03c4789834dc1d0d0ef4,
     type: 3}
---- !u!114 &1621826212556266344
+--- !u!114 &2419253639629568097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502009927202614386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72767151191ab4f65b6c773227e46232, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audio: {fileID: 6108097378210313830}
+--- !u!114 &6108097378210313830
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -301,7 +315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playOnStart: 0
   _cueName: Enemy_Foot00
-  _cueSheet: Enemy
+  _cueSheet: 
   _regionOnStart: {fileID: 0}
   _listenerOnStart: {fileID: 0}
   _use3dPositioning: 1
@@ -310,19 +324,6 @@ MonoBehaviour:
   _pitch: 0
   _androidUseLowLatencyVoicePool: 0
   need_to_player_update_all: 1
---- !u!114 &2419253639629568097
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 502009927202614386}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72767151191ab4f65b6c773227e46232, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audio: {fileID: 1621826212556266344}
 --- !u!1 &617742287419781676
 GameObject:
   m_ObjectHideFlags: 0

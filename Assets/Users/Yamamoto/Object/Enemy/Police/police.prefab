@@ -1328,8 +1328,8 @@ GameObject:
   - component: {fileID: 6693130104330208957}
   - component: {fileID: 7861683539303365580}
   - component: {fileID: -3497946707093904779}
-  - component: {fileID: -7086612977895087036}
   - component: {fileID: 8415660686470368927}
+  - component: {fileID: 7702752158779513239}
   m_Layer: 0
   m_Name: police
   m_TagString: Untagged
@@ -1475,31 +1475,9 @@ MonoBehaviour:
   attackClip: {fileID: 1827226128182048838, guid: efac8d8a96e94ef43bd6422e959340de,
     type: 3}
   attackDamage: 15
+  searchArea: 50
   bulletPrefab: {fileID: 8871777121355791282, guid: 265a824829aba0d4aa6e6875340839c8,
     type: 3}
---- !u!114 &-7086612977895087036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5552524597018552477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playOnStart: 0
-  _cueName: 
-  _cueSheet: 
-  _regionOnStart: {fileID: 0}
-  _listenerOnStart: {fileID: 0}
-  _use3dPositioning: 1
-  _loop: 0
-  _volume: 1
-  _pitch: 0
-  _androidUseLowLatencyVoicePool: 0
-  need_to_player_update_all: 1
 --- !u!114 &8415660686470368927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1512,7 +1490,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72767151191ab4f65b6c773227e46232, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audio: {fileID: -7086612977895087036}
+  audio: {fileID: 7702752158779513239}
+--- !u!114 &7702752158779513239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5552524597018552477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: Gun00
+  _cueSheet: 
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &5553565784712921985
 GameObject:
   m_ObjectHideFlags: 0
