@@ -27,15 +27,16 @@ public class Parameters_R : MonoBehaviour
 {
     [SerializeField] private Text scoreText, finalScoreText, timeText, epText, hpText;
     [SerializeField] private GameObject resultPanel = null;
-    [SerializeField] private GameObject hp1, hp2, hp3, hp4;
-    [SerializeField] public int score, time, ep, hp, damTime, plusTime, maxHP;
-    [SerializeField] public Slider epSlider, hpSlider, hpSlider2, hpSlider3, hpSlider4, mainSlider;
-    [SerializeField] public Image circle,niwa;
+    [SerializeField] private GameObject[] hpSli;
+    [SerializeField] public int score, time, ep, hp, damTime, plusTime, maxHP, niwaPer;
+    [SerializeField] public Slider epSlider, mainSlider;
+    [SerializeField] public Slider[] hpSlider;
 
     private bool freeze = false;
-    private float count,niwaPer;
-    [SerializeField] public int evo1, evo2, evo3;
-    public bool finalChicken;
+    private float count;
+    [SerializeField] public int evo1, evo2, evo3, startNum;
+    public string saveStage;
+    [SerializeField] public Missions_M scrMis;
 
     public void Start()
     {
@@ -44,18 +45,23 @@ public class Parameters_R : MonoBehaviour
         timeText.text = "Time: " + time;
         epText.text = "EP: " + ep;
         hpText.text = "HP: " + hp;
-        hpSlider.value = 100;
-        hpSlider.maxValue = 100;
         epSlider.value = 0;
-        epSlider.maxValue = evo1;
+        //epSlider.maxValue = evo1;
         count = time;
-        niwaPer = evo1;
-        hp1.SetActive(true);
-        hp2.SetActive(false);
-        hp3.SetActive(false);
-        hp4.SetActive(false);
-        mainSlider = hpSlider;
-        maxHP = 100;
+        for (int i = 0; i < 4; i++)
+        {
+            if (i == startNum)
+            {
+                hpSli[i].SetActive(true);
+                mainSlider = hpSlider[i];
+            }
+            else
+            {
+                hpSli[i].SetActive(false);
+            }
+        }
+        ep += niwaPer;
+        EPManager(0);
     }
 
     public void ScoreManager(int addScore)      //山本加筆：publicにすることで他Scriptで参照できるようにしました
@@ -100,10 +106,10 @@ public class Parameters_R : MonoBehaviour
             {
                 epSlider.value = 0;
                 epSlider.maxValue = evo2 - evo1;
-                hp1.SetActive(false);
-                hp2.SetActive(true);
-                hpSlider2.value = hp;
-                mainSlider = hpSlider2;
+                hpSli[0].SetActive(false);
+                hpSli[1].SetActive(true);
+                hpSlider[1].value = hp;
+                mainSlider = hpSlider[1];
                 TimeManager(10);
                 maxHP = 150;
             }
@@ -111,16 +117,16 @@ public class Parameters_R : MonoBehaviour
             {
                 epSlider.value = 0;
                 epSlider.maxValue = evo3 - evo2;
-                hp2.SetActive(false);
-                hp3.SetActive(true);
-                hpSlider3.value = hp;
-                mainSlider = hpSlider3;
+                hpSli[1].SetActive(false);
+                hpSli[2].SetActive(true);
+                hpSlider[2].value = hp;
+                mainSlider = hpSlider[2];
                 TimeManager(10);
                 maxHP = 500;
             }
             else if (ep == evo3)
             {
-                hp4.SetActive(true);
+                hpSli[3].SetActive(true);
                 TimeManager(10);
                 maxHP = 1000;
             }
@@ -148,6 +154,9 @@ public class Parameters_R : MonoBehaviour
                 freeze = true;
                 resultPanel.SetActive(true);
                 hp = 0;
+                PlayerPrefs.SetString(saveStage, scrMis.load);
+                PlayerPrefs.Save();
+                Debug.Log(saveStage);//後消し
             }
             hpText.text = "HP: " + hp;
         }
@@ -188,4 +197,5 @@ public class Parameters_R : MonoBehaviour
         }
     }
     //タイマーです。一秒ごとにTimeManager()で一秒減らしてます。
+
 }
