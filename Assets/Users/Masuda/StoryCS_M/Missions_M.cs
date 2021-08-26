@@ -21,6 +21,8 @@ public class Missions_M : MonoBehaviour
     public string misStr = "isMission";
     [SerializeField] public ObjectStateManagement_Y eneBillScr;
     public bool stage2;
+    public Parameters_R scrParame;
+    public string load;
 
     public virtual void Start()
     {

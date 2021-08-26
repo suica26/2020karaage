@@ -6,23 +6,30 @@ using UnityEngine.UI;
 public class Mission2_M : Missions_M
 {
     public int gasStand, gasTank;
+    public string onLoad;
+
     // Start is called before the first frame update
     public override void Start()
     {
         base.Start();
         misBox.SetActive(true);
-        missionSlide.Play();
-        mission.text = splitText[0];
-        submis.text = splitText[1];
-        exmis.text = splitText[2];
-        count.text = "1";
-        per.text = "0%";
-        first = true;
         Time.timeScale = 1;
+        onLoad = PlayerPrefs.GetString(scrParame.saveStage, "");
+        Debug.Log(onLoad);//後消し
+        switch (onLoad)
+        {
+            case "first": FirstMission_2(); break;
+            case "second": SecondMission_2(); break;
+            case "third": ThirdMission_2(); break;
+            case "fourth": FourthMission_2(); break;
+            case "final": FinalMission_2(); break;
+            default: FirstMission_2(); break;
+        }
+        PlayerPrefs.DeleteAll();
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         Vector3 playerPos = player.transform.position;
         Vector3 comPos = company.transform.position;
@@ -30,77 +37,29 @@ public class Mission2_M : Missions_M
 
         if (bigNum >= bigBorder4 && first == true)
         {
-            missionSlide.Play();
-            mission.text = splitText[3];
-            submis.text = splitText[4];
-            exmis.text = splitText[5];
-            count.text = "2";
-            first = false;
-            second = true;
-            achieve = 0;
-            per.text = achieve + "/ 1";
+            SecondMission_2();
         }
         else if (bigNum >= bigBorder3 && smallNum >= smallBorder1 && first == true)
         {
-            missionSlide.Play();
-            mission.text = splitText[3];
-            submis.text = splitText[4];
-            exmis.text = splitText[5];
-            count.text = "2";
-            first = false;
-            second = true;
-            achieve = 0;
-            per.text = achieve + "/ 1";
+            SecondMission_2();
         }
         else if (bigNum >= bigBorder2 && smallNum >= smallBorder2 && first == true)
         {
-            missionSlide.Play();
-            mission.text = splitText[3];
-            submis.text = splitText[4];
-            exmis.text = splitText[5];
-            count.text = "2";
-            first = false;
-            second = true;
-            achieve = 0;
-            per.text = achieve + "/ 1";
+            SecondMission_2();
         }
         else if (bigNum >= bigBorder1 && smallNum >= smallBorder3 && first == true)
         {
-            missionSlide.Play();
-            mission.text = splitText[3];
-            submis.text = splitText[4];
-            exmis.text = splitText[5];
-            count.text = "2";
-            first = false;
-            second = true;
-            achieve = 0;
-            per.text = achieve + "/ 1";
+            SecondMission_2();
         }
 
         if (second && gasStand >= 1)
         {
-            missionSlide.Play();
-            mission.text = splitText[6];
-            submis.text = splitText[7];
-            exmis.text = splitText[8];
-            count.text = "3";
-            second = false;
-            third = true;
-            achieve = 0;
-            per.text = achieve + "/ 3";
+            ThirdMission_2();
         }
 
         if (third && gasTank >= 3)
         {
-            missionSlide.Play();
-            mission.text = splitText[9];
-            submis.text = splitText[10];
-            exmis.text = splitText[11];
-            count.text = "4";
-            third = false;
-            fourth = true;
-            achieve = 0;
-            per.text = "";
+            FourthMission_2();
         }
 
         if (fourth)
@@ -115,30 +74,81 @@ public class Mission2_M : Missions_M
 
         if (fourth && dis <= 30)
         {
-            eneBillScr.changeDamageFlg();
-
-            missionSlide.Play();
-            mission.text = splitText[12];
-            submis.text = splitText[13];
-            exmis.text = splitText[14];
-            count.text = "5";
-            fourth = false;
-            final = true;
-            achieve = 0;
-            per.text = "";
+            FinalMission_2();
         }
 
         if (achieve >= 99)
         {
-            missionSlide.Play();
-            mission.text = splitText[3];
-            submis.text = splitText[4];
-            exmis.text = splitText[5];
-            count.text = "2";
-            first = false;
-            second = true;
-            achieve = 0;
-            per.text = achieve + "/ 1";
+            SecondMission_2();
         }
+    }
+
+    public void FirstMission_2()
+    {
+        missionSlide.Play();
+        mission.text = splitText[0];
+        submis.text = splitText[1];
+        exmis.text = splitText[2];
+        count.text = "1";
+        per.text = "0%";
+        load = "first";
+    }
+
+    public void SecondMission_2()
+    {
+        missionSlide.Play();
+        mission.text = splitText[3];
+        submis.text = splitText[4];
+        exmis.text = splitText[5];
+        count.text = "2";
+        first = false;
+        second = true;
+        achieve = 0;
+        per.text = achieve + "/ 1";
+        load = "second";
+    }
+
+    public void ThirdMission_2()
+    {
+        missionSlide.Play();
+        mission.text = splitText[6];
+        submis.text = splitText[7];
+        exmis.text = splitText[8];
+        count.text = "3";
+        second = false;
+        third = true;
+        achieve = 0;
+        per.text = achieve + "/ 3";
+        load = "third";
+    }
+
+    public void FourthMission_2()
+    {
+        missionSlide.Play();
+        mission.text = splitText[9];
+        submis.text = splitText[10];
+        exmis.text = splitText[11];
+        count.text = "4";
+        third = false;
+        fourth = true;
+        achieve = 0;
+        per.text = "";
+        load = "fourth";
+    }
+
+    public void FinalMission_2()
+    {
+        eneBillScr.changeDamageFlg();
+
+        missionSlide.Play();
+        mission.text = splitText[12];
+        submis.text = splitText[13];
+        exmis.text = splitText[14];
+        count.text = "5";
+        fourth = false;
+        final = true;
+        achieve = 0;
+        per.text = "";
+        load = "final";
     }
 }
