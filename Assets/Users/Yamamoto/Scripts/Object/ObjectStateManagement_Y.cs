@@ -181,7 +181,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
         else hitSkilID = num;
     }
 
-    public void Damage(float mag, int skill)
+    public virtual void Damage(float mag, int skill)
     {
         //すでに破壊済みの場合は何も起きないようにする
         if (!livingFlg) return;
