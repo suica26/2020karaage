@@ -31,33 +31,36 @@ public class Enemy_Y : ObjectStateManagement_Y
     //基本挙動を記述
     protected void Update()
     {
-        routineTimer += Time.deltaTime;
-
-        if (Vector3.Distance(player.transform.position, transform.position) <= searchArea)
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Death"))
         {
+            routineTimer += Time.deltaTime;
 
-            if (Vector3.Distance(player.transform.position, transform.position) <= attackDistance)
+            if (Vector3.Distance(player.transform.position, transform.position) <= searchArea)
             {
-                if (routineTimer > attackInterval)
+                if (Vector3.Distance(player.transform.position, transform.position) <= attackDistance)
                 {
-                    routineTimer = 0f;
-                    Attack();
+                    if (routineTimer > attackInterval)
+                    {
+                        routineTimer = 0f;
+                        Attack();
+                    }
+                    else
+                    {
+                        Wait();
+                    }
                 }
                 else
                 {
-                    Wait();
+                    if (!animator.GetCurrentAnimatorStateInfo(0).IsTag("StopMove"))
+                        Walk();
                 }
             }
             else
             {
-                if (!animator.GetCurrentAnimatorStateInfo(0).IsTag("StopMove"))
-                    Walk();
+                Wait();
             }
         }
-        else
-        {
-            Wait();
-        }
+        else StopMove();
     }
 
     protected void StopMove()
@@ -81,9 +84,6 @@ public class Enemy_Y : ObjectStateManagement_Y
 
     protected void Wait()
     {
-        //すでに死亡済の場合は無効
-        if (animator.GetNextAnimatorStateInfo(0).IsName("Death")) return;
-
         StopMove();
         var p = player.transform.position;
         p.y = 0f;

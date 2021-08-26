@@ -48,6 +48,9 @@ public class ObjectBreak_Y : MonoBehaviour
 
     public void BreakAction()
     {
+        //どっかのexceptionで消えない問題が発生しないように、最初に宣言
+        Destroy(gameObject, objScr.deleteTime);
+
         //破砕片になる場合とオブジェクトが差し替えられない場合で動作を変更
         if (divided)
         {
@@ -67,8 +70,6 @@ public class ObjectBreak_Y : MonoBehaviour
             var effect = Instantiate(objScr.breakEffect, transform.position, Quaternion.identity);
             Destroy(effect, 1f);
         }
-
-        Destroy(gameObject, objScr.deleteTime);
     }
 
     private void RigidOn(GameObject obj)
