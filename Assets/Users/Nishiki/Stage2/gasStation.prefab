@@ -17,6 +17,9 @@ GameObject:
   - component: {fileID: 9051830398936968817}
   - component: {fileID: 4207816486901302429}
   - component: {fileID: 7034111685342173289}
+  - component: {fileID: 926076663001237871}
+  - component: {fileID: 6833175730693761808}
+  - component: {fileID: 8118477673885723510}
   m_Layer: 0
   m_Name: gasStation
   m_TagString: Untagged
@@ -32,7 +35,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2637636568380918346}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -126.4, y: 178.7, z: 25.9}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children:
   - {fileID: 3404129698746234142}
@@ -70,9 +73,11 @@ MonoBehaviour:
   _obj: {fileID: 7430103647231780757, guid: 3a87acf169f5aad4a9e7910be0e61470, type: 3}
   _effect: {fileID: 6712329990759217117, guid: 53bf79c5ee1924f789ffbbd76bb24400, type: 3}
   _usageEvo: 3
-  _force: 100
+  _force: 5
   _time: 2
   _ySize: 0
+  _ySizeAdditional: 0
+  _ySizeAdditionalObj: -50
   _xScale: 50
   _yScale: 50
   _zScale: 50
@@ -182,6 +187,46 @@ MonoBehaviour:
   _pitch: 0
   _androidUseLowLatencyVoicePool: 0
   need_to_player_update_all: 1
+--- !u!65 &926076663001237871
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2637636568380918346}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!64 &6833175730693761808
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2637636568380918346}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4207443722817456029, guid: 665fefed40a65f74691cf0bb1fa6ff73, type: 3}
+--- !u!65 &8118477673885723510
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2637636568380918346}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 90, y: 1346, z: 90}
+  m_Center: {x: -585, y: 700, z: 734}
 --- !u!1 &3380244574649682307
 GameObject:
   m_ObjectHideFlags: 0
@@ -271,7 +316,7 @@ MeshCollider:
   m_GameObject: {fileID: 3380244574649682307}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
@@ -365,7 +410,7 @@ MeshCollider:
   m_GameObject: {fileID: 6791377946007255596}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
@@ -459,7 +504,7 @@ MeshCollider:
   m_GameObject: {fileID: 7562739171107572095}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
