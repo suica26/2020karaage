@@ -1510,10 +1510,11 @@ MonoBehaviour:
   epText: {fileID: 142731158829648816}
   hpText: {fileID: 142731159582597040}
   resultPanel: {fileID: 142731160000988672}
-  hp1: {fileID: 5325179351247077686}
-  hp2: {fileID: 8967758548552258525}
-  hp3: {fileID: 8021141387703396754}
-  hp4: {fileID: 4642005956834943864}
+  hpSli:
+  - {fileID: 5325179351247077686}
+  - {fileID: 8967758548552258525}
+  - {fileID: 8021141387703396754}
+  - {fileID: 4642005956834943864}
   score: 0
   time: 1000000000
   ep: 0
@@ -1521,18 +1522,20 @@ MonoBehaviour:
   damTime: 0
   plusTime: 0
   maxHP: 0
+  niwaPer: 0
   epSlider: {fileID: 3277275680745075340}
-  hpSlider: {fileID: 7486503622248579290}
-  hpSlider2: {fileID: 3279067817902348376}
-  hpSlider3: {fileID: 5599938460179933249}
-  hpSlider4: {fileID: 5086475334892162775}
   mainSlider: {fileID: 0}
-  circle: {fileID: 68217338880648377}
-  niwa: {fileID: 68217337739808601}
+  hpSlider:
+  - {fileID: 7486503622248579290}
+  - {fileID: 3279067817902348376}
+  - {fileID: 5599938460179933249}
+  - {fileID: 5086475334892162775}
   evo1: 450
   evo2: 1500
   evo3: 3000000
-  finalChicken: 0
+  startNum: 0
+  saveStage: 
+  scrMis: {fileID: 0}
 --- !u!114 &142731158995589353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1987,6 +1990,7 @@ MonoBehaviour:
   EvoEffect: {fileID: 6396547306888079729, guid: bfffc631cb58a0849983ae924b890e8a,
     type: 3}
   DEBUG_MODE: 0
+  startNum: 0
 --- !u!114 &142731159246388828
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -46,6 +46,9 @@ public class EvolutionChicken_R : MonoBehaviour
     private CriAtomSource audioLavel;
     private CriAtomSource BGM;
 
+    //M
+    public int startNum;
+
     void Start()
     {
         // objParamが空の場合、Canvasオブジェクトを探す
@@ -65,16 +68,32 @@ public class EvolutionChicken_R : MonoBehaviour
 
         scrBlast = GetComponent<MorBlast_R>();
 
-        evolutionNum = 0;
+        //もともと0、startNumの数字=形態数
+        evolutionNum = startNum;
+        nowEvoNum = startNum;
+
         status_HP = HP[evolutionNum];
         status_ATK = ATK[evolutionNum];
         status_SPD = SPD[evolutionNum];
         status_SCORE = SCORE[evolutionNum];
         status_JUMP = JUMP[evolutionNum];
 
-        chickens[1].SetActive(false);
-        chickens[2].SetActive(false);
-        chickens[3].SetActive(false);
+        //chickens[1].SetActive(false);
+        //chickens[2].SetActive(false);
+        //chickens[3].SetActive(false);
+
+        //M　ループで最初の形態を決定
+        for (int i = 0; i < 4; i++)
+        {
+            if (i == startNum)
+            {
+                chickens[i].SetActive(true);
+            }
+            else
+            {
+                chickens[i].SetActive(false);
+            }
+        }
 
         audioLavel = (CriAtomSource)GetComponent("CriAtomSource");
         //ADX Selector Change
