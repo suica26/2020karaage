@@ -30,6 +30,9 @@ public class GasTank_R : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (mainTankRigid == null)
+            isDelete = true;
+
         if(!onTheBuilding)
         {
             // 足場が破壊されたとき
