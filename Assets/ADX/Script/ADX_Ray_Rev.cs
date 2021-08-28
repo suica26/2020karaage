@@ -271,7 +271,7 @@ public class ADX_Ray_Rev : MonoBehaviour
 
     private void EvoNumCheck()
     {
-        if(scrEvo.EvolutionNum == 1)
+        if (scrEvo.EvolutionNum == 0)
         {
 
         }
@@ -279,7 +279,11 @@ public class ADX_Ray_Rev : MonoBehaviour
         {
 
         }
-        if (scrEvo.EvolutionNum == 1)
+        if (scrEvo.EvolutionNum == 2)
+        {
+
+        }
+        if (scrEvo.EvolutionNum == 3)
         {
 
         }

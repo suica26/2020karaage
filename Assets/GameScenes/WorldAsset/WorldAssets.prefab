@@ -8301,7 +8301,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3051248697228920746}
   - component: {fileID: 3051248697228920744}
-  - component: {fileID: 3051248697228920747}
   - component: {fileID: 3051248697228920745}
   m_Layer: 0
   m_Name: ADX_Listener
@@ -8338,20 +8337,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   regionOnStart: {fileID: 0}
   activateListenerOnEnable: 0
---- !u!114 &3051248697228920747
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3051248697228920749}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecad6a0b372c4405c99e5a8b1bd1c54f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Camera: {fileID: 142731160190032490}
-  Player: {fileID: 142731159246388825}
 --- !u!114 &3051248697228920745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8364,9 +8349,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a29355a15b1045fd9674ceed8813a2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ADX_Lisner: {fileID: 3051248697228920749}
-  directionFocusLevel: 0.5
-  distanceFocusLevel: 0
+  PanPosObject: {fileID: 7694328368683941239, guid: 9b71f4157046c4bf1a86c990cfa5167a,
+    type: 3}
+  VolPosObject: {fileID: 4726990369857609420, guid: 012ae80f930d14905a8c6d82b7d87c62,
+    type: 3}
+  CamPosObject: {fileID: 6271197852072803430, guid: e88b9a0458c164901bd064c17baa2004,
+    type: 3}
+  DebugMode: 1
 --- !u!1 &3051248697233895098
 GameObject:
   m_ObjectHideFlags: 0
