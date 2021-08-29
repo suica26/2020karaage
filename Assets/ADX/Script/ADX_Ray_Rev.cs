@@ -249,6 +249,10 @@ public class ADX_Ray_Rev : MonoBehaviour
             {
                 GroundMaterial = "asphalt";
             }
+            else if (Ghit.collider.tag == "Wood")
+            {
+                GroundMaterial = "wood";
+            }
             else GroundMaterial = "tile";
         }
         else
