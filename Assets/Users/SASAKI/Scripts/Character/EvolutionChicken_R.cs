@@ -132,6 +132,7 @@ public class EvolutionChicken_R : MonoBehaviour
             chickens[evolutionNum - 1].SetActive(false);
             chickens[evolutionNum].SetActive(true);
 
+            SoundFormCheck();
             audioLavel.Play("ShockWave");
 
             status_HP = HP[evolutionNum];
@@ -144,7 +145,10 @@ public class EvolutionChicken_R : MonoBehaviour
 
             scrCam.evolved = false;
         }
+    }
 
+    private void SoundFormCheck()
+    {
         if (evolutionNum == 1)
         {
             //ADX Selector Change
