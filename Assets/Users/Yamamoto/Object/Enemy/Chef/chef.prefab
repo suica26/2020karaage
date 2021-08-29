@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 3465619958055138601}
   - component: {fileID: -6854739156859251007}
   - component: {fileID: 2419253639629568097}
-  - component: {fileID: 6108097378210313830}
+  - component: {fileID: 5721384325907002523}
   m_Layer: 0
   m_Name: chef
   m_TagString: Untagged
@@ -279,6 +279,8 @@ MonoBehaviour:
   shardDamage_nonDiv: 0
   specialObjectFlg: 1
   notDamage: 0
+  magnitude: 0.1
+  duration: 0.25
   attackDistance: 3
   attackInterval: 8
   weapon: {fileID: 7023606130072122206}
@@ -300,8 +302,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72767151191ab4f65b6c773227e46232, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audio: {fileID: 6108097378210313830}
---- !u!114 &6108097378210313830
+  audio: {fileID: 5721384325907002523}
+--- !u!114 &5721384325907002523
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -315,7 +317,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playOnStart: 0
   _cueName: Enemy_Foot00
-  _cueSheet: 
+  _cueSheet: Enemy
   _regionOnStart: {fileID: 0}
   _listenerOnStart: {fileID: 0}
   _use3dPositioning: 1
