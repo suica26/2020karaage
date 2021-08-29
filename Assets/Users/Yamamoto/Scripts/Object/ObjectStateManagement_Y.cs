@@ -7,6 +7,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
     [Range(0, 4), SerializeField] protected int tier_WalkAttack;
     [SerializeField] private GameObject divideObject;
     protected string attackSoundName, contactSoundName, ExplosionSoundName, CutterContactSoundName;
+    protected int MaxHP;
     public int HP;                  //Inspector上から設定できます。
     [Header("ダメージ倍率")]
     public float kickMag;       //キックのダメージ倍率
@@ -71,6 +72,8 @@ public class ObjectStateManagement_Y : MonoBehaviour
         //加筆　undertreem 0625
         ADX_RevLevel = player.GetComponent<ADX_Ray_Rev>();
         renderers = CheckRenderer();
+
+        MaxHP = HP;
     }
     public void changeDamageFlg()
     {

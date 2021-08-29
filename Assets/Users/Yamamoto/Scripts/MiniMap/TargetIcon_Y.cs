@@ -18,7 +18,15 @@ public class TargetIcon_Y : MiniMapIcon_Y
         var p = player.transform.position;
         var dir = target.transform.position - p;
         dir.y = 0f;
-        dir = dir.normalized * radius;
-        transform.position = new Vector3(p.x + dir.x, y, p.z + dir.z);
+        if (dir.magnitude <= radius)
+        {
+            var t = target.transform.position;
+            transform.position = new Vector3(t.x, y, t.z);
+        }
+        else
+        {
+            dir = dir.normalized * radius;
+            transform.position = new Vector3(p.x + dir.x, y, p.z + dir.z);
+        }
     }
 }
