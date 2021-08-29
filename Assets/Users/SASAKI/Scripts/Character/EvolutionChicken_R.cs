@@ -33,7 +33,8 @@ public class EvolutionChicken_R : MonoBehaviour
     private float status_SCORE;
     private float status_JUMP;
 
-    private int nowEvoNum = 0;
+    //M よそから参照したいのでpublicにします
+    public int nowEvoNum = 0;
 
     //カプセル化
     public int EvolutionNum { get { return evolutionNum; } }
