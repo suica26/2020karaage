@@ -85,9 +85,9 @@ public class Enemy_Y : ObjectStateManagement_Y
     protected void Wait()
     {
         StopMove();
-        var p = player.transform.position;
-        p.y = 0f;
-        transform.LookAt(p);
+        var dir = player.transform.position - transform.position;
+        dir.y = 0f;
+        transform.forward = dir.normalized;
         animator.SetBool("isWait", true);
         animator.SetBool("isWalk", false);
     }
