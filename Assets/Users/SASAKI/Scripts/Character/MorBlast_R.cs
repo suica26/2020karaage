@@ -20,12 +20,12 @@ public class MorBlast_R : MonoBehaviour
     [SerializeField] private Transform[] center;
     [SerializeField] private float[] effectScale;
 
-    public GameObject morBlaSphere;    //おはようブラストの干渉判定用の球体
+    private GameObject morBlaSphere;    //おはようブラストの干渉判定用の球体
     private float plusScale = 0f;   //おはようブラストの放射範囲
     private GameObject[] morningBlast = new GameObject[3];
     private GameObject effect;
-    private int charge;
-    private bool isBlast;   //ブラスト発声中か否かのフラグ
+    private int charge; 
+    public bool isBlast;   //ブラスト発声中か否かのフラグ、一瞬パブリックに
     public float spreadTime;    //おはようブラストの放射時間
     public int Number = 0;
 
