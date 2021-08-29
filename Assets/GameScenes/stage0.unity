@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.30690813, g: 0.6228158, b: 0.85540986, a: 1}
+  m_IndirectSpecularColor: {r: 0.30689147, g: 0.6234039, b: 0.8556689, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -305,6 +305,7 @@ MonoBehaviour:
   pz: 7.3
   dHP: {fileID: 1202394770}
   spdown: 0.1
+  audio: {fileID: 0}
 --- !u!65 &40312682
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1832,6 +1833,7 @@ MonoBehaviour:
   pz: 13
   dHP: {fileID: 1202394770}
   spdown: 0.1
+  audio: {fileID: 0}
 --- !u!65 &229306782
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3136,6 +3138,7 @@ MonoBehaviour:
   pz: 7.3
   dHP: {fileID: 1202394770}
   spdown: 0.1
+  audio: {fileID: 0}
 --- !u!65 &329399804
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3451,6 +3454,7 @@ MonoBehaviour:
   pz: 13
   dHP: {fileID: 1202394770}
   spdown: 0.1
+  audio: {fileID: 0}
 --- !u!65 &349530567
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3890,6 +3894,7 @@ MonoBehaviour:
   pz: 13
   dHP: {fileID: 1202394770}
   spdown: 0.1
+  audio: {fileID: 0}
 --- !u!65 &436500610
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4343,6 +4348,7 @@ MonoBehaviour:
   pz: 13
   dHP: {fileID: 1202394770}
   spdown: 0.1
+  audio: {fileID: 0}
 --- !u!65 &478514033
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5537,9 +5543,10 @@ GameObject:
   - component: {fileID: 598414673}
   - component: {fileID: 598414672}
   - component: {fileID: 598414671}
+  - component: {fileID: 598414675}
   m_Layer: 0
   m_Name: mainground
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5618,6 +5625,29 @@ Transform:
   m_Father: {fileID: 662499516}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &598414675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598414670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 1
+  _cueName: Track_engine
+  _cueSheet: St0_Track
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &622318743
 GameObject:
   m_ObjectHideFlags: 0
@@ -6090,6 +6120,7 @@ MonoBehaviour:
   pz: 7.3
   dHP: {fileID: 1202394770}
   spdown: 0.1
+  audio: {fileID: 0}
 --- !u!65 &662514774
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7131,6 +7162,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainSt
       objectReference: {fileID: 0}
+    - target: {fileID: 1147840121244368600, guid: 16815d26a64c0c34390081d507999571,
+        type: 3}
+      propertyPath: m_TagString
+      value: Road
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16815d26a64c0c34390081d507999571, type: 3}
 --- !u!1 &773246032
@@ -8093,7 +8129,6 @@ GameObject:
   - component: {fileID: 905172744}
   - component: {fileID: 905172743}
   - component: {fileID: 905172745}
-  - component: {fileID: 905172740}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -8161,29 +8196,6 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!114 &905172740
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 905172737}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playOnStart: 1
-  _cueName: Track_engine
-  _cueSheet: St0_Track
-  _regionOnStart: {fileID: 0}
-  _listenerOnStart: {fileID: 0}
-  _use3dPositioning: 1
-  _loop: 0
-  _volume: 1
-  _pitch: 0
-  _androidUseLowLatencyVoicePool: 0
-  need_to_player_update_all: 1
 --- !u!20 &905172741
 Camera:
   m_ObjectHideFlags: 0
@@ -8784,25 +8796,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!1 &986273347 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 142731159246388825, guid: 6917cbfc87619ff4198ca8fde270bf21,
-    type: 3}
-  m_PrefabInstance: {fileID: 2146802793}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &986273358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 986273347}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ebd114779111485b8114853f1394ba1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioLavel: {fileID: 0}
 --- !u!1 &994506835
 GameObject:
   m_ObjectHideFlags: 0
@@ -10682,6 +10675,7 @@ MonoBehaviour:
   pz: 13
   dHP: {fileID: 1202394770}
   spdown: 0.1
+  audio: {fileID: 0}
 --- !u!65 &1187367220
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13981,6 +13975,7 @@ MonoBehaviour:
   pz: 7.3
   dHP: {fileID: 1202394770}
   spdown: 0.1
+  audio: {fileID: 0}
 --- !u!65 &1594701349
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19612,7 +19607,7 @@ PrefabInstance:
     - target: {fileID: 142731160078300708, guid: 6917cbfc87619ff4198ca8fde270bf21,
         type: 3}
       propertyPath: m_RootOrder
-      value: 23
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 142731160078300709, guid: 6917cbfc87619ff4198ca8fde270bf21,
         type: 3}
@@ -19837,7 +19832,7 @@ PrefabInstance:
     - target: {fileID: 7615885362146818832, guid: 6917cbfc87619ff4198ca8fde270bf21,
         type: 3}
       propertyPath: m_RootOrder
-      value: 24
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 7814895706161498831, guid: 6917cbfc87619ff4198ca8fde270bf21,
         type: 3}
@@ -20118,6 +20113,7 @@ MonoBehaviour:
   pz: 4.51
   dHP: {fileID: 1202394770}
   spdown: 0.1
+  audio: {fileID: 0}
 --- !u!23 &1001830506138404310
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -20247,6 +20243,7 @@ MonoBehaviour:
   pz: 4.51
   dHP: {fileID: 1202394770}
   spdown: 0.1
+  audio: {fileID: 0}
 --- !u!23 &1001830506205210482
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -20376,6 +20373,7 @@ MonoBehaviour:
   pz: 4.51
   dHP: {fileID: 1202394770}
   spdown: 0.1
+  audio: {fileID: 0}
 --- !u!23 &1001830506256863510
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -20505,6 +20503,7 @@ MonoBehaviour:
   pz: 4.51
   dHP: {fileID: 1202394770}
   spdown: 0.1
+  audio: {fileID: 0}
 --- !u!23 &1001830506453515862
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -20695,6 +20694,7 @@ MonoBehaviour:
   pz: 4.51
   dHP: {fileID: 1202394770}
   spdown: 0.1
+  audio: {fileID: 0}
 --- !u!54 &1001830506493088617
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -20771,6 +20771,7 @@ MonoBehaviour:
   pz: 4.51
   dHP: {fileID: 1202394770}
   spdown: 0.1
+  audio: {fileID: 0}
 --- !u!23 &1001830506704311742
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -20900,6 +20901,7 @@ MonoBehaviour:
   pz: 4.51
   dHP: {fileID: 1202394770}
   spdown: 0.1
+  audio: {fileID: 0}
 --- !u!23 &1001830506723679710
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -21082,6 +21084,7 @@ MonoBehaviour:
   pz: 4.51
   dHP: {fileID: 1202394770}
   spdown: 0.1
+  audio: {fileID: 0}
 --- !u!54 &1001830507906074853
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -21924,6 +21927,7 @@ MonoBehaviour:
   pz: 7
   dHP: {fileID: 1202394770}
   spdown: 0.1
+  audio: {fileID: 0}
 --- !u!65 &4783399402199128683
 BoxCollider:
   m_ObjectHideFlags: 0
