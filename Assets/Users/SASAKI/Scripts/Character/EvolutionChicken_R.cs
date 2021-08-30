@@ -44,9 +44,6 @@ public class EvolutionChicken_R : MonoBehaviour
     public float Status_SCORE { get { return status_SCORE; } }
     public float Status_JUMP { get { return status_JUMP; } }
 
-    private CriAtomSource audioLavel;
-    private CriAtomSource BGM;
-
     //M
     public int startNum;
 
@@ -96,10 +93,6 @@ public class EvolutionChicken_R : MonoBehaviour
             }
         }
 
-        audioLavel = (CriAtomSource)GetComponent("CriAtomSource");
-        //ADX Selector Change
-        audioLavel.player.SetSelectorLabel("Chicken_Form", "form1");
-
     }
 
     // Update is called once per frame
@@ -132,9 +125,6 @@ public class EvolutionChicken_R : MonoBehaviour
             chickens[evolutionNum - 1].SetActive(false);
             chickens[evolutionNum].SetActive(true);
 
-            SoundFormCheck();
-            audioLavel.Play("ShockWave");
-
             status_HP = HP[evolutionNum];
             status_ATK = ATK[evolutionNum];
             status_SPD = SPD[evolutionNum];
@@ -144,23 +134,6 @@ public class EvolutionChicken_R : MonoBehaviour
             scrBlast.EvoBlast();
 
             scrCam.evolved = false;
-        }
-    }
-
-    private void SoundFormCheck()
-    {
-        if (evolutionNum == 1)
-        {
-            //ADX Selector Change
-            audioLavel.player.SetSelectorLabel("Chicken_Form", "form2");
-        }
-        if (evolutionNum == 2)
-        {
-            audioLavel.player.SetSelectorLabel("Chicken_Form", "form3");
-        }
-        if (evolutionNum == 4)
-        {
-            audioLavel.player.SetSelectorLabel("Chicken_Form", "form4");
         }
     }
 }

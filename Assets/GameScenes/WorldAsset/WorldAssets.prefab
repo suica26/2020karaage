@@ -2230,10 +2230,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e1937cab68e940e39b0cae4be839c8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SoundDebugText: {fileID: 3051248698388823884}
   Debug_RevSendLevel: {fileID: 3051248698388823886}
   HitPoint: {fileID: 3013925485706282491, guid: 8ff5e0dae44224a4f9034835ecc0efbd,
     type: 3}
-  SoundDebudPanel: {fileID: 3051248698790946046}
+  SoundDebugPanel: {fileID: 3051248698790946046}
+  DebugMode: 1
   span: 0.2
   TownNoizeCon: {fileID: 3051248696776623923}
 --- !u!82 &4177734382547650486
@@ -9087,6 +9089,8 @@ GameObject:
   - component: {fileID: 3051248697838983963}
   - component: {fileID: 3051248697838983962}
   - component: {fileID: 3051248697838983965}
+  - component: {fileID: 2190218103332771789}
+  - component: {fileID: 2761571657325446243}
   m_Layer: 5
   m_Name: Hipstamp
   m_TagString: Untagged
@@ -9171,6 +9175,41 @@ MonoBehaviour:
   atomSource00: {fileID: 0}
   atomSource01: {fileID: 0}
   atomSource02: {fileID: 142731159246388822}
+--- !u!114 &2190218103332771789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3051248697838983967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: affaa8eb9a07c490f994135355d62256, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2761571657325446243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3051248697838983967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: Pause
+  _cueSheet: BGM
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &3051248698051566956
 GameObject:
   m_ObjectHideFlags: 0
@@ -9783,7 +9822,7 @@ GameObject:
   - component: {fileID: 3051248698388823885}
   - component: {fileID: 3051248698388823884}
   m_Layer: 5
-  m_Name: SND_Debug
+  m_Name: SND_DebugText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10355,7 +10394,7 @@ GameObject:
   - component: {fileID: 3051248698790946044}
   - component: {fileID: 3051248698790946047}
   m_Layer: 5
-  m_Name: SoundDebgCheck
+  m_Name: SoundDebugCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10378,7 +10417,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.40300003}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -544, y: -370}
+  m_AnchoredPosition: {x: 258, y: 350}
   m_SizeDelta: {x: -1120.4348, y: -771.3988}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3051248698790946044
@@ -12571,6 +12610,8 @@ GameObject:
   - component: {fileID: 4367141473779389017}
   - component: {fileID: 4367141473779389016}
   - component: {fileID: 4367141473779389020}
+  - component: {fileID: 2842378616855639272}
+  - component: {fileID: 1735515594615725441}
   m_Layer: 5
   m_Name: Pause
   m_TagString: Untagged
@@ -12655,6 +12696,41 @@ MonoBehaviour:
   atomSource00: {fileID: 0}
   atomSource01: {fileID: 0}
   atomSource02: {fileID: 142731159246388822}
+--- !u!114 &2842378616855639272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4367141473779389022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: affaa8eb9a07c490f994135355d62256, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1735515594615725441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4367141473779389022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: Pause
+  _cueSheet: BGM
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &4367141473935416434
 GameObject:
   m_ObjectHideFlags: 0
@@ -14616,6 +14692,8 @@ GameObject:
   - component: {fileID: 751845671482333983}
   - component: {fileID: 1584338899873797092}
   - component: {fileID: 2337214506004071748}
+  - component: {fileID: 8547871028242369456}
+  - component: {fileID: 864153708795995401}
   m_Layer: 5
   m_Name: EvoPanel
   m_TagString: Untagged
@@ -14684,6 +14762,41 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8547871028242369456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5997398647476717256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: affaa8eb9a07c490f994135355d62256, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &864153708795995401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5997398647476717256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: Pause
+  _cueSheet: BGM
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &6110797297208073224
 GameObject:
   m_ObjectHideFlags: 0
