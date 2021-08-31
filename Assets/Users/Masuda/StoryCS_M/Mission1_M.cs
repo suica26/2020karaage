@@ -8,8 +8,7 @@ public class Mission1_M : Missions_M
     public GameObject hip,shop,evoPanel;
     public int manhole, hydrant, evoCount;
     public bool hipStamp = false, evolution = false;
-    public Parameters_R scrParame;
-    public float timer2;
+    public float timer2,timer3;
 
     public override void Start()
     {
@@ -27,6 +26,7 @@ public class Mission1_M : Missions_M
         Vector3 comPos = company.transform.position;
         float dis = Vector3.Distance(playerPos, comPos);
         evoCount = scrParame.ep;
+        evoNum = scrEvoChi.nowEvoNum;
 
         if (!shop && first)
         {
@@ -131,12 +131,46 @@ public class Mission1_M : Missions_M
 
         if (manhole >= 3 && fourth)
         {
-            fourth = false;
+            if (evoNum >= 1)
+            {
+                fourth = false;
+                five = false;
+                final = true;
+                missionSlide.Play();
+                mission.text = splitText[12];
+                submis.text = splitText[13];
+                exmis.text = splitText[14];
+                count.text = "4";
+                per.text = "";
+            }
+
+            else
+            {
+                fourth = false;
+                five = true;
+                missionSlide.Play();
+                mission.text = splitText[9];
+                submis.text = splitText[10];
+                exmis.text = splitText[11];
+                count.text = "4";
+                per.text = "";
+            }
+        }
+
+        if (evoNum >= 1 && five)
+        {
+            timer3 += Time.deltaTime;
+        }
+
+        if (timer3 >= 1.0f && five)
+        {
+            timer3 = 0;
+            five = false;
             final = true;
             missionSlide.Play();
-            mission.text = splitText[9];
-            submis.text = splitText[10];
-            exmis.text = splitText[11];
+            mission.text = splitText[12];
+            submis.text = splitText[13];
+            exmis.text = splitText[14];
             count.text = "4";
             per.text = "";
         }
@@ -146,15 +180,15 @@ public class Mission1_M : Missions_M
             tipsTimer += Time.deltaTime;
         }
 
-        if (dis <= 30 && final)
+        if (dis <= 40 && final)
         {
             //山本加筆
             eneBillScr.changeDamageFlg();
 
             missionSlide.Play();
-            mission.text = splitText[12];
-            submis.text = splitText[13];
-            exmis.text = splitText[14];
+            mission.text = splitText[15];
+            submis.text = splitText[16];
+            exmis.text = splitText[17];
             count.text = "5";
             final = false;
         }

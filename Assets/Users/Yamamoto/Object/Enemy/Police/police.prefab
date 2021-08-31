@@ -1329,7 +1329,7 @@ GameObject:
   - component: {fileID: 7861683539303365580}
   - component: {fileID: -3497946707093904779}
   - component: {fileID: 8415660686470368927}
-  - component: {fileID: 7702752158779513239}
+  - component: {fileID: 3979325175564754024}
   m_Layer: 0
   m_Name: police
   m_TagString: Untagged
@@ -1469,12 +1469,14 @@ MonoBehaviour:
   shardDamage_nonDiv: 0
   specialObjectFlg: 1
   notDamage: 0
+  magnitude: 0.1
+  duration: 0.25
   attackDistance: 20
   attackInterval: 5
   weapon: {fileID: 6608533013224504180}
   attackClip: {fileID: 1827226128182048838, guid: efac8d8a96e94ef43bd6422e959340de,
     type: 3}
-  attackDamage: 15
+  attackDamage: 50
   searchArea: 50
   bulletPrefab: {fileID: 8871777121355791282, guid: 265a824829aba0d4aa6e6875340839c8,
     type: 3}
@@ -1490,8 +1492,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72767151191ab4f65b6c773227e46232, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audio: {fileID: 7702752158779513239}
---- !u!114 &7702752158779513239
+  audio: {fileID: 3979325175564754024}
+--- !u!114 &3979325175564754024
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1504,8 +1506,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playOnStart: 0
-  _cueName: Gun00
-  _cueSheet: 
+  _cueName: Enemy_Foot00
+  _cueSheet: Enemy
   _regionOnStart: {fileID: 0}
   _listenerOnStart: {fileID: 0}
   _use3dPositioning: 1

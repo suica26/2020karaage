@@ -8,7 +8,7 @@ public class MorBlast_R : MonoBehaviour
     [SerializeField] private AudioClip blastClip;
     [SerializeField] private AudioClip evoBlastClip;
     [SerializeField] private AudioSource audioSource;
-    [SerializeField] private Transition_R scrAnim;
+    [SerializeField] private Transition_R[] scrAnim;
     [SerializeField] private float secondBlastTime, thirdBlastTime;
     [SerializeField] private float[] pullTimes;     // チャージの時間を設定する
     [SerializeField] private float[] spreadScale;
@@ -75,7 +75,7 @@ public class MorBlast_R : MonoBehaviour
             if (scrCutter != null)
                 scrCutter.CanCutter = false;
 
-            if(effect == null)
+            if (effect == null)
             {
                 effect = Instantiate(_effect, center[scrEvo.EvolutionNum].position, Quaternion.Euler(transform.rotation.eulerAngles), transform);
                 effect.transform.localScale *= effectScale[scrEvo.EvolutionNum];
@@ -85,7 +85,7 @@ public class MorBlast_R : MonoBehaviour
 
             //チャージ音を鳴らす
             audio.Play("BlastSub01");
-           
+
 
             //チャージ段階の判定
             pullTime += Time.deltaTime;
@@ -116,7 +116,7 @@ public class MorBlast_R : MonoBehaviour
 
             audioSource.Stop();
             pullTime = 0f;
-            if(charge > 0)
+            if (charge > 0)
             {
                 isBlast = true;
                 StartCoroutine("ReleaseBlast");
@@ -126,14 +126,14 @@ public class MorBlast_R : MonoBehaviour
             audio.Play("BlastSub02");
         }
 
-        
-        for(int i = 0; i < morningBlast.Length; i++)
+
+        for (int i = 0; i < morningBlast.Length; i++)
         {
             if (morningBlast[i] != null)
             {
                 morningBlast[i].transform.position = blastCenter[scrEvo.EvolutionNum].position;
                 morningBlast[i].transform.localScale += new Vector3(plusScale, plusScale, plusScale) / spreadTime * Time.deltaTime;
-            }   
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.C))
@@ -152,7 +152,7 @@ public class MorBlast_R : MonoBehaviour
         pullTime = 0f;
         charge = 0;
         audioSource.PlayOneShot(blastClip);
-        scrAnim.SetAnimator(Transition_R.Anim.BLAST, true);
+        scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.BLAST, true);
 
         //1回目
         morningBlast[0] = Instantiate(morBlaSphere, transform);
@@ -167,7 +167,7 @@ public class MorBlast_R : MonoBehaviour
         Destroy(morningBlast[2], spreadTime);
 
         isBlast = false;
-        scrAnim.SetAnimator(Transition_R.Anim.BLAST, false);
+        scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.BLAST, false);
         yield break;
     }
 
@@ -182,9 +182,9 @@ public class MorBlast_R : MonoBehaviour
 
     private void PlayEffect()
     {
-        if(effect != null)
+        if (effect != null)
         {
-            foreach(var particle in effect.GetComponentsInChildren<ParticleSystem>())
+            foreach (var particle in effect.GetComponentsInChildren<ParticleSystem>())
             {
                 particle.Play();
             }

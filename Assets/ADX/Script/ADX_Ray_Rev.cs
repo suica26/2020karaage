@@ -9,27 +9,24 @@ public class ADX_Ray_Rev : MonoBehaviour
 {
 
     private float RevSendLev_R, RevSendLev_L;
-    private Text RevSendLevel;
-    public GameObject Debug_RevSendLevel, HitPoint, SoundDebudPanel;
+    public Text SoundDebugText;
+    public GameObject Debug_RevSendLevel, HitPoint, SoundDebugPanel;
     private bool A, Once, Once1, OnGround;
     private float a, b, c, d, e, f, g, h, i, j, k, l, m, o, p, q, r, TownNoizeNum, Num, TownNoizeEQNum, EQNum;
     private float Ypos, velocity;
-    private bool DebugMode;
-
-    public float span = 0f;
+    public bool DebugMode;
+    private float span = 0.2f;
     private float currentTime = 0f;
     private float True_RevSendLev;
-
     private CriAtomSource Sound;
+    [Header("ベースノイズキューのCriAtomSouceをセット")]
     public CriAtomSource TownNoizeCon;
-
-
     private string GroundMaterial;
-
     private new Rigidbody rigidbody;
     CriAtomExPlayback playback1, playback2;
     CharaMoveRigid_R scrMove;
     EvolutionChicken_R scrEvo;
+    private Text DebugText;
 
     private string Stagename;
 
@@ -49,7 +46,8 @@ public class ADX_Ray_Rev : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.RevSendLevel = Debug_RevSendLevel.GetComponent<Text>();
+        //this.RevSendLevel = Debug_RevSendLevel.GetComponent<Text>();
+        DebugText = SoundDebugText.GetComponent<Text>();
         DebugMode = false;
         Sound = GetComponent<CriAtomSource>();
         Once = true;
@@ -77,6 +75,8 @@ public class ADX_Ray_Rev : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //形態チェック
+        ADXEvoNumCheck();
         //span秒に1回だけ処理する
         currentTime += Time.deltaTime;
         if (currentTime > span)
@@ -112,7 +112,7 @@ public class ADX_Ray_Rev : MonoBehaviour
         }
         //高さ座標からAISAC値を決定
         //ステージに応じて変更（いつか汎用的なのに変えましょう戒め）
-        if(Stagename == "St1")
+        if (Stagename == "St1")
         {
             Vector3 Pos = this.transform.position;
             Ypos = Pos.y / 24.0f;
@@ -121,7 +121,7 @@ public class ADX_Ray_Rev : MonoBehaviour
         if (Stagename == "St2")
         {
             Vector3 Pos = this.transform.position;
-            Ypos = (Pos.y -90) / 28.0f;
+            Ypos = (Pos.y - 90) / 28.0f;
             TownNoizeCon.SetAisacControl("Obj_angle", Ypos);
         }
         if (Stagename == "Other")
@@ -131,7 +131,7 @@ public class ADX_Ray_Rev : MonoBehaviour
 
 
 
-            this.RevSendLevel.text = "RevSendLevel_L:" + RevSendLev_L + "RevSendLevel_R:" + RevSendLev_R + "\n" + "落下速度:" + velocity;
+        //this.RevSendLevel.text = "RevSendLevel_L:" + RevSendLev_L + "RevSendLevel_R:" + RevSendLev_R + "\n" + "落下速度:" + velocity;
 
         //滑空中の音
         if ((scrMove._isFlying == true & Once1 == false & velocity > 0) & (Input.GetKey(KeyCode.W) | Input.GetKey(KeyCode.A) | Input.GetKey(KeyCode.S) | Input.GetKey(KeyCode.D)))
@@ -139,44 +139,25 @@ public class ADX_Ray_Rev : MonoBehaviour
             playback1 = Sound.Play("Gliding");
             Once1 = true;
         }
-        if(velocity > 0.3)
+        if (velocity > 0.3)
         {
             playback1.Stop();
         }
 
         //Debug.Log(scrMove._isFlying);
 
-
-
-
-
-
-
-            //接地＆材質判定
-            OnGround = GloundRays(0.5f);
+        //接地＆材質判定
+        OnGround = GloundRays(0.5f);
 
         if (OnGround == true & Once == false)
         {
             Sound.Play("Landing");
-            
+
             Once = true;
         }
         Sound.player.SetSelectorLabel("Selector_Floor", GroundMaterial);
 
-
-
-        //デバッグモードONOFF
-        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.P) & DebugMode == false)
-        {
-            DebugMode = true;
-            SoundDebudPanel.gameObject.SetActive(true);
-        }
-        if (Input.GetKey(KeyCode.LeftShift) & Input.GetKeyDown(KeyCode.K) & DebugMode == true)
-        {
-            DebugMode = false;
-            SoundDebudPanel.gameObject.SetActive(false);
-        }
-
+        SoundDebugMode();
 
 
     }
@@ -241,6 +222,7 @@ public class ADX_Ray_Rev : MonoBehaviour
             OnGround = true;
             Once1 = false;
 
+            //地面材質判定
             if (Ghit.collider.tag == "Soil")
             {
                 GroundMaterial = "soil";
@@ -248,6 +230,14 @@ public class ADX_Ray_Rev : MonoBehaviour
             else if (Ghit.collider.tag == "Road")
             {
                 GroundMaterial = "asphalt";
+            }
+            else if (Ghit.collider.tag == "Wood")
+            {
+                GroundMaterial = "wood";
+            }
+            else if (Ghit.collider.tag == "metal")
+            {
+                GroundMaterial = "metal";
             }
             else GroundMaterial = "tile";
         }
@@ -269,19 +259,24 @@ public class ADX_Ray_Rev : MonoBehaviour
         action();
     }
 
-    private void EvoNumCheck()
+    //形態チェック
+    private void ADXEvoNumCheck()
     {
-        if(scrEvo.EvolutionNum == 1)
+        if (scrEvo.EvolutionNum == 0)
         {
-
+            Sound.player.SetSelectorLabel("Chicken_Form", "form1");
         }
         if (scrEvo.EvolutionNum == 1)
         {
-
+            Sound.player.SetSelectorLabel("Chicken_Form", "form2");
         }
-        if (scrEvo.EvolutionNum == 1)
+        if (scrEvo.EvolutionNum == 2)
         {
-
+            Sound.player.SetSelectorLabel("Chicken_Form", "form3");
+        }
+        if (scrEvo.EvolutionNum == 3)
+        {
+            Sound.player.SetSelectorLabel("Chicken_Form", "form4");
         }
     }
 
@@ -291,7 +286,19 @@ public class ADX_Ray_Rev : MonoBehaviour
         if (other.gameObject.tag == "EnemyItem")
         {
             playback2 = Sound.Play("Damage");
-            Debug.Log("hit");
         }
+    }
+
+    //DebugMode
+    private void SoundDebugMode()
+    {
+        if (DebugMode == true && SoundDebugPanel != null)
+        {
+            SoundDebugPanel.gameObject.SetActive(true);
+
+            //Debug材質表示
+            DebugText.text = GroundMaterial;
+        }
+        else { }
     }
 }

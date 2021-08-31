@@ -7,6 +7,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
     [Range(0, 4), SerializeField] protected int tier_WalkAttack;
     [SerializeField] private GameObject divideObject;
     protected string attackSoundName, contactSoundName, ExplosionSoundName, CutterContactSoundName;
+    protected int MaxHP;
     public int HP;                  //Inspector上から設定できます。
     [Header("ダメージ倍率")]
     public float kickMag;       //キックのダメージ倍率
@@ -55,6 +56,8 @@ public class ObjectStateManagement_Y : MonoBehaviour
     public int shardDamage_nonDiv;
     public bool specialObjectFlg;
     [SerializeField] protected bool notDamage;
+    public float magnitude = 0.1f;
+    public float duration = 0.25f;
 
     //Start is called before the first frame update
     protected virtual void Start()
@@ -69,6 +72,8 @@ public class ObjectStateManagement_Y : MonoBehaviour
         //加筆　undertreem 0625
         ADX_RevLevel = player.GetComponent<ADX_Ray_Rev>();
         renderers = CheckRenderer();
+
+        MaxHP = HP;
     }
     public void changeDamageFlg()
     {
@@ -214,7 +219,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
             }
 
             //振動させる
-            StartCoroutine(DoShake(0.25f, 0.1f));
+            StartCoroutine(DoShake(duration, magnitude));
         }
         else Death();    //破壊したときの処理
     }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AISAC_Con_Tset : MonoBehaviour
 {
@@ -22,13 +23,23 @@ public class AISAC_Con_Tset : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (scrEvo.EvolutionNum == 1 && BGMAISAC < 1)
+        if (scrEvo.EvolutionNum == 1 && BGMAISAC < 1 && SceneManager.GetActiveScene().name == "stage1")
         {
             BGMAISAC += 0.02f;
             bgmCriAtomSource.SetAisacControl("BGM_Aisac", BGMAISAC);
-            Debug.Log("EvoSpund");
         }
-    }
 
+        else if (scrEvo.EvolutionNum == 1 &&  SceneManager.GetActiveScene().name == "stage2")
+        {
+            BGMAISAC = 0f;
+        }
+
+        else if (scrEvo.EvolutionNum == 2 && BGMAISAC < 1 && SceneManager.GetActiveScene().name == "stage2")
+        {
+            BGMAISAC += 0.02f;
+            bgmCriAtomSource.SetAisacControl("BGM_Aisac", BGMAISAC);
+        }
+
+    }
 
 }

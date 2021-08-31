@@ -16,7 +16,7 @@ public class Cutter_R : MonoBehaviour
     [Tooltip("落下攻撃時のカッターの初速"), SerializeField] private float cutterFABaseSpeed;
     [Tooltip("落下攻撃時のカッターが地面に到達するまでの速度"), SerializeField] private float dropSpeed;
 
-    [SerializeField] Transition_R scrAnim;
+    [SerializeField] Transition_R[] scrAnim;
 
     private float timer;
     private float catchableTimer;
@@ -94,7 +94,7 @@ public class Cutter_R : MonoBehaviour
                 scrCutter.evoSpeed = 1.0f + scrEvo.EvolutionNum * 4.0f;
                 scrCutter.backArea = backAreaTransform[scrEvo.EvolutionNum];
                 scrCutter.cutterBaseSpeed = cutterBaseSpeed;
-                scrAnim.SetAnimator(Transition_R.Anim.CUTTER, true);
+                scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.CUTTER, true);
                 Sound.Play("CutterMove");
             }
             else
@@ -110,7 +110,7 @@ public class Cutter_R : MonoBehaviour
             if (animTimer <= 0f)
             {
                 animTimer = 0f;
-                scrAnim.SetAnimator(Transition_R.Anim.CUTTER, false);
+                scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.CUTTER, false);
             }
         }
     }

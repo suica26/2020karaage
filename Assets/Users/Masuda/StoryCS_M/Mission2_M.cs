@@ -7,6 +7,7 @@ public class Mission2_M : Missions_M
 {
     public int gasStand, gasTank;
     public string onLoad;
+    public float timer_2_1;
 
     // Start is called before the first frame update
     public override void Start()
@@ -22,6 +23,7 @@ public class Mission2_M : Missions_M
             case "second": SecondMission_2(); break;
             case "third": ThirdMission_2(); break;
             case "fourth": FourthMission_2(); break;
+            case "five": FiveMission_2(); break;
             case "final": FinalMission_2(); break;
             default: FirstMission_2(); break;
         }
@@ -34,6 +36,7 @@ public class Mission2_M : Missions_M
         Vector3 playerPos = player.transform.position;
         Vector3 comPos = company.transform.position;
         float dis = Vector3.Distance(playerPos, comPos);
+        evoNum = scrEvoChi.EvolutionNum;
 
         if (bigNum >= bigBorder4 && first == true)
         {
@@ -59,10 +62,22 @@ public class Mission2_M : Missions_M
 
         if (third && gasTank >= 3)
         {
-            FourthMission_2();
+            if (evoNum >= 2)
+            {
+                FiveMission_2();
+            }
+            else
+            {
+                FourthMission_2();
+            }
         }
 
-        if (fourth)
+        if (evoNum >= 2 && fourth)
+        {
+            timer_2_1 += Time.deltaTime;
+        }
+
+        if (five)
         {
             tipsTimer += Time.deltaTime;
         }
@@ -72,7 +87,12 @@ public class Mission2_M : Missions_M
             buildTips.SetActive(true);
         }
 
-        if (fourth && dis <= 30)
+        if (fourth && timer_2_1 >= 1.0f)
+        {
+            FiveMission_2();
+        }
+
+        if (five && dis <= 50)
         {
             FinalMission_2();
         }
@@ -136,16 +156,32 @@ public class Mission2_M : Missions_M
         load = "fourth";
     }
 
+    public void FiveMission_2()
+    {
+        timer_2_1 = 0;
+        missionSlide.Play();
+        mission.text = splitText[12];
+        submis.text = splitText[13];
+        exmis.text = splitText[14];
+        count.text = "4";
+        third = false;
+        fourth = false;
+        five = true;
+        achieve = 0;
+        per.text = "";
+        load = "five";
+    }
+
     public void FinalMission_2()
     {
         eneBillScr.changeDamageFlg();
 
         missionSlide.Play();
-        mission.text = splitText[12];
-        submis.text = splitText[13];
-        exmis.text = splitText[14];
+        mission.text = splitText[15];
+        submis.text = splitText[16];
+        exmis.text = splitText[17];
         count.text = "5";
-        fourth = false;
+        five = false;
         final = true;
         achieve = 0;
         per.text = "";
