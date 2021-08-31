@@ -156,7 +156,6 @@ public class Parameters_R : MonoBehaviour
                 hp = 0;
                 PlayerPrefs.SetString(saveStage, scrMis.load);
                 PlayerPrefs.Save();
-                Debug.Log(saveStage);//後消し
             }
             hpText.text = "HP: " + hp;
         }

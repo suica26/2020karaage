@@ -16,7 +16,6 @@ public class Mission2_M : Missions_M
         misBox.SetActive(true);
         Time.timeScale = 1;
         onLoad = PlayerPrefs.GetString(scrParame.saveStage, "");
-        Debug.Log(onLoad);//後消し
         switch (onLoad)
         {
             case "first": FirstMission_2(); break;
@@ -27,7 +26,7 @@ public class Mission2_M : Missions_M
             case "final": FinalMission_2(); break;
             default: FirstMission_2(); break;
         }
-        PlayerPrefs.DeleteAll();
+        PlayerPrefs.DeleteKey(onLoad);
     }
 
     // Update is called once per frame
