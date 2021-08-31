@@ -24,6 +24,7 @@ public class EvolutionChicken_R : MonoBehaviour
     private int EP;
 
     private TpsCameraJC_R scrCam;
+    private CriAtomSource Sound;
 
     //ステータス設定用変数
     private int evolutionNum;
@@ -43,9 +44,6 @@ public class EvolutionChicken_R : MonoBehaviour
     public float Status_SPD { get { return status_SPD; } }
     public float Status_SCORE { get { return status_SCORE; } }
     public float Status_JUMP { get { return status_JUMP; } }
-
-    private CriAtomSource audioLavel;
-    private CriAtomSource BGM;
 
     //M
     public int startNum;
@@ -68,6 +66,8 @@ public class EvolutionChicken_R : MonoBehaviour
         scrCam = Camera.main.GetComponent<TpsCameraJC_R>();
 
         scrBlast = GetComponent<MorBlast_R>();
+
+        Sound = GetComponent<CriAtomSource>();
 
         //もともと0、startNumの数字=形態数
         evolutionNum = startNum;
@@ -96,10 +96,6 @@ public class EvolutionChicken_R : MonoBehaviour
             }
         }
 
-        audioLavel = (CriAtomSource)GetComponent("CriAtomSource");
-        //ADX Selector Change
-        audioLavel.player.SetSelectorLabel("Chicken_Form", "form1");
-
     }
 
     // Update is called once per frame
@@ -117,7 +113,7 @@ public class EvolutionChicken_R : MonoBehaviour
         if (evolutionNum < evolutionPoint.Length && EP >= evolutionPoint[evolutionNum])
         {
             evolutionNum++;
-
+            Sound.Play("ShockWave");
             Camera.main.GetComponent<TpsCameraJC_R>().StartCoroutine("CameraWorkEvolution");
 
             var effect = Instantiate(EvoEffect, transform);
@@ -132,9 +128,6 @@ public class EvolutionChicken_R : MonoBehaviour
             chickens[evolutionNum - 1].SetActive(false);
             chickens[evolutionNum].SetActive(true);
 
-            SoundFormCheck();
-            audioLavel.Play("ShockWave");
-
             status_HP = HP[evolutionNum];
             status_ATK = ATK[evolutionNum];
             status_SPD = SPD[evolutionNum];
@@ -144,23 +137,6 @@ public class EvolutionChicken_R : MonoBehaviour
             scrBlast.EvoBlast();
 
             scrCam.evolved = false;
-        }
-    }
-
-    private void SoundFormCheck()
-    {
-        if (evolutionNum == 1)
-        {
-            //ADX Selector Change
-            audioLavel.player.SetSelectorLabel("Chicken_Form", "form2");
-        }
-        if (evolutionNum == 2)
-        {
-            audioLavel.player.SetSelectorLabel("Chicken_Form", "form3");
-        }
-        if (evolutionNum == 4)
-        {
-            audioLavel.player.SetSelectorLabel("Chicken_Form", "form4");
         }
     }
 }
