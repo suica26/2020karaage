@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5472457982006428305}
   - component: {fileID: 1018863235813687258}
   - component: {fileID: 6913371246473747796}
+  - component: {fileID: 2497733979900012675}
   - component: {fileID: 4356213465862684677}
   - component: {fileID: 3040465702832958394}
   - component: {fileID: -1648660066193379979}
@@ -114,7 +115,20 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 127, y: 1915.4822, z: 189}
-  m_Center: {x: 300, y: 400, z: 3.4}
+  m_Center: {x: -352.55, y: -18.6, z: 3.4}
+--- !u!65 &2497733979900012675
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2448828224777624931}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 717.4, y: 91.8, z: 58}
+  m_Center: {x: -13.968765, y: 747.7, z: 0.000034332275}
 --- !u!135 &4356213465862684677
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -157,6 +171,8 @@ MonoBehaviour:
   shardDamage_nonDiv: 500
   specialObjectFlg: 0
   notDamage: 0
+  magnitude: 0.1
+  duration: 0.25
 --- !u!114 &-1648660066193379979
 MonoBehaviour:
   m_ObjectHideFlags: 0
