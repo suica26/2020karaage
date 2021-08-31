@@ -24,6 +24,7 @@ public class EvolutionChicken_R : MonoBehaviour
     private int EP;
 
     private TpsCameraJC_R scrCam;
+    private CriAtomSource Sound;
 
     //ステータス設定用変数
     private int evolutionNum;
@@ -65,6 +66,8 @@ public class EvolutionChicken_R : MonoBehaviour
         scrCam = Camera.main.GetComponent<TpsCameraJC_R>();
 
         scrBlast = GetComponent<MorBlast_R>();
+
+        Sound = GetComponent<CriAtomSource>();
 
         //もともと0、startNumの数字=形態数
         evolutionNum = startNum;
@@ -110,7 +113,7 @@ public class EvolutionChicken_R : MonoBehaviour
         if (evolutionNum < evolutionPoint.Length && EP >= evolutionPoint[evolutionNum])
         {
             evolutionNum++;
-
+            Sound.Play("ShockWave");
             Camera.main.GetComponent<TpsCameraJC_R>().StartCoroutine("CameraWorkEvolution");
 
             var effect = Instantiate(EvoEffect, transform);

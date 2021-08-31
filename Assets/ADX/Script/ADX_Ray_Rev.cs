@@ -15,7 +15,7 @@ public class ADX_Ray_Rev : MonoBehaviour
     private float a, b, c, d, e, f, g, h, i, j, k, l, m, o, p, q, r, TownNoizeNum, Num, TownNoizeEQNum, EQNum;
     private float Ypos, velocity;
     public bool DebugMode;
-    public float span = 0f;
+    private float span = 0.2f;
     private float currentTime = 0f;
     private float True_RevSendLev;
     private CriAtomSource Sound;
