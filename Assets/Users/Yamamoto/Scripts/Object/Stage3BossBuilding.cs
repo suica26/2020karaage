@@ -1,13 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Stage3BossBuilding : ObjectStateManagement_Y
 {
     private bool[] phase = new bool[3] { false, false, false };
     public float launchPower;
     public Vector3[] launchPos;
-    public GameObject[] enemyData;
+    public GameObject[] enemyPrefabs;
+    public int[] phaseEnemyNum;
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Return)) Damage(kickMag, 1);
+    }
 
     public override void Damage(float mag, int skill)
     {
@@ -41,30 +48,33 @@ public class Stage3BossBuilding : ObjectStateManagement_Y
         //すでにそのphaseでLaunch済みであれば無視
         else if (phase[phaseNum]) return;
 
+        Debug.Log($"Phase : {phaseNum + 1}");
         StartCoroutine(LaunchEnemys(phaseNum));
     }
 
     private IEnumerator LaunchEnemys(int phaseNum)
     {
-        //負荷軽減のためにコルーチンで疑似非同期化
-        foreach (Transform enemy in enemyData[phaseNum].transform)
+        for (int i = 0; i < 3; i++)
         {
-            GameObject e = Instantiate(enemy.gameObject, launchPos[phaseNum], Quaternion.identity);
-            var rb = e.GetComponent<Rigidbody>();
-            var dir = Vector3.zero;
-
-            //射出方向の抽選
-            while (true)
+            for (int j = 0; j < phaseEnemyNum[i + phaseNum * 3]; j++)
             {
-                dir = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
-                if (dir.magnitude >= 1f) break;
+                GameObject e = Instantiate(enemyPrefabs[i].gameObject, launchPos[i], Quaternion.identity);
+                var rb = e.GetComponent<Rigidbody>();
+                var dir = Vector3.zero;
+
+                //射出方向の抽選
+                while (true)
+                {
+                    dir = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
+                    if (dir.magnitude >= 1f) break;
+                }
+
+                e.transform.eulerAngles = dir;
+                dir.y = 2f;
+                rb.AddForce(dir * launchPower, ForceMode.Impulse);
+
+                yield return null;
             }
-
-            e.transform.eulerAngles = dir;
-            dir.y = 2f;
-            rb.AddForce(dir * launchPower, ForceMode.Impulse);
-
-            yield return null;
         }
     }
 }
