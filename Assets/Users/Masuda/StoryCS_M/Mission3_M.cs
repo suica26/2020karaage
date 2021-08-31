@@ -5,7 +5,7 @@ using UnityEngine;
 public class Mission3_M : Missions_M
 {
     public string onLoad;
-
+    public GameObject eneBill;
     public override void Start()
     {
         base.Start();
@@ -19,7 +19,7 @@ public class Mission3_M : Missions_M
             case "second": SecondMission_3(); break;
             default: FirstMission_3(); break;
         }
-        PlayerPrefs.DeleteAll();
+        PlayerPrefs.DeleteKey(onLoad);
     }
 
     // Update is called once per frame
@@ -29,6 +29,11 @@ public class Mission3_M : Missions_M
         if (evoNum >= 3 && first)
         {
             SecondMission_3();
+        }
+
+        if (!eneBill)
+        {
+            PlayerPrefs.SetString("storyClear", "clear");
         }
     }
 
