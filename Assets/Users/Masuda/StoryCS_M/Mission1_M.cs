@@ -35,7 +35,6 @@ public class Mission1_M : Missions_M
             mission.text = splitText[0];
             submis.text = splitText[1];
             exmis.text = splitText[2];
-            count.text = "1";
             first = false;
             second = true;
             per.text = "0%";
@@ -47,7 +46,6 @@ public class Mission1_M : Missions_M
             mission.text = splitText[3];
             submis.text = splitText[4];
             exmis.text = splitText[5];
-            count.text = "2";
             second = false;
             third = true;
             achieve = 0;
@@ -59,7 +57,6 @@ public class Mission1_M : Missions_M
             mission.text = splitText[3];
             submis.text = splitText[4];
             exmis.text = splitText[5];
-            count.text = "2";
             second = false;
             third = true;
             achieve = 0;
@@ -71,7 +68,6 @@ public class Mission1_M : Missions_M
             mission.text = splitText[3];
             submis.text = splitText[4];
             exmis.text = splitText[5];
-            count.text = "2";
             second = false;
             third = true;
             achieve = 0;
@@ -83,7 +79,6 @@ public class Mission1_M : Missions_M
             mission.text = splitText[3];
             submis.text = splitText[4];
             exmis.text = splitText[5];
-            count.text = "2";
             second = false;
             third = true;
             achieve = 0;
@@ -98,7 +93,6 @@ public class Mission1_M : Missions_M
             mission.text = splitText[6];
             submis.text = splitText[7];
             exmis.text = splitText[8];
-            count.text = "3";
             achieve = 0;
             per.text = achieve + "/ 3";
             hipStamp = true;
@@ -140,7 +134,6 @@ public class Mission1_M : Missions_M
                 mission.text = splitText[12];
                 submis.text = splitText[13];
                 exmis.text = splitText[14];
-                count.text = "4";
                 per.text = "";
             }
 
@@ -152,7 +145,6 @@ public class Mission1_M : Missions_M
                 mission.text = splitText[9];
                 submis.text = splitText[10];
                 exmis.text = splitText[11];
-                count.text = "4";
                 per.text = "";
             }
         }
@@ -171,7 +163,6 @@ public class Mission1_M : Missions_M
             mission.text = splitText[12];
             submis.text = splitText[13];
             exmis.text = splitText[14];
-            count.text = "4";
             per.text = "";
         }
 
@@ -189,7 +180,6 @@ public class Mission1_M : Missions_M
             mission.text = splitText[15];
             submis.text = splitText[16];
             exmis.text = splitText[17];
-            count.text = "5";
             final = false;
         }
 
@@ -212,7 +202,6 @@ public class Mission1_M : Missions_M
             mission.text = splitText[3];
             submis.text = splitText[4];
             exmis.text = splitText[5];
-            count.text = "2";
             second = false;
             third = true;
             achieve = 0;

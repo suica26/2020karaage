@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class Missions_M : MonoBehaviour
 {
-    [SerializeField] public Text mission, submis, exmis, count, per, tips, mainCount;
+    [SerializeField] public Text mission, submis, exmis, per, tips;
     [SerializeField]
     public GameObject player, misBox, company, buildTips, tipsChicken;
     [SerializeField] public TextAsset txtFile;
-    [SerializeField] public int smallNum, bigNum, achieve, main, hitID;
+    [SerializeField] public int smallNum, bigNum, achieve, hitID;
     [SerializeField] public int smallBorder1, smallBorder2, smallBorder3,
                                 bigBorder1, bigBorder2, bigBorder3, bigBorder4;
     public bool first = true, second = false, third = false, fourth = false, five = false, final = false, tip = false;
@@ -17,8 +17,6 @@ public class Missions_M : MonoBehaviour
     public string[] splitText;
     [SerializeField] public Animation missionSlide;
     [SerializeField] public float timer, tipsTimer;
-    public Animator animator;
-    public string misStr = "isMission";
     [SerializeField] public ObjectStateManagement_Y eneBillScr;
     public bool stage2;
     public Parameters_R scrParame;
@@ -28,13 +26,11 @@ public class Missions_M : MonoBehaviour
 
     public virtual void Start()
     {
-        mainCount.text += main;
         txtData = txtFile.text;
         splitText = txtData.Split(char.Parse("\n"));
         //misBox.SetActive(false);
         buildTips.SetActive(false);
         tipsChicken.SetActive(false);
-        animator = misBox.GetComponent<Animator>();
     }
 
     public virtual void BigNumberPlus()

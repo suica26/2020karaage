@@ -12,7 +12,6 @@ public class Mission3_M : Missions_M
         misBox.SetActive(true);
         Time.timeScale = 1;
         onLoad = PlayerPrefs.GetString(scrParame.saveStage, "");
-        Debug.Log(onLoad);//後消し
         switch (onLoad)
         {
             case "first": FirstMission_3(); break;
@@ -43,7 +42,6 @@ public class Mission3_M : Missions_M
         mission.text = splitText[0];
         submis.text = splitText[1];
         exmis.text = splitText[2];
-        count.text = "1";
         per.text = "0%";
         load = "first";
     }
@@ -54,7 +52,6 @@ public class Mission3_M : Missions_M
         mission.text = splitText[3];
         submis.text = splitText[4];
         exmis.text = splitText[5];
-        count.text = "1";
         per.text = "0%";
         load = "second";
         first = false;
