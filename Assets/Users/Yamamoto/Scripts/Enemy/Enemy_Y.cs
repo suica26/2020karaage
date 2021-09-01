@@ -29,7 +29,7 @@ public class Enemy_Y : ObjectStateManagement_Y
     }
 
     //基本挙動を記述
-    protected void Update()
+    protected virtual void Update()
     {
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Death"))
         {
