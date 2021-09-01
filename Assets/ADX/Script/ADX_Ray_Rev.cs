@@ -70,6 +70,8 @@ public class ADX_Ray_Rev : MonoBehaviour
         {
             Stagename = "Other";
         }
+        //後で消す
+        Sound.player.SetSelectorLabel("Selector_Floor", "asphalt");
     }
 
     // Update is called once per frame
@@ -155,7 +157,7 @@ public class ADX_Ray_Rev : MonoBehaviour
 
             Once = true;
         }
-        Sound.player.SetSelectorLabel("Selector_Floor", GroundMaterial);
+        //Sound.player.SetSelectorLabel("Selector_Floor", GroundMaterial);
 
         SoundDebugMode();
 
