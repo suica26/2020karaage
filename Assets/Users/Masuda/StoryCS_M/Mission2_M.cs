@@ -8,6 +8,7 @@ public class Mission2_M : Missions_M
     public int gasStand, gasTank;
     public string onLoad;
     public float timer_2_1;
+    public GameObject bossIcon;
 
     // Start is called before the first frame update
     public override void Start()
@@ -153,6 +154,8 @@ public class Mission2_M : Missions_M
 
     public void FiveMission_2()
     {
+        bossIcon.SetActive(true);
+
         timer_2_1 = 0;
         missionSlide.Play();
         mission.text = splitText[12];

@@ -5,10 +5,11 @@ using UnityEngine.UI;
 
 public class Mission1_M : Missions_M
 {
-    public GameObject hip,shop,evoPanel;
+    public GameObject hip, shop, evoPanel;
     public int manhole, hydrant, evoCount;
     public bool hipStamp = false, evolution = false;
-    public float timer2,timer3;
+    public float timer2, timer3;
+    public GameObject bossIcon;
 
     public override void Start()
     {
@@ -156,6 +157,10 @@ public class Mission1_M : Missions_M
 
         if (timer3 >= 1.0f && five)
         {
+            bossIcon.SetActive(true);
+            //一時的に、アジトを探すミッションが発動した時点でミニマップアイコンが見えるように挙動修正 山本
+            buildTips.SetActive(true);
+
             timer3 = 0;
             five = false;
             final = true;
