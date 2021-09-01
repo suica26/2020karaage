@@ -6,6 +6,8 @@ public class TargetIcon_Y : MiniMapIcon_Y
 {
     public float radius;
     private GameObject player;
+    public GameObject triangle;
+    public GameObject sphere;
     // Start is called before the first frame update
     private void Start()
     {
@@ -22,11 +24,16 @@ public class TargetIcon_Y : MiniMapIcon_Y
         {
             var t = target.transform.position;
             transform.position = new Vector3(t.x, y, t.z);
+            triangle.SetActive(false);
+            sphere.SetActive(true);
         }
         else
         {
             dir = dir.normalized * radius;
             transform.position = new Vector3(p.x + dir.x, y, p.z + dir.z);
+            transform.forward = dir;
+            triangle.SetActive(true);
+            sphere.SetActive(false);
         }
     }
 }

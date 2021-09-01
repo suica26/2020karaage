@@ -10,7 +10,8 @@ public class Missions_M : MonoBehaviour
     public GameObject player, misBox, company, buildTips, tipsChicken;
     [SerializeField] public TextAsset txtFile;
     [SerializeField] public int smallNum, bigNum, achieve, hitID;
-    [SerializeField] public int smallBorder1, smallBorder2, smallBorder3,
+    [SerializeField]
+    public int smallBorder1, smallBorder2, smallBorder3,
                                 bigBorder1, bigBorder2, bigBorder3, bigBorder4;
     public bool first = true, second = false, third = false, fourth = false, five = false, final = false, tip = false;
     public string txtData;
@@ -44,7 +45,7 @@ public class Missions_M : MonoBehaviour
 
         else if (first && stage2)
         {
-            
+
             if (hitID == 3)
             {
                 bigNum++;
@@ -60,7 +61,7 @@ public class Missions_M : MonoBehaviour
         }
     }
     public virtual void SmallNumberPlus()
-    {        
+    {
         if (second && !stage2)
         {
             smallNum++;
