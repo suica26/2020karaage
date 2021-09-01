@@ -147,7 +147,7 @@ public class ADX_Ray_Rev : MonoBehaviour
         //Debug.Log(scrMove._isFlying);
 
         //接地＆材質判定
-        OnGround = GloundRays(0.5f);
+        OnGround = GloundRays(0.05f);
 
         if (OnGround == true & Once == false)
         {
