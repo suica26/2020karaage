@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class Mission3_M : Missions_M
 {
-    public string onLoad;
+    public string onLoad_s3;
     public GameObject eneBill;
     public override void Start()
     {
         base.Start();
         misBox.SetActive(true);
         Time.timeScale = 1;
-        onLoad = PlayerPrefs.GetString(scrParame.saveStage, "");
-        switch (onLoad)
+        onLoad_s3 = PlayerPrefs.GetString(scrParame.saveStage, "");
+        switch (onLoad_s3)
         {
             case "first": FirstMission_3(); break;
             case "second": SecondMission_3(); break;
             default: FirstMission_3(); break;
         }
-        PlayerPrefs.DeleteKey(onLoad);
+        PlayerPrefs.DeleteKey(onLoad_s3);
     }
 
     // Update is called once per frame
