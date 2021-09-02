@@ -10,7 +10,6 @@ public class GasTankCount_M : MonoBehaviour
     public GameObject player;
     public Vector3 pos,prePos;
     public bool drop;
-    private int tankHP;
     public Text achieve;
         
     void Start()
@@ -25,25 +24,10 @@ public class GasTankCount_M : MonoBehaviour
     void Update()
     {
         pos = this.gameObject.gameObject.transform.position;
-        tankHP = osmY.HP;
-        /*if (tankHP == 0 && m2m.third)
-        {
-            m2m.gasTank += 1;
-            m2m.achieve += 1;
-            achieve.text = m2m.achieve + " / 3";
-        }*/
 
         if (pos.y <= prePos.y-5 && m2m.third)
         {
             prePos.y = -1000;
-            m2m.gasTank += 1;
-            m2m.achieve += 1;
-            achieve.text = m2m.achieve + " / 3";
-        }
-
-        //救済
-        if (!this.gameObject)
-        {
             m2m.gasTank += 1;
             m2m.achieve += 1;
             achieve.text = m2m.achieve + " / 3";
