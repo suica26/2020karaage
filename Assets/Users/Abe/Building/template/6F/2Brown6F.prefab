@@ -154,10 +154,10 @@ MonoBehaviour:
   divideObject: {fileID: 1435620989390794633, guid: 5f33ff5e3dfa8cc43aa6f9300e0686a6,
     type: 3}
   HP: 2500
-  kickMag: 0.7
-  blastMag: 0.75
-  cutterMag: 1.1
-  fallAttackMag: 0.8
+  kickMag: 0.85
+  blastMag: 1
+  cutterMag: 1
+  fallAttackMag: 1
   breakScore: 400000
   objectID: 0
   breakEffect: {fileID: 311248781918492841, guid: b393eb1a6c9aede41a72e76abfea12dd,
@@ -169,6 +169,8 @@ MonoBehaviour:
   shardDamage_nonDiv: 2500
   specialObjectFlg: 0
   notDamage: 0
+  magnitude: 0.1
+  duration: 0.25
 --- !u!114 &-7488959590682755053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,7 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objFood: {fileID: 5882868508514077054, guid: 52bb1160a73b4b848953812cb2383dfc, type: 3}
-  minFood: 8
+  minFood: 7
   maxFood: 10
 --- !u!54 &3552126725660861516
 Rigidbody:
