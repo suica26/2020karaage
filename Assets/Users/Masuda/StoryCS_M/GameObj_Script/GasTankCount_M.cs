@@ -7,6 +7,7 @@ public class GasTankCount_M : MonoBehaviour
 {
     private Mission2_M m2m;
     private ObjectStateManagement_Y osmY;
+    private FireHydrant_R fireHyd;
     public GameObject player;
     public Vector3 pos,prePos;
     public bool drop;
@@ -16,6 +17,7 @@ public class GasTankCount_M : MonoBehaviour
     {
         player = GameObject.Find("Player");
         m2m = player.GetComponent<Mission2_M>();
+        fireHyd = this.GetComponent<FireHydrant_R>();
         osmY = this.gameObject.GetComponent<ObjectStateManagement_Y>();
         prePos = this.gameObject.gameObject.transform.position;
     }
@@ -25,7 +27,15 @@ public class GasTankCount_M : MonoBehaviour
     {
         pos = this.gameObject.gameObject.transform.position;
 
-        if (pos.y <= prePos.y-5 && m2m.third)
+        /*if (pos.y <= prePos.y-5 && m2m.third)
+        {
+            prePos.y = -1000;
+            m2m.gasTank += 1;
+            m2m.achieve += 1;
+            achieve.text = m2m.achieve + " / 3";
+        }*/
+
+        if (fireHyd.makeHydrant)
         {
             prePos.y = -1000;
             m2m.gasTank += 1;

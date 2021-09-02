@@ -29,7 +29,7 @@ public class Mission1_M : Missions_M
         evoCount = scrParame.ep;
         evoNum = scrEvoChi.nowEvoNum;
 
-        if (!shop && first)
+        if (!shop)
         {
             misBox.SetActive(true);
             missionSlide.Play();

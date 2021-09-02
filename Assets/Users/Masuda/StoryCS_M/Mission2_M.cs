@@ -27,7 +27,7 @@ public class Mission2_M : Missions_M
             case "final": FinalMission_2(); break;
             default: FirstMission_2(); break;
         }
-        PlayerPrefs.DeleteKey(onLoad);
+        PlayerPrefs.DeleteKey(scrParame.saveStage);
     }
 
     // Update is called once per frame
@@ -105,6 +105,7 @@ public class Mission2_M : Missions_M
 
     public void FirstMission_2()
     {
+        first = true;
         missionSlide.Play();
         mission.text = splitText[0];
         submis.text = splitText[1];
