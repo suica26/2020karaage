@@ -2236,7 +2236,7 @@ MonoBehaviour:
   HitPoint: {fileID: 3013925485706282491, guid: 8ff5e0dae44224a4f9034835ecc0efbd,
     type: 3}
   SoundDebugPanel: {fileID: 3051248698790946046}
-  DebugMode: 1
+  DebugMode: 0
   TownNoizeCon: {fileID: 3051248696776623923}
 --- !u!82 &4177734382547650486
 AudioSource:
@@ -3763,7 +3763,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playOnStart: 1
+  _playOnStart: 0
   _cueName: BGM01
   _cueSheet: BGM
   _regionOnStart: {fileID: 0}
@@ -8343,7 +8343,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3051248696776623922}
-  - component: {fileID: 3051248696776623925}
   - component: {fileID: 3051248696776623923}
   m_Layer: 0
   m_Name: SoundObject
@@ -8362,23 +8361,11 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -154.2045, y: 36.491005, z: -540.79956}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 5697247849454370168}
   m_Father: {fileID: 3051248697233895099}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3051248696776623925
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3051248696776623924}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce04980091be44acca1b48f22bc6de1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bgmCriAtomSource: {fileID: 2482979785076293278}
 --- !u!114 &3051248696776623923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10510,7 +10497,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3051248698388823886}
   m_LocalRotation: {x: -0.009075622, y: 0.0000319216, z: -0.0035171243, w: 0.9999527}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 0.9599999, y: 0.9700001, z: 5.4127917}
   m_Children: []
   m_Father: {fileID: 3051248698790946045}
@@ -10518,7 +10505,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: -1.04, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 136.51956, y: -26.12439}
+  m_AnchoredPosition: {x: 145, y: -20}
   m_SizeDelta: {x: 763.81, y: 139.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3051248698388823885
@@ -10550,17 +10537,17 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 30
+    m_FontSize: 31
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 9
+    m_MinSize: 2
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 2.49
+    m_LineSpacing: 1
   m_Text: 
 --- !u!1 &3051248698459840316
 GameObject:
@@ -11091,7 +11078,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.40300003}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 258, y: 350}
+  m_AnchoredPosition: {x: 514, y: 352}
   m_SizeDelta: {x: -1120.4348, y: -771.3988}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3051248698790946044
@@ -22167,6 +22154,74 @@ Transform:
   m_Father: {fileID: 5416253156243412464}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7943368437551166402
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5697247849454370168}
+  - component: {fileID: 6236204191698540080}
+  - component: {fileID: 3294166897820525550}
+  m_Layer: 0
+  m_Name: BGMObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5697247849454370168
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7943368437551166402}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 993.6074, y: 682.2104, z: 681.7903}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3051248696776623922}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6236204191698540080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7943368437551166402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: BGM01
+  _cueSheet: BGM
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
+--- !u!114 &3294166897820525550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7943368437551166402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce04980091be44acca1b48f22bc6de1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgmCriAtomSource: {fileID: 6236204191698540080}
 --- !u!1 &8021141387703396754
 GameObject:
   m_ObjectHideFlags: 0

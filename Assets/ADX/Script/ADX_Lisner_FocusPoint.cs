@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class ADX_Lisner_FocusPoint : MonoBehaviour
 {
@@ -105,6 +102,6 @@ public class ADX_Lisner_FocusPoint : MonoBehaviour
             directionFocusLevel = 0.8f;
             distanceFocusLevel = 0.3f;
         }
-        else { Debug.Log("EvoNumCheck is Errer"); }
+        else { Debug.Log("EvoNumCheck Sound is Errer"); }
     }
 }

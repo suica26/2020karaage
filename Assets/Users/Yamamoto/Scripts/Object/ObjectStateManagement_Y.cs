@@ -33,7 +33,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
     protected FoodMaker_R scrFood;
     protected EvolutionChicken_R scrEvo;
     //加筆　undertreem 0625
-    protected ADX_Ray_Rev ADX_RevLevel;
+    protected ADX_SoundRaycast ADX_RevLevel;
     protected string Rev; //ADXバス名
     /// <summary>
     /// 0:踏み潰し攻撃
@@ -70,7 +70,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
         scrFood = GetComponent<FoodMaker_R>();
         criAtomSource = GetComponent<CriAtomSource>();
         //加筆　undertreem 0625
-        ADX_RevLevel = player.GetComponent<ADX_Ray_Rev>();
+        ADX_RevLevel = player.GetComponent<ADX_SoundRaycast>();
         renderers = CheckRenderer();
 
         MaxHP = HP;
@@ -204,8 +204,8 @@ public class ObjectStateManagement_Y : MonoBehaviour
             //カッターの時
             if (hitSkilID == 2)
             {
-                //SetCutterContactCue();
-                criAtomSource.Play("CutterContract");
+                SetCutterContactCue();
+                criAtomSource.Play(CutterContactSoundName);
             }
             else if (hitSkilID == 3)//おはようブラストの時
             {
@@ -261,8 +261,20 @@ public class ObjectStateManagement_Y : MonoBehaviour
     {
         switch (objectID)
         {
-            //後で入れます
-            default: break;
+            case 0: CutterContactSoundName = "CutterContract"; break;
+            case 1: CutterContactSoundName = "Cutter_C_pole00"; break;
+            case 2: CutterContactSoundName = "CutterContract"; break;
+            case 3: CutterContactSoundName = "CutterContract"; break;
+            case 4: CutterContactSoundName = "CutterContract"; break;
+            case 5: CutterContactSoundName = "CutterContract"; break;
+            case 6: CutterContactSoundName = "CutterContract"; break;
+            case 7: CutterContactSoundName = "CutterTree00"; break;
+            case 8: CutterContactSoundName = "Cutter_C_firehydrant00"; break;
+            case 9: CutterContactSoundName = "Cutter_C_pole00"; break;
+            case 10: CutterContactSoundName = "CutterContract0"; break;
+            case 11: CutterContactSoundName = "ChefContact"; break;
+            case 12: CutterContactSoundName = "PoliceContact"; break;
+            default: CutterContactSoundName = "CutterContract"; break;
         }
         if (criAtomSource != null) criAtomSource.cueName = CutterContactSoundName;
     }

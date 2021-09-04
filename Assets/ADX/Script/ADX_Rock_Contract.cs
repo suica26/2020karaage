@@ -5,7 +5,7 @@ using UnityEngine;
 public class ADX_Rock_Contract : MonoBehaviour
 {
     private  CriAtomSource ContractSound;
-    private ADX_Ray_Rev ADX_RevLevel_L, ADX_RevLevel_R;
+    private ADX_SoundRaycast ADX_RevLevel_L, ADX_RevLevel_R;
     private string Rev_L,Rev_R; //ADXバス名
     public GameObject player { get; private set; }
     private bool isCalledOnce = false;
