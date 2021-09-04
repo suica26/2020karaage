@@ -5,13 +5,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class ADX_Ray_Rev : MonoBehaviour
+public class ADX_SoundRaycast : MonoBehaviour
 {
 
     private float RevSendLev_R, RevSendLev_L;
     public Text SoundDebugText;
     public GameObject Debug_RevSendLevel, HitPoint, SoundDebugPanel;
-    private bool A, Once, Once1, OnGround;
+    private bool A, Once, Once1, OnGround, MaterialChange;
     private float a, b, c, d, e, f, g, h, i, j, k, l, m, o, p, q, r, TownNoizeNum, Num, TownNoizeEQNum, EQNum;
     private float Ypos, velocity;
     public bool DebugMode;
@@ -21,7 +21,7 @@ public class ADX_Ray_Rev : MonoBehaviour
     private CriAtomSource Sound;
     [Header("ベースノイズキューのCriAtomSouceをセット")]
     public CriAtomSource TownNoizeCon;
-    private string GroundMaterial;
+    private string GroundMaterial, GroundMaterial0, EvolutionNum, EvolutionNum0;
     private new Rigidbody rigidbody;
     CriAtomExPlayback playback1, playback2;
     CharaMoveRigid_R scrMove;
@@ -48,7 +48,6 @@ public class ADX_Ray_Rev : MonoBehaviour
     {
         //this.RevSendLevel = Debug_RevSendLevel.GetComponent<Text>();
         DebugText = SoundDebugText.GetComponent<Text>();
-        DebugMode = false;
         Sound = GetComponent<CriAtomSource>();
         Once = true;
         Once1 = true;
@@ -57,6 +56,9 @@ public class ADX_Ray_Rev : MonoBehaviour
         rigidbody = this.GetComponent<Rigidbody>();
         scrMove = GetComponent<CharaMoveRigid_R>();
         scrEvo = GetComponent<EvolutionChicken_R>();
+
+        //デフォルト形態セレクターセット
+        Sound.player.SetSelectorLabel("Chicken_Form", "form1");
 
         if (SceneManager.GetActiveScene().name == "stage1")
         {
@@ -70,8 +72,6 @@ public class ADX_Ray_Rev : MonoBehaviour
         {
             Stagename = "Other";
         }
-        //後で消す
-        Sound.player.SetSelectorLabel("Selector_Floor", "asphalt");
     }
 
     // Update is called once per frame
@@ -149,7 +149,7 @@ public class ADX_Ray_Rev : MonoBehaviour
         //Debug.Log(scrMove._isFlying);
 
         //接地＆材質判定
-        OnGround = GloundRays(0.05f);
+        OnGround = GloundRays(0.6f);
 
         if (OnGround == true & Once == false)
         {
@@ -157,11 +157,8 @@ public class ADX_Ray_Rev : MonoBehaviour
 
             Once = true;
         }
-        //Sound.player.SetSelectorLabel("Selector_Floor", GroundMaterial);
 
         SoundDebugMode();
-
-
     }
 
     //RayCastメソッド
@@ -201,8 +198,7 @@ public class ADX_Ray_Rev : MonoBehaviour
         {
             Num = 0f;
         }
-        //Aがtrueなら返り値は　1
-        //Aがfalseなら返り値は　0
+
         return Num;
     }
 
@@ -210,10 +206,10 @@ public class ADX_Ray_Rev : MonoBehaviour
     private bool GloundRays(float Glounddistance)
     {
         //Rayの作成　　　　
-        Ray Gray = new Ray(transform.position, Vector3.down);
+        Ray Gray = new Ray(transform.position + new Vector3(0.0f, 0.5f, 0.0f), Vector3.down);
         RaycastHit Ghit;
         //Rayの可視化 
-        Debug.DrawRay(Gray.origin, Gray.direction * Glounddistance, Color.black);
+        Debug.DrawRay(Gray.origin, Gray.direction * Glounddistance, Color.green);
         //Rayにオブジェクトが衝突したら
         if (Physics.Raycast(Gray, out Ghit, Glounddistance))
         {
@@ -224,24 +220,33 @@ public class ADX_Ray_Rev : MonoBehaviour
             OnGround = true;
             Once1 = false;
 
-            //地面材質判定
-            if (Ghit.collider.tag == "Soil")
+
+            //1回だけ地面材質判定
+            if (GroundMaterial != GroundMaterial0)
             {
-                GroundMaterial = "soil";
+                GroundMaterial = GroundMaterial0;
+                Sound.player.SetSelectorLabel("Selector_Floor", GroundMaterial);
             }
-            else if (Ghit.collider.tag == "Road")
+            else
             {
-                GroundMaterial = "asphalt";
+                if (Ghit.collider.tag == "Soil")
+                {
+                    GroundMaterial0 = "soil";
+                }
+                else if (Ghit.collider.tag == "Road")
+                {
+                    GroundMaterial0 = "asphalt";
+                }
+                else if (Ghit.collider.tag == "Wood")
+                {
+                    GroundMaterial0 = "wood";
+                }
+                else if (Ghit.collider.tag == "metal")
+                {
+                    GroundMaterial0 = "metal";
+                }
+                else GroundMaterial0 = "tile";
             }
-            else if (Ghit.collider.tag == "Wood")
-            {
-                GroundMaterial = "wood";
-            }
-            else if (Ghit.collider.tag == "metal")
-            {
-                GroundMaterial = "metal";
-            }
-            else GroundMaterial = "tile";
         }
         else
         {
@@ -264,22 +269,33 @@ public class ADX_Ray_Rev : MonoBehaviour
     //形態チェック
     private void ADXEvoNumCheck()
     {
-        if (scrEvo.EvolutionNum == 0)
+        //進化時1回だけ
+        if(EvolutionNum != EvolutionNum0)
         {
-            Sound.player.SetSelectorLabel("Chicken_Form", "form1");
+            EvolutionNum = EvolutionNum0;
+            Sound.player.SetSelectorLabel("Chicken_Form", EvolutionNum);
         }
-        if (scrEvo.EvolutionNum == 1)
+        else
         {
-            Sound.player.SetSelectorLabel("Chicken_Form", "form2");
+            if (scrEvo.EvolutionNum == 0)
+            {
+                EvolutionNum0 = "form1";
+            }
+            if (scrEvo.EvolutionNum == 1)
+            {
+                EvolutionNum0 = "form2";
+            }
+            if (scrEvo.EvolutionNum == 2)
+            {
+                EvolutionNum0 = "form3";
+            }
+            if (scrEvo.EvolutionNum == 3)
+            {
+                EvolutionNum0 = "form4";
+            }
         }
-        if (scrEvo.EvolutionNum == 2)
-        {
-            Sound.player.SetSelectorLabel("Chicken_Form", "form3");
-        }
-        if (scrEvo.EvolutionNum == 3)
-        {
-            Sound.player.SetSelectorLabel("Chicken_Form", "form4");
-        }
+        //St.0だけ別
+        if (SceneManager.GetActiveScene().name == "stage0") Sound.player.SetSelectorLabel("Chicken_Form", "St0");
     }
 
     //DamegeSound
@@ -294,13 +310,12 @@ public class ADX_Ray_Rev : MonoBehaviour
     //DebugMode
     private void SoundDebugMode()
     {
-        if (DebugMode == true && SoundDebugPanel != null)
+        if (DebugMode == true)
         {
             SoundDebugPanel.gameObject.SetActive(true);
 
-            //Debug材質表示
-            DebugText.text = GroundMaterial;
+            //Debug表示
+            DebugText.text = "SoundDebug\nGroundMaterial:" + GroundMaterial + "\nChickenForm:" + EvolutionNum;
         }
-        else { }
     }
 }

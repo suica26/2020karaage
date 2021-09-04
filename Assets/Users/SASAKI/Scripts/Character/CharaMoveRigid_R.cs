@@ -73,7 +73,7 @@ public class CharaMoveRigid_R : MonoBehaviour
     private new CriAtomSource audio;
     CriAtomExPlayback JumpS, WalkVoiceS, FootS, IdleVoiceS;
     //加筆　undertreem 0628
-    private ADX_Ray_Rev ADX_RevLevel_L, ADX_RevLevel_R;
+    private ADX_SoundRaycast ADX_RevLevel_L, ADX_RevLevel_R;
     private float BusLevel_L, BusLevel_R;
 
     void Start()
@@ -87,8 +87,8 @@ public class CharaMoveRigid_R : MonoBehaviour
         stunned = false;
         audio = (CriAtomSource)GetComponent("CriAtomSource");
         //加筆　undertreem 0628
-        ADX_RevLevel_L = GetComponent<ADX_Ray_Rev>();
-        ADX_RevLevel_R = GetComponent<ADX_Ray_Rev>();
+        ADX_RevLevel_L = GetComponent<ADX_SoundRaycast>();
+        ADX_RevLevel_R = GetComponent<ADX_SoundRaycast>();
 
         //山本加筆 BusLevelがStage0でNullException吐きまくってたので、初期化付けました
     }

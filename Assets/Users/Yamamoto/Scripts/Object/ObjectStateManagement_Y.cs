@@ -33,7 +33,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
     protected FoodMaker_R scrFood;
     protected EvolutionChicken_R scrEvo;
     //加筆　undertreem 0625
-    protected ADX_Ray_Rev ADX_RevLevel;
+    protected ADX_SoundRaycast ADX_RevLevel;
     protected string Rev; //ADXバス名
     /// <summary>
     /// 0:踏み潰し攻撃
@@ -70,7 +70,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
         scrFood = GetComponent<FoodMaker_R>();
         criAtomSource = GetComponent<CriAtomSource>();
         //加筆　undertreem 0625
-        ADX_RevLevel = player.GetComponent<ADX_Ray_Rev>();
+        ADX_RevLevel = player.GetComponent<ADX_SoundRaycast>();
         renderers = CheckRenderer();
 
         MaxHP = HP;
