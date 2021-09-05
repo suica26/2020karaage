@@ -189,14 +189,14 @@ public class Mission1_M : Missions_M
             final = false;
         }
 
-        if (tipsTimer >= 180 && !tip)
+        if (tipsTimer >= 30 && !tip)
         {
             tips.text = "アジトは金色に輝いているみたい...？？";
             tip = true;
             tipsChicken.SetActive(true);
         }
 
-        else if (tipsTimer >= 300 && tip)
+        else if (tipsTimer >= 60 && tip)
         {
             tips.text = "消火栓やマンホールを使って\n見渡してみよう...！";
             buildTips.SetActive(true);
