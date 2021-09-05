@@ -40,6 +40,16 @@ public class MorBlast_R : MonoBehaviour
 
     private new CriAtomSource audio;
 
+    // Mobile Setting
+    private bool mobileMode;
+    private enum eBlast
+    {
+        wait,
+        push,
+        release,
+    }
+    private eBlast isBlastMobile;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,6 +61,10 @@ public class MorBlast_R : MonoBehaviour
         Debug.LogError("scrKick: " + scrKick);
         Debug.LogError("scrCutter: " + scrCutter);
         isBlast = false;
+
+        mobileMode = MobileSetting_R.GetInstance().IsMobileMode();
+        if (mobileMode)
+            isBlastMobile = eBlast.wait;
     }
 
     // Update is called once per frame
@@ -61,71 +75,22 @@ public class MorBlast_R : MonoBehaviour
             return;
         }
 
-        if (Input.GetMouseButton(2) && !isBlast)
+        if(!mobileMode)
         {
-            // 移動速度の減衰
-            if (scrMove != null)
-                scrMove.MoveMag = 1.0f - moveSpeedMag;
+            if (Input.GetMouseButton(2) && !isBlast)
+                ChargeBlast();
 
-            // キックを使用不可にする
-            if (scrKick != null)
-                scrKick.CanKick = false;
-
-            // カッターを使用不可にする
-            if (scrCutter != null)
-                scrCutter.CanCutter = false;
-
-            if (effect == null)
-            {
-                effect = Instantiate(_effect, center[scrEvo.EvolutionNum].position, Quaternion.Euler(transform.rotation.eulerAngles), transform);
-                effect.transform.localScale *= effectScale[scrEvo.EvolutionNum];
-                PlayEffect();
-            }
-
-
-            //チャージ音を鳴らす
-            audio.Play("BlastSub01");
-
-
-            //チャージ段階の判定
-            pullTime += Time.deltaTime;
-            if (pullTime >= pullTimes[0] && charge == 0)
-                charge = 1;
-            if (pullTime >= pullTimes[1] && charge == 1)
-                charge = 2;
-            if (pullTime >= pullTimes[2] && charge == 2)
-                charge = 3;
+            if (Input.GetMouseButtonUp(2))   //マウス中ボタンを離した際に発動
+                DoBlast();
         }
-
-        if (Input.GetMouseButtonUp(2))   //マウス中ボタンを離した際に発動
+        else
         {
-            // 移動速度を直す
-            if (scrMove != null)
-                scrMove.MoveMag = 1.0f;
+            if (isBlastMobile == eBlast.push && !isBlast)
+                ChargeBlast();
 
-            // キックを使用可能にする
-            if (scrKick != null)
-                scrKick.CanKick = true;
-
-            // カッターを使用可能にする
-            if (scrCutter != null)
-                scrCutter.CanCutter = true;
-
-            if (effect != null)
-                Destroy(effect);
-
-            audioSource.Stop();
-            pullTime = 0f;
-            if (charge > 0)
-            {
-                isBlast = true;
-                StartCoroutine("ReleaseBlast");
-            }
-
-            audio.Stop();
-            audio.Play("BlastSub02");
+            if (isBlastMobile == eBlast.release)
+                DoBlast();
         }
-
 
         for (int i = 0; i < morningBlast.Length; i++)
         {
@@ -144,6 +109,74 @@ public class MorBlast_R : MonoBehaviour
                 Number = 0;
             }
         }
+    }
+
+    private void ChargeBlast()
+    {
+        // 移動速度の減衰
+        if (scrMove != null)
+            scrMove.MoveMag = 1.0f - moveSpeedMag;
+
+        // キックを使用不可にする
+        if (scrKick != null)
+            scrKick.CanKick = false;
+
+        // カッターを使用不可にする
+        if (scrCutter != null)
+            scrCutter.CanCutter = false;
+
+        if (effect == null)
+        {
+            effect = Instantiate(_effect, center[scrEvo.EvolutionNum].position, Quaternion.Euler(transform.rotation.eulerAngles), transform);
+            effect.transform.localScale *= effectScale[scrEvo.EvolutionNum];
+            PlayEffect();
+        }
+
+
+        //チャージ音を鳴らす
+        audio.Play("BlastSub01");
+
+
+        //チャージ段階の判定
+        pullTime += Time.deltaTime;
+        if (pullTime >= pullTimes[0] && charge == 0)
+            charge = 1;
+        if (pullTime >= pullTimes[1] && charge == 1)
+            charge = 2;
+        if (pullTime >= pullTimes[2] && charge == 2)
+            charge = 3;
+    }
+
+    private void DoBlast()
+    {
+        // 移動速度を直す
+        if (scrMove != null)
+            scrMove.MoveMag = 1.0f;
+
+        // キックを使用可能にする
+        if (scrKick != null)
+            scrKick.CanKick = true;
+
+        // カッターを使用可能にする
+        if (scrCutter != null)
+            scrCutter.CanCutter = true;
+
+        if (effect != null)
+            Destroy(effect);
+
+        audioSource.Stop();
+        pullTime = 0f;
+        if (charge > 0)
+        {
+            isBlast = true;
+            StartCoroutine("ReleaseBlast");
+        }
+
+        audio.Stop();
+        audio.Play("BlastSub02");
+
+        if (mobileMode)
+            isBlastMobile = eBlast.wait;
     }
 
     IEnumerator ReleaseBlast()
@@ -189,5 +222,16 @@ public class MorBlast_R : MonoBehaviour
                 particle.Play();
             }
         }
+    }
+
+    // Moblie Setting
+    public void PushButton()
+    {
+        isBlastMobile = eBlast.push;
+    }
+
+    public void ReleaseButton()
+    {
+        isBlastMobile = eBlast.release;
     }
 }

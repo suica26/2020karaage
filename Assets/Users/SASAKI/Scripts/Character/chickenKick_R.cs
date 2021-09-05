@@ -24,6 +24,16 @@ public class chickenKick_R : MonoBehaviour
     //ADX
     private CriAtomSource criAtomSource;
 
+    // Mobile Setting
+    private bool mobileMode;
+    private enum eKick
+    {
+        wait,
+        push,
+        release,
+    }
+    private eKick isKick;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +43,9 @@ public class chickenKick_R : MonoBehaviour
         CanKick = true;
         chargePoint = 0;
         criAtomSource = GetComponent<CriAtomSource>();
+
+        mobileMode = MobileSetting_R.GetInstance().IsMobileMode();
+        isKick = eKick.wait;
     }
 
     // Update is called once per frame
@@ -45,43 +58,84 @@ public class chickenKick_R : MonoBehaviour
             return;
         }
 
-        if (Input.GetMouseButton(0) && CanKick)
-        {
-            timer += Time.deltaTime;
-        }
+        if (!mobileMode)
+            if (Input.GetMouseButton(0) && CanKick)
+                timer += Time.deltaTime;
+        else
+            if (isKick == eKick.push && CanKick)
+                timer += Time.deltaTime;
 
-        if (Input.GetMouseButtonUp(0) && CanKick)
+        if(!mobileMode)
         {
-            //山本加筆(&& coolTimer >= coolTimes[scrEvo.EvolutionNum])
-            if (timer <= 0.5f)
+            if (Input.GetMouseButtonUp(0) && CanKick)
             {
-                if (coolTimer >= coolTimes[scrEvo.EvolutionNum])
+                //山本加筆(&& coolTimer >= coolTimes[scrEvo.EvolutionNum])
+                if (timer <= 0.5f)
                 {
-                    if (scrMove._isFlying)
-                    {
-                        scrMove._isFlying = false;
-                        GetComponent<Rigidbody>().useGravity = true;
-                    }
-
+                    Kick();
+                }
+                else
+                {
                     timer = 0.0f;
-                    coolTimer = 0f;
-                    //audioSource.PlayOneShot(kickSound);
-                    criAtomSource.Play("Kick");
-                    var objKick = Instantiate(kickEffect, transform.position, Quaternion.identity);
-                    Destroy(objKick, 0.5f);
-                    kickCollisions[scrEvo.EvolutionNum].SetActive(true);
-                    scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.KICK, true);
                 }
             }
             else
             {
-                timer = 0.0f;
+                kickCollisions[scrEvo.EvolutionNum].SetActive(false);
+                scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.KICK, false);
             }
         }
         else
         {
-            kickCollisions[scrEvo.EvolutionNum].SetActive(false);
-            scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.KICK, false);
+            if(isKick == eKick.release && CanKick)
+            {
+                if(timer <= 0.5f)
+                    Kick();
+                else
+                    timer = 0.0f;
+            }
+            else
+            {
+                kickCollisions[scrEvo.EvolutionNum].SetActive(false);
+                scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.KICK, false);
+            }
         }
+    }
+
+    private void Kick()
+    {
+        if (coolTimer >= coolTimes[scrEvo.EvolutionNum])
+        {
+            if (scrMove._isFlying)
+            {
+                scrMove._isFlying = false;
+                GetComponent<Rigidbody>().useGravity = true;
+            }
+
+            timer = 0.0f;
+            coolTimer = 0f;
+            //audioSource.PlayOneShot(kickSound);
+            criAtomSource.Play("Kick");
+            var objKick = Instantiate(kickEffect, transform.position, Quaternion.identity);
+            Destroy(objKick, 0.5f);
+            kickCollisions[scrEvo.EvolutionNum].SetActive(true);
+            scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.KICK, true);
+        }
+
+        if (mobileMode)
+            isKick = eKick.wait;
+    }
+
+    // Mobile Button
+    public void PushButton()
+    {
+        isKick = eKick.push;
+        Debug.LogError("PUSH");
+    }
+
+    public void ReleaseButton()
+    {
+        isKick = eKick.release;
+        Debug.LogError("Release");
     }
 }
