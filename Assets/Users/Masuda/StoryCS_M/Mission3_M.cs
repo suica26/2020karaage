@@ -6,6 +6,7 @@ public class Mission3_M : Missions_M
 {
     public string onLoad_s3;
     public GameObject eneBill;
+    public float evoTimer;
     public override void Start()
     {
         base.Start();
@@ -27,12 +28,17 @@ public class Mission3_M : Missions_M
         evoNum = scrEvoChi.EvolutionNum;
         if (evoNum >= 3 && first)
         {
-            SecondMission_3();
+            evoTimer += Time.deltaTime;
         }
 
         if (!eneBill)
         {
             PlayerPrefs.SetString("storyClear", "clear");
+        }
+
+        if (first && evoTimer >= 1.0f)
+        {
+            SecondMission_3();
         }
     }
 
@@ -55,7 +61,6 @@ public class Mission3_M : Missions_M
         mission.text = splitText[3];
         submis.text = splitText[4];
         exmis.text = splitText[5];
-        per.text = "0%";
         load = "second";
         first = false;
     }

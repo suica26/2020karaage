@@ -111,7 +111,7 @@ public class Parameters_R : MonoBehaviour
                 hpSlider[1].value = hp;
                 mainSlider = hpSlider[1];
                 TimeManager(10);
-                maxHP = 150;
+                maxHP = 250;
             }
             else if (ep == evo2)
             {
@@ -195,11 +195,11 @@ public class Parameters_R : MonoBehaviour
             hp = maxHP;
         }
 
-        if (hp >= 500)
+        if (hp >= 500 && ep >= evo3)
         {
             mainSlider = hpSlider[3];
         }
-        else if (hp < 500)
+        else if (hp < 500 && ep >= evo3)
         {
             mainSlider = hpSlider[2];
         }

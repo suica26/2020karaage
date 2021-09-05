@@ -10,7 +10,7 @@ public class GasTankCount_M : MonoBehaviour
     private FireHydrant_R fireHyd;
     public GameObject player;
     public Vector3 pos,prePos;
-    public bool drop;
+    public bool comp;
     public Text achieve;
         
     void Start()
@@ -27,21 +27,31 @@ public class GasTankCount_M : MonoBehaviour
     {
         pos = this.gameObject.gameObject.transform.position;
 
-        /*if (pos.y <= prePos.y-5 && m2m.third)
+        if (pos.y <= prePos.y-5 && m2m.third && !comp)
         {
             prePos.y = -1000;
             m2m.gasTank += 1;
             m2m.achieve += 1;
             achieve.text = m2m.achieve + " / 3";
-        }*/
-
-        if (fireHyd.makeHydrant)
-        {
-            prePos.y = -1000;
-            m2m.gasTank += 1;
-            m2m.achieve += 1;
-            achieve.text = m2m.achieve + " / 3";
+            comp = true;
         }
 
+        if (fireHyd.makeHydrant && !comp)
+        {
+            prePos.y = -1000;
+            m2m.gasTank += 1;
+            m2m.achieve += 1;
+            achieve.text = m2m.achieve + " / 3";
+            comp = true;
+        }
+
+        if (!this.gameObject && !comp)
+        {
+            prePos.y = -1000;
+            m2m.gasTank += 1;
+            m2m.achieve += 1;
+            achieve.text = m2m.achieve + " / 3";
+            comp = true;
+        }
     }
 }

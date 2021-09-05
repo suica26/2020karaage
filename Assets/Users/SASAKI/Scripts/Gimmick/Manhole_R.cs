@@ -9,6 +9,7 @@ public class Manhole_R : BlowerGimmickBase
     //M
     private Mission1_M m1m;
     public GameObject player;
+    private bool splash;
 
     private void Start()
     {
@@ -26,11 +27,12 @@ public class Manhole_R : BlowerGimmickBase
             InstanceEffect();
             audio.Play("Manhole00");
             //M
-            if (m1m.fourth)
+            if (m1m.fourth && !splash)
             {
                 m1m.manhole += 1;
                 m1m.achieve += 1;
                 m1m.per.text = m1m.achieve + "/ 3";
+                splash = true;
             }
         }
     }
