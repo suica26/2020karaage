@@ -49,6 +49,8 @@ public class Mission3_M : Missions_M
 
     public void SecondMission_3()
     {
+        eneBillScr.changeDamageFlg();
+
         missionSlide.Play();
         mission.text = splitText[3];
         submis.text = splitText[4];
