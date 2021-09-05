@@ -19,6 +19,7 @@ public class Mission1_M : Missions_M
         misBox.SetActive(false);
         GameObject findCanvas = GameObject.Find("Canvas");
         scrParame = findCanvas.GetComponent<Parameters_R>();
+        first = true;
     }
 
     void Update()
@@ -29,7 +30,7 @@ public class Mission1_M : Missions_M
         evoCount = scrParame.ep;
         evoNum = scrEvoChi.nowEvoNum;
 
-        if (!shop)
+        if (!shop && first)
         {
             misBox.SetActive(true);
             missionSlide.Play();
