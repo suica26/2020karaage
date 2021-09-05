@@ -17,6 +17,7 @@ public class WayPointGraph_Y : MonoBehaviour
     public float routinTimer;
     public float spawnTime;
     private const float DISTAREA = 20f;
+    [SerializeField] private bool calculating;
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +49,7 @@ public class WayPointGraph_Y : MonoBehaviour
         }
 
         ResetDijkstraMap();
+        calculating = false;
     }
 
     private void Update()
@@ -55,28 +57,28 @@ public class WayPointGraph_Y : MonoBehaviour
         //一度に存在する市民の数を制御
         if (civilNum < civilMaxNum) routinTimer += Time.deltaTime;
         //スポーン処理
-        if (routinTimer >= spawnTime) Spawn();
+        if (routinTimer >= spawnTime && !calculating) StartCoroutine(Spawn());
     }
 
-    private void Spawn()
+    private IEnumerator Spawn()
     {
         routinTimer = 0f;
         civilNum++;
+        int randomNum = 0;
         while (true)
         {
             //セットしてあるPrefabの中から、Spawnする市民をランダムに選択
-            int randomNum = Random.Range(0, scrSpawners.Count);
-            if (Vector3.Distance(wayPointsArray[scrSpawners[randomNum].PointNumber].transform.position, GameObject.Find("Player").transform.position) >= DISTAREA)
-            {
-                CulDijkstra(scrSpawners[randomNum].PointNumber);
-                scrSpawners[randomNum].SpawnCivil();
-                break;
-            }
+            randomNum = Random.Range(0, scrSpawners.Count);
+            if (Vector3.Distance(wayPointsArray[scrSpawners[randomNum].PointNumber].transform.position, GameObject.Find("Player").transform.position) >= DISTAREA) break;
         }
 
+        calculating = true;
+        yield return StartCoroutine(CulDijkstra(scrSpawners[randomNum].PointNumber));
+
+        scrSpawners[randomNum].SpawnCivil();
     }
 
-    public void CulDijkstra(int startPoint)
+    public IEnumerator CulDijkstra(int startPoint)
     {
         int endPoint;
         do
@@ -134,8 +136,11 @@ public class WayPointGraph_Y : MonoBehaviour
             if (NOC > 100)
             {
                 Debug.Log($"Infinite Loop Avoided! Start is {wpScripts[startPoint].PointNumber}. End is {wpScripts[endPoint].PointNumber}");
+                calculating = false;
                 break;
             }
+
+            yield return null;
         }
 
         finishFlg = false;
@@ -163,6 +168,7 @@ public class WayPointGraph_Y : MonoBehaviour
 
         routeList.Reverse();
         route = routeList.ToArray();
+        calculating = false;
     }
 
     public void ResetDijkstraMap()
