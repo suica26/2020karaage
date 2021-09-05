@@ -2335,16 +2335,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a77642bacb84ac46874ad0abf72d80a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sli: {fileID: 459354564}
-  hp: 170
+  hps: 00000000000000000000000000000000
   skip: 0
-  heal: 0
-  maxHP: 150
+  maxHP: 300
+  hp: 340
   nowHP: 0
   percent: 0
   atai: 0
   judge1: 0
   judge2: 0
+  hpSli:
+  - {fileID: 459354564}
+  - {fileID: 57160182}
+  mainSli: {fileID: 0}
 --- !u!1 &922383176
 GameObject:
   m_ObjectHideFlags: 0
