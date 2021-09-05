@@ -194,6 +194,15 @@ public class Parameters_R : MonoBehaviour
         {
             hp = maxHP;
         }
+
+        if (hp >= 500)
+        {
+            mainSlider = hpSlider[3];
+        }
+        else if (hp < 500)
+        {
+            mainSlider = hpSlider[2];
+        }
     }
     //タイマーです。一秒ごとにTimeManager()で一秒減らしてます。
 
