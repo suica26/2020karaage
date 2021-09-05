@@ -76,6 +76,13 @@ public class CharaMoveRigid_R : MonoBehaviour
     private ADX_SoundRaycast ADX_RevLevel_L, ADX_RevLevel_R;
     private float BusLevel_L, BusLevel_R;
 
+    // Mobile Operation
+    private bool mobileMode;
+    private Joystick joystick;
+    private bool pushJumpButton;
+    private bool pushKickButton;
+    private bool pushCutterButton;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -89,8 +96,16 @@ public class CharaMoveRigid_R : MonoBehaviour
         //加筆　undertreem 0628
         ADX_RevLevel_L = GetComponent<ADX_SoundRaycast>();
         ADX_RevLevel_R = GetComponent<ADX_SoundRaycast>();
-
         //山本加筆 BusLevelがStage0でNullException吐きまくってたので、初期化付けました
+
+        mobileMode = MobileSetting_R.GetInstance().IsMobileMode();
+        if (mobileMode)
+        {
+            joystick = FindObjectOfType<Joystick>();
+            pushJumpButton = false;
+            pushKickButton = false;
+            pushCutterButton = false;
+        }
     }
 
     void Update()
@@ -98,8 +113,16 @@ public class CharaMoveRigid_R : MonoBehaviour
         speed = scrEvo.Status_SPD;
         jumpSpeed = scrEvo.Status_JUMP;
 
-        h = Input.GetAxis("Horizontal");
-        v = Input.GetAxis("Vertical");
+        if(!mobileMode)
+        {
+            h = Input.GetAxis("Horizontal");
+            v = Input.GetAxis("Vertical");
+        }
+        else
+        {
+            h = joystick.Horizontal;
+            v = joystick.Vertical;
+        }
 
         if(Camera.main.GetComponent<TpsCameraJC_R>().evolutionAnimStart)
         {
@@ -159,7 +182,7 @@ public class CharaMoveRigid_R : MonoBehaviour
                 scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.KICKFA, false);
                 scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.CUTTERFA, false);
                 fallAttack = false;
-                fallAttackCollisionCheck();
+                FallAttackCollisionCheck();
                 rb.velocity = Vector3.zero;
             }
 
@@ -188,10 +211,21 @@ public class CharaMoveRigid_R : MonoBehaviour
                 rb.velocity = moveDirection * speed * MoveMag;
 
                 //チキンの身体の向きを修正
-                if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
+                if (!mobileMode)
                 {
-                    Quaternion qua = Quaternion.LookRotation(moveDirection);
-                    transform.rotation = Quaternion.RotateTowards(transform.rotation, qua, rotateSpeed * Time.deltaTime);
+                    if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
+                    {
+                        Quaternion qua = Quaternion.LookRotation(moveDirection);
+                        transform.rotation = Quaternion.RotateTowards(transform.rotation, qua, rotateSpeed * Time.deltaTime);
+                    }
+                }
+                else
+                {
+                    if(joystick.Horizontal != 0 || joystick.Vertical != 0)
+                    {
+                        Quaternion qua = Quaternion.LookRotation(moveDirection);
+                        transform.rotation = Quaternion.RotateTowards(transform.rotation, qua, rotateSpeed * Time.deltaTime);
+                    }
                 }
             }
             else
@@ -202,12 +236,26 @@ public class CharaMoveRigid_R : MonoBehaviour
             }
 
             //ジャンプした際の処理
-            if (Input.GetButtonDown("Jump"))
+            if (!mobileMode)
             {
-                audio.Stop();
-                JumpS = audio.Play("Jump");
-                scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.JUMP, true);
-                rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
+                if (Input.GetButtonDown("Jump"))
+                {
+                    audio.Stop();
+                    JumpS = audio.Play("Jump");
+                    scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.JUMP, true);
+                    rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
+                }
+            }
+            else
+            {
+                if(pushJumpButton)
+                {
+                    audio.Stop();
+                    JumpS = audio.Play("Jump");
+                    scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.JUMP, true);
+                    rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
+                    pushJumpButton = false;
+                }
             }
         }
         //空中の処理を記述
@@ -259,44 +307,71 @@ public class CharaMoveRigid_R : MonoBehaviour
                 }
             }
 
-            //落下攻撃の処理(キック)
-            if (Input.GetMouseButton(0) && !fallAttack)
+            //落下攻撃の処理(キック & カッター)
+            if(!mobileMode)
             {
-                if (kickFallAttackTimer <= kickFallAttackTime)
+                if (Input.GetMouseButton(0) && !fallAttack)
                 {
-                    kickFallAttackTimer += Time.deltaTime;
+                    if (kickFallAttackTimer <= kickFallAttackTime)
+                        kickFallAttackTimer += Time.deltaTime;
+                    else
+                    {
+                        fallAttackVer = 1;
+                        StartCoroutine("FallAttack");
+                    }
+                }
+                else if (Input.GetMouseButton(1) && !fallAttack && scrCutter.enabled)
+                {
+                    if (cutterFallAttackTimer <= cutterFallAttackTime)
+                        cutterFallAttackTimer += Time.deltaTime;
+                    else if (!scrCutter.throwingCutter)
+                    {
+                        fallAttackVer = 2;
+                        StartCoroutine("FallAttack");
+                    }
                 }
                 else
                 {
-                    fallAttackVer = 1;
-                    StartCoroutine("FallAttack");
-                }
-            }
-            //落下攻撃の処理(カッター)
-            else if (Input.GetMouseButton(1) && !fallAttack && scrCutter.enabled)
-            {
-                if (cutterFallAttackTimer <= cutterFallAttackTime)
-                {
-                    cutterFallAttackTimer += Time.deltaTime;
-                }
-                else if (!scrCutter.throwingCutter)
-                {
-                    fallAttackVer = 2;
-                    StartCoroutine("FallAttack");
+                    kickFallAttackTimer = 0f;
+                    cutterFallAttackTimer = 0f;
                 }
             }
             else
             {
-                kickFallAttackTimer = 0f;
-                cutterFallAttackTimer = 0f;
+                if(pushKickButton && !fallAttack)
+                {
+                    if (kickFallAttackTimer <= kickFallAttackTime)
+                        kickFallAttackTimer += Time.deltaTime;
+                    else
+                    {
+                        fallAttackVer = 1;
+                        StartCoroutine("FallAttack");
+                    }
+                }
+                else if (pushCutterButton && !fallAttack && scrCutter.enabled)
+                {
+                    if (cutterFallAttackTimer <= cutterFallAttackTime)
+                        cutterFallAttackTimer += Time.deltaTime;
+                    else if (!scrCutter.throwingCutter)
+                    {
+                        fallAttackVer = 2;
+                        StartCoroutine("FallAttack");
+                    }
+                }
+                else
+                {
+                    kickFallAttackTimer = 0f;
+                    cutterFallAttackTimer = 0f;
+                }
             }
+
             audioSourceWalk.Stop();
             IdleVoiceS.Stop();
         }
     }
 
     //落下攻撃後、接地時にInvoke。衝撃波を設定
-    void fallAttackCollisionCheck()
+    void FallAttackCollisionCheck()
     {
         GameObject circleChecker;
         if (fallAttackVer == 1)
@@ -396,5 +471,33 @@ public class CharaMoveRigid_R : MonoBehaviour
             yield return null;
         }
         stunned = false;
+    }
+
+    // Mobile Setting
+    public void PushButton()
+    {
+        pushJumpButton = true;
+    }
+
+    public void PushKickButton()
+    {
+        pushKickButton = true;
+    }
+    public void PushCutterButton()
+    {
+        pushCutterButton = true;
+    }
+
+    public void ReleaseButton()
+    {
+        pushJumpButton = false;
+    }
+    public void ReleaseKickButton()
+    {
+        pushKickButton = false;
+    }
+    public void ReleaseCutterButton()
+    {
+        pushCutterButton = false;
     }
 }

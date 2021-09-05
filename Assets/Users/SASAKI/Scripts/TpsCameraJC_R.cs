@@ -36,6 +36,9 @@ public class TpsCameraJC_R : MonoBehaviour
 
     private EvolutionChicken_R scrEvo;
 
+    // Mobile Setting
+    private bool mobileMode;
+
     // Use this for initialization
     void Start()
     {
@@ -51,6 +54,8 @@ public class TpsCameraJC_R : MonoBehaviour
         mouse.y = 0.5f; // start mouse y pos ,0.5f is half
 
         scrEvo = objPlayer.GetComponent<EvolutionChicken_R>();
+
+        mobileMode = MobileSetting_R.GetInstance().IsMobileMode();
     }
 
     // Update is called once per frame
@@ -60,7 +65,21 @@ public class TpsCameraJC_R : MonoBehaviour
         {
             case eCamWork.eNormal:
                 // Get MouseMove
-                mouse -= new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")) * Time.deltaTime * spinSpeed;
+                if (!mobileMode)
+                {
+                    mouse -= new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")) * Time.deltaTime * spinSpeed;
+                }
+                else
+                {
+                    foreach (Touch touch in Input.touches)
+                    {
+                        if (touch.position.y >= Screen.height * 0.4f && touch.phase == TouchPhase.Moved)
+                        {
+                            mouse -= touch.deltaPosition * 0.1f * Time.deltaTime * spinSpeed;
+                        }
+                    }
+                }
+
                 // Clamp mouseY move
                 mouse.y = Mathf.Clamp(mouse.y, 0.25f, 0.95f);
                 //M
