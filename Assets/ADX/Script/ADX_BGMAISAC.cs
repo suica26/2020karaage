@@ -24,7 +24,7 @@ public class ADX_BGMAISAC : MonoBehaviour
         }
         else if (SceneManager.GetActiveScene().name == "Stage2")
         {
-            bgmCriAtomSource.Play("BGM02");
+            bgmCriAtomSource.Play("BGM01");
         }
         else if (SceneManager.GetActiveScene().name == "stage3")
         {
@@ -42,12 +42,12 @@ public class ADX_BGMAISAC : MonoBehaviour
             bgmCriAtomSource.SetAisacControl("BGM_Aisac", BGMAISAC);
         }
 
-        else if (scrEvo.EvolutionNum == 1 &&  SceneManager.GetActiveScene().name == "stage2")
+        else if (scrEvo.EvolutionNum == 1 &&  SceneManager.GetActiveScene().name == "Stage2")
         {
             BGMAISAC = 0f;
         }
 
-        else if (scrEvo.EvolutionNum == 2 && BGMAISAC < 1 && SceneManager.GetActiveScene().name == "stage2")
+        else if (scrEvo.EvolutionNum == 2 && BGMAISAC < 1 && SceneManager.GetActiveScene().name == "Stage2")
         {
             BGMAISAC += 0.02f;
             bgmCriAtomSource.SetAisacControl("BGM_Aisac", BGMAISAC);
