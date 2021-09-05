@@ -22,6 +22,12 @@ public class WayPointGraph_Y : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(InitSetting());
+    }
+
+    private IEnumerator InitSetting()
+    {
+        calculating = true;
         //コストマップ情報を構築
         wayPointsArray = new GameObject[wayPoints.transform.childCount];
         wpScripts = new WayPoint_Y[wayPointsArray.Length];
@@ -31,6 +37,7 @@ public class WayPointGraph_Y : MonoBehaviour
             wpScripts[i] = wayPointsArray[i].GetComponent<WayPoint_Y>();
             //各WayPointにnumberを割り振り
             wpScripts[i].SetPointNum(i);
+            yield return null;
         }
 
         //リスト初期化
@@ -46,6 +53,7 @@ public class WayPointGraph_Y : MonoBehaviour
             if (wps.endPointFlg) endPointNumbers.Add(wps.PointNumber);
             //スポーン候補をリストに追加していく
             if (wps.spawnerPointFlg) scrSpawners.Add(wayPointsArray[wps.PointNumber].GetComponent<SpawnerWaypoint_Y>());
+            yield return null;
         }
 
         ResetDijkstraMap();
