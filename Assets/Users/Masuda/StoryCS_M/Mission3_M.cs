@@ -42,8 +42,9 @@ public class Mission3_M : Missions_M
         mission.text = splitText[0];
         submis.text = splitText[1];
         exmis.text = splitText[2];
-        per.text = "0%";
+        //per.text = "0%";
         load = "first";
+        first = true;
     }
 
     public void SecondMission_3()

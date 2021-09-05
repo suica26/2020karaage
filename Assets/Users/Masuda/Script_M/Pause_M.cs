@@ -18,7 +18,7 @@ public class Pause_M : MonoBehaviour
         {
             //ポーズのオンオフ
             pausePanel.SetActive(!pausePanel.activeSelf);
-            how.SetActive(!pausePanel.activeSelf);
+            //how.SetActive(!pausePanel.activeSelf);
             audio.Play("System_Decision");
 
             //ポーズ中に停止
