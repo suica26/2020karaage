@@ -13,6 +13,7 @@ public class FlyingEnemy_Y : MonoBehaviour
     private Animator animator;
     private float rayCycle = 1f;
     private float rayTimer;
+    private Collider collider;
 
     private void Start()
     {
@@ -20,6 +21,7 @@ public class FlyingEnemy_Y : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        collider = GetComponent<Collider>();
 
         enemyScr.enabled = false;
         navMeshAgent.enabled = false;
@@ -44,6 +46,7 @@ public class FlyingEnemy_Y : MonoBehaviour
                     navMeshAgent.enabled = true;
                     animator.enabled = true;
                     rb.isKinematic = true;
+                    collider.isTrigger = false;
                 }
                 Debug.DrawRay(transform.position, -transform.up, Color.red, 1f);
             }
@@ -52,6 +55,6 @@ public class FlyingEnemy_Y : MonoBehaviour
 
     private void NotIsTrigger()
     {
-        GetComponent<Collider>().isTrigger = false;
+        collider.isTrigger = false;
     }
 }
