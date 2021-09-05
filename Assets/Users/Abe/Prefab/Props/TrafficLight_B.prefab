@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5663452601751058676}
   - component: {fileID: 7628322967625085260}
   - component: {fileID: 3124691085480572052}
-  - component: {fileID: 2409841999152357144}
+  - component: {fileID: 4075540633025940977}
   m_Layer: 2
   m_Name: TrafficLight_B
   m_TagString: Small
@@ -157,6 +157,8 @@ MonoBehaviour:
   shardDamage_nonDiv: 500
   specialObjectFlg: 0
   notDamage: 0
+  magnitude: 0.1
+  duration: 0.25
 --- !u!114 &7628322967625085260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,7 +270,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2409841999152357144
+--- !u!114 &4075540633025940977
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -282,7 +284,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playOnStart: 0
   _cueName: PoleContact00
-  _cueSheet: Contact
+  _cueSheet: 
   _regionOnStart: {fileID: 0}
   _listenerOnStart: {fileID: 0}
   _use3dPositioning: 1
