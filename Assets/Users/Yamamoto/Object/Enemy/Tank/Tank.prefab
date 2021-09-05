@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 568067675038204673}
   - component: {fileID: -1273211078973464205}
   m_Layer: 0
-  m_Name: Tank_Y
+  m_Name: Tank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,10 +147,13 @@ MonoBehaviour:
   shardDamage_nonDiv: 0
   specialObjectFlg: 1
   notDamage: 0
+  magnitude: 0.1
+  duration: 0.25
   attackDistance: 80
   attackInterval: 5
   weapon: {fileID: 4609758015876695867}
-  attackClip: {fileID: 0}
+  attackClip: {fileID: 1827226128182048838, guid: b0f6ed75d9c575242b0533eb246fdea1,
+    type: 3}
   attackDamage: 100
   searchArea: 200
   bulletPrefab: {fileID: 626279893075345666, guid: 524c2dc832f21e444bb6a4f89300021e,
