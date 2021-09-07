@@ -30,6 +30,10 @@ public class ADX_BGMAISAC : MonoBehaviour
         {
             bgmCriAtomSource.Play("BGM03");
         }
+        else if (SceneManager.GetActiveScene().name == "stage0")
+        {
+            bgmCriAtomSource.Play("BGM_St0");
+        }
         else bgmCriAtomSource.Play("BGM00");
     }
 
