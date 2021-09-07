@@ -10,6 +10,21 @@ public class Stage3BossBuilding : ObjectStateManagement_Y
     public Vector3[] launchPos;
     public GameObject[] enemyPrefabs;
     public int[] phaseEnemyNum;
+    private GameObject mainCamera;
+    private TpsCameraJC_R cameraScr;
+    private CharaMoveRigid_R playerMoveScr;
+    private EnemyMoveController_Y enemyControllerScr;
+    public Vector3 cameraMoveTargetPos;
+
+    protected override void Start()
+    {
+        base.Start();
+
+        mainCamera = GameObject.Find("Main Camera");
+        cameraScr = mainCamera.GetComponent<TpsCameraJC_R>();
+        playerMoveScr = player.GetComponent<CharaMoveRigid_R>();
+        enemyControllerScr = GameObject.Find("GameAI_Y").GetComponent<EnemyMoveController_Y>();
+    }
 
     private void Update()
     {
@@ -49,7 +64,23 @@ public class Stage3BossBuilding : ObjectStateManagement_Y
         else if (phase[phaseNum]) return;
 
         Debug.Log($"Phase : {phaseNum + 1}");
+        phase[phaseNum] = true;
+        ChangeToCameraMode();
+
+        StartCoroutine(LookLauncher(phaseNum));
         StartCoroutine(LaunchEnemys(phaseNum));
+    }
+
+    private IEnumerator LookLauncher(int phaseNum)
+    {
+        var nowPos = mainCamera.transform.position;
+        for (float i = 0; i < 1.0f; i += 0.005f)
+        {
+            mainCamera.transform.position = Vector3.Lerp(nowPos, cameraMoveTargetPos, i);
+            mainCamera.transform.LookAt(launchPos[phaseNum]);
+            yield return null;
+        }
+        Invoke("ChangeToPlayMode", 2f);
     }
 
     private IEnumerator LaunchEnemys(int phaseNum)
@@ -76,5 +107,19 @@ public class Stage3BossBuilding : ObjectStateManagement_Y
                 yield return null;
             }
         }
+    }
+
+    private void ChangeToCameraMode()
+    {
+        cameraScr.enabled = false;
+        playerMoveScr.enabled = false;
+        enemyControllerScr.enemyCanMove = false;
+    }
+
+    private void ChangeToPlayMode()
+    {
+        cameraScr.enabled = true;
+        playerMoveScr.enabled = true;
+        enemyControllerScr.enemyCanMove = true;
     }
 }
