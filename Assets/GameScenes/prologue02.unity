@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -274,7 +274,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 12800000, guid: 27cca22bb1f896546b354fe60bbe4070, type: 3}
     m_FontSize: 25
-    m_FontStyle: 0
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 40
@@ -284,7 +284,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u3044\u3044\u3048"
+  m_Text: NO
 --- !u!222 &388577830
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -621,7 +621,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skip: {fileID: 1262834097}
   next: {fileID: 1851914076}
-  canvas: {fileID: 892643522}
 --- !u!114 &710181630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -792,7 +791,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 12800000, guid: 27cca22bb1f896546b354fe60bbe4070, type: 3}
     m_FontSize: 25
-    m_FontStyle: 0
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 40
@@ -802,7 +801,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u306F\u3044"
+  m_Text: YES
 --- !u!222 &741929599
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -880,7 +879,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u3053\u306E\u30E0\u30FC\u30D3\u30FC\u3092\u30B9\u30AD\u30C3\u30D7\u3057\u307E\u3059\u304B\uFF1F"
+  m_Text: Do you skip this movie?
 --- !u!222 &749309060
 CanvasRenderer:
   m_ObjectHideFlags: 0

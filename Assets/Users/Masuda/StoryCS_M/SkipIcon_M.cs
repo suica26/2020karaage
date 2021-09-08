@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SkipIcon_M : MonoBehaviour
 {
-    [SerializeField] GameObject skip,next,canvas;
+    [SerializeField] GameObject skip,next;
     private CriAtomSource cas;
     void Start()
     {
@@ -33,6 +33,5 @@ public class SkipIcon_M : MonoBehaviour
     {
         next.SetActive(true);
         skip.SetActive(false);
-        Destroy(canvas);
     }
 }
