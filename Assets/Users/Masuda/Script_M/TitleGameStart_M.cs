@@ -16,12 +16,6 @@ public class TitleGameStart_M : MonoBehaviour
         audio = (CriAtomSource)GetComponent("CriAtomSource");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void OnClick()
     {
         audio.Play("System_Decision");
