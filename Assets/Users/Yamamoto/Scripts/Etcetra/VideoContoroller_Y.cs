@@ -50,7 +50,6 @@ public class VideoContoroller_Y : MonoBehaviour
         {
             SkipCurrentCut();
         }
-        Debug.Log(SoundCount);
     }
 
     private void StopCut()
