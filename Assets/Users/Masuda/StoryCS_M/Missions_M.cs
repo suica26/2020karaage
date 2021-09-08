@@ -7,7 +7,7 @@ public class Missions_M : MonoBehaviour
 {
     [SerializeField] public Text mission, submis, exmis, per, tips;
     [SerializeField]
-    public GameObject player, misBox, company, buildTips, tipsChicken;
+    public GameObject player, misBox, company, tipsChicken;
     [SerializeField] public TextAsset txtFile;
     [SerializeField] public int smallNum, bigNum, achieve, hitID;
     [SerializeField]
@@ -30,7 +30,6 @@ public class Missions_M : MonoBehaviour
         txtData = txtFile.text;
         splitText = txtData.Split(char.Parse("\n"));
         //misBox.SetActive(false);
-        buildTips.SetActive(false);
         tipsChicken.SetActive(false);
     }
 

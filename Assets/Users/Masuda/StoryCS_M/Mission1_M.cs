@@ -154,13 +154,12 @@ public class Mission1_M : Missions_M
         if (evoNum >= 1 && five)
         {
             timer3 += Time.deltaTime;
+            bossIcon.SetActive(true);
+            //一時的に、アジトを探すミッションが発動した時点でミニマップアイコンが見えるように挙動修正 山本
         }
 
         if (timer3 >= 1.0f && five)
         {
-            bossIcon.SetActive(true);
-            //一時的に、アジトを探すミッションが発動した時点でミニマップアイコンが見えるように挙動修正 山本
-            buildTips.SetActive(true);
 
             timer3 = 0;
             five = false;
@@ -199,7 +198,6 @@ public class Mission1_M : Missions_M
         else if (tipsTimer >= 60 && tip)
         {
             tips.text = "消火栓やマンホールを使って\n見渡してみよう...！";
-            buildTips.SetActive(true);
         }
 
         if (achieve >= 99)

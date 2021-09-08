@@ -82,11 +82,6 @@ public class Mission2_M : Missions_M
             tipsTimer += Time.deltaTime;
         }
 
-        if (tipsTimer >= 180)
-        {
-            buildTips.SetActive(true);
-        }
-
         if (fourth && timer_2_1 >= 1.0f)
         {
             FiveMission_2();
