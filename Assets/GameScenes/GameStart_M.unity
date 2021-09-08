@@ -5147,6 +5147,7 @@ GameObject:
   - component: {fileID: 831078243}
   - component: {fileID: 831078242}
   - component: {fileID: 831078245}
+  - component: {fileID: 831078246}
   m_Layer: 5
   m_Name: ScreenQ2
   m_TagString: Untagged
@@ -5277,6 +5278,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dca669f42cff7f40985206062ec1793, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &831078246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831078240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: 
+  _cueSheet: 
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &844798574
 GameObject:
   m_ObjectHideFlags: 0
@@ -5484,6 +5508,7 @@ GameObject:
   - component: {fileID: 912876935}
   - component: {fileID: 912876937}
   - component: {fileID: 912876936}
+  - component: {fileID: 912876938}
   m_Layer: 5
   m_Name: BGM
   m_TagString: Untagged
@@ -5551,6 +5576,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 912876934}
   m_CullTransparentMesh: 0
+--- !u!114 &912876938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 912876934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2281821560989145b3f0e64d55237ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volSlider: {fileID: 521090896}
+  cas: {fileID: 0}
+  soundVolumeController: {fileID: 0}
 --- !u!1 &988414589
 GameObject:
   m_ObjectHideFlags: 0
@@ -8749,6 +8789,7 @@ GameObject:
   - component: {fileID: 1452689797}
   - component: {fileID: 1452689796}
   - component: {fileID: 1452689799}
+  - component: {fileID: 1452689800}
   m_Layer: 5
   m_Name: ScreenQ1
   m_TagString: Untagged
@@ -8879,6 +8920,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85bc44ed23299e54480fa10b74a65fdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1452689800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452689794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: 
+  _cueSheet: 
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &1453071461
 GameObject:
   m_ObjectHideFlags: 0
@@ -10410,7 +10474,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1757776038}
         m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
