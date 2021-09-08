@@ -17,6 +17,7 @@ public class Enemy_Y : ObjectStateManagement_Y
     public AnimationClip attackClip;
     public int attackDamage;
     public float searchArea = 50f;
+    private EnemyMoveController_Y enemyControllerScr;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -26,12 +27,13 @@ public class Enemy_Y : ObjectStateManagement_Y
         rb = GetComponent<Rigidbody>();
         navAgent = GetComponent<NavMeshAgent>();
         animator.SetBool("isWalk", true);
+        enemyControllerScr = GameObject.Find("GameAI_Y").GetComponent<EnemyMoveController_Y>();
     }
 
     //基本挙動を記述
     protected virtual void Update()
     {
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Death"))
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Death") && enemyControllerScr.enemyCanMove)
         {
             routineTimer += Time.deltaTime;
 
