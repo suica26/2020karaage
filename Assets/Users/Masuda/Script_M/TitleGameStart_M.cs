@@ -14,12 +14,6 @@ public class TitleGameStart_M : MonoBehaviour
         cleared = PlayerPrefs.GetString("storyClear");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void OnClick()
     {
         if (cleared == "clear")
