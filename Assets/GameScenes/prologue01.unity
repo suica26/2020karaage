@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -611,29 +611,13 @@ GameObject:
   - component: {fileID: 923012800}
   - component: {fileID: 923012799}
   - component: {fileID: 923012798}
-  - component: {fileID: 923012797}
   m_Layer: 5
   m_Name: skip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &923012797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 923012796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cde7402ee130b14cae57e045e5484a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skip: {fileID: 1203495482}
-  next: {fileID: 1851914076}
-  canvas: {fileID: 1845914600}
+  m_IsActive: 0
 --- !u!114 &923012798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -677,7 +661,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 923012797}
+      - m_Target: {fileID: 0}
         m_MethodName: OnSkip
         m_Mode: 1
         m_Arguments:
@@ -945,7 +929,7 @@ GameObject:
   - component: {fileID: 1203495485}
   - component: {fileID: 1203495484}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: sentence
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1069,7 +1053,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 12800000, guid: 27cca22bb1f896546b354fe60bbe4070, type: 3}
     m_FontSize: 25
-    m_FontStyle: 0
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 40
@@ -1079,7 +1063,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u306F\u3044"
+  m_Text: YES
 --- !u!222 &1230856642
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1147,7 +1131,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 12800000, guid: 27cca22bb1f896546b354fe60bbe4070, type: 3}
     m_FontSize: 25
-    m_FontStyle: 0
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 40
@@ -1157,7 +1141,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u3044\u3044\u3048"
+  m_Text: NO
 --- !u!222 &1501048578
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1235,7 +1219,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u3053\u306E\u30E0\u30FC\u30D3\u30FC\u3092\u30B9\u30AD\u30C3\u30D7\u3057\u307E\u3059\u304B\uFF1F"
+  m_Text: Do you skip this movie?
 --- !u!222 &1694264708
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1326,7 +1310,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 923012797}
+      - m_Target: {fileID: 1845914606}
         m_MethodName: OffSkip
         m_Mode: 1
         m_Arguments:
@@ -1387,6 +1371,8 @@ GameObject:
   - component: {fileID: 1845914602}
   - component: {fileID: 1845914601}
   - component: {fileID: 1845914605}
+  - component: {fileID: 1845914607}
+  - component: {fileID: 1845914606}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1488,6 +1474,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameMode: 0
+--- !u!114 &1845914606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1845914600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cde7402ee130b14cae57e045e5484a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skip: {fileID: 1203495482}
+  next: {fileID: 1851914076}
+--- !u!114 &1845914607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1845914600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a816653788aaa464fa6b28e7f1cd9fd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skip: {fileID: 1203495482}
+  twin: 0
+  doubleClick: 0
 --- !u!1 &1851914076
 GameObject:
   m_ObjectHideFlags: 0
@@ -1617,7 +1632,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 923012797}
+      - m_Target: {fileID: 1845914606}
         m_MethodName: SkipStory
         m_Mode: 1
         m_Arguments:

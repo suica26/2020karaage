@@ -6,12 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class TitleGameStart_M : MonoBehaviour
 {
-    public GameObject gameMode;
+    public GameObject gameMode, start, loadPanel;
     public string cleared, sceneName;
+    private new CriAtomSource audio;
 
     void Start()
     {
-        cleared = PlayerPrefs.GetString("storyClear");
+        //cleared = PlayerPrefs.GetString("storyClear");
+        audio = (CriAtomSource)GetComponent("CriAtomSource");
     }
 
     // Update is called once per frame
@@ -22,13 +24,18 @@ public class TitleGameStart_M : MonoBehaviour
 
     public void OnClick()
     {
-        if (cleared == "clear")
+        audio.Play("System_Decision");
+        loadPanel.SetActive(true);
+        SceneManager.LoadScene(sceneName);
+
+        /*if (cleared == "clear")
         {
             gameMode.SetActive(true);
+            start.SetActive(false);
         }
         else
         {
             SceneManager.LoadScene(sceneName);
-        }
+        }*/
     }
 }
