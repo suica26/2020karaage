@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 public class MovieSkip_M : MonoBehaviour
 {
     public GameObject skip;
-    public bool twin, dual;
-    public float doubleClick;
+    public bool dual;
+    public float doubleClick, counter;
 
     void Start()
     {
@@ -17,34 +17,35 @@ public class MovieSkip_M : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0))
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            dual = true;
+            counter += 1;
+        }
+
+        if(counter >= 2)
+        {
+            skip.SetActive(true);
+            ResetStates();
+        }
+
+        if (dual)
         {
             doubleClick += Time.deltaTime;
-            dual = true;
-        }
-
-        if (doubleClick < 1f)
-        {
-            if (Input.GetMouseButton(0))
-            {
-                twin = true;
-            }
-        }
-
-        if (twin)
-        {
-            twin = false;
-            dual = false;
-            skip.SetActive(true);
-            doubleClick = 0;
         }
 
         if (doubleClick >= 1f)
         {
-            doubleClick = 0;
-            twin = false;
-            dual = false;
+            ResetStates();
         }
 
+    }
+
+    public void ResetStates()
+    {
+        doubleClick = 0;
+        counter = 0;
+        dual = false;
     }
 }

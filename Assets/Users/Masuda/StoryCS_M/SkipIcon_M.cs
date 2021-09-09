@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class SkipIcon_M : MonoBehaviour
 {
     [SerializeField] GameObject skip,next;
+    public MovieSkip_M movSkip;
     private CriAtomSource cas;
     void Start()
     {
@@ -27,6 +28,7 @@ public class SkipIcon_M : MonoBehaviour
     public void OffSkip()
     {
         skip.SetActive(false);
+        movSkip.ResetStates();
     }
 
     public void SkipStory()
