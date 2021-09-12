@@ -109,15 +109,15 @@ public class Mission1_M : Missions_M
         {
             Time.timeScale = 0f;
             hip.SetActive(true);
-            //Cursor.visible = true;
+            Cursor.visible = true;
         }
 
-        if (timer >= 5.0f)
+        /*if (timer >= 5.0f)
         {
             Time.timeScale = 1f;
             hip.SetActive(false);
             hipStamp = false;
-        }
+        }*/
 
         if (!hipStamp)
         {
@@ -220,15 +220,34 @@ public class Mission1_M : Missions_M
         {
             evoPanel.SetActive(true);
             Time.timeScale = 0f;
+            Cursor.visible = true;
         }
-        if (timer2 >= 3.0f)
+        /*if (timer2 >= 1.0f)
         {
-            evoPanel.SetActive(false);
+            
+        }*/
+        if (!evoPanel)
+        {
             timer2 = 0;
-            Time.timeScale = 1f;
-            evolution = true;
         }
 
+    }
+
+    public void OnClick1()
+    {
+        evoPanel.SetActive(false);
+        timer2 = 0;
+        Time.timeScale = 1f;
+        evolution = true;
+        Cursor.visible = false;
+    }
+
+    public void OnClick2()
+    {
+        Time.timeScale = 1f;
+        hip.SetActive(false);
+        hipStamp = false;
+        Cursor.visible = false;
     }
 
     /*new void BigNumberPlus()
