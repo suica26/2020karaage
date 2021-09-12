@@ -30,6 +30,7 @@ public class Parameters_R : MonoBehaviour
     [SerializeField] private GameObject[] hpSli;
     [SerializeField] public int score, time, ep, hp, damTime, plusTime, maxHP, niwaPer;
     [SerializeField] public Slider epSlider, mainSlider;
+    public Image sliderFill;
     [SerializeField] public Slider[] hpSlider;
 
     private bool freeze = false;
@@ -37,6 +38,7 @@ public class Parameters_R : MonoBehaviour
     [SerializeField] public int evo1, evo2, evo3, startNum;
     public string saveStage;
     [SerializeField] public Missions_M scrMis;
+    public float colorR, colorG, nowPer, nowColor;
 
     public void Start()
     {
@@ -101,6 +103,8 @@ public class Parameters_R : MonoBehaviour
             epSlider.value += addEP;
             hp += 1;
             mainSlider.value += 1;
+            nowColor += nowPer;
+
             //epText.text = "EP: " + ep;
             if (ep == evo1)
             {
@@ -112,6 +116,8 @@ public class Parameters_R : MonoBehaviour
                 mainSlider = hpSlider[1];
                 TimeManager(10);
                 maxHP = 250;
+                sliderFill.color = new Color32(0, 255, 0, 255);
+                nowPer = 255 / evo2;
             }
             else if (ep == evo2)
             {
@@ -123,12 +129,15 @@ public class Parameters_R : MonoBehaviour
                 mainSlider = hpSlider[2];
                 TimeManager(10);
                 maxHP = 500;
+                sliderFill.color = new Color32(0, 255, 0, 255);
+                nowPer = 255 / evo3;
             }
             else if (ep == evo3)
             {
                 hpSli[3].SetActive(true);
                 TimeManager(10);
                 maxHP = 1000;
+                sliderFill.color = new Color32(0, 255, 0, 255);
             }
 
             if (plusTime == 10)
@@ -165,7 +174,10 @@ public class Parameters_R : MonoBehaviour
     private void Update()
     {
         count -= Time.deltaTime;
-        
+        colorR = nowColor;
+        colorG = 255 - nowColor;
+        sliderFill.color = new Color(colorR, colorG, 0, 255);
+
         if (time - count > 1)
         {
             TimeManager(-1);
