@@ -7,6 +7,9 @@ public class SoundVolumeController : MonoBehaviour
 {
     public float soundVolume = 1f;
     public GameObject[] soundmaster;
+    private string[] CatergoryNames = new string[4]{
+        "BGM", "SFX", "Voice", "Ambient"
+    };
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -21,9 +24,7 @@ public class SoundVolumeController : MonoBehaviour
 
     void Update()
     {
-        CriAtom.SetCategoryVolume("BGM", soundVolume);
-        CriAtom.SetCategoryVolume("SFX", soundVolume);
-        CriAtom.SetCategoryVolume("Voice", soundVolume);
-        CriAtom.SetCategoryVolume("Ambient", soundVolume);
+        foreach (var category in CatergoryNames)
+            CriAtom.SetCategoryVolume(category, soundVolume);
     }
 }
