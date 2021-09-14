@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Mission2_M : Missions_M
 {
-    public int gasStand, gasTank;
+    public int gasStand, gasTank, enemyBreak;
     public string onLoad;
     public float timer_2_1;
     public GameObject bossIcon;
@@ -178,5 +178,14 @@ public class Mission2_M : Missions_M
         achieve = 0;
         per.text = "";
         load = "final";
+    }
+
+    public void EnemyBreak()
+    {
+        if (third)
+        {
+            achieve += 1;
+            per.text = achieve + "/ 20";
+        }
     }
 }
