@@ -116,7 +116,9 @@ public class Parameters_R : MonoBehaviour
                 mainSlider = hpSlider[1];
                 TimeManager(10);
                 maxHP = 250;
-                sliderFill.color = new Color32(0, 255, 0, 255);
+                colorR = 0;
+                colorG = 255;
+                sliderFill.color = new Color(0, 255, 0, 255);
                 nowPer = 255 / evo2;
             }
             else if (ep == evo2)
@@ -129,14 +131,19 @@ public class Parameters_R : MonoBehaviour
                 mainSlider = hpSlider[2];
                 TimeManager(10);
                 maxHP = 500;
+                colorR = 0;
+                colorG = 255;
                 sliderFill.color = new Color32(0, 255, 0, 255);
                 nowPer = 255 / evo3;
             }
             else if (ep == evo3)
             {
                 hpSli[3].SetActive(true);
+                hpSli[2].transform.position = new Vector3(0, -370, 0);// 
                 TimeManager(10);
                 maxHP = 1000;
+                colorR = 0;
+                colorG = 255;
                 sliderFill.color = new Color32(0, 255, 0, 255);
             }
 
