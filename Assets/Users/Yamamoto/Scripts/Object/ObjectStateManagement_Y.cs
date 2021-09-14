@@ -63,7 +63,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
     protected virtual void Start()
     {
         player = GameObject.Find("Player");
-
+        MaxHP = HP;
         //加筆(佐々木)
         scrCharaMove = player.GetComponent<CharaMoveRigid_R>();
         scrEvo = player.GetComponent<EvolutionChicken_R>();
@@ -72,9 +72,8 @@ public class ObjectStateManagement_Y : MonoBehaviour
         //加筆　undertreem 0625
         ADX_RevLevel = player.GetComponent<ADX_SoundRaycast>();
         renderers = CheckRenderer();
-
-        MaxHP = HP;
     }
+
     public void changeDamageFlg()
     {
         notDamage = false;
@@ -131,7 +130,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
         //最初は代入されたobjをとりあえず入れておく
         checkObjects.Add(gameObject);
         //返り値のRenderer
-        var renderers = new List<Renderer>();
+        var rendererList = new List<Renderer>();
 
         bool finish = false;
 
@@ -143,7 +142,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
                 //メッシュが設定されている(＝空オブジェクトでない)オブジェクトの場合
                 if (cObj.GetComponent<Renderer>() != null)
                 {
-                    renderers.Add(cObj.GetComponent<Renderer>());
+                    rendererList.Add(cObj.GetComponent<Renderer>());
                 }
                 else
                 {
@@ -165,7 +164,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
             else finish = true;
         }
 
-        return renderers.ToArray();
+        return rendererList.ToArray();
     }
 
     protected bool CheckRenVisible()
