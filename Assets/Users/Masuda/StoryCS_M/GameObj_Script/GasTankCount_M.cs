@@ -9,25 +9,25 @@ public class GasTankCount_M : MonoBehaviour
     private ObjectStateManagement_Y osmY;
     private FireHydrant_R fireHyd;
     public GameObject player;
-    public Vector3 pos,prePos;
+    public Vector3 pos, prePos;
     public bool comp;
     public Text achieve;
-        
+
     void Start()
     {
         player = GameObject.Find("Player");
         m2m = player.GetComponent<Mission2_M>();
-        fireHyd = this.GetComponent<FireHydrant_R>();
-        osmY = this.gameObject.GetComponent<ObjectStateManagement_Y>();
-        prePos = this.gameObject.gameObject.transform.position;
+        fireHyd = GetComponent<FireHydrant_R>();
+        osmY = GetComponent<ObjectStateManagement_Y>();
+        prePos = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        pos = this.gameObject.gameObject.transform.position;
+        pos = transform.position;
 
-        if (pos.y <= prePos.y-5 && m2m.third && !comp)
+        if (pos.y <= prePos.y - 5 && m2m.third && !comp)
         {
             prePos.y = -1000;
             m2m.gasTank += 1;

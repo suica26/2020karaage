@@ -9,6 +9,7 @@ public class Mission2_M : Missions_M
     public string onLoad;
     public float timer_2_1;
     public GameObject bossIcon;
+    public EnemySpawnController enemySpawnerScr;
 
     // Start is called before the first frame update
     public override void Start()
@@ -139,6 +140,7 @@ public class Mission2_M : Missions_M
         achieve = 0;
         per.text = achieve + "/ 20";
         load = "third";
+        enemySpawnerScr.enabled = true;
     }
 
     public void FourthMission_2()
