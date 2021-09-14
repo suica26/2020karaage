@@ -3869,8 +3869,8 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_RenderPostProcessing: 1
-  m_Antialiasing: 0
-  m_AntialiasingQuality: 2
+  m_Antialiasing: 1
+  m_AntialiasingQuality: 1
   m_StopNaN: 0
   m_Dithering: 0
   m_ClearDepth: 1
@@ -4077,9 +4077,9 @@ Light:
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
-    m_Bias: 1
-    m_NormalBias: 0
-    m_NearPlane: 0.2
+    m_Bias: 0.8
+    m_NormalBias: 3
+    m_NearPlane: 4.6
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -4128,7 +4128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UsePipelineSettings: 0
+  m_UsePipelineSettings: 1
 --- !u!1 &142731160434822420
 GameObject:
   m_ObjectHideFlags: 0
