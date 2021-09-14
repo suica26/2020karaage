@@ -32,11 +32,13 @@ public class Mission1_M : Missions_M
 
         if (!shop && first)
         {
+            //建物にあいさつ
             FirstMission();
         }
 
         if (bigNum >= bigBorder4 && second == true)
         {
+            //消火栓
             SecondMission();
         }
         else if (bigNum >= bigBorder3 && smallNum >= smallBorder1 && second == true)
@@ -54,6 +56,7 @@ public class Mission1_M : Missions_M
 
         if (hydrant >= 3 && third)
         {
+            //マンホール
             ThirdMission();
         }
 
@@ -76,28 +79,36 @@ public class Mission1_M : Missions_M
 
         if (manhole >= 3 && fourth)
         {
+            //車
+            FourthMission();
+        }
+
+        if (car >= 3 && five)
+        {
             if (evoNum >= 1)
             {
-                FiveMission();
+                //アジト探し
+                SixMission();
             }
 
             else
             {
-                SixMission();
+                //進化
+                FiveMission();
             }
         }
 
-        if (evoNum >= 1 && five)
+        if (evoNum >= 1 && six)
         {
             timer3 += Time.deltaTime;
             bossIcon.SetActive(true);
             //一時的に、アジトを探すミッションが発動した時点でミニマップアイコンが見えるように挙動修正 山本
         }
 
-        if (timer3 >= 1.0f && five)
+        if (timer3 >= 1.0f && six)
         {
-
-            FiveMission();
+            //アジト探し
+            SixMission();
         }
 
         if (final)
@@ -107,6 +118,7 @@ public class Mission1_M : Missions_M
 
         if (dis <= 40 && final)
         {
+            //破壊
             FinalMission();
         }
 
@@ -120,6 +132,7 @@ public class Mission1_M : Missions_M
         else if (tipsTimer >= 60 && tip)
         {
             tips.text = "消火栓やマンホールを使って\n見渡してみよう...！";
+            tipsTimer = 0;
         }
 
         if (achieve >= 99)
@@ -200,14 +213,20 @@ public class Mission1_M : Missions_M
 
     void FourthMission()
     {
-        
+        fourth = false;
+        five = true;
+        missionSlide.Play();
+        mission.text = splitText[9];
+        submis.text = splitText[10];
+        exmis.text = splitText[11];
+        achieve = 0;
+        per.text = achieve + "/ 3";
     }
 
     void FiveMission()
     {
-        fourth = false;
         five = false;
-        final = true;
+        six = true;
         missionSlide.Play();
         mission.text = splitText[12];
         submis.text = splitText[13];
@@ -217,12 +236,13 @@ public class Mission1_M : Missions_M
 
     void SixMission()
     {
-        fourth = false;
-        five = true;
+        five = false;
+        six = false;
+        final = true;
         missionSlide.Play();
-        mission.text = splitText[9];
-        submis.text = splitText[10];
-        exmis.text = splitText[11];
+        mission.text = splitText[15];
+        submis.text = splitText[16];
+        exmis.text = splitText[17];
         per.text = "";
     }
 
@@ -231,9 +251,19 @@ public class Mission1_M : Missions_M
         eneBillScr.changeDamageFlg();
 
         missionSlide.Play();
-        mission.text = splitText[15];
-        submis.text = splitText[16];
-        exmis.text = splitText[17];
+        mission.text = splitText[18];
+        submis.text = splitText[19];
+        exmis.text = splitText[20];
         final = false;
+    }
+
+    public void CarDestroy()
+    {
+        if (five)
+        {
+            car += 1;
+            achieve += 1;
+            per.text = achieve + " / 3";
+        }
     }
 }
