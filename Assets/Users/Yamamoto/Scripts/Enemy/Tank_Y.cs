@@ -5,6 +5,7 @@ using UnityEngine;
 public class Tank_Y : Enemy_Y
 {
     public GameObject bulletPrefab;
+
     private void Fire()
     {
         var genPos = weapon.transform.position;

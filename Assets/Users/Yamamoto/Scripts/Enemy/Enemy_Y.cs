@@ -101,7 +101,7 @@ public class Enemy_Y : ObjectStateManagement_Y
         animator.SetBool("isWalk", true);
     }
 
-    protected void Attack()
+    protected virtual void Attack()
     {
         StopMove();
         animator.SetTrigger("Attack");

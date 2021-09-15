@@ -7,6 +7,7 @@ public class Mission3_M : Missions_M
     public string onLoad_s3;
     public GameObject eneBill;
     public float evoTimer;
+    public GameObject bossIcon;
     public override void Start()
     {
         base.Start();
@@ -56,6 +57,7 @@ public class Mission3_M : Missions_M
     public void SecondMission_3()
     {
         eneBillScr.changeDamageFlg();
+        bossIcon.SetActive(true);
 
         missionSlide.Play();
         mission.text = splitText[3];

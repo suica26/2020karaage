@@ -1,16 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ClickOff_M : MonoBehaviour
 {
-    [SerializeField] public GameObject thisObj;
-    [SerializeField] bool breaker;
-    private new CriAtomSource audio;
+    public GameObject thisObj;
+    //private new CriAtomSource audio;
+    public Mission1_M mm1;
 
     void Start()
     {
-        
+        //audio = (CriAtomSource)GetComponent<CriAtomSource>();
     }
 
     // Update is called once per frame
@@ -21,9 +22,10 @@ public class ClickOff_M : MonoBehaviour
 
     public void OnClick()
     {
-        audio.Play("System_Cancel");
-        Time.timeScale = 1f;
+        //audio.Play("System_Cancel");
         thisObj.SetActive(false);
-        breaker = false;
+        mm1.hipStamp = false;
+        Cursor.visible = false;
+        Time.timeScale = 1f;
     }
 }

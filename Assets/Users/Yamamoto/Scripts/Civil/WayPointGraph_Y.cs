@@ -37,23 +37,26 @@ public class WayPointGraph_Y : MonoBehaviour
             wpScripts[i] = wayPointsArray[i].GetComponent<WayPoint_Y>();
             //各WayPointにnumberを割り振り
             wpScripts[i].SetPointNum(i);
-            yield return null;
+
+            if (i % 5 == 0) yield return null;
         }
 
         //リスト初期化
         endPointNumbers = new List<int>();
         scrSpawners = new List<SpawnerWaypoint_Y>();
 
+        int count = 0;
         //隣接点の情報を取得
         foreach (var wps in wpScripts)
         {
+            count++;
             //隣接点情報を各WayPointにセット
             wps.SetNeiNum();
             //終着点候補をリストに追加していく
             if (wps.endPointFlg) endPointNumbers.Add(wps.PointNumber);
             //スポーン候補をリストに追加していく
             if (wps.spawnerPointFlg) scrSpawners.Add(wayPointsArray[wps.PointNumber].GetComponent<SpawnerWaypoint_Y>());
-            yield return null;
+            if (count % 5 == 0) yield return null;
         }
 
         ResetDijkstraMap();

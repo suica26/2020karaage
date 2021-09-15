@@ -15,6 +15,7 @@ public class FlyingEnemy_Y : MonoBehaviour
     private float rayTimer;
     private Collider collider;
     public float fallenSpeed = -1.5f;
+    private Stage3BossBuilding st3BossScr;
     private void Start()
     {
         enemyScr = GetComponent<Enemy_Y>();
@@ -39,7 +40,7 @@ public class FlyingEnemy_Y : MonoBehaviour
         {
             rayTimer = 0f;
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, -transform.up, out hit, 0.1f))
+            if (Physics.Raycast(transform.position, -transform.up, out hit, 0.3f))
             {
                 GroundMode();
                 parachute.SetActive(false);
@@ -63,8 +64,8 @@ public class FlyingEnemy_Y : MonoBehaviour
         if (isFlying) return;
         isFlying = true;
         enemyScr.enabled = false;
-        navMeshAgent.enabled = false;
         animator.enabled = false;
+        navMeshAgent.enabled = false;
         rb.isKinematic = false;
     }
 
@@ -73,8 +74,18 @@ public class FlyingEnemy_Y : MonoBehaviour
         if (!isFlying) return;
         isFlying = false;
         enemyScr.enabled = true;
-        navMeshAgent.enabled = true;
         animator.enabled = true;
+        navMeshAgent.enabled = true;
         rb.isKinematic = true;
+    }
+
+    public void SetSt3BossScr(Stage3BossBuilding scr)
+    {
+        st3BossScr = scr;
+    }
+
+    private void OnDestroy()
+    {
+        st3BossScr.IncreaseEnemyBreakCount();
     }
 }

@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -4401,6 +4401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   setPanelP: {fileID: 1527331512}
+  starts: {fileID: 0}
 --- !u!114 &382132628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10460,6 +10461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseOption: {fileID: 1527331512}
+  starts: {fileID: 0}
 --- !u!114 &949940761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11728,6 +11730,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseOption: {fileID: 1804162010}
+  starts: {fileID: 0}
 --- !u!114 &1059589594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12698,7 +12701,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: bb118390b7a605b44b88a4a6f6761873,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.9912482
+      value: -2.64
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bb118390b7a605b44b88a4a6f6761873,
         type: 3}
@@ -12723,7 +12726,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: bb118390b7a605b44b88a4a6f6761873,
         type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bb118390b7a605b44b88a4a6f6761873,
         type: 3}
@@ -16075,7 +16078,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1847
+    m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -16094,14 +16097,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1525311179}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: -8}
+  m_LocalRotation: {x: 0, y: -0.69791543, z: 0, w: 0.7161802}
+  m_LocalPosition: {x: 14.77, y: 2, z: 0.64}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 287721142}
   m_Father: {fileID: 0}
   m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -88.52, z: 0}
 --- !u!1 &1527331512
 GameObject:
   m_ObjectHideFlags: 0
@@ -16435,6 +16438,7 @@ MonoBehaviour:
   niwaPer: 0
   epSlider: {fileID: 0}
   mainSlider: {fileID: 0}
+  sliderFill: {fileID: 0}
   hpSlider: []
   evo1: 450
   evo2: 3000000
@@ -16442,6 +16446,10 @@ MonoBehaviour:
   startNum: 0
   saveStage: 
   scrMis: {fileID: 0}
+  colorR: 0
+  colorG: 0
+  nowPer: 0
+  nowColor: 0
 --- !u!114 &1594671341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16778,6 +16786,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   setPanelP: {fileID: 1804162010}
+  starts: {fileID: 0}
 --- !u!114 &1619464270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18668,7 +18677,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -18703,7 +18712,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 3cf8e05b3601bd04aaf05c48a64d1e1b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -18740,11 +18749,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1726413671}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -65.2, y: 78.1, z: -2.8}
+  m_LocalPosition: {x: -34, y: 8.3, z: -2.8}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1733431405
 GameObject:
@@ -23555,7 +23564,8 @@ MonoBehaviour:
   blastClip: {fileID: 8300000, guid: 3c58f9f3131016d4ead5201f88d691d7, type: 3}
   evoBlastClip: {fileID: 8300000, guid: 7feef3793d690574195ef850f68cced9, type: 3}
   audioSource: {fileID: 2147035851}
-  scrAnim: {fileID: 0}
+  scrAnim:
+  - {fileID: 0}
   secondBlastTime: 0.5
   thirdBlastTime: 0.5
   pullTimes: []
@@ -23611,7 +23621,8 @@ MonoBehaviour:
   cutterBaseSpeed: 12
   cutterFABaseSpeed: 18
   dropSpeed: 24
-  scrAnim: {fileID: 0}
+  scrAnim:
+  - {fileID: 0}
   throwingCutter: 0
 --- !u!82 &2147035855
 AudioSource:
@@ -23821,6 +23832,7 @@ MonoBehaviour:
   - 40
   EvoEffect: {fileID: 0}
   DEBUG_MODE: 0
+  nowEvoNum: 0
   startNum: 0
 --- !u!54 &2147035858
 Rigidbody:
@@ -23845,6 +23857,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8729586998704242170, guid: e4ad10f186b4f884e95bc49f8b46542b,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2623716444850090931, guid: e4ad10f186b4f884e95bc49f8b46542b,
         type: 3}
       propertyPath: m_Name

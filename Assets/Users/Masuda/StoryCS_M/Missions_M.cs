@@ -7,13 +7,14 @@ public class Missions_M : MonoBehaviour
 {
     [SerializeField] public Text mission, submis, exmis, per, tips;
     [SerializeField]
-    public GameObject player, misBox, company, buildTips, tipsChicken;
+    public GameObject player, misBox, company, tipsChicken;
     [SerializeField] public TextAsset txtFile;
     [SerializeField] public int smallNum, bigNum, achieve, hitID;
     [SerializeField]
     public int smallBorder1, smallBorder2, smallBorder3,
                                 bigBorder1, bigBorder2, bigBorder3, bigBorder4;
-    public bool first = false, second = false, third = false, fourth = false, five = false, final = false, tip = false;
+    public bool first = false, second = false, third = false, fourth = false, five = false,
+        six = false, final = false, tip = false;
     public string txtData;
     public string[] splitText;
     [SerializeField] public Animation missionSlide;
@@ -30,7 +31,6 @@ public class Missions_M : MonoBehaviour
         txtData = txtFile.text;
         splitText = txtData.Split(char.Parse("\n"));
         //misBox.SetActive(false);
-        buildTips.SetActive(false);
         tipsChicken.SetActive(false);
     }
 

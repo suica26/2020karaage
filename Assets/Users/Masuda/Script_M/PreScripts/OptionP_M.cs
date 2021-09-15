@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OptionP_M : MonoBehaviour
 {
-    [SerializeField] private GameObject setPanelP;
+    [SerializeField] private GameObject setPanelP, starts;
     private new CriAtomSource audio;
     void Start()
     {
@@ -15,6 +15,7 @@ public class OptionP_M : MonoBehaviour
     {
         audio.Play("System_Decision");
         setPanelP.SetActive(true);
+        starts.SetActive(false);
     }
 
 }
