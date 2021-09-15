@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -5282034740847405582}
   - component: {fileID: 6184491439173604963}
   - component: {fileID: 6286301486544636840}
+  - component: {fileID: 4428624860937793934}
   m_Layer: 2
   m_Name: FireHydrant
   m_TagString: Untagged
@@ -130,6 +131,8 @@ MonoBehaviour:
   shardDamage_nonDiv: 50
   specialObjectFlg: 0
   notDamage: 0
+  magnitude: 0.1
+  duration: 0.25
 --- !u!64 &8663573979528208312
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -167,6 +170,7 @@ MonoBehaviour:
   _xScale: 1
   _yScale: 10
   _zScale: 1
+  makeHydrant: 0
   player: {fileID: 0}
   hyd: 0
 --- !u!114 &6184491439173604963
@@ -205,3 +209,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+--- !u!114 &4428624860937793934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2527383316214841470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58d7fbd90420d744e8ba69d321b2e651, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  m1m: {fileID: 0}
+  hit: 0

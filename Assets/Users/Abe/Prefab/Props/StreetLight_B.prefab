@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 6696394769682687237}
   - component: {fileID: 2823067930725471149}
   - component: {fileID: 88982359392079409}
+  - component: {fileID: 8283965928127485389}
   m_Layer: 2
   m_Name: StreetLight_B
   m_TagString: Small
@@ -171,6 +172,8 @@ MonoBehaviour:
   shardDamage_nonDiv: 100
   specialObjectFlg: 0
   notDamage: 0
+  magnitude: 0.1
+  duration: 0.25
 --- !u!114 &6696394769682687237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,3 +308,18 @@ MonoBehaviour:
   _pitch: 0
   _androidUseLowLatencyVoicePool: 0
   need_to_player_update_all: 1
+--- !u!114 &8283965928127485389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3462733393100577994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58d7fbd90420d744e8ba69d321b2e651, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  m1m: {fileID: 0}
+  hit: 0

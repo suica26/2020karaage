@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Mission1_M : Missions_M
 {
     public GameObject hip, shop, evoPanel;
-    public int manhole, hydrant, car, evoCount;
+    public int manhole, hydrant, car, shard, evoCount;
     public bool hipStamp = false, evolution = false;
     public float timer2, timer3;
     public GameObject bossIcon;
@@ -38,7 +38,7 @@ public class Mission1_M : Missions_M
 
         if (bigNum >= bigBorder4 && second == true)
         {
-            //消火栓
+            //小物シュート
             SecondMission();
         }
         else if (bigNum >= bigBorder3 && smallNum >= smallBorder1 && second == true)
@@ -54,13 +54,19 @@ public class Mission1_M : Missions_M
             SecondMission();
         }
 
-        if (hydrant >= 3 && third)
+        if (shard >= 3 && third)
         {
-            //マンホール
+            //消火栓
             ThirdMission();
         }
 
-        if (fourth && hipStamp)
+        if (hydrant >= 3 && fourth)
+        {
+            //マンホール
+            FourthMission();
+        }
+
+        if (five && hipStamp)
         {
             timer += Time.unscaledDeltaTime / 2;
         }
@@ -77,24 +83,24 @@ public class Mission1_M : Missions_M
             timer = 0;
         }
 
-        if (manhole >= 3 && fourth)
+        if (manhole >= 3 && five)
         {
             //車
-            FourthMission();
+            FiveMission();
         }
 
-        if (car >= 3 && five)
+        if (car >= 3 && six)
         {
             if (evoNum >= 1)
             {
                 //アジト探し
-                SixMission();
+                SevenMission();
             }
 
             else
             {
                 //進化
-                FiveMission();
+                SixMission();
             }
         }
 
@@ -108,7 +114,7 @@ public class Mission1_M : Missions_M
         if (timer3 >= 1.0f && six)
         {
             //アジト探し
-            SixMission();
+            SevenMission();
         }
 
         if (final)
@@ -189,9 +195,9 @@ public class Mission1_M : Missions_M
     void SecondMission()
     {
         missionSlide.Play();
-        mission.text = splitText[3];
-        submis.text = splitText[4];
-        exmis.text = splitText[5];
+        mission.text = splitText[21];
+        submis.text = splitText[22];
+        exmis.text = splitText[23];
         second = false;
         third = true;
         achieve = 0;
@@ -200,8 +206,20 @@ public class Mission1_M : Missions_M
 
     void ThirdMission()
     {
+        missionSlide.Play();
+        mission.text = splitText[3];
+        submis.text = splitText[4];
+        exmis.text = splitText[5];
         third = false;
         fourth = true;
+        achieve = 0;
+        per.text = achieve + "/ 3";
+    }
+
+    void FourthMission()
+    {
+        fourth = false;
+        five = true;
         missionSlide.Play();
         mission.text = splitText[6];
         submis.text = splitText[7];
@@ -211,10 +229,10 @@ public class Mission1_M : Missions_M
         hipStamp = true;
     }
 
-    void FourthMission()
+    void FiveMission()
     {
-        fourth = false;
-        five = true;
+        five = false;
+        six = true;
         missionSlide.Play();
         mission.text = splitText[9];
         submis.text = splitText[10];
@@ -223,10 +241,10 @@ public class Mission1_M : Missions_M
         per.text = achieve + "/ 3";
     }
 
-    void FiveMission()
+    void SixMission()
     {
-        five = false;
-        six = true;
+        six = false;
+        seven = true;
         missionSlide.Play();
         mission.text = splitText[12];
         submis.text = splitText[13];
@@ -234,9 +252,9 @@ public class Mission1_M : Missions_M
         per.text = "";
     }
 
-    void SixMission()
+    void SevenMission()
     {
-        five = false;
+        seven = false;
         six = false;
         final = true;
         missionSlide.Play();
@@ -259,9 +277,19 @@ public class Mission1_M : Missions_M
 
     public void CarDestroy()
     {
-        if (five)
+        if (six)
         {
             car += 1;
+            achieve += 1;
+            per.text = achieve + " / 3";
+        }
+    }
+
+    public void ShardAttack()
+    {
+        if (third)
+        {
+            shard += 1;
             achieve += 1;
             per.text = achieve + " / 3";
         }
