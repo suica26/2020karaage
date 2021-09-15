@@ -35,7 +35,7 @@ public class FireHydrant_R : BlowerGimmickBase
             InstanceObject();
             InstanceEffect();
             //M
-            if (m1m.third && hyd)
+            if (m1m.fourth && hyd)
             {
                 m1m.hydrant += 1;
                 m1m.achieve += 1;

@@ -27,7 +27,7 @@ public class Manhole_R : BlowerGimmickBase
             InstanceEffect();
             audio.Play("Manhole00");
             //M
-            if (m1m.fourth && !splash)
+            if (m1m.five && !splash)
             {
                 m1m.manhole += 1;
                 m1m.achieve += 1;
