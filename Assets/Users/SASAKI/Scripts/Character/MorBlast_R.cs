@@ -75,21 +75,25 @@ public class MorBlast_R : MonoBehaviour
             return;
         }
 
-        if(!mobileMode)
+        // 攻撃制限
+        if(AttackRestrictions_R.GetInstance().CanAttack())
         {
-            if (Input.GetMouseButton(2) && !isBlast)
-                ChargeBlast();
+            if (!mobileMode)
+            {
+                if (Input.GetMouseButton(2) && !isBlast)
+                    ChargeBlast();
 
-            if (Input.GetMouseButtonUp(2))   //マウス中ボタンを離した際に発動
-                DoBlast();
-        }
-        else
-        {
-            if (isBlastMobile == eBlast.push && !isBlast)
-                ChargeBlast();
+                if (Input.GetMouseButtonUp(2))   //マウス中ボタンを離した際に発動
+                    DoBlast();
+            }
+            else
+            {
+                if (isBlastMobile == eBlast.push && !isBlast)
+                    ChargeBlast();
 
-            if (isBlastMobile == eBlast.release)
-                DoBlast();
+                if (isBlastMobile == eBlast.release)
+                    DoBlast();
+            }
         }
 
         for (int i = 0; i < morningBlast.Length; i++)
@@ -149,6 +153,8 @@ public class MorBlast_R : MonoBehaviour
 
     private void DoBlast()
     {
+        AttackRestrictions_R.GetInstance().SetTimer(secondBlastTime + thirdBlastTime);
+
         // 移動速度を直す
         if (scrMove != null)
             scrMove.MoveMag = 1.0f;

@@ -10,7 +10,6 @@ public class GasTank_R : MonoBehaviour
     [SerializeField] private GameObject subprops;
     [SerializeField] private ObjectStateManagement_Y underObject;
     private GameObject[] props;
-
     private Vector3 moveVec;    // 転がる方向
     private bool isDelete;
     private float timer;
@@ -33,7 +32,7 @@ public class GasTank_R : MonoBehaviour
         if (mainTankRigid == null)
             isDelete = true;
 
-        if(!onTheBuilding)
+        if (!onTheBuilding)
         {
             // 足場が破壊されたとき
             foreach (var obj in props)
@@ -50,7 +49,7 @@ public class GasTank_R : MonoBehaviour
         }
         else
         {
-            if(underObject.HP == 0 && !isDelete)
+            if (underObject.HP == 0 && !isDelete)
             {
                 SetPropsIsTrigger();
                 mainTankRigid.isKinematic = false;
@@ -60,13 +59,13 @@ public class GasTank_R : MonoBehaviour
         }
 
         // 暫定処理
-        if(isDelete)
+        if (isDelete)
         {
             timer += Time.deltaTime;
             if (timer >= 2.0)
             {
-                Destroy(this.gameObject);
                 Destroy(this.subprops);
+                Destroy(this.gameObject);
             }
         }
     }

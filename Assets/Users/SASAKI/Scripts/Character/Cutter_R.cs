@@ -78,30 +78,33 @@ public class Cutter_R : MonoBehaviour
             }
         }
 
-        //マウスクリック中にタイマー(通常or落下攻撃判定用)を加算
-        if(!mobileMode)
+        if(AttackRestrictions_R.GetInstance().CanAttack())
         {
-            if (Input.GetMouseButton(1) && CanCutter)
-                timer += Time.deltaTime;
-        }
-        else
-        {
-            if (isCutter == eCutter.push && CanCutter)
-                timer += Time.deltaTime;
-        }
-
-        //以下通常のカッター攻撃の記述
-        if(!mobileMode)
-        {
-            if (Input.GetMouseButtonUp(1) && CanCutter)
+            //マウスクリック中にタイマー(通常or落下攻撃判定用)を加算
+            if (!mobileMode)
             {
-                Cutter();
+                if (Input.GetMouseButton(1) && CanCutter)
+                    timer += Time.deltaTime;
             }
-        }
-        else
-        {
-            if (isCutter == eCutter.release && CanCutter)
-                Cutter();
+            else
+            {
+                if (isCutter == eCutter.push && CanCutter)
+                    timer += Time.deltaTime;
+            }
+
+            //以下通常のカッター攻撃の記述
+            if (!mobileMode)
+            {
+                if (Input.GetMouseButtonUp(1) && CanCutter)
+                {
+                    Cutter();
+                }
+            }
+            else
+            {
+                if (isCutter == eCutter.release && CanCutter)
+                    Cutter();
+            }
         }
 
         //カッター攻撃のアニメーション遷移処理
@@ -125,6 +128,8 @@ public class Cutter_R : MonoBehaviour
                 scrMove._isFlying = false;
                 GetComponent<Rigidbody>().useGravity = true;
             }
+
+            AttackRestrictions_R.GetInstance().SetTimer(0.75f);
 
             throwingCutter = true;
             timer = 0.0f;

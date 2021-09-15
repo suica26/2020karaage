@@ -110,6 +110,9 @@ public class CharaMoveRigid_R : MonoBehaviour
 
     void Update()
     {
+        // 攻撃判定の更新
+        AttackRestrictions_R.GetInstance().Update();
+
         speed = scrEvo.Status_SPD;
         jumpSpeed = scrEvo.Status_JUMP;
 

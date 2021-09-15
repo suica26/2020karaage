@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Mission1_M : Missions_M
 {
     public GameObject hip, shop, evoPanel;
-    public int manhole, hydrant, evoCount;
+    public int manhole, hydrant, car, evoCount;
     public bool hipStamp = false, evolution = false;
     public float timer2, timer3;
     public GameObject bossIcon;
@@ -32,72 +32,32 @@ public class Mission1_M : Missions_M
 
         if (!shop && first)
         {
-            misBox.SetActive(true);
-            missionSlide.Play();
-            mission.text = splitText[0];
-            submis.text = splitText[1];
-            exmis.text = splitText[2];
-            first = false;
-            second = true;
-            per.text = "0%";
+            //建物にあいさつ
+            FirstMission();
         }
 
         if (bigNum >= bigBorder4 && second == true)
         {
-            missionSlide.Play();
-            mission.text = splitText[3];
-            submis.text = splitText[4];
-            exmis.text = splitText[5];
-            second = false;
-            third = true;
-            achieve = 0;
-            per.text = achieve + "/ 3";
+            //消火栓
+            SecondMission();
         }
         else if (bigNum >= bigBorder3 && smallNum >= smallBorder1 && second == true)
         {
-            missionSlide.Play();
-            mission.text = splitText[3];
-            submis.text = splitText[4];
-            exmis.text = splitText[5];
-            second = false;
-            third = true;
-            achieve = 0;
-            per.text = achieve + "/ 3";
+            SecondMission();
         }
         else if (bigNum >= bigBorder2 && smallNum >= smallBorder2 && second == true)
         {
-            missionSlide.Play();
-            mission.text = splitText[3];
-            submis.text = splitText[4];
-            exmis.text = splitText[5];
-            second = false;
-            third = true;
-            achieve = 0;
-            per.text = achieve + "/ 3";
+            SecondMission();
         }
         else if (bigNum >= bigBorder1 && smallNum >= smallBorder3 && second == true)
         {
-            missionSlide.Play();
-            mission.text = splitText[3];
-            submis.text = splitText[4];
-            exmis.text = splitText[5];
-            second = false;
-            third = true;
-            achieve = 0;
-            per.text = achieve + "/ 3";
+            SecondMission();
         }
 
         if (hydrant >= 3 && third)
         {
-            third = false;
-            fourth = true;
-            missionSlide.Play();
-            mission.text = splitText[6];
-            submis.text = splitText[7];
-            exmis.text = splitText[8];
-            achieve = 0;
-            per.text = achieve + "/ 3";
-            hipStamp = true;
+            //マンホール
+            ThirdMission();
         }
 
         if (fourth && hipStamp)
@@ -112,63 +72,43 @@ public class Mission1_M : Missions_M
             Cursor.visible = true;
         }
 
-        /*if (timer >= 5.0f)
-        {
-            Time.timeScale = 1f;
-            hip.SetActive(false);
-            hipStamp = false;
-        }*/
-
         if (!hipStamp)
         {
-            //Cursor.visible = false;
             timer = 0;
         }
 
         if (manhole >= 3 && fourth)
         {
+            //車
+            FourthMission();
+        }
+
+        if (car >= 3 && five)
+        {
             if (evoNum >= 1)
             {
-                fourth = false;
-                five = false;
-                final = true;
-                missionSlide.Play();
-                mission.text = splitText[12];
-                submis.text = splitText[13];
-                exmis.text = splitText[14];
-                per.text = "";
+                //アジト探し
+                SixMission();
             }
 
             else
             {
-                fourth = false;
-                five = true;
-                missionSlide.Play();
-                mission.text = splitText[9];
-                submis.text = splitText[10];
-                exmis.text = splitText[11];
-                per.text = "";
+                //進化
+                FiveMission();
             }
         }
 
-        if (evoNum >= 1 && five)
+        if (evoNum >= 1 && six)
         {
             timer3 += Time.deltaTime;
             bossIcon.SetActive(true);
             //一時的に、アジトを探すミッションが発動した時点でミニマップアイコンが見えるように挙動修正 山本
         }
 
-        if (timer3 >= 1.0f && five)
+        if (timer3 >= 1.0f && six)
         {
-
-            timer3 = 0;
-            five = false;
-            final = true;
-            missionSlide.Play();
-            mission.text = splitText[12];
-            submis.text = splitText[13];
-            exmis.text = splitText[14];
-            per.text = "";
+            //アジト探し
+            SixMission();
         }
 
         if (final)
@@ -178,14 +118,8 @@ public class Mission1_M : Missions_M
 
         if (dis <= 40 && final)
         {
-            //山本加筆
-            eneBillScr.changeDamageFlg();
-
-            missionSlide.Play();
-            mission.text = splitText[15];
-            submis.text = splitText[16];
-            exmis.text = splitText[17];
-            final = false;
+            //破壊
+            FinalMission();
         }
 
         if (tipsTimer >= 30 && !tip)
@@ -198,18 +132,12 @@ public class Mission1_M : Missions_M
         else if (tipsTimer >= 60 && tip)
         {
             tips.text = "消火栓やマンホールを使って\n見渡してみよう...！";
+            tipsTimer = 0;
         }
 
         if (achieve >= 99)
         {
-            missionSlide.Play();
-            mission.text = splitText[3];
-            submis.text = splitText[4];
-            exmis.text = splitText[5];
-            second = false;
-            third = true;
-            achieve = 0;
-            per.text = achieve + "/ 3";
+            SecondMission();
         }
 
         if (evoCount >= scrParame.evo1 * 0.5 && !evolution)
@@ -222,10 +150,6 @@ public class Mission1_M : Missions_M
             Time.timeScale = 0f;
             Cursor.visible = true;
         }
-        /*if (timer2 >= 1.0f)
-        {
-            
-        }*/
         if (!evoPanel)
         {
             timer2 = 0;
@@ -250,20 +174,96 @@ public class Mission1_M : Missions_M
         Cursor.visible = false;
     }
 
-    /*new void BigNumberPlus()
+    void FirstMission()
     {
-        bigNum++;
-        if (second)
+        misBox.SetActive(true);
+        missionSlide.Play();
+        mission.text = splitText[0];
+        submis.text = splitText[1];
+        exmis.text = splitText[2];
+        first = false;
+        second = true;
+        per.text = "0%";
+    }
+
+    void SecondMission()
+    {
+        missionSlide.Play();
+        mission.text = splitText[3];
+        submis.text = splitText[4];
+        exmis.text = splitText[5];
+        second = false;
+        third = true;
+        achieve = 0;
+        per.text = achieve + "/ 3";
+    }
+
+    void ThirdMission()
+    {
+        third = false;
+        fourth = true;
+        missionSlide.Play();
+        mission.text = splitText[6];
+        submis.text = splitText[7];
+        exmis.text = splitText[8];
+        achieve = 0;
+        per.text = achieve + "/ 3";
+        hipStamp = true;
+    }
+
+    void FourthMission()
+    {
+        fourth = false;
+        five = true;
+        missionSlide.Play();
+        mission.text = splitText[9];
+        submis.text = splitText[10];
+        exmis.text = splitText[11];
+        achieve = 0;
+        per.text = achieve + "/ 3";
+    }
+
+    void FiveMission()
+    {
+        five = false;
+        six = true;
+        missionSlide.Play();
+        mission.text = splitText[12];
+        submis.text = splitText[13];
+        exmis.text = splitText[14];
+        per.text = "";
+    }
+
+    void SixMission()
+    {
+        five = false;
+        six = false;
+        final = true;
+        missionSlide.Play();
+        mission.text = splitText[15];
+        submis.text = splitText[16];
+        exmis.text = splitText[17];
+        per.text = "";
+    }
+
+    void FinalMission()
+    {
+        eneBillScr.changeDamageFlg();
+
+        missionSlide.Play();
+        mission.text = splitText[18];
+        submis.text = splitText[19];
+        exmis.text = splitText[20];
+        final = false;
+    }
+
+    public void CarDestroy()
+    {
+        if (five)
         {
-            base.BigNumberPlus();
+            car += 1;
+            achieve += 1;
+            per.text = achieve + " / 3";
         }
     }
-    new void SmallNumberPlus()
-    {
-        smallNum++;
-        if (second)
-        {
-            base.SmallNumberPlus();
-        }
-    }*/
 }

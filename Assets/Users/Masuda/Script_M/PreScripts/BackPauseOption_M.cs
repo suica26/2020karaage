@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BackPauseOption_M : MonoBehaviour
 {
-    [SerializeField] private GameObject pauseOption;
+    [SerializeField] private GameObject pauseOption, starts;
     private new CriAtomSource audio;
     void Start()
     {
@@ -15,5 +15,6 @@ public class BackPauseOption_M : MonoBehaviour
     {
         audio.Play("System_Cancel");
         pauseOption.SetActive(false);
+        starts.SetActive(true);
     }
 }

@@ -7,14 +7,21 @@ public class Stage3BossBuilding : ObjectStateManagement_Y
 {
     private bool[] phase = new bool[3] { false, false, false };
     public float launchPower;
-    public Vector3[] launchPos;
+    public Vector3[] towerPos;
+    public float[] launchHeight;
     public GameObject[] enemyPrefabs;
     public int[] phaseEnemyNum;
     private GameObject mainCamera;
     private TpsCameraJC_R cameraScr;
     private CharaMoveRigid_R playerMoveScr;
+    private chickenKick_R kickScr;
+    private Cutter_R cutterScr;
+    private MorBlast_R morblaScr;
     private EnemyMoveController_Y enemyControllerScr;
     public Vector3 cameraMoveTargetPos;
+    public int[] phaseBreakEnemyNum;
+    public int enemyBreakCount;
+    public bool debug;
 
     protected override void Start()
     {
@@ -23,18 +30,27 @@ public class Stage3BossBuilding : ObjectStateManagement_Y
         mainCamera = GameObject.Find("Main Camera");
         cameraScr = mainCamera.GetComponent<TpsCameraJC_R>();
         playerMoveScr = player.GetComponent<CharaMoveRigid_R>();
+        kickScr = player.GetComponent<chickenKick_R>();
+        cutterScr = player.GetComponent<Cutter_R>();
+        morblaScr = player.GetComponent<MorBlast_R>();
         enemyControllerScr = GameObject.Find("GameAI_Y").GetComponent<EnemyMoveController_Y>();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return)) Damage(kickMag, 1);
+        if (debug && Input.GetKeyDown(KeyCode.Return))
+        {
+            changeDamageFlg();
+            Damage(kickMag, 1);
+        }
     }
 
     public override void Damage(float mag, int skill)
     {
         //すでに破壊済みの場合は何も起きないようにする
         if (!livingFlg) return;
+        notDamage = true;
+        Invoke("changeDamageFlg", 0.5f);
 
         HP -= (int)(scrEvo.Status_ATK * mag);
 
@@ -67,6 +83,10 @@ public class Stage3BossBuilding : ObjectStateManagement_Y
         phase[phaseNum] = true;
         ChangeToCameraMode();
 
+        /*
+            もし敵の射出に関して処理を追加したい場合はここに作成した関数を記述してください
+        */
+
         StartCoroutine(LookLauncher(phaseNum));
         StartCoroutine(LaunchEnemys(phaseNum));
     }
@@ -74,10 +94,11 @@ public class Stage3BossBuilding : ObjectStateManagement_Y
     private IEnumerator LookLauncher(int phaseNum)
     {
         var nowPos = mainCamera.transform.position;
+        var lookPos = new Vector3(transform.position.x, launchHeight[phaseNum], transform.position.z);
         for (float i = 0; i < 1.0f; i += 0.005f)
         {
             mainCamera.transform.position = Vector3.Lerp(nowPos, cameraMoveTargetPos, i);
-            mainCamera.transform.LookAt(launchPos[phaseNum]);
+            mainCamera.transform.LookAt(lookPos);
             yield return null;
         }
         Invoke("ChangeToPlayMode", 2f);
@@ -89,7 +110,10 @@ public class Stage3BossBuilding : ObjectStateManagement_Y
         {
             for (int j = 0; j < phaseEnemyNum[i + phaseNum * 3]; j++)
             {
-                GameObject e = Instantiate(enemyPrefabs[i].gameObject, launchPos[i], Quaternion.identity);
+                int num = Random.Range(0, 2);
+                var genPos = new Vector3(towerPos[num].x, launchHeight[i], towerPos[num].z);
+                GameObject e = Instantiate(enemyPrefabs[i].gameObject, genPos, Quaternion.identity);
+                e.GetComponent<FlyingEnemy_Y>().SetSt3BossScr(this);
                 var rb = e.GetComponent<Rigidbody>();
                 var dir = Vector3.zero;
 
@@ -107,12 +131,16 @@ public class Stage3BossBuilding : ObjectStateManagement_Y
                 yield return null;
             }
         }
+        notDamage = true;
     }
 
     private void ChangeToCameraMode()
     {
         cameraScr.enabled = false;
         playerMoveScr.enabled = false;
+        kickScr.enabled = false;
+        cutterScr.enabled = false;
+        morblaScr.enabled = false;
         enemyControllerScr.enemyCanMove = false;
     }
 
@@ -120,6 +148,22 @@ public class Stage3BossBuilding : ObjectStateManagement_Y
     {
         cameraScr.enabled = true;
         playerMoveScr.enabled = true;
+        kickScr.enabled = true;
+        cutterScr.enabled = true;
+        morblaScr.enabled = true;
         enemyControllerScr.enemyCanMove = true;
+    }
+
+    public void IncreaseEnemyBreakCount()
+    {
+        enemyBreakCount++;
+        int phaseNum = 0;
+        foreach (var p in phase) if (p) phaseNum++;
+
+        if (enemyBreakCount >= phaseBreakEnemyNum[phaseNum - 1])
+        {
+            changeDamageFlg();
+            //もし敵を指定の数倒して支部が攻撃できるようになることに何か処理を追加する場合は、この下に書いてください
+        }
     }
 }

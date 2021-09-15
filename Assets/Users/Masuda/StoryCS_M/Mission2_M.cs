@@ -5,10 +5,11 @@ using UnityEngine.UI;
 
 public class Mission2_M : Missions_M
 {
-    public int gasStand, gasTank;
+    public int gasStand, gasTank, enemyBreak;
     public string onLoad;
     public float timer_2_1;
     public GameObject bossIcon;
+    public EnemySpawnController enemySpawnerScr;
 
     // Start is called before the first frame update
     public override void Start()
@@ -24,6 +25,7 @@ public class Mission2_M : Missions_M
             case "third": ThirdMission_2(); break;
             case "fourth": FourthMission_2(); break;
             case "five": FiveMission_2(); break;
+            case "six": SixMission_2(); break;
             case "final": FinalMission_2(); break;
             default: FirstMission_2(); break;
         }
@@ -60,31 +62,36 @@ public class Mission2_M : Missions_M
             ThirdMission_2();
         }
 
-        if (third && gasTank >= 3)
+        if (third && enemyBreak >= 20)
+        {
+            FourthMission_2();
+        }
+
+        if (fourth && gasTank >= 3)
         {
             if (evoNum >= 2)
             {
-                FiveMission_2();
+                SixMission_2();
             }
             else
             {
-                FourthMission_2();
+                FiveMission_2();
             }
         }
 
-        if (evoNum >= 2 && fourth)
+        if (evoNum >= 2 && five)
         {
             timer_2_1 += Time.deltaTime;
         }
 
-        if (five)
+        if (six)
         {
             tipsTimer += Time.deltaTime;
         }
 
-        if (fourth && timer_2_1 >= 1.0f)
+        if (five && timer_2_1 >= 1.0f)
         {
-            FiveMission_2();
+            SixMission_2();
         }
 
         if (five && dis <= 50)
@@ -131,8 +138,9 @@ public class Mission2_M : Missions_M
         second = false;
         third = true;
         achieve = 0;
-        per.text = achieve + "/ 3";
+        per.text = achieve + "/ 20";
         load = "third";
+        enemySpawnerScr.enabled = true;
     }
 
     public void FourthMission_2()
@@ -145,38 +153,64 @@ public class Mission2_M : Missions_M
         fourth = true;
         achieve = 0;
         per.text = "";
+        achieve = 0;
+        per.text = achieve + "/ 3";
         load = "fourth";
     }
 
     public void FiveMission_2()
     {
-        bossIcon.SetActive(true);
-
-        timer_2_1 = 0;
         missionSlide.Play();
         mission.text = splitText[12];
         submis.text = splitText[13];
         exmis.text = splitText[14];
-        third = false;
         fourth = false;
         five = true;
         achieve = 0;
         per.text = "";
+        achieve = 0;
+        per.text = achieve + "/ 3";
         load = "five";
     }
 
+    public void SixMission_2()
+    {
+        bossIcon.SetActive(true);
+
+        timer_2_1 = 0;
+        missionSlide.Play();
+        mission.text = splitText[15];
+        submis.text = splitText[16];
+        exmis.text = splitText[17];
+        fourth = false;
+        five = false;
+        six = true;
+        achieve = 0;
+        per.text = "";
+        load = "six";
+    }
     public void FinalMission_2()
     {
         eneBillScr.changeDamageFlg();
 
         missionSlide.Play();
-        mission.text = splitText[15];
-        submis.text = splitText[16];
-        exmis.text = splitText[17];
-        five = false;
+        mission.text = splitText[18];
+        submis.text = splitText[19];
+        exmis.text = splitText[20];
+        six = false;
         final = true;
         achieve = 0;
         per.text = "";
         load = "final";
+    }
+
+    public void EnemyBreak()
+    {
+        if (third)
+        {
+            enemyBreak += 1;
+            achieve += 1;
+            per.text = achieve + "/ 20";
+        }
     }
 }

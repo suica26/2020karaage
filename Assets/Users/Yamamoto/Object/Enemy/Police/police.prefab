@@ -1330,8 +1330,9 @@ GameObject:
   - component: {fileID: -3497946707093904779}
   - component: {fileID: 8415660686470368927}
   - component: {fileID: 3979325175564754024}
+  - component: {fileID: -8498235308746862614}
   m_Layer: 16
-  m_Name: Police
+  m_Name: police
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1476,9 +1477,9 @@ MonoBehaviour:
   weapon: {fileID: 6608533013224504180}
   attackClip: {fileID: 1827226128182048838, guid: efac8d8a96e94ef43bd6422e959340de,
     type: 3}
-  attackDamage: 50
+  attackDamage: 25
   searchArea: 50
-  bulletPrefab: {fileID: 8871777121355791282, guid: 265a824829aba0d4aa6e6875340839c8,
+  bulletPrefab: {fileID: 5407391703896175637, guid: 9298af474cb001244ac2810f5cc12b7c,
     type: 3}
 --- !u!114 &8415660686470368927
 MonoBehaviour:
@@ -1516,6 +1517,18 @@ MonoBehaviour:
   _pitch: 0
   _androidUseLowLatencyVoicePool: 0
   need_to_player_update_all: 1
+--- !u!114 &-8498235308746862614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5552524597018552477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c47c4693d1b16d5428cf1156f2ee9c05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5553565784712921985
 GameObject:
   m_ObjectHideFlags: 0

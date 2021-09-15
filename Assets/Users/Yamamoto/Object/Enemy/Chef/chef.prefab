@@ -140,8 +140,9 @@ GameObject:
   - component: {fileID: -6854739156859251007}
   - component: {fileID: 2419253639629568097}
   - component: {fileID: 7450924142112176213}
+  - component: {fileID: 5239580655453336973}
   m_Layer: 16
-  m_Name: Chef
+  m_Name: chef
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -286,7 +287,7 @@ MonoBehaviour:
   weapon: {fileID: 7023606130072122206}
   attackClip: {fileID: 1827226128182048838, guid: 9db3317666acb8946bfa7f07ae3ef795,
     type: 3}
-  attackDamage: 25
+  attackDamage: 13
   searchArea: 50
   hitBoxPrefab: {fileID: 3531957827537779740, guid: a150f44f619a03c4789834dc1d0d0ef4,
     type: 3}
@@ -326,6 +327,18 @@ MonoBehaviour:
   _pitch: 0
   _androidUseLowLatencyVoicePool: 0
   need_to_player_update_all: 1
+--- !u!114 &5239580655453336973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502009927202614386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbabd14aa89eaa343a28120ced76b943, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &617742287419781676
 GameObject:
   m_ObjectHideFlags: 0
