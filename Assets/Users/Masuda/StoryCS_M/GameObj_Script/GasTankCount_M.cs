@@ -23,6 +23,7 @@ public class GasTankCount_M : MonoBehaviour
     }
 
     // Update is called once per frame
+    /*
     void Update()
     {
         pos = transform.position;
@@ -53,5 +54,15 @@ public class GasTankCount_M : MonoBehaviour
             achieve.text = m2m.achieve + " / 3";
             comp = true;
         }
+    }
+    */
+
+    private void OnDestroy()
+    {
+        prePos.y = -1000;
+        m2m.gasTank += 1;
+        m2m.achieve += 1;
+        achieve.text = m2m.achieve + " / 3";
+        comp = true;
     }
 }
