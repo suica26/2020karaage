@@ -64,40 +64,42 @@ public class chickenKick_R : MonoBehaviour
         else
             if (isKick == eKick.push && CanKick)
                 timer += Time.deltaTime;
-
-        if(!mobileMode)
+        if(AttackRestrictions_R.GetInstance().CanAttack())
         {
-            if (Input.GetMouseButtonUp(0) && CanKick)
+            if (!mobileMode)
             {
-                //山本加筆(&& coolTimer >= coolTimes[scrEvo.EvolutionNum])
-                if (timer <= 0.5f)
+                if (Input.GetMouseButtonUp(0) && CanKick)
                 {
-                    Kick();
+                    //山本加筆(&& coolTimer >= coolTimes[scrEvo.EvolutionNum])
+                    if (timer <= 0.5f)
+                    {
+                        Kick();
+                    }
+                    else
+                    {
+                        timer = 0.0f;
+                    }
                 }
                 else
                 {
-                    timer = 0.0f;
+                    kickCollisions[scrEvo.EvolutionNum].SetActive(false);
+                    scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.KICK, false);
                 }
             }
             else
             {
-                kickCollisions[scrEvo.EvolutionNum].SetActive(false);
-                scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.KICK, false);
-            }
-        }
-        else
-        {
-            if(isKick == eKick.release && CanKick)
-            {
-                if(timer <= 0.5f)
-                    Kick();
+                if (isKick == eKick.release && CanKick)
+                {
+                    if (timer <= 0.5f)
+                        Kick();
+                    else
+                        timer = 0.0f;
+                }
                 else
-                    timer = 0.0f;
-            }
-            else
-            {
-                kickCollisions[scrEvo.EvolutionNum].SetActive(false);
-                scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.KICK, false);
+                {
+                    kickCollisions[scrEvo.EvolutionNum].SetActive(false);
+                    scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.KICK, false);
+                }
             }
         }
     }
@@ -111,6 +113,8 @@ public class chickenKick_R : MonoBehaviour
                 scrMove._isFlying = false;
                 GetComponent<Rigidbody>().useGravity = true;
             }
+
+            AttackRestrictions_R.GetInstance().SetTimer(0.25f);
 
             timer = 0.0f;
             coolTimer = 0f;
