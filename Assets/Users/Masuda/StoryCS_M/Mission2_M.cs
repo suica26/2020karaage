@@ -94,7 +94,7 @@ public class Mission2_M : Missions_M
             SixMission_2();
         }
 
-        if (five && dis <= 50)
+        if (six && dis <= 50)
         {
             FinalMission_2();
         }

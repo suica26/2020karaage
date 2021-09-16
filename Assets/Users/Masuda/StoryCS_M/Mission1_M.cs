@@ -104,14 +104,14 @@ public class Mission1_M : Missions_M
             }
         }
 
-        if (evoNum >= 1 && six)
+        if (evoNum >= 1 && seven)
         {
             timer3 += Time.deltaTime;
             bossIcon.SetActive(true);
             //一時的に、アジトを探すミッションが発動した時点でミニマップアイコンが見えるように挙動修正 山本
         }
 
-        if (timer3 >= 1.0f && six)
+        if (timer3 >= 1.0f && seven)
         {
             //アジト探し
             SevenMission();
