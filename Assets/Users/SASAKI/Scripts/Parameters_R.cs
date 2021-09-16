@@ -38,7 +38,7 @@ public class Parameters_R : MonoBehaviour
     [SerializeField] public int evo1, evo2, evo3, startNum;
     public string saveStage;
     [SerializeField] public Missions_M scrMis;
-    public float nowPer,currentPer;
+    public float currentPer;
     public Color color1, color2, color3, color4;
 
     public void Start()
@@ -116,7 +116,6 @@ public class Parameters_R : MonoBehaviour
                 mainSlider = hpSlider[1];
                 TimeManager(10);
                 maxHP = 250;
-                nowPer = evo2;
             }
             else if (ep == evo2)
             {
@@ -128,7 +127,6 @@ public class Parameters_R : MonoBehaviour
                 mainSlider = hpSlider[2];
                 TimeManager(10);
                 maxHP = 500;
-                nowPer = evo3;
             }
             else if (ep == evo3)
             {
@@ -172,8 +170,19 @@ public class Parameters_R : MonoBehaviour
     private void Update()
     {
         count -= Time.deltaTime;
-        currentPer = ep / nowPer;
-        sliderFill.color = Color.Lerp(color1, color2, currentPer);
+        currentPer = epSlider.value / epSlider.maxValue;
+        if (currentPer <= 0.30f)
+        {
+            sliderFill.color = Color.Lerp(color1, color2, currentPer * 4f);
+        }
+        else if (currentPer >= 0.85f)
+        {
+            sliderFill.color = Color.Lerp(color3, color4, currentPer);
+        }
+        else
+        {
+            sliderFill.color = Color.Lerp(color2, color3, currentPer);
+        }
 
         if (time - count > 1)
         {
