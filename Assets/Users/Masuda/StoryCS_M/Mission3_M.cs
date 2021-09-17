@@ -34,7 +34,7 @@ public class Mission3_M : Missions_M
 
         if (!eneBill)
         {
-            PlayerPrefs.SetString("storyClear", "clear");
+            //PlayerPrefs.SetString("storyClear", "clear");
         }
 
         if (first && evoTimer >= 1.0f)
