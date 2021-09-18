@@ -113,6 +113,11 @@ public class CharaMoveRigid_R : MonoBehaviour
         // 攻撃判定の更新
         AttackRestrictions_R.GetInstance().Update();
 
+        //M 追加:時間停止中は操作を遮断
+        if (Mathf.Approximately(Time.timeScale, 0f))
+        {
+            return;
+        }
         speed = scrEvo.Status_SPD;
         jumpSpeed = scrEvo.Status_JUMP;
 

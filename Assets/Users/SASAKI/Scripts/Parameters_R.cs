@@ -49,7 +49,7 @@ public class Parameters_R : MonoBehaviour
         epText.text = "EP: " + ep;
         hpText.text = "HP: " + hp;
         epSlider.value = 0;
-        //epSlider.maxValue = evo1;
+        
         count = time;
         for (int i = 0; i < 4; i++)
         {
@@ -105,7 +105,6 @@ public class Parameters_R : MonoBehaviour
             hp += 1;
             mainSlider.value += 1;
 
-            //epText.text = "EP: " + ep;
             if (ep == evo1)
             {
                 epSlider.value = 0;
@@ -131,7 +130,7 @@ public class Parameters_R : MonoBehaviour
             else if (ep == evo3)
             {
                 hpSli[3].SetActive(true);
-                hpSli[2].transform.position = new Vector3(0, -370, 0);// 
+                hpSli[2].transform.position = new Vector3(0, -370, 0);// 場所調整
                 TimeManager(10);
                 maxHP = 1000;
             }
@@ -159,7 +158,7 @@ public class Parameters_R : MonoBehaviour
                 freeze = true;
                 resultPanel.SetActive(true);
                 hp = 0;
-                PlayerPrefs.SetString(saveStage, scrMis.load);
+                PlayerPrefs.SetString(saveStage, scrMis.load);//ミッションセーブ
                 PlayerPrefs.Save();
             }
             hpText.text = "HP: " + hp;
@@ -170,6 +169,8 @@ public class Parameters_R : MonoBehaviour
     private void Update()
     {
         count -= Time.deltaTime;
+
+        //ゲージの色変換
         currentPer = epSlider.value / epSlider.maxValue;
         if (currentPer <= 0.30f)
         {
@@ -184,29 +185,11 @@ public class Parameters_R : MonoBehaviour
             sliderFill.color = Color.Lerp(color2, color3, currentPer);
         }
 
+
         if (time - count > 1)
         {
             TimeManager(-1);
         }
-
-        /*if (epSlider.value == evo1)
-        {
-            epSlider.value = 0;
-            epSlider.maxValue = evo2;
-            evo1 = 100000;
-        }
-
-        else if (epSlider.value == evo2)
-        {
-            epSlider.value = 0;
-            epSlider.maxValue = evo3;
-            evo2 = 100000;
-        }
-
-        else if (epSlider.value == evo3)
-        {
-            hp4.SetActive(true);
-        }*/
 
         if (hp >= maxHP)
         {
