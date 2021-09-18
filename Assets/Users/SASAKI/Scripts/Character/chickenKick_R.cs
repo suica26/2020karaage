@@ -53,6 +53,7 @@ public class chickenKick_R : MonoBehaviour
     {
         coolTimer += Time.deltaTime;
 
+        //M 追加:時間停止中は操作を遮断
         if (Mathf.Approximately(Time.timeScale, 0f))
         {
             return;

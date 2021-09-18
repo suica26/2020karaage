@@ -8,7 +8,7 @@ public class Missions_M : MonoBehaviour
     [SerializeField] public Text mission, submis, exmis, per, tips;
     [SerializeField]
     public GameObject player, misBox, company, tipsChicken;
-    [SerializeField] public TextAsset txtFile;
+    [SerializeField] public TextAsset txtFile;//英語ファイルを追加し、mainFileで日英のファイル変更を可能に
     [SerializeField] public int smallNum, bigNum, achieve, hitID;
     [SerializeField]
     public int smallBorder1, smallBorder2, smallBorder3,
