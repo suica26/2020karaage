@@ -15,7 +15,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
     public float cutterMag;     //カッターのダメージ倍率
     public float fallAttackMag;     //落下攻撃のダメージ倍率
     [Header("破壊時のスコア")] public int breakScore;       //建物を破壊したときに得られるスコア
-    protected CriAtomSource criAtomSource;
+    [SerializeField] protected CriAtomSource criAtomSource;
     /// <summary>
     /// 1 信号機
     /// 2 ゴミ箱
