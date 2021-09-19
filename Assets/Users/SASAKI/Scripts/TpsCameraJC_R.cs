@@ -136,7 +136,7 @@ public class TpsCameraJC_R : MonoBehaviour
         // 順次処理を行う(Shard は無視する)
         foreach(var hit in hits)
         {
-            if(hit.transform.gameObject.layer != 10)
+            if(hit.transform.gameObject.layer != 10 && hit.transform.gameObject.layer != 17)
             {
                 setCamPos = hit.point + transform.forward;
                 transform.position = setCamPos;
