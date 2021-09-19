@@ -2,18 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class St3TreeSound : MonoBehaviour
+public class AmbientSound : MonoBehaviour
 {
-    [SerializeField] private GameObject[] trees;
-    [SerializeField] private CriAtomSource[] cris;
+    [SerializeField] private GameObject[] soundObjs;
+    [SerializeField] private CriAtomSource[] cass;
     private GameObject player;
+    [SerializeField] private float distance = 20f;
+    [SerializeField] private string cueName;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
-        trees = new GameObject[transform.childCount];
-        cris = new CriAtomSource[transform.childCount];
+        soundObjs = new GameObject[transform.childCount];
+        cass = new CriAtomSource[transform.childCount];
         StartCoroutine(StartSettings());
     }
 
@@ -29,7 +31,7 @@ public class St3TreeSound : MonoBehaviour
         int count = 0;
         foreach (Transform tree in transform)
         {
-            trees[count] = tree.gameObject;
+            soundObjs[count] = tree.gameObject;
             count++;
             if (count % 100 == 0) yield return null;
         }
@@ -38,11 +40,11 @@ public class St3TreeSound : MonoBehaviour
     private IEnumerator GetCris()
     {
         int count = 0;
-        foreach (var tree in trees)
+        foreach (var tree in soundObjs)
         {
             var cri = tree.GetComponent<CriAtomSource>();
-            if (cri != null) cris[count] = cri;
-            else cris[count] = GetComponentInChildren<CriAtomSource>();
+            if (cri != null) cass[count] = cri;
+            else cass[count] = GetComponentInChildren<CriAtomSource>();
 
             count++;
             if (count % 30 == 0) yield return null;
@@ -52,16 +54,15 @@ public class St3TreeSound : MonoBehaviour
     private IEnumerator CheckDistances()
     {
         Debug.Log("Tree Sound Loop Start!");
-        for (int i = 0; i < trees.Length; i++)
+        for (int i = 0; i < soundObjs.Length; i++)
         {
-            if (trees[i] != null)
+            if (soundObjs[i] != null)
             {
-                float distance = Vector3.Distance(trees[i].transform.position, player.transform.position);
-                if (distance <= 20f)
+                if (Vector3.Distance(soundObjs[i].transform.position, player.transform.position) <= distance)
                 {
-                    PlayAndStopSound(cris[i]);
+                    PlayAndStopSound(cass[i]);
                 }
-                else cris[i].Stop();
+                else cass[i].Stop();
             }
             if (i % 30 == 0) yield return null;
         }
@@ -77,7 +78,7 @@ public class St3TreeSound : MonoBehaviour
         {
             if ((cri.status == CriAtomSource.Status.Stop) || (cri.status == CriAtomSource.Status.PlayEnd))
             {
-                cri.Play();
+                cri.Play(cueName);
             }
         }
     }
