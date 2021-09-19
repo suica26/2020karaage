@@ -130,14 +130,28 @@ public class Mission1_M : Missions_M
 
         if (tipsTimer >= 30 && !tip)
         {
-            tips.text = "アジトは金色に輝いているみたい...？？";
+            if (playLanguage == "English")
+            {
+                tips.text = "The hideout is shining golden";
+            }
+            else if (playLanguage == "Japanese")
+            {
+                tips.text = "アジトは金色に輝いているみたい...？？";
+            }
             tip = true;
             tipsChicken.SetActive(true);
         }
 
         else if (tipsTimer >= 60 && tip)
         {
-            tips.text = "消火栓やマンホールを使って\n見渡してみよう...！";
+            if (playLanguage == "English")
+            {
+                tips.text = "Let's look around using a stream of water！";
+            }
+            else if (playLanguage == "Japanese")
+            {
+                tips.text = "消火栓やマンホールを使って\n見渡してみよう...！";
+            }
             tipsTimer = 0;
         }
 

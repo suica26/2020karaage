@@ -8,7 +8,7 @@ public class Missions_M : MonoBehaviour
     [SerializeField] public Text mission, submis, exmis, per, tips;
     [SerializeField]
     public GameObject player, misBox, company, tipsChicken;
-    [SerializeField] public TextAsset txtFile;//英語ファイルを追加し、mainFileで日英のファイル変更を可能に
+    [SerializeField] public TextAsset txtFile, japanese, english;//英語ファイルを追加し、mainFileで日英のファイル変更を可能に
     [SerializeField] public int smallNum, bigNum, achieve, hitID;
     [SerializeField]
     public int smallBorder1, smallBorder2, smallBorder3,
@@ -22,12 +22,21 @@ public class Missions_M : MonoBehaviour
     [SerializeField] public ObjectStateManagement_Y eneBillScr;
     public bool stage2;
     public Parameters_R scrParame;
-    public string load;
+    public string load,playLanguage;
     public EvolutionChicken_R scrEvoChi;
     public int evoNum;
 
     public virtual void Start()
     {
+        playLanguage = PlayerPrefs.GetString("language");
+        if (playLanguage == "English")
+        {
+            txtFile = english;
+        }
+        else if (playLanguage == "Japanese")
+        {
+            txtFile = japanese;
+        }
         txtData = txtFile.text;
         splitText = txtData.Split(char.Parse("\n"));
         //misBox.SetActive(false);
