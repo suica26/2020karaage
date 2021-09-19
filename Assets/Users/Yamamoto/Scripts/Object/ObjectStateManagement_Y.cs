@@ -74,6 +74,25 @@ public class ObjectStateManagement_Y : MonoBehaviour
         renderers = CheckRenderer();
     }
 
+    private float timer;
+    private void Update()
+    {
+        timer += Time.deltaTime;
+        if (timer >= 3f)
+        {
+            timer = 0f;
+
+            if (Vector3.Distance(transform.position, player.transform.position) >= 300f)
+            {
+                foreach (var r in renderers) r.enabled = false;
+            }
+            else
+            {
+                foreach (var r in renderers) r.enabled = true;
+            }
+        }
+    }
+
     public void changeDamageFlg()
     {
         notDamage = false;
