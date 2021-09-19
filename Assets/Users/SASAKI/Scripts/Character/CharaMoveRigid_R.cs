@@ -83,6 +83,10 @@ public class CharaMoveRigid_R : MonoBehaviour
     private bool pushKickButton;
     private bool pushCutterButton;
 
+    // 坂道移動用
+    private Vector3 inputVector;
+    private Vector3 normalVector;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -157,6 +161,8 @@ public class CharaMoveRigid_R : MonoBehaviour
             if (hit.transform.gameObject.tag != "Player")
             {
                 isGrounded = true;
+                normalVector = hit.normal;
+                break;
             }
         }
         // もしスタン中なら何もしない。
@@ -210,7 +216,7 @@ public class CharaMoveRigid_R : MonoBehaviour
 
                 //チキンの移動方向や移動量を計算
                 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
-                moveDirection = cameraForward * v + Camera.main.transform.right * h;
+                moveDirection = Vector3.ProjectOnPlane(cameraForward * v + Camera.main.transform.right * h, normalVector);
                 if (moveDirection.magnitude > 1)
                 {
                     moveDirection.Normalize();
