@@ -15,19 +15,19 @@ public class AttackRestrictions_R : MonoBehaviour
 
     public void Update()
     {
-        if (timer > 0f)   
+        if (timer > 0f)
             timer -= Time.deltaTime;
     }
 
     public bool CanAttack()
     {
-        Debug.Log(timer <= 0.0f);
+        //Debug.Log(timer <= 0.0f);
         return timer <= 0.0f;
     }
 
     public void SetTimer(float time)
     {
-        Debug.Log(time);
+        //Debug.Log(time);
         timer = time;
     }
 }

@@ -4,22 +4,21 @@ using UnityEngine;
 
 public class ADX_CivControl : MonoBehaviour
 {
-    private CriAtomSource Sound;
+    private CriAtomSource cas;
     private GameObject player;
     public float distance = 20;
-    float _distance;
     private float span = 0.1f;
     private float currentTime = 0f;
-    private int CivilNum;
-    private string CivilSelecter;
-    private Rigidbody _rigidbody;
+    private Rigidbody rb;
     CriAtomExPlayback CivilContact, CivilIdle, CivilFoot;
+
+    private bool isStop;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
-        _rigidbody = this.GetComponent<Rigidbody>();
-        Sound = GetComponent<CriAtomSource>();
+        rb = this.GetComponent<Rigidbody>();
+        cas = GetComponent<CriAtomSource>();
     }
 
     // Update is called once per frame
@@ -27,45 +26,48 @@ public class ADX_CivControl : MonoBehaviour
     {
         //span秒に1回だけ処理する
         currentTime += Time.deltaTime;
+
         if (currentTime > span)
         {
-            _distance = Vector3.Distance(player.transform.position, transform.position);
-            if (_distance < distance)
+            currentTime = 0f;
+            if (Vector3.Distance(player.transform.position, transform.position) < distance)
             {
                 PlayAndStopSound();
             }
             else
             {
-                Sound.Stop();
+                cas.Stop();
             }
             //Debug.Log(_distance);
             //Debug.Log(Sound.status);
-            currentTime = 0f;
-        }
-        if(_rigidbody.velocity.magnitude < 0.1f)
-        {
-            CivilFoot.Stop();
-            CivilIdle.Stop();
-            Sound.Play("Civil_Contact");
+
+            if (rb.velocity.magnitude < 0.1f)
+            {
+                Stoping();
+                isStop = true;
+            }
+            else isStop = false;
         }
     }
 
     //再生状況監視
     private void PlayAndStopSound()
     {
-        if (Sound != null)
+        if ((cas.status == CriAtomSource.Status.Stop) || (cas.status == CriAtomSource.Status.PlayEnd))
         {
-            CriAtomSource.Status status = Sound.status;
-            if ((status == CriAtomSource.Status.Stop) || (status == CriAtomSource.Status.PlayEnd))
-            {
-                //セレクターランダム値を決定
-                CivilNum = Random.Range(7, 9);
-                CivilSelecter = CivilNum.ToString();
-                Sound.player.SetSelectorLabel("CivilVoice", CivilSelecter);
+            //セレクターランダム値を決定
+            cas.player.SetSelectorLabel("CivilVoice", Random.Range(7, 9).ToString());
 
-                CivilFoot = Sound.Play("Civil_Footstep00");
-                CivilIdle =  Sound.Play("Civil_Idle");
-            }
+            if (!isStop) CivilFoot = cas.Play("Civil_Footstep00");
+            CivilIdle = cas.Play("Civil_Idle");
         }
+    }
+
+    private void Stoping()
+    {
+        if (isStop) return;
+        CivilFoot.Stop();
+        CivilIdle.Stop();
+        cas.Play("Civil_Contact");
     }
 }

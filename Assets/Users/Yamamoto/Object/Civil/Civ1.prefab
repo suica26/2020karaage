@@ -805,9 +805,9 @@ MonoBehaviour:
   walkSpeed: 4
   contagionRange: 20
   route: []
+  timer: 0
   deleteTiming: 90
   resetForwardTiming: 5
-  wayPointGraph: {fileID: 0}
   avoidFlg: 0
   animator: {fileID: 747083478006564623}
 --- !u!54 &27743366457743911
@@ -1018,7 +1018,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 88e8c89c8bc20e64189a7974fbe42740, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
