@@ -14,19 +14,28 @@ public class GameScene_Language_M : MonoBehaviour
     public Text clearSen, nextStage, titleBack;
     public Text clearSenC, nextStageC, titleBackC;
 
-    public bool stage3;
+    public bool stage3, mobileMode;
     private string languageMode;
     void Start()
     {
         languageMode = PlayerPrefs.GetString("language");
-        if (languageMode == "Japanese")
+        if (languageMode == "Japanese" && !mobileMode)
         {
             return;
             //Japanese();
         }
-        else if (languageMode == "English")
+        else if (languageMode == "Japanese" && mobileMode)
+        {
+            hipSen2.text = "空中にいる間に、\nヒップスタンプボタンを押そう";
+        }
+        else if (languageMode == "English" && !mobileMode)
         {
             English();
+        }
+        else if (languageMode == "English" && mobileMode)
+        {
+            English();
+            hipSen2.text = "While in the air \n Let's press and hold the hip stamp button!";
         }
     }
 
@@ -59,7 +68,7 @@ public class GameScene_Language_M : MonoBehaviour
         cutter.text = "CrestCutter";
         evoSen.text = "Accumulate the upper left gauge to the end \n And the chicken will evolve";
         hipSen1.text = "HipStamp";
-        hipSen2.text = "While in the air Let's press and hold the left click!";
+        hipSen2.text = "While in the air \n Let's press and hold the left click!";
         attention.text = "There seems to be nothing here";
 
         if (stage3)
