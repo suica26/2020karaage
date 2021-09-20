@@ -21,13 +21,13 @@ public class Stage0_ButtonFlash_M : MonoBehaviour
     {
         if (other.gameObject.tag == "check1")
         {
-            timer = Mathf.Sin(Time.time);
-            kick.color = new Color(1, 1, 1, timer * 3);
+            timer = Mathf.Cos(Time.time) + 0.2f;
+            kick.color = new Color(1, 1, 1, timer);
         }
         else if (other.gameObject.tag == "check2")
         {
-            timer = Mathf.Sin(Time.time);
-            cutter.color = new Color(1, 1, 1, timer * 3);
+            timer = Mathf.Cos(Time.time) + 0.2f;
+            cutter.color = new Color(1, 1, 1, timer);
         }
     }
 
