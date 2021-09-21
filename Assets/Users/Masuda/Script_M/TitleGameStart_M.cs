@@ -19,8 +19,10 @@ public class TitleGameStart_M : MonoBehaviour
     public void OnClick()
     {
         audio.Play("System_Decision");
-        loadPanel.SetActive(true);
-        SceneManager.LoadScene(sceneName);
+        //loadPanel.SetActive(true);
+        gameMode.SetActive(true);
+        start.SetActive(false);
+        //SceneManager.LoadScene(sceneName);
 
         /*if (cleared == "clear")
         {
