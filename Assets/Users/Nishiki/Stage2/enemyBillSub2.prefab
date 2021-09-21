@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 6465483183309384068}
   - component: {fileID: 6465483183309384069}
   - component: {fileID: 6465483183309384074}
-  - component: {fileID: 6465483183309384075}
+  - component: {fileID: 7223801964860496431}
   - component: {fileID: 6465483183309384072}
   - component: {fileID: 6465483183309384073}
   - component: {fileID: 6465483183309384078}
@@ -237,7 +237,7 @@ MonoBehaviour:
   _pitch: 0
   _androidUseLowLatencyVoicePool: 0
   need_to_player_update_all: 1
---- !u!114 &6465483183309384075
+--- !u!114 &7223801964860496431
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -246,7 +246,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6465483183309384076}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8075661621763774d8231cabafe12bb8, type: 3}
+  m_Script: {fileID: 11500000, guid: d863fe38bad6348449ca82b2ac22e54e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tier_WalkAttack: 4
@@ -254,10 +254,11 @@ MonoBehaviour:
     type: 3}
   HP: 1500
   kickMag: 1
-  blastMag: 0
+  blastMag: 1
   cutterMag: 1
   fallAttackMag: 1
   breakScore: 10000
+  criAtomSource: {fileID: 0}
   objectID: 0
   breakEffect: {fileID: 311248781918492841, guid: b393eb1a6c9aede41a72e76abfea12dd,
     type: 3}
