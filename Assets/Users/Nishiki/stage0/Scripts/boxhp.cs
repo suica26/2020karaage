@@ -54,7 +54,8 @@ public class boxhp : MonoBehaviour
             currentHp -= damage;
             uipanel.SetActive(true);
             Invoke("UISetNonActive", 1.2f);
-            audio.Play("BoxContract");
+            if (audio.status != CriAtomSource.Status.Playing)
+                audio.Play("BoxContract");
         }
     }
 

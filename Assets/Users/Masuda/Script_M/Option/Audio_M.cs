@@ -8,22 +8,29 @@ public class Audio_M : MonoBehaviour
     public Slider volSlider;
     public CriAtomSource cas;
 
-    [SerializeField] public static float vol;
+    [SerializeField] public static float vol = 0f;
     public SoundVolumeController soundVolumeController;
     private int timer;
+    private bool isUpdate;
+
+    private void Start()
+    {
+        isUpdate = false;
+        Invoke("SetInstance", 0.1f);
+    }
+
+    private void SetInstance()
+    {
+        var soundVolumeObject = GameObject.Find("SoundVolume");
+        soundVolumeController = soundVolumeObject.GetComponent<SoundVolumeController>();
+        volSlider.value = soundVolumeController.nowVolume;
+        isUpdate = true;
+    }
 
     // Update is called once per frame
     void Update()
     {
-        timer++;
-        if (timer == 5)
-        {
-            var soundVolumeObject = GameObject.Find("SoundVolume");
-            soundVolumeController = soundVolumeObject.GetComponent<SoundVolumeController>();
-            volSlider.value = soundVolumeController.soundVolume;
-        }
-
-        if (timer > 6)
+        if (isUpdate)
         {
             vol = volSlider.value;
             if (soundVolumeController == null)
@@ -35,16 +42,8 @@ public class Audio_M : MonoBehaviour
             }
             else
             {
-                soundVolumeController.soundVolume = vol;
+                soundVolumeController.currentVolume = vol;
             }
         }
     }
-
-    /*
-    //ADX　Aisac値変更
-    private void VolumeControlValue(float value)
-    {
-        cas.SetAisacControl("Volume", value);
-    }
-    */
 }

@@ -9,11 +9,21 @@ public class ChangeLanguage : MonoBehaviour
     public Text optionTitle, volume, scr, scr1, scr2, lan;
     public Text howTitle, key, mouse, move, jump, pause, blast, kick, cutter;
     public string language;//PlayrPrefsで判別
+    private SaveManager_Y saveManager;
 
     void Start()
     {
+        saveManager = GameObject.Find("SaveManager").GetComponent<SaveManager_Y>();
         PlayerPrefs.SetString("language", "Japanese");
         PlayerPrefs.Save();
+
+        if (saveManager != null)
+            switch (saveManager.GetLanguage())
+            {
+                case "Japanese": Change_Japanese(); break;
+                case "English": Change_English(); break;
+                default: break;
+            }
     }
 
     public void Change_English()
@@ -40,6 +50,8 @@ public class ChangeLanguage : MonoBehaviour
         cutter.text = "CrestCutter";
         PlayerPrefs.SetString("language", "English");
         language = "ENGLISH";
+        if (saveManager != null)
+            saveManager.SaveLanguage("English");
     }
 
     public void Change_Japanese()
@@ -66,6 +78,7 @@ public class ChangeLanguage : MonoBehaviour
         cutter.text = "カッター";
         PlayerPrefs.SetString("language", "Japanese");
         language = "JAPANESE";
+        if (saveManager != null)
+            saveManager.SaveLanguage("Japanese");
     }
-
 }

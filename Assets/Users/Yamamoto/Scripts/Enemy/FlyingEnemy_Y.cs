@@ -15,7 +15,7 @@ public class FlyingEnemy_Y : MonoBehaviour
     private float rayTimer;
     private Collider collider;
     public float fallenSpeed = -1.5f;
-    private Stage3BossBuilding st3BossScr;
+    private Stage3BossBuilding_Y st3BossScr;
     private void Start()
     {
         enemyScr = GetComponent<Enemy_Y>();
@@ -79,7 +79,7 @@ public class FlyingEnemy_Y : MonoBehaviour
         rb.isKinematic = true;
     }
 
-    public void SetSt3BossScr(Stage3BossBuilding scr)
+    public void SetSt3BossScr(Stage3BossBuilding_Y scr)
     {
         st3BossScr = scr;
     }
