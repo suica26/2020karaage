@@ -16,26 +16,20 @@ public class ADX_BGMAISAC : MonoBehaviour
         BGMAISAC = 0f;
         bgmCriAtomSource.SetAisacControl("BGM_Aisac", BGMAISAC);
 
-        if (SceneManager.GetActiveScene().name == "stage1")
+        string bgmName = "";
+        switch (SceneManager.GetActiveScene().name)
         {
-            bgmCriAtomSource.Play("BGM01");
+            case "stage0": bgmName = "BGM_St0"; break;
+            case "stage1": bgmName = "BGM01"; break;
+            case "Stage2": bgmName = "BGM01"; break;
+            case "Stage3": bgmName = "BGM03"; break;
+            default: bgmName = "BGM00"; break;
         }
-        else if (SceneManager.GetActiveScene().name == "Stage2")
-        {
-            bgmCriAtomSource.Play("BGM01");
-        }
-        else if (SceneManager.GetActiveScene().name == "Stage3")
-        {
-            bgmCriAtomSource.Play("BGM03");
-        }
-        else if (SceneManager.GetActiveScene().name == "stage0")
-        {
-            bgmCriAtomSource.Play("BGM_St0");
-        }
-        else bgmCriAtomSource.Play("BGM00");
+        bgmCriAtomSource.Play(bgmName);
 
         player = GameObject.Find("Player");
-        scrEvo = player.GetComponent<EvolutionChicken_R>();
+        if (player != null)
+            scrEvo = player.GetComponent<EvolutionChicken_R>();
     }
 
     // Update is called once per frame

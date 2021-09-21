@@ -403,7 +403,6 @@ public class ObjectStateManagement_Y : MonoBehaviour
         //差し替え処理  分割オブジェクトが設定されていないか技がカッターの時には無視する
         if (divideObject != null && hitSkilID != 2) ChangeObject();
         else Substitution();    //差し替えをしない場合
-
     }
 
     public void DeathCount()
