@@ -8,6 +8,8 @@ public class CharaMoveRigid_R : MonoBehaviour
     [Tooltip("足音用AudioSource"), SerializeField] private AudioSource audioSourceWalk;
     [Tooltip("ジャンプ、落下攻撃用"), SerializeField] private AudioSource audioSourceCommon;
     [Tooltip("キャラクターの回転速度"), SerializeField] private float rotateSpeed;
+    [Tooltip("移動時のエフェクト"), SerializeField] private GameObject[] moveEffect;
+    [Tooltip("グライド時のエフェクト"), SerializeField] private GameObject[] glideEffect;
 
     [Header("接地判定用")]
     [Tooltip("BoxCast(足元検知用)のX成分指定(1~4段階まで)"), SerializeField] private float[] raycastCubeX;
@@ -179,6 +181,17 @@ public class CharaMoveRigid_R : MonoBehaviour
                 return;
             }
 
+            // もし非アクティブなら、移動時のエフェクトをアクティブにする
+            if (moveEffect[scrEvo.EvolutionNum].GetComponent<ParticleSystem>().startLifetime != 2)
+                moveEffect[scrEvo.EvolutionNum].GetComponent<ParticleSystem>().startLifetime = 2;
+
+            if (glideEffect[scrEvo.EvolutionNum].GetComponent<ParticleSystem>().maxParticles != 0)
+            {
+                glideEffect[scrEvo.EvolutionNum].GetComponent<ParticleSystem>().maxParticles = 0;
+                glideEffect[scrEvo.EvolutionNum].transform.GetChild(0).GetComponent<ParticleSystem>().maxParticles = 0;
+            }
+
+
             // 滑空の接地時の処理
             if (isFlying)
             {
@@ -283,6 +296,11 @@ public class CharaMoveRigid_R : MonoBehaviour
             scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.JUMP, true);
             scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.WALK, false);
 
+            // もしアクティブなら移動時のエフェクトを非アクティブにする
+            if (moveEffect[scrEvo.EvolutionNum].GetComponent<ParticleSystem>().startLifetime != 0)
+                moveEffect[scrEvo.EvolutionNum].GetComponent<ParticleSystem>().startLifetime = 0;
+            //moveEffect[scrEvo.EvolutionNum].SetActive(false);
+
             //空中での制動(移動量は地上の1/3程度)
             if (h != 0 || v != 0)
             {
@@ -297,6 +315,12 @@ public class CharaMoveRigid_R : MonoBehaviour
                     {
                         rb.useGravity = false;
                         rb.AddForce(Vector3.down * 9.81f * 0.25f, ForceMode.Acceleration);
+
+                        if (glideEffect[scrEvo.EvolutionNum].GetComponent<ParticleSystem>().maxParticles != 100)
+                        {
+                            glideEffect[scrEvo.EvolutionNum].GetComponent<ParticleSystem>().maxParticles = 100;
+                            glideEffect[scrEvo.EvolutionNum].transform.GetChild(0).GetComponent<ParticleSystem>().maxParticles = 100;
+                        }
                     }
                     rb.AddForce(moveDirection * speed * 1.5f, ForceMode.Force);
 
