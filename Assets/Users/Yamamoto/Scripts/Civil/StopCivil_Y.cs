@@ -6,6 +6,7 @@ public class StopCivil_Y : Civil_Y
 {
     [SerializeField] private string[] animStrArray;
     public float animCycle;
+    public GameObject mouth;
     // Start is called before the first frame update
     private void Start()
     {
@@ -59,5 +60,11 @@ public class StopCivil_Y : Civil_Y
         //何もアニメーショントリガーが設定されてなければ無視
         if (animStrArray.Length != 0)
             animator.SetTrigger(animStrArray[Random.Range(0, animStrArray.Length)]);
+    }
+
+    protected override void Escape()
+    {
+        mouth.SetActive(true);
+        base.Escape();
     }
 }
