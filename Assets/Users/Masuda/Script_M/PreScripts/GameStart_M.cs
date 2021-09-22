@@ -9,6 +9,22 @@ public class GameStart_M : MonoBehaviour
     //シーンGameStartのButtonに張っ付いてます
     [SerializeField] public GameObject load;
     public string sceneName;
+    private SaveManager_Y saveManager;
+    public int stageNum;
+
+    private void Start()
+    {
+        saveManager = GameObject.Find("SaveManager").GetComponent<SaveManager_Y>();
+    }
+
+    private void Update()
+    {
+        if (stageNum > 0)
+        {
+            if (!saveManager.GetClearFlg(stageNum)) gameObject.SetActive(false);
+            else gameObject.SetActive(true);
+        }
+    }
 
     public void OnStart()
     {
