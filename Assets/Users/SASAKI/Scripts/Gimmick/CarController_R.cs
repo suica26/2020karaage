@@ -10,29 +10,27 @@ public class CarController_R : MonoBehaviour
     [SerializeField] private int minSpeed;
     [SerializeField] private int maxSpeed;
 
+    private GameObject player;
+
     private List<GameObject> carList;
-    private List<GameObject> endWaypoints;
+    private GameObject[] waypoints;
 
     private const float instantiateInterval = 0.5f;
     private float carInstantiateTimer;
 
+    private bool firstInstantiate;
+
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.Find("Player");
+        firstInstantiate = true;
+
         //子オブジェクト(waypoint)をすべて取得する
-        GameObject[] waypoints = GetAllChildObject();
+        waypoints = GetAllChildObject();
 
-        endWaypoints = new List<GameObject>();
+        //endWaypoints = new List<GameObject>();
         carList = new List<GameObject>();
-
-        //車を生成可能なウェイポイントのみを選別してリスト化
-        foreach (GameObject waypoint in waypoints)
-        {
-            if (waypoint.GetComponent<CarWaypoint_R>().Instantiable())
-            {
-                endWaypoints.Add(waypoint);
-            }
-        }
 
         carInstantiateTimer = instantiateInterval;
     }
@@ -40,6 +38,15 @@ public class CarController_R : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (firstInstantiate)
+        {
+            firstInstantiate = false;
+            for (int i = 0; i < maxCarNum; i++)
+            {
+                CarInstantiate();
+            }
+        }
+
         carInstantiateTimer -= Time.deltaTime;
 
         //車の数が減ったら補充する
@@ -61,7 +68,13 @@ public class CarController_R : MonoBehaviour
     {
         //山本加筆　モデルを複数の中からランダムに選ぶように変更
         var Car = Instantiate(preCar[Random.Range(0, preCar.Length)]);
-        var waypoint = endWaypoints[Random.Range(0, endWaypoints.Count)];
+        var waypoint = waypoints[Random.Range(0, waypoints.Length)];
+
+        while ((waypoint.transform.position - player.transform.position).magnitude < 100.0f)
+        {
+            waypoint = waypoints[Random.Range(0, waypoints.Length)];
+        }
+
         Car.GetComponent<Car_R>().Init(waypoint, Random.Range(minSpeed, maxSpeed));
 
         carList.Add(Car);
