@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1109716181852562753}
   - component: {fileID: 7999976213602176878}
   - component: {fileID: 1357200705478308422}
+  - component: {fileID: 2810830069881753878}
   m_Layer: 0
   m_Name: 7_4F
   m_TagString: Big
@@ -52,12 +53,13 @@ MonoBehaviour:
   tier_WalkAttack: 3
   divideObject: {fileID: 8810331402166788418, guid: 1fae59a840b58cf4eaf2dc077fb2246d,
     type: 3}
-  HP: 2000
+  HP: 1500
   kickMag: 0.8
   blastMag: 1
   cutterMag: 1
   fallAttackMag: 1.75
   breakScore: 300000
+  criAtomSource: {fileID: 0}
   objectID: 0
   breakEffect: {fileID: 311248781918492841, guid: b393eb1a6c9aede41a72e76abfea12dd,
     type: 3}
@@ -192,8 +194,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1000, y: 1600, z: 1000}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 915, y: 1124.6, z: 1101.9}
+  m_Center: {x: 0, y: 233, z: 0}
 --- !u!54 &7999976213602176878
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -233,6 +235,19 @@ MonoBehaviour:
   _pitch: 0
   _androidUseLowLatencyVoicePool: 0
   need_to_player_update_all: 1
+--- !u!65 &2810830069881753878
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7703840747682976369}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 803.26, y: 460.2, z: 1005.14}
+  m_Center: {x: 51.4, y: -559.1, z: -43.7}
 --- !u!1 &8557238114732710740
 GameObject:
   m_ObjectHideFlags: 0

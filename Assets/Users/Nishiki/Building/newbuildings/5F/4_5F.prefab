@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8854644754399726056}
   - component: {fileID: 1044582819587647493}
   - component: {fileID: 9161343987556390054}
+  - component: {fileID: 1373539652875431837}
   - component: {fileID: 2252009643120508553}
   - component: {fileID: 7102352484518527905}
   m_Layer: 0
@@ -52,12 +53,13 @@ MonoBehaviour:
   tier_WalkAttack: 3
   divideObject: {fileID: 8810331402166788418, guid: 1fae59a840b58cf4eaf2dc077fb2246d,
     type: 3}
-  HP: 2500
+  HP: 2000
   kickMag: 0.8
   blastMag: 1
   cutterMag: 1
   fallAttackMag: 1.75
   breakScore: 300000
+  criAtomSource: {fileID: 0}
   objectID: 0
   breakEffect: {fileID: 311248781918492841, guid: b393eb1a6c9aede41a72e76abfea12dd,
     type: 3}
@@ -84,7 +86,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objFood: {fileID: 5882868508514077054, guid: 52bb1160a73b4b848953812cb2383dfc, type: 3}
   minFood: 6
-  maxFood: 8
+  maxFood: 9
 --- !u!82 &1044582819587647493
 AudioSource:
   m_ObjectHideFlags: 0
@@ -192,8 +194,21 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1000, y: 1900, z: 800}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1110, y: 1472.9, z: 800}
+  m_Center: {x: 0, y: 238, z: 0}
+--- !u!65 &1373539652875431837
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922099683005850518}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 999.7, y: 466.1, z: 806.8}
+  m_Center: {x: 43.5, y: -731.01, z: 0}
 --- !u!54 &2252009643120508553
 Rigidbody:
   m_ObjectHideFlags: 0
