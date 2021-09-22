@@ -22,6 +22,7 @@ public class Stage3BossBuilding_Y : ObjectStateManagement_Y
     public int[] phaseBreakEnemyNum;
     public int enemyBreakCount;
     public bool debug;
+    private CriAtomSource Sound;
 
     protected override void Start()
     {
@@ -34,6 +35,7 @@ public class Stage3BossBuilding_Y : ObjectStateManagement_Y
         cutterScr = player.GetComponent<Cutter_R>();
         morblaScr = player.GetComponent<MorBlast_R>();
         enemyControllerScr = GameObject.Find("GameAI_Y").GetComponent<EnemyMoveController_Y>();
+        Sound = GetComponent<CriAtomSource>();
     }
 
     private void Update()
@@ -86,6 +88,7 @@ public class Stage3BossBuilding_Y : ObjectStateManagement_Y
         /*
             もし敵の射出に関して処理を追加したい場合はここに作成した関数を記述してください
         */
+        Sound.Play("Warning");
 
         StartCoroutine(LookLauncher(phaseNum));
         StartCoroutine(LaunchEnemys(phaseNum));
