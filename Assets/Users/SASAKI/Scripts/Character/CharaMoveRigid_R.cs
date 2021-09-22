@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class CharaMoveRigid_R : MonoBehaviour
 {
-    [SerializeField] private AudioClip[] walkClip;
-    [Tooltip("足音用AudioSource"), SerializeField] private AudioSource audioSourceWalk;
-    [Tooltip("ジャンプ、落下攻撃用"), SerializeField] private AudioSource audioSourceCommon;
     [Tooltip("キャラクターの回転速度"), SerializeField] private float rotateSpeed;
     [Tooltip("移動時のエフェクト"), SerializeField] private GameObject[] moveEffect;
     [Tooltip("グライド時のエフェクト"), SerializeField] private GameObject[] glideEffect;
@@ -23,9 +20,6 @@ public class CharaMoveRigid_R : MonoBehaviour
     [Tooltip("落下攻撃の倍率設定"), SerializeField] private float[] boostMag;
     [SerializeField] GameObject preCircle;
     [SerializeField] private GameObject fallAttackKickEffect;
-    [SerializeField] private AudioClip CutterFAClip;
-    [SerializeField] private AudioClip KickFAClip;
-    [SerializeField] private AudioClip JumpClip;
 
     [Header("混乱用")]
     [SerializeField] private float[] effectScale;
@@ -304,7 +298,6 @@ public class CharaMoveRigid_R : MonoBehaviour
             //空中での制動(移動量は地上の1/3程度)
             if (h != 0 || v != 0)
             {
-                audioSourceWalk.Stop();
                 IdleVoiceS.Stop();
                 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
                 moveDirection = cameraForward * v + Camera.main.transform.right * h;
@@ -402,8 +395,6 @@ public class CharaMoveRigid_R : MonoBehaviour
                     cutterFallAttackTimer = 0f;
                 }
             }
-
-            audioSourceWalk.Stop();
             IdleVoiceS.Stop();
         }
     }
@@ -487,7 +478,6 @@ public class CharaMoveRigid_R : MonoBehaviour
         stunned = true;
         //Sound
         WalkVoiceS.Stop();
-        audioSourceWalk.Stop();
         IdleVoiceS.Stop();
         audio.Play("Confusion");
 

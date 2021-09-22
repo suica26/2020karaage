@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class MorBlast_R : MonoBehaviour
 {
-    [SerializeField] private AudioClip chargeClip;
-    [SerializeField] private AudioClip blastClip;
-    [SerializeField] private AudioClip evoBlastClip;
-    [SerializeField] private AudioSource audioSource;
     [SerializeField] private Transition_R[] scrAnim;
     [SerializeField] private float secondBlastTime, thirdBlastTime;
     [SerializeField] private float[] pullTimes;     // チャージの時間を設定する
@@ -170,16 +166,15 @@ public class MorBlast_R : MonoBehaviour
         if (effect != null)
             Destroy(effect);
 
-        audioSource.Stop();
         pullTime = 0f;
+        audio.Stop();
         if (charge > 0)
         {
             isBlast = true;
             StartCoroutine("ReleaseBlast");
+            audio.Play("BlastSub02");
         }
 
-        audio.Stop();
-        audio.Play("BlastSub02");
 
         if (mobileMode)
             isBlastMobile = eBlast.wait;
@@ -190,7 +185,6 @@ public class MorBlast_R : MonoBehaviour
         plusScale = spreadScale[charge - 1] * spreadEvoScale[scrEvo.EvolutionNum];
         pullTime = 0f;
         charge = 0;
-        audioSource.PlayOneShot(blastClip);
         scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.BLAST, true);
 
         //1回目
@@ -214,7 +208,6 @@ public class MorBlast_R : MonoBehaviour
     public void EvoBlast()
     {
         plusScale = spreadScale[2] * spreadEvoScale[scrEvo.EvolutionNum];
-        audioSource.PlayOneShot(evoBlastClip);
         morningBlast[0] = Instantiate(morBlaSphere, transform);
         Destroy(morningBlast[0], spreadTime);
     }

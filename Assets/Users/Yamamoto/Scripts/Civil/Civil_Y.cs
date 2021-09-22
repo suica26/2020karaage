@@ -88,6 +88,7 @@ public class Civil_Y : MonoBehaviour
                 other.gameObject.name == "fallAttackCircle(Clone)")
             {
                 EscapeContagion();
+                criAtomSource.Stop();
                 criAtomSource.Play("Citizen00");
             }
         }
@@ -127,6 +128,8 @@ public class Civil_Y : MonoBehaviour
                 Vector3 TorquePower = new Vector3(Random.Range(-100f, 100f), Random.Range(-100f, 100f), Random.Range(-100f, 100f));
                 rb.AddForce(F, ForceMode.Impulse);
                 rb.AddTorque(TorquePower, ForceMode.Impulse);
+                criAtomSource.Stop();
+                criAtomSource.Play("Citizen00");
                 Destroy(gameObject, 2f);
                 Escape();
                 death = true;

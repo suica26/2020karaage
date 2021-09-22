@@ -268,8 +268,6 @@ public class ObjectStateManagement_Y : MonoBehaviour
             case 8: attackSoundName = "FireHydrant00"; break;
             case 9: attackSoundName = "TrafficExplosion00"; break;
             case 10: attackSoundName = "BuildingContact00"; break;
-            case 11: attackSoundName = "ChefContact"; break;
-            case 12: attackSoundName = "PoliceContact"; break;
             default: attackSoundName = "TrachcanContact00"; break;
         }
         if (criAtomSource != null) criAtomSource.cueName = attackSoundName;
@@ -290,8 +288,6 @@ public class ObjectStateManagement_Y : MonoBehaviour
             case 8: CutterContactSoundName = "Cutter_C_firehydrant00"; break;
             case 9: CutterContactSoundName = "Cutter_C_pole00"; break;
             case 10: CutterContactSoundName = "CutterContract0"; break;
-            case 11: CutterContactSoundName = "ChefContact"; break;
-            case 12: CutterContactSoundName = "PoliceContact"; break;
             default: CutterContactSoundName = "CutterContract"; break;
         }
         if (criAtomSource != null) criAtomSource.cueName = CutterContactSoundName;
@@ -312,8 +308,6 @@ public class ObjectStateManagement_Y : MonoBehaviour
             case 8: contactSoundName = "Contact_FireHydrant00"; break;
             case 9: contactSoundName = "PoleContact00"; break;
             case 10: contactSoundName = "BuildingContact00"; break;
-            case 11: contactSoundName = "ChefContact"; break;
-            case 12: contactSoundName = "PoliceContact"; break;
             default: contactSoundName = "TrachcanContact00"; break;
         }
         if (criAtomSource != null) criAtomSource.cueName = contactSoundName;
@@ -334,8 +328,19 @@ public class ObjectStateManagement_Y : MonoBehaviour
             case 8: ExplosionSoundName = "FireHydrant00"; break;
             case 9: ExplosionSoundName = "PoleContract00"; break;
             case 10: ExplosionSoundName = "GasStation00"; break;
-            case 11: ExplosionSoundName = "ChefDie"; break;
-            case 12: ExplosionSoundName = "PoliceDie"; break;
+
+            case 100: ExplosionSoundName = "CutterBuilExplosion"; break;
+            case 101: ExplosionSoundName = "Cutter_Pole01"; break;
+            case 102: ExplosionSoundName = "CutterCut00"; break;
+            case 103: ExplosionSoundName = "CutterCut00"; break;
+            case 104: ExplosionSoundName = "CutterCut00"; break;
+            case 105: ExplosionSoundName = "CutterBuilExplosion"; break;
+            case 106: ExplosionSoundName = "CutterCut00"; break;
+            case 107: ExplosionSoundName = "CutterTree00"; break;
+            case 108: ExplosionSoundName = "Cutter_firehydrant01"; break;
+            case 109: ExplosionSoundName = "Cutter_Pole01"; break;
+            case 110: ExplosionSoundName = "CutterCut00"; break;
+
             default: ExplosionSoundName = "PoleExplosion00"; break;
         }
         if (criAtomSource != null) criAtomSource.cueName = ExplosionSoundName;
@@ -374,15 +379,14 @@ public class ObjectStateManagement_Y : MonoBehaviour
         //餌のスポーン処理
         scrFood?.DropFood();
 
-        SetBreakCue();
         //加筆　undertreem 0625
         //float BusLevel = ADX_RevLevel.ADX_BusSendLevel;
         //SetBusSendLevelSet(Rev, BusLevel);
         //Debug.Log(BusLevel);
         //カッターのときはカッターキューを鳴らす
-        if (hitSkilID == 2 && objectID == 0) criAtomSource.Play("CutterBuilExplosion");
-        else if (hitSkilID == 2) criAtomSource?.Play("CutterCut00");
-        else criAtomSource?.Play(ExplosionSoundName);
+        if (hitSkilID == 2) objectID += 100;
+        SetBreakCue();
+        criAtomSource?.Play(ExplosionSoundName);
 
         //全て処理しきった場合は次のDeathメソッドを実行
         return true;

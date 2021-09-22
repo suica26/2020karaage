@@ -6,11 +6,12 @@ public class ADX_CivControl : MonoBehaviour
 {
     private CriAtomSource cas;
     private GameObject player;
-    public float distance = 20;
+    public float distance = 15;
     private float span = 0.1f;
     private float currentTime = 0f;
     private Rigidbody rb;
     CriAtomExPlayback CivilContact, CivilIdle, CivilFoot;
+    public bool NoWalking = false;
 
     private bool isStop;
     // Start is called before the first frame update
@@ -41,7 +42,7 @@ public class ADX_CivControl : MonoBehaviour
             //Debug.Log(_distance);
             //Debug.Log(Sound.status);
 
-            if (rb.velocity.magnitude < 0.1f)
+            if (rb.velocity.magnitude < 0.1f && NoWalking == false)
             {
                 Stoping();
                 isStop = true;
@@ -56,9 +57,9 @@ public class ADX_CivControl : MonoBehaviour
         if ((cas.status == CriAtomSource.Status.Stop) || (cas.status == CriAtomSource.Status.PlayEnd))
         {
             //セレクターランダム値を決定
-            cas.player.SetSelectorLabel("CivilVoice", Random.Range(7, 9).ToString());
+            cas.player.SetSelectorLabel("CivilVoice", Random.Range(1, 9).ToString());
 
-            if (!isStop) CivilFoot = cas.Play("Civil_Footstep00");
+            if (!isStop && NoWalking == false) CivilFoot = cas.Play("Civil_Footstep00");
             CivilIdle = cas.Play("Civil_Idle");
         }
     }
@@ -69,5 +70,13 @@ public class ADX_CivControl : MonoBehaviour
         CivilFoot.Stop();
         CivilIdle.Stop();
         cas.Play("Civil_Contact");
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "Player" && NoWalking == true) {
+            CivilIdle.Stop();
+            cas.Play("Civil_Contact");
+        }
     }
 }
