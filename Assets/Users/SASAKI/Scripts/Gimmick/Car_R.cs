@@ -36,9 +36,12 @@ public class Car_R : MonoBehaviour
             // 交差点情報更新
             nowWaypoint = nextWaypoint;
 
+            if (!nowWaypoint.GetComponent<CarWaypoint_R>().endWaypoint)
+                isFirstMeetEnd = false;
+
             // 次の交差点と、その次の交差点を取得
             nextWaypoint = nowWaypoint.GetComponent<CarWaypoint_R>().SetNextWaypoint(nowWaypoint);
-            afterNextWaypoint = nextWaypoint.GetComponent<CarWaypoint_R>().SetNextWaypoint(nowWaypoint);
+            afterNextWaypoint = nextWaypoint.GetComponent<CarWaypoint_R>().SetNextWaypoint(nextWaypoint);
 
             //初期移動先(インスタンス先)を設定
             SetPosInit(nowWaypoint.transform.position);
@@ -51,6 +54,7 @@ public class Car_R : MonoBehaviour
                 targetPos.y += initHeight;
             }
         }
+
     }
 
     // Update is called once per frame
