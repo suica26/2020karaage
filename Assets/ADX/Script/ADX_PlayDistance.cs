@@ -10,12 +10,15 @@ public class ADX_PlayDistance : MonoBehaviour
     float _distance;
     private float span = 0.1f;
     private float currentTime = 0f;
+    public string cueName;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
 
         Sound = GetComponent<CriAtomSource>();
+
+        span = Random.Range(0.1f, 0.3f);
     }
 
     // Update is called once per frame
@@ -43,13 +46,9 @@ public class ADX_PlayDistance : MonoBehaviour
     //再生状況監視
     private void PlayAndStopSound()
     {
-        if (Sound != null)
+        if ((Sound.status == CriAtomSource.Status.Stop) || (Sound.status == CriAtomSource.Status.PlayEnd))
         {
-            CriAtomSource.Status status = Sound.status;
-            if ((status == CriAtomSource.Status.Stop) || (status == CriAtomSource.Status.PlayEnd))
-            {
-                Sound.Play();
-            }
+            Sound.Play(cueName);
         }
     }
 }
