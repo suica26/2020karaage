@@ -91,6 +91,18 @@ public class SaveManager_Y : MonoBehaviour
         Save();
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="stageNum"></param>
+    /// <returns>
+    /// 1,2,3のどれかから選択してください
+    /// </returns>
+    public bool GetClearFlg(int stageNum)
+    {
+        return sd.stageClearFlg[stageNum - 1];
+    }
+
     public void SaveSoundVolume(float vol)
     {
         sd.soundVolume = vol;
