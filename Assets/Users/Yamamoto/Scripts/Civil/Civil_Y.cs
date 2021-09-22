@@ -176,7 +176,7 @@ public class Civil_Y : MonoBehaviour
         return AB;
     }
 
-    protected void Escape()
+    protected virtual void Escape()
     {
         animator.SetBool(escapeStr, true);
         if (!escapeFlg) escapeFlg = true;

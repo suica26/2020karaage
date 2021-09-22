@@ -22,8 +22,12 @@ MonoBehaviour:
   resetForwardTiming: 0
   avoidFlg: 0
   animator: {fileID: 8176578669812159076}
-  animStrArray: []
+  animStrArray:
+  - Idle1
+  - Idle2
+  - Idle3
   animCycle: 20
+  mouth: {fileID: 393561688878529600}
 --- !u!1001 &8874103980340647275
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -346,6 +350,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 83.82981
       objectReference: {fileID: 0}
+    - target: {fileID: 9102074776542456107, guid: 68fe9c5af64fbce44806ceb29bb1c4d5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6478438837999712571, guid: 68fe9c5af64fbce44806ceb29bb1c4d5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 68fe9c5af64fbce44806ceb29bb1c4d5, type: 3}
@@ -358,6 +367,12 @@ GameObject:
 --- !u!95 &8176578669812159076 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 747083478006564623, guid: 68fe9c5af64fbce44806ceb29bb1c4d5,
+    type: 3}
+  m_PrefabInstance: {fileID: 8874103980340647275}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &393561688878529600 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9102074776542456107, guid: 68fe9c5af64fbce44806ceb29bb1c4d5,
     type: 3}
   m_PrefabInstance: {fileID: 8874103980340647275}
   m_PrefabAsset: {fileID: 0}

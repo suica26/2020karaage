@@ -22,8 +22,12 @@ MonoBehaviour:
   resetForwardTiming: 0
   avoidFlg: 0
   animator: {fileID: 7039682706919605931}
-  animStrArray: []
+  animStrArray:
+  - Idle1
+  - Idle2
+  - Idle3
   animCycle: 20
+  mouth: {fileID: 1822936497331158530}
 --- !u!1001 &8841398827279517733
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -55,6 +59,11 @@ PrefabInstance:
         type: 3}
       propertyPath: distance
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7205383876582684199, guid: 0ae5e38f052c93145bb66670f8d86884,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8077296276905527454, guid: 0ae5e38f052c93145bb66670f8d86884,
         type: 3}
@@ -133,6 +142,12 @@ GameObject:
 --- !u!95 &7039682706919605931 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 1946416489287011982, guid: 0ae5e38f052c93145bb66670f8d86884,
+    type: 3}
+  m_PrefabInstance: {fileID: 8841398827279517733}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1822936497331158530 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7205383876582684199, guid: 0ae5e38f052c93145bb66670f8d86884,
     type: 3}
   m_PrefabInstance: {fileID: 8841398827279517733}
   m_PrefabAsset: {fileID: 0}
