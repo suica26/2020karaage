@@ -10,6 +10,7 @@ public class GameScene_Language_M : MonoBehaviour
     public Text howTitle, key, mouse, move, jump, pause, blast, kick, cutter;
     public Text evoSen, hipSen1,hipSen2;
     public Text attention;
+    public Text gameOver, retry, title;
     //stage12,stage3
     public Text clearSen, nextStage, titleBack;
     public Text clearSenC, nextStageC, titleBackC;
@@ -70,6 +71,9 @@ public class GameScene_Language_M : MonoBehaviour
         hipSen1.text = "HipStamp";
         hipSen2.text = "While in the air \n Let's press and hold the left click!";
         attention.text = "There seems to be nothing here";
+        gameOver.text = "Game Over...";
+        retry.text = "Continue";
+        title.text = "Exit to title";
 
         if (stage3)
         {

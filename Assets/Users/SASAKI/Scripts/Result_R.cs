@@ -28,16 +28,23 @@ public class Result_R : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        /*if (Input.GetKeyDown(KeyCode.R))
         {
             Time.timeScale = 1f;
             nextPanel.SetActive(true);
             SceneManager.LoadScene(sceneName);
-        }
+        }*/
     }
 
     void OnEnable()
     {
         Time.timeScale = 0f;
+    }
+
+    public void OnClick()
+    {
+        Time.timeScale = 1f;
+        nextPanel.SetActive(true);
+        SceneManager.LoadScene(sceneName);
     }
 }
