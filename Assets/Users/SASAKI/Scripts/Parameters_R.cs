@@ -102,7 +102,7 @@ public class Parameters_R : MonoBehaviour
             ep += addEP;
             plusTime += 1;
             epSlider.value += addEP;
-            hp += 1;
+            HPManager(-1);
             mainSlider.value += 1;
 
             if (ep == evo1)
@@ -150,8 +150,11 @@ public class Parameters_R : MonoBehaviour
         if (!freeze)
         {
             TimeManager(-damTime);
-            hp -= addHP;
-            mainSlider.value -= addHP;
+            if(!(addHP < 0 && hp == maxHP))
+            {
+                hp -= addHP;
+                mainSlider.value -= addHP;
+            }
 
             if (hp <= 0)
             {
