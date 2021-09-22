@@ -115,6 +115,7 @@ public class ObjectBreak_Y : MonoBehaviour
     private IEnumerator CutterCollapse(GameObject obj)
     {
         RigidOn(obj);
+        obj.layer = LayerMask.NameToLayer("Shard");
         GameObject cutter = GameObject.Find("Cutter(Clone)");
         //カッターの進行方向（XZ平面）を90度回転したものがカット平面
         var normal = cutter.transform.right;
@@ -123,6 +124,8 @@ public class ObjectBreak_Y : MonoBehaviour
 
         var left = new GameObject(gameObject.name + "_leftObj", typeof(Rigidbody));
         var right = new GameObject(gameObject.name + "_rightObj", typeof(Rigidbody));
+        ShardSettings(left, objScr.shardDamage_nonDiv / 2);
+        ShardSettings(right, objScr.shardDamage_nonDiv / 2);
 
         //MeshCutがException吐いた時のために、一応先に宣言しておく
         Destroy(left, objScr.deleteTime);
@@ -177,9 +180,6 @@ public class ObjectBreak_Y : MonoBehaviour
 
         rbL.AddForce(-normal * objScr.power / 3, ForceMode.Impulse);
         rbR.AddForce(normal * objScr.power / 3, ForceMode.Impulse);
-
-        ShardSettings(left, objScr.shardDamage_nonDiv / 2);
-        ShardSettings(right, objScr.shardDamage_nonDiv / 2);
 
         //破壊時のアクションを動作させるために少し遅延させる
         Invoke("SetNonActive", 0.1f);
