@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class chickenKick_R : MonoBehaviour
 {
-    [SerializeField] AudioSource audioSource;
     [SerializeField] GameObject[] kickCollisions;
     [SerializeField] GameObject kickEffect;
-    [SerializeField] AudioClip kickSound;
     [SerializeField] Transition_R[] scrAnim;
 
     EvolutionChicken_R scrEvo;
