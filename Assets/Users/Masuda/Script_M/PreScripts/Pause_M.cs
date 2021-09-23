@@ -6,6 +6,9 @@ public class Pause_M : MonoBehaviour
 {
     [SerializeField] private GameObject pausePanel, optionPanel, how;
     private new CriAtomSource audio;
+    public bool gameSet;
+    public Parameters_R para;
+    public Stage1Clear_M s1Cle;
     void Start()
     {
         pausePanel.SetActive(false);
@@ -14,7 +17,16 @@ public class Pause_M : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (para.hp <= 0)
+        {
+            gameSet = false;
+        }
+        else if (s1Cle.stageClear == true)
+        {
+            gameSet = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && gameSet)
         {
             PauseStart();
         }
@@ -33,8 +45,9 @@ public class Pause_M : MonoBehaviour
             Time.timeScale = 0f;
             Cursor.visible = true;
         }
+
         //時が動き出す
-        else
+        if (!pausePanel.activeSelf)
         {
             Time.timeScale = 1f;
             optionPanel.SetActive(false);
