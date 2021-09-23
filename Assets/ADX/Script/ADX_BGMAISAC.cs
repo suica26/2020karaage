@@ -10,6 +10,8 @@ public class ADX_BGMAISAC : MonoBehaviour
     public CriAtomSource bgmCriAtomSource;//BGMのCriAtomSourceアタッチしないと効かない
     EvolutionChicken_R scrEvo;
     private GameObject player;
+    private bool battleFlg = false;
+    List<GameObject> fightingEnemies;
 
     // Start is called before the first frame update
     void Start()
@@ -32,13 +34,15 @@ public class ADX_BGMAISAC : MonoBehaviour
         if (player != null)
             scrEvo = player.GetComponent<EvolutionChicken_R>();
         EnemyBool = false;
-}
+
+        fightingEnemies.Add(gameObject);
+    }
 
     // Update is called once per frame
     void Update()
     {
         //nullチェックを追加　山本
-        if (scrEvo != null)
+        if (scrEvo != null && !battleFlg)
         {
             if (scrEvo.EvolutionNum == 1 && BGMAISAC < 1 && SceneManager.GetActiveScene().name == "stage1")
             {
@@ -55,7 +59,7 @@ public class ADX_BGMAISAC : MonoBehaviour
                 bgmCriAtomSource.SetAisacControl("BGM_Aisac", BGMAISAC);
             }
 
-            if(SceneManager.GetActiveScene().name == "Stage2")
+            if (SceneManager.GetActiveScene().name == "Stage2")
             {
                 if (EnemyBool == true && BGMAISAC <= 1)
                 {
@@ -67,7 +71,36 @@ public class ADX_BGMAISAC : MonoBehaviour
                 }
             }
         }
-        Debug.Log(BGMAISAC);
+
+        bool clearFlg = false;
+        foreach (var e in fightingEnemies) if (e != null) clearFlg = true;
+        if (clearFlg)
+        {
+            battleFlg = false;
+        }
+
+        if (battleFlg)
+        {
+            BGMAISAC += 0.02f;
+            if (BGMAISAC > 1f) BGMAISAC = 1f;
+        }
+
+        //Debug.Log(BGMAISAC);
         bgmCriAtomSource.SetAisacControl("BGM_Aisac", BGMAISAC);
+    }
+
+    public void SetBattleBGM(GameObject enemy)
+    {
+        //すでにリストに追加済みの敵だったら無視
+        foreach (var e in fightingEnemies)
+        {
+            if (e == enemy) return;
+            Debug.Log("Check");
+        }
+        fightingEnemies.Add(enemy);
+        if (battleFlg) return;
+
+        fightingEnemies.Clear();
+        battleFlg = true;
     }
 }
