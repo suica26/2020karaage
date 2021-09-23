@@ -5,7 +5,9 @@ using UnityEngine;
 public class Pause_M : MonoBehaviour
 {
     [SerializeField] private GameObject pausePanel, optionPanel, how;
+    //, gameOver
     private new CriAtomSource audio;
+    private bool gameSet;
     void Start()
     {
         pausePanel.SetActive(false);
@@ -18,6 +20,10 @@ public class Pause_M : MonoBehaviour
         {
             PauseStart();
         }
+        /*if (gameOver)
+        {
+            gameSet = false;
+        }*/
     }
 
     public void PauseStart()
