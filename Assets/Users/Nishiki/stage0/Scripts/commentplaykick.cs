@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class commentplaykick : MonoBehaviour
 {
-    private Animator animCon;
+    public Animator animCon;
     private int breakNum;
+
+    int time;
+    public int ontime;
+    bool a = false;
 
     // Start is called before the first frame update
     void Start()
@@ -13,18 +17,26 @@ public class commentplaykick : MonoBehaviour
         animCon = GetComponent<Animator>();
     }
 
-    void OnTriggerEnter(Collider collision)
+    private void FixedUpdate()
     {
-        if (collision.gameObject.tag == "Player" && breakNum != 2)
+        if (a == false)
+        {
+            time++;
+        }
+
+        if (time >= ontime && breakNum != 1)
         {
             animCon.SetInteger("play", 1);
+            a = true;
+
+            time = 0;
         }
     }
 
     public void BreakNumPlus()
     {
         breakNum++;
-        if (breakNum >= 2)
+        if (breakNum >= 1)
         {
             animCon.SetInteger("play", 0);
             GetComponent<BoxCollider>().enabled = false;

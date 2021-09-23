@@ -10,6 +10,10 @@ public class doorscore : MonoBehaviour
     public int nowanim;
     public GameObject air;
     public GameObject arrow;
+
+    public GameObject ironeffect;
+
+    public bool hit = false;
     //ADX
     private CriAtomSource criAtomSource;
     int time;
@@ -52,7 +56,9 @@ public class doorscore : MonoBehaviour
     {
         if (collision.gameObject.name == "Cutter(Clone)")
         {
+            hit = true;
             damage++;
+            Instantiate(ironeffect, new Vector3(-6, 1, -15), Quaternion.identity);
             criAtomSource.Play("Track_noise00");
         }
     }
