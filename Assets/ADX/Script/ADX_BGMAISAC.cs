@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class ADX_BGMAISAC : MonoBehaviour
 {
     private float BGMAISAC;
+    public bool EnemyBool;
     public CriAtomSource bgmCriAtomSource;//BGMのCriAtomSourceアタッチしないと効かない
     EvolutionChicken_R scrEvo;
     private GameObject player;
@@ -21,7 +22,7 @@ public class ADX_BGMAISAC : MonoBehaviour
         {
             case "stage0": bgmName = "BGM_St0"; break;
             case "stage1": bgmName = "BGM01"; break;
-            case "Stage2": bgmName = "BGM01"; break;
+            case "Stage2": bgmName = "BGM02"; break;
             case "Stage3": bgmName = "BGM03"; break;
             default: bgmName = "BGM00"; break;
         }
@@ -30,7 +31,8 @@ public class ADX_BGMAISAC : MonoBehaviour
         player = GameObject.Find("Player");
         if (player != null)
             scrEvo = player.GetComponent<EvolutionChicken_R>();
-    }
+        EnemyBool = false;
+}
 
     // Update is called once per frame
     void Update()
@@ -45,13 +47,27 @@ public class ADX_BGMAISAC : MonoBehaviour
             }
             else if (scrEvo.EvolutionNum == 1 && SceneManager.GetActiveScene().name == "Stage2")
             {
-                BGMAISAC = 0f;
+                //BGMAISAC = 0f;
             }
             else if (scrEvo.EvolutionNum == 2 && BGMAISAC < 1 && SceneManager.GetActiveScene().name == "Stage2")
             {
                 BGMAISAC += 0.02f;
                 bgmCriAtomSource.SetAisacControl("BGM_Aisac", BGMAISAC);
             }
+
+            if(SceneManager.GetActiveScene().name == "Stage2")
+            {
+                if (EnemyBool == true && BGMAISAC <= 1)
+                {
+                    BGMAISAC += 0.05f;
+                }
+                else if (EnemyBool == false && BGMAISAC >= 0)
+                {
+                    BGMAISAC -= 0.05f;
+                }
+            }
         }
+        Debug.Log(BGMAISAC);
+        bgmCriAtomSource.SetAisacControl("BGM_Aisac", BGMAISAC);
     }
 }
