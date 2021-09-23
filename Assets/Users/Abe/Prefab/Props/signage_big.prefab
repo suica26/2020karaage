@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3061349901187855954}
   - component: {fileID: 2719943675680522380}
   - component: {fileID: 8969103162599556661}
+  - component: {fileID: -378160424325864692}
   m_Layer: 0
   m_Name: signage_big
   m_TagString: Untagged
@@ -51,19 +52,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tier_WalkAttack: 0
   divideObject: {fileID: 0}
-  HP: 0
-  kickMag: 0
-  blastMag: 0
-  cutterMag: 0
-  fallAttackMag: 0
+  HP: 150
+  kickMag: 1
+  blastMag: 1.5
+  cutterMag: 1.5
+  fallAttackMag: 1.5
   breakScore: 0
+  criAtomSource: {fileID: 0}
   objectID: 0
   breakEffect: {fileID: 0}
   deleteTime: 3
-  torque: 0
-  power: 0
+  torque: 90
+  power: 25
   groundContactSoundName: 
-  shardDamage_nonDiv: 0
+  shardDamage_nonDiv: 800
   specialObjectFlg: 0
   notDamage: 0
   magnitude: 0.1
@@ -148,6 +150,21 @@ MonoBehaviour:
   _pitch: 0
   _androidUseLowLatencyVoicePool: 0
   need_to_player_update_all: 1
+--- !u!114 &-378160424325864692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6920316242920510723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58d7fbd90420d744e8ba69d321b2e651, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  m1m: {fileID: 0}
+  hit: 0
 --- !u!1001 &2331722992821231407
 PrefabInstance:
   m_ObjectHideFlags: 0
