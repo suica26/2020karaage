@@ -11,7 +11,7 @@ public class ADX_BGMAISAC : MonoBehaviour
     EvolutionChicken_R scrEvo;
     private GameObject player;
     private bool battleFlg = false;
-    List<GameObject> fightingEnemies;
+    private List<GameObject> fightingEnemies = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -34,8 +34,6 @@ public class ADX_BGMAISAC : MonoBehaviour
         if (player != null)
             scrEvo = player.GetComponent<EvolutionChicken_R>();
         EnemyBool = false;
-
-        fightingEnemies.Add(gameObject);
     }
 
     // Update is called once per frame
@@ -72,17 +70,23 @@ public class ADX_BGMAISAC : MonoBehaviour
             }
         }
 
-        bool clearFlg = false;
-        foreach (var e in fightingEnemies) if (e != null) clearFlg = true;
-        if (clearFlg)
-        {
-            battleFlg = false;
-        }
-
         if (battleFlg)
         {
+            bool clearFlg = true;
+            foreach (var e in fightingEnemies)
+            {
+                if (e != null)
+                {
+                    clearFlg = false;
+                    break;
+                }
+            }
+            if (clearFlg) battleFlg = false;
+
+
             BGMAISAC += 0.02f;
             if (BGMAISAC > 1f) BGMAISAC = 1f;
+            Debug.Log(BGMAISAC);
         }
 
         //Debug.Log(BGMAISAC);
@@ -92,15 +96,12 @@ public class ADX_BGMAISAC : MonoBehaviour
     public void SetBattleBGM(GameObject enemy)
     {
         //すでにリストに追加済みの敵だったら無視
-        foreach (var e in fightingEnemies)
-        {
-            if (e == enemy) return;
-            Debug.Log("Check");
-        }
+        foreach (var e in fightingEnemies) if (e == enemy) return;
         fightingEnemies.Add(enemy);
         if (battleFlg) return;
 
         fightingEnemies.Clear();
+        fightingEnemies.Add(enemy);
         battleFlg = true;
     }
 }
