@@ -308,6 +308,8 @@ GameObject:
   - component: {fileID: 6063229541102256942}
   - component: {fileID: 2684418181682922803}
   - component: {fileID: 2949847960954206503}
+  - component: {fileID: -9115864098592946452}
+  - component: {fileID: 831856196919209076}
   m_Layer: 16
   m_Name: ReTank
   m_TagString: Enemy
@@ -457,6 +459,42 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-9115864098592946452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7688571215654442205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72767151191ab4f65b6c773227e46232, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audio: {fileID: 831856196919209076}
+--- !u!114 &831856196919209076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7688571215654442205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 1
+  _cueName: Tank_Driving00
+  _cueSheet: Enemy
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &8152426277787443285
 GameObject:
   m_ObjectHideFlags: 0
