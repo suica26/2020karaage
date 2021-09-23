@@ -42,6 +42,7 @@ public class boxhp : MonoBehaviour
             death = true;
             currentHp = 0;
             scrCommentKick.BreakNumPlus();
+            scrCommentKick.animCon.SetInteger("play", 0);
             animCon.SetInteger("break", 1);
             Destroy(this.gameObject, 1.2f);
         }
