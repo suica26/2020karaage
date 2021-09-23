@@ -11,6 +11,7 @@ public class New_GameOver_M : MonoBehaviour
     private float timer1, timer2;
     private CriAtomSource cas;
     private bool off1, off2;
+    public Parameters_R para;
 
     void Start()
     {
@@ -20,8 +21,11 @@ public class New_GameOver_M : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer1 += 0.05f;
-        timer2 += 0.05f;
+        if (para.hp <= 0)
+        {
+            timer1 += 0.05f;
+            timer2 += 0.05f;
+        }
 
         gameOver.color = new Color(1, 1, 1, timer1);
         blackBack.color = new Color(0, 0, 0, timer1);

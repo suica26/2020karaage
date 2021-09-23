@@ -5,6 +5,7 @@ using UnityEngine;
 public class Stage1Clear_M : MonoBehaviour
 {
     [SerializeField] public GameObject clear, company, next, pause;
+    public bool stageClear;
     void Start()
     {
         clear.SetActive(false);
@@ -21,6 +22,7 @@ public class Stage1Clear_M : MonoBehaviour
             Cursor.visible = true;
             clear.SetActive(true);
             next.SetActive(true);
+            stageClear = true;
         }
     }
 }
