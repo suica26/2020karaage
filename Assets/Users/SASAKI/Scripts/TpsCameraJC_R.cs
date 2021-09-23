@@ -26,6 +26,10 @@ public class TpsCameraJC_R : MonoBehaviour
     //M
     public float minY;
 
+    // モバイル用
+    private int camFingerId;
+    private int ignoreFingerId;
+
     private enum eCamWork
     {
         eNormal,
@@ -56,6 +60,12 @@ public class TpsCameraJC_R : MonoBehaviour
         scrEvo = objPlayer.GetComponent<EvolutionChicken_R>();
 
         mobileMode = MobileSetting_R.GetInstance().IsMobileMode();
+
+        if (mobileMode)
+        {
+            camFingerId = -1;
+            ignoreFingerId = -1;
+        }
     }
 
     // Update is called once per frame
@@ -71,11 +81,51 @@ public class TpsCameraJC_R : MonoBehaviour
                 }
                 else
                 {
+                    // カメラのFingerIdを設定
+                    if (camFingerId < 0)
+                    {
+                        foreach (Touch touch in Input.touches)
+                        {
+                            if ((touch.position.x > Screen.width * 0.20f &&
+                               touch.position.y > Screen.height * 0.20f) &&
+                               ignoreFingerId != touch.fingerId)
+                            {
+                                Debug.Log("CAMERAON");
+                                camFingerId = touch.fingerId;
+                            }
+                        }
+                    }
+
+                    if(ignoreFingerId < 0)
+                    {
+                        foreach (Touch touch in Input.touches)
+                        {
+                            if ((touch.position.x < Screen.width * 0.20f &&
+                               touch.position.y < Screen.height * 0.20f) &&
+                               camFingerId != touch.fingerId)
+                            {
+                                Debug.Log("IGNORE");
+                                ignoreFingerId = touch.fingerId;
+                            }
+                        }
+                    }
+
+                    // 実際のカメラ操作の実装
                     foreach (Touch touch in Input.touches)
                     {
-                        if (touch.position.y >= Screen.height * 0.4f && touch.phase == TouchPhase.Moved)
+                        if (touch.fingerId == camFingerId && (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled))
+                            camFingerId = -1;
+
+                        if (touch.fingerId == ignoreFingerId && (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled))
+                            ignoreFingerId = -1;
+
+                        if (camFingerId >= 0)
                         {
-                            mouse -= touch.deltaPosition * 0.1f * Time.deltaTime * spinSpeed;
+                            if (camFingerId == touch.fingerId)
+                            {
+                                Vector2 position = touch.deltaPosition;
+                                mouse -= position * 0.1f * Time.deltaTime * spinSpeed;
+                            }
                         }
                     }
                 }
