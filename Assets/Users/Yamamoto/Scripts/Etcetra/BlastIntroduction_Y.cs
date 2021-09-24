@@ -76,7 +76,7 @@ public class BlastIntroduction_Y : MonoBehaviour
         isIntro = true;
         movie.Pause();
         misAnim.Play();
-        Sound?.Play("MoviePose");
+
         if (isJapanese)
         {
             mis.text = "おはようブラストを使ってみよう！";
@@ -95,7 +95,6 @@ public class BlastIntroduction_Y : MonoBehaviour
     {
         isBlast = true;
         misAnim.Play();
-        Sound?.Play("MovieBlast2");
 
         if (isJapanese)
         {
