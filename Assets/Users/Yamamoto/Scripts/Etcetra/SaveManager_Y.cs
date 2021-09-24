@@ -19,10 +19,17 @@ public class SaveManager_Y : MonoBehaviour
     const string SAVE_FILE_PATH = "save.json";
     private bool isSaving = false;
     private bool isLoading = false;
+    static private SaveManager_Y instance;
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        Time.timeScale = 1f;
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else Destroy(gameObject);
     }
 
     private void Start()

@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2662,8 +2662,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volSlider: {fileID: 1575471702}
-  cas: {fileID: 0}
-  soundVolumeController: {fileID: 0}
 --- !u!114 &261869634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8760,7 +8758,7 @@ GameObject:
   - component: {fileID: 871356597}
   m_Layer: 0
   m_Name: SaveManager
-  m_TagString: Untagged
+  m_TagString: SaveManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9457,8 +9455,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volSlider: {fileID: 521090896}
-  cas: {fileID: 0}
-  soundVolumeController: {fileID: 0}
 --- !u!1 &950037017
 GameObject:
   m_ObjectHideFlags: 0

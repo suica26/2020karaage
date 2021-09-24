@@ -12,17 +12,20 @@ public class SoundVolumeController : MonoBehaviour
         "BGM", "SFX", "Voice", "Ambient"
     };
     private SaveManager_Y saveManager;
+    static private SoundVolumeController instance;
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else Destroy(gameObject);
     }
 
     void Start()
     {
-        //中断したときにSoundVolumeが複数個存在するのを防ぐ処理
-        soundmaster = GameObject.FindGameObjectsWithTag("SoundVolume");
-        if (soundmaster.Length > 1) Destroy(this.gameObject);
         saveManager = GameObject.Find("SaveManager").GetComponent<SaveManager_Y>();
         if (saveManager != null)
             currentVolume = saveManager.GetSoundVolume();
