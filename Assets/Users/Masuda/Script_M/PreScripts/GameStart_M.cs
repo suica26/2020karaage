@@ -21,7 +21,7 @@ public class GameStart_M : MonoBehaviour
     {
         if (stageNum > 0)
         {
-            if (!saveManager.GetClearFlg(stageNum)) gameObject.SetActive(false);
+            if (!saveManager.GetStageFlg(stageNum)) gameObject.SetActive(false);
             else gameObject.SetActive(true);
         }
     }

@@ -7,10 +7,12 @@ using UnityEngine;
 [Serializable]
 public struct SaveData
 {
+    public bool[] stageFlg;
     public bool[] stageClearFlg;
     public float soundVolume;
     public int quality;
     public string language;
+    public float mouseSensitive;
 }
 
 public class SaveManager_Y : MonoBehaviour
@@ -77,10 +79,12 @@ public class SaveManager_Y : MonoBehaviour
         catch (Exception e)
         {
             sd = new SaveData();
+            sd.stageFlg = new bool[3] { false, false, false };
             sd.stageClearFlg = new bool[3] { false, false, false };
             sd.soundVolume = 1f;
             sd.language = "Japanese";
             sd.quality = 2;
+            sd.mouseSensitive = 1f;
         }
     }
 
@@ -90,6 +94,16 @@ public class SaveManager_Y : MonoBehaviour
         isSaving = false;
         isLoading = false;
     }
+    public void SaveStageFlg(int stageNum)
+    {
+        sd.stageFlg[stageNum] = true;
+        Save();
+    }
+
+    public bool GetStageFlg(int stageNum)
+    {
+        return sd.stageFlg[stageNum - 1];
+    }
 
     public void SaveClearFlg(int stageNum)
     {
@@ -97,13 +111,6 @@ public class SaveManager_Y : MonoBehaviour
         Save();
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="stageNum"></param>
-    /// <returns>
-    /// 1,2,3のどれかから選択してください
-    /// </returns>
     public bool GetClearFlg(int stageNum)
     {
         return sd.stageClearFlg[stageNum - 1];
