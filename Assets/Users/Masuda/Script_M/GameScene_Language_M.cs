@@ -27,7 +27,7 @@ public class GameScene_Language_M : MonoBehaviour
         }
         else if (languageMode == "Japanese" && mobileMode)
         {
-            hipSen2.text = "空中にいる間に、\nヒップスタンプボタンを押そう";
+            hipSen2.text = "空中にいる間に、\nキックボタンを長押ししよう";
         }
         else if (languageMode == "English" && !mobileMode)
         {
@@ -36,7 +36,7 @@ public class GameScene_Language_M : MonoBehaviour
         else if (languageMode == "English" && mobileMode)
         {
             English();
-            hipSen2.text = "While in the air \n Let's press and hold the hip stamp button!";
+            hipSen2.text = "While in the air \n Let's press and hold the kick button!";
         }
     }
 
@@ -67,7 +67,7 @@ public class GameScene_Language_M : MonoBehaviour
         blast.text = "MorningBlast(Long Press)";
         kick.text = "Kick";
         cutter.text = "CrestCutter";
-        evoSen.text = "Accumulate the upper left gauge to the end \n And the chicken will evolve";
+        evoSen.text = "When the upper left gauge is full, \n the chicken will evolve";
         hipSen1.text = "HipStamp";
         hipSen2.text = "While in the air \n Let's press and hold the left click!";
         attention.text = "There seems to be nothing here";

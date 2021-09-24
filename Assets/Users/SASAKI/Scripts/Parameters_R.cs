@@ -103,7 +103,6 @@ public class Parameters_R : MonoBehaviour
             plusTime += 1;
             epSlider.value += addEP;
             HPManager(-1);
-            mainSlider.value += 1;
 
             if (ep == evo1)
             {
@@ -201,11 +200,17 @@ public class Parameters_R : MonoBehaviour
 
         if (hp >= 500 && ep >= evo3)
         {
-            mainSlider = hpSlider[3];
+            if (hpSlider[2].value == 500)
+            {
+                mainSlider = hpSlider[3];
+            }
         }
         else if (hp < 500 && ep >= evo3)
         {
-            mainSlider = hpSlider[2];
+            if (hpSlider[3].value == 0)
+            {
+                mainSlider = hpSlider[2];
+            }
         }
     }
     //タイマーです。一秒ごとにTimeManager()で一秒減らしてます。
