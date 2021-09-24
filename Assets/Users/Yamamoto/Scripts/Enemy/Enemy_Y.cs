@@ -20,6 +20,10 @@ public class Enemy_Y : ObjectStateManagement_Y
     private EnemyMoveController_Y enemyControllerScr;
 
     private ADX_BGMAISAC aisacScr;
+    [SerializeField] private Vector3[] patrollRoute;
+    private int patrollNum;
+    public EnemySpawnController AIscript;
+    public int number;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -31,6 +35,7 @@ public class Enemy_Y : ObjectStateManagement_Y
         animator.SetBool("isWalk", true);
         enemyControllerScr = GameObject.Find("GameAI_Y").GetComponent<EnemyMoveController_Y>();
         aisacScr = GameObject.Find("BGMObject").GetComponent<ADX_BGMAISAC>();
+        patrollNum = 0;
     }
 
     //基本挙動を記述
@@ -59,12 +64,15 @@ public class Enemy_Y : ObjectStateManagement_Y
                 else
                 {
                     if (!animator.GetCurrentAnimatorStateInfo(0).IsTag("StopMove"))
+                    {
+                        navAgent.SetDestination(player.transform.position);
                         Walk();
+                    }
                 }
             }
             else
             {
-                Wait();
+                Patroll();
             }
         }
         else StopMove();
@@ -78,7 +86,6 @@ public class Enemy_Y : ObjectStateManagement_Y
 
     protected void Move()
     {
-        navAgent.destination = player.transform.position;
         navAgent.isStopped = false;
         rb.isKinematic = false;
     }
@@ -104,6 +111,24 @@ public class Enemy_Y : ObjectStateManagement_Y
         Move();
         animator.SetBool("isWait", false);
         animator.SetBool("isWalk", true);
+    }
+
+    protected void Patroll()
+    {
+        if (patrollRoute == null)
+        {
+            Wait();
+        }
+        else
+        {
+            Walk();
+            if (navAgent.remainingDistance <= 1.0f)
+            {
+                patrollNum++;
+                if (patrollNum == patrollRoute.Length) patrollNum = 0;
+                navAgent.SetDestination(patrollRoute[patrollNum]);
+            }
+        }
     }
 
     protected virtual void Attack()
@@ -136,5 +161,15 @@ public class Enemy_Y : ObjectStateManagement_Y
 
         Destroy(gameObject, 1.5f);
         animator.SetTrigger("Death");
+    }
+
+    public void SetPatrollRoute(Vector3[] route)
+    {
+        patrollRoute = route;
+    }
+
+    private void OnDestroy()
+    {
+        AIscript?.UpdateEnemyNum(number);
     }
 }
