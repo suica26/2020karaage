@@ -66,12 +66,16 @@ public class TpsCameraJC_R : MonoBehaviour
             camFingerId = -1;
             ignoreFingerId = -1;
         }
+
+        //山本追加 セーブデータとマウス感度(spinSpeed)を連動させられるように
+        var saveObj = GameObject.FindGameObjectWithTag("SaveManager");
+        if (saveObj != null) spinSpeed = saveObj.GetComponent<SaveManager_Y>().GetMouseSensitive();
     }
 
     // Update is called once per frame
     void Update()
     {
-        switch(eCameraWork)
+        switch (eCameraWork)
         {
             case eCamWork.eNormal:
                 // Get MouseMove
@@ -96,7 +100,7 @@ public class TpsCameraJC_R : MonoBehaviour
                         }
                     }
 
-                    if(ignoreFingerId < 0)
+                    if (ignoreFingerId < 0)
                     {
                         foreach (Touch touch in Input.touches)
                         {
@@ -151,7 +155,7 @@ public class TpsCameraJC_R : MonoBehaviour
 
                 camPos = pos + focus[scrEvo.EvolutionNum].position;
 
-                if(endEvolution < 0.25f)
+                if (endEvolution < 0.25f)
                 {
                     endEvolution += Time.deltaTime;
                     transform.position = Vector3.Lerp(transform.position, camPos, 0.25f);
@@ -176,7 +180,7 @@ public class TpsCameraJC_R : MonoBehaviour
         Vector3 setCamPos;
         Vector3 distance = camPos - focus[scrEvo.EvolutionNum].position;
         Ray ray = new Ray(focus[scrEvo.EvolutionNum].position, distance);
-        Debug.DrawRay(ray.origin, ray.direction * distance.magnitude, Color.red, 0.1f,false);
+        Debug.DrawRay(ray.origin, ray.direction * distance.magnitude, Color.red, 0.1f, false);
         RaycastHit[] hits = Physics.RaycastAll(ray, distance.magnitude);
 
         // カメラとチキン間に障害物が無かったら処理を終了する
@@ -184,9 +188,9 @@ public class TpsCameraJC_R : MonoBehaviour
             return;
 
         // 順次処理を行う(Shard は無視する)
-        foreach(var hit in hits)
+        foreach (var hit in hits)
         {
-            if(hit.transform.gameObject.layer != 10 && hit.transform.gameObject.layer != 17)
+            if (hit.transform.gameObject.layer != 10 && hit.transform.gameObject.layer != 17)
             {
                 setCamPos = hit.point + transform.forward;
                 transform.position = setCamPos;
@@ -213,7 +217,7 @@ public class TpsCameraJC_R : MonoBehaviour
     {
         var elapsed = 0f;
 
-        while(elapsed < dur)
+        while (elapsed < dur)
         {
             var pos = transform.localPosition;
             var x = pos.x + Random.Range(-1f, 1f) * magnitude;
@@ -237,7 +241,7 @@ public class TpsCameraJC_R : MonoBehaviour
 
         while (timer < 5.0f)
         {
-            if(Time.timeScale != 0)
+            if (Time.timeScale != 0)
             {
                 Time.timeScale = 0.1f;
 

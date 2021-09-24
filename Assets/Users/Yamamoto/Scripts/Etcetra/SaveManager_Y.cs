@@ -143,4 +143,15 @@ public class SaveManager_Y : MonoBehaviour
         sd.quality = num;
         Save();
     }
+
+    public void SaveMouseSensitive(float sensitive)
+    {
+        sd.mouseSensitive = sensitive;
+        Save();
+    }
+
+    public float GetMouseSensitive()
+    {
+        return sd.mouseSensitive;
+    }
 }
