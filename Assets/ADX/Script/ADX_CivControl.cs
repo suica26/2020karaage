@@ -6,7 +6,7 @@ public class ADX_CivControl : MonoBehaviour
 {
     private CriAtomSource cas;
     private GameObject player;
-    public float distance = 15;
+    private float distance = 10;
     private float span = 0.1f;
     private float currentTime = 0f;
     private Rigidbody rb;

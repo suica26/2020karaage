@@ -279,7 +279,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
         {
             case 0: CutterContactSoundName = "CutterContract"; break;
             case 1: CutterContactSoundName = "Cutter_C_pole00"; break;
-            case 2: CutterContactSoundName = "CutterContract"; break;
+            case 2: CutterContactSoundName = "Cutter_Trashcan00"; break;
             case 3: CutterContactSoundName = "CutterContract"; break;
             case 4: CutterContactSoundName = "CutterContract"; break;
             case 5: CutterContactSoundName = "CutterContract"; break;
@@ -287,7 +287,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
             case 7: CutterContactSoundName = "CutterTree00"; break;
             case 8: CutterContactSoundName = "Cutter_C_firehydrant00"; break;
             case 9: CutterContactSoundName = "Cutter_C_pole00"; break;
-            case 10: CutterContactSoundName = "CutterContract0"; break;
+            case 10: CutterContactSoundName = "CutterContract"; break;
             default: CutterContactSoundName = "CutterContract"; break;
         }
         if (criAtomSource != null) criAtomSource.cueName = CutterContactSoundName;

@@ -6,12 +6,13 @@ using System;
 
 public class ADX_BGMAISAC : MonoBehaviour
 {
-    private float BGMAISAC, span;
+    private float BGMAISAC, span, BGMEvo;
     public CriAtomSource bgmCriAtomSource;//BGMのCriAtomSourceアタッチしないと効かない
     EvolutionChicken_R scrEvo;
     private GameObject player;
     private bool battleFlg = false;
     private List<GameObject> fightingEnemies = new List<GameObject>();
+    public bool St3Fase = false;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +36,9 @@ public class ADX_BGMAISAC : MonoBehaviour
             scrEvo = player.GetComponent<EvolutionChicken_R>();
 
         StartCoroutine("Logging");
+
+        //デフォルト形態セレクターセット
+        bgmCriAtomSource.player.SetSelectorLabel("Chicken_Form", "form1");
     }
 
     // Update is called once per frame
@@ -44,10 +48,12 @@ public class ADX_BGMAISAC : MonoBehaviour
         if (scrEvo != null)
         {
             //St1設定
-            if (scrEvo.EvolutionNum == 1 && BGMAISAC < 1 && SceneManager.GetActiveScene().name == "stage1")
+            if (SceneManager.GetActiveScene().name == "stage1")
             {
-                BGMAISAC += 0.02f;
-                bgmCriAtomSource.SetAisacControl("BGM_Aisac", BGMAISAC);
+                if (scrEvo.EvolutionNum == 1 && BGMEvo < 1f)
+                {
+                    BGMEvo += 0.015f;
+                }
             }
 
 
@@ -78,18 +84,31 @@ public class ADX_BGMAISAC : MonoBehaviour
                     BGMAISAC -= 0.02f;
                     if (BGMAISAC < 0f) BGMAISAC = 0f;
                 }
-                //第3形態
-                if (scrEvo.EvolutionNum == 2)
-                {
 
+                if (scrEvo.EvolutionNum == 2 && BGMEvo < 1f)
+                {
+                    BGMEvo += 0.015f;
                 }
             }
+
+            // St3設定
+            if (SceneManager.GetActiveScene().name == "Stage3")
+            {
+                //フェーズ戦BGM切り替え
+                if (St3Fase && BGMAISAC < 1)
+                {
+                    BGMAISAC += 0.015f;
+                }
+                if (scrEvo.EvolutionNum == 3 && BGMEvo < 1f)
+                {
+                    BGMEvo += 0.015f;
+                }
+
+            }
         }
-
-
-
         //Debug.Log(BGMAISAC);
         bgmCriAtomSource.SetAisacControl("BGM_Aisac", BGMAISAC);
+        bgmCriAtomSource.SetAisacControl("BGMEvo", BGMEvo);
     }
 
     public void SetBattleBGM(GameObject enemy)
@@ -104,6 +123,7 @@ public class ADX_BGMAISAC : MonoBehaviour
         fightingEnemies.Add(enemy);
         battleFlg = true;
     }
+
 
     IEnumerator Logging()
     {

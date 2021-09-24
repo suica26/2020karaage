@@ -129,7 +129,7 @@ public class Civil_Y : MonoBehaviour
                 rb.AddForce(F, ForceMode.Impulse);
                 rb.AddTorque(TorquePower, ForceMode.Impulse);
                 criAtomSource.Stop();
-                criAtomSource.Play("Citizen00");
+                criAtomSource.Play("CivilFly");
                 Destroy(gameObject, 2f);
                 Escape();
                 death = true;
