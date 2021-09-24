@@ -12,16 +12,12 @@ public class Pause_M : MonoBehaviour
     void Start()
     {
         pausePanel.SetActive(false);
-        audio = (CriAtomSource)GetComponent("CriAtomSource");
+        audio = GetComponent<CriAtomSource>();
     }
 
     void Update()
     {
-        if (para.hp <= 0)
-        {
-            gameSet = false;
-        }
-        else if (s1Cle.stageClear == true)
+        if (para.hp <= 0 || s1Cle?.stageClear == true)
         {
             gameSet = false;
         }
@@ -37,7 +33,7 @@ public class Pause_M : MonoBehaviour
         //ポーズのオンオフ
         pausePanel.SetActive(!pausePanel.activeSelf);
         //how.SetActive(!pausePanel.activeSelf);
-        audio.Play("System_Decision");
+        audio?.Play("System_Decision");
 
         //ポーズ中に停止
         if (pausePanel.activeSelf)

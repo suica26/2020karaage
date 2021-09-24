@@ -30,10 +30,10 @@ public class SoundVolumeController : MonoBehaviour
 
     void Update()
     {
+        foreach (var category in CatergoryNames)
+            CriAtom.SetCategoryVolume(category, currentVolume);
         if (currentVolume != nowVolume)
         {
-            foreach (var category in CatergoryNames)
-                CriAtom.SetCategoryVolume(category, currentVolume);
             nowVolume = currentVolume;
             if (saveManager != null)
                 saveManager.SaveSoundVolume(nowVolume);

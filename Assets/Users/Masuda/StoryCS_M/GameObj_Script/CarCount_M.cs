@@ -6,22 +6,19 @@ using UnityEngine.UI;
 public class CarCount_M : MonoBehaviour
 {
     private Mission1_M m1m;
-    private ObjectStateManagement_Y osmY;
     private GameObject player;
-    private bool kuruma;
 
     void Start()
     {
         player = GameObject.Find("Player");
         m1m = player.GetComponent<Mission1_M>();
-        osmY = this.GetComponent<ObjectStateManagement_Y>();
     }
-    void Update()
+
+    private void OnDestroy()
     {
-        if (osmY.HP <= 0 && !kuruma)
+        if (m1m != null && m1m.five)
         {
             m1m.CarDestroy();
-            kuruma = true;
         }
     }
 }
