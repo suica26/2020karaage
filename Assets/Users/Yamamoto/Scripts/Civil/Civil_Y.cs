@@ -201,7 +201,8 @@ public class Civil_Y : MonoBehaviour
         if (Vector3.Dot(transform.forward, nextForward) < 1f && !avoidFlg)
         {
             RotTimePlus();
-            transform.forward = Vector3.Lerp(preForward, nextForward, rotTime);
+            if (Vector3.Lerp(preForward, nextForward, rotTime) != Vector3.zero)
+                transform.forward = Vector3.Lerp(preForward, nextForward, rotTime);
         }
     }
 
