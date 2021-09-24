@@ -16,6 +16,8 @@ public class BlastIntroduction_Y : MonoBehaviour
     public double videoTime;
     private SaveManager_Y saveManager;
     public bool isJapanese;
+
+    private CriAtomSource Sound;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +32,9 @@ public class BlastIntroduction_Y : MonoBehaviour
             saveManager = saveObj.GetComponent<SaveManager_Y>();
         if (saveManager == null || saveManager.GetLanguage() == "Japanese") isJapanese = true;
         else if (saveManager.GetLanguage() == "English") isJapanese = false;
+
+        Sound = GetComponent<CriAtomSource>();
+
     }
 
     // Update is called once per frame
@@ -42,14 +47,17 @@ public class BlastIntroduction_Y : MonoBehaviour
             if (movie.time >= introStart && !isIntro) Intro_Start();
             if (isIntro && Input.GetMouseButton(2) && !isBlast)
             {
+                Sound.Play("MovieBlast1");
                 blastCharge += Time.deltaTime;
                 if (blastCharge >= 3f) Intro_LetsBlast();
+                
             }
             if (isBlast && Input.GetMouseButtonUp(2))
             {
                 movie.Play();
                 blasted = true;
                 topObject.SetActive(false);
+                Sound.Play("MovieBlast2");
             }
         }
     }
@@ -60,6 +68,7 @@ public class BlastIntroduction_Y : MonoBehaviour
         topObject.SetActive(true);
         isIntro = true;
         movie.Pause();
+        Sound.Play("MoviePose");
         misAnim.Play();
 
         Debug.Log("CheckLang");
@@ -83,6 +92,7 @@ public class BlastIntroduction_Y : MonoBehaviour
     {
         isBlast = true;
         misAnim.Play();
+        Sound.Play("MovieBlast2");
 
         if (isJapanese)
         {
