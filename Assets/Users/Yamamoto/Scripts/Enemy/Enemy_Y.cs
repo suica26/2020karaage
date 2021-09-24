@@ -21,7 +21,6 @@ public class Enemy_Y : ObjectStateManagement_Y
 
     private ADX_BGMAISAC aisacScr;
     [SerializeField] private Vector3[] patrollRoute;
-    private int patrollNum;
     public EnemySpawnController AIscript;
     public int number;
 
@@ -35,7 +34,6 @@ public class Enemy_Y : ObjectStateManagement_Y
         animator.SetBool("isWalk", true);
         enemyControllerScr = GameObject.Find("GameAI_Y").GetComponent<EnemyMoveController_Y>();
         aisacScr = GameObject.Find("BGMObject").GetComponent<ADX_BGMAISAC>();
-        patrollNum = 0;
     }
 
     //基本挙動を記述
@@ -122,11 +120,9 @@ public class Enemy_Y : ObjectStateManagement_Y
         else
         {
             Walk();
-            if (navAgent.remainingDistance <= 1.0f)
+            if (navAgent.remainingDistance <= 3.0f)
             {
-                patrollNum++;
-                if (patrollNum == patrollRoute.Length) patrollNum = 0;
-                navAgent.SetDestination(patrollRoute[patrollNum]);
+                navAgent.SetDestination(patrollRoute[Random.Range(0, patrollRoute.Length)]);
             }
         }
     }
@@ -168,7 +164,7 @@ public class Enemy_Y : ObjectStateManagement_Y
         patrollRoute = route;
     }
 
-    private void OnDestroy()
+    protected void OnDestroy()
     {
         AIscript?.UpdateEnemyNum(number);
     }

@@ -149,7 +149,6 @@ public class ObjectBreak_Y : MonoBehaviour
                     var divObjects = MeshCut.Cut(cObj, cutter.transform.position, normal, cObj.GetComponent<Renderer>().material);
                     divObjects[0].transform.parent = left.transform;
                     divObjects[1].transform.parent = right.transform;
-                    yield return null;
                 }
                 else
                 {
