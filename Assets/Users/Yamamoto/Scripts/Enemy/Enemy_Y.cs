@@ -19,7 +19,6 @@ public class Enemy_Y : ObjectStateManagement_Y
     public float searchArea = 50f;
     private EnemyMoveController_Y enemyControllerScr;
 
-    private CriAtomSource Sound;
     private ADX_BGMAISAC aisacScr;
 
     // Start is called before the first frame update
@@ -31,7 +30,6 @@ public class Enemy_Y : ObjectStateManagement_Y
         navAgent = GetComponent<NavMeshAgent>();
         animator.SetBool("isWalk", true);
         enemyControllerScr = GameObject.Find("GameAI_Y").GetComponent<EnemyMoveController_Y>();
-        Sound = GetComponent<CriAtomSource>();
         aisacScr = GameObject.Find("BGMObject").GetComponent<ADX_BGMAISAC>();
     }
 
@@ -45,7 +43,6 @@ public class Enemy_Y : ObjectStateManagement_Y
             if (Vector3.Distance(player.transform.position, transform.position) <= searchArea)
             {
                 aisacScr.SetBattleBGM(gameObject);
-                //Sound.Play("FightAction");
 
                 if (Vector3.Distance(player.transform.position, transform.position) <= attackDistance)
                 {
@@ -68,7 +65,6 @@ public class Enemy_Y : ObjectStateManagement_Y
             else
             {
                 Wait();
-                //Sound.Play("NoFightAction");
             }
         }
         else StopMove();
