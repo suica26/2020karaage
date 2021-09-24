@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8829617880069505990}
   - component: {fileID: 2846035889084450275}
   - component: {fileID: -3395587561688704423}
+  - component: {fileID: -4702694254042714738}
   m_Layer: 0
   m_Name: GameAI_Y
   m_TagString: Untagged
@@ -83,3 +84,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyCanMove: 1
+--- !u!114 &-4702694254042714738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8829617880069505993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81ca0ee1c72bbb44288159501e7da853, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scene:
+    sceneAsset: {fileID: 102900000, guid: bd65cb761e0b5d843b2a3f12f295c81f, type: 3}
+    scenePath: Assets/GameScenes/01-02mov.unity
+  debug: 0

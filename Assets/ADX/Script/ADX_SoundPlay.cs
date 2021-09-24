@@ -13,7 +13,7 @@ public class ADX_SoundPlay : MonoBehaviour
     }
     void OnEnable()
     {
-        audio.Play();
+        audio?.Play();
     }
 
 }

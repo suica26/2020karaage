@@ -23,7 +23,6 @@ public class SaveManager_Y : MonoBehaviour
 
     private void Awake()
     {
-        Time.timeScale = 1f;
         if (instance == null)
         {
             instance = this;
