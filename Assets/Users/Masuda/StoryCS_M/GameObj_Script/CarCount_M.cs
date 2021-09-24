@@ -16,7 +16,7 @@ public class CarCount_M : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (m1m != null && m1m.six)
+        if (m1m != null && GetComponent<ObjectStateManagement_Y>().HP <= 0)
         {
             m1m.CarDestroy();
         }
