@@ -26,8 +26,6 @@ public class Mission1_M : Missions_M
     void Update()
     {
         Vector3 playerPos = player.transform.position;
-        Vector3 comPos = company.transform.position;
-        float dis = Vector3.Distance(playerPos, comPos);
         evoCount = scrParame.ep;
         evoNum = scrEvoChi.nowEvoNum;
 
@@ -123,10 +121,15 @@ public class Mission1_M : Missions_M
             tipsTimer += Time.deltaTime;
         }
 
-        if (dis <= 40 && final)
+        if (company != null)
         {
-            //破壊
-            FinalMission();
+            Vector3 comPos = company.transform.position;
+            float dis = Vector3.Distance(playerPos, comPos);
+            if (dis <= 40 && final)
+            {
+                //破壊
+                FinalMission();
+            }
         }
 
         if (tipsTimer >= 30 && !tip)

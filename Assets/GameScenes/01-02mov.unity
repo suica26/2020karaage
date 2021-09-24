@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -786,7 +786,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f154ff0ac54c142928b46e94a4ee0790, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableDebugPrintOnTerminal: 0
+  enableDebugPrintOnTerminal: 1
   enableForceCrashOnError: 0
   dontDestroyOnLoad: 1
 --- !u!4 &695229941
@@ -2677,6 +2677,7 @@ GameObject:
   - component: {fileID: 4868635450030955769}
   - component: {fileID: 4868635450030955775}
   - component: {fileID: 4868635450030955774}
+  - component: {fileID: 4868635450030955776}
   m_Layer: 0
   m_Name: movie
   m_TagString: Untagged
@@ -2835,5 +2836,22 @@ MonoBehaviour:
   misAnim: {fileID: 887682183}
   introStart: 21
   movie: {fileID: 4868635450030955769}
+  isIntro: 0
+  isBlast: 0
+  blasted: 0
+  blastCharge: 0
   videoTime: 0
+  sceneLoader: {fileID: 1851914076}
   isJapanese: 0
+--- !u!114 &4868635450030955776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4868635450030955768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94b335d9ae9c35941aa3014e7ccfad64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
