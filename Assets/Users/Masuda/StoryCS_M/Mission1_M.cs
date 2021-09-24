@@ -10,7 +10,7 @@ public class Mission1_M : Missions_M
     public bool hipStamp = false, evolution = false;
     public float timer2, timer3;
     public GameObject bossIcon;
-    public bool mobileMode;
+    public bool mobileMode;//いらない？
 
     public override void Start()
     {
