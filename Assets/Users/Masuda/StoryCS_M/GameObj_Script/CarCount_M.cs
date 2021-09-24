@@ -16,7 +16,7 @@ public class CarCount_M : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (m1m != null && m1m.five)
+        if (m1m != null && m1m.six)
         {
             m1m.CarDestroy();
         }
