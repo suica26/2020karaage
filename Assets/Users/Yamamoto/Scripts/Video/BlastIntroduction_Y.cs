@@ -17,6 +17,34 @@ public class BlastIntroduction_Y : MonoBehaviour
     private SaveManager_Y saveManager;
     public bool isJapanese;
     private CriAtomSource Sound;
+    private string[] introText = new string[6]
+    {
+        "おはようブラストを使ってみよう！",
+        "おはようブラストをチャージ！",
+        "マウスホイールを長押ししよう！",
+        "Let's use Morning Blast!",
+        "Charge Morning Blast!",
+        "Press Mouse wheel!",
+    };
+    private string[] blastText = new string[6]
+    {
+        "おはようブラストを使ってみよう！",
+        "おはようブラストを発射！",
+        "マウスホイールを離そう！",
+        "Let's use Morning Blast!",
+        "Play Morning Blast!",
+        "Release Mouse wheel!"
+    };
+    private string[] mobileText = new string[4]
+    {
+        "ブラストボタンを長押しよう！",
+        "ブラストボタンを離そう！",
+        "Press Blast Button!",
+        "Release Mouse Button!"
+    };
+
+    public bool isMoblie;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,19 +61,33 @@ public class BlastIntroduction_Y : MonoBehaviour
         else if (saveManager.GetLanguage() == "English") isJapanese = false;
 
         Sound = GetComponent<CriAtomSource>();
+
+        if (isMoblie)
+        {
+            introText[2] = mobileText[0];
+            introText[5] = mobileText[1];
+            blastText[2] = mobileText[2];
+            blastText[5] = mobileText[3];
+        }
+
+#if UNITY_IOS || UNITY_ANDROID
+        isMoblie = true;
+#endif
     }
 
     // Update is called once per frame
     void Update()
     {
         videoTime = movie.time;
+        bool pressBlast = Input.GetMouseButtonDown(2);
+        bool upBlast = Input.GetMouseButtonUp(2);
 
         if (!blasted)
         {
             if (movie.time >= introStart && !isIntro) Intro_Start();
             if (isIntro && !isBlast)
             {
-                if (Input.GetMouseButton(2))
+                if (pressBlast)
                 {
                     Sound.Play("MovieBlast1");
                     blastCharge += Time.deltaTime;
@@ -58,7 +100,7 @@ public class BlastIntroduction_Y : MonoBehaviour
                 if (blastCharge >= 3f) Intro_LetsBlast();
 
             }
-            if (isBlast && Input.GetMouseButtonUp(2))
+            if (isBlast && upBlast)
             {
                 movie.Play();
                 blasted = true;
@@ -75,18 +117,12 @@ public class BlastIntroduction_Y : MonoBehaviour
         movie.Pause();
         misAnim.Play();
 
-        if (isJapanese)
-        {
-            mis.text = "おはようブラストを使ってみよう！";
-            subMis.text = "おはようブラストをチャージ！";
-            exMis.text = "マウスホイールを長押ししよう！";
-        }
-        else
-        {
-            mis.text = "Let's use Morning Blast!";
-            subMis.text = "Charge Morning Blast!";
-            exMis.text = "Press Mouse wheel!";
-        }
+        var num = 0;
+        if (isJapanese) num = 0;
+        else num = 3;
+        mis.text = introText[num];
+        subMis.text = introText[num + 1];
+        exMis.text = introText[num + 2];
     }
 
     private void Intro_LetsBlast()
@@ -94,17 +130,11 @@ public class BlastIntroduction_Y : MonoBehaviour
         isBlast = true;
         misAnim.Play();
 
-        if (isJapanese)
-        {
-            mis.text = "おはようブラストを使ってみよう！";
-            subMis.text = "おはようブラストを発射！";
-            exMis.text = "マウスホイールを離そう！";
-        }
-        else
-        {
-            mis.text = "Let's use Morning Blast!";
-            subMis.text = "Play Morning Blast!";
-            exMis.text = "Release Mouse wheel!";
-        }
+        var num = 0;
+        if (isJapanese) num = 0;
+        else num = 3;
+        mis.text = blastText[num];
+        subMis.text = blastText[num + 1];
+        exMis.text = blastText[num + 2];
     }
 }
