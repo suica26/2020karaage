@@ -5,7 +5,7 @@ using UnityEngine;
 public class ObjectStateManagement_Y : MonoBehaviour
 {
     [Range(0, 4), SerializeField] protected int tier_WalkAttack;
-    [SerializeField] private GameObject divideObject;
+    [SerializeField] protected GameObject divideObject;
     protected string attackSoundName, contactSoundName, ExplosionSoundName, CutterContactSoundName;
     protected int MaxHP;
     public int HP;                  //Inspector上から設定できます。
@@ -347,7 +347,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
     }
 
     //振動コルーチン
-    private IEnumerator DoShake(float duration, float magnitude)
+    protected IEnumerator DoShake(float duration, float magnitude)
     {
         var pos = transform.localPosition;
 
@@ -425,7 +425,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
     }
 
     //差し替えする場合
-    private void ChangeObject()
+    protected void ChangeObject()
     {
         var genPos = transform.position;
         var dividedObject = Instantiate(divideObject, genPos, transform.rotation);

@@ -39,41 +39,44 @@ public class Enemy_Y : ObjectStateManagement_Y
     //基本挙動を記述
     protected virtual void Update()
     {
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Death") && enemyControllerScr.enemyCanMove)
+        if (livingFlg)
         {
-            routineTimer += Time.deltaTime;
-
-            if (Vector3.Distance(player.transform.position, transform.position) <= searchArea)
+            if (enemyControllerScr.enemyCanMove)
             {
-                aisacScr.SetBattleBGM(gameObject);
+                routineTimer += Time.deltaTime;
 
-                if (Vector3.Distance(player.transform.position, transform.position) <= attackDistance)
+                if (Vector3.Distance(player.transform.position, transform.position) <= searchArea)
                 {
-                    if (routineTimer > attackInterval)
+                    aisacScr.SetBattleBGM(gameObject);
+
+                    if (Vector3.Distance(player.transform.position, transform.position) <= attackDistance)
                     {
-                        routineTimer = 0f;
-                        Attack();
+                        if (routineTimer > attackInterval)
+                        {
+                            routineTimer = 0f;
+                            Attack();
+                        }
+                        else
+                        {
+                            Wait();
+                        }
                     }
                     else
                     {
-                        Wait();
+                        if (!animator.GetCurrentAnimatorStateInfo(0).IsTag("StopMove"))
+                        {
+                            navAgent.SetDestination(player.transform.position);
+                            Walk();
+                        }
                     }
                 }
                 else
                 {
-                    if (!animator.GetCurrentAnimatorStateInfo(0).IsTag("StopMove"))
-                    {
-                        navAgent.SetDestination(player.transform.position);
-                        Walk();
-                    }
+                    Patroll();
                 }
             }
-            else
-            {
-                Patroll();
-            }
+            else StopMove();
         }
-        else StopMove();
     }
 
     protected void StopMove()

@@ -83,8 +83,8 @@ public class BlastIntroduction_Y : MonoBehaviour
     void Update()
     {
         videoTime = movie.time;
-        bool pressBlast = Input.GetMouseButtonDown(0) || isPush;
-        bool upBlast = Input.GetMouseButtonUp(0) || !isPush;
+        bool pressBlast = Input.GetMouseButton(2) || isPush;
+        bool upBlast = !Input.GetMouseButton(2) && !isPush;
 
         if (!blasted)
         {
