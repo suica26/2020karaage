@@ -38,6 +38,7 @@ public class Parameters_R : MonoBehaviour
     [SerializeField] public int evo1, evo2, evo3, startNum;
     public string saveStage;
     [SerializeField] public Missions_M scrMis;
+    public DamagePanel_M damaPanel;
     public float currentPer;
     public Color color1, color2, color3, color4;
 
@@ -102,7 +103,8 @@ public class Parameters_R : MonoBehaviour
             ep += addEP;
             plusTime += 1;
             epSlider.value += addEP;
-            HPManager(-1);
+            hp += 1;
+            mainSlider.value += 1;
 
             if (ep == evo1)
             {
@@ -149,6 +151,7 @@ public class Parameters_R : MonoBehaviour
         if (!freeze)
         {
             TimeManager(-damTime);
+            damaPanel.DamageEffect();
             if(!(addHP < 0 && hp == maxHP))
             {
                 hp -= addHP;
