@@ -12,13 +12,14 @@ GameObject:
   - component: {fileID: 792910836217362498}
   - component: {fileID: 5978211442871856095}
   - component: {fileID: 3845646780595559915}
+  - component: {fileID: 7034111685342173289}
   - component: {fileID: 1563464832526392548}
   - component: {fileID: 4337799488308797223}
   - component: {fileID: 9051830398936968817}
   - component: {fileID: 4207816486901302429}
-  - component: {fileID: 7034111685342173289}
   - component: {fileID: 926076663001237871}
   - component: {fileID: 8118477673885723510}
+  - component: {fileID: 4190867065148302373}
   m_Layer: 0
   m_Name: gasStation
   m_TagString: Untagged
@@ -96,7 +97,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tier_WalkAttack: 4
-  divideObject: {fileID: 0}
+  divideObject: {fileID: 919132149155446097, guid: ec810a86bbe932c4e98941c3b9ffc5e7,
+    type: 3}
   HP: 250
   kickMag: 1
   blastMag: 1
@@ -115,6 +117,29 @@ MonoBehaviour:
   notDamage: 0
   magnitude: 0.1
   duration: 0.25
+--- !u!114 &7034111685342173289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2637636568380918346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: GasStation00
+  _cueSheet: Explosion
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!65 &1563464832526392548
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -167,29 +192,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 115.9, y: 738.4, z: 450.8}
   m_Center: {x: 432.9, y: 404.11, z: -547.6}
---- !u!114 &7034111685342173289
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2637636568380918346}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playOnStart: 0
-  _cueName: GasStation00
-  _cueSheet: Explosion
-  _regionOnStart: {fileID: 0}
-  _listenerOnStart: {fileID: 0}
-  _use3dPositioning: 1
-  _loop: 0
-  _volume: 1
-  _pitch: 0
-  _androidUseLowLatencyVoicePool: 0
-  need_to_player_update_all: 1
 --- !u!65 &926076663001237871
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -216,6 +218,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 90, y: 1346, z: 90}
   m_Center: {x: -585, y: 700, z: 734}
+--- !u!65 &4190867065148302373
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2637636568380918346}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1127.756, y: 649.30475, z: 560.2917}
+  m_Center: {x: 417.74307, y: 335.1922, z: 602.2154}
 --- !u!1 &3380244574649682307
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,7 +321,6 @@ GameObject:
   - component: {fileID: 8743743896362966855}
   - component: {fileID: 2327693116238750095}
   - component: {fileID: 8570137774540543802}
-  - component: {fileID: 5884830229821163556}
   m_Layer: 0
   m_Name: Building
   m_TagString: Untagged
@@ -375,19 +389,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &5884830229821163556
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6791377946007255596}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1124.2397, y: 625.67725, z: 563.7258}
-  m_Center: {x: 419.00192, y: 338.5902, z: 610.36694}
 --- !u!1 &7562739171107572095
 GameObject:
   m_ObjectHideFlags: 0
