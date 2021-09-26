@@ -8,6 +8,6 @@ public class Stage2BossBuilding_Y : ObjectStateManagement_Y
     {
         base.Death();
         var saveManager = GameObject.Find("SaveManager").GetComponent<SaveManager_Y>();
-        saveManager.SaveClearFlg(1);
+        saveManager.SaveClearFlg(2);
     }
 }

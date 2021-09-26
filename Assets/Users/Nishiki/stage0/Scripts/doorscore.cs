@@ -58,7 +58,8 @@ public class doorscore : MonoBehaviour
         {
             hit = true;
             damage++;
-            Instantiate(ironeffect, new Vector3(-6, 1, -15), Quaternion.identity);
+            if (ironeffect != null)
+                Instantiate(ironeffect, new Vector3(-6, 1, -15), Quaternion.identity);
             criAtomSource.Play("Track_noise00");
         }
     }
