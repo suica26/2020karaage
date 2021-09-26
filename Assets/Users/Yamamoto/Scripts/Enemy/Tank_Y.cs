@@ -15,4 +15,10 @@ public class Tank_Y : Enemy_Y
         bullet.GetComponent<BulletDamage>().damage = attackDamage;
         Destroy(bullet, 5f);
     }
+
+    protected override void Death()
+    {
+        base.Death();
+        Substitution();
+    }
 }
