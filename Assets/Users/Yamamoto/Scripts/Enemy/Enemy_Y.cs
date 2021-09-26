@@ -157,6 +157,7 @@ public class Enemy_Y : ObjectStateManagement_Y
 
         //アニメーション以外の要素を停止
         StopMove();
+        navAgent.enabled = false;
 
         Destroy(gameObject, 1.5f);
         animator.SetTrigger("Death");

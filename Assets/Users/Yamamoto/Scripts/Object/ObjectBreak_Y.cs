@@ -29,7 +29,7 @@ public class ObjectBreak_Y : MonoBehaviour
         criAtomSource = GetComponent<CriAtomSource>();
         //破壊済み状態にタグとレイヤーを変更
         tag = "Broken";
-        this.gameObject.layer = LayerMask.NameToLayer("BrokenObject");
+        gameObject.layer = LayerMask.NameToLayer("BrokenObject");
         //分割済みオブジェクトなのかを判定
         divided = isDivided;
 
@@ -41,7 +41,6 @@ public class ObjectBreak_Y : MonoBehaviour
                 var rb = child.gameObject.AddComponent<Rigidbody>();
                 rb.isKinematic = true;
                 myParts.Add(child.gameObject);
-                if (child.gameObject.GetComponent<Collider>() == null) child.gameObject.AddComponent<BoxCollider>();
             }
         }
     }

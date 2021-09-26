@@ -37,10 +37,10 @@ public class BlastIntroduction_Y : MonoBehaviour
     };
     private string[] mobileText = new string[4]
     {
-        "ブラストボタンを長押しよう！",
-        "Press Blast Button!",
-        "ブラストボタンを離そう！",
-        "Release Mouse Button!"
+        "ボタンを長押しよう！",
+        "Press The Button!",
+        "ボタンを離そう！",
+        "Release The Button!"
     };
 
     public bool isMoblie;
@@ -74,8 +74,6 @@ public class BlastIntroduction_Y : MonoBehaviour
             introText[5] = mobileText[1];
             blastText[2] = mobileText[2];
             blastText[5] = mobileText[3];
-
-            blastButton.SetActive(true);
         }
     }
 
@@ -110,6 +108,8 @@ public class BlastIntroduction_Y : MonoBehaviour
                 blasted = true;
                 topObject.SetActive(false);
                 Sound.Play("MovieBlast2");
+                if (isMoblie)
+                    blastButton.GetComponent<Animator>().SetTrigger("Ezout");
             }
         }
     }
@@ -120,6 +120,11 @@ public class BlastIntroduction_Y : MonoBehaviour
         isIntro = true;
         movie.Pause();
         misAnim.Play();
+        if (isMoblie)
+        {
+            blastButton.SetActive(true);
+            blastButton.GetComponent<Animator>().SetTrigger("Blast");
+        }
 
         var num = 0;
         if (isJapanese) num = 0;

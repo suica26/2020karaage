@@ -7486,8 +7486,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volSlider: {fileID: 2130993962}
-  cas: {fileID: 1525311180}
-  soundVolumeController: {fileID: 0}
 --- !u!114 &1444232473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8675,6 +8673,7 @@ MonoBehaviour:
   company: {fileID: 0}
   next: {fileID: 1714961302}
   pause: {fileID: 1781850763}
+  stageClear: 0
 --- !u!114 &1594671338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8703,6 +8702,9 @@ MonoBehaviour:
   pausePanel: {fileID: 1781850763}
   optionPanel: {fileID: 1527331512}
   how: {fileID: 1804162010}
+  gameSet: 0
+  para: {fileID: 0}
+  s1Cle: {fileID: 0}
 --- !u!114 &1594671340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8740,6 +8742,7 @@ MonoBehaviour:
   startNum: 0
   saveStage: 
   scrMis: {fileID: 0}
+  damaPanel: {fileID: 0}
   currentPer: 0
   color1: {r: 0, g: 0, b: 0, a: 0}
   color2: {r: 0, g: 0, b: 0, a: 0}
@@ -12689,6 +12692,75 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7497ecfbf2b02b84ca7920051a62b438, type: 3}
+--- !u!1001 &7410720648315720480
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5938249494383259272, guid: f5faa7e9ed0f8bb4684657d16bd2a711,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938249494383259272, guid: f5faa7e9ed0f8bb4684657d16bd2a711,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938249494383259272, guid: f5faa7e9ed0f8bb4684657d16bd2a711,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938249494383259272, guid: f5faa7e9ed0f8bb4684657d16bd2a711,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938249494383259272, guid: f5faa7e9ed0f8bb4684657d16bd2a711,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938249494383259272, guid: f5faa7e9ed0f8bb4684657d16bd2a711,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938249494383259272, guid: f5faa7e9ed0f8bb4684657d16bd2a711,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938249494383259272, guid: f5faa7e9ed0f8bb4684657d16bd2a711,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938249494383259272, guid: f5faa7e9ed0f8bb4684657d16bd2a711,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938249494383259272, guid: f5faa7e9ed0f8bb4684657d16bd2a711,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938249494383259272, guid: f5faa7e9ed0f8bb4684657d16bd2a711,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6423037826826974258, guid: f5faa7e9ed0f8bb4684657d16bd2a711,
+        type: 3}
+      propertyPath: m_Name
+      value: Pri_cells_gasStation
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f5faa7e9ed0f8bb4684657d16bd2a711, type: 3}
 --- !u!1001 &7532972919737518346
 PrefabInstance:
   m_ObjectHideFlags: 0
