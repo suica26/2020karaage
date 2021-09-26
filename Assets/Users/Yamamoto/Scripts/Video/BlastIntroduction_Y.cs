@@ -38,16 +38,22 @@ public class BlastIntroduction_Y : MonoBehaviour
     private string[] mobileText = new string[4]
     {
         "ブラストボタンを長押しよう！",
-        "ブラストボタンを離そう！",
         "Press Blast Button!",
+        "ブラストボタンを離そう！",
         "Release Mouse Button!"
     };
 
     public bool isMoblie;
+    private bool isPush;
+    public GameObject blastButton;
 
     // Start is called before the first frame update
     void Start()
     {
+#if UNITY_IOS || UNITY_ANDROID
+        isMoblie = true;
+#endif
+
         mis = mission.GetComponent<Text>();
         subMis = subMission.GetComponent<Text>();
         exMis = exMission.GetComponent<Text>();
@@ -68,19 +74,17 @@ public class BlastIntroduction_Y : MonoBehaviour
             introText[5] = mobileText[1];
             blastText[2] = mobileText[2];
             blastText[5] = mobileText[3];
-        }
 
-#if UNITY_IOS || UNITY_ANDROID
-        isMoblie = true;
-#endif
+            blastButton.SetActive(true);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         videoTime = movie.time;
-        bool pressBlast = Input.GetMouseButtonDown(2);
-        bool upBlast = Input.GetMouseButtonUp(2);
+        bool pressBlast = Input.GetMouseButton(2) || isPush;
+        bool upBlast = !Input.GetMouseButton(2) && !isPush;
 
         if (!blasted)
         {
@@ -120,6 +124,7 @@ public class BlastIntroduction_Y : MonoBehaviour
         var num = 0;
         if (isJapanese) num = 0;
         else num = 3;
+
         mis.text = introText[num];
         subMis.text = introText[num + 1];
         exMis.text = introText[num + 2];
@@ -133,8 +138,19 @@ public class BlastIntroduction_Y : MonoBehaviour
         var num = 0;
         if (isJapanese) num = 0;
         else num = 3;
+
         mis.text = blastText[num];
         subMis.text = blastText[num + 1];
         exMis.text = blastText[num + 2];
+    }
+
+    public void PushButton()
+    {
+        isPush = true;
+    }
+
+    public void ReleaseButton()
+    {
+        isPush = false;
     }
 }
