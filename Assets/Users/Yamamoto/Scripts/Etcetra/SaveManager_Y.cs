@@ -96,7 +96,7 @@ public class SaveManager_Y : MonoBehaviour
     }
     public void SaveStageFlg(int stageNum)
     {
-        sd.stageFlg[stageNum] = true;
+        sd.stageFlg[stageNum - 1] = true;
         Save();
     }
 
@@ -107,7 +107,7 @@ public class SaveManager_Y : MonoBehaviour
 
     public void SaveClearFlg(int stageNum)
     {
-        sd.stageClearFlg[stageNum] = true;
+        sd.stageClearFlg[stageNum - 1] = true;
         Save();
     }
 

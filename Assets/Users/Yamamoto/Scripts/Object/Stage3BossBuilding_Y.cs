@@ -91,7 +91,7 @@ public class Stage3BossBuilding_Y : ObjectStateManagement_Y
             もし敵の射出に関して処理を追加したい場合はここに作成した関数を記述してください
         */
         Sound.Play("Warning");
-        if(aisacScr.St3Fase == false)aisacScr.St3Fase = true;
+        if (aisacScr.St3Fase == false) aisacScr.St3Fase = true;
 
         StartCoroutine(LookLauncher(phaseNum));
         StartCoroutine(LaunchEnemys(phaseNum));
@@ -177,6 +177,6 @@ public class Stage3BossBuilding_Y : ObjectStateManagement_Y
     {
         base.Death();
         var saveManager = GameObject.Find("SaveManager").GetComponent<SaveManager_Y>();
-        saveManager.SaveClearFlg(2);
+        saveManager.SaveClearFlg(3);
     }
 }
