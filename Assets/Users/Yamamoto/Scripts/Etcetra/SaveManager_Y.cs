@@ -22,6 +22,7 @@ public class SaveManager_Y : MonoBehaviour
     private bool isSaving = false;
     private bool isLoading = false;
     static private SaveManager_Y instance;
+    private bool isMobile;
 
     private void Awake()
     {
@@ -81,7 +82,7 @@ public class SaveManager_Y : MonoBehaviour
             sd = new SaveData();
             sd.stageFlg = new bool[3] { false, false, false };
             sd.stageClearFlg = new bool[3] { false, false, false };
-            sd.soundVolume = 1f;
+            sd.soundVolume = 0.7f;
             sd.language = "Japanese";
             sd.quality = 2;
             sd.mouseSensitive = 1f;

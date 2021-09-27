@@ -427,8 +427,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
     //差し替えする場合
     protected void ChangeObject()
     {
-        var genPos = transform.position;
-        var dividedObject = Instantiate(divideObject, genPos, transform.rotation);
+        var dividedObject = Instantiate(divideObject, transform.position, transform.rotation);
         var breakScr = dividedObject.AddComponent<ObjectBreak_Y>();
         breakScr.InitSetting(this, true);
         breakScr.BreakAction();

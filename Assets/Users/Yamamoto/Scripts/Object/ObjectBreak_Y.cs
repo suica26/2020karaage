@@ -38,9 +38,10 @@ public class ObjectBreak_Y : MonoBehaviour
             //自分の子要素をリストに格納
             foreach (Transform child in gameObject.transform)
             {
-                var rb = child.gameObject.AddComponent<Rigidbody>();
+                var rb = GetComponent<Rigidbody>();
                 rb.isKinematic = true;
                 myParts.Add(child.gameObject);
+                Destroy(gameObject, objScr.deleteTime);
             }
         }
     }

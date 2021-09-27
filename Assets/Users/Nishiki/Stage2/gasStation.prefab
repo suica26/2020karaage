@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3445558105350115568}
   - component: {fileID: 792910836217362498}
   - component: {fileID: 5978211442871856095}
-  - component: {fileID: 3845646780595559915}
+  - component: {fileID: 6214014278669161515}
   - component: {fileID: 7034111685342173289}
   - component: {fileID: 1563464832526392548}
   - component: {fileID: 4337799488308797223}
@@ -84,7 +84,7 @@ MonoBehaviour:
   makeHydrant: 0
   player: {fileID: 0}
   hyd: 0
---- !u!114 &3845646780595559915
+--- !u!114 &6214014278669161515
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,11 +93,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2637636568380918346}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8075661621763774d8231cabafe12bb8, type: 3}
+  m_Script: {fileID: 11500000, guid: cdb19c1e826822b418d67185835ef078, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tier_WalkAttack: 4
-  divideObject: {fileID: 919132149155446097, guid: ec810a86bbe932c4e98941c3b9ffc5e7,
+  divideObject: {fileID: 6423037826826974258, guid: f5faa7e9ed0f8bb4684657d16bd2a711,
     type: 3}
   HP: 250
   kickMag: 1
@@ -109,14 +109,17 @@ MonoBehaviour:
   objectID: 10
   breakEffect: {fileID: 0}
   deleteTime: 3
-  torque: 5
-  power: 5
+  torque: 20
+  power: 50
   groundContactSoundName: 
   shardDamage_nonDiv: 0
   specialObjectFlg: 0
   notDamage: 0
   magnitude: 0.1
   duration: 0.25
+  createExplodeTiming: 1
+  explosionSphere: {fileID: 5818495932642304110, guid: a013e85b03203e44593037dfd1ede75c,
+    type: 3}
 --- !u!114 &7034111685342173289
 MonoBehaviour:
   m_ObjectHideFlags: 0
