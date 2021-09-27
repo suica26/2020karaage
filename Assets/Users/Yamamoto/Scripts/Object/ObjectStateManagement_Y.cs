@@ -111,6 +111,14 @@ public class ObjectStateManagement_Y : MonoBehaviour
                 case "fallAttackCircle(Clone)": Damage(fallAttackMag * scrCharaMove.damageBoost, 4); break;
             }
         }
+
+        //ガス系オブジェクトの爆発がヒットしたとき
+        if (other.gameObject.name == "ExplosionSphere(Clone)" && !specialObjectFlg && livingFlg)
+        {
+            objectID = 10;
+            SetSkillID(0);
+            Death();
+        }
     }
 
     //踏み潰し攻撃などなど
@@ -120,16 +128,14 @@ public class ObjectStateManagement_Y : MonoBehaviour
         bool trampling = collision.gameObject.tag == "Player" && scrEvo.EvolutionNum >= tier_WalkAttack;
         //破砕車がぶつかったとき
         bool carHit = collision.gameObject.name.Contains("car") && collision.gameObject.GetComponentInParent<Rigidbody>().velocity.magnitude > 5f;
-        //ガスタンクがぶつかったとき
-        bool gasTankHit = collision.gameObject.name.Contains("mainTank") && collision.gameObject.GetComponentInParent<Rigidbody>().velocity.magnitude > 5f;
 
         //破砕車、ガスタンクが建物にぶつかったときキューを入れ替える
-        if ((carHit || gasTankHit) && objectID == 0 && !specialObjectFlg)
+        if (carHit && objectID == 0 && !specialObjectFlg)
         {
             objectID = 10;
         }
         //即死条件と生存フラグがどちらも成り立つとき、即死発動
-        if ((trampling || carHit || gasTankHit) && livingFlg && !specialObjectFlg)
+        if ((trampling || carHit) && livingFlg && !specialObjectFlg)
         {
             SetSkillID(0);
             Death();

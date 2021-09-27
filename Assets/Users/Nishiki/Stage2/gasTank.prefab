@@ -431,6 +431,7 @@ MonoBehaviour:
   cutterMag: 1
   fallAttackMag: 1
   breakScore: 0
+  criAtomSource: {fileID: 0}
   objectID: 0
   breakEffect: {fileID: 0}
   deleteTime: 3
@@ -794,6 +795,7 @@ MonoBehaviour:
   cutterMag: 1
   fallAttackMag: 1
   breakScore: 0
+  criAtomSource: {fileID: 0}
   objectID: 0
   breakEffect: {fileID: 0}
   deleteTime: 3
@@ -920,6 +922,7 @@ MonoBehaviour:
   cutterMag: 1
   fallAttackMag: 1
   breakScore: 0
+  criAtomSource: {fileID: 0}
   objectID: 0
   breakEffect: {fileID: 0}
   deleteTime: 3
@@ -1142,7 +1145,6 @@ MonoBehaviour:
   player: {fileID: 0}
   pos: {x: 0, y: 0, z: 0}
   prePos: {x: 0, y: 0, z: 0}
-  comp: 0
   achieve: {fileID: 0}
 --- !u!114 &4109913316854149079
 MonoBehaviour:
@@ -1164,6 +1166,7 @@ MonoBehaviour:
   cutterMag: 1
   fallAttackMag: 1
   breakScore: 0
+  criAtomSource: {fileID: 0}
   objectID: 6
   breakEffect: {fileID: 0}
   deleteTime: 3
@@ -1622,6 +1625,7 @@ MonoBehaviour:
   cutterMag: 1
   fallAttackMag: 1
   breakScore: 0
+  criAtomSource: {fileID: 0}
   objectID: 0
   breakEffect: {fileID: 0}
   deleteTime: 3
@@ -1926,6 +1930,7 @@ MonoBehaviour:
   cutterMag: 1
   fallAttackMag: 1
   breakScore: 0
+  criAtomSource: {fileID: 0}
   objectID: 0
   breakEffect: {fileID: 0}
   deleteTime: 3
@@ -2131,6 +2136,7 @@ MonoBehaviour:
   cutterMag: 1
   fallAttackMag: 1
   breakScore: 0
+  criAtomSource: {fileID: 0}
   objectID: 0
   breakEffect: {fileID: 0}
   deleteTime: 3
@@ -2336,6 +2342,7 @@ MonoBehaviour:
   cutterMag: 1
   fallAttackMag: 1
   breakScore: 0
+  criAtomSource: {fileID: 0}
   objectID: 0
   breakEffect: {fileID: 0}
   deleteTime: 3
@@ -2393,6 +2400,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onTheBuilding: 0
   enemyBill: {fileID: 0}
+  explosionSphere: {fileID: 2707484399983983890, guid: 10abdfb8c1d834b4c847203d04192cf7,
+    type: 3}
+  startExplodeTiming: 2
+  expDeleteTiming: 0.8
+  expScale: 50
 --- !u!135 &3041782271938283974
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -4,40 +4,16 @@ using UnityEngine;
 
 public class GasStation_Y : ObjectStateManagement_Y
 {
-    public float createExplodeTiming;
     public GameObject explosionSphere;
+    public float startExplodeTiming;
+    public float expDeleteTiming;
+    public float expScale;
     protected override void Death()
     {
         if (!ChangeToDeath()) return;
 
-        if (GetComponent<Car_R>() != null)
-        {
-            Destroy(GetComponent<Animator>());
-            Destroy(GetComponent<Car_R>());
-        }
-
         DeathCount();
         Destroy(gameObject, deleteTime);
-        gameObject.SetActive(false);
-
-        //差し替え処理
-        var dividedObject = Instantiate(divideObject, transform.position, transform.rotation);
-
-        //破壊オブジェクト設定
-        tag = "Broken";
-        gameObject.layer = LayerMask.NameToLayer("BrokenObject");
-
-        //破壊処理
-        foreach (Transform child in gameObject.transform)
-        {
-            GasStationBreak(child.gameObject);
-            Destroy(child.gameObject, deleteTime);
-        }
-        if (breakEffect != null)
-        {
-            var effect = Instantiate(breakEffect, transform.position, transform.rotation);
-            Destroy(effect, 1f);
-        }
         StartCoroutine(InstantiateExplode(transform.position));
     }
 
@@ -63,7 +39,33 @@ public class GasStation_Y : ObjectStateManagement_Y
 
     private IEnumerator InstantiateExplode(Vector3 genPos)
     {
-        yield return new WaitForSeconds(createExplodeTiming);
-        Instantiate(explosionSphere, genPos, Quaternion.identity);
+        var sphere = Instantiate(explosionSphere, genPos, Quaternion.identity);
+        var expScr = sphere.GetComponent<ExplosionSphere_Y>();
+        expScr.targetScale = expScale;
+        expScr.deleteTime = expDeleteTiming;
+        expScr.SetScalingFlg(startExplodeTiming);
+
+        yield return new WaitForSeconds(startExplodeTiming);
+
+        gameObject.SetActive(false);
+
+        //差し替え処理
+        var dividedObject = Instantiate(divideObject, transform.position, transform.rotation);
+        Destroy(dividedObject, deleteTime);
+
+        //破壊オブジェクト設定
+        tag = "Broken";
+        gameObject.layer = LayerMask.NameToLayer("BrokenObject");
+
+        //破壊処理
+        foreach (Transform child in dividedObject.transform)
+        {
+            GasStationBreak(child.gameObject);
+        }
+        if (breakEffect != null)
+        {
+            var effect = Instantiate(breakEffect, transform.position, transform.rotation);
+            Destroy(effect, 1f);
+        }
     }
 }
