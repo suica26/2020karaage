@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 7849391546080688605}
   - component: {fileID: 5407225888981323031}
   - component: {fileID: 5519965691047223306}
-  - component: {fileID: 2489846694108311488}
   - component: {fileID: 5819025525724764742}
   - component: {fileID: 6354790628045462273}
   - component: {fileID: 7790593432968485852}
   - component: {fileID: 3543462126048002323}
+  - component: {fileID: 8745593168902090893}
   m_Layer: 2
   m_Name: tree
   m_TagString: Small
@@ -98,102 +98,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 150, y: 3115.4368, z: 150}
   m_Center: {x: 0, y: 1087.9723, z: 6.47464}
---- !u!82 &2489846694108311488
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5767614945766714562}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!114 &5819025525724764742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,7 +118,8 @@ MonoBehaviour:
   cutterMag: 1.5
   fallAttackMag: 1
   breakScore: 500
-  objectID: 0
+  criAtomSource: {fileID: 0}
+  objectID: 7
   breakEffect: {fileID: 0}
   deleteTime: 3
   torque: 100
@@ -223,6 +128,8 @@ MonoBehaviour:
   shardDamage_nonDiv: 300
   specialObjectFlg: 0
   notDamage: 0
+  magnitude: 0.1
+  duration: 0.25
 --- !u!114 &6354790628045462273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 400540f14b6981848a8da03f843b8495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objFood: {fileID: 6224625970994948174, guid: 432283639b2517e4cb2744030344a38c, type: 3}
+  objFood: {fileID: 5882868508514077054, guid: 52bb1160a73b4b848953812cb2383dfc, type: 3}
   minFood: 0
   maxFood: 0
 --- !u!54 &7790593432968485852
@@ -277,3 +184,16 @@ MonoBehaviour:
   _pitch: 0
   _androidUseLowLatencyVoicePool: 0
   need_to_player_update_all: 1
+--- !u!114 &8745593168902090893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5767614945766714562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4302c2447a59484db44a8bc0d23ddd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 20

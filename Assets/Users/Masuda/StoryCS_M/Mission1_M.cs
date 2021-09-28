@@ -5,11 +5,12 @@ using UnityEngine.UI;
 
 public class Mission1_M : Missions_M
 {
-    public GameObject hip,shop,evoPanel;
-    public int manhole, hydrant, evoCount;
+    public GameObject hip, shop, evoPanel;
+    public int manhole, hydrant, car, shard, evoCount;
     public bool hipStamp = false, evolution = false;
-    public Parameters_R scrParame;
-    public float timer2;
+    public float timer2, timer3;
+    public GameObject bossIcon;
+    public bool mobileMode;
 
     public override void Start()
     {
@@ -19,92 +20,52 @@ public class Mission1_M : Missions_M
         misBox.SetActive(false);
         GameObject findCanvas = GameObject.Find("Canvas");
         scrParame = findCanvas.GetComponent<Parameters_R>();
+        first = true;
     }
 
     void Update()
     {
         Vector3 playerPos = player.transform.position;
-        Vector3 comPos = company.transform.position;
-        float dis = Vector3.Distance(playerPos, comPos);
         evoCount = scrParame.ep;
+        evoNum = scrEvoChi.nowEvoNum;
 
         if (!shop && first)
         {
-            misBox.SetActive(true);
-            missionSlide.Play();
-            mission.text = splitText[0];
-            submis.text = splitText[1];
-            exmis.text = splitText[2];
-            count.text = "1";
-            first = false;
-            second = true;
-            per.text = "0%";
+            //建物にあいさつ
+            FirstMission();
         }
 
         if (bigNum >= bigBorder4 && second == true)
         {
-            missionSlide.Play();
-            mission.text = splitText[3];
-            submis.text = splitText[4];
-            exmis.text = splitText[5];
-            count.text = "2";
-            second = false;
-            third = true;
-            achieve = 0;
-            per.text = achieve + "/ 3";
+            //小物シュート
+            SecondMission();
         }
         else if (bigNum >= bigBorder3 && smallNum >= smallBorder1 && second == true)
         {
-            missionSlide.Play();
-            mission.text = splitText[3];
-            submis.text = splitText[4];
-            exmis.text = splitText[5];
-            count.text = "2";
-            second = false;
-            third = true;
-            achieve = 0;
-            per.text = achieve + "/ 3";
+            SecondMission();
         }
         else if (bigNum >= bigBorder2 && smallNum >= smallBorder2 && second == true)
         {
-            missionSlide.Play();
-            mission.text = splitText[3];
-            submis.text = splitText[4];
-            exmis.text = splitText[5];
-            count.text = "2";
-            second = false;
-            third = true;
-            achieve = 0;
-            per.text = achieve + "/ 3";
+            SecondMission();
         }
         else if (bigNum >= bigBorder1 && smallNum >= smallBorder3 && second == true)
         {
-            missionSlide.Play();
-            mission.text = splitText[3];
-            submis.text = splitText[4];
-            exmis.text = splitText[5];
-            count.text = "2";
-            second = false;
-            third = true;
-            achieve = 0;
-            per.text = achieve + "/ 3";
+            SecondMission();
         }
 
-        if (hydrant >= 3 && third)
+        if (shard >= 3 && third)
         {
-            third = false;
-            fourth = true;
-            missionSlide.Play();
-            mission.text = splitText[6];
-            submis.text = splitText[7];
-            exmis.text = splitText[8];
-            count.text = "3";
-            achieve = 0;
-            per.text = achieve + "/ 3";
-            hipStamp = true;
+            //消火栓
+            ThirdMission();
         }
 
-        if (fourth && hipStamp)
+        if (hydrant >= 3 && fourth)
+        {
+            //マンホール
+            FourthMission();
+        }
+
+        if (five && !hipStamp)
         {
             timer += Time.unscaledDeltaTime / 2;
         }
@@ -113,32 +74,46 @@ public class Mission1_M : Missions_M
         {
             Time.timeScale = 0f;
             hip.SetActive(true);
-            //Cursor.visible = true;
+            Cursor.visible = true;
         }
 
-        if (timer >= 5.0f)
+        if (hipStamp)
         {
-            Time.timeScale = 1f;
-            hip.SetActive(false);
-            hipStamp = false;
-        }
-
-        if (!hipStamp)
-        {
-            //Cursor.visible = false;
             timer = 0;
         }
 
-        if (manhole >= 3 && fourth)
+        if (manhole >= 3 && five)
         {
-            fourth = false;
-            final = true;
-            missionSlide.Play();
-            mission.text = splitText[9];
-            submis.text = splitText[10];
-            exmis.text = splitText[11];
-            count.text = "4";
-            per.text = "";
+            //車
+            FiveMission();
+        }
+
+        if (car >= 3 && six)
+        {
+            if (evoNum >= 1)
+            {
+                //アジト探し
+                SevenMission();
+            }
+
+            else
+            {
+                //進化
+                SixMission();
+            }
+        }
+
+        if (evoNum >= 1 && seven)
+        {
+            timer3 += Time.deltaTime;
+            bossIcon.SetActive(true);
+            //一時的に、アジトを探すミッションが発動した時点でミニマップアイコンが見えるように挙動修正 山本
+        }
+
+        if (timer3 >= 1.0f && seven)
+        {
+            //アジト探し
+            SevenMission();
         }
 
         if (final)
@@ -146,43 +121,47 @@ public class Mission1_M : Missions_M
             tipsTimer += Time.deltaTime;
         }
 
-        if (dis <= 30 && final)
+        if (company != null)
         {
-            //山本加筆
-            eneBillScr.changeDamageFlg();
-
-            missionSlide.Play();
-            mission.text = splitText[12];
-            submis.text = splitText[13];
-            exmis.text = splitText[14];
-            count.text = "5";
-            final = false;
+            Vector3 comPos = company.transform.position;
+            float dis = Vector3.Distance(playerPos, comPos);
+            if (dis <= 40 && final)
+            {
+                //破壊
+                FinalMission();
+            }
         }
 
-        if (tipsTimer >= 180 && !tip)
+        if (tipsTimer >= 30 && !tip)
         {
-            tips.text = "アジトは金色に輝いているみたい...？？";
+            if (playLanguage == "English")
+            {
+                tips.text = "The hideout is shining golden";
+            }
+            else if (playLanguage == "Japanese")
+            {
+                tips.text = "アジトは金色に輝いているみたい...？？";
+            }
             tip = true;
             tipsChicken.SetActive(true);
         }
 
-        else if (tipsTimer >= 300 && tip)
+        else if (tipsTimer >= 60 && tip)
         {
-            tips.text = "消火栓やマンホールを使って\n見渡してみよう...！";
-            buildTips.SetActive(true);
+            if (playLanguage == "English")
+            {
+                tips.text = "Let's look around using a stream of water！";
+            }
+            else if (playLanguage == "Japanese")
+            {
+                tips.text = "消火栓やマンホールを使って\n見渡してみよう...！";
+            }
+            tipsTimer = 0;
         }
 
         if (achieve >= 99)
         {
-            missionSlide.Play();
-            mission.text = splitText[3];
-            submis.text = splitText[4];
-            exmis.text = splitText[5];
-            count.text = "2";
-            second = false;
-            third = true;
-            achieve = 0;
-            per.text = achieve + "/ 3";
+            SecondMission();
         }
 
         if (evoCount >= scrParame.evo1 * 0.5 && !evolution)
@@ -193,31 +172,144 @@ public class Mission1_M : Missions_M
         {
             evoPanel.SetActive(true);
             Time.timeScale = 0f;
+            Cursor.visible = true;
         }
-        if (timer2 >= 3.0f)
+        if (!evoPanel)
         {
-            evoPanel.SetActive(false);
             timer2 = 0;
-            Time.timeScale = 1f;
-            evolution = true;
         }
 
     }
 
-    /*new void BigNumberPlus()
+    public void OnClick1()
     {
-        bigNum++;
-        if (second)
+        evoPanel.SetActive(false);
+        timer2 = 0;
+        Time.timeScale = 1f;
+        evolution = true;
+        Cursor.visible = false;
+    }
+
+    public void OnClick2()
+    {
+        hip.SetActive(false);
+        timer = 0;
+        Time.timeScale = 1f;
+        hipStamp = true;
+        Cursor.visible = false;
+    }
+
+    void FirstMission()
+    {
+        misBox.SetActive(true);
+        missionSlide.Play();
+        mission.text = splitText[0];
+        submis.text = splitText[1];
+        exmis.text = splitText[2];
+        first = false;
+        second = true;
+        per.text = "0%";
+    }
+
+    void SecondMission()
+    {
+        missionSlide.Play();
+        mission.text = splitText[3];
+        submis.text = splitText[4];
+        exmis.text = splitText[5];
+        second = false;
+        third = true;
+        achieve = 0;
+        per.text = achieve + "/ 3";
+    }
+
+    void ThirdMission()
+    {
+        missionSlide.Play();
+        mission.text = splitText[6];
+        submis.text = splitText[7];
+        exmis.text = splitText[8];
+        third = false;
+        fourth = true;
+        achieve = 0;
+        per.text = achieve + "/ 3";
+    }
+
+    void FourthMission()
+    {
+        fourth = false;
+        five = true;
+        missionSlide.Play();
+        mission.text = splitText[9];
+        submis.text = splitText[10];
+        exmis.text = splitText[11];
+        achieve = 0;
+        per.text = achieve + "/ 3";
+    }
+
+    void FiveMission()
+    {
+        five = false;
+        six = true;
+        missionSlide.Play();
+        mission.text = splitText[12];
+        submis.text = splitText[13];
+        exmis.text = splitText[14];
+        achieve = 0;
+        per.text = achieve + "/ 3";
+    }
+
+    void SixMission()
+    {
+        six = false;
+        seven = true;
+        missionSlide.Play();
+        mission.text = splitText[15];
+        submis.text = splitText[16];
+        exmis.text = splitText[17];
+        per.text = "";
+    }
+
+    void SevenMission()
+    {
+        seven = false;
+        six = false;
+        final = true;
+        missionSlide.Play();
+        mission.text = splitText[18];
+        submis.text = splitText[19];
+        exmis.text = splitText[20];
+        per.text = "";
+    }
+
+    void FinalMission()
+    {
+        eneBillScr.changeDamageFlg();
+
+        missionSlide.Play();
+        mission.text = splitText[21];
+        submis.text = splitText[22];
+        exmis.text = splitText[23];
+        final = false;
+    }
+
+    public void CarDestroy()
+    {
+        if (six)
         {
-            base.BigNumberPlus();
+            car += 1;
+            achieve += 1;
+            per.text = achieve + " / 3";
         }
     }
-    new void SmallNumberPlus()
+
+    public void ShardAttack()
     {
-        smallNum++;
-        if (second)
+        if (third)
         {
-            base.SmallNumberPlus();
+            shard += 1;
+            achieve += 1;
+            per.text = achieve + " / 3";
         }
-    }*/
+    }
 }

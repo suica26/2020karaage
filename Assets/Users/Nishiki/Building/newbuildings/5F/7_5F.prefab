@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 2268958575656932586}
   - component: {fileID: 9160298322473107141}
   - component: {fileID: 202604708470785005}
+  - component: {fileID: 324056281360342989}
   m_Layer: 0
   m_Name: 7_5F
   m_TagString: Big
@@ -132,13 +133,14 @@ MonoBehaviour:
   divideObject: {fileID: 8810331402166788418, guid: 1fae59a840b58cf4eaf2dc077fb2246d,
     type: 3}
   HP: 2000
-  kickMag: 0.7
-  blastMag: 0.75
-  cutterMag: 1.1
-  fallAttackMag: 0.8
+  kickMag: 0.8
+  blastMag: 1
+  cutterMag: 1
+  fallAttackMag: 1.75
   breakScore: 300000
+  criAtomSource: {fileID: 0}
   objectID: 0
-  breakEffect: {fileID: 311248781918492841, guid: b393eb1a6c9aede41a72e76abfea12dd,
+  breakEffect: {fileID: 5308132802037912087, guid: c0f49ba13282946468f5d7ad3f67c273,
     type: 3}
   deleteTime: 3
   torque: 10
@@ -147,6 +149,8 @@ MonoBehaviour:
   shardDamage_nonDiv: 2000
   specialObjectFlg: 0
   notDamage: 0
+  magnitude: 0.1
+  duration: 0.25
 --- !u!114 &1926784596300237220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,7 +165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objFood: {fileID: 5882868508514077054, guid: 52bb1160a73b4b848953812cb2383dfc, type: 3}
   minFood: 6
-  maxFood: 8
+  maxFood: 9
 --- !u!82 &7935428953749153865
 AudioSource:
   m_ObjectHideFlags: 0
@@ -269,8 +273,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1000, y: 1900, z: 1000}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 924.9, y: 1472.2, z: 1087.1}
+  m_Center: {x: 0, y: 235, z: 0}
 --- !u!54 &9160298322473107141
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -310,3 +314,16 @@ MonoBehaviour:
   _pitch: 0
   _androidUseLowLatencyVoicePool: 0
   need_to_player_update_all: 1
+--- !u!65 &324056281360342989
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8859705708188951514}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 815.32, y: 453.8, z: 1000}
+  m_Center: {x: 49.6, y: -736.6, z: -43.8}

@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class CharaMoveRigid_R : MonoBehaviour
 {
-    [SerializeField] private AudioClip[] walkClip;
-    [Tooltip("足音用AudioSource"), SerializeField] private AudioSource audioSourceWalk;
-    [Tooltip("ジャンプ、落下攻撃用"), SerializeField] private AudioSource audioSourceCommon;
     [Tooltip("キャラクターの回転速度"), SerializeField] private float rotateSpeed;
+    [Tooltip("移動時のエフェクト"), SerializeField] private GameObject[] moveEffect;
+    [Tooltip("グライド時のエフェクト"), SerializeField] private GameObject[] glideEffect;
 
     [Header("接地判定用")]
     [Tooltip("BoxCast(足元検知用)のX成分指定(1~4段階まで)"), SerializeField] private float[] raycastCubeX;
@@ -21,9 +20,6 @@ public class CharaMoveRigid_R : MonoBehaviour
     [Tooltip("落下攻撃の倍率設定"), SerializeField] private float[] boostMag;
     [SerializeField] GameObject preCircle;
     [SerializeField] private GameObject fallAttackKickEffect;
-    [SerializeField] private AudioClip CutterFAClip;
-    [SerializeField] private AudioClip KickFAClip;
-    [SerializeField] private AudioClip JumpClip;
 
     [Header("混乱用")]
     [SerializeField] private float[] effectScale;
@@ -73,8 +69,19 @@ public class CharaMoveRigid_R : MonoBehaviour
     private new CriAtomSource audio;
     CriAtomExPlayback JumpS, WalkVoiceS, FootS, IdleVoiceS;
     //加筆　undertreem 0628
-    private ADX_Ray_Rev ADX_RevLevel_L, ADX_RevLevel_R;
+    private ADX_SoundRaycast ADX_RevLevel_L, ADX_RevLevel_R;
     private float BusLevel_L, BusLevel_R;
+
+    // Mobile Operation
+    private bool mobileMode;
+    private Joystick joystick;
+    private bool pushJumpButton;
+    private bool pushKickButton;
+    private bool pushCutterButton;
+
+    // 坂道移動用
+    private Vector3 inputVector;
+    private Vector3 normalVector;
 
     void Start()
     {
@@ -87,19 +94,43 @@ public class CharaMoveRigid_R : MonoBehaviour
         stunned = false;
         audio = (CriAtomSource)GetComponent("CriAtomSource");
         //加筆　undertreem 0628
-        ADX_RevLevel_L = GetComponent<ADX_Ray_Rev>();
-        ADX_RevLevel_R = GetComponent<ADX_Ray_Rev>();
-
+        ADX_RevLevel_L = GetComponent<ADX_SoundRaycast>();
+        ADX_RevLevel_R = GetComponent<ADX_SoundRaycast>();
         //山本加筆 BusLevelがStage0でNullException吐きまくってたので、初期化付けました
+
+        mobileMode = MobileSetting_R.GetInstance().IsMobileMode();
+        if (mobileMode)
+        {
+            joystick = FindObjectOfType<Joystick>();
+            pushJumpButton = false;
+            pushKickButton = false;
+            pushCutterButton = false;
+        }
     }
 
     void Update()
     {
+        // 攻撃判定の更新
+        AttackRestrictions_R.GetInstance().Update();
+
+        //M 追加:時間停止中は操作を遮断
+        if (Mathf.Approximately(Time.timeScale, 0f))
+        {
+            return;
+        }
         speed = scrEvo.Status_SPD;
         jumpSpeed = scrEvo.Status_JUMP;
 
-        h = Input.GetAxis("Horizontal");
-        v = Input.GetAxis("Vertical");
+        if(!mobileMode)
+        {
+            h = Input.GetAxis("Horizontal");
+            v = Input.GetAxis("Vertical");
+        }
+        else
+        {
+            h = joystick.Horizontal;
+            v = joystick.Vertical;
+        }
 
         if(Camera.main.GetComponent<TpsCameraJC_R>().evolutionAnimStart)
         {
@@ -126,6 +157,8 @@ public class CharaMoveRigid_R : MonoBehaviour
             if (hit.transform.gameObject.tag != "Player")
             {
                 isGrounded = true;
+                normalVector = hit.normal;
+                break;
             }
         }
         // もしスタン中なら何もしない。
@@ -141,6 +174,17 @@ public class CharaMoveRigid_R : MonoBehaviour
                 StartCoroutine("StunnedChicken");
                 return;
             }
+
+            // もし非アクティブなら、移動時のエフェクトをアクティブにする
+            if (moveEffect[scrEvo.EvolutionNum].GetComponent<ParticleSystem>().startLifetime != 2)
+                moveEffect[scrEvo.EvolutionNum].GetComponent<ParticleSystem>().startLifetime = 2;
+
+            if (glideEffect[scrEvo.EvolutionNum].GetComponent<ParticleSystem>().maxParticles != 0)
+            {
+                glideEffect[scrEvo.EvolutionNum].GetComponent<ParticleSystem>().maxParticles = 0;
+                glideEffect[scrEvo.EvolutionNum].transform.GetChild(0).GetComponent<ParticleSystem>().maxParticles = 0;
+            }
+
 
             // 滑空の接地時の処理
             if (isFlying)
@@ -159,7 +203,7 @@ public class CharaMoveRigid_R : MonoBehaviour
                 scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.KICKFA, false);
                 scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.CUTTERFA, false);
                 fallAttack = false;
-                fallAttackCollisionCheck();
+                FallAttackCollisionCheck();
                 rb.velocity = Vector3.zero;
             }
 
@@ -179,7 +223,7 @@ public class CharaMoveRigid_R : MonoBehaviour
 
                 //チキンの移動方向や移動量を計算
                 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
-                moveDirection = cameraForward * v + Camera.main.transform.right * h;
+                moveDirection = Vector3.ProjectOnPlane(cameraForward * v + Camera.main.transform.right * h, normalVector);
                 if (moveDirection.magnitude > 1)
                 {
                     moveDirection.Normalize();
@@ -188,10 +232,21 @@ public class CharaMoveRigid_R : MonoBehaviour
                 rb.velocity = moveDirection * speed * MoveMag;
 
                 //チキンの身体の向きを修正
-                if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
+                if (!mobileMode)
                 {
-                    Quaternion qua = Quaternion.LookRotation(moveDirection);
-                    transform.rotation = Quaternion.RotateTowards(transform.rotation, qua, rotateSpeed * Time.deltaTime);
+                    if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
+                    {
+                        Quaternion qua = Quaternion.LookRotation(moveDirection);
+                        transform.rotation = Quaternion.RotateTowards(transform.rotation, qua, rotateSpeed * Time.deltaTime);
+                    }
+                }
+                else
+                {
+                    if(joystick.Horizontal != 0 || joystick.Vertical != 0)
+                    {
+                        Quaternion qua = Quaternion.LookRotation(moveDirection);
+                        transform.rotation = Quaternion.RotateTowards(transform.rotation, qua, rotateSpeed * Time.deltaTime);
+                    }
                 }
             }
             else
@@ -202,12 +257,26 @@ public class CharaMoveRigid_R : MonoBehaviour
             }
 
             //ジャンプした際の処理
-            if (Input.GetButtonDown("Jump"))
+            if (!mobileMode)
             {
-                audio.Stop();
-                JumpS = audio.Play("Jump");
-                scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.JUMP, true);
-                rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
+                if (Input.GetButtonDown("Jump"))
+                {
+                    audio.Stop();
+                    JumpS = audio.Play("Jump");
+                    scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.JUMP, true);
+                    rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
+                }
+            }
+            else
+            {
+                if(pushJumpButton)
+                {
+                    audio.Stop();
+                    JumpS = audio.Play("Jump");
+                    scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.JUMP, true);
+                    rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
+                    pushJumpButton = false;
+                }
             }
         }
         //空中の処理を記述
@@ -221,10 +290,14 @@ public class CharaMoveRigid_R : MonoBehaviour
             scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.JUMP, true);
             scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.WALK, false);
 
+            // もしアクティブなら移動時のエフェクトを非アクティブにする
+            if (moveEffect[scrEvo.EvolutionNum].GetComponent<ParticleSystem>().startLifetime != 0)
+                moveEffect[scrEvo.EvolutionNum].GetComponent<ParticleSystem>().startLifetime = 0;
+            //moveEffect[scrEvo.EvolutionNum].SetActive(false);
+
             //空中での制動(移動量は地上の1/3程度)
             if (h != 0 || v != 0)
             {
-                audioSourceWalk.Stop();
                 IdleVoiceS.Stop();
                 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
                 moveDirection = cameraForward * v + Camera.main.transform.right * h;
@@ -235,6 +308,12 @@ public class CharaMoveRigid_R : MonoBehaviour
                     {
                         rb.useGravity = false;
                         rb.AddForce(Vector3.down * 9.81f * 0.25f, ForceMode.Acceleration);
+
+                        if (glideEffect[scrEvo.EvolutionNum].GetComponent<ParticleSystem>().maxParticles != 100)
+                        {
+                            glideEffect[scrEvo.EvolutionNum].GetComponent<ParticleSystem>().maxParticles = 100;
+                            glideEffect[scrEvo.EvolutionNum].transform.GetChild(0).GetComponent<ParticleSystem>().maxParticles = 100;
+                        }
                     }
                     rb.AddForce(moveDirection * speed * 1.5f, ForceMode.Force);
 
@@ -259,44 +338,69 @@ public class CharaMoveRigid_R : MonoBehaviour
                 }
             }
 
-            //落下攻撃の処理(キック)
-            if (Input.GetMouseButton(0) && !fallAttack)
+            //落下攻撃の処理(キック & カッター)
+            if(!mobileMode)
             {
-                if (kickFallAttackTimer <= kickFallAttackTime)
+                if (Input.GetMouseButton(0) && !fallAttack)
                 {
-                    kickFallAttackTimer += Time.deltaTime;
+                    if (kickFallAttackTimer <= kickFallAttackTime)
+                        kickFallAttackTimer += Time.deltaTime;
+                    else
+                    {
+                        fallAttackVer = 1;
+                        StartCoroutine("FallAttack");
+                    }
+                }
+                else if (Input.GetMouseButton(1) && !fallAttack && scrCutter.enabled)
+                {
+                    if (cutterFallAttackTimer <= cutterFallAttackTime)
+                        cutterFallAttackTimer += Time.deltaTime;
+                    else if (!scrCutter.throwingCutter)
+                    {
+                        fallAttackVer = 2;
+                        StartCoroutine("FallAttack");
+                    }
                 }
                 else
                 {
-                    fallAttackVer = 1;
-                    StartCoroutine("FallAttack");
-                }
-            }
-            //落下攻撃の処理(カッター)
-            else if (Input.GetMouseButton(1) && !fallAttack && scrCutter.enabled)
-            {
-                if (cutterFallAttackTimer <= cutterFallAttackTime)
-                {
-                    cutterFallAttackTimer += Time.deltaTime;
-                }
-                else if (!scrCutter.throwingCutter)
-                {
-                    fallAttackVer = 2;
-                    StartCoroutine("FallAttack");
+                    kickFallAttackTimer = 0f;
+                    cutterFallAttackTimer = 0f;
                 }
             }
             else
             {
-                kickFallAttackTimer = 0f;
-                cutterFallAttackTimer = 0f;
+                if(pushKickButton && !fallAttack)
+                {
+                    if (kickFallAttackTimer <= kickFallAttackTime)
+                        kickFallAttackTimer += Time.deltaTime;
+                    else
+                    {
+                        fallAttackVer = 1;
+                        StartCoroutine("FallAttack");
+                    }
+                }
+                else if (pushCutterButton && !fallAttack && scrCutter.enabled)
+                {
+                    if (cutterFallAttackTimer <= cutterFallAttackTime)
+                        cutterFallAttackTimer += Time.deltaTime;
+                    else if (!scrCutter.throwingCutter)
+                    {
+                        fallAttackVer = 2;
+                        StartCoroutine("FallAttack");
+                    }
+                }
+                else
+                {
+                    kickFallAttackTimer = 0f;
+                    cutterFallAttackTimer = 0f;
+                }
             }
-            audioSourceWalk.Stop();
             IdleVoiceS.Stop();
         }
     }
 
     //落下攻撃後、接地時にInvoke。衝撃波を設定
-    void fallAttackCollisionCheck()
+    void FallAttackCollisionCheck()
     {
         GameObject circleChecker;
         if (fallAttackVer == 1)
@@ -374,7 +478,6 @@ public class CharaMoveRigid_R : MonoBehaviour
         stunned = true;
         //Sound
         WalkVoiceS.Stop();
-        audioSourceWalk.Stop();
         IdleVoiceS.Stop();
         audio.Play("Confusion");
 
@@ -396,5 +499,33 @@ public class CharaMoveRigid_R : MonoBehaviour
             yield return null;
         }
         stunned = false;
+    }
+
+    // Mobile Setting
+    public void PushButton()
+    {
+        pushJumpButton = true;
+    }
+
+    public void PushKickButton()
+    {
+        pushKickButton = true;
+    }
+    public void PushCutterButton()
+    {
+        pushCutterButton = true;
+    }
+
+    public void ReleaseButton()
+    {
+        pushJumpButton = false;
+    }
+    public void ReleaseKickButton()
+    {
+        pushKickButton = false;
+    }
+    public void ReleaseCutterButton()
+    {
+        pushCutterButton = false;
     }
 }

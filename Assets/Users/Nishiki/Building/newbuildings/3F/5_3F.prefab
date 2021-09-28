@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 8964153058589097528}
   - component: {fileID: 2018754688805573655}
   - component: {fileID: 7049311626344638783}
+  - component: {fileID: 1705226129997546561}
   m_Layer: 0
   m_Name: 5_3F
   m_TagString: Big
@@ -131,22 +132,25 @@ MonoBehaviour:
   tier_WalkAttack: 3
   divideObject: {fileID: 8810331402166788418, guid: 1fae59a840b58cf4eaf2dc077fb2246d,
     type: 3}
-  HP: 2000
-  kickMag: 0.7
-  blastMag: 0.75
-  cutterMag: 1.1
-  fallAttackMag: 0.8
+  HP: 900
+  kickMag: 0.8
+  blastMag: 1
+  cutterMag: 1
+  fallAttackMag: 1.75
   breakScore: 300000
+  criAtomSource: {fileID: 0}
   objectID: 0
-  breakEffect: {fileID: 311248781918492841, guid: b393eb1a6c9aede41a72e76abfea12dd,
+  breakEffect: {fileID: 5308132802037912087, guid: c0f49ba13282946468f5d7ad3f67c273,
     type: 3}
   deleteTime: 3
   torque: 10
-  power: 40
+  power: 50
   groundContactSoundName: 
   shardDamage_nonDiv: 2000
   specialObjectFlg: 0
   notDamage: 0
+  magnitude: 0.1
+  duration: 0.25
 --- !u!114 &8765891749900919670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,8 +273,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1000, y: 1200, z: 900}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 912.6, y: 764.6, z: 1012.6}
+  m_Center: {x: 0, y: 237.5, z: 0}
 --- !u!54 &2018754688805573655
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -310,3 +314,16 @@ MonoBehaviour:
   _pitch: 0
   _androidUseLowLatencyVoicePool: 0
   need_to_player_update_all: 1
+--- !u!65 &1705226129997546561
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1866771858900044040}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 800, y: 472.6, z: 998.8}
+  m_Center: {x: 47.83, y: -378.8, z: 0}

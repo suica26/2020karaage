@@ -11,12 +11,16 @@ GameObject:
   - component: {fileID: 3445558105350115568}
   - component: {fileID: 792910836217362498}
   - component: {fileID: 5978211442871856095}
-  - component: {fileID: 3845646780595559915}
+  - component: {fileID: 6214014278669161515}
+  - component: {fileID: 7034111685342173289}
   - component: {fileID: 1563464832526392548}
   - component: {fileID: 4337799488308797223}
   - component: {fileID: 9051830398936968817}
   - component: {fileID: 4207816486901302429}
-  - component: {fileID: 7034111685342173289}
+  - component: {fileID: 926076663001237871}
+  - component: {fileID: 8118477673885723510}
+  - component: {fileID: 4190867065148302373}
+  - component: {fileID: 2149046863110242467}
   m_Layer: 0
   m_Name: gasStation
   m_TagString: Untagged
@@ -32,7 +36,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2637636568380918346}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -126.4, y: 178.7, z: 25.9}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children:
   - {fileID: 3404129698746234142}
@@ -68,17 +72,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _obj: {fileID: 7430103647231780757, guid: 3a87acf169f5aad4a9e7910be0e61470, type: 3}
-  _effect: {fileID: 6712329990759217117, guid: 53bf79c5ee1924f789ffbbd76bb24400, type: 3}
+  _effect: {fileID: 4874099611583431867, guid: afcc368e0e264524c841ea2a6e244211, type: 3}
   _usageEvo: 3
-  _force: 100
+  _force: 5
   _time: 2
-  _ySize: 0
-  _xScale: 50
-  _yScale: 50
-  _zScale: 50
+  _ySize: 5
+  _ySizeAdditional: 0
+  _ySizeAdditionalObj: -50
+  _xScale: 200
+  _yScale: 200
+  _zScale: 200
+  makeHydrant: 0
   player: {fileID: 0}
   hyd: 0
---- !u!114 &3845646780595559915
+--- !u!114 &6214014278669161515
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,26 +94,58 @@ MonoBehaviour:
   m_GameObject: {fileID: 2637636568380918346}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8075661621763774d8231cabafe12bb8, type: 3}
+  m_Script: {fileID: 11500000, guid: cdb19c1e826822b418d67185835ef078, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tier_WalkAttack: 4
-  divideObject: {fileID: 0}
+  divideObject: {fileID: 6423037826826974258, guid: f5faa7e9ed0f8bb4684657d16bd2a711,
+    type: 3}
   HP: 250
   kickMag: 1
   blastMag: 1
   cutterMag: 1
   fallAttackMag: 1
   breakScore: 0
+  criAtomSource: {fileID: 0}
   objectID: 10
   breakEffect: {fileID: 0}
   deleteTime: 3
-  torque: 5
-  power: 5
+  torque: 20
+  power: 50
   groundContactSoundName: 
   shardDamage_nonDiv: 0
   specialObjectFlg: 0
   notDamage: 0
+  magnitude: 0.1
+  duration: 0.25
+  explosionSphere: {fileID: 2707484399983983890, guid: 10abdfb8c1d834b4c847203d04192cf7,
+    type: 3}
+  startExplodeTiming: 0.7
+  expDeleteTiming: 0.5
+  expScale: 50
+--- !u!114 &7034111685342173289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2637636568380918346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: GasStation00
+  _cueSheet: Explosion
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!65 &1563464832526392548
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -159,29 +198,61 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 115.9, y: 738.4, z: 450.8}
   m_Center: {x: 432.9, y: 404.11, z: -547.6}
---- !u!114 &7034111685342173289
-MonoBehaviour:
+--- !u!65 &926076663001237871
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2637636568380918346}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playOnStart: 0
-  _cueName: GasStation00
-  _cueSheet: Explosion
-  _regionOnStart: {fileID: 0}
-  _listenerOnStart: {fileID: 0}
-  _use3dPositioning: 1
-  _loop: 0
-  _volume: 1
-  _pitch: 0
-  _androidUseLowLatencyVoicePool: 0
-  need_to_player_update_all: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &8118477673885723510
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2637636568380918346}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 90, y: 1346, z: 90}
+  m_Center: {x: -585, y: 700, z: 734}
+--- !u!65 &4190867065148302373
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2637636568380918346}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1127.756, y: 649.30475, z: 560.2917}
+  m_Center: {x: 417.74307, y: 335.1922, z: 602.2154}
+--- !u!54 &2149046863110242467
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2637636568380918346}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &3380244574649682307
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,7 +264,6 @@ GameObject:
   - component: {fileID: 5088871873510127425}
   - component: {fileID: 230689571734777770}
   - component: {fileID: 1427204259997031883}
-  - component: {fileID: 4302171894084679117}
   m_Layer: 0
   m_Name: Sign
   m_TagString: Untagged
@@ -262,20 +332,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &4302171894084679117
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3380244574649682307}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2849203588802097394, guid: 665fefed40a65f74691cf0bb1fa6ff73, type: 3}
 --- !u!1 &6791377946007255596
 GameObject:
   m_ObjectHideFlags: 0
@@ -287,7 +343,6 @@ GameObject:
   - component: {fileID: 8743743896362966855}
   - component: {fileID: 2327693116238750095}
   - component: {fileID: 8570137774540543802}
-  - component: {fileID: 2464013288229965020}
   m_Layer: 0
   m_Name: Building
   m_TagString: Untagged
@@ -356,20 +411,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &2464013288229965020
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6791377946007255596}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -4207443722817456029, guid: 665fefed40a65f74691cf0bb1fa6ff73, type: 3}
 --- !u!1 &7562739171107572095
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,7 +422,6 @@ GameObject:
   - component: {fileID: 4482333874771531116}
   - component: {fileID: 3004886292861024492}
   - component: {fileID: 8750234125080970598}
-  - component: {fileID: 6357067140558814865}
   m_Layer: 0
   m_Name: Machine
   m_TagString: Untagged
@@ -450,20 +490,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &6357067140558814865
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7562739171107572095}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 8074750411987931458, guid: 665fefed40a65f74691cf0bb1fa6ff73, type: 3}
 --- !u!1 &8996009480958491415
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,11 +501,6 @@ GameObject:
   - component: {fileID: 3404129698746234142}
   - component: {fileID: 7891375285246326110}
   - component: {fileID: 8073206509692616082}
-  - component: {fileID: 4644630120107879051}
-  - component: {fileID: 6073873968379878222}
-  - component: {fileID: 8036822108300877864}
-  - component: {fileID: 7632812081653483645}
-  - component: {fileID: 8601353373017279857}
   m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
@@ -548,69 +569,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &4644630120107879051
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8996009480958491415}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 3909233067320746374, guid: 665fefed40a65f74691cf0bb1fa6ff73, type: 3}
---- !u!65 &6073873968379878222
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8996009480958491415}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 2000, y: 113.4, z: 766}
-  m_Center: {x: 0.0009765625, y: 791.6, z: -477}
---- !u!65 &8036822108300877864
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8996009480958491415}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 115.9, y: 738.4, z: 450.8}
-  m_Center: {x: -138.5, y: 404.11, z: -547.6}
---- !u!65 &7632812081653483645
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8996009480958491415}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 115.9, y: 738.4, z: 450.8}
-  m_Center: {x: -772.9, y: 404.11, z: -547.6}
---- !u!65 &8601353373017279857
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8996009480958491415}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 115.9, y: 738.4, z: 450.8}
-  m_Center: {x: 432.9, y: 404.11, z: -547.6}

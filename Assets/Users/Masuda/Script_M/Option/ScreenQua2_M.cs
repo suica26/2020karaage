@@ -4,19 +4,21 @@ using UnityEngine;
 
 public class ScreenQua2_M : MonoBehaviour
 {
-    private new CriAtomSource audio;
+    private CriAtomSource criAtomSource;
+    private SaveManager_Y saveManager;
     void Start()
     {
-        audio = (CriAtomSource)GetComponent("CriAtomSource");
+        criAtomSource = GetComponent<CriAtomSource>();
+        if (saveManager != null)
+            saveManager = GameObject.Find("SaveManager").GetComponent<SaveManager_Y>();
     }
 
-    void Update()
-    {
-        
-    }
     void OnClick()
     {
+        //一応mediumに変更
         QualitySettings.SetQualityLevel(2);
-        audio.Play("System_Decision");
+        if (saveManager != null)
+            saveManager.SaveQuality(2);
+        criAtomSource.Play("System_Decision");
     }
 }

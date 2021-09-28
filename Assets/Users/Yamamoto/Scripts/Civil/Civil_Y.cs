@@ -6,12 +6,12 @@ public class Civil_Y : MonoBehaviour
 {
     //市民を実装する際には、必ずTagでCivilを設定すること
     public bool escapeFlg = false;
-    public float escapeSpeed;
-    public float walkSpeed;
+    [SerializeField] protected float escapeSpeed;
+    [SerializeField] private float walkSpeed;
     public float contagionRange;
-    private Vector3 fallenSpeed;
-    private Rigidbody rb;
-    private GameObject player;
+    protected Vector3 fallenSpeed;
+    protected Rigidbody rb;
+    protected GameObject player;
     public GameObject[] route;
     private int routeNum = 0;
     private Vector3 preForward;
@@ -20,22 +20,20 @@ public class Civil_Y : MonoBehaviour
     private float rotTime = 0f;
     //市民の内部時間
     private float deleteTimer;
-    private float timer;
-    [SerializeField] private float deleteTiming;
+    [SerializeField] protected float timer;
+    [SerializeField] protected float deleteTiming;
     [SerializeField] private float resetForwardTiming;
-    public WayPointGraph_Y wayPointGraph;
+    private WayPointGraph_Y wayPointGraph;
     public bool avoidFlg = false;
-    [SerializeField] private Animator animator;
-    private string escapeStr = "isEscape";
-
-    private bool surprised;
-    private bool death;
-
+    [SerializeField] protected Animator animator;
+    protected string escapeStr = "isEscape";
+    protected bool surprised;
+    protected bool death;
     //ADX
-    private CriAtomSource criAtomSource;
+    protected CriAtomSource criAtomSource;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody>();
         player = GameObject.Find("Player");
@@ -46,7 +44,7 @@ public class Civil_Y : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (!death)
         {
@@ -58,7 +56,11 @@ public class Civil_Y : MonoBehaviour
                 //迷子(次のWayPointに到着できなかった)になった時に自分を消去する処理
                 if (deleteTimer > deleteTiming) Death();
                 //進行方向を一定タイミングで再計算する
-                if (timer > resetForwardTiming) ResetNextForward();
+                if (timer > resetForwardTiming)
+                {
+                    timer = 0f;
+                    ResetNextForward();
+                }
 
                 if (escapeFlg) Escape();
                 else Walk();
@@ -74,7 +76,7 @@ public class Civil_Y : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (!escapeFlg)
         {
@@ -86,6 +88,7 @@ public class Civil_Y : MonoBehaviour
                 other.gameObject.name == "fallAttackCircle(Clone)")
             {
                 EscapeContagion();
+                criAtomSource.Stop();
                 criAtomSource.Play("Citizen00");
             }
         }
@@ -108,9 +111,9 @@ public class Civil_Y : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision other)
+    protected void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && !escapeFlg)
         {
             if (other.gameObject.GetComponent<EvolutionChicken_R>().EvolutionNum > 1)
             {
@@ -125,6 +128,8 @@ public class Civil_Y : MonoBehaviour
                 Vector3 TorquePower = new Vector3(Random.Range(-100f, 100f), Random.Range(-100f, 100f), Random.Range(-100f, 100f));
                 rb.AddForce(F, ForceMode.Impulse);
                 rb.AddTorque(TorquePower, ForceMode.Impulse);
+                criAtomSource.Stop();
+                criAtomSource.Play("CivilFly");
                 Destroy(gameObject, 2f);
                 Escape();
                 death = true;
@@ -141,7 +146,7 @@ public class Civil_Y : MonoBehaviour
         }
     }
 
-    private void EscapeContagion()
+    protected void EscapeContagion()
     {
         Escape();
         var civilObjects = GameObject.FindGameObjectsWithTag("Civil");
@@ -155,7 +160,7 @@ public class Civil_Y : MonoBehaviour
     }
 
     //XZ平面における点Bから点Aへの方向ベクトルを返す。(yは0)
-    private Vector3 GetVectorXZ(Vector3 A, Vector3 B)
+    protected Vector3 GetVectorXZ(Vector3 A, Vector3 B)
     {
         var AB = A - B;
         AB.y = 0;
@@ -163,7 +168,7 @@ public class Civil_Y : MonoBehaviour
     }
 
     //GetVectorXZの単位ベクトル化まで
-    private Vector3 GetVectorXZNormalized(Vector3 A, Vector3 B)
+    protected Vector3 GetVectorXZNormalized(Vector3 A, Vector3 B)
     {
         var AB = A - B;
         AB.y = 0;
@@ -171,7 +176,7 @@ public class Civil_Y : MonoBehaviour
         return AB;
     }
 
-    public void Escape()
+    protected virtual void Escape()
     {
         animator.SetBool(escapeStr, true);
         if (!escapeFlg) escapeFlg = true;
@@ -196,7 +201,8 @@ public class Civil_Y : MonoBehaviour
         if (Vector3.Dot(transform.forward, nextForward) < 1f && !avoidFlg)
         {
             RotTimePlus();
-            transform.forward = Vector3.Lerp(preForward, nextForward, rotTime);
+            if (Vector3.Lerp(preForward, nextForward, rotTime) != Vector3.zero)
+                transform.forward = Vector3.Lerp(preForward, nextForward, rotTime);
         }
     }
 
@@ -239,7 +245,7 @@ public class Civil_Y : MonoBehaviour
         rotTime = 0f;
     }
 
-    private void Death()
+    protected virtual void Death()
     {
         wayPointGraph.CivilNumDecrease();
         Destroy(gameObject);

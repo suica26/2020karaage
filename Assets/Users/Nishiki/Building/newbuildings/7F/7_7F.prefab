@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6406280901509631500}
   - component: {fileID: 4072575188009477155}
   - component: {fileID: 4995776957485111563}
+  - component: {fileID: 4506782565813900728}
   m_Layer: 0
   m_Name: 7_7F
   m_TagString: Big
@@ -49,17 +50,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8075661621763774d8231cabafe12bb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tier_WalkAttack: 3
+  tier_WalkAttack: 4
   divideObject: {fileID: 8810331402166788418, guid: 1fae59a840b58cf4eaf2dc077fb2246d,
     type: 3}
-  HP: 2000
-  kickMag: 0.7
-  blastMag: 0.75
-  cutterMag: 1.1
-  fallAttackMag: 0.8
+  HP: 3000
+  kickMag: 0.8
+  blastMag: 1
+  cutterMag: 1
+  fallAttackMag: 1.75
   breakScore: 300000
+  criAtomSource: {fileID: 0}
   objectID: 0
-  breakEffect: {fileID: 311248781918492841, guid: b393eb1a6c9aede41a72e76abfea12dd,
+  breakEffect: {fileID: 5308132802037912087, guid: c0f49ba13282946468f5d7ad3f67c273,
     type: 3}
   deleteTime: 3
   torque: 10
@@ -68,6 +70,8 @@ MonoBehaviour:
   shardDamage_nonDiv: 2000
   specialObjectFlg: 0
   notDamage: 0
+  magnitude: 0.1
+  duration: 0.25
 --- !u!114 &6712064550816568130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,8 +85,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objFood: {fileID: 5882868508514077054, guid: 52bb1160a73b4b848953812cb2383dfc, type: 3}
-  minFood: 6
-  maxFood: 8
+  minFood: 9
+  maxFood: 13
 --- !u!82 &3007021171533361839
 AudioSource:
   m_ObjectHideFlags: 0
@@ -190,8 +194,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1000, y: 2600, z: 1000}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 900, y: 2160, z: 1095}
+  m_Center: {x: 0, y: 237, z: 0}
 --- !u!54 &4072575188009477155
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -231,6 +235,19 @@ MonoBehaviour:
   _pitch: 0
   _androidUseLowLatencyVoicePool: 0
   need_to_player_update_all: 1
+--- !u!65 &4506782565813900728
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4424967103029197116}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 820, y: 474.69, z: 1010.77}
+  m_Center: {x: 43.4, y: -1076, z: -45.6}
 --- !u!1 &8014253838240506654
 GameObject:
   m_ObjectHideFlags: 0

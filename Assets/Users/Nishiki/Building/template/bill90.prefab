@@ -106,8 +106,10 @@ MonoBehaviour:
   cutterMag: 1
   fallAttackMag: 1.2
   breakScore: 100000
+  criAtomSource: {fileID: 0}
   objectID: 0
-  breakEffect: {fileID: 0}
+  breakEffect: {fileID: 5308132802037912087, guid: c0f49ba13282946468f5d7ad3f67c273,
+    type: 3}
   deleteTime: 3
   torque: 100
   power: 80
@@ -115,6 +117,8 @@ MonoBehaviour:
   shardDamage_nonDiv: 3000
   specialObjectFlg: 0
   notDamage: 0
+  magnitude: 0.1
+  duration: 0.25
 --- !u!114 &-3548140531442655768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,8 +241,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3090.5967, y: 9000, z: 2042.592}
-  m_Center: {x: 0, y: 200, z: 0}
+  m_Size: {x: 3012, y: 9000, z: 1952}
+  m_Center: {x: 0, y: 169, z: 0}
 --- !u!54 &7849956658792938949
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -16,7 +16,7 @@ public class Cutter_R : MonoBehaviour
     [Tooltip("落下攻撃時のカッターの初速"), SerializeField] private float cutterFABaseSpeed;
     [Tooltip("落下攻撃時のカッターが地面に到達するまでの速度"), SerializeField] private float dropSpeed;
 
-    [SerializeField] Transition_R scrAnim;
+    [SerializeField] Transition_R[] scrAnim;
 
     private float timer;
     private float catchableTimer;
@@ -30,6 +30,18 @@ public class Cutter_R : MonoBehaviour
     EvolutionChicken_R scrEvo;
 
     private CriAtomSource Sound;
+
+    // Mobile Setting
+    private bool mobileMode;
+    private enum eCutter
+    {
+        wait,
+        push,
+        release,
+    }
+
+    private eCutter isCutter;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +53,9 @@ public class Cutter_R : MonoBehaviour
         throwingCutter = false;
         CanCutter = true;
         Sound = GetComponent<CriAtomSource>();
+
+        mobileMode = MobileSetting_R.GetInstance().IsMobileMode();
+        isCutter = eCutter.wait;
     }
 
     // Update is called once per frame
@@ -63,43 +78,32 @@ public class Cutter_R : MonoBehaviour
             }
         }
 
-        //マウスクリック中にタイマー(通常or落下攻撃判定用)を加算
-        if (Input.GetMouseButton(1) && CanCutter)
-            timer += Time.deltaTime;
-
-        //以下通常のカッター攻撃の記述
-        if (Input.GetMouseButtonUp(1) && CanCutter)
+        if(AttackRestrictions_R.GetInstance().CanAttack())
         {
-            if(!throwingCutter && timer <= 0.5f)
+            //マウスクリック中にタイマー(通常or落下攻撃判定用)を加算
+            if (!mobileMode)
             {
-                if (scrMove._isFlying)
-                {
-                    scrMove._isFlying = false;
-                    GetComponent<Rigidbody>().useGravity = true;
-                }
-
-                throwingCutter = true;
-                timer = 0.0f;
-                animTimer = 0.25f;
-
-                if (MoveToCamRot)
-                    cutter = Instantiate(preCutter, cutterTransform[scrEvo.EvolutionNum].position, Quaternion.Euler(Camera.main.transform.rotation.eulerAngles));
-                else
-                    cutter = Instantiate(preCutter, cutterTransform[scrEvo.EvolutionNum].position, Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0, 0, 0)));
-
-                cutter.transform.localScale = cutter.transform.localScale * cutterSize[scrEvo.EvolutionNum];
-                cutter.GetComponent<CutterMoveFA_R>().enabled = false;
-                CutterMove1_R scrCutter = cutter.GetComponent<CutterMove1_R>();
-                scrCutter.enabled = true;
-                scrCutter.evoSpeed = 1.0f + scrEvo.EvolutionNum * 4.0f;
-                scrCutter.backArea = backAreaTransform[scrEvo.EvolutionNum];
-                scrCutter.cutterBaseSpeed = cutterBaseSpeed;
-                scrAnim.SetAnimator(Transition_R.Anim.CUTTER, true);
-                Sound.Play("CutterMove");
+                if (Input.GetMouseButton(1) && CanCutter)
+                    timer += Time.deltaTime;
             }
             else
             {
-                timer = 0.0f;
+                if (isCutter == eCutter.push && CanCutter)
+                    timer += Time.deltaTime;
+            }
+
+            //以下通常のカッター攻撃の記述
+            if (!mobileMode)
+            {
+                if (Input.GetMouseButtonUp(1) && CanCutter)
+                {
+                    Cutter();
+                }
+            }
+            else
+            {
+                if (isCutter == eCutter.release && CanCutter)
+                    Cutter();
             }
         }
 
@@ -110,9 +114,51 @@ public class Cutter_R : MonoBehaviour
             if (animTimer <= 0f)
             {
                 animTimer = 0f;
-                scrAnim.SetAnimator(Transition_R.Anim.CUTTER, false);
+                scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.CUTTER, false);
             }
         }
+    }
+
+    public void Cutter()
+    {
+        if (!throwingCutter && timer <= 0.5f)
+        {
+            if (scrMove._isFlying)
+            {
+                scrMove._isFlying = false;
+                GetComponent<Rigidbody>().useGravity = true;
+            }
+
+            AttackRestrictions_R.GetInstance().SetTimer(0.75f);
+
+            throwingCutter = true;
+            timer = 0.0f;
+            animTimer = 0.25f;
+
+            if (MoveToCamRot)
+                cutter = Instantiate(preCutter, cutterTransform[scrEvo.EvolutionNum].position, Quaternion.Euler(Camera.main.transform.rotation.eulerAngles));
+            else
+                cutter = Instantiate(preCutter, cutterTransform[scrEvo.EvolutionNum].position, Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0, 0, 0)));
+
+            cutter.transform.localScale = cutter.transform.localScale * cutterSize[scrEvo.EvolutionNum];
+            cutter.transform.GetChild(0).localScale *= cutterSize[scrEvo.EvolutionNum];
+            cutter.GetComponent<CutterMoveFA_R>().enabled = false;
+            CutterMove1_R scrCutter = cutter.GetComponent<CutterMove1_R>();
+            scrCutter.enabled = true;
+            scrCutter.evoSpeed = 1.0f + scrEvo.EvolutionNum * 4.0f;
+            scrCutter.backArea = backAreaTransform[scrEvo.EvolutionNum];
+            scrCutter.cutterBaseSpeed = cutterBaseSpeed;
+            scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.CUTTER, true);
+            Sound.Play("CutterMove");
+
+        }
+        else
+        {
+            timer = 0.0f;
+        }
+
+        if (mobileMode)
+            isCutter = eCutter.wait;
     }
 
     //以下は落下攻撃の際の処理を記述
@@ -122,6 +168,7 @@ public class Cutter_R : MonoBehaviour
         throwingCutter = true;
         cutter = Instantiate(preCutter, cutterTransform[scrEvo.EvolutionNum].position, Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0, 0, 0)));
         cutter.transform.localScale = cutter.transform.localScale * cutterSize[scrEvo.EvolutionNum];
+        cutter.transform.GetChild(0).localScale *= cutterSize[scrEvo.EvolutionNum];
         cutter.GetComponent<CutterMove1_R>().enabled = false;
         CutterMoveFA_R scrCutter = cutter.GetComponent<CutterMoveFA_R>();
         scrCutter.enabled = true;
@@ -139,5 +186,16 @@ public class Cutter_R : MonoBehaviour
             Destroy(other.gameObject);
             throwingCutter = false;
         }
+    }
+
+    // Mobile Setting
+    public void PushButton()
+    {
+        isCutter = eCutter.push;
+    }
+
+    public void ReleaseButton()
+    {
+        isCutter = eCutter.release;
     }
 }

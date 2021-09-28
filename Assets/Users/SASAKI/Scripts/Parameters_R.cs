@@ -27,15 +27,20 @@ public class Parameters_R : MonoBehaviour
 {
     [SerializeField] private Text scoreText, finalScoreText, timeText, epText, hpText;
     [SerializeField] private GameObject resultPanel = null;
-    [SerializeField] private GameObject hp1, hp2, hp3, hp4;
-    [SerializeField] public int score, time, ep, hp, damTime, plusTime, maxHP;
-    [SerializeField] public Slider epSlider, hpSlider, hpSlider2, hpSlider3, hpSlider4, mainSlider;
-    [SerializeField] public Image circle,niwa;
+    [SerializeField] private GameObject[] hpSli;
+    [SerializeField] public int score, time, ep, hp, damTime, plusTime, maxHP, niwaPer;
+    [SerializeField] public Slider epSlider, mainSlider;
+    public Image sliderFill;
+    [SerializeField] public Slider[] hpSlider;
 
     private bool freeze = false;
-    private float count,niwaPer;
-    [SerializeField] public int evo1, evo2, evo3;
-    public bool finalChicken;
+    private float count;
+    [SerializeField] public int evo1, evo2, evo3, startNum;
+    public string saveStage;
+    [SerializeField] public Missions_M scrMis;
+    public DamagePanel_M damaPanel;
+    public float currentPer;
+    public Color color1, color2, color3, color4;
 
     public void Start()
     {
@@ -44,18 +49,23 @@ public class Parameters_R : MonoBehaviour
         timeText.text = "Time: " + time;
         epText.text = "EP: " + ep;
         hpText.text = "HP: " + hp;
-        hpSlider.value = 100;
-        hpSlider.maxValue = 100;
         epSlider.value = 0;
-        epSlider.maxValue = evo1;
+        
         count = time;
-        niwaPer = evo1;
-        hp1.SetActive(true);
-        hp2.SetActive(false);
-        hp3.SetActive(false);
-        hp4.SetActive(false);
-        mainSlider = hpSlider;
-        maxHP = 100;
+        for (int i = 0; i < 4; i++)
+        {
+            if (i == startNum)
+            {
+                hpSli[i].SetActive(true);
+                mainSlider = hpSlider[i];
+            }
+            else
+            {
+                hpSli[i].SetActive(false);
+            }
+        }
+        ep += niwaPer;
+        EPManager(0);
     }
 
     public void ScoreManager(int addScore)      //山本加筆：publicにすることで他Scriptで参照できるようにしました
@@ -93,36 +103,44 @@ public class Parameters_R : MonoBehaviour
             ep += addEP;
             plusTime += 1;
             epSlider.value += addEP;
-            hp += 1;
-            mainSlider.value += 1;
-            //epText.text = "EP: " + ep;
+            hp += 10;
+            mainSlider.value += 10;
+
             if (ep == evo1)
             {
                 epSlider.value = 0;
                 epSlider.maxValue = evo2 - evo1;
-                hp1.SetActive(false);
-                hp2.SetActive(true);
-                hpSlider2.value = hp;
-                mainSlider = hpSlider2;
+                hpSli[0].SetActive(false);
+                hpSli[1].SetActive(true);
+                hpSlider[1].value = hp;
+                mainSlider = hpSlider[1];
                 TimeManager(10);
-                maxHP = 150;
+                maxHP = 250;
+                hp = maxHP;
+                mainSlider.value = maxHP;
             }
             else if (ep == evo2)
             {
                 epSlider.value = 0;
                 epSlider.maxValue = evo3 - evo2;
-                hp2.SetActive(false);
-                hp3.SetActive(true);
-                hpSlider3.value = hp;
-                mainSlider = hpSlider3;
+                hpSli[1].SetActive(false);
+                hpSli[2].SetActive(true);
+                hpSlider[2].value = hp;
+                mainSlider = hpSlider[2];
                 TimeManager(10);
                 maxHP = 500;
+                hp = maxHP;
+                mainSlider.value = maxHP;
             }
             else if (ep == evo3)
             {
-                hp4.SetActive(true);
+                hpSli[3].SetActive(true);
+                hpSli[2].transform.Translate(0, 45, 0);// 場所調整
                 TimeManager(10);
                 maxHP = 1000;
+                hp = maxHP;
+                hpSlider[2].value = 500;
+                hpSlider[3].value = 500;
             }
 
             if (plusTime == 10)
@@ -140,14 +158,20 @@ public class Parameters_R : MonoBehaviour
         if (!freeze)
         {
             TimeManager(-damTime);
-            hp -= addHP;
-            mainSlider.value -= addHP;
+            damaPanel.DamageEffect();
+            if(!(addHP < 0 && hp == maxHP))
+            {
+                hp -= addHP;
+                mainSlider.value -= addHP;
+            }
 
             if (hp <= 0)
             {
                 freeze = true;
                 resultPanel.SetActive(true);
                 hp = 0;
+                PlayerPrefs.SetString(saveStage, scrMis.load);//ミッションセーブ
+                PlayerPrefs.Save();
             }
             hpText.text = "HP: " + hp;
         }
@@ -157,35 +181,48 @@ public class Parameters_R : MonoBehaviour
     private void Update()
     {
         count -= Time.deltaTime;
-        
+
+        //ゲージの色変換
+        currentPer = epSlider.value / epSlider.maxValue;
+        if (currentPer <= 0.30f)
+        {
+            sliderFill.color = Color.Lerp(color1, color2, currentPer * 4f);
+        }
+        else if (currentPer >= 0.85f)
+        {
+            sliderFill.color = Color.Lerp(color3, color4, currentPer);
+        }
+        else
+        {
+            sliderFill.color = Color.Lerp(color2, color3, currentPer);
+        }
+
+
         if (time - count > 1)
         {
             TimeManager(-1);
         }
 
-        /*if (epSlider.value == evo1)
-        {
-            epSlider.value = 0;
-            epSlider.maxValue = evo2;
-            evo1 = 100000;
-        }
-
-        else if (epSlider.value == evo2)
-        {
-            epSlider.value = 0;
-            epSlider.maxValue = evo3;
-            evo2 = 100000;
-        }
-
-        else if (epSlider.value == evo3)
-        {
-            hp4.SetActive(true);
-        }*/
-
         if (hp >= maxHP)
         {
             hp = maxHP;
         }
+
+        if (hp >= 500 && ep >= evo3)
+        {
+            if (hpSlider[2].value == 500)
+            {
+                mainSlider = hpSlider[3];
+            }
+        }
+        else if (hp < 500 && ep >= evo3)
+        {
+            if (hpSlider[3].value == 0)
+            {
+                mainSlider = hpSlider[2];
+            }
+        }
     }
     //タイマーです。一秒ごとにTimeManager()で一秒減らしてます。
+
 }

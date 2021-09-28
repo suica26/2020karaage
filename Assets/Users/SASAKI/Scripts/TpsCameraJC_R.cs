@@ -26,6 +26,10 @@ public class TpsCameraJC_R : MonoBehaviour
     //M
     public float minY;
 
+    // モバイル用
+    private int camFingerId;
+    private int ignoreFingerId;
+
     private enum eCamWork
     {
         eNormal,
@@ -35,6 +39,9 @@ public class TpsCameraJC_R : MonoBehaviour
     private eCamWork eCameraWork = eCamWork.eNormal;
 
     private EvolutionChicken_R scrEvo;
+
+    // Mobile Setting
+    private bool mobileMode;
 
     // Use this for initialization
     void Start()
@@ -51,20 +58,86 @@ public class TpsCameraJC_R : MonoBehaviour
         mouse.y = 0.5f; // start mouse y pos ,0.5f is half
 
         scrEvo = objPlayer.GetComponent<EvolutionChicken_R>();
+
+        mobileMode = MobileSetting_R.GetInstance().IsMobileMode();
+
+        if (mobileMode)
+        {
+            camFingerId = -1;
+            ignoreFingerId = -1;
+        }
+
+        //山本追加 セーブデータとマウス感度(spinSpeed)を連動させられるように
+        var saveObj = GameObject.FindGameObjectWithTag("SaveManager");
+        if (saveObj != null) spinSpeed = saveObj.GetComponent<SaveManager_Y>().GetMouseSensitive();
     }
 
     // Update is called once per frame
     void Update()
     {
-        switch(eCameraWork)
+        switch (eCameraWork)
         {
             case eCamWork.eNormal:
                 // Get MouseMove
-                mouse -= new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")) * Time.deltaTime * spinSpeed;
+                if (!mobileMode)
+                {
+                    mouse -= new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")) * Time.deltaTime * spinSpeed;
+                }
+                else
+                {
+                    // カメラのFingerIdを設定
+                    if (camFingerId < 0)
+                    {
+                        foreach (Touch touch in Input.touches)
+                        {
+                            if ((touch.position.x > Screen.width * 0.20f &&
+                               touch.position.y > Screen.height * 0.20f) &&
+                               ignoreFingerId != touch.fingerId)
+                            {
+                                Debug.Log("CAMERAON");
+                                camFingerId = touch.fingerId;
+                            }
+                        }
+                    }
+
+                    if (ignoreFingerId < 0)
+                    {
+                        foreach (Touch touch in Input.touches)
+                        {
+                            if ((touch.position.x < Screen.width * 0.20f &&
+                               touch.position.y < Screen.height * 0.20f) &&
+                               camFingerId != touch.fingerId)
+                            {
+                                Debug.Log("IGNORE");
+                                ignoreFingerId = touch.fingerId;
+                            }
+                        }
+                    }
+
+                    // 実際のカメラ操作の実装
+                    foreach (Touch touch in Input.touches)
+                    {
+                        if (touch.fingerId == camFingerId && (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled))
+                            camFingerId = -1;
+
+                        if (touch.fingerId == ignoreFingerId && (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled))
+                            ignoreFingerId = -1;
+
+                        if (camFingerId >= 0)
+                        {
+                            if (camFingerId == touch.fingerId)
+                            {
+                                Vector2 position = touch.deltaPosition;
+                                mouse -= position * 0.1f * Time.deltaTime * spinSpeed;
+                            }
+                        }
+                    }
+                }
+
                 // Clamp mouseY move
-                //mouse.y = Mathf.Clamp(mouse.y, 0.25f, 0.95f);
+                mouse.y = Mathf.Clamp(mouse.y, 0.25f, 0.95f);
                 //M
-                mouse.y = Mathf.Clamp(mouse.y, minY, 0.95f);
+                //mouse.y = Mathf.Clamp(mouse.y, minY, 0.95f);
 
                 // sphere coordinates
                 pos.x = Mathf.Sin(mouse.y * Mathf.PI) * Mathf.Cos(mouse.x * Mathf.PI);
@@ -82,7 +155,7 @@ public class TpsCameraJC_R : MonoBehaviour
 
                 camPos = pos + focus[scrEvo.EvolutionNum].position;
 
-                if(endEvolution < 0.25f)
+                if (endEvolution < 0.25f)
                 {
                     endEvolution += Time.deltaTime;
                     transform.position = Vector3.Lerp(transform.position, camPos, 0.25f);
@@ -107,7 +180,7 @@ public class TpsCameraJC_R : MonoBehaviour
         Vector3 setCamPos;
         Vector3 distance = camPos - focus[scrEvo.EvolutionNum].position;
         Ray ray = new Ray(focus[scrEvo.EvolutionNum].position, distance);
-        Debug.DrawRay(ray.origin, ray.direction * distance.magnitude, Color.red, 0.1f,false);
+        Debug.DrawRay(ray.origin, ray.direction * distance.magnitude, Color.red, 0.1f, false);
         RaycastHit[] hits = Physics.RaycastAll(ray, distance.magnitude);
 
         // カメラとチキン間に障害物が無かったら処理を終了する
@@ -115,11 +188,11 @@ public class TpsCameraJC_R : MonoBehaviour
             return;
 
         // 順次処理を行う(Shard は無視する)
-        foreach(var hit in hits)
+        foreach (var hit in hits)
         {
-            if(hit.transform.gameObject.layer != 10)
+            if (hit.transform.gameObject.layer != 10 && hit.transform.gameObject.layer != 17)
             {
-                setCamPos = hit.point;
+                setCamPos = hit.point + transform.forward;
                 transform.position = setCamPos;
                 return;
             }
@@ -144,7 +217,7 @@ public class TpsCameraJC_R : MonoBehaviour
     {
         var elapsed = 0f;
 
-        while(elapsed < dur)
+        while (elapsed < dur)
         {
             var pos = transform.localPosition;
             var x = pos.x + Random.Range(-1f, 1f) * magnitude;
@@ -168,7 +241,7 @@ public class TpsCameraJC_R : MonoBehaviour
 
         while (timer < 5.0f)
         {
-            if(Time.timeScale != 0)
+            if (Time.timeScale != 0)
             {
                 Time.timeScale = 0.1f;
 

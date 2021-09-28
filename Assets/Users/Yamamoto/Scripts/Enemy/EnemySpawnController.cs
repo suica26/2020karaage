@@ -9,7 +9,7 @@ public class EnemySpawnController : MonoBehaviour
     [SerializeField, Header("最大湧き数")] private int[] maxNum;
     [SerializeField, Header("リスポーン時間")] private float[] respawnTime;
     [SerializeField, Header("どのPhaseで出現するか")] private int[] spawnPhase;
-    [Header("スポーン位置のブレの量")]public float blur = 5f;
+    [Header("スポーン位置のブレの量")] public float blur = 5f;
 
     private GameObject player;
     private EvolutionChicken_R scrEvo;
@@ -26,13 +26,13 @@ public class EnemySpawnController : MonoBehaviour
         enemyNum = new int[enemyPrefab.Length];
         spawnPos = new List<List<Transform>>();
 
-        
+
         for (int i = 0; i < enemyPrefab.Length; i++)
         {
             //配列初期化
             respawnTimer[i] = 0f;
             enemyNum[i] = 0;
-            foreach(Transform pos in spawner[i].transform)
+            foreach (Transform pos in spawner[i].transform)
             {
                 //spawn位置のインポート
                 spawnPos.Add(new List<Transform>());
@@ -44,7 +44,7 @@ public class EnemySpawnController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for(int i= 0; i < enemyPrefab.Length; i++)
+        for (int i = 0; i < enemyPrefab.Length; i++)
         {
             if (scrEvo.EvolutionNum + 1 >= spawnPhase[i] && enemyNum[i] < maxNum[i])
             {
@@ -63,8 +63,10 @@ public class EnemySpawnController : MonoBehaviour
         var spawnP = randomSpawnPos(spawnPos[i]);
         var enemy = Instantiate(enemyPrefab[i], SpawnPositionBlur(spawnP), Quaternion.identity);
         enemyNum[i]++;
-        var scr = enemy.AddComponent<EnemyStatusForGameAI>();
-        scr.i = i;  //何番目の敵(Prefab)なのかを記憶させる
+        var scr = enemy.GetComponent<Enemy_Y>();
+        scr.SetPatrollRoute(spawnP.GetComponent<EnemySpawner_Y>().patrollRoute);
+        scr.AIscript = this;
+        scr.number = i;  //何番目の敵(Prefab)なのかを記憶させる
         //Debug.Log($"{i}番目の敵は,{enemyNum[i]}体います");
     }
 

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class FireHydrant_R : BlowerGimmickBase
 {
-    private bool makeHydrant = false;
+    //M publicに変えさせていただきます
+    public bool makeHydrant = false;
     private ObjectStateManagement_Y scrObjManage;
     //M
     //private Stage1_Mission_M s1mm;
@@ -34,7 +35,7 @@ public class FireHydrant_R : BlowerGimmickBase
             InstanceObject();
             InstanceEffect();
             //M
-            if (m1m.third && hyd)
+            if (m1m.fourth && hyd)
             {
                 m1m.hydrant += 1;
                 m1m.achieve += 1;

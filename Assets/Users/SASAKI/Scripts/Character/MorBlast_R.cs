@@ -4,11 +4,7 @@ using UnityEngine;
 
 public class MorBlast_R : MonoBehaviour
 {
-    [SerializeField] private AudioClip chargeClip;
-    [SerializeField] private AudioClip blastClip;
-    [SerializeField] private AudioClip evoBlastClip;
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private Transition_R scrAnim;
+    [SerializeField] private Transition_R[] scrAnim;
     [SerializeField] private float secondBlastTime, thirdBlastTime;
     [SerializeField] private float[] pullTimes;     // チャージの時間を設定する
     [SerializeField] private float[] spreadScale;
@@ -40,6 +36,16 @@ public class MorBlast_R : MonoBehaviour
 
     private new CriAtomSource audio;
 
+    // Mobile Setting
+    private bool mobileMode;
+    private enum eBlast
+    {
+        wait,
+        push,
+        release,
+    }
+    private eBlast isBlastMobile;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,6 +57,10 @@ public class MorBlast_R : MonoBehaviour
         Debug.LogError("scrKick: " + scrKick);
         Debug.LogError("scrCutter: " + scrCutter);
         isBlast = false;
+
+        mobileMode = MobileSetting_R.GetInstance().IsMobileMode();
+        if (mobileMode)
+            isBlastMobile = eBlast.wait;
     }
 
     // Update is called once per frame
@@ -61,79 +71,34 @@ public class MorBlast_R : MonoBehaviour
             return;
         }
 
-        if (Input.GetMouseButton(2) && !isBlast)
+        // 攻撃制限
+        if(AttackRestrictions_R.GetInstance().CanAttack())
         {
-            // 移動速度の減衰
-            if (scrMove != null)
-                scrMove.MoveMag = 1.0f - moveSpeedMag;
-
-            // キックを使用不可にする
-            if (scrKick != null)
-                scrKick.CanKick = false;
-
-            // カッターを使用不可にする
-            if (scrCutter != null)
-                scrCutter.CanCutter = false;
-
-            if(effect == null)
+            if (!mobileMode)
             {
-                effect = Instantiate(_effect, center[scrEvo.EvolutionNum].position, Quaternion.Euler(transform.rotation.eulerAngles), transform);
-                effect.transform.localScale *= effectScale[scrEvo.EvolutionNum];
-                PlayEffect();
+                if (Input.GetMouseButton(2) && !isBlast)
+                    ChargeBlast();
+
+                if (Input.GetMouseButtonUp(2))   //マウス中ボタンを離した際に発動
+                    DoBlast();
             }
+            else
+            {
+                if (isBlastMobile == eBlast.push && !isBlast)
+                    ChargeBlast();
 
-
-            //チャージ音を鳴らす
-            audio.Play("BlastSub01");
-           
-
-            //チャージ段階の判定
-            pullTime += Time.deltaTime;
-            if (pullTime >= pullTimes[0] && charge == 0)
-                charge = 1;
-            if (pullTime >= pullTimes[1] && charge == 1)
-                charge = 2;
-            if (pullTime >= pullTimes[2] && charge == 2)
-                charge = 3;
+                if (isBlastMobile == eBlast.release)
+                    DoBlast();
+            }
         }
 
-        if (Input.GetMouseButtonUp(2))   //マウス中ボタンを離した際に発動
-        {
-            // 移動速度を直す
-            if (scrMove != null)
-                scrMove.MoveMag = 1.0f;
-
-            // キックを使用可能にする
-            if (scrKick != null)
-                scrKick.CanKick = true;
-
-            // カッターを使用可能にする
-            if (scrCutter != null)
-                scrCutter.CanCutter = true;
-
-            if (effect != null)
-                Destroy(effect);
-
-            audioSource.Stop();
-            pullTime = 0f;
-            if(charge > 0)
-            {
-                isBlast = true;
-                StartCoroutine("ReleaseBlast");
-            }
-
-            audio.Stop();
-            audio.Play("BlastSub02");
-        }
-
-        
-        for(int i = 0; i < morningBlast.Length; i++)
+        for (int i = 0; i < morningBlast.Length; i++)
         {
             if (morningBlast[i] != null)
             {
                 morningBlast[i].transform.position = blastCenter[scrEvo.EvolutionNum].position;
                 morningBlast[i].transform.localScale += new Vector3(plusScale, plusScale, plusScale) / spreadTime * Time.deltaTime;
-            }   
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.C))
@@ -146,13 +111,81 @@ public class MorBlast_R : MonoBehaviour
         }
     }
 
+    private void ChargeBlast()
+    {
+        // 移動速度の減衰
+        if (scrMove != null)
+            scrMove.MoveMag = 1.0f - moveSpeedMag;
+
+        // キックを使用不可にする
+        if (scrKick != null)
+            scrKick.CanKick = false;
+
+        // カッターを使用不可にする
+        if (scrCutter != null)
+            scrCutter.CanCutter = false;
+
+        if (effect == null)
+        {
+            effect = Instantiate(_effect, center[scrEvo.EvolutionNum].position, Quaternion.Euler(transform.rotation.eulerAngles), transform);
+            effect.transform.localScale *= effectScale[scrEvo.EvolutionNum];
+            PlayEffect();
+        }
+
+
+        //チャージ音を鳴らす
+        audio.Play("BlastSub01");
+
+
+        //チャージ段階の判定
+        pullTime += Time.deltaTime;
+        if (pullTime >= pullTimes[0] && charge == 0)
+            charge = 1;
+        if (pullTime >= pullTimes[1] && charge == 1)
+            charge = 2;
+        if (pullTime >= pullTimes[2] && charge == 2)
+            charge = 3;
+    }
+
+    private void DoBlast()
+    {
+        AttackRestrictions_R.GetInstance().SetTimer(secondBlastTime + thirdBlastTime);
+
+        // 移動速度を直す
+        if (scrMove != null)
+            scrMove.MoveMag = 1.0f;
+
+        // キックを使用可能にする
+        if (scrKick != null)
+            scrKick.CanKick = true;
+
+        // カッターを使用可能にする
+        if (scrCutter != null)
+            scrCutter.CanCutter = true;
+
+        if (effect != null)
+            Destroy(effect);
+
+        pullTime = 0f;
+        audio.Stop();
+        if (charge > 0)
+        {
+            isBlast = true;
+            StartCoroutine("ReleaseBlast");
+            audio.Play("BlastSub02");
+        }
+
+
+        if (mobileMode)
+            isBlastMobile = eBlast.wait;
+    }
+
     IEnumerator ReleaseBlast()
     {
         plusScale = spreadScale[charge - 1] * spreadEvoScale[scrEvo.EvolutionNum];
         pullTime = 0f;
         charge = 0;
-        audioSource.PlayOneShot(blastClip);
-        scrAnim.SetAnimator(Transition_R.Anim.BLAST, true);
+        scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.BLAST, true);
 
         //1回目
         morningBlast[0] = Instantiate(morBlaSphere, transform);
@@ -167,7 +200,7 @@ public class MorBlast_R : MonoBehaviour
         Destroy(morningBlast[2], spreadTime);
 
         isBlast = false;
-        scrAnim.SetAnimator(Transition_R.Anim.BLAST, false);
+        scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.BLAST, false);
         yield break;
     }
 
@@ -175,19 +208,29 @@ public class MorBlast_R : MonoBehaviour
     public void EvoBlast()
     {
         plusScale = spreadScale[2] * spreadEvoScale[scrEvo.EvolutionNum];
-        audioSource.PlayOneShot(evoBlastClip);
         morningBlast[0] = Instantiate(morBlaSphere, transform);
         Destroy(morningBlast[0], spreadTime);
     }
 
     private void PlayEffect()
     {
-        if(effect != null)
+        if (effect != null)
         {
-            foreach(var particle in effect.GetComponentsInChildren<ParticleSystem>())
+            foreach (var particle in effect.GetComponentsInChildren<ParticleSystem>())
             {
                 particle.Play();
             }
         }
+    }
+
+    // Moblie Setting
+    public void PushButton()
+    {
+        isBlastMobile = eBlast.push;
+    }
+
+    public void ReleaseButton()
+    {
+        isBlastMobile = eBlast.release;
     }
 }

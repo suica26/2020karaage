@@ -101,7 +101,7 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 0.46
   contrast:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 2.96
     min: -100
     max: 100
@@ -140,15 +140,15 @@ MonoBehaviour:
     m_Value: 1
   gaussianStart:
     m_OverrideState: 1
-    m_Value: 198.7
+    m_Value: 150.3
     min: 0
   gaussianEnd:
     m_OverrideState: 1
-    m_Value: 610.6
+    m_Value: 370.55
     min: 0
   gaussianMaxRadius:
     m_OverrideState: 1
-    m_Value: 0.5
+    m_Value: 0.705
     min: 0.5
     max: 1.5
   highQualitySampling:
@@ -197,9 +197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   components:
   - {fileID: -665218294594217088}
-  - {fileID: 7042800744115889000}
   - {fileID: -595788100053537267}
-  - {fileID: 8276346291684256989}
   - {fileID: -6490051476009089347}
   - {fileID: 2099160946553233182}
   - {fileID: -6772414439458691901}
@@ -220,57 +218,3 @@ MonoBehaviour:
   mode:
     m_OverrideState: 1
     m_Value: 2
---- !u!114 &7042800744115889000
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29fa0085f50d5e54f8144f766051a691, type: 3}
-  m_Name: FilmGrain
-  m_EditorClassIdentifier: 
-  active: 1
-  m_AdvancedMode: 0
-  type:
-    m_OverrideState: 1
-    m_Value: 3
-  intensity:
-    m_OverrideState: 1
-    m_Value: 0.1
-    min: 0
-    max: 1
-  response:
-    m_OverrideState: 0
-    m_Value: 0.8
-    min: 0
-    max: 1
-  texture:
-    m_OverrideState: 0
-    m_Value: {fileID: 0}
---- !u!114 &8276346291684256989
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 221518ef91623a7438a71fef23660601, type: 3}
-  m_Name: WhiteBalance
-  m_EditorClassIdentifier: 
-  active: 1
-  m_AdvancedMode: 0
-  temperature:
-    m_OverrideState: 1
-    m_Value: 10
-    min: -100
-    max: 100
-  tint:
-    m_OverrideState: 1
-    m_Value: 13.6
-    min: -100
-    max: 100

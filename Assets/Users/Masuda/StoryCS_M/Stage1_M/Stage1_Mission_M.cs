@@ -36,7 +36,7 @@ public class Stage1_Mission_M : MonoBehaviour
 
     void Update()
     {
-        Language = ChangeLanguage.getLanguage();//
+        //Language = ChangeLanguage.getLanguage();
         Vector3 playerPos = player.transform.position;
         Vector3 comPos = company.transform.position;
         float dis = Vector3.Distance(playerPos, comPos);

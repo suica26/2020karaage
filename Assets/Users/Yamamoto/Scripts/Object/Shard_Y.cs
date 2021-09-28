@@ -6,6 +6,7 @@ public class Shard_Y : MonoBehaviour
 {
     public int shardDamage;
     private bool gaveDamage = false;
+    
     private void OnCollisionEnter(Collision other)
     {
         if (!gaveDamage)

@@ -17,10 +17,17 @@ public class WayPointGraph_Y : MonoBehaviour
     public float routinTimer;
     public float spawnTime;
     private const float DISTAREA = 20f;
+    [SerializeField] private bool calculating;
 
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(InitSetting());
+    }
+
+    private IEnumerator InitSetting()
+    {
+        calculating = true;
         //コストマップ情報を構築
         wayPointsArray = new GameObject[wayPoints.transform.childCount];
         wpScripts = new WayPoint_Y[wayPointsArray.Length];
@@ -30,24 +37,30 @@ public class WayPointGraph_Y : MonoBehaviour
             wpScripts[i] = wayPointsArray[i].GetComponent<WayPoint_Y>();
             //各WayPointにnumberを割り振り
             wpScripts[i].SetPointNum(i);
+
+            if (i % 5 == 0) yield return null;
         }
 
         //リスト初期化
         endPointNumbers = new List<int>();
         scrSpawners = new List<SpawnerWaypoint_Y>();
 
+        int count = 0;
         //隣接点の情報を取得
         foreach (var wps in wpScripts)
         {
+            count++;
             //隣接点情報を各WayPointにセット
             wps.SetNeiNum();
             //終着点候補をリストに追加していく
             if (wps.endPointFlg) endPointNumbers.Add(wps.PointNumber);
             //スポーン候補をリストに追加していく
             if (wps.spawnerPointFlg) scrSpawners.Add(wayPointsArray[wps.PointNumber].GetComponent<SpawnerWaypoint_Y>());
+            if (count % 5 == 0) yield return null;
         }
 
         ResetDijkstraMap();
+        calculating = false;
     }
 
     private void Update()
@@ -55,28 +68,28 @@ public class WayPointGraph_Y : MonoBehaviour
         //一度に存在する市民の数を制御
         if (civilNum < civilMaxNum) routinTimer += Time.deltaTime;
         //スポーン処理
-        if (routinTimer >= spawnTime) Spawn();
+        if (routinTimer >= spawnTime && !calculating) StartCoroutine(Spawn());
     }
 
-    private void Spawn()
+    private IEnumerator Spawn()
     {
         routinTimer = 0f;
         civilNum++;
+        int randomNum = 0;
         while (true)
         {
             //セットしてあるPrefabの中から、Spawnする市民をランダムに選択
-            int randomNum = Random.Range(0, scrSpawners.Count);
-            if (Vector3.Distance(wayPointsArray[scrSpawners[randomNum].PointNumber].transform.position, GameObject.Find("Player").transform.position) >= DISTAREA)
-            {
-                CulDijkstra(scrSpawners[randomNum].PointNumber);
-                scrSpawners[randomNum].SpawnCivil();
-                break;
-            }
+            randomNum = Random.Range(0, scrSpawners.Count);
+            if (Vector3.Distance(wayPointsArray[scrSpawners[randomNum].PointNumber].transform.position, GameObject.Find("Player").transform.position) >= DISTAREA) break;
         }
 
+        calculating = true;
+        yield return StartCoroutine(CulDijkstra(scrSpawners[randomNum].PointNumber));
+
+        scrSpawners[randomNum].SpawnCivil();
     }
 
-    public void CulDijkstra(int startPoint)
+    public IEnumerator CulDijkstra(int startPoint)
     {
         int endPoint;
         do
@@ -134,8 +147,11 @@ public class WayPointGraph_Y : MonoBehaviour
             if (NOC > 100)
             {
                 Debug.Log($"Infinite Loop Avoided! Start is {wpScripts[startPoint].PointNumber}. End is {wpScripts[endPoint].PointNumber}");
+                calculating = false;
                 break;
             }
+
+            yield return null;
         }
 
         finishFlg = false;
@@ -163,6 +179,7 @@ public class WayPointGraph_Y : MonoBehaviour
 
         routeList.Reverse();
         route = routeList.ToArray();
+        calculating = false;
     }
 
     public void ResetDijkstraMap()

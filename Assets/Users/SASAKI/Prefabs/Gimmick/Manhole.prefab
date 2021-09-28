@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 9176439785199168654}
   - component: {fileID: -3037700048920991352}
   - component: {fileID: 4274357659594388101}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Manhole
-  m_TagString: Untagged
+  m_TagString: metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,9 +115,12 @@ MonoBehaviour:
   _force: 200
   _time: 2.5
   _ySize: 0.2
+  _ySizeAdditional: 0
+  _ySizeAdditionalObj: 0
   _xScale: 2
   _yScale: 5
   _zScale: 2
+  player: {fileID: 0}
 --- !u!54 &-3037700048920991352
 Rigidbody:
   m_ObjectHideFlags: 0

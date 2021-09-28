@@ -90,6 +90,8 @@ GameObject:
   - component: {fileID: 30098971709343626}
   - component: {fileID: 1513354650150674259}
   - component: {fileID: 6595120339355588617}
+  - component: {fileID: 7805288732188054103}
+  - component: {fileID: 3747604191676238793}
   m_Layer: 0
   m_Name: body
   m_TagString: Untagged
@@ -158,6 +160,43 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &7805288732188054103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431111515790150007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4302c2447a59484db44a8bc0d23ddd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 20
+  cueName: "CarMove00\u3000\u3000"
+--- !u!114 &3747604191676238793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431111515790150007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: "\u3000"
+  _cueSheet: 
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &2200427024726069262
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,6 +372,7 @@ GameObject:
   - component: {fileID: 5967423035081972792}
   - component: {fileID: -718959085629548675}
   - component: {fileID: -3854896102660974537}
+  - component: {fileID: 1393407332425431301}
   m_Layer: 0
   m_Name: car3_1
   m_TagString: Car
@@ -389,13 +429,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _obj: {fileID: 7430103647231780757, guid: 3a87acf169f5aad4a9e7910be0e61470, type: 3}
   _effect: {fileID: 6712329990759217117, guid: 53bf79c5ee1924f789ffbbd76bb24400, type: 3}
-  _usageEvo: 3
+  _usageEvo: 1
   _force: 10
   _time: 5
   _ySize: 2
+  _ySizeAdditional: 0
+  _ySizeAdditionalObj: 0
   _xScale: 6
   _yScale: 6
   _zScale: 6
+  makeHydrant: 0
   player: {fileID: 0}
   hyd: 0
 --- !u!114 &1413686855154798641
@@ -418,6 +461,7 @@ MonoBehaviour:
   cutterMag: 1
   fallAttackMag: 1
   breakScore: 0
+  criAtomSource: {fileID: 0}
   objectID: 5
   breakEffect: {fileID: 0}
   deleteTime: 3
@@ -427,6 +471,8 @@ MonoBehaviour:
   shardDamage_nonDiv: 0
   specialObjectFlg: 0
   notDamage: 0
+  magnitude: 0.1
+  duration: 0.25
 --- !u!54 &-1375562345466738953
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -517,6 +563,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1393407332425431301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2450961377838538724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a8de29bc362ca6418fc5c78fa0372c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3793525489225160563
 GameObject:
   m_ObjectHideFlags: 0

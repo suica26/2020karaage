@@ -17,6 +17,12 @@ public class Enemy_Y : ObjectStateManagement_Y
     public AnimationClip attackClip;
     public int attackDamage;
     public float searchArea = 50f;
+    private EnemyMoveController_Y enemyControllerScr;
+
+    private ADX_BGMAISAC aisacScr;
+    [SerializeField] private Vector3[] patrollRoute;
+    public EnemySpawnController AIscript;
+    public int number;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -26,36 +32,50 @@ public class Enemy_Y : ObjectStateManagement_Y
         rb = GetComponent<Rigidbody>();
         navAgent = GetComponent<NavMeshAgent>();
         animator.SetBool("isWalk", true);
+        enemyControllerScr = GameObject.Find("GameAI_Y").GetComponent<EnemyMoveController_Y>();
+        aisacScr = GameObject.Find("BGMObject").GetComponent<ADX_BGMAISAC>();
     }
 
     //基本挙動を記述
-    protected void Update()
+    protected virtual void Update()
     {
-        routineTimer += Time.deltaTime;
-
-        if (Vector3.Distance(player.transform.position, transform.position) <= searchArea)
+        if (livingFlg)
         {
-
-            if (Vector3.Distance(player.transform.position, transform.position) <= attackDistance)
+            if (enemyControllerScr.enemyCanMove)
             {
-                if (routineTimer > attackInterval)
+                routineTimer += Time.deltaTime;
+
+                if (Vector3.Distance(player.transform.position, transform.position) <= searchArea)
                 {
-                    routineTimer = 0f;
-                    Attack();
+                    aisacScr.SetBattleBGM(gameObject);
+
+                    if (Vector3.Distance(player.transform.position, transform.position) <= attackDistance)
+                    {
+                        if (routineTimer > attackInterval)
+                        {
+                            routineTimer = 0f;
+                            Attack();
+                        }
+                        else
+                        {
+                            Wait();
+                        }
+                    }
+                    else
+                    {
+                        if (!animator.GetCurrentAnimatorStateInfo(0).IsTag("StopMove"))
+                        {
+                            navAgent.SetDestination(player.transform.position);
+                            Walk();
+                        }
+                    }
                 }
                 else
                 {
-                    Wait();
+                    Patroll();
                 }
             }
-            else
-            {
-                Walk();
-            }
-        }
-        else
-        {
-            Wait();
+            else StopMove();
         }
     }
 
@@ -67,7 +87,6 @@ public class Enemy_Y : ObjectStateManagement_Y
 
     protected void Move()
     {
-        navAgent.destination = player.transform.position;
         navAgent.isStopped = false;
         rb.isKinematic = false;
     }
@@ -81,6 +100,9 @@ public class Enemy_Y : ObjectStateManagement_Y
     protected void Wait()
     {
         StopMove();
+        var dir = player.transform.position - transform.position;
+        dir.y = 0f;
+        transform.forward = dir.normalized;
         animator.SetBool("isWait", true);
         animator.SetBool("isWalk", false);
     }
@@ -92,11 +114,40 @@ public class Enemy_Y : ObjectStateManagement_Y
         animator.SetBool("isWalk", true);
     }
 
-    protected void Attack()
+    protected void Patroll()
+    {
+        if (patrollRoute == null)
+        {
+            Wait();
+        }
+        else
+        {
+            Walk();
+            if (navAgent.remainingDistance <= 3.0f)
+            {
+                navAgent.SetDestination(patrollRoute[Random.Range(0, patrollRoute.Length)]);
+            }
+        }
+    }
+
+    protected virtual void Attack()
     {
         StopMove();
         animator.SetTrigger("Attack");
         StartCoroutine(RestartMove());
+    }
+
+    public override void Damage(float mag, int skill)
+    {
+        //すでに破壊済みの場合は何も起きないようにする
+        if (!livingFlg) return;
+
+        HP -= (int)(scrEvo.Status_ATK * mag);
+        SetSkillID(skill);
+        animator.SetTrigger("Damage");
+
+        //生死判定
+        LivingCheck();
     }
 
     protected override void Death()
@@ -106,8 +157,19 @@ public class Enemy_Y : ObjectStateManagement_Y
 
         //アニメーション以外の要素を停止
         StopMove();
+        navAgent.enabled = false;
 
-        Destroy(gameObject, 0.5f);
+        Destroy(gameObject, 1.5f);
         animator.SetTrigger("Death");
+    }
+
+    public void SetPatrollRoute(Vector3[] route)
+    {
+        patrollRoute = route;
+    }
+
+    protected void OnDestroy()
+    {
+        AIscript?.UpdateEnemyNum(number);
     }
 }

@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 5472457982006428305}
   - component: {fileID: 1018863235813687258}
   - component: {fileID: 6913371246473747796}
+  - component: {fileID: 2497733979900012675}
   - component: {fileID: 4356213465862684677}
   - component: {fileID: 3040465702832958394}
   - component: {fileID: -1648660066193379979}
-  - component: {fileID: 1851862116055528291}
   - component: {fileID: -1443858533272254348}
   m_Layer: 2
   m_Name: StreetLight_A
@@ -114,7 +114,20 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 127, y: 1915.4822, z: 189}
-  m_Center: {x: 300, y: 400, z: 3.4}
+  m_Center: {x: -352.55, y: -18.6, z: 3.4}
+--- !u!65 &2497733979900012675
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2448828224777624931}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 717.4, y: 91.8, z: 58}
+  m_Center: {x: -13.968765, y: 747.7, z: 0.000034332275}
 --- !u!135 &4356213465862684677
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -142,21 +155,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tier_WalkAttack: 2
   divideObject: {fileID: 0}
-  HP: 500
+  HP: 150
   kickMag: 1
   blastMag: 1.2
   cutterMag: 1.5
   fallAttackMag: 1
   breakScore: 1000
-  objectID: 0
+  criAtomSource: {fileID: 0}
+  objectID: 1
   breakEffect: {fileID: 0}
   deleteTime: 3
   torque: 100
   power: 30
   groundContactSoundName: BounceLight00
-  shardDamage_nonDiv: 500
+  shardDamage_nonDiv: 800
   specialObjectFlg: 0
   notDamage: 0
+  magnitude: 0.1
+  duration: 0.25
 --- !u!114 &-1648660066193379979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,102 +188,6 @@ MonoBehaviour:
   objFood: {fileID: 6224625970994948174, guid: 432283639b2517e4cb2744030344a38c, type: 3}
   minFood: 0
   maxFood: 0
---- !u!82 &1851862116055528291
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2448828224777624931}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!114 &-1443858533272254348
 MonoBehaviour:
   m_ObjectHideFlags: 0

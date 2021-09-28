@@ -6,45 +6,32 @@ using UnityEngine.UI;
 public class Audio_M : MonoBehaviour
 {
     public Slider volSlider;
-    public CriAtomSource cas;
 
-    [SerializeField] public static float vol;
-    public SoundVolumeController soundVolumeController;
-    private int timer;
+    [SerializeField] public static float vol = 0f;
+    private SoundVolumeController soundVolumeController;
+    private string[] CatergoryNames = new string[4]{
+        "BGM", "SFX", "Voice", "Ambient"
+    };
+
+    private void Start()
+    {
+        var soundVolumeObject = GameObject.Find("SoundVolume");
+        soundVolumeController = soundVolumeObject.GetComponent<SoundVolumeController>();
+        volSlider.value = soundVolumeController.nowVolume;
+    }
 
     // Update is called once per frame
     void Update()
     {
-        timer++;
-        if (timer == 5)
+        vol = volSlider.value;
+        if (soundVolumeController == null)
         {
-            var soundVolumeObject = GameObject.Find("SoundVolume");
-            soundVolumeController = soundVolumeObject.GetComponent<SoundVolumeController>();
-            volSlider.value = soundVolumeController.soundVolume;
+            foreach (var category in CatergoryNames)
+                CriAtom.SetCategoryVolume(category, vol);
         }
-
-        if (timer > 6)
+        else
         {
-            vol = volSlider.value;
-            if (soundVolumeController == null)
-            {
-                CriAtom.SetCategoryVolume("BGM", vol);
-                CriAtom.SetCategoryVolume("SFX", vol);
-                CriAtom.SetCategoryVolume("Voice", vol);
-                CriAtom.SetCategoryVolume("Ambient", vol);
-            }
-            else
-            {
-                soundVolumeController.soundVolume = vol;
-            }
+            soundVolumeController.currentVolume = vol;
         }
     }
-
-    /*
-    //ADX　Aisac値変更
-    private void VolumeControlValue(float value)
-    {
-        cas.SetAisacControl("Volume", value);
-    }
-    */
 }

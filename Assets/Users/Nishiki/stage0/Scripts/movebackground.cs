@@ -16,13 +16,13 @@ public class movebackground : MonoBehaviour
 
     public float spdown;
     private CameraShake shake;
-    private  CriAtomSource audio;
+    public  new CriAtomSource audio;
     private float AISAC;
     private GameObject MainCamera;
     private void Start()
     {
         shake = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShake>();
-        audio = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CriAtomSource>();
+        audio = GameObject.Find("mainground").GetComponent<CriAtomSource>();
         AISAC = 0.45f;
         audio.SetAisacControl("Volume", AISAC);
     }

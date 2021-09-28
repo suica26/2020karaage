@@ -556,7 +556,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 88e8c89c8bc20e64189a7974fbe42740, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -1093,7 +1093,7 @@ GameObject:
   - component: {fileID: 6760055943281882109}
   - component: {fileID: 7026735143315130746}
   - component: {fileID: 8551496460697599318}
-  - component: {fileID: -8187131891899211147}
+  - component: {fileID: 6053872500020871742}
   m_Layer: 0
   m_Name: Civ2
   m_TagString: Civil
@@ -1133,9 +1133,9 @@ MonoBehaviour:
   walkSpeed: 4
   contagionRange: 20
   route: []
+  timer: 0
   deleteTiming: 90
   resetForwardTiming: 5
-  wayPointGraph: {fileID: 0}
   avoidFlg: 0
   animator: {fileID: 1946416489287011982}
 --- !u!54 &7026735143315130746
@@ -1177,7 +1177,7 @@ MonoBehaviour:
   _pitch: 0
   _androidUseLowLatencyVoicePool: 0
   need_to_player_update_all: 1
---- !u!114 &-8187131891899211147
+--- !u!114 &6053872500020871742
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1186,7 +1186,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 9124111091889982900}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4302c2447a59484db44a8bc0d23ddd6, type: 3}
+  m_Script: {fileID: 11500000, guid: f7fce62bf4e64491f8c942f231529f4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 18
+  distance: 5
+  NoWalking: 0

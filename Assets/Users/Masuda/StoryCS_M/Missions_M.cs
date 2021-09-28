@@ -5,32 +5,42 @@ using UnityEngine.UI;
 
 public class Missions_M : MonoBehaviour
 {
-    [SerializeField] public Text mission, submis, exmis, count, per, tips, mainCount;
+    [SerializeField] public Text mission, submis, exmis, per, tips;
     [SerializeField]
-    public GameObject player, misBox, company, buildTips, tipsChicken;
-    [SerializeField] public TextAsset txtFile;
-    [SerializeField] public int smallNum, bigNum, achieve, main, hitID;
-    [SerializeField] public int smallBorder1, smallBorder2, smallBorder3,
-                                bigBorder1, bigBorder2, bigBorder3, bigBorder4 ,anythingCount;
-    public bool first = true, second = false, third = false, fourth = false, final = false, tip = false;
+    public GameObject player, misBox, company, tipsChicken;
+    [SerializeField] public TextAsset txtFile, japanese, english;//英語ファイルを追加し、mainFileで日英のファイル変更を可能に
+    [SerializeField] public int smallNum, bigNum, achieve, hitID;
+    [SerializeField]
+    public int smallBorder1, smallBorder2, smallBorder3,
+                                bigBorder1, bigBorder2, bigBorder3, bigBorder4;
+    public bool first = false, second = false, third = false, fourth = false, five = false,
+        six = false, seven = false, final = false, tip = false;
     public string txtData;
     public string[] splitText;
     [SerializeField] public Animation missionSlide;
     [SerializeField] public float timer, tipsTimer;
-    public Animator animator;
-    public string misStr = "isMission";
     [SerializeField] public ObjectStateManagement_Y eneBillScr;
     public bool stage2;
+    public Parameters_R scrParame;
+    public string load,playLanguage;
+    public EvolutionChicken_R scrEvoChi;
+    public int evoNum;
 
     public virtual void Start()
     {
-        mainCount.text += main;
+        playLanguage = PlayerPrefs.GetString("language");
+        if (playLanguage == "English")
+        {
+            txtFile = english;
+        }
+        else if (playLanguage == "Japanese")
+        {
+            txtFile = japanese;
+        }
         txtData = txtFile.text;
         splitText = txtData.Split(char.Parse("\n"));
         //misBox.SetActive(false);
-        buildTips.SetActive(false);
         tipsChicken.SetActive(false);
-        animator = misBox.GetComponent<Animator>();
     }
 
     public virtual void BigNumberPlus()
@@ -44,7 +54,7 @@ public class Missions_M : MonoBehaviour
 
         else if (first && stage2)
         {
-            
+
             if (hitID == 3)
             {
                 bigNum++;
@@ -60,7 +70,7 @@ public class Missions_M : MonoBehaviour
         }
     }
     public virtual void SmallNumberPlus()
-    {        
+    {
         if (second && !stage2)
         {
             smallNum++;

@@ -431,6 +431,7 @@ MonoBehaviour:
   cutterMag: 1
   fallAttackMag: 1
   breakScore: 0
+  criAtomSource: {fileID: 0}
   objectID: 0
   breakEffect: {fileID: 0}
   deleteTime: 3
@@ -440,6 +441,8 @@ MonoBehaviour:
   shardDamage_nonDiv: 0
   specialObjectFlg: 0
   notDamage: 0
+  magnitude: 0.1
+  duration: 0.25
 --- !u!1 &3148532803460801092
 GameObject:
   m_ObjectHideFlags: 0
@@ -792,6 +795,7 @@ MonoBehaviour:
   cutterMag: 1
   fallAttackMag: 1
   breakScore: 0
+  criAtomSource: {fileID: 0}
   objectID: 0
   breakEffect: {fileID: 0}
   deleteTime: 3
@@ -801,6 +805,8 @@ MonoBehaviour:
   shardDamage_nonDiv: 0
   specialObjectFlg: 0
   notDamage: 0
+  magnitude: 0.1
+  duration: 0.25
 --- !u!1 &4543166570822050453
 GameObject:
   m_ObjectHideFlags: 0
@@ -916,6 +922,7 @@ MonoBehaviour:
   cutterMag: 1
   fallAttackMag: 1
   breakScore: 0
+  criAtomSource: {fileID: 0}
   objectID: 0
   breakEffect: {fileID: 0}
   deleteTime: 3
@@ -925,6 +932,8 @@ MonoBehaviour:
   shardDamage_nonDiv: 0
   specialObjectFlg: 0
   notDamage: 0
+  magnitude: 0.1
+  duration: 0.25
 --- !u!1 &5232680806691003816
 GameObject:
   m_ObjectHideFlags: 0
@@ -1136,7 +1145,6 @@ MonoBehaviour:
   player: {fileID: 0}
   pos: {x: 0, y: 0, z: 0}
   prePos: {x: 0, y: 0, z: 0}
-  drop: 0
   achieve: {fileID: 0}
 --- !u!114 &4109913316854149079
 MonoBehaviour:
@@ -1152,12 +1160,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tier_WalkAttack: 4
   divideObject: {fileID: 0}
-  HP: 500
+  HP: 400
   kickMag: 1
   blastMag: 1
   cutterMag: 1
   fallAttackMag: 1
   breakScore: 0
+  criAtomSource: {fileID: 0}
   objectID: 6
   breakEffect: {fileID: 0}
   deleteTime: 3
@@ -1167,6 +1176,8 @@ MonoBehaviour:
   shardDamage_nonDiv: 0
   specialObjectFlg: 0
   notDamage: 0
+  magnitude: 0
+  duration: 0
 --- !u!114 &6719764043381876783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1180,14 +1191,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _obj: {fileID: 7430103647231780757, guid: 3a87acf169f5aad4a9e7910be0e61470, type: 3}
-  _effect: {fileID: 6712329990759217117, guid: 53bf79c5ee1924f789ffbbd76bb24400, type: 3}
+  _effect: {fileID: 2928450046883548547, guid: 6c2c0d9a0a5f9764d91795b929234232, type: 3}
   _usageEvo: 3
-  _force: 50
-  _time: 2
+  _force: 8
+  _time: 4
   _ySize: 0
-  _xScale: 25
-  _yScale: 25
-  _zScale: 25
+  _ySizeAdditional: 9
+  _ySizeAdditionalObj: 0
+  _xScale: 40
+  _yScale: 40
+  _zScale: 40
+  makeHydrant: 0
   player: {fileID: 0}
   hyd: 0
 --- !u!114 &5797568001521447844
@@ -1611,6 +1625,7 @@ MonoBehaviour:
   cutterMag: 1
   fallAttackMag: 1
   breakScore: 0
+  criAtomSource: {fileID: 0}
   objectID: 0
   breakEffect: {fileID: 0}
   deleteTime: 3
@@ -1620,6 +1635,8 @@ MonoBehaviour:
   shardDamage_nonDiv: 0
   specialObjectFlg: 0
   notDamage: 0
+  magnitude: 0.1
+  duration: 0.25
 --- !u!1 &7402703194428963477
 GameObject:
   m_ObjectHideFlags: 0
@@ -1753,6 +1770,7 @@ MonoBehaviour:
   mainTankRigid: {fileID: 7248231595986234104}
   speed: 2
   subprops: {fileID: 7683542193724585035}
+  underObject: {fileID: 0}
 --- !u!1 &7683542193724585035
 GameObject:
   m_ObjectHideFlags: 0
@@ -1912,6 +1930,7 @@ MonoBehaviour:
   cutterMag: 1
   fallAttackMag: 1
   breakScore: 0
+  criAtomSource: {fileID: 0}
   objectID: 0
   breakEffect: {fileID: 0}
   deleteTime: 3
@@ -1921,6 +1940,8 @@ MonoBehaviour:
   shardDamage_nonDiv: 0
   specialObjectFlg: 0
   notDamage: 0
+  magnitude: 0.1
+  duration: 0.25
 --- !u!1 &8366524272443326867
 GameObject:
   m_ObjectHideFlags: 0
@@ -2115,6 +2136,7 @@ MonoBehaviour:
   cutterMag: 1
   fallAttackMag: 1
   breakScore: 0
+  criAtomSource: {fileID: 0}
   objectID: 0
   breakEffect: {fileID: 0}
   deleteTime: 3
@@ -2124,6 +2146,8 @@ MonoBehaviour:
   shardDamage_nonDiv: 0
   specialObjectFlg: 0
   notDamage: 0
+  magnitude: 0.1
+  duration: 0.25
 --- !u!1 &8846156298500137363
 GameObject:
   m_ObjectHideFlags: 0
@@ -2318,6 +2342,7 @@ MonoBehaviour:
   cutterMag: 1
   fallAttackMag: 1
   breakScore: 0
+  criAtomSource: {fileID: 0}
   objectID: 0
   breakEffect: {fileID: 0}
   deleteTime: 3
@@ -2327,6 +2352,8 @@ MonoBehaviour:
   shardDamage_nonDiv: 0
   specialObjectFlg: 0
   notDamage: 0
+  magnitude: 0.1
+  duration: 0.25
 --- !u!1 &9116412249516826439
 GameObject:
   m_ObjectHideFlags: 0
@@ -2352,8 +2379,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9116412249516826439}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.016, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2328819870670982729}
@@ -2371,6 +2398,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56fcf0bdf867f6943b4faed600c27775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onTheBuilding: 0
+  enemyBill: {fileID: 0}
+  explosionSphere: {fileID: 2707484399983983890, guid: 10abdfb8c1d834b4c847203d04192cf7,
+    type: 3}
+  startExplodeTiming: 2
+  expDeleteTiming: 0.8
+  expScale: 50
 --- !u!135 &3041782271938283974
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2383,4 +2417,4 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.0098
-  m_Center: {x: 0, y: 0.016, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}

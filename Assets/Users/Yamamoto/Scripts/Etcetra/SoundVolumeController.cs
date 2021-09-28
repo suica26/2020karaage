@@ -5,25 +5,41 @@ using UnityEngine.SceneManagement;
 
 public class SoundVolumeController : MonoBehaviour
 {
-    public float soundVolume = 1f;
+    public float currentVolume = 0f;
+    public float nowVolume = 0f;
     public GameObject[] soundmaster;
+    private string[] CatergoryNames = new string[4]{
+        "BGM", "SFX", "Voice", "Ambient"
+    };
+    private SaveManager_Y saveManager;
+    static private SoundVolumeController instance;
+
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else Destroy(gameObject);
     }
 
     void Start()
     {
-        //中断したときにSoundVolumeが複数個存在するのを防ぐ処理
-        soundmaster = GameObject.FindGameObjectsWithTag("SoundVolume");
-        if (soundmaster.Length > 1) Destroy(this.gameObject);
+        saveManager = GameObject.Find("SaveManager").GetComponent<SaveManager_Y>();
+        if (saveManager != null)
+            currentVolume = saveManager.GetSoundVolume();
     }
 
     void Update()
     {
-        CriAtom.SetCategoryVolume("BGM", soundVolume);
-        CriAtom.SetCategoryVolume("SFX", soundVolume);
-        CriAtom.SetCategoryVolume("Voice", soundVolume);
-        CriAtom.SetCategoryVolume("Ambient", soundVolume);
+        foreach (var category in CatergoryNames)
+            CriAtom.SetCategoryVolume(category, currentVolume);
+        if (currentVolume != nowVolume)
+        {
+            nowVolume = currentVolume;
+            if (saveManager != null)
+                saveManager.SaveSoundVolume(nowVolume);
+        }
     }
 }

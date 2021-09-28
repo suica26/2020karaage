@@ -36,9 +36,12 @@ public class Car_R : MonoBehaviour
             // 交差点情報更新
             nowWaypoint = nextWaypoint;
 
+            if (!nowWaypoint.GetComponent<CarWaypoint_R>().endWaypoint)
+                isFirstMeetEnd = false;
+
             // 次の交差点と、その次の交差点を取得
             nextWaypoint = nowWaypoint.GetComponent<CarWaypoint_R>().SetNextWaypoint(nowWaypoint);
-            afterNextWaypoint = nextWaypoint.GetComponent<CarWaypoint_R>().SetNextWaypoint(nowWaypoint);
+            afterNextWaypoint = nextWaypoint.GetComponent<CarWaypoint_R>().SetNextWaypoint(nextWaypoint);
 
             //初期移動先(インスタンス先)を設定
             SetPosInit(nowWaypoint.transform.position);
@@ -48,8 +51,10 @@ public class Car_R : MonoBehaviour
             if (!nextWaypoint.GetComponent<CarWaypoint_R>().uTurn)
             {
                 targetPos = afterNextWaypoint.GetComponent<CarWaypoint_R>().SetNextTargetPos(nextWaypoint.transform.position, nowWaypoint.transform.position, targetPos);
+                targetPos.y += initHeight;
             }
         }
+
     }
 
     // Update is called once per frame
@@ -122,6 +127,7 @@ public class Car_R : MonoBehaviour
                 {
                     afterNextWaypoint = nextWaypoint.GetComponent<CarWaypoint_R>().SetNextWaypoint(nowWaypoint);
                     targetPos = afterNextWaypoint.GetComponent<CarWaypoint_R>().SetNextTargetPos(nextWaypoint.transform.position, nowWaypoint.transform.position, targetPos);
+                    targetPos.y += initHeight;
                 }
             }
             else
@@ -131,8 +137,9 @@ public class Car_R : MonoBehaviour
                 {
                     afterNextWaypoint = nextWaypoint.GetComponent<CarWaypoint_R>().SetNextWaypoint(nowWaypoint);
                 }
-                    
+
                 targetPos = afterNextWaypoint.GetComponent<CarWaypoint_R>().SetNextTargetPos(nextWaypoint.transform.position, nowWaypoint.transform.position, targetPos);
+                targetPos.y += initHeight;
             }
         }
     }

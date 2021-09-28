@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 188097530435774932}
   - component: {fileID: 473382555459228822}
   - component: {fileID: -4334722193752554098}
+  - component: {fileID: -2493595887543757121}
   m_Layer: 0
   m_Name: car2_1
   m_TagString: Car
@@ -152,13 +153,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _obj: {fileID: 7430103647231780757, guid: 3a87acf169f5aad4a9e7910be0e61470, type: 3}
   _effect: {fileID: 6712329990759217117, guid: 53bf79c5ee1924f789ffbbd76bb24400, type: 3}
-  _usageEvo: 3
+  _usageEvo: 1
   _force: 10
   _time: 5
   _ySize: 2
+  _ySizeAdditional: 0
+  _ySizeAdditionalObj: 0
   _xScale: 6
   _yScale: 6
   _zScale: 6
+  makeHydrant: 0
   player: {fileID: 0}
   hyd: 0
 --- !u!114 &5420141842494107964
@@ -181,6 +185,7 @@ MonoBehaviour:
   cutterMag: 1
   fallAttackMag: 1
   breakScore: 0
+  criAtomSource: {fileID: 0}
   objectID: 5
   breakEffect: {fileID: 0}
   deleteTime: 3
@@ -190,6 +195,8 @@ MonoBehaviour:
   shardDamage_nonDiv: 0
   specialObjectFlg: 0
   notDamage: 0
+  magnitude: 0.1
+  duration: 0.25
 --- !u!54 &-9010039148590714624
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -236,8 +243,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playOnStart: 0
-  _cueName: CarExplosion00
-  _cueSheet: Explosion
+  _cueName: 
+  _cueSheet: 
   _regionOnStart: {fileID: 0}
   _listenerOnStart: {fileID: 0}
   _use3dPositioning: 1
@@ -280,6 +287,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-2493595887543757121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767165312509565086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a8de29bc362ca6418fc5c78fa0372c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2018558212856418313
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,6 +547,8 @@ GameObject:
   - component: {fileID: 2940000017197416688}
   - component: {fileID: 4442397116111542313}
   - component: {fileID: 8295779683104497523}
+  - component: {fileID: 4630027055537527827}
+  - component: {fileID: 3792623364812444741}
   m_Layer: 0
   m_Name: body
   m_TagString: Untagged
@@ -596,6 +617,43 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &4630027055537527827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4285809454806617613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4302c2447a59484db44a8bc0d23ddd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 20
+  cueName: "CarMove00\u3000\u3000"
+--- !u!114 &3792623364812444741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4285809454806617613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e631c3b9947b54c823c6853a05529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playOnStart: 0
+  _cueName: 
+  _cueSheet: 
+  _regionOnStart: {fileID: 0}
+  _listenerOnStart: {fileID: 0}
+  _use3dPositioning: 1
+  _loop: 0
+  _volume: 1
+  _pitch: 0
+  _androidUseLowLatencyVoicePool: 0
+  need_to_player_update_all: 1
 --- !u!1 &4511005383523864762
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,8 +5,9 @@ using UnityEngine;
 public class ObjectStateManagement_Y : MonoBehaviour
 {
     [Range(0, 4), SerializeField] protected int tier_WalkAttack;
-    [SerializeField] private GameObject divideObject;
+    [SerializeField] protected GameObject divideObject;
     protected string attackSoundName, contactSoundName, ExplosionSoundName, CutterContactSoundName;
+    protected int MaxHP;
     public int HP;                  //Inspector上から設定できます。
     [Header("ダメージ倍率")]
     public float kickMag;       //キックのダメージ倍率
@@ -14,7 +15,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
     public float cutterMag;     //カッターのダメージ倍率
     public float fallAttackMag;     //落下攻撃のダメージ倍率
     [Header("破壊時のスコア")] public int breakScore;       //建物を破壊したときに得られるスコア
-    protected CriAtomSource criAtomSource;
+    [SerializeField] protected CriAtomSource criAtomSource;
     /// <summary>
     /// 1 信号機
     /// 2 ゴミ箱
@@ -32,7 +33,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
     protected FoodMaker_R scrFood;
     protected EvolutionChicken_R scrEvo;
     //加筆　undertreem 0625
-    protected ADX_Ray_Rev ADX_RevLevel;
+    protected ADX_SoundRaycast ADX_RevLevel;
     protected string Rev; //ADXバス名
     /// <summary>
     /// 0:踏み潰し攻撃
@@ -55,21 +56,43 @@ public class ObjectStateManagement_Y : MonoBehaviour
     public int shardDamage_nonDiv;
     public bool specialObjectFlg;
     [SerializeField] protected bool notDamage;
+    public float magnitude = 0.1f;
+    public float duration = 0.25f;
 
     //Start is called before the first frame update
     protected virtual void Start()
     {
         player = GameObject.Find("Player");
-
+        MaxHP = HP;
         //加筆(佐々木)
         scrCharaMove = player.GetComponent<CharaMoveRigid_R>();
         scrEvo = player.GetComponent<EvolutionChicken_R>();
         scrFood = GetComponent<FoodMaker_R>();
         criAtomSource = GetComponent<CriAtomSource>();
         //加筆　undertreem 0625
-        ADX_RevLevel = player.GetComponent<ADX_Ray_Rev>();
+        ADX_RevLevel = player.GetComponent<ADX_SoundRaycast>();
         renderers = CheckRenderer();
     }
+
+    private float timer;
+    private void Update()
+    {
+        timer += Time.deltaTime;
+        if (timer >= 3f)
+        {
+            timer = 0f;
+
+            if (Vector3.Distance(transform.position, player.transform.position) >= 300f)
+            {
+                foreach (var r in renderers) r.enabled = false;
+            }
+            else
+            {
+                foreach (var r in renderers) r.enabled = true;
+            }
+        }
+    }
+
     public void changeDamageFlg()
     {
         notDamage = false;
@@ -88,6 +111,14 @@ public class ObjectStateManagement_Y : MonoBehaviour
                 case "fallAttackCircle(Clone)": Damage(fallAttackMag * scrCharaMove.damageBoost, 4); break;
             }
         }
+
+        //ガス系オブジェクトの爆発がヒットしたとき
+        if (other.gameObject.name == "ExplosionSphere(Clone)" && !specialObjectFlg && livingFlg)
+        {
+            objectID = 10;
+            SetSkillID(0);
+            Death();
+        }
     }
 
     //踏み潰し攻撃などなど
@@ -97,16 +128,14 @@ public class ObjectStateManagement_Y : MonoBehaviour
         bool trampling = collision.gameObject.tag == "Player" && scrEvo.EvolutionNum >= tier_WalkAttack;
         //破砕車がぶつかったとき
         bool carHit = collision.gameObject.name.Contains("car") && collision.gameObject.GetComponentInParent<Rigidbody>().velocity.magnitude > 5f;
-        //ガスタンクがぶつかったとき
-        bool gasTankHit = collision.gameObject.name.Contains("mainTank") && collision.gameObject.GetComponentInParent<Rigidbody>().velocity.magnitude > 5f;
 
         //破砕車、ガスタンクが建物にぶつかったときキューを入れ替える
-        if ((carHit || gasTankHit) && objectID == 0 && !specialObjectFlg)
+        if (carHit && objectID == 0 && !specialObjectFlg)
         {
             objectID = 10;
         }
         //即死条件と生存フラグがどちらも成り立つとき、即死発動
-        if ((trampling || carHit || gasTankHit) && livingFlg && !specialObjectFlg)
+        if ((trampling || carHit) && livingFlg && !specialObjectFlg)
         {
             SetSkillID(0);
             Death();
@@ -126,7 +155,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
         //最初は代入されたobjをとりあえず入れておく
         checkObjects.Add(gameObject);
         //返り値のRenderer
-        var renderers = new List<Renderer>();
+        var rendererList = new List<Renderer>();
 
         bool finish = false;
 
@@ -138,7 +167,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
                 //メッシュが設定されている(＝空オブジェクトでない)オブジェクトの場合
                 if (cObj.GetComponent<Renderer>() != null)
                 {
-                    renderers.Add(cObj.GetComponent<Renderer>());
+                    rendererList.Add(cObj.GetComponent<Renderer>());
                 }
                 else
                 {
@@ -160,7 +189,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
             else finish = true;
         }
 
-        return renderers.ToArray();
+        return rendererList.ToArray();
     }
 
     protected bool CheckRenVisible()
@@ -181,7 +210,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
         else hitSkilID = num;
     }
 
-    public void Damage(float mag, int skill)
+    public virtual void Damage(float mag, int skill)
     {
         //すでに破壊済みの場合は何も起きないようにする
         if (!livingFlg) return;
@@ -199,8 +228,8 @@ public class ObjectStateManagement_Y : MonoBehaviour
             //カッターの時
             if (hitSkilID == 2)
             {
-                //SetCutterContactCue();
-                criAtomSource.Play("CutterContract");
+                SetCutterContactCue();
+                criAtomSource.Play(CutterContactSoundName);
             }
             else if (hitSkilID == 3)//おはようブラストの時
             {
@@ -214,7 +243,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
             }
 
             //振動させる
-            StartCoroutine(DoShake(0.25f, 0.1f));
+            StartCoroutine(DoShake(duration, magnitude));
         }
         else Death();    //破壊したときの処理
     }
@@ -245,8 +274,6 @@ public class ObjectStateManagement_Y : MonoBehaviour
             case 8: attackSoundName = "FireHydrant00"; break;
             case 9: attackSoundName = "TrafficExplosion00"; break;
             case 10: attackSoundName = "BuildingContact00"; break;
-            case 11: attackSoundName = "ChefContact"; break;
-            case 12: attackSoundName = "PoliceContact"; break;
             default: attackSoundName = "TrachcanContact00"; break;
         }
         if (criAtomSource != null) criAtomSource.cueName = attackSoundName;
@@ -256,8 +283,18 @@ public class ObjectStateManagement_Y : MonoBehaviour
     {
         switch (objectID)
         {
-            //後で入れます
-            default: break;
+            case 0: CutterContactSoundName = "CutterContract"; break;
+            case 1: CutterContactSoundName = "Cutter_C_pole00"; break;
+            case 2: CutterContactSoundName = "Cutter_Trashcan00"; break;
+            case 3: CutterContactSoundName = "CutterContract"; break;
+            case 4: CutterContactSoundName = "CutterContract"; break;
+            case 5: CutterContactSoundName = "CutterContract"; break;
+            case 6: CutterContactSoundName = "CutterContract"; break;
+            case 7: CutterContactSoundName = "CutterTree00"; break;
+            case 8: CutterContactSoundName = "Cutter_C_firehydrant00"; break;
+            case 9: CutterContactSoundName = "Cutter_C_pole00"; break;
+            case 10: CutterContactSoundName = "CutterContract"; break;
+            default: CutterContactSoundName = "CutterContract"; break;
         }
         if (criAtomSource != null) criAtomSource.cueName = CutterContactSoundName;
     }
@@ -277,8 +314,6 @@ public class ObjectStateManagement_Y : MonoBehaviour
             case 8: contactSoundName = "Contact_FireHydrant00"; break;
             case 9: contactSoundName = "PoleContact00"; break;
             case 10: contactSoundName = "BuildingContact00"; break;
-            case 11: contactSoundName = "ChefContact"; break;
-            case 12: contactSoundName = "PoliceContact"; break;
             default: contactSoundName = "TrachcanContact00"; break;
         }
         if (criAtomSource != null) criAtomSource.cueName = contactSoundName;
@@ -299,15 +334,26 @@ public class ObjectStateManagement_Y : MonoBehaviour
             case 8: ExplosionSoundName = "FireHydrant00"; break;
             case 9: ExplosionSoundName = "PoleContract00"; break;
             case 10: ExplosionSoundName = "GasStation00"; break;
-            case 11: ExplosionSoundName = "ChefDie"; break;
-            case 12: ExplosionSoundName = "PoliceDie"; break;
+
+            case 100: ExplosionSoundName = "CutterBuilExplosion"; break;
+            case 101: ExplosionSoundName = "Cutter_Pole01"; break;
+            case 102: ExplosionSoundName = "CutterCut00"; break;
+            case 103: ExplosionSoundName = "CutterCut00"; break;
+            case 104: ExplosionSoundName = "CutterCut00"; break;
+            case 105: ExplosionSoundName = "CutterBuilExplosion"; break;
+            case 106: ExplosionSoundName = "CutterCut00"; break;
+            case 107: ExplosionSoundName = "CutterTree00"; break;
+            case 108: ExplosionSoundName = "Cutter_firehydrant01"; break;
+            case 109: ExplosionSoundName = "Cutter_Pole01"; break;
+            case 110: ExplosionSoundName = "CutterCut00"; break;
+
             default: ExplosionSoundName = "PoleExplosion00"; break;
         }
         if (criAtomSource != null) criAtomSource.cueName = ExplosionSoundName;
     }
 
     //振動コルーチン
-    private IEnumerator DoShake(float duration, float magnitude)
+    protected IEnumerator DoShake(float duration, float magnitude)
     {
         var pos = transform.localPosition;
 
@@ -339,15 +385,14 @@ public class ObjectStateManagement_Y : MonoBehaviour
         //餌のスポーン処理
         scrFood?.DropFood();
 
-        SetBreakCue();
         //加筆　undertreem 0625
         //float BusLevel = ADX_RevLevel.ADX_BusSendLevel;
         //SetBusSendLevelSet(Rev, BusLevel);
         //Debug.Log(BusLevel);
         //カッターのときはカッターキューを鳴らす
-        if (hitSkilID == 2 && objectID == 0) criAtomSource.Play("CutterBuilExplosion");
-        else if (hitSkilID == 2) criAtomSource?.Play("CutterCut00");
-        else criAtomSource?.Play(ExplosionSoundName);
+        if (hitSkilID == 2) objectID += 100;
+        SetBreakCue();
+        criAtomSource?.Play(ExplosionSoundName);
 
         //全て処理しきった場合は次のDeathメソッドを実行
         return true;
@@ -368,7 +413,6 @@ public class ObjectStateManagement_Y : MonoBehaviour
         //差し替え処理  分割オブジェクトが設定されていないか技がカッターの時には無視する
         if (divideObject != null && hitSkilID != 2) ChangeObject();
         else Substitution();    //差し替えをしない場合
-
     }
 
     public void DeathCount()
@@ -387,10 +431,9 @@ public class ObjectStateManagement_Y : MonoBehaviour
     }
 
     //差し替えする場合
-    private void ChangeObject()
+    protected void ChangeObject()
     {
-        var genPos = transform.position;
-        var dividedObject = Instantiate(divideObject, genPos, transform.rotation);
+        var dividedObject = Instantiate(divideObject, transform.position, transform.rotation);
         var breakScr = dividedObject.AddComponent<ObjectBreak_Y>();
         breakScr.InitSetting(this, true);
         breakScr.BreakAction();

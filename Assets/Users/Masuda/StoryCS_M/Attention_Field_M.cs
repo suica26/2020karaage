@@ -34,6 +34,11 @@ public class Attention_Field_M : MonoBehaviour
                 animator.SetBool(str2, true);
                 Count();
             }
+
+            if (Vector3.Distance(player.transform.position, wall.transform.position) > safety && count == 0)
+            {
+                animator.SetBool(str2, true);
+            }
         }
 
         if (count >= 1.1f)
