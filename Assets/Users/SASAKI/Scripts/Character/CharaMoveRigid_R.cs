@@ -111,6 +111,9 @@ public class CharaMoveRigid_R : MonoBehaviour
     void Update()
     {
         // 攻撃判定の更新
+        if (stunFlag)
+            AttackRestrictions_R.GetInstance().SetTimer(0.1f);
+
         AttackRestrictions_R.GetInstance().Update();
 
         //M 追加:時間停止中は操作を遮断
@@ -171,6 +174,7 @@ public class CharaMoveRigid_R : MonoBehaviour
             if(stunFlag)
             {
                 stunFlag = false;
+                AttackRestrictions_R.GetInstance().SetTimer(1.0f);
                 StartCoroutine("StunnedChicken");
                 return;
             }
@@ -430,6 +434,9 @@ public class CharaMoveRigid_R : MonoBehaviour
     //落下攻撃時の動きの処理
     IEnumerator FallAttack()
     {
+        if (stunFlag)
+            yield break;
+
         if (isFlying)
         {
             scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.GLIDING, false);
