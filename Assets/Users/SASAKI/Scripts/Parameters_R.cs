@@ -103,8 +103,8 @@ public class Parameters_R : MonoBehaviour
             ep += addEP;
             plusTime += 1;
             epSlider.value += addEP;
-            hp += 1;
-            mainSlider.value += 1;
+            hp += 10;
+            mainSlider.value += 10;
 
             if (ep == evo1)
             {
@@ -116,6 +116,8 @@ public class Parameters_R : MonoBehaviour
                 mainSlider = hpSlider[1];
                 TimeManager(10);
                 maxHP = 250;
+                hp = maxHP;
+                mainSlider.value = maxHP;
             }
             else if (ep == evo2)
             {
@@ -127,6 +129,8 @@ public class Parameters_R : MonoBehaviour
                 mainSlider = hpSlider[2];
                 TimeManager(10);
                 maxHP = 500;
+                hp = maxHP;
+                mainSlider.value = maxHP;
             }
             else if (ep == evo3)
             {
@@ -134,6 +138,9 @@ public class Parameters_R : MonoBehaviour
                 hpSli[2].transform.Translate(0, 45, 0);// 場所調整
                 TimeManager(10);
                 maxHP = 1000;
+                hp = maxHP;
+                hpSlider[2].value = 500;
+                hpSlider[3].value = 500;
             }
 
             if (plusTime == 10)
