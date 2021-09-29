@@ -107,7 +107,7 @@ public class Parameters_R : MonoBehaviour
             ep += addEP;
             plusTime += 1;
             epSlider.value += addEP;
-            hp += 10;
+            HPManager(-10);
             mainSlider.value += 10;
 
             if (ep == evo1)
@@ -179,18 +179,19 @@ public class Parameters_R : MonoBehaviour
             }
             hpText.text = "HP: " + hp;
 
-            /*
+
+
             if (hp < 50 && HPsound == true)
             {
                 Sound.Play("LoHP");
                 HPsound = false;
             }
-            if (HPsound == false && hp > 50)
+            if (hp >= 50 && HPsound == false)
             {
-                Sound.Play("NomalHP");
+                Sound?.Play("NomalHP");
                 HPsound = true;
             }
-            */
+            
 
         }
     }

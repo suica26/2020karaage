@@ -7,9 +7,13 @@ public class ADX_Pause : MonoBehaviour
 {
     private CriAtomSource Sound;
 
-    private void OnEnable()
+    private void Start()
     {
         Sound = GetComponent<CriAtomSource>();
+    }
+
+    private void OnEnable()
+    {
         Sound.Play("Pause");
     }
 
