@@ -22,7 +22,7 @@ public class SaveManager_Y : MonoBehaviour
     private bool isSaving = false;
     private bool isLoading = false;
     static private SaveManager_Y instance;
-    private bool isMobile;
+    public bool isMobile { get; private set; } = false;
 
     private void Awake()
     {
@@ -36,6 +36,10 @@ public class SaveManager_Y : MonoBehaviour
 
     private void Start()
     {
+#if UNITY_IOS || UNITY_ANDROID
+        isMoblie = true;
+        Debug.Log("Mobile");
+#endif
         Load();
         QualitySettings.SetQualityLevel(sd.quality);
     }
