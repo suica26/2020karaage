@@ -89,9 +89,7 @@ public class Stage3BossBuilding_Y : ObjectStateManagement_Y
         phase[phaseNum] = true;
         ChangeToCameraMode();
 
-        /*
-            もし敵の射出に関して処理を追加したい場合はここに作成した関数を記述してください
-        */
+        //もし敵の射出に関して処理を追加したい場合はここに作成した関数を記述してください
         if (m3m.second)
         {
             m3m.ThirdMission_3();
@@ -103,6 +101,7 @@ public class Stage3BossBuilding_Y : ObjectStateManagement_Y
 
         Sound.Play("Warning");
         if (aisacScr.St3Fase == false) aisacScr.St3Fase = true;
+        //ここまで
 
         StartCoroutine(LookLauncher(phaseNum));
         StartCoroutine(LaunchEnemys(phaseNum));
