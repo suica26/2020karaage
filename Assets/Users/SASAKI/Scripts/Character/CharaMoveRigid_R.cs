@@ -99,7 +99,7 @@ public class CharaMoveRigid_R : MonoBehaviour
         ADX_RevLevel_R = GetComponent<ADX_SoundRaycast>();
         //山本加筆 BusLevelがStage0でNullException吐きまくってたので、初期化付けました
 
-        mobileMode = MobileSetting_R.GetInstance().IsMobileMode();
+        mobileMode = SaveManager_Y.GetInstance().isMobile;
         if (mobileMode)
         {
             joystick = FindObjectOfType<Joystick>();

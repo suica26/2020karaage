@@ -6,7 +6,8 @@ public class MobileUIDrawing_R : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mobileMode = MobileSetting_R.GetInstance().IsMobileMode();
+        mobileMode = SaveManager_Y.GetInstance().isMobile;
+
         if (!mobileMode)
             gameObject.SetActive(false);
     }
