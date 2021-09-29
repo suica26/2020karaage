@@ -37,14 +37,15 @@ public class GasTank_R : MonoBehaviour
             // 足場が破壊されたとき
             foreach (var obj in props)
             {
-                if (obj.GetComponent<ObjectStateManagement_Y>().HP == 0)
-                {
-                    SetPropsIsTrigger();
-                    Vector3 dist = (obj.transform.position - this.transform.position);
-                    moveVec = new Vector3(dist.x, 0, dist.z).normalized;
-                    mainTankRigid.isKinematic = false;
-                    mainTankRigid.AddForce(moveVec * speed);
-                }
+                if(obj.GetComponent<ObjectStateManagement_Y>() != null)
+                    if (obj.GetComponent<ObjectStateManagement_Y>().HP == 0)
+                    {
+                        SetPropsIsTrigger();
+                        Vector3 dist = (obj.transform.position - this.transform.position);
+                        moveVec = new Vector3(dist.x, 0, dist.z).normalized;
+                        mainTankRigid.isKinematic = false;
+                        mainTankRigid.AddForce(moveVec * speed);
+                    }
             }
         }
         else
