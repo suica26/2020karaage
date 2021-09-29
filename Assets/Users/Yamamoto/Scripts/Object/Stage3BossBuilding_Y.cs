@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Stage3BossBuilding_Y : ObjectStateManagement_Y
 {
-    private bool[] phase = new bool[3] { false, false, false };
+    private bool[] phase = new bool[2] { false, false };
     public float launchPower;
     public Vector3[] towerPos;
     public float[] launchHeight;
@@ -70,9 +70,8 @@ public class Stage3BossBuilding_Y : ObjectStateManagement_Y
     private int HPCheck(int HP)
     {
         //HPがLaunchタイミングになっているかを調べる。
-        if (HP <= MaxHP / 4) return 2;
-        else if (HP <= MaxHP / 4 * 2) return 1;
-        else if (HP <= MaxHP / 4 * 3) return 0;
+        if (HP <= MaxHP / 3 * 2) return 1;
+        else if (HP <= MaxHP / 3) return 0;
 
         //どのLaunchタイミングでもない(HP > MaxHP / 4 * 3)だった場合は3を返す
         return -1;
@@ -122,7 +121,7 @@ public class Stage3BossBuilding_Y : ObjectStateManagement_Y
 
     private IEnumerator LaunchEnemys(int phaseNum)
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 2; i++)
         {
             for (int j = 0; j < phaseEnemyNum[i + phaseNum * 3]; j++)
             {
