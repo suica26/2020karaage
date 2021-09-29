@@ -213,4 +213,43 @@ public class Mission2_M : Missions_M
             per.text = achieve + "/ 20";
         }
     }
+
+    public override void SmallNumberPlus()
+    {
+        if (first)
+        {
+            if (hitID == 3)
+            {
+                smallNum++;
+                //anythingCount += 1;
+                hitID = 0;
+                achieve += 3;
+                per.text = achieve + "%";
+            }
+            else
+            {
+                hitID = 0;
+            }
+        }
+    }
+
+    public override void BigNumberPlus()
+    {
+        if (first)
+        {
+
+            if (hitID == 3)
+            {
+                bigNum++;
+                //anythingCount += 1;
+                hitID = 0;
+                achieve += 14;
+                per.text = achieve + "%";
+            }
+            else
+            {
+                hitID = 0;
+            }
+        }
+    }
 }

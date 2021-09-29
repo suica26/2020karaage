@@ -50,10 +50,6 @@ public class BlastIntroduction_Y : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-#if UNITY_IOS || UNITY_ANDROID
-        isMoblie = true;
-#endif
-
         mis = mission.GetComponent<Text>();
         subMis = subMission.GetComponent<Text>();
         exMis = exMission.GetComponent<Text>();
@@ -62,7 +58,11 @@ public class BlastIntroduction_Y : MonoBehaviour
 
         var saveObj = GameObject.Find("SaveManager");
         if (saveObj != null)
+        {
             saveManager = saveObj.GetComponent<SaveManager_Y>();
+            isMoblie = saveManager.isMobile;
+        }
+
         if (saveManager == null || saveManager.GetLanguage() == "Japanese") isJapanese = true;
         else if (saveManager.GetLanguage() == "English") isJapanese = false;
 

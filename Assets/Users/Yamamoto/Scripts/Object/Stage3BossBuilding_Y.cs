@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Stage3BossBuilding_Y : ObjectStateManagement_Y
 {
-    private bool[] phase = new bool[3] { false, false, false };
+    private bool[] phase = new bool[2] { false, false };
     public float launchPower;
     public Vector3[] towerPos;
     public float[] launchHeight;
@@ -24,6 +24,7 @@ public class Stage3BossBuilding_Y : ObjectStateManagement_Y
     public bool debug;
     private CriAtomSource Sound;
     private ADX_BGMAISAC aisacScr;
+    private Mission3_M m3m;
 
     protected override void Start()
     {
@@ -38,6 +39,7 @@ public class Stage3BossBuilding_Y : ObjectStateManagement_Y
         enemyControllerScr = GameObject.Find("GameAI_Y").GetComponent<EnemyMoveController_Y>();
         Sound = GetComponent<CriAtomSource>();
         aisacScr = GameObject.Find("BGMObject").GetComponent<ADX_BGMAISAC>();
+        m3m = player.GetComponent<Mission3_M>();
     }
 
     private void Update()
@@ -68,9 +70,8 @@ public class Stage3BossBuilding_Y : ObjectStateManagement_Y
     private int HPCheck(int HP)
     {
         //HPがLaunchタイミングになっているかを調べる。
-        if (HP <= MaxHP / 4) return 2;
-        else if (HP <= MaxHP / 4 * 2) return 1;
-        else if (HP <= MaxHP / 4 * 3) return 0;
+        if (HP <= MaxHP / 3 * 2) return 1;
+        else if (HP <= MaxHP / 3) return 0;
 
         //どのLaunchタイミングでもない(HP > MaxHP / 4 * 3)だった場合は3を返す
         return -1;
@@ -87,11 +88,19 @@ public class Stage3BossBuilding_Y : ObjectStateManagement_Y
         phase[phaseNum] = true;
         ChangeToCameraMode();
 
-        /*
-            もし敵の射出に関して処理を追加したい場合はここに作成した関数を記述してください
-        */
+        //もし敵の射出に関して処理を追加したい場合はここに作成した関数を記述してください
+        if (m3m.second)
+        {
+            m3m.ThirdMission_3();
+        }
+        else if (m3m.fourth)
+        {
+            m3m.FiveMission_3();
+        }
+
         Sound.Play("Warning");
         if (aisacScr.St3Fase == false) aisacScr.St3Fase = true;
+        //ここまで
 
         StartCoroutine(LookLauncher(phaseNum));
         StartCoroutine(LaunchEnemys(phaseNum));
@@ -112,7 +121,7 @@ public class Stage3BossBuilding_Y : ObjectStateManagement_Y
 
     private IEnumerator LaunchEnemys(int phaseNum)
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 2; i++)
         {
             for (int j = 0; j < phaseEnemyNum[i + phaseNum * 3]; j++)
             {
@@ -162,6 +171,7 @@ public class Stage3BossBuilding_Y : ObjectStateManagement_Y
 
     public void IncreaseEnemyBreakCount()
     {
+        if (!notDamage) return;
         enemyBreakCount++;
         int phaseNum = 0;
         foreach (var p in phase) if (p) phaseNum++;
@@ -170,6 +180,14 @@ public class Stage3BossBuilding_Y : ObjectStateManagement_Y
         {
             changeDamageFlg();
             //もし敵を指定の数倒して支部が攻撃できるようになることに何か処理を追加する場合は、この下に書いてください
+            if (m3m.third)
+            {
+                m3m.FourthMission_3();
+            }
+            else if (m3m.five)
+            {
+                m3m.SixMission_3();
+            }
         }
     }
 

@@ -19,11 +19,12 @@ public class CharaMoveRigid_R : MonoBehaviour
     [Tooltip("各進化段階の落下攻撃の威力UP(2 => 3)"), SerializeField] private float[] fallAttackSecondHeight;
     [Tooltip("落下攻撃の倍率設定"), SerializeField] private float[] boostMag;
     [SerializeField] GameObject preCircle;
-    [SerializeField] private GameObject fallAttackKickEffect;
+    [SerializeField] private GameObject[] fallAttackKickEffect;
 
     [Header("混乱用")]
     [SerializeField] private float[] effectScale;
     [SerializeField] GameObject confuseEffect;
+    [SerializeField] Transform[] confuseEffTranslate;
 
     [Header("アニメーション処理用")]
     [SerializeField] private Transition_R[] scrAnim;
@@ -98,7 +99,7 @@ public class CharaMoveRigid_R : MonoBehaviour
         ADX_RevLevel_R = GetComponent<ADX_SoundRaycast>();
         //山本加筆 BusLevelがStage0でNullException吐きまくってたので、初期化付けました
 
-        mobileMode = MobileSetting_R.GetInstance().IsMobileMode();
+        mobileMode = SaveManager_Y.GetInstance().isMobile;
         if (mobileMode)
         {
             joystick = FindObjectOfType<Joystick>();
@@ -111,6 +112,9 @@ public class CharaMoveRigid_R : MonoBehaviour
     void Update()
     {
         // 攻撃判定の更新
+        if (stunFlag)
+            AttackRestrictions_R.GetInstance().SetTimer(0.1f);
+
         AttackRestrictions_R.GetInstance().Update();
 
         //M 追加:時間停止中は操作を遮断
@@ -171,13 +175,15 @@ public class CharaMoveRigid_R : MonoBehaviour
             if(stunFlag)
             {
                 stunFlag = false;
+                AttackRestrictions_R.GetInstance().SetTimer(1.0f);
                 StartCoroutine("StunnedChicken");
                 return;
             }
 
             // もし非アクティブなら、移動時のエフェクトをアクティブにする
-            if (moveEffect[scrEvo.EvolutionNum].GetComponent<ParticleSystem>().startLifetime != 2)
-                moveEffect[scrEvo.EvolutionNum].GetComponent<ParticleSystem>().startLifetime = 2;
+            // ごり押し感強いので改善すべきかも？
+            if (moveEffect[scrEvo.EvolutionNum].GetComponent<ParticleSystem>().maxParticles != 100)
+                moveEffect[scrEvo.EvolutionNum].GetComponent<ParticleSystem>().maxParticles = 100;
 
             if (glideEffect[scrEvo.EvolutionNum].GetComponent<ParticleSystem>().maxParticles != 0)
             {
@@ -291,8 +297,8 @@ public class CharaMoveRigid_R : MonoBehaviour
             scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.WALK, false);
 
             // もしアクティブなら移動時のエフェクトを非アクティブにする
-            if (moveEffect[scrEvo.EvolutionNum].GetComponent<ParticleSystem>().startLifetime != 0)
-                moveEffect[scrEvo.EvolutionNum].GetComponent<ParticleSystem>().startLifetime = 0;
+            if (moveEffect[scrEvo.EvolutionNum].GetComponent<ParticleSystem>().maxParticles != 0)
+                moveEffect[scrEvo.EvolutionNum].GetComponent<ParticleSystem>().maxParticles = 0;
             //moveEffect[scrEvo.EvolutionNum].SetActive(false);
 
             //空中での制動(移動量は地上の1/3程度)
@@ -418,7 +424,7 @@ public class CharaMoveRigid_R : MonoBehaviour
             scrCam.Shake();
             if (fallAttackKickEffect != null)
             {
-                GameObject effect = Instantiate(fallAttackKickEffect, transform.position, Quaternion.identity);
+                GameObject effect = Instantiate(fallAttackKickEffect[scrEvo.EvolutionNum], transform.position, Quaternion.identity);
                 Destroy(effect, 0.5f);
             }
             circleChecker = Instantiate(preCircle, transform.position, Quaternion.identity);
@@ -430,6 +436,9 @@ public class CharaMoveRigid_R : MonoBehaviour
     //落下攻撃時の動きの処理
     IEnumerator FallAttack()
     {
+        if (stunFlag)
+            yield break;
+
         if (isFlying)
         {
             scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.GLIDING, false);
@@ -482,6 +491,7 @@ public class CharaMoveRigid_R : MonoBehaviour
         audio.Play("Confusion");
 
         GameObject effect = Instantiate(confuseEffect, transform);
+        effect.transform.position = confuseEffTranslate[scrEvo.EvolutionNum].position;
         if (effect.GetComponent<ParticleSystem>() != null)
             effect.GetComponent<ParticleSystem>().Play();
 

@@ -20,9 +20,8 @@ public class Missions_M : MonoBehaviour
     [SerializeField] public Animation missionSlide;
     [SerializeField] public float timer, tipsTimer;
     [SerializeField] public ObjectStateManagement_Y eneBillScr;
-    public bool stage2;
     public Parameters_R scrParame;
-    public string load,playLanguage;
+    public string load, playLanguage;
     public EvolutionChicken_R scrEvoChi;
     public int evoNum;
 
@@ -43,59 +42,6 @@ public class Missions_M : MonoBehaviour
         tipsChicken.SetActive(false);
     }
 
-    public virtual void BigNumberPlus()
-    {
-        if (second && !stage2)
-        {
-            bigNum++;
-            achieve += 20;
-            per.text = achieve + "%";
-        }
-
-        else if (first && stage2)
-        {
-
-            if (hitID == 3)
-            {
-                bigNum++;
-                //anythingCount += 1;
-                hitID = 0;
-                achieve += 14;
-                per.text = achieve + "%";
-            }
-            else
-            {
-                hitID = 0;
-            }
-        }
-    }
-    public virtual void SmallNumberPlus()
-    {
-        if (second && !stage2)
-        {
-            smallNum++;
-            achieve += 4;
-            per.text = achieve + "%";
-        }
-
-        else if (first && stage2)
-        {
-            if (hitID == 3)
-            {
-                smallNum++;
-                //anythingCount += 1;
-                hitID = 0;
-                achieve += 3;
-                per.text = achieve + "%";
-            }
-            else
-            {
-                hitID = 0;
-            }
-        }
-    }
-
+    public virtual void BigNumberPlus() { }
+    public virtual void SmallNumberPlus() { }
 }
-
-
-

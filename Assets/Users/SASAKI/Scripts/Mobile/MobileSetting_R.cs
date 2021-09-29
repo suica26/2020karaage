@@ -14,7 +14,10 @@ public class MobileSetting_R : MonoBehaviour
         return instance;
     }
 
-    private MobileSetting_R() { }
+    private MobileSetting_R()
+    {
+        mobileMode = SaveManager_Y.GetInstance().isMobile;
+    }
 
     public bool IsMobileMode()
     {

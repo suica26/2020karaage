@@ -41,6 +41,8 @@ public class Parameters_R : MonoBehaviour
     public DamagePanel_M damaPanel;
     public float currentPer;
     public Color color1, color2, color3, color4;
+    private CriAtomSource Sound;
+    private bool HPsound;
 
     public void Start()
     {
@@ -66,6 +68,8 @@ public class Parameters_R : MonoBehaviour
         }
         ep += niwaPer;
         EPManager(0);
+        Sound = GetComponent<CriAtomSource>();
+        HPsound = true;
     }
 
     public void ScoreManager(int addScore)      //山本加筆：publicにすることで他Scriptで参照できるようにしました
@@ -103,7 +107,7 @@ public class Parameters_R : MonoBehaviour
             ep += addEP;
             plusTime += 1;
             epSlider.value += addEP;
-            hp += 10;
+            HPManager(-10);
             mainSlider.value += 10;
 
             if (ep == evo1)
@@ -135,7 +139,7 @@ public class Parameters_R : MonoBehaviour
             else if (ep == evo3)
             {
                 hpSli[3].SetActive(true);
-                hpSli[2].transform.Translate(0, 45, 0);// 場所調整
+                hpSli[2].transform.Translate(-25, 45, 0);// 場所調整
                 TimeManager(10);
                 maxHP = 1000;
                 hp = maxHP;
@@ -174,6 +178,21 @@ public class Parameters_R : MonoBehaviour
                 PlayerPrefs.Save();
             }
             hpText.text = "HP: " + hp;
+
+
+
+            if (hp < 50 && HPsound == true)
+            {
+                Sound.Play("LoHP");
+                HPsound = false;
+            }
+            if (hp >= 50 && HPsound == false)
+            {
+                Sound?.Play("NomalHP");
+                HPsound = true;
+            }
+            
+
         }
     }
     //引数で指定した分だけHPを加算します。

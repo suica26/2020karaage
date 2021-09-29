@@ -312,4 +312,24 @@ public class Mission1_M : Missions_M
             per.text = achieve + " / 3";
         }
     }
+
+    public override void SmallNumberPlus()
+    {
+        if (second)
+        {
+            smallNum++;
+            achieve += 4;
+            per.text = achieve + "%";
+        }
+    }
+
+    public override void BigNumberPlus()
+    {
+        if (second)
+        {
+            bigNum++;
+            achieve += 20;
+            per.text = achieve + "%";
+        }
+    }
 }

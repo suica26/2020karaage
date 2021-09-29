@@ -17,6 +17,8 @@ public class GasTankMT_R : MonoBehaviour
     public float startExplodeTiming;
     public float expDeleteTiming;
     public float expScale;
+    [SerializeField] private ObjectStateManagement_Y objScr;
+    private bool exploded;
 
     void Start()
     {
@@ -26,14 +28,17 @@ public class GasTankMT_R : MonoBehaviour
 
     void Update()
     {
+        //ヤマモト追加
+        if (objScr.HP <= 0 && !exploded) Explosion();
+
         if (!onTheBuilding)
         {
-            if (transform.parent.GetComponent<ObjectStateManagement_Y>().HP == 0)
-                Destroy(transform.parent.gameObject);
+            //if (transform.parent.GetComponent<ObjectStateManagement_Y>().HP == 0)
+            //Destroy(transform.parent.gameObject);
 
             if (CollisionCount >= 5)
             {
-                Explosion();
+                objScr.GetComponent<ObjectStateManagement_Y>().HP = 0;
             }
 
             if (!transform.parent.GetComponent<Rigidbody>().isKinematic)
@@ -41,7 +46,7 @@ public class GasTankMT_R : MonoBehaviour
                 timer += Time.deltaTime;
                 if (timer >= 2.0 && transform.parent.GetComponent<Rigidbody>().velocity.magnitude < 2.0)
                 {
-                    Explosion();
+                    objScr.GetComponent<ObjectStateManagement_Y>().HP = 0;
                 }
             }
         }
@@ -71,7 +76,8 @@ public class GasTankMT_R : MonoBehaviour
     //山本追加
     private void Explosion()
     {
-        transform.parent.GetComponent<ObjectStateManagement_Y>().HP = 0;
+        exploded = true;
+
         var sphere = Instantiate(explosionSphere, transform.position, transform.rotation);
         var expScr = sphere.GetComponent<ExplosionSphere_Y>();
         expScr.targetScale = expScale;
