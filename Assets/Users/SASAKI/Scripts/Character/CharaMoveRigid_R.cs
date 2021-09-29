@@ -24,6 +24,7 @@ public class CharaMoveRigid_R : MonoBehaviour
     [Header("混乱用")]
     [SerializeField] private float[] effectScale;
     [SerializeField] GameObject confuseEffect;
+    [SerializeField] Transform[] confuseEffTranslate;
 
     [Header("アニメーション処理用")]
     [SerializeField] private Transition_R[] scrAnim;
@@ -180,8 +181,9 @@ public class CharaMoveRigid_R : MonoBehaviour
             }
 
             // もし非アクティブなら、移動時のエフェクトをアクティブにする
-            if (moveEffect[scrEvo.EvolutionNum].GetComponent<ParticleSystem>().startLifetime != 2)
-                moveEffect[scrEvo.EvolutionNum].GetComponent<ParticleSystem>().startLifetime = 2;
+            // ごり押し感強いので改善すべきかも？
+            if (moveEffect[scrEvo.EvolutionNum].GetComponent<ParticleSystem>().maxParticles != 100)
+                moveEffect[scrEvo.EvolutionNum].GetComponent<ParticleSystem>().maxParticles = 100;
 
             if (glideEffect[scrEvo.EvolutionNum].GetComponent<ParticleSystem>().maxParticles != 0)
             {
@@ -295,8 +297,8 @@ public class CharaMoveRigid_R : MonoBehaviour
             scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.WALK, false);
 
             // もしアクティブなら移動時のエフェクトを非アクティブにする
-            if (moveEffect[scrEvo.EvolutionNum].GetComponent<ParticleSystem>().startLifetime != 0)
-                moveEffect[scrEvo.EvolutionNum].GetComponent<ParticleSystem>().startLifetime = 0;
+            if (moveEffect[scrEvo.EvolutionNum].GetComponent<ParticleSystem>().maxParticles != 0)
+                moveEffect[scrEvo.EvolutionNum].GetComponent<ParticleSystem>().maxParticles = 0;
             //moveEffect[scrEvo.EvolutionNum].SetActive(false);
 
             //空中での制動(移動量は地上の1/3程度)
@@ -489,6 +491,7 @@ public class CharaMoveRigid_R : MonoBehaviour
         audio.Play("Confusion");
 
         GameObject effect = Instantiate(confuseEffect, transform);
+        effect.transform.position = confuseEffTranslate[scrEvo.EvolutionNum].position;
         if (effect.GetComponent<ParticleSystem>() != null)
             effect.GetComponent<ParticleSystem>().Play();
 
