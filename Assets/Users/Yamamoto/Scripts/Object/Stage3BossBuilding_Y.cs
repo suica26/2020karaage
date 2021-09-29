@@ -172,6 +172,7 @@ public class Stage3BossBuilding_Y : ObjectStateManagement_Y
 
     public void IncreaseEnemyBreakCount()
     {
+        if (!notDamage) return;
         enemyBreakCount++;
         int phaseNum = 0;
         foreach (var p in phase) if (p) phaseNum++;
