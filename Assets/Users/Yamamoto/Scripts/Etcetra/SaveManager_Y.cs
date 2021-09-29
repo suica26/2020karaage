@@ -12,7 +12,7 @@ public struct SaveData
     public float soundVolume;
     public int quality;
     public string language;
-    public float mouseSensitive;
+    public float cameraSensitive;
 }
 
 public class SaveManager_Y : MonoBehaviour
@@ -85,7 +85,7 @@ public class SaveManager_Y : MonoBehaviour
             sd.soundVolume = 0.7f;
             sd.language = "Japanese";
             sd.quality = 2;
-            sd.mouseSensitive = 1f;
+            sd.cameraSensitive = 1f;
         }
     }
 
@@ -145,14 +145,14 @@ public class SaveManager_Y : MonoBehaviour
         Save();
     }
 
-    public void SaveMouseSensitive(float sensitive)
+    public void SaveCameraSensitive(float sensitive)
     {
-        sd.mouseSensitive = sensitive;
+        sd.cameraSensitive = sensitive;
         Save();
     }
 
-    public float GetMouseSensitive()
+    public float GetCameraSensitive()
     {
-        return sd.mouseSensitive;
+        return sd.cameraSensitive;
     }
 }
