@@ -62,7 +62,7 @@ public class TpsCameraJC_R : MonoBehaviour
 
         scrEvo = objPlayer.GetComponent<EvolutionChicken_R>();
 
-        mobileMode = MobileSetting_R.GetInstance().IsMobileMode();
+        mobileMode = SaveManager_Y.GetInstance().isMobile;
 
         if (mobileMode)
         {

@@ -159,4 +159,9 @@ public class SaveManager_Y : MonoBehaviour
     {
         return sd.cameraSensitive;
     }
+
+    public static SaveManager_Y GetInstance()
+    {
+        return instance;
+    }
 }
