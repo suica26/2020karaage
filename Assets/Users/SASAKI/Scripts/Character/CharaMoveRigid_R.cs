@@ -24,6 +24,7 @@ public class CharaMoveRigid_R : MonoBehaviour
     [Header("混乱用")]
     [SerializeField] private float[] effectScale;
     [SerializeField] GameObject confuseEffect;
+    [SerializeField] Transform[] confuseEffTranslate;
 
     [Header("アニメーション処理用")]
     [SerializeField] private Transition_R[] scrAnim;
@@ -490,6 +491,7 @@ public class CharaMoveRigid_R : MonoBehaviour
         audio.Play("Confusion");
 
         GameObject effect = Instantiate(confuseEffect, transform);
+        effect.transform.position = confuseEffTranslate[scrEvo.EvolutionNum].position;
         if (effect.GetComponent<ParticleSystem>() != null)
             effect.GetComponent<ParticleSystem>().Play();
 
