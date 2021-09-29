@@ -24,6 +24,7 @@ public class Stage3BossBuilding_Y : ObjectStateManagement_Y
     public bool debug;
     private CriAtomSource Sound;
     private ADX_BGMAISAC aisacScr;
+    private Mission3_M m3m;
 
     protected override void Start()
     {
@@ -38,6 +39,7 @@ public class Stage3BossBuilding_Y : ObjectStateManagement_Y
         enemyControllerScr = GameObject.Find("GameAI_Y").GetComponent<EnemyMoveController_Y>();
         Sound = GetComponent<CriAtomSource>();
         aisacScr = GameObject.Find("BGMObject").GetComponent<ADX_BGMAISAC>();
+        m3m = player.GetComponent<Mission3_M>();
     }
 
     private void Update()
@@ -90,6 +92,15 @@ public class Stage3BossBuilding_Y : ObjectStateManagement_Y
         /*
             もし敵の射出に関して処理を追加したい場合はここに作成した関数を記述してください
         */
+        if (m3m.second)
+        {
+            m3m.ThirdMission_3();
+        }
+        else if (m3m.fourth)
+        {
+            m3m.FiveMission_3();
+        }
+
         Sound.Play("Warning");
         if (aisacScr.St3Fase == false) aisacScr.St3Fase = true;
 
@@ -170,6 +181,14 @@ public class Stage3BossBuilding_Y : ObjectStateManagement_Y
         {
             changeDamageFlg();
             //もし敵を指定の数倒して支部が攻撃できるようになることに何か処理を追加する場合は、この下に書いてください
+            if (m3m.third)
+            {
+                m3m.FourthMission_3();
+            }
+            else if (m3m.five)
+            {
+                m3m.SixMission_3();
+            }
         }
     }
 

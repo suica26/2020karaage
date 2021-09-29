@@ -56,6 +56,7 @@ public class Mission3_M : Missions_M
 
     public void SecondMission_3()
     {
+        //支部攻撃
         eneBillScr.changeDamageFlg();
         bossIcon.SetActive(true);
 
@@ -65,5 +66,47 @@ public class Mission3_M : Missions_M
         exmis.text = splitText[5];
         load = "second";
         first = false;
+        second = true;
+    }
+
+    public void ThirdMission_3()
+    {
+        //敵破壊1
+        missionSlide.Play();
+        mission.text = "";
+        submis.text = splitText[6];
+        exmis.text = splitText[7];
+        second = false;
+        third = true;
+    }
+
+    public void FourthMission_3()
+    {
+        //支部攻撃2
+        missionSlide.Play();
+        submis.text = splitText[8];
+        exmis.text = splitText[9];
+        third = false;
+        fourth = true;
+    }
+
+    public void FiveMission_3()
+    {
+        //敵破壊2
+        missionSlide.Play();
+        submis.text = splitText[10];
+        exmis.text = splitText[11]; 
+        fourth = false;
+        five = true;
+    }
+
+    public void SixMission_3()
+    {
+        //支部撃破
+        missionSlide.Play();
+        submis.text = splitText[12];
+        exmis.text = splitText[13];
+        five = false;
+        six = true;
     }
 }
