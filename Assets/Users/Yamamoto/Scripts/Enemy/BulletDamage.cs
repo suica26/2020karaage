@@ -21,7 +21,8 @@ public class BulletDamage : MonoBehaviour
         {
             isHit = true;
             param.HPManager(damage);
-            Destroy(this.gameObject);
         }
+        if (other.gameObject.tag != "Enemy" && other.gameObject.tag != "WayPoint")
+            Destroy(gameObject);
     }
 }
