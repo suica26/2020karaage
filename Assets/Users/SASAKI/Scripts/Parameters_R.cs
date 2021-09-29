@@ -41,6 +41,8 @@ public class Parameters_R : MonoBehaviour
     public DamagePanel_M damaPanel;
     public float currentPer;
     public Color color1, color2, color3, color4;
+    private CriAtomSource Sound;
+    private bool HPsound;
 
     public void Start()
     {
@@ -66,6 +68,8 @@ public class Parameters_R : MonoBehaviour
         }
         ep += niwaPer;
         EPManager(0);
+        Sound = GetComponent<CriAtomSource>();
+        HPsound = true;
     }
 
     public void ScoreManager(int addScore)      //山本加筆：publicにすることで他Scriptで参照できるようにしました
@@ -174,6 +178,20 @@ public class Parameters_R : MonoBehaviour
                 PlayerPrefs.Save();
             }
             hpText.text = "HP: " + hp;
+
+            /*
+            if (hp < 50 && HPsound == true)
+            {
+                Sound.Play("LoHP");
+                HPsound = false;
+            }
+            if (HPsound == false && hp > 50)
+            {
+                Sound.Play("NomalHP");
+                HPsound = true;
+            }
+            */
+
         }
     }
     //引数で指定した分だけHPを加算します。
