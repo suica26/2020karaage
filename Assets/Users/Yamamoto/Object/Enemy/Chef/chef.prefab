@@ -263,7 +263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c47280ff66cad724f94a5455ef1da987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tier_WalkAttack: 3
+  tier_WalkAttack: 2
   divideObject: {fileID: 0}
   HP: 150
   kickMag: 1
@@ -271,6 +271,7 @@ MonoBehaviour:
   cutterMag: 1
   fallAttackMag: 1
   breakScore: 100
+  criAtomSource: {fileID: 0}
   objectID: 11
   breakEffect: {fileID: 0}
   deleteTime: 3
@@ -278,7 +279,7 @@ MonoBehaviour:
   power: 0
   groundContactSoundName: 
   shardDamage_nonDiv: 0
-  specialObjectFlg: 1
+  specialObjectFlg: 0
   notDamage: 0
   magnitude: 0.1
   duration: 0.25
@@ -289,6 +290,9 @@ MonoBehaviour:
     type: 3}
   attackDamage: 13
   searchArea: 50
+  patrollRoute: []
+  AIscript: {fileID: 0}
+  number: 0
   hitBoxPrefab: {fileID: 3531957827537779740, guid: a150f44f619a03c4789834dc1d0d0ef4,
     type: 3}
 --- !u!114 &2419253639629568097
