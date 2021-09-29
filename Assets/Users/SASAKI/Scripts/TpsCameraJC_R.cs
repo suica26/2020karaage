@@ -43,6 +43,9 @@ public class TpsCameraJC_R : MonoBehaviour
     // Mobile Setting
     private bool mobileMode;
 
+    //山本追加　カメラ感度操作用
+    private SaveManager_Y saveManager;
+
     // Use this for initialization
     void Start()
     {
@@ -69,12 +72,15 @@ public class TpsCameraJC_R : MonoBehaviour
 
         //山本追加 セーブデータとマウス感度(spinSpeed)を連動させられるように
         var saveObj = GameObject.FindGameObjectWithTag("SaveManager");
-        if (saveObj != null) spinSpeed = saveObj.GetComponent<SaveManager_Y>().GetMouseSensitive();
+        if (saveObj != null) saveManager = saveObj.GetComponent<SaveManager_Y>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (saveManager != null)
+            SetSpinSpeed(saveManager.GetCameraSensitive());
+
         switch (eCameraWork)
         {
             case eCamWork.eNormal:
@@ -281,5 +287,13 @@ public class TpsCameraJC_R : MonoBehaviour
         Time.timeScale = 1.0f;
         endEvolution = 0.0f;
         eCameraWork = eCamWork.eNormal;
+    }
+
+    //山本追加 カメラ感度設定関数
+    public void SetSpinSpeed(float sensitive)
+    {
+        spinSpeed = sensitive;
+        if (spinSpeed < 0f) spinSpeed = 0f;
+        else if (spinSpeed > 1f) spinSpeed = 1f;
     }
 }
