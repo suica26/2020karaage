@@ -52,7 +52,7 @@ public class Parameters_R : MonoBehaviour
         epText.text = "EP: " + ep;
         hpText.text = "HP: " + hp;
         epSlider.value = 0;
-        
+
         count = time;
         for (int i = 0; i < 4; i++)
         {
@@ -78,7 +78,7 @@ public class Parameters_R : MonoBehaviour
         {
             score += addScore;
             scoreText.text = "Price:$ " + score;
-        
+
         }
     }
     //引数で指定した分だけスコアを加算します。
@@ -152,18 +152,21 @@ public class Parameters_R : MonoBehaviour
                 plusTime = 0;
                 TimeManager(1);
             }
-            
+
         }
     }
     //引数で指定した分だけEPを加算します。
 
     public void HPManager(int addHP)
-    {   
+    {
         if (!freeze)
         {
-            TimeManager(-damTime);
-            damaPanel.DamageEffect();
-            if(!(addHP < 0 && hp == maxHP))
+            if (addHP > 0)
+            {
+                TimeManager(-damTime);
+                damaPanel.DamageEffect();
+            }
+            if (!(addHP < 0 && hp == maxHP))
             {
                 hp -= addHP;
                 mainSlider.value -= addHP;
@@ -191,7 +194,7 @@ public class Parameters_R : MonoBehaviour
                 Sound?.Play("NomalHP");
                 HPsound = true;
             }
-            
+
 
         }
     }
