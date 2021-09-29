@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class GameScene_Language_M : MonoBehaviour
 {
     public Text pauseP, start, howto, option, exit;
-    public Text optionTitle, volume, scr, scr1, scr2;
+    public Text optionTitle, volume, scr, scr1, scr2, cameraS;
     public Text howTitle, key, mouse, move, jump, pause, blast, kick, cutter;
     public Text evoSen, hipSen1,hipSen2;
     public Text attention;
@@ -58,6 +58,7 @@ public class GameScene_Language_M : MonoBehaviour
         scr.text = "QUALITY";
         scr1.text = "LOW";
         scr2.text = "HIGH";
+        cameraS.text = "CAMERA";
         howTitle.text = "HOW TO TITLE";
         key.text = "Keyboard";
         mouse.text = "Mouse";
