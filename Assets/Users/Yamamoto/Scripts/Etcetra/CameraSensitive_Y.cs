@@ -13,7 +13,7 @@ public class CameraSensitive_Y : MonoBehaviour
     void Start()
     {
         var saveObj = GameObject.FindGameObjectWithTag("SaveManager");
-        if (saveObj == null)
+        if (saveObj != null)
         {
             saveManager = saveObj.GetComponent<SaveManager_Y>();
             sensitiveSlider.value = saveManager.GetCameraSensitive();
