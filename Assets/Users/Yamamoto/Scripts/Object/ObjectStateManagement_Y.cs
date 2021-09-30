@@ -55,7 +55,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
     protected Renderer[] renderers;
     public int shardDamage_nonDiv;
     public bool specialObjectFlg;
-    [SerializeField] protected bool notDamage;
+    public bool notDamage;
     public float magnitude = 0.1f;
     public float duration = 0.25f;
 
@@ -101,15 +101,12 @@ public class ObjectStateManagement_Y : MonoBehaviour
     //通常攻撃
     protected void OnTriggerEnter(Collider other)
     {
-        if (!notDamage)
+        switch (other.gameObject.name)
         {
-            switch (other.gameObject.name)
-            {
-                case "KickCollision": Damage(kickMag, 1); break;
-                case "Cutter(Clone)": Damage(cutterMag, 2); break;
-                case "MorningBlastSphere_Y(Clone)": Damage(blastMag, 3); break;
-                case "fallAttackCircle(Clone)": Damage(fallAttackMag * scrCharaMove.damageBoost, 4); break;
-            }
+            case "KickCollision": Damage(kickMag, 1); break;
+            case "Cutter(Clone)": Damage(cutterMag, 2); break;
+            case "MorningBlastSphere_Y(Clone)": Damage(blastMag, 3); break;
+            case "fallAttackCircle(Clone)": Damage(fallAttackMag * scrCharaMove.damageBoost, 4); break;
         }
 
         //ガス系オブジェクトの爆発がヒットしたとき
@@ -213,7 +210,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
     public virtual void Damage(float mag, int skill)
     {
         //すでに破壊済みの場合は何も起きないようにする
-        if (!livingFlg) return;
+        if (!livingFlg || notDamage) return;
 
         HP -= (int)(scrEvo.Status_ATK * mag);
         SetSkillID(skill);
