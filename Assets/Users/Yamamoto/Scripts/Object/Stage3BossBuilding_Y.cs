@@ -54,7 +54,7 @@ public class Stage3BossBuilding_Y : ObjectStateManagement_Y
     public override void Damage(float mag, int skill)
     {
         //すでに破壊済みの場合は何も起きないようにする
-        if (!livingFlg) return;
+        if (!livingFlg || notDamage) return;
         notDamage = true;
         Invoke("changeDamageFlg", 0.5f);
 
@@ -70,8 +70,8 @@ public class Stage3BossBuilding_Y : ObjectStateManagement_Y
     private int HPCheck(int HP)
     {
         //HPがLaunchタイミングになっているかを調べる。
-        if (HP <= MaxHP / 3 * 2) return 1;
-        else if (HP <= MaxHP / 3) return 0;
+        if (HP <= MaxHP / 3) return 1;
+        else if (HP <= MaxHP / 3 * 2) return 0;
 
         //どのLaunchタイミングでもない(HP > MaxHP / 4 * 3)だった場合は3を返す
         return -1;
@@ -121,12 +121,12 @@ public class Stage3BossBuilding_Y : ObjectStateManagement_Y
 
     private IEnumerator LaunchEnemys(int phaseNum)
     {
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < phaseEnemyNum[i + phaseNum * 3]; j++)
             {
                 int num = Random.Range(0, 2);
-                var genPos = new Vector3(towerPos[num].x, launchHeight[i], towerPos[num].z);
+                var genPos = new Vector3(towerPos[num].x, launchHeight[phaseNum], towerPos[num].z);
                 GameObject e = Instantiate(enemyPrefabs[i].gameObject, genPos, Quaternion.identity);
                 e.GetComponent<FlyingEnemy_Y>().SetSt3BossScr(this);
                 var rb = e.GetComponent<Rigidbody>();
@@ -179,6 +179,7 @@ public class Stage3BossBuilding_Y : ObjectStateManagement_Y
         if (enemyBreakCount >= phaseBreakEnemyNum[phaseNum - 1])
         {
             changeDamageFlg();
+            enemyBreakCount = 0;
             //もし敵を指定の数倒して支部が攻撃できるようになることに何か処理を追加する場合は、この下に書いてください
             if (m3m.third)
             {
