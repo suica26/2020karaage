@@ -39,6 +39,10 @@ public class Tank_Y : Enemy_Y
 
         Destroy(gameObject, deleteTime);
 
+        //ステージ3用の処理
+        var st3BoosScr = Stage3BossBuilding_Y.ReturnInstance();
+        if (st3BoosScr != null) st3BoosScr.IncreaseEnemyBreakCount();
+
         if (divideObject != null && hitSkilID != 2) ChangeObject();
         else Substitution();    //差し替えをしない場合
     }

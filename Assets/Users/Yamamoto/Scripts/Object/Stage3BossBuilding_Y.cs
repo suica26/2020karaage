@@ -135,7 +135,6 @@ public class Stage3BossBuilding_Y : ObjectStateManagement_Y
                 int num = Random.Range(0, 2);
                 var genPos = new Vector3(towerPos[num].x, launchHeight[phaseNum], towerPos[num].z);
                 GameObject e = Instantiate(enemyPrefabs[i].gameObject, genPos, Quaternion.identity);
-                e.GetComponent<FlyingEnemy_Y>().SetSt3BossScr(this);
                 var rb = e.GetComponent<Rigidbody>();
                 var dir = Vector3.zero;
 
