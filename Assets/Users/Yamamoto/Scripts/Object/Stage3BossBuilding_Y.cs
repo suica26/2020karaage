@@ -25,6 +25,7 @@ public class Stage3BossBuilding_Y : ObjectStateManagement_Y
     private CriAtomSource Sound;
     private ADX_BGMAISAC aisacScr;
     private Mission3_M m3m;
+    private static Stage3BossBuilding_Y instance;
 
     protected override void Start()
     {
@@ -40,6 +41,12 @@ public class Stage3BossBuilding_Y : ObjectStateManagement_Y
         Sound = GetComponent<CriAtomSource>();
         aisacScr = GameObject.Find("BGMObject").GetComponent<ADX_BGMAISAC>();
         m3m = player.GetComponent<Mission3_M>();
+        instance = this;
+    }
+
+    public static Stage3BossBuilding_Y ReturnInstance()
+    {
+        return instance;
     }
 
     private void Update()
@@ -171,7 +178,7 @@ public class Stage3BossBuilding_Y : ObjectStateManagement_Y
 
     public void IncreaseEnemyBreakCount()
     {
-        if (!notDamage) return;
+        if (!notDamage || !phase[0]) return;
         enemyBreakCount++;
         int phaseNum = 0;
         foreach (var p in phase) if (p) phaseNum++;
