@@ -107,6 +107,7 @@ public class Mission2_M : Missions_M
 
     public void FirstMission_2()
     {
+        //ブラスト
         first = true;
         missionSlide.Play();
         mission.text = splitText[0];
@@ -118,6 +119,7 @@ public class Mission2_M : Missions_M
 
     public void SecondMission_2()
     {
+        //ガソスタ
         missionSlide.Play();
         mission.text = splitText[3];
         submis.text = splitText[4];
@@ -131,6 +133,7 @@ public class Mission2_M : Missions_M
 
     public void ThirdMission_2()
     {
+        //敵倒し
         missionSlide.Play();
         mission.text = splitText[6];
         submis.text = splitText[7];
@@ -145,6 +148,7 @@ public class Mission2_M : Missions_M
 
     public void FourthMission_2()
     {
+        //ガスボール
         missionSlide.Play();
         mission.text = splitText[9];
         submis.text = splitText[10];
@@ -160,6 +164,7 @@ public class Mission2_M : Missions_M
 
     public void FiveMission_2()
     {
+        //進化
         missionSlide.Play();
         mission.text = splitText[12];
         submis.text = splitText[13];
@@ -168,13 +173,12 @@ public class Mission2_M : Missions_M
         five = true;
         achieve = 0;
         per.text = "";
-        achieve = 0;
-        per.text = achieve + "/ 3";
         load = "five";
     }
 
     public void SixMission_2()
     {
+        //支部探し
         bossIcon.SetActive(true);
 
         timer_2_1 = 0;
@@ -193,6 +197,7 @@ public class Mission2_M : Missions_M
     {
         eneBillScr.changeDamageFlg();
 
+        //支部破壊
         missionSlide.Play();
         mission.text = splitText[18];
         submis.text = splitText[19];
