@@ -30,14 +30,6 @@ public class Mission3_M : Missions_M
     void Update()
     {
         evoNum = scrEvoChi.EvolutionNum;
-        if (achieve >= 25)
-        {
-            achieve = 25;
-        }
-        if (achieve2 >= 10)
-        {
-            achieve2 = 10;
-        }
 
         if (evoNum >= 3 && first)
         {
@@ -153,6 +145,10 @@ public class Mission3_M : Missions_M
         if (third || five)
         {
             achieve += 1;
+            if (achieve >= 25)
+            {
+                achieve = 25;
+            }
             per.text = achieve + " / 25";
         }
     }
@@ -162,11 +158,19 @@ public class Mission3_M : Missions_M
         if (third)
         {
             achieve2 += 1;
+            if (achieve2 >= 10)
+            {
+                achieve2 = 10;
+            }
             per2.text = achieve2 + " / 10";
         }
         else if (five)
         {
             achieve += 1;
+            if (achieve >= 25)
+            {
+                achieve = 25;
+            }
             per.text = achieve + " / 25";
         }
     }
@@ -176,6 +180,10 @@ public class Mission3_M : Missions_M
         if (third || five)
         {
             achieve2 += 1;
+            if (achieve2 >= 10)
+            {
+                achieve2 = 10;
+            }
             per2.text = achieve2 + " / 10";
         }
     }
