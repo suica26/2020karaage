@@ -68,7 +68,7 @@ public class GameScene_Language_M : MonoBehaviour
         blast.text = "MorningBlast(Long Press)";
         kick.text = "Kick";
         cutter.text = "CrestCutter";
-        evoSen.text = "When the upper left gauge is full, \n the chicken will evolve";
+        evoSen.text = "When the lower gauge is full, \n the chicken will evolve";
         hipSen1.text = "HipStamp";
         hipSen2.text = "While in the air \n Let's press and hold the left click!";
         attention.text = "There seems to be nothing here";
