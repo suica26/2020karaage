@@ -47,9 +47,9 @@ public class StopCivil_Y : Civil_Y
                 other.gameObject.tag == "Chain" ||
                 other.gameObject.name == "fallAttackCircle(Clone)")
             {
-                EscapeContagion();
                 criAtomSource.Stop();
                 criAtomSource.Play("Citizen00");
+                EscapeContagion();
             }
             rb.isKinematic = false;
         }
