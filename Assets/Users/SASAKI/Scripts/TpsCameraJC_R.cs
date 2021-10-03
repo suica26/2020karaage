@@ -196,6 +196,8 @@ public class TpsCameraJC_R : MonoBehaviour
         // 順次処理を行う(Shard は無視する)
         foreach (var hit in hits)
         {
+            //山本追加 餌でカメラがくがくしてたのを回避
+            if (hit.collider.gameObject.layer != LayerMask.NameToLayer("Food")) return;
             if (hit.transform.gameObject.layer != 10 && hit.transform.gameObject.layer != 17)
             {
                 setCamPos = hit.point + transform.forward;

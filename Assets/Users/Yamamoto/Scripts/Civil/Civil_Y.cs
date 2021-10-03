@@ -180,10 +180,7 @@ public class Civil_Y : MonoBehaviour
     {
         animator.SetBool(escapeStr, true);
         if (!escapeFlg) escapeFlg = true;
-        if (!avoidFlg)
-        {
-            transform.forward = GetVectorXZNormalized(transform.position, player.transform.position);
-        }
+        if (!avoidFlg) transform.forward = GetVectorXZNormalized(transform.position, player.transform.position);
 
         //y方向の速度を保存
         fallenSpeed = new Vector3(0, rb.velocity.y, 0);

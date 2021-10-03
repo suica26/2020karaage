@@ -37,7 +37,7 @@ public class SaveManager_Y : MonoBehaviour
     private void Start()
     {
 #if UNITY_IOS || UNITY_ANDROID
-        isMoblie = true;
+        isMobile = true;
         Debug.Log("Mobile");
 #endif
         Load();

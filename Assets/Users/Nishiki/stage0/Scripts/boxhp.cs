@@ -12,16 +12,13 @@ public class boxhp : MonoBehaviour
     public GameObject uipanel;
     //ADX
     public new CriAtomSource audio;
-
-    private Animator animCon;
+    public GameObject explosionEffect;
     private bool death;
     public commentplaykick scrCommentKick;
 
     // Start is called before the first frame update
     void Start()
     {
-        animCon = GetComponent<Animator>();
-
         audio = GetComponent<CriAtomSource>();
 
         slider.value = 1;
@@ -43,8 +40,9 @@ public class boxhp : MonoBehaviour
             currentHp = 0;
             scrCommentKick.BreakNumPlus();
             scrCommentKick.animCon.SetInteger("play", 0);
-            animCon.SetInteger("break", 1);
-            Destroy(this.gameObject, 1.2f);
+            Instantiate(explosionEffect, transform.position, Quaternion.identity);
+            GetComponent<Renderer>().enabled = false;
+            Destroy(gameObject, 0.6f);
         }
     }
 
