@@ -139,7 +139,7 @@ public class Parameters_R : MonoBehaviour
             else if (ep == evo3)
             {
                 hpSli[3].SetActive(true);
-                hpSli[2].transform.Translate(-10, 21, 0);// 場所調整
+                hpSli[2].transform.Translate(-10, 24, 0);// 場所調整
                 TimeManager(10);
                 maxHP = 1000;
                 hp = maxHP;

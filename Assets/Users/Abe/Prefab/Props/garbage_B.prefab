@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8306661188573362903}
   - component: {fileID: 3489904567524113280}
   - component: {fileID: 5756827630079562197}
+  - component: {fileID: 5061682991450356286}
   m_Layer: 2
   m_Name: garbage_B
   m_TagString: Small
@@ -127,6 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tier_WalkAttack: 1
   divideObject: {fileID: 0}
+  genPosY: 0
   HP: 150
   kickMag: 1.5
   blastMag: 1
@@ -183,3 +185,18 @@ MonoBehaviour:
   _pitch: 0
   _androidUseLowLatencyVoicePool: 0
   need_to_player_update_all: 1
+--- !u!114 &5061682991450356286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8730711843708546912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58d7fbd90420d744e8ba69d321b2e651, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  m1m: {fileID: 0}
+  hit: 0
