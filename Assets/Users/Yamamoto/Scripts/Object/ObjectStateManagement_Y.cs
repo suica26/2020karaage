@@ -6,6 +6,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
 {
     [Range(0, 4), SerializeField] protected int tier_WalkAttack;
     [SerializeField] protected GameObject divideObject;
+    public float genPosY;
     protected string attackSoundName, contactSoundName, ExplosionSoundName, CutterContactSoundName;
     protected int MaxHP;
     public int HP;                  //Inspector上から設定できます。
@@ -430,7 +431,9 @@ public class ObjectStateManagement_Y : MonoBehaviour
     //差し替えする場合
     protected void ChangeObject()
     {
-        var dividedObject = Instantiate(divideObject, transform.position, transform.rotation);
+        var genPos = transform.position;
+        genPos.y += genPosY;
+        var dividedObject = Instantiate(divideObject, genPos, transform.rotation);
         var breakScr = dividedObject.AddComponent<ObjectBreak_Y>();
         breakScr.InitSetting(this, true);
         breakScr.BreakAction();
