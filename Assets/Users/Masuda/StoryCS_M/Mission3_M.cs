@@ -10,7 +10,7 @@ public class Mission3_M : Missions_M
     public float evoTimer;
     public GameObject bossIcon, perSub;
     public Text per2;
-    public int achieve2;
+    public int achieve2, achieve3;
     public override void Start()
     {
         base.Start();
@@ -46,21 +46,21 @@ public class Mission3_M : Missions_M
             SecondMission_3();
         }
 
-        //支部の段階
-        if (third)
+        //支部の段階,あくまでエスケープ用で高めに設定
+        /*if (third)
         {
-            if (achieve >= 25 && achieve2 >= 10)
+            if (achieve >= 30 && achieve2 >= 15)//元々25,10ずつ
             {
                 FourthMission_3();
             }
         }
         if (five)
         {
-            if (achieve >= 25 && achieve2 >= 10)
+            if (achieve >= 30 && achieve2 >= 20 && achieve3 >= 15)
             {
                 SixMission_3();
             }
-        }
+        }*/
     }
 
     public void FirstMission_3()
@@ -96,8 +96,8 @@ public class Mission3_M : Missions_M
         mission.text = "";
         submis.text = splitText[6];
         exmis.text = splitText[7];
-        per.text = "0 / 25";//シェフ
-        per2.text = "0 / 10";//警官
+        //per.text = "0 / 25";//シェフ
+        //per2.text = "0 / 10";//警官
         second = false;
         third = true;
     }
@@ -122,8 +122,8 @@ public class Mission3_M : Missions_M
         exmis.text = splitText[11];
         achieve = 0;
         achieve2 = 0;
-        per.text = "0 / 25";//警官
-        per2.text = "0 / 10";//戦車
+        //per.text = "0 / 25";//警官
+        //per2.text = "0 / 10";//戦車
         fourth = false;
         five = true;
     }
@@ -145,33 +145,24 @@ public class Mission3_M : Missions_M
         if (third || five)
         {
             achieve += 1;
-            if (achieve >= 25)
+            /*if (achieve >= 25)
             {
                 achieve = 25;
             }
-            per.text = achieve + " / 25";
+            per.text = achieve + " / 25";*/
         }
     }
 
     public void EnemyBreak_Police()
     {
-        if (third)
+        if (third || five)
         {
             achieve2 += 1;
-            if (achieve2 >= 10)
+            /*if (achieve2 >= 10)
             {
                 achieve2 = 10;
             }
-            per2.text = achieve2 + " / 10";
-        }
-        else if (five)
-        {
-            achieve += 1;
-            if (achieve >= 25)
-            {
-                achieve = 25;
-            }
-            per.text = achieve + " / 25";
+            per2.text = achieve2 + " / 10";*/
         }
     }
 
@@ -179,12 +170,12 @@ public class Mission3_M : Missions_M
     {
         if (third || five)
         {
-            achieve2 += 1;
-            if (achieve2 >= 10)
+            achieve3 += 1;
+            /*if (achieve2 >= 10)
             {
                 achieve2 = 10;
             }
-            per2.text = achieve2 + " / 10";
+            per2.text = achieve2 + " / 10";*/
         }
     }
 }
