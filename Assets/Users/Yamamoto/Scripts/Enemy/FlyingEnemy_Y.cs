@@ -78,14 +78,4 @@ public class FlyingEnemy_Y : MonoBehaviour
         navMeshAgent.enabled = true;
         rb.isKinematic = true;
     }
-
-    public void SetSt3BossScr(Stage3BossBuilding_Y scr)
-    {
-        st3BossScr = scr;
-    }
-
-    private void OnDestroy()
-    {
-        st3BossScr.IncreaseEnemyBreakCount();
-    }
 }

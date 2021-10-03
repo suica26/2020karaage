@@ -161,6 +161,10 @@ public class Enemy_Y : ObjectStateManagement_Y
 
         Destroy(gameObject, 1.5f);
         animator.SetTrigger("Death");
+
+        //ステージ3用の処理
+        var st3BoosScr = Stage3BossBuilding_Y.ReturnInstance();
+        if (st3BoosScr != null) st3BoosScr.IncreaseEnemyBreakCount();
     }
 
     public void SetPatrollRoute(Vector3[] route)

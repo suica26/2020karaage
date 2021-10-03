@@ -25,6 +25,7 @@ public class Stage3BossBuilding_Y : ObjectStateManagement_Y
     private CriAtomSource Sound;
     private ADX_BGMAISAC aisacScr;
     private Mission3_M m3m;
+    private static Stage3BossBuilding_Y instance;
 
     protected override void Start()
     {
@@ -40,6 +41,12 @@ public class Stage3BossBuilding_Y : ObjectStateManagement_Y
         Sound = GetComponent<CriAtomSource>();
         aisacScr = GameObject.Find("BGMObject").GetComponent<ADX_BGMAISAC>();
         m3m = player.GetComponent<Mission3_M>();
+        instance = this;
+    }
+
+    public static Stage3BossBuilding_Y ReturnInstance()
+    {
+        return instance;
     }
 
     private void Update()
@@ -128,7 +135,6 @@ public class Stage3BossBuilding_Y : ObjectStateManagement_Y
                 int num = Random.Range(0, 2);
                 var genPos = new Vector3(towerPos[num].x, launchHeight[phaseNum], towerPos[num].z);
                 GameObject e = Instantiate(enemyPrefabs[i].gameObject, genPos, Quaternion.identity);
-                e.GetComponent<FlyingEnemy_Y>().SetSt3BossScr(this);
                 var rb = e.GetComponent<Rigidbody>();
                 var dir = Vector3.zero;
 
@@ -171,7 +177,7 @@ public class Stage3BossBuilding_Y : ObjectStateManagement_Y
 
     public void IncreaseEnemyBreakCount()
     {
-        if (!notDamage) return;
+        if (!notDamage || !phase[0]) return;
         enemyBreakCount++;
         int phaseNum = 0;
         foreach (var p in phase) if (p) phaseNum++;
