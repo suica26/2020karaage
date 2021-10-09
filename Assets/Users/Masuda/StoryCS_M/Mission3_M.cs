@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Mission3_M : Missions_M
 {
     public string onLoad_s3;
-    public GameObject eneBill;
+    public GameObject eneBill,shibuLight2;
     public float evoTimer;
     public GameObject bossIcon, perSub;
     public Text per2;
@@ -14,6 +14,8 @@ public class Mission3_M : Missions_M
     public override void Start()
     {
         base.Start();
+        shibuLight2 = GameObject.Find("Light_pillar (1)");
+        shibuLight2.SetActive(false);
         misBox.SetActive(true);
         Time.timeScale = 1;
         onLoad_s3 = PlayerPrefs.GetString(scrParame.saveStage, "");
@@ -44,6 +46,8 @@ public class Mission3_M : Missions_M
         if (first && evoTimer >= 1.0f)
         {
             SecondMission_3();
+            shibuLight.SetActive(true);
+            shibuLight2.SetActive(true);
         }
 
         //支部の段階,あくまでエスケープ用で高めに設定

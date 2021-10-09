@@ -72,6 +72,7 @@ public class Mission2_M : Missions_M
             if (evoNum >= 2)
             {
                 SixMission_2();
+                shibuLight.SetActive(true);
             }
             else
             {
@@ -92,6 +93,7 @@ public class Mission2_M : Missions_M
         if (five && timer_2_1 >= 1.0f)
         {
             SixMission_2();
+            shibuLight.SetActive(true);
         }
 
         if (six && dis <= 50)

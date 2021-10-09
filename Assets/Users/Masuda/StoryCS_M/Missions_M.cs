@@ -7,7 +7,7 @@ public class Missions_M : MonoBehaviour
 {
     [SerializeField] public Text mission, submis, exmis, per, tips;
     [SerializeField]
-    public GameObject player, misBox, company, tipsChicken;
+    public GameObject player, misBox, company, tipsChicken, shibuLight;
     [SerializeField] public TextAsset txtFile, japanese, english;//英語ファイルを追加し、mainFileで日英のファイル変更を可能に
     [SerializeField] public int smallNum, bigNum, achieve, hitID;
     [SerializeField]
@@ -40,6 +40,8 @@ public class Missions_M : MonoBehaviour
         splitText = txtData.Split(char.Parse("\n"));
         //misBox.SetActive(false);
         tipsChicken.SetActive(false);
+        shibuLight = GameObject.Find("Light_pillar");
+        shibuLight.SetActive(false);
     }
 
     public virtual void BigNumberPlus() { }
