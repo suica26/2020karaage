@@ -94,6 +94,7 @@ public class Mission1_M : Missions_M
             {
                 //アジト探し
                 SevenMission();
+                shibuLight.SetActive(true);
             }
 
             else
@@ -114,6 +115,7 @@ public class Mission1_M : Missions_M
         {
             //アジト探し
             SevenMission();
+            shibuLight.SetActive(true);
         }
 
         if (final)
