@@ -28,13 +28,13 @@ public class ObjectStateManagement_Y : MonoBehaviour
     /// 8 消火栓
     /// </summary>
     public int objectID;
-    public GameObject player { get; private set; }
+    public static GameObject player { get; private set; }
     //加筆(佐々木)
-    protected CharaMoveRigid_R scrCharaMove;
-    protected FoodMaker_R scrFood;
-    protected EvolutionChicken_R scrEvo;
+    protected static CharaMoveRigid_R scrCharaMove;
+    protected static FoodMaker_R scrFood;
+    protected static EvolutionChicken_R scrEvo;
     //加筆　undertreem 0625
-    protected ADX_SoundRaycast ADX_RevLevel;
+    protected static ADX_SoundRaycast ADX_RevLevel;
     protected string Rev; //ADXバス名
     /// <summary>
     /// 0:踏み潰し攻撃
@@ -57,25 +57,26 @@ public class ObjectStateManagement_Y : MonoBehaviour
     public int shardDamage_nonDiv;
     public bool specialObjectFlg;
     public bool notDamage;
-    public float magnitude = 0.1f;
-    public float duration = 0.25f;
+    [SerializeField] protected float magnitude = 0.1f;
+    [SerializeField] protected float duration = 0.25f;
+    private float timer;
 
     //Start is called before the first frame update
     protected virtual void Start()
     {
-        player = GameObject.Find("Player");
         MaxHP = HP;
         //加筆(佐々木)
-        scrCharaMove = player.GetComponent<CharaMoveRigid_R>();
-        scrEvo = player.GetComponent<EvolutionChicken_R>();
-        scrFood = GetComponent<FoodMaker_R>();
+        if (player == null) player = GameObject.Find("Player");
+        if (scrCharaMove == null) scrCharaMove = player.GetComponent<CharaMoveRigid_R>();
+        if (scrEvo == null) scrEvo = player.GetComponent<EvolutionChicken_R>();
+        if (scrFood == null) scrFood = GetComponent<FoodMaker_R>();
         criAtomSource = GetComponent<CriAtomSource>();
         //加筆　undertreem 0625
-        ADX_RevLevel = player.GetComponent<ADX_SoundRaycast>();
+        if (ADX_RevLevel == null)
+        { ADX_RevLevel = player.GetComponent<ADX_SoundRaycast>(); Debug.Log("Static"); }
         renderers = CheckRenderer();
     }
 
-    private float timer;
     private void Update()
     {
         timer += Time.deltaTime;
@@ -384,9 +385,6 @@ public class ObjectStateManagement_Y : MonoBehaviour
         scrFood?.DropFood();
 
         //加筆　undertreem 0625
-        //float BusLevel = ADX_RevLevel.ADX_BusSendLevel;
-        //SetBusSendLevelSet(Rev, BusLevel);
-        //Debug.Log(BusLevel);
         //カッターのときはカッターキューを鳴らす
         if (hitSkilID == 2) objectID += 100;
         SetBreakCue();
