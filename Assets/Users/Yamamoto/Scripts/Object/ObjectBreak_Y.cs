@@ -24,7 +24,7 @@ public class ObjectBreak_Y : MonoBehaviour
     public void InitSetting(ObjectStateManagement_Y objectScript, bool isDivided)
     {
         objScr = objectScript;
-        player = objectScript.player;
+        player = ObjectStateManagement_Y.player;
         Collapsions = new VoidFunc[5] { TramplingCollapse, KickCollapse, CutterCollapse, MorBlaBreak, FallenCollapse };
         criAtomSource = GetComponent<CriAtomSource>();
         //破壊済み状態にタグとレイヤーを変更
@@ -193,7 +193,7 @@ public class ObjectBreak_Y : MonoBehaviour
     {
         RigidOn(obj);
 
-        var dir = (obj.transform.position - objScr.player.transform.position);
+        var dir = (obj.transform.position - player.transform.position);
         dir.y = 0f;
         dir = dir.normalized;
         var F = dir * objScr.power;
@@ -209,7 +209,7 @@ public class ObjectBreak_Y : MonoBehaviour
     {
         RigidOn(obj);
 
-        var direction = (obj.transform.position - objScr.player.transform.position).normalized;
+        var direction = (obj.transform.position - player.transform.position).normalized;
         var rb = obj.GetComponent<Rigidbody>();
         yield return null;
         var F = direction * objScr.power;
