@@ -118,7 +118,7 @@ public class Parameters_R : MonoBehaviour
                 hpSli[1].SetActive(true);
                 hpSlider[1].value = hp;
                 mainSlider = hpSlider[1];
-                TimeManager(10);
+                TimeManager(20);
                 maxHP = 250;
                 hp = maxHP;
                 mainSlider.value = maxHP;
@@ -131,7 +131,7 @@ public class Parameters_R : MonoBehaviour
                 hpSli[2].SetActive(true);
                 hpSlider[2].value = hp;
                 mainSlider = hpSlider[2];
-                TimeManager(10);
+                TimeManager(20);
                 maxHP = 500;
                 hp = maxHP;
                 mainSlider.value = maxHP;
@@ -140,7 +140,7 @@ public class Parameters_R : MonoBehaviour
             {
                 hpSli[3].SetActive(true);
                 hpSli[2].transform.Translate(-10, 24, 0);// 場所調整
-                TimeManager(10);
+                TimeManager(20);
                 maxHP = 1000;
                 hp = maxHP;
                 hpSlider[2].value = 500;
@@ -203,6 +203,7 @@ public class Parameters_R : MonoBehaviour
     private void Update()
     {
         count -= Time.deltaTime;
+        //timeText.text = "Time: " + time;
 
         //ゲージの色変換
         currentPer = epSlider.value / epSlider.maxValue;
