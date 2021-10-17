@@ -166,7 +166,7 @@ public class Parameters_R : MonoBehaviour
                 TimeManager(-damTime);
                 damaPanel.DamageEffect();
             }
-            if (!(addHP < 0 && hp == maxHP))
+            if (!(addHP < 0))
             {
                 hp -= addHP;
                 mainSlider.value -= addHP;
