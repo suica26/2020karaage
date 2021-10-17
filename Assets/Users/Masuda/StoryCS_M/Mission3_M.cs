@@ -7,6 +7,7 @@ public class Mission3_M : Missions_M
 {
     public string onLoad_s3;
     public GameObject eneBill,shibuLight2;
+    public GameObject[] shibuEff;
     public float evoTimer;
     public GameObject bossIcon, perSub;
     public Text per2;
@@ -15,7 +16,18 @@ public class Mission3_M : Missions_M
     {
         base.Start();
         shibuLight2 = GameObject.Find("Light_pillar (1)");
+        shibuEff[0] = GameObject.Find("EneBuilding_eff 1");
+        shibuEff[1] = GameObject.Find("EneBuilding_eff 1 (1)");
+        shibuEff[2] = GameObject.Find("EneBuilding_eff 1 (2)");
+        shibuEff[3] = GameObject.Find("EneBuilding_eff 1 (3)");
+        shibuEff[4] = GameObject.Find("EneBuilding_eff 1 (4)");
+        shibuEff[5] = GameObject.Find("EneBuilding_eff 1 (5)");
+        shibuEff[6] = GameObject.Find("EneBuilding_eff 1 (6)");
         shibuLight2.SetActive(false);
+        for (int i = 0; i < 7; i++)
+        {
+            shibuEff[i].SetActive(false);
+        }
         misBox.SetActive(true);
         Time.timeScale = 1;
         onLoad_s3 = PlayerPrefs.GetString(scrParame.saveStage, "");
@@ -38,16 +50,20 @@ public class Mission3_M : Missions_M
             evoTimer += Time.deltaTime;
         }
 
-        if (!eneBill)
+        /*if (!eneBill)
         {
-            //PlayerPrefs.SetString("storyClear", "clear");
-        }
+            PlayerPrefs.SetString("storyClear", "clear");
+        }*/
 
         if (first && evoTimer >= 1.0f)
         {
             SecondMission_3();
             shibuLight.SetActive(true);
             shibuLight2.SetActive(true);
+            for (int i = 0; i < 7; i++)
+            {
+                shibuEff[i].SetActive(true);
+            }
         }
 
         //支部の段階,あくまでエスケープ用で高めに設定
