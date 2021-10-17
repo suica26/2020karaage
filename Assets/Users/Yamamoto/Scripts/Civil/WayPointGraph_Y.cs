@@ -166,6 +166,7 @@ public class WayPointGraph_Y : MonoBehaviour
 
         while (!finish)
         {
+            if (before - 1 >= wpScripts.Length) break;
             if (wpScripts[before].BeforePoint == -100)
             {
                 finish = true;
