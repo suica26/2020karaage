@@ -178,7 +178,7 @@ public class Civil_Y : MonoBehaviour
 
     protected virtual void Escape()
     {
-        animator.SetBool(escapeStr, true);
+        animator?.SetBool(escapeStr, true);
         if (!escapeFlg) escapeFlg = true;
         if (!avoidFlg) transform.forward = GetVectorXZNormalized(transform.position, player.transform.position);
 

@@ -143,7 +143,7 @@ public class ObjectBreak_Y : MonoBehaviour
             foreach (var cObj in checkObjects)
             {
                 //メッシュが設定されている(＝空オブジェクトでない)オブジェクトの場合
-                if (cObj.GetComponent<MeshFilter>() != null)
+                if (cObj.GetComponent<MeshFilter>() != null && cObj != null)
                 {
                     var divObjects = MeshCut.Cut(cObj, cutter.transform.position, normal, cObj.GetComponent<Renderer>().material);
                     divObjects[0].transform.parent = left.transform;
@@ -152,7 +152,7 @@ public class ObjectBreak_Y : MonoBehaviour
                 else
                 {
                     //子オブジェクトを所有しているかを確認
-                    if (cObj.transform.childCount > 0)
+                    if (cObj.transform.childCount > 0 && cObj.activeInHierarchy)
                     {
                         foreach (Transform children in cObj.transform)
                         {

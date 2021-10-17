@@ -11,7 +11,7 @@ public class FoodMaker_R : MonoBehaviour
         int count = Random.Range(minFood, maxFood);
         float range = 3f;
 
-        for(int i = 0; i < count; i++)
+        for (int i = 0; i < count; i++)
         {
             //ヤマモト加筆
             var genPos = transform.position;
@@ -19,7 +19,7 @@ public class FoodMaker_R : MonoBehaviour
             genPos.y += Random.Range(-range, range);
             genPos.z += Random.Range(-range, range);
             //生成場所をtransfotm.positionからgenPosに
-            var food = Instantiate(objFood, genPos, new Quaternion(Random.Range(0,360) * Mathf.Deg2Rad, 0f, Random.Range(0, 360) * Mathf.Deg2Rad, 1));
+            var food = Instantiate(objFood, genPos, Quaternion.identity);
 
             Destroy(food, 20f);
         }
