@@ -11,7 +11,7 @@ public class Civil_Y : MonoBehaviour
     public float contagionRange;
     protected Vector3 fallenSpeed;
     protected Rigidbody rb;
-    protected GameObject player;
+    protected static GameObject player;
     public GameObject[] route;
     private int routeNum = 0;
     private Vector3 preForward;
@@ -23,7 +23,7 @@ public class Civil_Y : MonoBehaviour
     [SerializeField] protected float timer;
     [SerializeField] protected float deleteTiming;
     [SerializeField] private float resetForwardTiming;
-    private WayPointGraph_Y wayPointGraph;
+    private static WayPointGraph_Y wayPointGraph;
     public bool avoidFlg = false;
     [SerializeField] protected Animator animator;
     protected string escapeStr = "isEscape";
@@ -36,10 +36,15 @@ public class Civil_Y : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        player = GameObject.Find("Player");
+        if (player == null)
+            player = GameObject.Find("Player");
         rotSpeed = Random.Range(0.7f, 1.5f);
         criAtomSource = GetComponent<CriAtomSource>();
-        wayPointGraph = GameObject.Find("GameAI_Y").GetComponent<WayPointGraph_Y>();
+        if (wayPointGraph == null)
+        {
+            wayPointGraph = GameObject.Find("GameAI_Y").GetComponent<WayPointGraph_Y>();
+            Debug.Log("SetWayPoint");
+        }
         surprised = false;
     }
 

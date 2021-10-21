@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpawnerWaypoint_Y : WayPoint_Y
 {
-    public WayPointGraph_Y wayPointGraph;
+    public static WayPointGraph_Y wayPointGraph;
     public GameObject[] civilPrefabs;
     private GameObject civil;
     public float blurScale;
@@ -13,7 +13,8 @@ public class SpawnerWaypoint_Y : WayPoint_Y
 
     private void Start()
     {
-        wayPointGraph = GameObject.Find("GameAI_Y").GetComponent<WayPointGraph_Y>();
+        if (wayPointGraph == null)
+            wayPointGraph = GameObject.Find("GameAI_Y").GetComponent<WayPointGraph_Y>();
     }
 
     public void SpawnCivil()

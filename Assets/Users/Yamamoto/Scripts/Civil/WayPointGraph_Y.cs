@@ -11,7 +11,6 @@ public class WayPointGraph_Y : MonoBehaviour
     private List<SpawnerWaypoint_Y> scrSpawners;
     private int NOC;   //計算回数
     public GameObject[] route;
-
     [SerializeField] private int civilMaxNum;
     public int civilNum;
     public float routinTimer;
