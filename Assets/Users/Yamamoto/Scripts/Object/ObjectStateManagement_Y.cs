@@ -380,7 +380,8 @@ public class ObjectStateManagement_Y : MonoBehaviour
         //一応、HPは0になるように補正をかける
         HP = 0;
 
-        GameObject.Find("Canvas").GetComponent<Parameters_R>().ScoreManager(breakScore);
+        if (ScoreAttack_Y.CheckScoreMode())
+            ScoreAttack_Y.AddScore(breakScore);
         //餌のスポーン処理
         scrFood?.DropFood();
 
