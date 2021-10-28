@@ -203,7 +203,7 @@ public class Parameters_R : MonoBehaviour
     private void Update()
     {
         count -= Time.deltaTime;
-        //timeText.text = "Time: " + time;
+        timeText.text = "Time: " + time;
 
         //ゲージの色変換
         currentPer = epSlider.value / epSlider.maxValue;
