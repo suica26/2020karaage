@@ -16,7 +16,7 @@ public class FoodMaker_R : MonoBehaviour
             //ヤマモト加筆
             var genPos = transform.position;
             genPos.x += Random.Range(-range, range);
-            genPos.y += Random.Range(-range, range);
+            genPos.y += 3f;
             genPos.z += Random.Range(-range, range);
             //生成場所をtransfotm.positionからgenPosに
             var food = Instantiate(objFood, genPos, Quaternion.identity);

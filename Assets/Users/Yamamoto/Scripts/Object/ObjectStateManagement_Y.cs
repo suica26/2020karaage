@@ -31,7 +31,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
     public static GameObject player { get; private set; }
     //加筆(佐々木)
     protected static CharaMoveRigid_R scrCharaMove;
-    protected static FoodMaker_R scrFood;
+    protected FoodMaker_R scrFood;
     protected static EvolutionChicken_R scrEvo;
     //加筆　undertreem 0625
     protected static ADX_SoundRaycast ADX_RevLevel;
@@ -69,7 +69,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
         if (player == null) player = GameObject.Find("Player");
         if (scrCharaMove == null) scrCharaMove = player.GetComponent<CharaMoveRigid_R>();
         if (scrEvo == null) scrEvo = player.GetComponent<EvolutionChicken_R>();
-        if (scrFood == null) scrFood = GetComponent<FoodMaker_R>();
+        scrFood = GetComponent<FoodMaker_R>();
         criAtomSource = GetComponent<CriAtomSource>();
         //加筆　undertreem 0625
         if (ADX_RevLevel == null)
