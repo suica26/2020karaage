@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class FoodGather_Y : MonoBehaviour
 {
-    private GameObject player;
-    private EvolutionChicken_R scrEvo;
+    private static GameObject player;
+    private static EvolutionChicken_R scrEvo;
     private Rigidbody rb;
     public float gatherDistance;
     public float gatherSpeed;
@@ -14,8 +14,10 @@ public class FoodGather_Y : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Player");
-        scrEvo = player.GetComponent<EvolutionChicken_R>();
+        if(player == null)
+            player = GameObject.Find("Player");
+        if(scrEvo == null)
+            scrEvo = player.GetComponent<EvolutionChicken_R>();
         rb = GetComponent<Rigidbody>();
     }
 
@@ -30,8 +32,9 @@ public class FoodGather_Y : MonoBehaviour
 
     private void GoToPlayer()
     {
+        Vector3 fallenSpeed = new Vector3(0, rb.velocity.y, 0);
         Vector3 toPlayer = (player.transform.position - transform.position).normalized;
         Vector3 gatherDir = (Quaternion.Euler(0, 145, 0) * toPlayer + toPlayer * centripetalRatio).normalized;
-        rb.velocity = gatherDir * gatherSpeed * (scrEvo.EvolutionNum + 1);
+        rb.velocity = gatherDir * gatherSpeed * (scrEvo.EvolutionNum + 1) + fallenSpeed;
     }
 }

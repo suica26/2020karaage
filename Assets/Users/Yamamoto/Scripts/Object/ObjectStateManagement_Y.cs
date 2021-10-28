@@ -401,8 +401,8 @@ public class ObjectStateManagement_Y : MonoBehaviour
 
         if (GetComponent<Car_R>() != null)
         {
-            Destroy(GetComponent<Animator>());
-            Destroy(GetComponent<Car_R>());
+            GetComponent<Animator>().enabled = false;
+            GetComponent<Car_R>().enabled = false;
         }
 
         DeathCount();
@@ -449,7 +449,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
         Delete();
     }
 
-    public void Delete()
+    protected void Delete()
     {
         Destroy(gameObject, deleteTime);
     }
