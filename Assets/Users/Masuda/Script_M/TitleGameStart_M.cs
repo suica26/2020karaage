@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class TitleGameStart_M : MonoBehaviour
 {
-    public GameObject gameMode, start, loadPanel;
-    public string cleared, sceneName;
+    public GameObject gameMode, story, start, loadPanel;
+    public string cleared;
     private new CriAtomSource audio;
 
     void Start()
@@ -16,22 +16,32 @@ public class TitleGameStart_M : MonoBehaviour
         audio = (CriAtomSource)GetComponent("CriAtomSource");
     }
 
+    private void Update()
+    {
+        /*if (Input.GetKeyDown(KeyCode.L))
+        {
+            cleared = "clear";
+        }
+        else if (Input.GetKeyDown(KeyCode.P))
+        {
+            cleared = "";
+        }*/
+    }
+
     public void OnClick()
     {
-        audio.Play("System_Decision");
-        //loadPanel.SetActive(true);
-        gameMode.SetActive(true);
-        start.SetActive(false);
-        //SceneManager.LoadScene(sceneName);
-
-        /*if (cleared == "clear")
+        if (cleared == "clear")
         {
+            audio.Play("System_Decision");
             gameMode.SetActive(true);
             start.SetActive(false);
         }
         else
         {
-            SceneManager.LoadScene(sceneName);
-        }*/
+            audio.Play("System_Decision");
+            story.SetActive(true);
+            start.SetActive(false);
+        }
+        
     }
 }
