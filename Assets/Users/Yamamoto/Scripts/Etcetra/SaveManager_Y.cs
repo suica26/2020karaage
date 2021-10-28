@@ -13,6 +13,8 @@ public struct SaveData
     public int quality;
     public string language;
     public float cameraSensitive;
+    public int[] localScoreRecord;
+    public string[] NCMBID;
 }
 
 public class SaveManager_Y : MonoBehaviour
@@ -90,6 +92,8 @@ public class SaveManager_Y : MonoBehaviour
             sd.language = "Japanese";
             sd.quality = 2;
             sd.cameraSensitive = 1f;
+            sd.localScoreRecord = new int[3] { 0, 0, 0 };
+            sd.NCMBID = new string[3] { "", "", "" };
         }
     }
 
@@ -154,10 +158,29 @@ public class SaveManager_Y : MonoBehaviour
         sd.cameraSensitive = sensitive;
         Save();
     }
-
     public float GetCameraSensitive()
     {
         return sd.cameraSensitive;
+    }
+
+    public void SavelocalScore(int stageNum, int score)
+    {
+        sd.localScoreRecord[stageNum - 1] = score;
+        Save();
+    }
+    public int GetlocalScore(int stageNum)
+    {
+        return sd.localScoreRecord[stageNum - 1];
+    }
+
+    public void SaveNCMBID(int stageNum, string id)
+    {
+        sd.NCMBID[stageNum - 1] = id;
+        Save();
+    }
+    public string GetNCMBID(int stageNum)
+    {
+        return sd.NCMBID[stageNum - 1];
     }
 
     public static SaveManager_Y GetInstance()
