@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class CountDown : MonoBehaviour
 {
     //カウントダウンの制御、タイマーとスコアの表示も
-    public Text timerTxt;
+    public Text timerTxt, gameTimerTxt;
     public float countdown;
     int count;
     public string mode;
@@ -27,6 +27,7 @@ public class CountDown : MonoBehaviour
             limit.SetActive(true);
             score.SetActive(true);
             mission.SetActive(false);
+            gameTimerTxt.text = "300";
         }
 
         if (countSet && countdown >= 0)
