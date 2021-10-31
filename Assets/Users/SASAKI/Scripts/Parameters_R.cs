@@ -28,7 +28,7 @@ public class Parameters_R : MonoBehaviour
     [SerializeField] private Text scoreText, finalScoreText, timeText, epText, hpText;
     [SerializeField] private GameObject resultPanel = null;
     [SerializeField] private GameObject[] hpSli;
-    [SerializeField] public int score, time, ep, hp, damTime, plusTime, maxHP, niwaPer;
+    [SerializeField] public int score, time, ep, hp, damTime, maxHP, niwaPer;
     [SerializeField] public Slider epSlider, mainSlider;
     public Image sliderFill;
     [SerializeField] public Slider[] hpSlider;
@@ -94,7 +94,7 @@ public class Parameters_R : MonoBehaviour
             {
                 finalScoreText.text = "Total damage:$ " + score;
                 freeze = true;
-                resultPanel.SetActive(true);
+                //resultPanel.SetActive(true);
             }
         }
     }
@@ -105,7 +105,6 @@ public class Parameters_R : MonoBehaviour
         if (!freeze)
         {
             ep += addEP;
-            plusTime += 1;
             epSlider.value += addEP;
             HPManager(-10);
             mainSlider.value += 10;
@@ -118,7 +117,7 @@ public class Parameters_R : MonoBehaviour
                 hpSli[1].SetActive(true);
                 hpSlider[1].value = hp;
                 mainSlider = hpSlider[1];
-                TimeManager(20);
+                //TimeManager(20);
                 maxHP = 250;
                 hp = maxHP;
                 mainSlider.value = maxHP;
@@ -131,7 +130,7 @@ public class Parameters_R : MonoBehaviour
                 hpSli[2].SetActive(true);
                 hpSlider[2].value = hp;
                 mainSlider = hpSlider[2];
-                TimeManager(20);
+                //TimeManager(20);
                 maxHP = 500;
                 hp = maxHP;
                 mainSlider.value = maxHP;
@@ -140,17 +139,11 @@ public class Parameters_R : MonoBehaviour
             {
                 hpSli[3].SetActive(true);
                 hpSli[2].transform.Translate(-10, 24, 0);// 場所調整
-                TimeManager(20);
+                //TimeManager(20);
                 maxHP = 1000;
                 hp = maxHP;
                 hpSlider[2].value = 500;
                 hpSlider[3].value = 500;
-            }
-
-            if (plusTime == 10)
-            {
-                plusTime = 0;
-                TimeManager(1);
             }
 
         }
@@ -203,7 +196,7 @@ public class Parameters_R : MonoBehaviour
     private void Update()
     {
         count -= Time.deltaTime;
-        timeText.text = "Time: " + time;
+        timeText.text = "Time: " + (int)time;
 
         //ゲージの色変換
         currentPer = epSlider.value / epSlider.maxValue;

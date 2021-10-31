@@ -18,14 +18,15 @@ public class TitleGameStart_M : MonoBehaviour
 
     private void Update()
     {
-        /*if (Input.GetKeyDown(KeyCode.L))
+        //test
+        if (Input.GetKeyDown(KeyCode.L))
         {
             cleared = "clear";
         }
         else if (Input.GetKeyDown(KeyCode.P))
         {
             cleared = "";
-        }*/
+        }
     }
 
     public void OnClick()

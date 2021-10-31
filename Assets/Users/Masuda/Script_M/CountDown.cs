@@ -13,27 +13,34 @@ public class CountDown : MonoBehaviour
     public bool countSet, countFin;
     public GameObject timer3to1, limit, score, mission;
     public Pause_M pa_M;
+    public Parameters_R paramR;
 
     void Start()
     {
         //mode = PlayerPrefs.GetString("modeJudge");
-    }
+        //mode = "scoreMode";//test
 
-    void Update()
-    {
         if (mode == "scoreMode")
         {
             countSet = true;
             limit.SetActive(true);
             score.SetActive(true);
             mission.SetActive(false);
-            gameTimerTxt.text = "300";
+            paramR.time = 20;
         }
+        else if (mode == "")
+        {
+            limit.SetActive(false);
+            paramR.time = 1000000000;//でけぇ初期値
+        }
+    }
 
+    void Update()
+    {
         if (countSet && countdown >= 0)
         {
             timer3to1.SetActive(true);
-            countdown -= Time.unscaledDeltaTime;
+            countdown -= Time.unscaledDeltaTime/2;
             count = (int)countdown;
             timerTxt.text = count.ToString();
         }
@@ -43,6 +50,8 @@ public class CountDown : MonoBehaviour
             timerTxt.text = "";
             timer3to1.SetActive(false);
             countSet = false;
+            mission.SetActive(false);
+            countdown = 0;
         }
 
         if (countSet && !countFin)
