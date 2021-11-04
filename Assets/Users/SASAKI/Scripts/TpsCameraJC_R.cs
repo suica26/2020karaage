@@ -257,27 +257,24 @@ public class TpsCameraJC_R : MonoBehaviour
                 {
                     transform.position = Vector3.Lerp(camWorkPos, Vector3.up * EvolutionCamWorkHeight[scrEvo.EvolutionNum] + objPlayer.transform.right * EvolutionCamWorkMinRadius[scrEvo.EvolutionNum] + focus[scrEvo.EvolutionNum].position, timer * 4);
                 }
-                else if (timer >= 0.25f && timer <= 0.8f)               // カメラズーム
+                else if (timer >= 0.25f && timer <= 2.25f)               // カメラズーム
                 {
-                    var distance = Vector3.Lerp(Vector3.right * (scrEvo.EvolutionNum + 1), Vector3.zero, (timer - 0.25f) / 0.75f);
+                    var distance = Vector3.Lerp(Vector3.right * (scrEvo.EvolutionNum + 1), Vector3.zero, (timer - 0.25f) / 2.0f);
                     transform.position = Vector3.up * EvolutionCamWorkHeight[scrEvo.EvolutionNum] + objPlayer.transform.position + objPlayer.transform.right * (EvolutionCamWorkMinRadius[scrEvo.EvolutionNum] + distance.x);
                 }
-                else if (timer > 1.0f && timer <= 5.0f)
+                else if (timer > 2.5f && timer <= 5.0f)
                 {
-                    // 進化フラグを設定
-                    evolved = true;
-
                     var distance = new Vector3(0.0f, 0.0f, 0.0f);       // カメラを引く
-                    if (timer <= 1.25f)
+                    if (timer <= 2.75f)
                     {
-                        distance = Vector3.Lerp(distance, Vector3.right, (timer - 1.0f) / 0.25f);
+                        distance = Vector3.Lerp(distance, Vector3.right, (timer - 2.5f) / 0.25f);
                     }
                     else
                     {
                         distance = new Vector3(1.0f, 0.0f, 0.0f);
                     }
 
-                    angle += Mathf.PI / 4.0f * Time.unscaledDeltaTime;
+                    angle += Mathf.PI / 2.5f * Time.unscaledDeltaTime;
                     transform.position = objPlayer.transform.position + new Vector3(Mathf.Cos(angle), 1.0f, Mathf.Sin(angle)) * (EvolutionCamWorkMinRadius[scrEvo.EvolutionNum] + distance.x * EvolutionCamWorkMinRadius[scrEvo.EvolutionNum]);     // カメラを回転させる
                 }
 
@@ -286,6 +283,9 @@ public class TpsCameraJC_R : MonoBehaviour
             }
             yield return null;
         }
+        // 進化フラグを設定
+        evolved = true;
+
         Time.timeScale = 1.0f;
         endEvolution = 0.0f;
         eCameraWork = eCamWork.eNormal;
