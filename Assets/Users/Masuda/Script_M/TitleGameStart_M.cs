@@ -13,7 +13,7 @@ public class TitleGameStart_M : MonoBehaviour
     void Start()
     {
         //cleared = PlayerPrefs.GetString("storyClear");
-        audio = (CriAtomSource)GetComponent("CriAtomSource");
+        audio = GetComponent<CriAtomSource>();
     }
 
     private void Update()
@@ -31,18 +31,16 @@ public class TitleGameStart_M : MonoBehaviour
 
     public void OnClick()
     {
+        audio.Play("System_Decision");
         if (cleared == "clear")
         {
-            audio.Play("System_Decision");
             gameMode.SetActive(true);
             start.SetActive(false);
         }
         else
         {
-            audio.Play("System_Decision");
             story.SetActive(true);
             start.SetActive(false);
         }
-        
     }
 }

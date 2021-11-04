@@ -11,13 +11,8 @@ public class ModeSellect : MonoBehaviour
     //modeJudgeにスコアアタックかどうかの記録を残す
     void Start()
     {
-        audio = (CriAtomSource)GetComponent("CriAtomSource");
+        audio = GetComponent<CriAtomSource>();
         PlayerPrefs.SetString("modeJudge", "");
-    }
-
-    void Update()
-    {
-        
     }
 
     public void OnStory()
@@ -26,6 +21,7 @@ public class ModeSellect : MonoBehaviour
         modeJ = PlayerPrefs.GetString("modeJudge");
         modeSellect.SetActive(false);
         stageSellect.SetActive(true);
+        ScoreAttack_Y.gameMode = mode.Story;
     }
 
     public void OnScore()
@@ -34,6 +30,7 @@ public class ModeSellect : MonoBehaviour
         modeJ = PlayerPrefs.GetString("modeJudge");
         modeSellect.SetActive(false);
         stageSellect.SetActive(true);
+        ScoreAttack_Y.gameMode = mode.ScoreAttack;
     }
 
 }

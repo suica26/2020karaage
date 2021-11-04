@@ -27,6 +27,7 @@ public class AirShip_Y : ObjectStateManagement_Y
             rotTimer += Time.deltaTime * rotSpeed;
             transform.position = rotCenter + new Vector3(Mathf.Cos(rotTimer), 0, Mathf.Sin(rotTimer)) * radius;
             transform.LookAt(rotCenter);
+            transform.forward = new Vector3(transform.forward.z, 0f, -transform.forward.x);
         }
     }
 

@@ -11,17 +11,24 @@ public class GameStart_M : MonoBehaviour
     public string sceneName;
     private SaveManager_Y saveManager;
     public int stageNum;
+    private delegate bool CheckFunc(int stageNum);
+    private CheckFunc checker;
 
     private void Start()
     {
-        saveManager = GameObject.Find("SaveManager").GetComponent<SaveManager_Y>();
+        saveManager = SaveManager_Y.GetInstance();
     }
 
     private void Update()
     {
+        if (ScoreAttack_Y.gameMode == mode.Story)
+            checker = saveManager.GetStageFlg;
+        else if (ScoreAttack_Y.gameMode == mode.ScoreAttack)
+            checker = saveManager.GetClearFlg;
+
         if (stageNum > 0)
         {
-            if (!saveManager.GetStageFlg(stageNum)) gameObject.SetActive(false);
+            if (!checker(stageNum)) gameObject.SetActive(false);
             else gameObject.SetActive(true);
         }
     }

@@ -9,12 +9,6 @@ public sealed class ScoreAttack_Y : MonoBehaviour
     private const float MAXLIMITTIME = 180;
     public static float limitTime { get; private set; }
     public static int score { get; private set; }
-    public enum mode
-    {
-        Story,
-        ScoreAttack,
-        Result
-    }
     public static mode gameMode;
     public static GameObject directionalLight;
     [SerializeField] private Material[] skyboxes;
