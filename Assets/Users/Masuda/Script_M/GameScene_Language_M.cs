@@ -14,6 +14,11 @@ public class GameScene_Language_M : MonoBehaviour
     //stage12,stage3
     public Text clearSen, nextStage, titleBack;
     public Text clearSenC, nextStageC, titleBackC;
+    //ScoreMode
+    public Text mob_res_Title, chickenName, resister;
+    public Text nameAtens, nameChange, yes;
+    public Text rank_Title, reTry, stageChange;
+    public Text sel_Stage, stage1S, stage2S, stage3S;
 
     public bool stage3, mobileMode;
     private string languageMode;
@@ -75,6 +80,19 @@ public class GameScene_Language_M : MonoBehaviour
         gameOver.text = "Game Over...";
         retry.text = "Continue";
         title.text = "Exit to title";
+        mob_res_Title.text = "Title";
+        chickenName.text = "Chicken Name";
+        resister.text = "Register";
+        nameAtens.text = "Is the name offensive, political, religious, sexual, discriminatory, or personally identifiable?";
+        nameChange.text = "Change the Name";
+        yes.text = "Yes";
+        rank_Title.text = "Title";
+        reTry.text = "Retry";
+        stageChange.text = "Stage Change";
+        sel_Stage.text = "Stage Select";
+        stage1S.text = "Stage1";
+        stage2S.text = "Stage2";
+        stage3S.text = "Stage3";
 
         if (stage3)
         {

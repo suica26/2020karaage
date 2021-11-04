@@ -46,8 +46,8 @@ public class Parameters_R : MonoBehaviour
 
     public void Start()
     {
-        scoreText.text = "Price:$ " + score;
-        finalScoreText.text = "Total damage:$ " + score;
+        scoreText.text = "$ " + score;
+        finalScoreText.text = "" + score;
         timeText.text = "Time: " + time;
         epText.text = "EP: " + ep;
         hpText.text = "HP: " + hp;
@@ -77,7 +77,7 @@ public class Parameters_R : MonoBehaviour
         if (!freeze)
         {
             score += addScore;
-            scoreText.text = "Price:$ " + score;
+            scoreText.text = "$ " + score;
 
         }
     }
@@ -92,7 +92,7 @@ public class Parameters_R : MonoBehaviour
             timeText.text = "Time: " + time;
             if (time <= 0)
             {
-                finalScoreText.text = "Total damage:$ " + score;
+                finalScoreText.text = "" + score;
                 freeze = true;
                 //resultPanel.SetActive(true);
             }

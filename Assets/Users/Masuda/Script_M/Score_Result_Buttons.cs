@@ -7,13 +7,18 @@ using UnityEngine.SceneManagement;
 public class Score_Result_Buttons : MonoBehaviour
 {
     public GameObject nameDeal, nameChecker, stageSllect, ranking, loadPanel;
-    public string sceneName, nowSceneName;
+    public string sceneName, nowSceneName, lanMode, gameMode;
     public string [] scenes;
     public Text stageName;
+    public Image blast;
     
     void Start()
     {
+        //スコアモードのボタン操作を管理＋その他仕様
         nowSceneName = SceneManager.GetActiveScene().name;
+        lanMode = PlayerPrefs.GetString("language");
+        gameMode = PlayerPrefs.GetString("modeJudge");
+
         if (nowSceneName == "stage1")
         {
             stageName.text = "ステージ１\nいなかの町";
@@ -25,6 +30,23 @@ public class Score_Result_Buttons : MonoBehaviour
         else if (nowSceneName == "Stage3")
         {
             stageName.text = "ステージ３\nさいごの街";
+        }
+        else if (nowSceneName == "stage1" && lanMode == "English")
+        {
+            stageName.text = "Stage１\nいなかの町";//決まってない
+        }
+        else if (nowSceneName == "Stage2" && lanMode == "English")
+        {
+            stageName.text = "Stage２\n海ぞいの町";
+        }
+        else if (nowSceneName == "Stage3" && lanMode == "English")
+        {
+            stageName.text = "Stage３\nさいごの街";
+        }
+
+        if (gameMode == "scoreMode" && nowSceneName == "stage1")
+        {
+            blast.color = new Color(255,255,255,130);
         }
     }
 
