@@ -112,7 +112,11 @@ public class EvolutionChicken_R : MonoBehaviour
 
         if (evolutionNum < evolutionPoint.Length && EP >= evolutionPoint[evolutionNum])
         {
+            chickens[evolutionNum].GetComponent<Animator>().updateMode = AnimatorUpdateMode.UnscaledTime;
+            chickens[evolutionNum].GetComponent<Transition_R>().SetAnimator(Transition_R.Anim.EVOLUTION, true);
+
             evolutionNum++;
+
             Sound.Play("ShockWave");
             Camera.main.GetComponent<TpsCameraJC_R>().StartCoroutine("CameraWorkEvolution");
 
@@ -127,6 +131,8 @@ public class EvolutionChicken_R : MonoBehaviour
             nowEvoNum++;
             chickens[evolutionNum - 1].SetActive(false);
             chickens[evolutionNum].SetActive(true);
+
+            chickens[evolutionNum - 1].GetComponent<Animator>().updateMode = AnimatorUpdateMode.Normal;
 
             status_HP = HP[evolutionNum];
             status_ATK = ATK[evolutionNum];
