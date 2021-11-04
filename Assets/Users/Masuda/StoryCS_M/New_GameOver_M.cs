@@ -38,7 +38,7 @@ public class New_GameOver_M : MonoBehaviour
             over1.SetActive(true);
             off1 = true;
         }
-        else if (timer2 >= 1.5f && !off2)
+        else if (timer2 >= 2.0f && !off2)
         {
             //ボタンが出てくる
             over2.SetActive(true);

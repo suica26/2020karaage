@@ -26,7 +26,7 @@ public class CountDown : MonoBehaviour
             limit.SetActive(true);
             score.SetActive(true);
             mission.SetActive(false);
-            paramR.time = 20;
+            paramR.time = 300;//本当は300
         }
         else if (mode == "")
         {
