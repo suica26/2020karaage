@@ -3,14 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class obile_HipStamp_M : MonoBehaviour
+public class Mobile_HipStamp_M : MonoBehaviour
 {
     public GameObject player, hipStamp, jump;
     public Vector3 pos;
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -24,7 +20,7 @@ public class obile_HipStamp_M : MonoBehaviour
         else
         {
             hipStamp.SetActive(false);
-            jump.SetActive(true) ;
+            jump.SetActive(true);
         }
     }
 }

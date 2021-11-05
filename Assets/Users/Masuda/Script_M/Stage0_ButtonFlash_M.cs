@@ -8,15 +8,6 @@ public class Stage0_ButtonFlash_M : MonoBehaviour
     public Image kick, cutter;
     public float timer;
     public bool sincos;
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
 
     private void OnTriggerStay(Collider other)
     {

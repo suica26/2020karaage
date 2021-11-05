@@ -17,14 +17,10 @@ public class SmallHit_M : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)//tag big
     {
-        if (collision.gameObject.tag == "Big")
-        { 
-            if (!hit)
-            {
-                Debug.Log("成功");
-                m1m.ShardAttack();
-                hit = true;
-            }
+        if (collision.gameObject.tag == "Big" && !hit)
+        {
+            m1m.ShardAttack();
+            hit = true;
         }
     }
 }
