@@ -9,20 +9,8 @@ public class ClickOff_M : MonoBehaviour
     //private new CriAtomSource audio;
     public Mission1_M mm1;
 
-    void Start()
-    {
-        //audio = (CriAtomSource)GetComponent<CriAtomSource>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void OnClick()
     {
-        //audio.Play("System_Cancel");
         thisObj.SetActive(false);
         mm1.hipStamp = false;
         Cursor.visible = false;

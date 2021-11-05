@@ -14,12 +14,6 @@ public class StartScene_Mobile_Howto : MonoBehaviour
         audio = (CriAtomSource)GetComponent("CriAtomSource");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void OnClick()
     {
         if (!mobileMode)

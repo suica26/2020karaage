@@ -8,7 +8,7 @@ public class GameScene_Language_M : MonoBehaviour
     public Text pauseP, start, howto, option, exit;
     public Text optionTitle, volume, scr, scr1, scr2, cameraS;
     public Text howTitle, key, mouse, move, jump, pause, blast, kick, cutter;
-    public Text evoSen, hipSen1,hipSen2;
+    public Text evoSen, hipSen1, hipSen2;
     public Text attention;
     public Text gameOver, retry, title;
     //stage12,stage3
@@ -43,11 +43,6 @@ public class GameScene_Language_M : MonoBehaviour
             English();
             hipSen2.text = "While in the air \n Let's press and hold the kick button!";
         }
-    }
-
-    void Japanese()
-    {
-
     }
 
     void English()

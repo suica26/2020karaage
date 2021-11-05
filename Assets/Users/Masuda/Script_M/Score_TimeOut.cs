@@ -16,11 +16,6 @@ public class Score_TimeOut : MonoBehaviour
     public Animator animator;
     private string TimeUpStr = "strTimeUp";
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         if (paramR.time <= 0)
@@ -56,21 +51,6 @@ public class Score_TimeOut : MonoBehaviour
 
     public void ImageChange()
     {
-        if (evoChi.nowEvoNum == 0)
-        {
-            mainImage.sprite = wanted[0];
-        }
-        else if (evoChi.nowEvoNum == 1)
-        {
-            mainImage.sprite = wanted[1];
-        }
-        else if (evoChi.nowEvoNum == 2)
-        {
-            mainImage.sprite = wanted[2];
-        }
-        else if (evoChi.nowEvoNum == 3)
-        {
-            mainImage.sprite = wanted[3];
-        }
+        mainImage.sprite = wanted[evoChi.nowEvoNum];
     }
 }

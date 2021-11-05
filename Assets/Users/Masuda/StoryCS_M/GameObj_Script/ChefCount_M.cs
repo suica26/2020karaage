@@ -43,7 +43,6 @@ public class ChefCount_M : MonoBehaviour
             {
                 m3m.EnemyBreak_Chef();
                 cock = true;
-
             }
         }
     }

@@ -35,22 +35,14 @@ public class Mission1_M : Missions_M
             FirstMission();
         }
 
-        if (bigNum >= bigBorder4 && second == true)
+        if (second)
         {
             //小物シュート
-            SecondMission();
-        }
-        else if (bigNum >= bigBorder3 && smallNum >= smallBorder1 && second == true)
-        {
-            SecondMission();
-        }
-        else if (bigNum >= bigBorder2 && smallNum >= smallBorder2 && second == true)
-        {
-            SecondMission();
-        }
-        else if (bigNum >= bigBorder1 && smallNum >= smallBorder3 && second == true)
-        {
-            SecondMission();
+            if ((bigNum >= bigBorder4) ||
+                (bigNum >= bigBorder3 && smallNum >= smallBorder1) ||
+                (bigNum >= bigBorder2 && smallNum >= smallBorder2) ||
+                (bigNum >= bigBorder1 && smallNum >= smallBorder3))
+                SecondMission();
         }
 
         if (shard >= 3 && third)

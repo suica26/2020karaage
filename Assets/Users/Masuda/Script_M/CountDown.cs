@@ -9,7 +9,6 @@ public class CountDown : MonoBehaviour
     public Text timerTxt, gameTimerTxt;
     public float countdown;
     int count;
-    public string mode;
     public bool countSet, countFin;
     public GameObject timer3to1, limit, score, mission;
     public Pause_M pa_M;
@@ -17,10 +16,7 @@ public class CountDown : MonoBehaviour
 
     void Start()
     {
-        //mode = PlayerPrefs.GetString("modeJudge");
-        //mode = "scoreMode";//test
-
-        if (mode == "scoreMode")
+        if (ScoreAttack_Y.gameMode == mode.ScoreAttack)
         {
             countSet = true;
             limit.SetActive(true);
@@ -28,7 +24,7 @@ public class CountDown : MonoBehaviour
             mission.SetActive(false);
             paramR.time = 300;//本当は300
         }
-        else if (mode == "")
+        else
         {
             limit.SetActive(false);
             paramR.time = 1000000000;//でけぇ初期値
@@ -40,7 +36,7 @@ public class CountDown : MonoBehaviour
         if (countSet && countdown >= 0)
         {
             timer3to1.SetActive(true);
-            countdown -= Time.unscaledDeltaTime/2;
+            countdown -= Time.unscaledDeltaTime / 2;
             count = (int)countdown;
             timerTxt.text = count.ToString();
         }

@@ -6,12 +6,24 @@ using UnityEngine.SceneManagement;
 
 public class Score_Result_Buttons : MonoBehaviour
 {
-    public GameObject nameDeal, nameChecker, stageSllect, ranking, loadPanel;
+    public GameObject nameDeal, nameChecker, stageSelect, ranking, loadPanel;
     public string sceneName, nowSceneName, lanMode, gameMode;
-    public string [] scenes;
+    public string[] scenes;
     public Text stageName;
     public Image blast;
-    
+    private Dictionary<string, string> stageNameJ = new Dictionary<string, string>()
+    {
+        {"stage1","ステージ１\nいなかの町"},
+        {"Stage2","ステージ２\n海ぞいの町"},
+        {"Stage3","ステージ３\nさいごの街"}
+    };
+    private Dictionary<string, string> stageNameE = new Dictionary<string, string>()
+    {
+        {"stage1","Stage１\nいなかの町"},
+        {"Stage2","Stage２\n海ぞいの町"},
+        {"Stage3","Stage３\nさいごの街"}
+    };
+
     void Start()
     {
         //スコアモードのボタン操作を管理＋その他仕様
@@ -19,41 +31,13 @@ public class Score_Result_Buttons : MonoBehaviour
         lanMode = PlayerPrefs.GetString("language");
         gameMode = PlayerPrefs.GetString("modeJudge");
 
-        if (nowSceneName == "stage1")
-        {
-            stageName.text = "ステージ１\nいなかの町";
-        }
-        else if (nowSceneName == "Stage2")
-        {
-            stageName.text = "ステージ２\n海ぞいの町";
-        }
-        else if (nowSceneName == "Stage3")
-        {
-            stageName.text = "ステージ３\nさいごの街";
-        }
-        else if (nowSceneName == "stage1" && lanMode == "English")
-        {
-            stageName.text = "Stage１\nいなかの町";//決まってない
-        }
-        else if (nowSceneName == "Stage2" && lanMode == "English")
-        {
-            stageName.text = "Stage２\n海ぞいの町";
-        }
-        else if (nowSceneName == "Stage3" && lanMode == "English")
-        {
-            stageName.text = "Stage３\nさいごの街";
-        }
+        if (lanMode == "English") stageName.text = stageNameE[nowSceneName];
+        else stageName.text = stageNameJ[nowSceneName];
 
-        if (gameMode == "scoreMode" && nowSceneName == "stage1")
+        if (ScoreAttack_Y.gameMode == mode.ScoreAttack && nowSceneName == "stage1")
         {
-            blast.color = new Color(255,255,255,130);
+            blast.color = new Color(255, 255, 255, 130);
         }
-    }
-
-    
-    void Update()
-    {
-        
     }
 
     public void NameCheck()
@@ -77,10 +61,10 @@ public class Score_Result_Buttons : MonoBehaviour
         nameDeal.SetActive(false);
     }
 
-    public void SellectScenes()
+    public void SelectScenes()
     {
         //ステージ選択パネル表示
-        stageSllect.SetActive(true);
+        stageSelect.SetActive(true);
     }
 
     public void RetryNowScene()
@@ -90,25 +74,11 @@ public class Score_Result_Buttons : MonoBehaviour
         SceneManager.LoadScene(nowSceneName);
     }
 
-    public void ReStartSt1()
+    public void ReStartStage(int stageNum)
     {
         //選んだステージを始める
         loadPanel.SetActive(true);
-        SceneManager.LoadScene(scenes[0]);
-    }
-
-    public void ReStartSt2()
-    {
-        //選んだステージを始める
-        loadPanel.SetActive(true);
-        SceneManager.LoadScene(scenes[1]);
-    }
-
-    public void ReStartSt3()
-    {
-        //選んだステージを始める
-        loadPanel.SetActive(true);
-        SceneManager.LoadScene(scenes[2]);
+        SceneManager.LoadScene(scenes[stageNum]);
     }
 
     public void TitleBack()

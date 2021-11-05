@@ -5,15 +5,6 @@ using UnityEngine;
 public class set_M : MonoBehaviour
 {
     [SerializeField] private GameObject setPanel;
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
 
     public void OnClick()
     {
