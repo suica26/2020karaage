@@ -42,6 +42,8 @@ public class Stage3BossBuilding_Y : ObjectStateManagement_Y
         aisacScr = GameObject.Find("BGMObject").GetComponent<ADX_BGMAISAC>();
         m3m = player.GetComponent<Mission3_M>();
         instance = this;
+
+        if (ScoreAttack_Y.gameMode == mode.ScoreAttack) notDamage = false;
     }
 
     public static Stage3BossBuilding_Y ReturnInstance()
