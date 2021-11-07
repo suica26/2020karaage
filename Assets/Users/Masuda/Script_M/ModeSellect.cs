@@ -30,6 +30,7 @@ public class ModeSellect : MonoBehaviour
         modeJ = PlayerPrefs.GetString("modeJudge");
         modeSellect.SetActive(false);
         stageSellect.SetActive(true);
+        ScoreAttack_Y.Init();
         ScoreAttack_Y.gameMode = mode.ScoreAttack;
     }
 }

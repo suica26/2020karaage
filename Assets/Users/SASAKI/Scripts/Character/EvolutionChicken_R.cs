@@ -50,6 +50,8 @@ public class EvolutionChicken_R : MonoBehaviour
 
     void Start()
     {
+        if (ScoreAttack_Y.gameMode == mode.ScoreAttack) ScoreAttackSetting();
+
         // objParamが空の場合、Canvasオブジェクトを探す
         if (objParam == null)
             scrParam = objParam.gameObject.GetComponent<Parameters_R>();
@@ -115,6 +117,9 @@ public class EvolutionChicken_R : MonoBehaviour
             chickens[evolutionNum].GetComponent<Animator>().updateMode = AnimatorUpdateMode.UnscaledTime;
             chickens[evolutionNum].GetComponent<Transition_R>().SetAnimator(Transition_R.Anim.EVOLUTION, true);
 
+            //山本加筆　スコアアタック用
+            if (ScoreAttack_Y.gameMode == mode.ScoreAttack) ScoreAttack_Y.AddLimitTime();
+
             evolutionNum++;
 
             Sound.Play("ShockWave");
@@ -126,7 +131,7 @@ public class EvolutionChicken_R : MonoBehaviour
         }
 
         // 進化用
-        if(scrCam.evolved && evolutionNum == nowEvoNum + 1)
+        if (scrCam.evolved && evolutionNum == nowEvoNum + 1)
         {
             nowEvoNum++;
             chickens[evolutionNum - 1].SetActive(false);
@@ -144,5 +149,10 @@ public class EvolutionChicken_R : MonoBehaviour
 
             scrCam.evolved = false;
         }
+    }
+
+    private void ScoreAttackSetting()
+    {
+
     }
 }

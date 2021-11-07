@@ -49,7 +49,8 @@ public class CountDown : MonoBehaviour
         if (countSet && !countFin)
         {
             pauseScr.gameSet = false;
-            Time.timeScale = 0;
+            if (!ScoreAttack_Y.connecting)
+                Time.timeScale = 0;
         }
         else if (!countSet && !countFin)
         {

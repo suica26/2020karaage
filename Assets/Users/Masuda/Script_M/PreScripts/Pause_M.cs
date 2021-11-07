@@ -41,7 +41,8 @@ public class Pause_M : MonoBehaviour
         if (pausePanel.activeSelf)
         {
             nowGameMode = ScoreAttack_Y.gameMode;
-            Time.timeScale = 0f;
+            if (!ScoreAttack_Y.connecting)
+                Time.timeScale = 0f;
             ScoreAttack_Y.gameMode = mode.Pause;
             Cursor.visible = true;
         }

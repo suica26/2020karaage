@@ -12,9 +12,15 @@ public class Score_TimeOut : MonoBehaviour
     public Image mainImage;
     public Sprite[] wanted;
     public EvolutionChicken_R evoChi;
-    private float timer_TO, timer_HO;
+    [SerializeField] private float timer_TO, timer_HO;
     public Animator animator;
     private string TimeUpStr = "strTimeUp";
+    private int stageNum;
+
+    private void Start()
+    {
+        ScoreAttack_Y.SetPlayStageNum();
+    }
 
     void Update()
     {
@@ -24,13 +30,14 @@ public class Score_TimeOut : MonoBehaviour
             timer_TO += Time.unscaledDeltaTime;
         }
 
-        if (timer_TO >= 1.0f)
+        if (timer_TO >= 2f)
         {
             ImageChange();
             result.SetActive(true);
+            if (ScoreAttack_Y.CheckNewRecord(ScoreAttack_Y.playStageNum)) newRecord.SetActive(true);
             pauseScr.gameSet = false;
             Cursor.visible = true;
-            Time.timeScale = 0;
+            if (!ScoreAttack_Y.connecting) Time.timeScale = 0;
         }
 
         if (paramScr.hp <= 0)
@@ -38,14 +45,15 @@ public class Score_TimeOut : MonoBehaviour
             timer_HO += Time.unscaledDeltaTime;
         }
 
-        if (timer_HO >= 1.95f)
+        if (timer_HO >= 2f)
         {
             ImageChange();
             result.SetActive(true);
             gameOver.SetActive(false);
             pauseScr.gameSet = false;
             Cursor.visible = true;
-            Time.timeScale = 0;
+            if (!ScoreAttack_Y.connecting)
+                Time.timeScale = 0;
         }
     }
 
