@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,8 +7,8 @@ public class Score_TimeOut : MonoBehaviour
 {
     //時間切れと体力切れした場合に、手配書画面が出るように
     public GameObject result, gameOver, newRecord, timeUp;
-    public Parameters_R paramR;
-    public Pause_M pa_M;
+    public Parameters_R paramScr;
+    public Pause_M pauseScr;
     public Image mainImage;
     public Sprite[] wanted;
     public EvolutionChicken_R evoChi;
@@ -18,7 +18,7 @@ public class Score_TimeOut : MonoBehaviour
 
     void Update()
     {
-        if (paramR.time <= 0)
+        if (ScoreAttack_Y.gameMode == mode.Result)
         {
             animator.SetBool(TimeUpStr, true);
             timer_TO += Time.unscaledDeltaTime;
@@ -28,12 +28,12 @@ public class Score_TimeOut : MonoBehaviour
         {
             ImageChange();
             result.SetActive(true);
-            pa_M.gameSet = false;
+            pauseScr.gameSet = false;
             Cursor.visible = true;
             Time.timeScale = 0;
         }
 
-        if (paramR.hp <= 0)
+        if (paramScr.hp <= 0)
         {
             timer_HO += Time.unscaledDeltaTime;
         }
@@ -43,7 +43,7 @@ public class Score_TimeOut : MonoBehaviour
             ImageChange();
             result.SetActive(true);
             gameOver.SetActive(false);
-            pa_M.gameSet = false;
+            pauseScr.gameSet = false;
             Cursor.visible = true;
             Time.timeScale = 0;
         }

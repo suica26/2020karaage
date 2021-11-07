@@ -2,5 +2,6 @@
 {
     Story,
     ScoreAttack,
-    Result
+    Result,
+    Pause
 }

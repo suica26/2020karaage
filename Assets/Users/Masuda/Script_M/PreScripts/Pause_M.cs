@@ -9,6 +9,8 @@ public class Pause_M : MonoBehaviour
     public bool gameSet;
     public Parameters_R para;
     public Stage1Clear_M s1Cle;
+    private mode nowGameMode;
+
     void Start()
     {
         pausePanel.SetActive(false);
@@ -38,7 +40,9 @@ public class Pause_M : MonoBehaviour
         //ポーズ中に停止
         if (pausePanel.activeSelf)
         {
+            nowGameMode = ScoreAttack_Y.gameMode;
             Time.timeScale = 0f;
+            ScoreAttack_Y.gameMode = mode.Pause;
             Cursor.visible = true;
         }
 
@@ -46,6 +50,7 @@ public class Pause_M : MonoBehaviour
         if (!pausePanel.activeSelf)
         {
             Time.timeScale = 1f;
+            ScoreAttack_Y.gameMode = nowGameMode;
             optionPanel.SetActive(false);
             how.SetActive(false);
             Cursor.visible = false;

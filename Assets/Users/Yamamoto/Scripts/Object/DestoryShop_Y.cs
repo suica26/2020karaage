@@ -11,6 +11,7 @@ public class DestoryShop_Y : MonoBehaviour
     public int deathFrameTimeng;
     void Start()
     {
+        if (ScoreAttack_Y.gameMode == mode.ScoreAttack) gameObject.SetActive(false);
         objScr = GetComponent<ObjectStateManagement_Y>();
     }
 

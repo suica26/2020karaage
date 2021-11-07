@@ -25,16 +25,14 @@ using UnityEngine.UI;
 
 public class Parameters_R : MonoBehaviour
 {
-    [SerializeField] private Text scoreText, finalScoreText, timeText, epText, hpText;
+    [SerializeField] private Text scoreText, finalScoreText, timeText;
     [SerializeField] private GameObject resultPanel = null;
     [SerializeField] private GameObject[] hpSli;
-    [SerializeField] public int score, time, ep, hp, damTime, maxHP, niwaPer;
+    [SerializeField] public int ep, hp, maxHP, niwaPer;
     [SerializeField] public Slider epSlider, mainSlider;
     public Image sliderFill;
     [SerializeField] public Slider[] hpSlider;
-
     private bool freeze = false;
-    private float count;
     [SerializeField] public int evo1, evo2, evo3, startNum;
     public string saveStage;
     [SerializeField] public Missions_M scrMis;
@@ -46,14 +44,12 @@ public class Parameters_R : MonoBehaviour
 
     public void Start()
     {
-        scoreText.text = "$ " + score;
-        finalScoreText.text = "" + score;
-        timeText.text = "Time: " + time;
-        epText.text = "EP: " + ep;
-        hpText.text = "HP: " + hp;
+        scoreText.text = "$ " + 0;
+        finalScoreText.text = "" + 0;
+        timeText.text = "Time: " + ScoreAttack_Y.limitTime;
         epSlider.value = 0;
+        ScoreAttack_Y.paramScr = this;
 
-        count = time;
         for (int i = 0; i < 4; i++)
         {
             if (i == startNum)
@@ -72,29 +68,22 @@ public class Parameters_R : MonoBehaviour
         HPsound = true;
     }
 
-    public void ScoreManager(int addScore)      //山本加筆：publicにすることで他Scriptで参照できるようにしました
+    public void ScoreUpdate()      //山本加筆：publicにすることで他Scriptで参照できるようにしました
     {
-        if (!freeze)
-        {
-            score += addScore;
-            scoreText.text = "$ " + score;
-
-        }
+        scoreText.text = "$ " + ScoreAttack_Y.score;
     }
     //引数で指定した分だけスコアを加算します。
 
-    public void TimeManager(int addTime)
+    public void TimeUpdate()
     {
         if (!freeze)
         {
-            time += addTime;
-            count = time;
-            timeText.text = "Time: " + time;
-            if (time <= 0)
+            timeText.text = "Time " + (int)ScoreAttack_Y.limitTime / 60 + ":" + String.Format("{0:00}", ScoreAttack_Y.limitTime % 60);
+            if (ScoreAttack_Y.gameMode == mode.Result)
             {
-                finalScoreText.text = "" + score;
+                finalScoreText.text = "" + ScoreAttack_Y.score;
                 freeze = true;
-                //resultPanel.SetActive(true);
+                ScoreAttack_Y.gameMode = mode.Pause;
             }
         }
     }
@@ -145,7 +134,6 @@ public class Parameters_R : MonoBehaviour
                 hpSlider[2].value = 500;
                 hpSlider[3].value = 500;
             }
-
         }
     }
     //引数で指定した分だけEPを加算します。
@@ -154,28 +142,43 @@ public class Parameters_R : MonoBehaviour
     {
         if (!freeze)
         {
+            //ダメージ処理
             if (addHP > 0)
             {
-                TimeManager(-damTime);
                 damaPanel.DamageEffect();
-            }
-            if (!(addHP < 0))
-            {
                 hp -= addHP;
                 mainSlider.value -= addHP;
             }
-
             if (hp <= 0)
             {
                 freeze = true;
+                ScoreAttack_Y.gameMode = mode.Pause;
                 resultPanel.SetActive(true);
                 hp = 0;
                 PlayerPrefs.SetString(saveStage, scrMis.load);//ミッションセーブ
                 PlayerPrefs.Save();
             }
-            hpText.text = "HP: " + hp;
 
+            if (hp >= maxHP)
+            {
+                hp = maxHP;
+            }
 
+            //バグ発生中 第四形態で一度上のゲージまで体力が減ると、回復しても下のゲージに反映されない
+            if (hp >= 500 && ep >= evo3)
+            {
+                if (hpSlider[2].value == 500)
+                {
+                    mainSlider = hpSlider[3];
+                }
+            }
+            else if (hp < 500 && ep >= evo3)
+            {
+                if (hpSlider[3].value == 0)
+                {
+                    mainSlider = hpSlider[2];
+                }
+            }
 
             if (hp < 50 && HPsound == true)
             {
@@ -187,18 +190,15 @@ public class Parameters_R : MonoBehaviour
                 Sound?.Play("NomalHP");
                 HPsound = true;
             }
-
-
         }
     }
     //引数で指定した分だけHPを加算します。
 
     private void Update()
     {
-        count -= Time.deltaTime;
-        timeText.text = "Time: " + (int)time;
+        TimeUpdate();
 
-        //ゲージの色変換
+        //体力ゲージの色変換
         currentPer = epSlider.value / epSlider.maxValue;
         if (currentPer <= 0.30f)
         {
@@ -212,33 +212,5 @@ public class Parameters_R : MonoBehaviour
         {
             sliderFill.color = Color.Lerp(color2, color3, currentPer);
         }
-
-
-        if (time - count > 1)
-        {
-            TimeManager(-1);
-        }
-
-        if (hp >= maxHP)
-        {
-            hp = maxHP;
-        }
-
-        if (hp >= 500 && ep >= evo3)
-        {
-            if (hpSlider[2].value == 500)
-            {
-                mainSlider = hpSlider[3];
-            }
-        }
-        else if (hp < 500 && ep >= evo3)
-        {
-            if (hpSlider[3].value == 0)
-            {
-                mainSlider = hpSlider[2];
-            }
-        }
     }
-    //タイマーです。一秒ごとにTimeManager()で一秒減らしてます。
-
 }
