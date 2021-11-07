@@ -13,18 +13,26 @@ public class Score_TimeOut : MonoBehaviour
     public Sprite[] wanted;
     public EvolutionChicken_R evoChi;
     private float timer_TO, timer_HO;
-    public Animator animator;
+    private bool owari;
+    public Animator animator; //Abe_gameSetで新しいゲームセット
     private string TimeUpStr = "strTimeUp";
+    //private string gameOWARI = "isGameSet";
 
     void Update()
     {
         if (ScoreAttack_Y.gameMode == mode.Result)
         {
             animator.SetBool(TimeUpStr, true);
+            //Abe_gameSet.SetBool(gameOWARI, true);//sub
+            owari = true;
+        }
+
+        if (owari == true)
+        {
             timer_TO += Time.unscaledDeltaTime;
         }
 
-        if (timer_TO >= 1.0f)
+        if (timer_TO >= 1.5f)
         {
             ImageChange();
             result.SetActive(true);

@@ -33,7 +33,7 @@ public class CountDown : MonoBehaviour
         if (countSet && countdown > 0)
         {
             timer3to1.SetActive(true);
-            countdown -= Time.unscaledDeltaTime / 2;
+            countdown -= Time.unscaledDeltaTime;
             count = (int)(countdown + 1);
             timerTxt.text = count.ToString();
         }
