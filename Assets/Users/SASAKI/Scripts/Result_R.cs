@@ -26,19 +26,10 @@ public class Result_R : MonoBehaviour
         nextPanel.SetActive(false);
     }
 
-    void Update()
-    {
-        /*if (Input.GetKeyDown(KeyCode.R))
-        {
-            Time.timeScale = 1f;
-            nextPanel.SetActive(true);
-            SceneManager.LoadScene(sceneName);
-        }*/
-    }
-
     void OnEnable()
     {
-        Time.timeScale = 0f;
+        if (!ScoreAttack_Y.connecting)
+            Time.timeScale = 0f;
     }
 
     public void OnClick()

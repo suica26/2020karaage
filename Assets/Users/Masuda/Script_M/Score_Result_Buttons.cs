@@ -11,6 +11,9 @@ public class Score_Result_Buttons : MonoBehaviour
     public string[] scenes;
     public Text stageName;
     public Image blast;
+    [SerializeField] private Text userName;
+    [SerializeField] private Text[] rankingTexts1to8;
+    [SerializeField] private Text[] aroundRankingText;
     private Dictionary<string, string> stageNameJ = new Dictionary<string, string>()
     {
         {"stage1","ステージ１\nいなかの町"},
@@ -40,6 +43,11 @@ public class Score_Result_Buttons : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (ScoreAttack_Y.connecting) Time.timeScale = 1f;
+    }
+
     public void NameCheck()
     {
         //名前の確認
@@ -48,11 +56,66 @@ public class Score_Result_Buttons : MonoBehaviour
 
     public void NameRegister()
     {
+        StartCoroutine(Connecting());
+    }
+
+    private IEnumerator Connecting()
+    {
+        ScoreAttack_Y.connecting = true;
+        yield return StartCoroutine(Submit());
+        yield return StartCoroutine(Fetch());
+        yield return StartCoroutine(GetAndResistTable());
+        DisplayUI();
+        ScoreAttack_Y.connecting = false;
+    }
+
+    private IEnumerator Submit()
+    {
         //名前を登録
-        //名前をサーバー？に送る処理
+        ScoreAttack_Y.SetPlayStageNum();
+        ScoreAttack_Y.SubmitScore(userName.text, ScoreAttack_Y.playStageNum);
+        yield return null;
+    }
+
+    private IEnumerator Fetch()
+    {
+        //ランキング同期
+        ScoreAttack_Y.GetWorldTopScore(ScoreAttack_Y.playStageNum);
+        yield return null;
+        ScoreAttack_Y.FetchRank(ScoreAttack_Y.score, ScoreAttack_Y.playStageNum);
+        yield return null;
+        ScoreAttack_Y.GetAroundMyScores(ScoreAttack_Y.score, ScoreAttack_Y.playStageNum);
+        yield return new WaitForSeconds(1f);
+    }
+
+    private IEnumerator GetAndResistTable()
+    {
+        //名前とスコアをそれぞれで取得
+        Debug.Log("Get Start");
+        var rankNames = ScoreAttack_Y.GetNames(ScoreAttack_Y.topRanking);
+        var rankScores = ScoreAttack_Y.GetScores(ScoreAttack_Y.topRanking);
+        var neighborNames = ScoreAttack_Y.GetNames(ScoreAttack_Y.neighbors);
+        var neighborScores = ScoreAttack_Y.GetScores(ScoreAttack_Y.neighbors);
+        Debug.Log("Get Complete");
+        yield return null;
+
+        Debug.Log("Resist Start");
+        for (int i = 0; i < rankNames.Length; i++)
+        {
+            rankingTexts1to8[i].text = $"{rankNames[i]} {rankScores[i]}";
+        }
+        aroundRankingText[0].text = $"{neighborNames[0]} {neighborScores[0]}";
+        aroundRankingText[1].text = $"{neighborNames[2]} {neighborScores[2]}";
+        aroundRankingText[2].text = $"{neighborNames[1]} {neighborScores[1]}";
+        Debug.Log("Resist Complete");
+    }
+
+    private void DisplayUI()
+    {
         nameChecker.SetActive(false);
         nameDeal.SetActive(false);
         ranking.SetActive(true);
+        Debug.Log("Ranking Complete");
     }
 
     public void NameChange()
@@ -70,6 +133,7 @@ public class Score_Result_Buttons : MonoBehaviour
     public void RetryNowScene()
     {
         //今いるシーンをやり直す
+        ScoreAttack_Y.gameMode = mode.ScoreAttack;
         loadPanel.SetActive(true);
         SceneManager.LoadScene(nowSceneName);
     }
@@ -77,6 +141,7 @@ public class Score_Result_Buttons : MonoBehaviour
     public void ReStartStage(int stageNum)
     {
         //選んだステージを始める
+        ScoreAttack_Y.gameMode = mode.ScoreAttack;
         loadPanel.SetActive(true);
         SceneManager.LoadScene(scenes[stageNum]);
     }

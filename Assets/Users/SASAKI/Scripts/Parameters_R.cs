@@ -83,7 +83,6 @@ public class Parameters_R : MonoBehaviour
             {
                 finalScoreText.text = "" + ScoreAttack_Y.score;
                 freeze = true;
-                ScoreAttack_Y.gameMode = mode.Pause;
             }
         }
     }
@@ -152,7 +151,7 @@ public class Parameters_R : MonoBehaviour
             if (hp <= 0)
             {
                 freeze = true;
-                ScoreAttack_Y.gameMode = mode.Pause;
+                ScoreAttack_Y.gameMode = mode.Result;
                 resultPanel.SetActive(true);
                 hp = 0;
                 PlayerPrefs.SetString(saveStage, scrMis.load);//ミッションセーブ

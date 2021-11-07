@@ -17,5 +17,4 @@ public class OptionP_M : MonoBehaviour
         setPanelP.SetActive(true);
         starts.SetActive(false);
     }
-
 }

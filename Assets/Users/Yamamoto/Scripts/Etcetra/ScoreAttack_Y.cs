@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using NCMB;
+using UnityEngine.SceneManagement;
 
 public sealed class ScoreAttack_Y : MonoBehaviour
 {
     public static ScoreAttack_Y instance { get; private set; }
-    private const float MAXLIMITTIME = 10;
+    private const float MAXLIMITTIME = 180;
     public static float limitTime { get; private set; }
     public static int score { get; private set; }
     public static mode gameMode;
@@ -17,9 +18,11 @@ public sealed class ScoreAttack_Y : MonoBehaviour
     private static float evoMatTimer;
     private static SaveManager_Y saveManager;
     public static bool countDown = true;
-    public static NCMBObject[] ranking;
+    public static NCMBObject[] topRanking;
     public static NCMBObject[] neighbors;
     private static int currentRank;
+    public static int playStageNum;
+    public static bool connecting;
 
     private void Awake()
     {
@@ -35,6 +38,7 @@ public sealed class ScoreAttack_Y : MonoBehaviour
     {
         saveManager = SaveManager_Y.GetInstance();
         Init();
+        connecting = false;
     }
 
     private void Update()
@@ -48,7 +52,7 @@ public sealed class ScoreAttack_Y : MonoBehaviour
             if (sunsetTimer >= 0.5f) SunsetChange();
 
             if (evoMatTimer > 0f) evoMatTimer -= Time.deltaTime;
-            else if (evoMatTimer <= 0f) evoMatTimer = 0f;
+            else if (evoMatTimer < 0f) DegenerateChicken();
 
             limitTime -= Time.deltaTime;
             if (limitTime <= 0f)
@@ -63,7 +67,29 @@ public sealed class ScoreAttack_Y : MonoBehaviour
         limitTime = MAXLIMITTIME;
         score = 0;
         countDown = true;
+        connecting = false;
         Debug.Log("Initialize");
+    }
+
+    /// <summary>
+    /// 遊んでいるステージからステージナンバーを取得
+    /// </summary>
+    public static void SetPlayStageNum()
+    {
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "stage1": playStageNum = 1; break;
+            case "Stage2": playStageNum = 2; break;
+            case "Stage3": playStageNum = 3; break;
+            default: break;
+        }
+    }
+    /// <summary>
+    /// ステージ番号を入力すると設定できる
+    /// </summary>
+    public static void SetPlayStageNum(int stageNum)
+    {
+        playStageNum = stageNum;
     }
 
     private void FinishScoreAttack()
@@ -72,9 +98,9 @@ public sealed class ScoreAttack_Y : MonoBehaviour
         gameMode = mode.Result;
     }
 
-    public bool CheckNewRecord(int stageNum)
+    public static bool CheckNewRecord(int stageNum)
     {
-        if (saveManager.GetlocalScore(stageNum) > score) return true;
+        if (saveManager.GetlocalScore(stageNum) < score) return true;
         else return false;
     }
 
@@ -113,6 +139,12 @@ public sealed class ScoreAttack_Y : MonoBehaviour
         evoMatTimer = 45f;
     }
 
+    //ニワトリ退化
+    private static void DegenerateChicken()
+    {
+        evoMatTimer = 0f;
+    }
+
     public static void SubmitScore(string name, int stageNum)
     {
         // クラスのNCMBObjectを作成
@@ -125,11 +157,12 @@ public sealed class ScoreAttack_Y : MonoBehaviour
             default: break;
         }
 
+        connecting = true;
         if (obj != null)
         {
             // オブジェクトに値を設定
             obj["name"] = name;
-            obj["score"] = 400;
+            obj["score"] = score;
             // データストアへの登録
             obj.SaveAsync((NCMBException e) =>
             {
@@ -147,7 +180,7 @@ public sealed class ScoreAttack_Y : MonoBehaviour
         }
     }
 
-    private static void FetchRank(int currentScore, int stageNum)
+    public static void FetchRank(int currentScore, int stageNum)
     {
         // データスコアの「HighScore」から検索
         NCMBQuery<NCMBObject> rankQuery = null;
@@ -159,6 +192,7 @@ public sealed class ScoreAttack_Y : MonoBehaviour
             default: break;
         }
         rankQuery.WhereGreaterThan("score", currentScore);
+        connecting = true;
         rankQuery.CountAsync((int count, NCMBException e) =>
         {
             //件数取得失敗
@@ -189,6 +223,7 @@ public sealed class ScoreAttack_Y : MonoBehaviour
         //検索件数を8件に設定
         query.Limit = 8;
 
+        connecting = true;
         //データストアでの検索を行う
         query.FindAsync((List<NCMBObject> objList, NCMBException e) =>
         {
@@ -196,16 +231,15 @@ public sealed class ScoreAttack_Y : MonoBehaviour
             else
             {
                 Debug.Log($"検索に成功しました。");
-                ranking = objList.ToArray();
+                topRanking = objList.ToArray();
             }
         });
     }
 
     public static void GetAroundMyScores(int currentScore, int stageNum)
     {
-        FetchRank(currentScore, stageNum);
         // スキップする数を決める（ただし自分が1位か2位のときは調整する）
-        int numSkip = currentRank - 3;
+        int numSkip = currentRank - 2;
         if (numSkip < 0) numSkip = 0;
 
         // データストアから検索
@@ -219,7 +253,8 @@ public sealed class ScoreAttack_Y : MonoBehaviour
         }
         query.OrderByDescending("score");
         query.Skip = numSkip;
-        query.Limit = 5;
+        query.Limit = 3;
+        connecting = true;
         query.FindAsync((List<NCMBObject> objList, NCMBException e) =>
         {
             if (e != null) Debug.Log($"周辺ランキングの検索に失敗しました。エラーコード{e.ErrorCode}");
@@ -229,5 +264,19 @@ public sealed class ScoreAttack_Y : MonoBehaviour
                 neighbors = objList.ToArray();
             }
         });
+    }
+
+    public static string[] GetNames(NCMBObject[] objList)
+    {
+        List<string> names = new List<string>();
+        foreach (var o in objList) names.Add(System.Convert.ToString(o["name"]));
+        return names.ToArray();
+    }
+
+    public static int[] GetScores(NCMBObject[] objList)
+    {
+        List<int> scores = new List<int>();
+        foreach (var o in objList) scores.Add(System.Convert.ToInt32(o["score"]));
+        return scores.ToArray();
     }
 }

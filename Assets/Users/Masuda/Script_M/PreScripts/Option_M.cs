@@ -13,11 +13,6 @@ public class Option_M : MonoBehaviour
 
     }
 
-    void Update()
-    {
-
-    }
-
     public void OnClick()
     {
         pausePanel1.SetActive(true);
