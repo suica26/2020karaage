@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,8 +11,8 @@ public class CountDown : MonoBehaviour
     int count;
     public bool countSet, countFin;
     public GameObject timer3to1, limit, score, mission;
-    public Pause_M pa_M;
-    public Parameters_R paramR;
+    public Pause_M pauseScr;
+    public Parameters_R paramScr;
 
     void Start()
     {
@@ -22,13 +22,9 @@ public class CountDown : MonoBehaviour
             limit.SetActive(true);
             score.SetActive(true);
             mission.SetActive(false);
-            paramR.time = 300;//本当は300
+            ScoreAttack_Y.Init();
         }
-        else
-        {
-            limit.SetActive(false);
-            paramR.time = 1000000000;//でけぇ初期値
-        }
+        else limit.SetActive(false);
     }
 
     void Update()
@@ -52,14 +48,15 @@ public class CountDown : MonoBehaviour
 
         if (countSet && !countFin)
         {
-            pa_M.gameSet = false;
+            pauseScr.gameSet = false;
             Time.timeScale = 0;
         }
         else if (!countSet && !countFin)
         {
-            pa_M.gameSet = true;
+            pauseScr.gameSet = true;
             Time.timeScale = 1;
             countFin = true;
+            ScoreAttack_Y.countDown = false;
         }
     }
 }

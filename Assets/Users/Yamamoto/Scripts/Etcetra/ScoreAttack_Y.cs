@@ -10,20 +10,25 @@ public sealed class ScoreAttack_Y : MonoBehaviour
     public static float limitTime { get; private set; }
     public static int score { get; private set; }
     public static mode gameMode;
+    public static Parameters_R paramScr;
     public static GameObject directionalLight;
     [SerializeField] private Material[] skyboxes;
     private float sunsetTimer;
     private static float evoMatTimer;
     private static SaveManager_Y saveManager;
-    private static bool countDown = true;
+    public static bool countDown = true;
     public static NCMBObject[] ranking;
     public static NCMBObject[] neighbors;
     private static int currentRank;
 
     private void Awake()
     {
-        if (instance == null) instance = this;
-        return;
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else Destroy(gameObject);
     }
 
     private void Start()
@@ -34,6 +39,9 @@ public sealed class ScoreAttack_Y : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Return))
+            Debug.Log($"gameMode:{gameMode},countDown:{countDown},limitTime:{limitTime},Score:{score}");
+
         if (gameMode == mode.ScoreAttack && !countDown)
         {
             sunsetTimer += Time.deltaTime;
@@ -55,6 +63,7 @@ public sealed class ScoreAttack_Y : MonoBehaviour
         limitTime = MAXLIMITTIME;
         score = 0;
         countDown = true;
+        Debug.Log("Initialize");
     }
 
     private void FinishScoreAttack()
@@ -77,6 +86,7 @@ public sealed class ScoreAttack_Y : MonoBehaviour
     public static void AddScore(int addScore)
     {
         score += addScore;
+        if (paramScr != null) paramScr.ScoreUpdate();
     }
 
     public static bool CheckScoreMode()
@@ -88,6 +98,7 @@ public sealed class ScoreAttack_Y : MonoBehaviour
     private void SunsetChange()
     {
         sunsetTimer = 0f;
+        if (skyboxes.Length == 0) return;
 
         //太陽光の向き変更
         if (directionalLight != null) directionalLight.transform.eulerAngles = new Vector3(360 - limitTime * 2, 0, 0);

@@ -32,5 +32,4 @@ public class ModeSellect : MonoBehaviour
         stageSellect.SetActive(true);
         ScoreAttack_Y.gameMode = mode.ScoreAttack;
     }
-
 }

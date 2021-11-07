@@ -72,8 +72,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
         scrFood = GetComponent<FoodMaker_R>();
         criAtomSource = GetComponent<CriAtomSource>();
         //加筆　undertreem 0625
-        if (ADX_RevLevel == null)
-        { ADX_RevLevel = player.GetComponent<ADX_SoundRaycast>(); Debug.Log("Static"); }
+        if (ADX_RevLevel == null) ADX_RevLevel = player.GetComponent<ADX_SoundRaycast>();
         renderers = CheckRenderer();
     }
 

@@ -41,6 +41,7 @@ public class TitleGameStart_M : MonoBehaviour
         {
             story.SetActive(true);
             start.SetActive(false);
+            ScoreAttack_Y.gameMode = mode.Story;
         }
     }
 }
