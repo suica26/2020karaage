@@ -6,12 +6,12 @@ public class ModeSellect : MonoBehaviour
 {
     public GameObject modeSellect, stageSellect;
     public string modeJ;
-    private new CriAtomSource audio;
+    private CriAtomSource criAtomSource;
 
     //modeJudgeにスコアアタックかどうかの記録を残す
     void Start()
     {
-        audio = GetComponent<CriAtomSource>();
+        criAtomSource = GetComponent<CriAtomSource>();
         PlayerPrefs.SetString("modeJudge", "");
     }
 

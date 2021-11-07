@@ -78,7 +78,7 @@ public class Parameters_R : MonoBehaviour
     {
         if (!freeze)
         {
-            timeText.text = "Time " + (int)ScoreAttack_Y.limitTime / 60 + ":" + ScoreAttack_Y.limitTime % 60;
+            timeText.text = "Time " + (int)ScoreAttack_Y.limitTime / 60 + ":" + String.Format("{0:00}", ScoreAttack_Y.limitTime % 60);
             if (ScoreAttack_Y.gameMode == mode.Result)
             {
                 finalScoreText.text = "" + ScoreAttack_Y.score;

@@ -6,7 +6,7 @@ using NCMB;
 public sealed class ScoreAttack_Y : MonoBehaviour
 {
     public static ScoreAttack_Y instance { get; private set; }
-    private const float MAXLIMITTIME = 180;
+    private const float MAXLIMITTIME = 10;
     public static float limitTime { get; private set; }
     public static int score { get; private set; }
     public static mode gameMode;

@@ -13,6 +13,7 @@ public class CountDown : MonoBehaviour
     public GameObject timer3to1, limit, score, mission;
     public Pause_M pauseScr;
     public Parameters_R paramScr;
+    private bool countWait = true;
 
     void Start()
     {
@@ -29,14 +30,13 @@ public class CountDown : MonoBehaviour
 
     void Update()
     {
-        if (countSet && countdown >= 0)
+        if (countSet && countdown > 0)
         {
             timer3to1.SetActive(true);
             countdown -= Time.unscaledDeltaTime / 2;
-            count = (int)countdown;
+            count = (int)(countdown + 1);
             timerTxt.text = count.ToString();
         }
-
         else if (countdown <= 0)
         {
             timerTxt.text = "";

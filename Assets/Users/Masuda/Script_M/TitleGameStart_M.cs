@@ -8,12 +8,14 @@ public class TitleGameStart_M : MonoBehaviour
 {
     public GameObject gameMode, story, start, loadPanel;
     public string cleared;
-    private new CriAtomSource audio;
+    private CriAtomSource criAtomSource;
+    private SaveManager_Y saveManager;
 
     void Start()
     {
         //cleared = PlayerPrefs.GetString("storyClear");
-        audio = GetComponent<CriAtomSource>();
+        criAtomSource = GetComponent<CriAtomSource>();
+        saveManager = SaveManager_Y.GetInstance();
     }
 
     private void Update()
@@ -31,8 +33,8 @@ public class TitleGameStart_M : MonoBehaviour
 
     public void OnClick()
     {
-        audio.Play("System_Decision");
-        if (cleared == "clear")
+        criAtomSource?.Play("System_Decision");
+        if (saveManager.GetClearFlg(3))
         {
             gameMode.SetActive(true);
             start.SetActive(false);
