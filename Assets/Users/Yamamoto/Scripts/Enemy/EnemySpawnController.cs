@@ -26,7 +26,6 @@ public class EnemySpawnController : MonoBehaviour
         enemyNum = new int[enemyPrefab.Length];
         spawnPos = new List<List<Transform>>();
 
-
         for (int i = 0; i < enemyPrefab.Length; i++)
         {
             //配列初期化

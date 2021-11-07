@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class Stage2BossBuilding_Y : ObjectStateManagement_Y
 {
+    protected override void Start()
+    {
+        base.Start();
+        if (ScoreAttack_Y.gameMode == mode.ScoreAttack)
+        {
+            notDamage = false;
+            GameObject.Find("GameAI_Y").GetComponent<EnemySpawnController>().enabled = true;
+        }
+    }
     protected override void Death()
     {
         base.Death();

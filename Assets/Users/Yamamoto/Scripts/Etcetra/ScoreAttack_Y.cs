@@ -23,6 +23,7 @@ public sealed class ScoreAttack_Y : MonoBehaviour
     private static int currentRank;
     public static int playStageNum;
     public static bool connecting;
+    public static EvolutionChicken_R evoScr;
 
     private void Awake()
     {
@@ -143,6 +144,7 @@ public sealed class ScoreAttack_Y : MonoBehaviour
     private static void DegenerateChicken()
     {
         evoMatTimer = 0f;
+        evoScr.Degenerate();
     }
 
     public static void SubmitScore(string name, int stageNum)

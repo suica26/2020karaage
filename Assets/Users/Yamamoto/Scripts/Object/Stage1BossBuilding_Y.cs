@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Stage1BossBuilding_Y : ObjectStateManagement_Y
 {
+    protected override void Start()
+    {
+        base.Start();
+        if (ScoreAttack_Y.gameMode == mode.ScoreAttack) notDamage = false;
+    }
+
     protected override void Death()
     {
         base.Death();

@@ -44,13 +44,12 @@ public class EvolutionChicken_R : MonoBehaviour
     public float Status_SPD { get { return status_SPD; } }
     public float Status_SCORE { get { return status_SCORE; } }
     public float Status_JUMP { get { return status_JUMP; } }
-
-    //M
     public int startNum;
+    [SerializeField] private MonoBehaviour[] skills;
 
     void Start()
     {
-        if (ScoreAttack_Y.gameMode == mode.ScoreAttack) ScoreAttackSetting();
+        //if (ScoreAttack_Y.gameMode == mode.ScoreAttack) ScoreAttackSetting();
 
         // objParamが空の場合、Canvasオブジェクトを探す
         if (objParam == null)
@@ -153,6 +152,24 @@ public class EvolutionChicken_R : MonoBehaviour
 
     private void ScoreAttackSetting()
     {
+        EP = 0;
+        startNum = 0;
+        nowEvoNum = 0;
+        evolutionNum = 0;
+        evolutionPoint[0] = 450;
+        evolutionPoint[1] = 1500;
+        evolutionPoint[2] = 5500;
+        foreach (var s in skills) s.enabled = true;
+        ScoreAttack_Y.evoScr = this;
+    }
 
+    //ニワトリ退化
+    public void Degenerate()
+    {
+        EP -= evolutionPoint[evolutionNum];
+        chickens[evolutionNum].SetActive(false);
+        evolutionNum--;
+        nowEvoNum--;
+        chickens[nowEvoNum].SetActive(true);
     }
 }
