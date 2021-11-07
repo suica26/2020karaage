@@ -50,7 +50,7 @@ public sealed class ScoreAttack_Y : MonoBehaviour
         if (gameMode == mode.ScoreAttack && !countDown)
         {
             sunsetTimer += Time.deltaTime;
-            if (sunsetTimer >= 0.5f) SunsetChange();
+            if (sunsetTimer >= 0.1f) SunsetChange();
 
             if (evoMatTimer > 0f) evoMatTimer -= Time.deltaTime;
             else if (evoMatTimer < 0f) DegenerateChicken();
@@ -125,7 +125,6 @@ public sealed class ScoreAttack_Y : MonoBehaviour
     private void SunsetChange()
     {
         sunsetTimer = 0f;
-        if (skyboxes.Length == 0) return;
 
         //太陽光の向き変更
         if (directionalLight != null) directionalLight.transform.eulerAngles = new Vector3(360 - limitTime * 2, 0, 0);
