@@ -13,7 +13,6 @@ public sealed class ScoreAttack_Y : MonoBehaviour
     public static mode gameMode;
     public static Parameters_R paramScr;
     public static GameObject directionalLight;
-    [SerializeField] private Material[] skyboxes;
     private float sunsetTimer;
     private static float evoMatTimer;
     private static SaveManager_Y saveManager;
@@ -24,6 +23,8 @@ public sealed class ScoreAttack_Y : MonoBehaviour
     public static int playStageNum;
     public static bool connecting;
     public static EvolutionChicken_R evoScr;
+    [SerializeField] private AnimationCurve curveR, curveG, curveB;
+    private Material skyboxMat;
 
     private void Awake()
     {
@@ -101,7 +102,11 @@ public sealed class ScoreAttack_Y : MonoBehaviour
 
     public static bool CheckNewRecord(int stageNum)
     {
-        if (saveManager.GetlocalScore(stageNum) < score) return true;
+        if (saveManager.GetlocalScore(stageNum) < score)
+        {
+            saveManager.SavelocalScore(stageNum, score);
+            return true;
+        }
         else return false;
     }
 
@@ -127,11 +132,19 @@ public sealed class ScoreAttack_Y : MonoBehaviour
         sunsetTimer = 0f;
 
         //太陽光の向き変更
-        if (directionalLight != null) directionalLight.transform.eulerAngles = new Vector3(360 - limitTime * 2, 0, 0);
+        if (directionalLight != null)
+        {
+            directionalLight.transform.eulerAngles = new Vector3(limitTime, 0, 0);
+        }
 
         //スカイボックスの変更
-        if (skyboxes != null)
-            RenderSettings.skybox = skyboxes[(int)(limitTime / (MAXLIMITTIME / skyboxes.Length))];
+        float time = 1 - limitTime / MAXLIMITTIME / 2;
+        if (skyboxMat == null)
+        {
+            skyboxMat = new Material(RenderSettings.skybox);
+            skyboxMat.SetColor("_Tint", new Color(curveR.Evaluate(time), curveG.Evaluate(time), curveB.Evaluate(time)));
+            RenderSettings.skybox = skyboxMat;
+        }
     }
 
     public static void SetEvolutionMaintainTimer()

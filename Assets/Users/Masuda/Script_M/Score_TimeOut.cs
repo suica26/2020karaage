@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Score_TimeOut : MonoBehaviour
 {
     //時間切れと体力切れした場合に、手配書画面が出るように
-    public GameObject result, gameOver, newRecord, timeUp;
+    public GameObject result, gameOver, newRecord;
     public Parameters_R paramScr;
     public Pause_M pauseScr;
     public Image mainImage;
@@ -15,7 +15,6 @@ public class Score_TimeOut : MonoBehaviour
     [SerializeField] private float timer_TO, timer_HO;
     public Animator animator;
     private string TimeUpStr = "strTimeUp";
-    private int stageNum;
 
     private void Start()
     {
@@ -52,8 +51,7 @@ public class Score_TimeOut : MonoBehaviour
             gameOver.SetActive(false);
             pauseScr.gameSet = false;
             Cursor.visible = true;
-            if (!ScoreAttack_Y.connecting)
-                Time.timeScale = 0;
+            if (!ScoreAttack_Y.connecting) Time.timeScale = 0;
         }
     }
 
