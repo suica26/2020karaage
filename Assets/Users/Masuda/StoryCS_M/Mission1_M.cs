@@ -21,6 +21,11 @@ public class Mission1_M : Missions_M
         GameObject findCanvas = GameObject.Find("Canvas");
         scrParame = findCanvas.GetComponent<Parameters_R>();
         first = true;
+
+        if (ScoreAttack_Y.gameMode == mode.ScoreAttack)
+        {
+            evolution = true;
+        }
     }
 
     void Update()
