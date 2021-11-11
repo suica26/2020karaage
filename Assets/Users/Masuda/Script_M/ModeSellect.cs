@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ModeSellect : MonoBehaviour
 {
-    public GameObject modeSellect, stageSellect;
+    public GameObject modeSellect, stageSelect1, stageSelect2;
     public string modeJ;
     private CriAtomSource criAtomSource;
 
@@ -20,7 +20,7 @@ public class ModeSellect : MonoBehaviour
         PlayerPrefs.SetString("modeJudge", "");
         modeJ = PlayerPrefs.GetString("modeJudge");
         modeSellect.SetActive(false);
-        stageSellect.SetActive(true);
+        stageSelect1.SetActive(true);
         ScoreAttack_Y.gameMode = mode.Story;
     }
 
@@ -29,7 +29,7 @@ public class ModeSellect : MonoBehaviour
         PlayerPrefs.SetString("modeJudge", "scoreMode");
         modeJ = PlayerPrefs.GetString("modeJudge");
         modeSellect.SetActive(false);
-        stageSellect.SetActive(true);
+        stageSelect2.SetActive(true);
         ScoreAttack_Y.Init();
         ScoreAttack_Y.gameMode = mode.ScoreAttack;
     }
