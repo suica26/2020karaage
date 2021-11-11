@@ -54,6 +54,7 @@ public class Parameters_R : MonoBehaviour
         epSlider.value = 0;
         ScoreAttack_Y.paramScr = this;
 
+        if (ScoreAttack_Y.gameMode == mode.ScoreAttack) startNum = 0;
         for (int i = 0; i < 4; i++)
         {
             if (i == startNum)
@@ -78,7 +79,6 @@ public class Parameters_R : MonoBehaviour
         scoreText.text = "$ " + score;
         animator.SetBool(strGetScore, true);
         scoreEmp += 1;//boolのかわり
-        //scoreText.text = "$ " + ScoreAttack_Y.score;
     }
     //引数で指定した分だけスコアを加算します。
 
@@ -91,7 +91,6 @@ public class Parameters_R : MonoBehaviour
             {
                 score = ScoreAttack_Y.score.ToString("N0");
                 finalScoreText.text = "" + score;
-                //finalScoreText.text = "" + ScoreAttack_Y.score;
                 freeze = true;
             }
         }

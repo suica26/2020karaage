@@ -8,5 +8,6 @@ public class ScoreAttackLight_Y : MonoBehaviour
     void Start()
     {
         ScoreAttack_Y.directionalLight = gameObject;
+        ScoreAttack_Y.d_light = GetComponent<Light>();
     }
 }

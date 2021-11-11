@@ -13,6 +13,7 @@ public sealed class ScoreAttack_Y : MonoBehaviour
     public static mode gameMode;
     public static Parameters_R paramScr;
     public static GameObject directionalLight;
+    public static Light d_light;
     private float sunsetTimer;
     private static float evoMatTimer;
     private static SaveManager_Y saveManager;
@@ -23,6 +24,8 @@ public sealed class ScoreAttack_Y : MonoBehaviour
     public static int playStageNum;
     public static bool connecting;
     public static EvolutionChicken_R evoScr;
+    [SerializeField]
+    private AnimationCurve curveLC_R, curveLC_G, curveLC_B, curveLightInt;
     [SerializeField] private AnimationCurve curveR, curveG, curveB;
     private Material skyboxMat;
 
@@ -130,15 +133,17 @@ public sealed class ScoreAttack_Y : MonoBehaviour
     private void SunsetChange()
     {
         sunsetTimer = 0f;
+        float time = 1 - limitTime / MAXLIMITTIME;
 
         //太陽光の向き変更
         if (directionalLight != null)
         {
             directionalLight.transform.eulerAngles = new Vector3(limitTime, 0, 0);
+            //d_light.intensity = curveLightInt.Evaluate(time);
+            //d_light.color = new Color(curveLC_R.Evaluate(time), curveLC_G.Evaluate(time), curveLC_B.Evaluate(time));
         }
 
         //スカイボックスの変更
-        float time = 1 - limitTime / MAXLIMITTIME / 2;
         if (skyboxMat == null)
         {
             skyboxMat = new Material(RenderSettings.skybox);

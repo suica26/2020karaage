@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -19523,6 +19523,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05d8006cb4e827d4b8ed45c409bdcadb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  curveLC_R:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  curveLC_G:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  curveLC_B:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  curveLightInt:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   curveR:
     serializedVersion: 2
     m_Curve:
@@ -19666,7 +19690,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.1687622
+      value: 0.39846802
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -19674,22 +19698,22 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.16027611
-      value: 0.1691447
-      inSlope: 0.0033399577
-      outSlope: 0.0033399577
+      time: 0.16027902
+      value: 0.41597354
+      inSlope: 0.26297823
+      outSlope: 0.26297823
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.7210696
+      inWeight: 0.23804195
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.27975005
-      value: 0.41069493
-      inSlope: 0.7379423
-      outSlope: 0.7379423
+      time: 0.27974445
+      value: 0.4509841
+      inSlope: 0.38330278
+      outSlope: 0.38330278
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0.6589763
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 0.5009225
@@ -19728,7 +19752,7 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
-    m_PostInfinity: 1
+    m_PostInfinity: 2
     m_RotationOrder: 4
 --- !u!4 &1919320730
 Transform:
