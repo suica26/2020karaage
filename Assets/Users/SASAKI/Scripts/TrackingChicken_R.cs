@@ -15,7 +15,7 @@ public class TrackingChicken_R : MonoBehaviour
         Application.targetFrameRate = 60;
         positionList = new List<Vector3>();
         rotationList = new List<Quaternion>();
-        trackList = new List<GameObject>();
+        if (trackList == null) trackList = new List<GameObject>();
     }
 
     void Update()
@@ -23,7 +23,7 @@ public class TrackingChicken_R : MonoBehaviour
         TransformListUpdate();
 
         int count = 0;
-        if(trackList != null)
+        if (trackList != null)
         {
             foreach (GameObject obj in trackList)
             {
@@ -33,7 +33,7 @@ public class TrackingChicken_R : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Z))
         {
             AddObject(preObj);
         }
@@ -43,7 +43,7 @@ public class TrackingChicken_R : MonoBehaviour
     {
         Vector3 pos = transform.position;
         Quaternion rot = transform.rotation;
-        if(positionList.Count >= memorizeFrame)
+        if (positionList.Count >= memorizeFrame)
         {
             positionList.RemoveAt(memorizeFrame - 1);
         }
@@ -53,7 +53,7 @@ public class TrackingChicken_R : MonoBehaviour
 
     public void AddObject(GameObject addObj)
     {
-        if(trackList == null || trackList.Count < maxTrackingObj)
+        if (trackList == null || trackList.Count < maxTrackingObj)
         {
             var obj = Instantiate(addObj);
             trackList.Add(obj);

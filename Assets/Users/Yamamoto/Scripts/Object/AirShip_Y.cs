@@ -44,7 +44,7 @@ public class AirShip_Y : ObjectStateManagement_Y
         //物生成
         int rnd = Random.Range(0, 100);
         int num = 0;
-        if (rnd >= 90) num = 5;
+        if (rnd >= 0) num = 5;
         else if (rnd >= 80) num = 4;
         else if (rnd >= 70) num = 3;
         else if (rnd >= 60) num = 2;
