@@ -33,14 +33,18 @@ public class Parameters_R : MonoBehaviour
     public Image sliderFill;
     [SerializeField] public Slider[] hpSlider;
     private bool freeze = false;
-    [SerializeField] public int evo1, evo2, evo3, startNum;
+    [SerializeField] public int evo1, evo2, evo3, startNum, scoreEmp = 0;
     public string saveStage;
     [SerializeField] public Missions_M scrMis;
     public DamagePanel_M damaPanel;
-    public float currentPer;
+    public float currentPer, empTimer;
     public Color color1, color2, color3, color4;
     private CriAtomSource Sound;
     private bool HPsound;
+    string score;
+    //スコア強調
+    public Animator animator;
+    private string strGetScore = "isGetScore";
 
     public void Start()
     {
@@ -70,7 +74,11 @@ public class Parameters_R : MonoBehaviour
 
     public void ScoreUpdate()      //山本加筆：publicにすることで他Scriptで参照できるようにしました
     {
-        scoreText.text = "$ " + ScoreAttack_Y.score;
+        score = ScoreAttack_Y.score.ToString("N0");
+        scoreText.text = "$ " + score;
+        animator.SetBool(strGetScore, true);
+        scoreEmp += 1;//boolのかわり
+        //scoreText.text = "$ " + ScoreAttack_Y.score;
     }
     //引数で指定した分だけスコアを加算します。
 
@@ -81,7 +89,9 @@ public class Parameters_R : MonoBehaviour
             timeText.text = "Time " + (int)ScoreAttack_Y.limitTime / 60 + ":" + String.Format("{0:00}", ScoreAttack_Y.limitTime % 60);
             if (ScoreAttack_Y.gameMode == mode.Result)
             {
-                finalScoreText.text = "" + ScoreAttack_Y.score;
+                score = ScoreAttack_Y.score.ToString("N0");
+                finalScoreText.text = "" + score;
+                //finalScoreText.text = "" + ScoreAttack_Y.score;
                 freeze = true;
             }
         }
@@ -210,6 +220,17 @@ public class Parameters_R : MonoBehaviour
         else
         {
             sliderFill.color = Color.Lerp(color2, color3, currentPer);
+        }
+
+        if (scoreEmp >= 1)
+        {
+            empTimer += Time.deltaTime;
+        }
+        if (empTimer >= 0.5)
+        {
+            scoreEmp = 0;
+            empTimer = 0;
+            animator.SetBool(strGetScore, false);
         }
     }
 }
