@@ -26,7 +26,7 @@ using UnityEngine.UI;
 public class Parameters_R : MonoBehaviour
 {
     [SerializeField] private Text scoreText, finalScoreText, timeText;
-    [SerializeField] private GameObject resultPanel = null;
+    [SerializeField] private GameObject resultPanel = null, flashBar;
     [SerializeField] private GameObject[] hpSli;
     [SerializeField] public int ep, hp, maxHP, niwaPer;
     [SerializeField] public Slider epSlider, mainSlider;
@@ -43,8 +43,8 @@ public class Parameters_R : MonoBehaviour
     private bool HPsound;
     string score;
     //スコア強調
-    public Animator animator;
-    private string strGetScore = "isGetScore";
+    public Animator animator, anime;
+    private string strGetScore = "isGetScore", strFlash = "isFlash";
 
     public void Start()
     {
@@ -142,6 +142,9 @@ public class Parameters_R : MonoBehaviour
                 hp = maxHP;
                 hpSlider[2].value = 500;
                 hpSlider[3].value = 500;
+                //満タンエフェクト
+                flashBar.SetActive(true);
+                anime.SetBool(strFlash, true);
             }
         }
     }
@@ -207,7 +210,7 @@ public class Parameters_R : MonoBehaviour
     {
         TimeUpdate();
 
-        //体力ゲージの色変換
+        //エサゲージの色変換
         currentPer = epSlider.value / epSlider.maxValue;
         if (currentPer <= 0.30f)
         {
