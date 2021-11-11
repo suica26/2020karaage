@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 945745662140525342}
   - component: {fileID: 2969155368094141304}
   - component: {fileID: 354097424417473123}
+  - component: {fileID: 4837807900694614398}
   m_Layer: 0
   m_Name: airship
   m_TagString: Untagged
@@ -121,7 +122,7 @@ MonoBehaviour:
   objectID: 0
   breakEffect: {fileID: 0}
   deleteTime: 3
-  torque: 0
+  torque: 10
   power: 0
   groundContactSoundName: 
   shardDamage_nonDiv: 0
@@ -133,6 +134,11 @@ MonoBehaviour:
   rotSpeed: 0.07
   rotCenter: {x: 0, y: 0, z: 0}
   radius: 200
+  food: {fileID: 5882868508514077054, guid: 52bb1160a73b4b848953812cb2383dfc, type: 3}
+  chef: {fileID: 502009927202614386, guid: d07acb6d6b4e3e942a4d4b083c95e6db, type: 3}
+  pollice: {fileID: 5552524597018552477, guid: 5db61b8656467974f8b627367c6bf089, type: 3}
+  tank: {fileID: 7688571215654442205, guid: 8a6aef1e6f5d675439f27274013426ff, type: 3}
+  littleChicken: {fileID: 0}
 --- !u!114 &354097424417473123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,3 +162,19 @@ MonoBehaviour:
   _pitch: 0
   _androidUseLowLatencyVoicePool: 0
   need_to_player_update_all: 1
+--- !u!54 &4837807900694614398
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 450688182569376842}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

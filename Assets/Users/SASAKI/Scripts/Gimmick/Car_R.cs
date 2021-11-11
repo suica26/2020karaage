@@ -108,38 +108,42 @@ public class Car_R : MonoBehaviour
             }
 
             // Uターンの際に情報の更新を一回の移動分止める(これをしないと経路情報がバグる)
-            if ((afterNextWaypoint.GetComponent<CarWaypoint_R>().uTurn || nextWaypoint.GetComponent<CarWaypoint_R>().uTurn) && !isUturn)
-                isUturn = true;
-            else
+            //山本加筆　nullチェック
+            if (afterNextWaypoint != null && nextWaypoint != null)
             {
-                isUturn = false;
-
-                //交差点情報更新
-                nowWaypoint = nextWaypoint;
-                nextWaypoint = afterNextWaypoint;
-            }
-
-            //次の交差点がUターンの時
-            if (nextWaypoint.GetComponent<CarWaypoint_R>().uTurn)
-            {
-                SetPosInit(nextWaypoint.transform.position);
-                if (isUturn)
+                if ((afterNextWaypoint.GetComponent<CarWaypoint_R>().uTurn || nextWaypoint.GetComponent<CarWaypoint_R>().uTurn) && !isUturn)
+                    isUturn = true;
+                else
                 {
-                    afterNextWaypoint = nextWaypoint.GetComponent<CarWaypoint_R>().SetNextWaypoint(nowWaypoint);
+                    isUturn = false;
+
+                    //交差点情報更新
+                    nowWaypoint = nextWaypoint;
+                    nextWaypoint = afterNextWaypoint;
+                }
+
+                //次の交差点がUターンの時
+                if (nextWaypoint.GetComponent<CarWaypoint_R>().uTurn)
+                {
+                    SetPosInit(nextWaypoint.transform.position);
+                    if (isUturn)
+                    {
+                        afterNextWaypoint = nextWaypoint.GetComponent<CarWaypoint_R>().SetNextWaypoint(nowWaypoint);
+                        targetPos = afterNextWaypoint.GetComponent<CarWaypoint_R>().SetNextTargetPos(nextWaypoint.transform.position, nowWaypoint.transform.position, targetPos);
+                        targetPos.y += initHeight;
+                    }
+                }
+                else
+                {
+                    //次の次の交差点が終端でない場合は次のwaypointを取得する
+                    if (!afterNextWaypoint.GetComponent<CarWaypoint_R>().endWaypoint)
+                    {
+                        afterNextWaypoint = nextWaypoint.GetComponent<CarWaypoint_R>().SetNextWaypoint(nowWaypoint);
+                    }
+
                     targetPos = afterNextWaypoint.GetComponent<CarWaypoint_R>().SetNextTargetPos(nextWaypoint.transform.position, nowWaypoint.transform.position, targetPos);
                     targetPos.y += initHeight;
                 }
-            }
-            else
-            {
-                //次の次の交差点が終端でない場合は次のwaypointを取得する
-                if (!afterNextWaypoint.GetComponent<CarWaypoint_R>().endWaypoint)
-                {
-                    afterNextWaypoint = nextWaypoint.GetComponent<CarWaypoint_R>().SetNextWaypoint(nowWaypoint);
-                }
-
-                targetPos = afterNextWaypoint.GetComponent<CarWaypoint_R>().SetNextTargetPos(nextWaypoint.transform.position, nowWaypoint.transform.position, targetPos);
-                targetPos.y += initHeight;
             }
         }
     }

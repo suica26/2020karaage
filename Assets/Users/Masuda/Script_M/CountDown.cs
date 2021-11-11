@@ -13,7 +13,6 @@ public class CountDown : MonoBehaviour
     public GameObject timer3to1, limit, score, mission;
     public Pause_M pauseScr;
     public Parameters_R paramScr;
-    private bool countWait = true;
 
     void Start()
     {
