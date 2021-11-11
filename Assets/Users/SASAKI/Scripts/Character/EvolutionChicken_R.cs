@@ -34,6 +34,8 @@ public class EvolutionChicken_R : MonoBehaviour
     private float status_SCORE;
     private float status_JUMP;
 
+    private bool evoBlast;
+
     //M よそから参照したいのでpublicにします
     public int nowEvoNum = 0;
 
@@ -80,6 +82,8 @@ public class EvolutionChicken_R : MonoBehaviour
         status_SCORE = SCORE[evolutionNum];
         status_JUMP = JUMP[evolutionNum];
 
+        evoBlast = false;
+
         //chickens[1].SetActive(false);
         //chickens[2].SetActive(false);
         //chickens[3].SetActive(false);
@@ -113,6 +117,8 @@ public class EvolutionChicken_R : MonoBehaviour
 
         if (evolutionNum < evolutionPoint.Length && EP >= evolutionPoint[evolutionNum])
         {
+            evoBlast = true;
+
             chickens[evolutionNum].GetComponent<Animator>().updateMode = AnimatorUpdateMode.UnscaledTime;
             chickens[evolutionNum].GetComponent<Transition_R>().SetAnimator(Transition_R.Anim.EVOLUTION, true);
 
@@ -144,9 +150,14 @@ public class EvolutionChicken_R : MonoBehaviour
             status_SCORE = SCORE[evolutionNum];
             status_JUMP = JUMP[evolutionNum];
 
-            scrBlast.EvoBlast();
-
             scrCam.evolved = false;
+        }
+
+        // 進化ブラスト
+        if(scrCam.evoBlast && evoBlast)
+        {
+            evoBlast = false;
+            scrBlast.EvoBlast();
         }
     }
 
