@@ -95,17 +95,19 @@ public class Stage3BossBuilding_Y : ObjectStateManagement_Y
 
         Debug.Log($"Phase : {phaseNum + 1}");
         phase[phaseNum] = true;
+
         ChangeToCameraMode();
 
         //もし敵の射出に関して処理を追加したい場合はここに作成した関数を記述してください
-        if (m3m.second)
-        {
-            m3m.ThirdMission_3();
-        }
-        else if (m3m.fourth)
-        {
-            m3m.FiveMission_3();
-        }
+        if (ScoreAttack_Y.gameMode == mode.Story)
+            if (m3m.second)
+            {
+                m3m.ThirdMission_3();
+            }
+            else if (m3m.fourth)
+            {
+                m3m.FiveMission_3();
+            }
 
         Sound.Play("Warning");
         if (aisacScr.St3Fase == false) aisacScr.St3Fase = true;
@@ -125,6 +127,7 @@ public class Stage3BossBuilding_Y : ObjectStateManagement_Y
             mainCamera.transform.LookAt(lookPos);
             yield return null;
         }
+
         Invoke("ChangeToPlayMode", 2f);
     }
 
@@ -189,14 +192,15 @@ public class Stage3BossBuilding_Y : ObjectStateManagement_Y
             changeDamageFlg();
             enemyBreakCount = 0;
             //もし敵を指定の数倒して支部が攻撃できるようになることに何か処理を追加する場合は、この下に書いてください
-            if (m3m.third)
-            {
-                m3m.FourthMission_3();
-            }
-            else if (m3m.five)
-            {
-                m3m.SixMission_3();
-            }
+            if (ScoreAttack_Y.gameMode == mode.Story)
+                if (m3m.third)
+                {
+                    m3m.FourthMission_3();
+                }
+                else if (m3m.five)
+                {
+                    m3m.SixMission_3();
+                }
         }
     }
 

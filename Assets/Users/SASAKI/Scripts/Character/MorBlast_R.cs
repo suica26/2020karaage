@@ -54,8 +54,8 @@ public class MorBlast_R : MonoBehaviour
         scrKick = GetComponent<chickenKick_R>();
         scrCutter = GetComponent<Cutter_R>();
         audio = GetComponent<CriAtomSource>();
-        Debug.LogError("scrKick: " + scrKick);
-        Debug.LogError("scrCutter: " + scrCutter);
+        //Debug.LogError("scrKick: " + scrKick);
+        //Debug.LogError("scrCutter: " + scrCutter);
         isBlast = false;
 
         mobileMode = MobileSetting_R.GetInstance().IsMobileMode();
@@ -72,7 +72,7 @@ public class MorBlast_R : MonoBehaviour
         }
 
         // 攻撃制限
-        if(AttackRestrictions_R.GetInstance().CanAttack())
+        if (AttackRestrictions_R.GetInstance().CanAttack())
         {
             if (!mobileMode)
             {

@@ -17,9 +17,9 @@ public class Enemy_Y : ObjectStateManagement_Y
     public AnimationClip attackClip;
     public int attackDamage;
     public float searchArea = 50f;
-    private EnemyMoveController_Y enemyControllerScr;
+    private static EnemyMoveController_Y enemyControllerScr;
 
-    private ADX_BGMAISAC aisacScr;
+    private static ADX_BGMAISAC aisacScr;
     [SerializeField] private Vector3[] patrollRoute;
     public EnemySpawnController AIscript;
     public int number;
@@ -32,8 +32,10 @@ public class Enemy_Y : ObjectStateManagement_Y
         rb = GetComponent<Rigidbody>();
         navAgent = GetComponent<NavMeshAgent>();
         animator.SetBool("isWalk", true);
-        enemyControllerScr = GameObject.Find("GameAI_Y").GetComponent<EnemyMoveController_Y>();
-        aisacScr = GameObject.Find("BGMObject").GetComponent<ADX_BGMAISAC>();
+        if (enemyControllerScr == null)
+            enemyControllerScr = GameObject.Find("GameAI_Y").GetComponent<EnemyMoveController_Y>();
+        if (aisacScr == null)
+            aisacScr = GameObject.Find("BGMObject").GetComponent<ADX_BGMAISAC>();
     }
 
     //基本挙動を記述
@@ -41,41 +43,45 @@ public class Enemy_Y : ObjectStateManagement_Y
     {
         if (livingFlg)
         {
-            if (enemyControllerScr.enemyCanMove)
+            if (navAgent.isOnNavMesh)
             {
-                routineTimer += Time.deltaTime;
-
-                if (Vector3.Distance(player.transform.position, transform.position) <= searchArea)
+                if (enemyControllerScr.enemyCanMove)
                 {
-                    aisacScr.SetBattleBGM(gameObject);
+                    routineTimer += Time.deltaTime;
 
-                    if (Vector3.Distance(player.transform.position, transform.position) <= attackDistance)
+                    if (Vector3.Distance(player.transform.position, transform.position) <= searchArea)
                     {
-                        if (routineTimer > attackInterval)
+                        aisacScr.SetBattleBGM(gameObject);
+
+                        if (Vector3.Distance(player.transform.position, transform.position) <= attackDistance)
                         {
-                            routineTimer = 0f;
-                            Attack();
+                            if (routineTimer > attackInterval)
+                            {
+                                routineTimer = 0f;
+                                Attack();
+                            }
+                            else
+                            {
+                                Wait();
+                            }
                         }
                         else
                         {
-                            Wait();
+                            if (!animator.GetCurrentAnimatorStateInfo(0).IsTag("StopMove"))
+                            {
+                                navAgent.SetDestination(player.transform.position);
+                                Walk();
+                            }
                         }
                     }
                     else
                     {
-                        if (!animator.GetCurrentAnimatorStateInfo(0).IsTag("StopMove"))
-                        {
-                            navAgent.SetDestination(player.transform.position);
-                            Walk();
-                        }
+                        Patroll();
                     }
                 }
-                else
-                {
-                    Patroll();
-                }
+                else StopMove();
             }
-            else StopMove();
+            else navAgent.enabled = false;
         }
     }
 
@@ -175,5 +181,11 @@ public class Enemy_Y : ObjectStateManagement_Y
     protected void OnDestroy()
     {
         AIscript?.UpdateEnemyNum(number);
+    }
+
+    protected void OnCollisionStay(Collision other)
+    {
+        if (!navAgent.isActiveAndEnabled)
+            navAgent.enabled = true;
     }
 }

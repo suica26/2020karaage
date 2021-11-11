@@ -49,7 +49,7 @@ public class EvolutionChicken_R : MonoBehaviour
 
     void Start()
     {
-        //if (ScoreAttack_Y.gameMode == mode.ScoreAttack) ScoreAttackSetting();
+        if (ScoreAttack_Y.gameMode == mode.ScoreAttack) ScoreAttackSetting();
 
         // objParamが空の場合、Canvasオブジェクトを探す
         if (objParam == null)

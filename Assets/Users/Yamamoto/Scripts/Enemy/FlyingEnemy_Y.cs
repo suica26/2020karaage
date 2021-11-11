@@ -49,7 +49,7 @@ public class FlyingEnemy_Y : MonoBehaviour
         }
 
         if (parachute.activeSelf)
-            rb.velocity = new Vector3(0, fallenSpeed, 0);
+            rb.velocity.Set(0, fallenSpeed, 0);
     }
 
     private void StartFloating()

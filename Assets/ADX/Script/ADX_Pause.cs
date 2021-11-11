@@ -14,11 +14,11 @@ public class ADX_Pause : MonoBehaviour
 
     private void OnEnable()
     {
-        Sound.Play("Pause");
+        Sound?.Play("Pause");
     }
 
     private void OnDisable()
     {
-        Sound.Play("Resume");
+        Sound?.Play("Resume");
     }
 }
