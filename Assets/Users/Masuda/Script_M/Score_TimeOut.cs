@@ -15,9 +15,11 @@ public class Score_TimeOut : MonoBehaviour
     [SerializeField] private float timer_TO, timer_HO;
     public Animator animator;
     private string TimeUpStr = "strTimeUp";
+    private CriAtomSource sound;
 
     private void Start()
     {
+        sound = GetComponent<CriAtomSource>();
         timeUPtxt.SetActive(false);
         ScoreAttack_Y.SetPlayStageNum();
     }
@@ -29,6 +31,7 @@ public class Score_TimeOut : MonoBehaviour
             timeUPtxt.SetActive(true);
             animator.SetBool(TimeUpStr, true);
             timer_TO += Time.unscaledDeltaTime;
+            sound.Play("TimeUp00");
         }
 
         if (timer_TO >= 2f)
