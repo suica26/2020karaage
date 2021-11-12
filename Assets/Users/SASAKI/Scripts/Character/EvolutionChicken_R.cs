@@ -51,8 +51,6 @@ public class EvolutionChicken_R : MonoBehaviour
 
     void Start()
     {
-        if (ScoreAttack_Y.gameMode == mode.ScoreAttack) ScoreAttackSetting();
-
         // objParamが空の場合、Canvasオブジェクトを探す
         if (objParam == null)
             scrParam = objParam.gameObject.GetComponent<Parameters_R>();
@@ -71,6 +69,8 @@ public class EvolutionChicken_R : MonoBehaviour
         scrBlast = GetComponent<MorBlast_R>();
 
         Sound = GetComponent<CriAtomSource>();
+
+        if (ScoreAttack_Y.gameMode == mode.ScoreAttack) ScoreAttackSetting();
 
         //もともと0、startNumの数字=形態数
         evolutionNum = startNum;
@@ -92,13 +92,9 @@ public class EvolutionChicken_R : MonoBehaviour
         for (int i = 0; i < 4; i++)
         {
             if (i == startNum)
-            {
                 chickens[i].SetActive(true);
-            }
             else
-            {
                 chickens[i].SetActive(false);
-            }
         }
 
     }
@@ -164,6 +160,7 @@ public class EvolutionChicken_R : MonoBehaviour
     private void ScoreAttackSetting()
     {
         EP = 0;
+        scrParam.ep = 0;
         startNum = 0;
         nowEvoNum = 0;
         evolutionNum = 0;
