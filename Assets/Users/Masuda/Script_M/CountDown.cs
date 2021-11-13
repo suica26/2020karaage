@@ -19,11 +19,11 @@ public class CountDown : MonoBehaviour
         if (ScoreAttack_Y.gameMode == mode.ScoreAttack)
         {
             //ストーリーモードの設定打ち消し
-            paramScr.ep = 0;
+            /*paramScr.ep = 0;
             paramScr.evo1 = 450;
             paramScr.evo2 = 1500;
             paramScr.evo3 = 5500;
-            //paramScr.startNum = 0;//あってる？
+            paramScr.startNum = 0;*/
             countSet = true;
             limit.SetActive(true);
             score.SetActive(true);

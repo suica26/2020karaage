@@ -19,6 +19,7 @@ public class Score_TimeOut : MonoBehaviour
     private void Start()
     {
         timeUPtxt.SetActive(false);
+        animator.SetBool(TimeUpStr, false);
         ScoreAttack_Y.SetPlayStageNum();
     }
 

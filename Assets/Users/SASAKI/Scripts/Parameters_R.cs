@@ -103,7 +103,7 @@ public class Parameters_R : MonoBehaviour
         {
             ep += addEP;
             epSlider.value += addEP;
-            HPManager(-10);
+            hp += 10;
             mainSlider.value += 10;
 
             if (ep == evo1)
@@ -164,15 +164,12 @@ public class Parameters_R : MonoBehaviour
             {
                 freeze = true;
                 ScoreAttack_Y.gameMode = mode.Result;
+                score = ScoreAttack_Y.score.ToString("N0");//スコア反映
+                finalScoreText.text = "" + score;
                 resultPanel.SetActive(true);
                 hp = 0;
                 PlayerPrefs.SetString(saveStage, scrMis.load);//ミッションセーブ
                 PlayerPrefs.Save();
-            }
-
-            if (hp >= maxHP)
-            {
-                hp = maxHP;
             }
 
             //バグ発生中 第四形態で一度上のゲージまで体力が減ると、回復しても下のゲージに反映されない
@@ -233,6 +230,11 @@ public class Parameters_R : MonoBehaviour
             scoreEmp = 0;
             empTimer = 0;
             animator.SetBool(strGetScore, false);
+        }
+
+        if (hp >= maxHP)
+        {
+            hp = maxHP;
         }
     }
 }

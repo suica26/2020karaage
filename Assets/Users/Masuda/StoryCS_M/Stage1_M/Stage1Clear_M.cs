@@ -5,7 +5,7 @@ using UnityEngine;
 public class Stage1Clear_M : MonoBehaviour
 {
     [SerializeField] public GameObject clear, company, next, pause;
-    public bool stageClear;
+    public bool stageClear, scoreM;
     void Start()
     {
         clear.SetActive(false);
@@ -15,7 +15,12 @@ public class Stage1Clear_M : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!company)
+        if (ScoreAttack_Y.gameMode == mode.ScoreAttack)
+        {
+            scoreM = true;
+        }
+
+        if (!company && !stageClear && !scoreM)
         {
             Time.timeScale = 0;
             //Destroy(pause);
