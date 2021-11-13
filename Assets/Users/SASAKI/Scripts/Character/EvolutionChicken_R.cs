@@ -180,13 +180,13 @@ public class EvolutionChicken_R : MonoBehaviour
     {
         if (evolutionNum == 0) return false;
 
-        if (evolutionNum - 2 < 0) EP = 0;
-        else EP = evolutionPoint[evolutionNum - 2];
-        scrParam.ep = EP;
         chickens[evolutionNum].SetActive(false);
         evolutionNum--;
         nowEvoNum--;
         chickens[evolutionNum].SetActive(true);
+        if (evolutionNum - 1 < 0) EP = 0;
+        else EP = evolutionPoint[evolutionNum - 1];
+        scrParam.ep = EP;
         chickens[evolutionNum].GetComponent<Transition_R>().SetAnimator(Transition_R.Anim.EVOLUTION, false);
         status_HP = HP[evolutionNum];
         status_ATK = ATK[evolutionNum];
