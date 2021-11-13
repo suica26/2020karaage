@@ -67,7 +67,7 @@ public class ObjectBreak_Y : MonoBehaviour
         if (objScr.breakEffect != null)
         {
             var effect = Instantiate(objScr.breakEffect, transform.position, Quaternion.identity);
-            Destroy(effect, 1f);
+            Destroy(effect, objScr.effectDeleteTime);
         }
     }
 

@@ -60,6 +60,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
     [SerializeField] protected float magnitude = 0.1f;
     [SerializeField] protected float duration = 0.25f;
     private float timer;
+    public float effectDeleteTime = 1f;
 
     //Start is called before the first frame update
     protected virtual void Start()
@@ -332,7 +333,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
             case 8: ExplosionSoundName = "FireHydrant00"; break;
             case 9: ExplosionSoundName = "PoleContract00"; break;
             case 10: ExplosionSoundName = "GasStation00"; break;
-            case 11: ExplosionSoundName = "Tank_Explosion";break;
+            case 11: ExplosionSoundName = "Tank_Explosion"; break;
 
             case 100: ExplosionSoundName = "CutterBuilExplosion"; break;
             case 101: ExplosionSoundName = "Cutter_Pole01"; break;
