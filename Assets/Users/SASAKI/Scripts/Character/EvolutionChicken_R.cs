@@ -147,10 +147,12 @@ public class EvolutionChicken_R : MonoBehaviour
             status_JUMP = JUMP[evolutionNum];
 
             scrCam.evolved = false;
+            //スコアアタック時、退化タイマーセット
+            if (ScoreAttack_Y.gameMode == mode.ScoreAttack) ScoreAttack_Y.SetEvolutionMaintainTimer();
         }
 
         // 進化ブラスト
-        if(scrCam.evoBlast && evoBlast)
+        if (scrCam.evoBlast && evoBlast)
         {
             evoBlast = false;
             scrBlast.EvoBlast();
@@ -172,12 +174,27 @@ public class EvolutionChicken_R : MonoBehaviour
     }
 
     //ニワトリ退化
-    public void Degenerate()
+    public bool Degenerate()
     {
-        EP -= evolutionPoint[evolutionNum];
+        if (evolutionNum == 0) return false;
+
+        if (evolutionNum - 2 < 0) EP = 0;
+        else EP = evolutionPoint[evolutionNum - 2];
+        scrParam.ep = EP;
         chickens[evolutionNum].SetActive(false);
         evolutionNum--;
         nowEvoNum--;
-        chickens[nowEvoNum].SetActive(true);
+        chickens[evolutionNum].SetActive(true);
+        chickens[evolutionNum].GetComponent<Transition_R>().SetAnimator(Transition_R.Anim.EVOLUTION, false);
+        status_HP = HP[evolutionNum];
+        status_ATK = ATK[evolutionNum];
+        status_SPD = SPD[evolutionNum];
+        status_SCORE = SCORE[evolutionNum];
+        status_JUMP = JUMP[evolutionNum];
+
+        scrParam.Degenerate(evolutionNum);
+
+        if (evolutionNum == 0) return false;
+        return true;
     }
 }

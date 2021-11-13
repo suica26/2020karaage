@@ -9,7 +9,7 @@ public class Pause_M : MonoBehaviour
     public bool gameSet;
     public Parameters_R para;
     public Stage1Clear_M s1Cle;
-    private mode nowGameMode;
+    public static mode nowGameMode;
 
     void Start()
     {

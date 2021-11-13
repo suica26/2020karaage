@@ -16,6 +16,6 @@ public class Backpause_M : MonoBehaviour
         audio.Play("System_Cancel");
         pausePanel.SetActive(false);
         Time.timeScale = 1f;
+        ScoreAttack_Y.gameMode = Pause_M.nowGameMode;
     }
-
 }
