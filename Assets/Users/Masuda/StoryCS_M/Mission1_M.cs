@@ -25,6 +25,7 @@ public class Mission1_M : Missions_M
         if (ScoreAttack_Y.gameMode == mode.ScoreAttack)
         {
             evolution = true;
+            another = true;
         }
     }
 
@@ -178,6 +179,10 @@ public class Mission1_M : Missions_M
             timer2 = 0;
         }
 
+        if (company == null)//破壊時光る柱を消す
+        {
+            shibuLight.SetActive(false);
+        }
     }
 
     public void OnClick1()
