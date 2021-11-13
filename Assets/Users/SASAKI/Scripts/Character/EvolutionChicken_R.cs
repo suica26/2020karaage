@@ -91,6 +91,7 @@ public class EvolutionChicken_R : MonoBehaviour
         //M　ループで最初の形態を決定
         for (int i = 0; i < 4; i++)
         {
+            chickens[i].GetComponent<Animator>().keepAnimatorControllerStateOnDisable = true;
             if (i == startNum)
                 chickens[i].SetActive(true);
             else
@@ -139,6 +140,7 @@ public class EvolutionChicken_R : MonoBehaviour
             chickens[evolutionNum].SetActive(true);
 
             chickens[evolutionNum - 1].GetComponent<Animator>().updateMode = AnimatorUpdateMode.Normal;
+            chickens[evolutionNum].GetComponent<Transition_R>().SetAnimator(Transition_R.Anim.EVOLUTION, false);
 
             status_HP = HP[evolutionNum];
             status_ATK = ATK[evolutionNum];
