@@ -175,9 +175,9 @@ public class EvolutionChicken_R : MonoBehaviour
         startNum = 0;
         nowEvoNum = 0;
         evolutionNum = 0;
-        evolutionPoint[0] = 450;
-        evolutionPoint[1] = 1500;
-        evolutionPoint[2] = 5500;
+        evolutionPoint[0] = 250;
+        evolutionPoint[1] = 800;
+        evolutionPoint[2] = 2650;
         foreach (var s in skills) s.enabled = true;
         ScoreAttack_Y.evoScr = this;
     }
