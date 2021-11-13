@@ -155,7 +155,7 @@ public sealed class ScoreAttack_Y : MonoBehaviour
 
     public static void SetEvolutionMaintainTimer()
     {
-        evoMatTimer = 10f;
+        evoMatTimer = 45f;
     }
 
     //ニワトリ退化
