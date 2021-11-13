@@ -22,6 +22,7 @@ public class TpsCameraJC_R : MonoBehaviour
 
     public bool evolutionAnimStart = false;
     public bool evolved = false;
+    public bool evoBlast = false;
     private float endEvolution = 0.25f;
     //M
     public float minY;
@@ -264,6 +265,7 @@ public class TpsCameraJC_R : MonoBehaviour
                 }
                 else if (timer > 2.5f && timer <= 5.0f)
                 {
+                    evoBlast = true;
                     var distance = new Vector3(0.0f, 0.0f, 0.0f);       // カメラを引く
                     if (timer <= 2.75f)
                     {
@@ -285,6 +287,7 @@ public class TpsCameraJC_R : MonoBehaviour
         }
         // 進化フラグを設定
         evolved = true;
+        evoBlast = false;
 
         Time.timeScale = 1.0f;
         endEvolution = 0.0f;

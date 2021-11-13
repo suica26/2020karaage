@@ -74,16 +74,16 @@ public class Score_Result_Buttons : MonoBehaviour
         //名前を登録
         ScoreAttack_Y.SetPlayStageNum();
         ScoreAttack_Y.SubmitScore(userName.text, ScoreAttack_Y.playStageNum);
-        yield return null;
+        yield return new WaitForSeconds(1f);
     }
 
     private IEnumerator Fetch()
     {
         //ランキング同期
         ScoreAttack_Y.GetWorldTopScore(ScoreAttack_Y.playStageNum);
-        yield return null;
+        yield return new WaitForSeconds(1f);
         ScoreAttack_Y.FetchRank(ScoreAttack_Y.score, ScoreAttack_Y.playStageNum);
-        yield return null;
+        yield return new WaitForSeconds(1f);
         ScoreAttack_Y.GetAroundMyScores(ScoreAttack_Y.score, ScoreAttack_Y.playStageNum);
         yield return new WaitForSeconds(1f);
     }

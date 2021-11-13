@@ -24,19 +24,23 @@ public class MovieSkip_M : MonoBehaviour
             counter += 1;
         }
 
+        //二度目のクリック判定
         if(counter >= 2)
         {
+            //ダブルクリックでスキップ
             skip.SetActive(true);
             ResetStates();
         }
 
         if (dual)
         {
+            //二回のクリック間の時間計測
             doubleClick += Time.deltaTime;
         }
 
         if (doubleClick >= 1f)
         {
+            //クリックから一秒でリセット
             ResetStates();
         }
 
@@ -44,6 +48,7 @@ public class MovieSkip_M : MonoBehaviour
 
     public void ResetStates()
     {
+        //クリック状況の情報をリセット
         doubleClick = 0;
         counter = 0;
         dual = false;

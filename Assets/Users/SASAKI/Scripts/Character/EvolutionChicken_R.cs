@@ -34,6 +34,8 @@ public class EvolutionChicken_R : MonoBehaviour
     private float status_SCORE;
     private float status_JUMP;
 
+    private bool evoBlast;
+
     //M よそから参照したいのでpublicにします
     public int nowEvoNum = 0;
 
@@ -49,8 +51,6 @@ public class EvolutionChicken_R : MonoBehaviour
 
     void Start()
     {
-        if (ScoreAttack_Y.gameMode == mode.ScoreAttack) ScoreAttackSetting();
-
         // objParamが空の場合、Canvasオブジェクトを探す
         if (objParam == null)
             scrParam = objParam.gameObject.GetComponent<Parameters_R>();
@@ -70,6 +70,8 @@ public class EvolutionChicken_R : MonoBehaviour
 
         Sound = GetComponent<CriAtomSource>();
 
+        if (ScoreAttack_Y.gameMode == mode.ScoreAttack) ScoreAttackSetting();
+
         //もともと0、startNumの数字=形態数
         evolutionNum = startNum;
         nowEvoNum = startNum;
@@ -80,6 +82,8 @@ public class EvolutionChicken_R : MonoBehaviour
         status_SCORE = SCORE[evolutionNum];
         status_JUMP = JUMP[evolutionNum];
 
+        evoBlast = false;
+
         //chickens[1].SetActive(false);
         //chickens[2].SetActive(false);
         //chickens[3].SetActive(false);
@@ -88,13 +92,9 @@ public class EvolutionChicken_R : MonoBehaviour
         for (int i = 0; i < 4; i++)
         {
             if (i == startNum)
-            {
                 chickens[i].SetActive(true);
-            }
             else
-            {
                 chickens[i].SetActive(false);
-            }
         }
 
     }
@@ -113,6 +113,8 @@ public class EvolutionChicken_R : MonoBehaviour
 
         if (evolutionNum < evolutionPoint.Length && EP >= evolutionPoint[evolutionNum])
         {
+            evoBlast = true;
+
             chickens[evolutionNum].GetComponent<Animator>().updateMode = AnimatorUpdateMode.UnscaledTime;
             chickens[evolutionNum].GetComponent<Transition_R>().SetAnimator(Transition_R.Anim.EVOLUTION, true);
 
@@ -144,15 +146,21 @@ public class EvolutionChicken_R : MonoBehaviour
             status_SCORE = SCORE[evolutionNum];
             status_JUMP = JUMP[evolutionNum];
 
-            scrBlast.EvoBlast();
-
             scrCam.evolved = false;
+        }
+
+        // 進化ブラスト
+        if(scrCam.evoBlast && evoBlast)
+        {
+            evoBlast = false;
+            scrBlast.EvoBlast();
         }
     }
 
     private void ScoreAttackSetting()
     {
         EP = 0;
+        scrParam.ep = 0;
         startNum = 0;
         nowEvoNum = 0;
         evolutionNum = 0;

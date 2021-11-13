@@ -14,7 +14,6 @@ public sealed class ScoreAttack_Y : MonoBehaviour
     public static Parameters_R paramScr;
     public static GameObject directionalLight;
     public static Light d_light;
-    private float sunsetTimer;
     private static float evoMatTimer;
     private static SaveManager_Y saveManager;
     public static bool countDown = true;
@@ -24,10 +23,11 @@ public sealed class ScoreAttack_Y : MonoBehaviour
     public static int playStageNum;
     public static bool connecting;
     public static EvolutionChicken_R evoScr;
-    [SerializeField]
-    private AnimationCurve curveLC_R, curveLC_G, curveLC_B, curveLightInt;
+    [SerializeField] private AnimationCurve curveLC_R, curveLC_G, curveLC_B, curveLightInt;
     [SerializeField] private AnimationCurve curveR, curveG, curveB;
+    [SerializeField, Range(0f, 1f)] private float lightDegree;
     private Material skyboxMat;
+    private static float accel = 1f;
 
     private void Awake()
     {
@@ -53,13 +53,12 @@ public sealed class ScoreAttack_Y : MonoBehaviour
 
         if (gameMode == mode.ScoreAttack && !countDown)
         {
-            sunsetTimer += Time.deltaTime;
-            if (sunsetTimer >= 0.1f) SunsetChange();
+            SunsetChange();
 
             if (evoMatTimer > 0f) evoMatTimer -= Time.deltaTime;
             else if (evoMatTimer < 0f) DegenerateChicken();
 
-            limitTime -= Time.deltaTime;
+            limitTime -= Time.deltaTime * accel;
             if (limitTime <= 0f)
             {
                 FinishScoreAttack();
@@ -116,6 +115,7 @@ public sealed class ScoreAttack_Y : MonoBehaviour
     public static void AddLimitTime()
     {
         limitTime += 20;
+        if (limitTime > MAXLIMITTIME) limitTime = MAXLIMITTIME;
     }
 
     public static void AddScore(int addScore)
@@ -132,15 +132,16 @@ public sealed class ScoreAttack_Y : MonoBehaviour
 
     private void SunsetChange()
     {
-        sunsetTimer = 0f;
         float time = 1 - limitTime / MAXLIMITTIME;
 
         //太陽光の向き変更
         if (directionalLight != null)
         {
-            directionalLight.transform.eulerAngles = new Vector3(limitTime, 0, 0);
-            //d_light.intensity = curveLightInt.Evaluate(time);
-            //d_light.color = new Color(curveLC_R.Evaluate(time), curveLC_G.Evaluate(time), curveLC_B.Evaluate(time));
+            //回転角を90°を中心にlightDegree以内になるように修正をかける
+            var degree = ((limitTime / MAXLIMITTIME * 180) - 90) * lightDegree;
+            directionalLight.transform.eulerAngles = new Vector3(90 + degree, 0f, 0f);
+            d_light.intensity = curveLightInt.Evaluate(time);
+            d_light.color = new Color(curveLC_R.Evaluate(time), curveLC_G.Evaluate(time), curveLC_B.Evaluate(time));
         }
 
         //スカイボックスの変更

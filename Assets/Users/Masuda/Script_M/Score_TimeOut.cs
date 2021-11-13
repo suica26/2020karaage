@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Score_TimeOut : MonoBehaviour
 {
     //時間切れと体力切れした場合に、手配書画面が出るように
-    public GameObject result, gameOver, newRecord;
+    public GameObject result, gameOver, newRecord, timeUPtxt;
     public Parameters_R paramScr;
     public Pause_M pauseScr;
     public Image mainImage;
@@ -15,9 +15,12 @@ public class Score_TimeOut : MonoBehaviour
     [SerializeField] private float timer_TO, timer_HO;
     public Animator animator;
     private string TimeUpStr = "strTimeUp";
+    private CriAtomSource sound;
 
     private void Start()
     {
+        sound = GetComponent<CriAtomSource>();
+        timeUPtxt.SetActive(false);
         ScoreAttack_Y.SetPlayStageNum();
     }
 
@@ -25,8 +28,10 @@ public class Score_TimeOut : MonoBehaviour
     {
         if (ScoreAttack_Y.gameMode == mode.Result)
         {
+            timeUPtxt.SetActive(true);
             animator.SetBool(TimeUpStr, true);
             timer_TO += Time.unscaledDeltaTime;
+            sound.Play("TimeUp00");
         }
 
         if (timer_TO >= 2f)

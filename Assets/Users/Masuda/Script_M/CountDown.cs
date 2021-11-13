@@ -6,28 +6,32 @@ using UnityEngine.UI;
 public class CountDown : MonoBehaviour
 {
     //カウントダウンの制御、タイマーとスコアの表示も
-    public Text timerTxt, gameTimerTxt;
     public float countdown;
     int count;
     public bool countSet, countFin;
     public GameObject timer3to1, limit, score, mission;
     public Pause_M pauseScr;
     public Parameters_R paramScr;
+    private CriAtomSource sound;
+    public Animator anime;
+    private string strCountDown = "isCountStart";
 
     void Start()
     {
+        sound = GetComponent<CriAtomSource>();
         if (ScoreAttack_Y.gameMode == mode.ScoreAttack)
         {
             //ストーリーモードの設定打ち消し
-            paramScr.ep = 0;
+            /*paramScr.ep = 0;
             paramScr.evo1 = 450;
             paramScr.evo2 = 1500;
             paramScr.evo3 = 5500;
-            //paramScr.startNum = 0;//あってる？
+            paramScr.startNum = 0;*/
             countSet = true;
             limit.SetActive(true);
             score.SetActive(true);
             mission.SetActive(false);
+            timer3to1.SetActive(true);
             ScoreAttack_Y.Init();
         }
         else limit.SetActive(false);
@@ -35,19 +39,18 @@ public class CountDown : MonoBehaviour
 
     void Update()
     {
-        if (countSet && countdown > 0)
+        if (countSet)
         {
-            timer3to1.SetActive(true);
-            countdown -= Time.unscaledDeltaTime;
+            countdown += Time.unscaledDeltaTime;
             count = (int)(countdown + 1);
-            timerTxt.text = count.ToString();
+            anime.SetBool(strCountDown, true);
+            sound.Play();
         }
-        else if (countdown <= 0)
+        if (anime.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
         {
-            timerTxt.text = "";
             timer3to1.SetActive(false);
             countSet = false;
-            mission.SetActive(false);
+            anime.SetBool(strCountDown, false);
             countdown = 0;
         }
 
@@ -55,7 +58,8 @@ public class CountDown : MonoBehaviour
         {
             pauseScr.gameSet = false;
             if (!ScoreAttack_Y.connecting)
-                Time.timeScale = 0;
+                Time.timeScale = 1;
+            //キャラの足を止めたい
         }
         else if (!countSet && !countFin)
         {
