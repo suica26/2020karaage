@@ -87,6 +87,38 @@ public class Parameters_R : MonoBehaviour
         HPsound = true;
     }
 
+    /// <summary>
+    /// 退化後の段階を指定(第一形態なら0が入る)
+    /// </summary>
+    /// <param name="toDegeneNum"></param>
+    public void Degenerate(int toDegeneNum)
+    {
+        hpSli[toDegeneNum].SetActive(true);
+        mainSlider = hpSlider[toDegeneNum];
+        hpSli[toDegeneNum + 1].SetActive(false);
+
+        switch (toDegeneNum)
+        {
+            case 0:
+                epSlider.maxValue = evo2 - evo1;
+                maxHP = 100;
+                break;
+            case 1:
+                epSlider.maxValue = evo3 - evo2;
+                maxHP = 250;
+                break;
+            case 2:
+                hpSli[2].transform.Translate(10, -24, 0);// 場所調整
+                maxHP = 500;
+                flashBar.SetActive(false);
+                break;
+        }
+        if (hp > maxHP) hp = maxHP;
+        hpSlider[toDegeneNum].value = hp;
+        epSlider.value = 0;
+        Debug.Log("Degene");
+    }
+
     public void ScoreUpdate()      //山本加筆：publicにすることで他Scriptで参照できるようにしました
     {
         score = ScoreAttack_Y.score.ToString("N0");
@@ -147,7 +179,7 @@ public class Parameters_R : MonoBehaviour
                 PlayerPrefs.Save();
             }
 
-            
+
         }
     }
     //引数で指定した分だけHPを加算します。

@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public sealed class ScoreAttack_Y : MonoBehaviour
 {
     public static ScoreAttack_Y instance { get; private set; }
-    private const float MAXLIMITTIME = 180;
+    private const float MAXLIMITTIME = 130;
     public static float limitTime { get; private set; }
     public static int score { get; private set; }
     public static mode gameMode;
@@ -49,22 +49,21 @@ public sealed class ScoreAttack_Y : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Return))
-            Debug.Log($"gameMode:{gameMode},countDown:{countDown},limitTime:{limitTime},Score:{score}");
-        if (Input.GetKey(KeyCode.LeftShift))
-            accel = 5f;
-        else accel = 1f;
+            Debug.Log($"gameMode:{gameMode},countDown:{countDown},limitTime:{limitTime},Score:{score},evoMatTimer:{evoMatTimer}");
 
-        if (gameMode == mode.ScoreAttack && !countDown)
+        if (gameMode == mode.ScoreAttack)
         {
             SunsetChange();
-
-            if (evoMatTimer > 0f) evoMatTimer -= Time.deltaTime;
-            else if (evoMatTimer < 0f) DegenerateChicken();
-
-            limitTime -= Time.deltaTime * accel;
-            if (limitTime <= 0f)
+            if (!countDown)
             {
-                FinishScoreAttack();
+                if (evoMatTimer > 0f) evoMatTimer -= Time.deltaTime;
+                else if (evoMatTimer < 0f) DegenerateChicken();
+
+                limitTime -= Time.deltaTime * accel;
+                if (limitTime <= 0f)
+                {
+                    FinishScoreAttack();
+                }
             }
         }
     }
@@ -141,7 +140,7 @@ public sealed class ScoreAttack_Y : MonoBehaviour
         if (directionalLight != null)
         {
             //回転角を90°を中心にlightDegree以内になるように修正をかける
-            var degree = (limitTime - 90) * lightDegree;
+            var degree = ((limitTime / MAXLIMITTIME * 180) - 90) * lightDegree;
             directionalLight.transform.eulerAngles = new Vector3(90 + degree, 0f, 0f);
             d_light.intensity = curveLightInt.Evaluate(time);
             d_light.color = new Color(curveLC_R.Evaluate(time), curveLC_G.Evaluate(time), curveLC_B.Evaluate(time));
@@ -165,7 +164,7 @@ public sealed class ScoreAttack_Y : MonoBehaviour
     private static void DegenerateChicken()
     {
         evoMatTimer = 0f;
-        evoScr.Degenerate();
+        if (evoScr.Degenerate()) SetEvolutionMaintainTimer();
     }
 
     public static void SubmitScore(string name, int stageNum)

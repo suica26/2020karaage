@@ -91,6 +91,7 @@ public class EvolutionChicken_R : MonoBehaviour
         //M　ループで最初の形態を決定
         for (int i = 0; i < 4; i++)
         {
+            chickens[i].GetComponent<Animator>().keepAnimatorControllerStateOnDisable = true;
             if (i == startNum)
                 chickens[i].SetActive(true);
             else
@@ -139,6 +140,7 @@ public class EvolutionChicken_R : MonoBehaviour
             chickens[evolutionNum].SetActive(true);
 
             chickens[evolutionNum - 1].GetComponent<Animator>().updateMode = AnimatorUpdateMode.Normal;
+            chickens[evolutionNum].GetComponent<Transition_R>().SetAnimator(Transition_R.Anim.EVOLUTION, false);
 
             status_HP = HP[evolutionNum];
             status_ATK = ATK[evolutionNum];
@@ -147,10 +149,12 @@ public class EvolutionChicken_R : MonoBehaviour
             status_JUMP = JUMP[evolutionNum];
 
             scrCam.evolved = false;
+            //スコアアタック時、退化タイマーセット
+            if (ScoreAttack_Y.gameMode == mode.ScoreAttack) ScoreAttack_Y.SetEvolutionMaintainTimer();
         }
 
         // 進化ブラスト
-        if(scrCam.evoBlast && evoBlast)
+        if (scrCam.evoBlast && evoBlast)
         {
             evoBlast = false;
             scrBlast.EvoBlast();
@@ -172,12 +176,27 @@ public class EvolutionChicken_R : MonoBehaviour
     }
 
     //ニワトリ退化
-    public void Degenerate()
+    public bool Degenerate()
     {
-        EP -= evolutionPoint[evolutionNum];
+        if (evolutionNum == 0) return false;
+
         chickens[evolutionNum].SetActive(false);
         evolutionNum--;
         nowEvoNum--;
-        chickens[nowEvoNum].SetActive(true);
+        chickens[evolutionNum].SetActive(true);
+        if (evolutionNum - 1 < 0) EP = 0;
+        else EP = evolutionPoint[evolutionNum - 1];
+        scrParam.ep = EP;
+        chickens[evolutionNum].GetComponent<Transition_R>().SetAnimator(Transition_R.Anim.EVOLUTION, false);
+        status_HP = HP[evolutionNum];
+        status_ATK = ATK[evolutionNum];
+        status_SPD = SPD[evolutionNum];
+        status_SCORE = SCORE[evolutionNum];
+        status_JUMP = JUMP[evolutionNum];
+
+        scrParam.Degenerate(evolutionNum);
+
+        if (evolutionNum == 0) return false;
+        return true;
     }
 }
