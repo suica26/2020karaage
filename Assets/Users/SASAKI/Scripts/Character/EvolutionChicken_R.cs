@@ -15,7 +15,7 @@ public class EvolutionChicken_R : MonoBehaviour
     [SerializeField] private float[] SCORE;
     [SerializeField] private float[] JUMP;
 
-    [SerializeField] private GameObject EvoEffect;
+    [SerializeField] private GameObject[] EvoEffect;
 
     [SerializeField] private bool DEBUG_MODE;
 
@@ -127,9 +127,16 @@ public class EvolutionChicken_R : MonoBehaviour
             Sound.Play("ShockWave");
             Camera.main.GetComponent<TpsCameraJC_R>().StartCoroutine("CameraWorkEvolution");
 
-            var effect = Instantiate(EvoEffect, transform);
+            var effect = Instantiate(EvoEffect[evolutionNum - 1], transform);
             effect.transform.localScale *= evolutionNum;
             Destroy(effect, 0.75f);
+
+            Transform[] effChilds = effect.GetComponentsInChildren<Transform>();
+            if (effChilds.Length != 0)
+                foreach (Transform obj in effChilds)
+                {
+                    obj.GetComponent<ParticleSystem>().Play();
+                }
         }
 
         // 進化用
