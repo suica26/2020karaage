@@ -28,12 +28,13 @@ public class Mission3_M : Missions_M
         {
             shibuEff[i].SetActive(false);
         }
-        misBox.SetActive(true);
         Time.timeScale = 1;
         if (ScoreAttack_Y.gameMode == mode.ScoreAttack)
         {
             another = true;
         }
+        else misBox.SetActive(true);
+
         onLoad_s3 = PlayerPrefs.GetString(scrParame.saveStage, "");
         switch (onLoad_s3)
         {
@@ -50,7 +51,7 @@ public class Mission3_M : Missions_M
     {
         evoNum = scrEvoChi.EvolutionNum;
 
-        if (evoNum >= 3 && first)
+        if (evoNum >= 3 && first && !another)
         {
             evoTimer += Time.deltaTime;
         }

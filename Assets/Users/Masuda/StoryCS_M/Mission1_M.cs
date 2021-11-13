@@ -35,7 +35,7 @@ public class Mission1_M : Missions_M
         evoCount = scrParame.ep;
         evoNum = scrEvoChi.nowEvoNum;
 
-        if (!shop && first)
+        if (!shop && first && !another)
         {
             //建物にあいさつ
             FirstMission();
@@ -159,7 +159,7 @@ public class Mission1_M : Missions_M
             tipsTimer = 0;
         }
 
-        if (achieve >= 99)
+        if (achieve >= 99 && !another)
         {
             SecondMission();
         }
