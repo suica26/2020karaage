@@ -18,6 +18,10 @@ public class Mission2_M : Missions_M
         misBox.SetActive(true);
         Time.timeScale = 1;
         onLoad = PlayerPrefs.GetString(scrParame.saveStage, "");
+        if (ScoreAttack_Y.gameMode == mode.ScoreAttack)
+        {
+            another = true;
+        }
         switch (onLoad)
         {
             case "first": FirstMission_2(); break;
@@ -27,6 +31,7 @@ public class Mission2_M : Missions_M
             case "five": FiveMission_2(); break;
             case "six": SixMission_2(); break;
             case "final": FinalMission_2(); break;
+            case "another": return;
             default: FirstMission_2(); break;
         }
         PlayerPrefs.DeleteKey(scrParame.saveStage);
@@ -104,6 +109,11 @@ public class Mission2_M : Missions_M
         if (achieve >= 99)
         {
             SecondMission_2();
+        }
+
+        if (company == null)//破壊時光る柱を消す
+        {
+            shibuLight.SetActive(false);
         }
     }
 

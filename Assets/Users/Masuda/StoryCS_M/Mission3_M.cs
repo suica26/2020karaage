@@ -30,11 +30,16 @@ public class Mission3_M : Missions_M
         }
         misBox.SetActive(true);
         Time.timeScale = 1;
+        if (ScoreAttack_Y.gameMode == mode.ScoreAttack)
+        {
+            another = true;
+        }
         onLoad_s3 = PlayerPrefs.GetString(scrParame.saveStage, "");
         switch (onLoad_s3)
         {
             case "first": FirstMission_3(); break;
             case "second": SecondMission_3(); break;
+            case "another": return;
             default: FirstMission_3(); break;
         }
         PlayerPrefs.DeleteKey(onLoad_s3);
@@ -66,21 +71,15 @@ public class Mission3_M : Missions_M
             }
         }
 
-        //支部の段階,あくまでエスケープ用で高めに設定
-        /*if (third)
+        if (company == null)//破壊時光る柱を消す
         {
-            if (achieve >= 30 && achieve2 >= 15)//元々25,10ずつ
+            shibuLight.SetActive(false);
+            shibuLight2.SetActive(false);
+            for (int i = 0; i < 7; i++)
             {
-                FourthMission_3();
+                shibuEff[i].SetActive(false);
             }
         }
-        if (five)
-        {
-            if (achieve >= 30 && achieve2 >= 20 && achieve3 >= 15)
-            {
-                SixMission_3();
-            }
-        }*/
     }
 
     public void FirstMission_3()

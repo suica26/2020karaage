@@ -103,7 +103,7 @@ public class Parameters_R : MonoBehaviour
         {
             ep += addEP;
             epSlider.value += addEP;
-            HPManager(-10);
+            hp += 10;
             mainSlider.value += 10;
 
             if (ep == evo1)
@@ -165,42 +165,14 @@ public class Parameters_R : MonoBehaviour
                 freeze = true;
                 ScoreAttack_Y.gameMode = mode.Result;
                 resultPanel.SetActive(true);
+                score = ScoreAttack_Y.score.ToString("N0");
+                finalScoreText.text = "" + score;
                 hp = 0;
                 PlayerPrefs.SetString(saveStage, scrMis.load);//ミッションセーブ
                 PlayerPrefs.Save();
             }
 
-            if (hp >= maxHP)
-            {
-                hp = maxHP;
-            }
-
-            //バグ発生中 第四形態で一度上のゲージまで体力が減ると、回復しても下のゲージに反映されない
-            if (hp >= 500 && ep >= evo3)
-            {
-                if (hpSlider[2].value == 500)
-                {
-                    mainSlider = hpSlider[3];
-                }
-            }
-            else if (hp < 500 && ep >= evo3)
-            {
-                if (hpSlider[3].value == 0)
-                {
-                    mainSlider = hpSlider[2];
-                }
-            }
-
-            if (hp < 50 && HPsound == true)
-            {
-                Sound.Play("LoHP");
-                HPsound = false;
-            }
-            if (hp >= 50 && HPsound == false)
-            {
-                Sound?.Play("NomalHP");
-                HPsound = true;
-            }
+            
         }
     }
     //引数で指定した分だけHPを加算します。
@@ -208,6 +180,39 @@ public class Parameters_R : MonoBehaviour
     private void Update()
     {
         TimeUpdate();
+
+        if (hp >= maxHP)
+        {
+            hp = maxHP;
+        }
+
+        //バグ発生中 第四形態で一度上のゲージまで体力が減ると、回復しても下のゲージに反映されない
+        //一旦Updateに移動
+        if (hp >= 500 && ep >= evo3)
+        {
+            if (hpSlider[2].value == 500)
+            {
+                mainSlider = hpSlider[3];
+            }
+        }
+        else if (hp < 500 && ep >= evo3)
+        {
+            if (hpSlider[3].value == 0)
+            {
+                mainSlider = hpSlider[2];
+            }
+        }
+
+        if (hp < 50 && HPsound == true)
+        {
+            Sound.Play("LoHP");
+            HPsound = false;
+        }
+        if (hp >= 50 && HPsound == false)
+        {
+            Sound?.Play("NomalHP");
+            HPsound = true;
+        }
 
         //エサゲージの色変換
         currentPer = epSlider.value / epSlider.maxValue;

@@ -14,7 +14,7 @@ public class Missions_M : MonoBehaviour
     public int smallBorder1, smallBorder2, smallBorder3,
                                 bigBorder1, bigBorder2, bigBorder3, bigBorder4;
     public bool first = false, second = false, third = false, fourth = false, five = false,
-        six = false, seven = false, final = false, tip = false;
+        six = false, seven = false, final = false, tip = false, another = false;
     public string txtData;
     public string[] splitText;
     [SerializeField] public Animation missionSlide;
