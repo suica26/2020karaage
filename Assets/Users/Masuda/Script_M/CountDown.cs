@@ -12,13 +12,11 @@ public class CountDown : MonoBehaviour
     public GameObject timer3to1, limit, score, mission;
     public Pause_M pauseScr;
     public Parameters_R paramScr;
-    private CriAtomSource sound;
     public Animator anime;
     private string strCountDown = "isCountStart";
 
     void Start()
     {
-        sound = GetComponent<CriAtomSource>();
         if (ScoreAttack_Y.gameMode == mode.ScoreAttack)
         {
             //ストーリーモードの設定打ち消し
@@ -39,7 +37,6 @@ public class CountDown : MonoBehaviour
             countdown += Time.unscaledDeltaTime;
             count = (int)(countdown + 1);
             anime.SetBool(strCountDown, true);
-            sound.Play();
         }
         if (anime.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
         {
