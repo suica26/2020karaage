@@ -51,17 +51,19 @@ public sealed class ScoreAttack_Y : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return))
             Debug.Log($"gameMode:{gameMode},countDown:{countDown},limitTime:{limitTime},Score:{score},evoMatTimer:{evoMatTimer}");
 
-        if (gameMode == mode.ScoreAttack && !countDown)
+        if (gameMode == mode.ScoreAttack)
         {
             SunsetChange();
-
-            if (evoMatTimer > 0f) evoMatTimer -= Time.deltaTime;
-            else if (evoMatTimer < 0f) DegenerateChicken();
-
-            limitTime -= Time.deltaTime * accel;
-            if (limitTime <= 0f)
+            if (!countDown)
             {
-                FinishScoreAttack();
+                if (evoMatTimer > 0f) evoMatTimer -= Time.deltaTime;
+                else if (evoMatTimer < 0f) DegenerateChicken();
+
+                limitTime -= Time.deltaTime * accel;
+                if (limitTime <= 0f)
+                {
+                    FinishScoreAttack();
+                }
             }
         }
     }
