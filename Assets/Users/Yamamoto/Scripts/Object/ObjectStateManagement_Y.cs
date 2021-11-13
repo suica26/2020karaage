@@ -332,6 +332,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
             case 8: ExplosionSoundName = "FireHydrant00"; break;
             case 9: ExplosionSoundName = "PoleContract00"; break;
             case 10: ExplosionSoundName = "GasStation00"; break;
+            case 11: ExplosionSoundName = "Tank_Explosion";break;
 
             case 100: ExplosionSoundName = "CutterBuilExplosion"; break;
             case 101: ExplosionSoundName = "Cutter_Pole01"; break;
@@ -344,6 +345,7 @@ public class ObjectStateManagement_Y : MonoBehaviour
             case 108: ExplosionSoundName = "Cutter_firehydrant01"; break;
             case 109: ExplosionSoundName = "Cutter_Pole01"; break;
             case 110: ExplosionSoundName = "CutterCut00"; break;
+            case 111: ExplosionSoundName = "Tank_Explosion"; break;
 
             default: ExplosionSoundName = "PoleExplosion00"; break;
         }
