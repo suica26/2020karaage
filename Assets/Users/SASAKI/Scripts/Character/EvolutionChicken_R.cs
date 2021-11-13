@@ -194,6 +194,7 @@ public class EvolutionChicken_R : MonoBehaviour
         if (evolutionNum - 1 < 0) EP = 0;
         else EP = evolutionPoint[evolutionNum - 1];
         scrParam.ep = EP;
+        scrParam.SliderChange();
         chickens[evolutionNum].GetComponent<Transition_R>().SetAnimator(Transition_R.Anim.EVOLUTION, false);
         status_HP = HP[evolutionNum];
         status_ATK = ATK[evolutionNum];

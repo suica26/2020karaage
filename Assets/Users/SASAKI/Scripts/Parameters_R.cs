@@ -45,6 +45,7 @@ public class Parameters_R : MonoBehaviour
     //スコア強調
     public Animator animator, anime;
     private string strGetScore = "isGetScore", strFlash = "isFlash";
+    public EvolutionChicken_R evoChi;
 
     public void Start()
     {
@@ -58,9 +59,10 @@ public class Parameters_R : MonoBehaviour
         {
             startNum = 0;
             ep = 0;
-            evo1 = 450;
-            evo2 = 1500;
-            evo3 = 5500;
+            evo1 = 250;
+            evo2 = 800;
+            evo3 = 2650;
+            epSlider.maxValue = 250;
             hp = 100;
             maxHP = 100;
             hpSli[0].SetActive(true);
@@ -186,6 +188,11 @@ public class Parameters_R : MonoBehaviour
 
     public void SliderChange()
     {
+        if (ScoreAttack_Y.gameMode == mode.ScoreAttack && evoChi.EvolutionNum == 0)
+        {
+            epSlider.maxValue = evo1;
+        }
+
         if (ep == evo1)
         {
             epSlider.value = 0;
