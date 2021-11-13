@@ -22,11 +22,6 @@ public class CountDown : MonoBehaviour
         if (ScoreAttack_Y.gameMode == mode.ScoreAttack)
         {
             //ストーリーモードの設定打ち消し
-            /*paramScr.ep = 0;
-            paramScr.evo1 = 450;
-            paramScr.evo2 = 1500;
-            paramScr.evo3 = 5500;
-            paramScr.startNum = 0;*/
             countSet = true;
             limit.SetActive(true);
             score.SetActive(true);
@@ -60,6 +55,7 @@ public class CountDown : MonoBehaviour
             if (!ScoreAttack_Y.connecting)
                 Time.timeScale = 1;
             //キャラの足を止めたい
+            //鶏のスピードを0に？
         }
         else if (!countSet && !countFin)
         {

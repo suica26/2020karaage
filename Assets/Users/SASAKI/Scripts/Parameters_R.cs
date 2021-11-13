@@ -54,21 +54,35 @@ public class Parameters_R : MonoBehaviour
         epSlider.value = 0;
         ScoreAttack_Y.paramScr = this;
 
-        if (ScoreAttack_Y.gameMode == mode.ScoreAttack) startNum = 0;
-        for (int i = 0; i < 4; i++)
+        if (ScoreAttack_Y.gameMode == mode.ScoreAttack)
         {
-            if (i == startNum)
-            {
-                hpSli[i].SetActive(true);
-                mainSlider = hpSlider[i];
-            }
-            else
-            {
-                hpSli[i].SetActive(false);
-            }
+            startNum = 0;
+            ep = 0;
+            evo1 = 450;
+            evo2 = 1500;
+            evo3 = 5500;
+            hp = 100;
+            maxHP = 100;
+            hpSli[0].SetActive(true);
+            mainSlider = hpSlider[0];
         }
-        ep += niwaPer;
-        EPManager(0);
+        else
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                if (i == startNum)
+                {
+                    hpSli[i].SetActive(true);
+                    mainSlider = hpSlider[i];
+                }
+                else
+                {
+                    hpSli[i].SetActive(false);
+                }
+            }
+            ep += niwaPer;
+            SliderChange();//ep(0)
+        }
         Sound = GetComponent<CriAtomSource>();
         HPsound = true;
     }
@@ -137,46 +151,7 @@ public class Parameters_R : MonoBehaviour
             epSlider.value += addEP;
             hp += 10;
             mainSlider.value += 10;
-
-            if (ep == evo1)
-            {
-                epSlider.value = 0;
-                epSlider.maxValue = evo2 - evo1;
-                hpSli[0].SetActive(false);
-                hpSli[1].SetActive(true);
-                hpSlider[1].value = hp;
-                mainSlider = hpSlider[1];
-                //TimeManager(20);
-                maxHP = 250;
-                hp = maxHP;
-                mainSlider.value = maxHP;
-            }
-            else if (ep == evo2)
-            {
-                epSlider.value = 0;
-                epSlider.maxValue = evo3 - evo2;
-                hpSli[1].SetActive(false);
-                hpSli[2].SetActive(true);
-                hpSlider[2].value = hp;
-                mainSlider = hpSlider[2];
-                //TimeManager(20);
-                maxHP = 500;
-                hp = maxHP;
-                mainSlider.value = maxHP;
-            }
-            else if (ep == evo3)
-            {
-                hpSli[3].SetActive(true);
-                hpSli[2].transform.Translate(-10, 24, 0);// 場所調整
-                //TimeManager(20);
-                maxHP = 1000;
-                hp = maxHP;
-                hpSlider[2].value = 500;
-                hpSlider[3].value = 500;
-                //満タンエフェクト
-                flashBar.SetActive(true);
-                anime.SetBool(strFlash, true);
-            }
+            SliderChange();
         }
     }
     //引数で指定した分だけEPを加算します。
@@ -208,6 +183,46 @@ public class Parameters_R : MonoBehaviour
         }
     }
     //引数で指定した分だけHPを加算します。
+
+    public void SliderChange()
+    {
+        if (ep == evo1)
+        {
+            epSlider.value = 0;
+            epSlider.maxValue = evo2 - evo1;
+            hpSli[0].SetActive(false);
+            hpSli[1].SetActive(true);
+            hpSlider[1].value = hp;
+            mainSlider = hpSlider[1];
+            maxHP = 250;
+            hp = maxHP;
+            mainSlider.value = maxHP;
+        }
+        else if (ep == evo2)
+        {
+            epSlider.value = 0;
+            epSlider.maxValue = evo3 - evo2;
+            hpSli[1].SetActive(false);
+            hpSli[2].SetActive(true);
+            hpSlider[2].value = hp;
+            mainSlider = hpSlider[2];
+            maxHP = 500;
+            hp = maxHP;
+            mainSlider.value = maxHP;
+        }
+        else if (ep == evo3)
+        {
+            hpSli[3].SetActive(true);
+            hpSli[2].transform.Translate(-10, 24, 0);// 場所調整
+            maxHP = 1000;
+            hp = maxHP;
+            hpSlider[2].value = 500;
+            hpSlider[3].value = 500;
+            //満タンエフェクト
+            flashBar.SetActive(true);
+            anime.SetBool(strFlash, true);
+        }
+    }
 
     private void Update()
     {

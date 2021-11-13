@@ -15,13 +15,13 @@ public class Mission2_M : Missions_M
     public override void Start()
     {
         base.Start();
-        misBox.SetActive(true);
         Time.timeScale = 1;
         onLoad = PlayerPrefs.GetString(scrParame.saveStage, "");
         if (ScoreAttack_Y.gameMode == mode.ScoreAttack)
         {
             another = true;
         }
+        else misBox.SetActive(true);
         switch (onLoad)
         {
             case "first": FirstMission_2(); break;
@@ -45,19 +45,19 @@ public class Mission2_M : Missions_M
         float dis = Vector3.Distance(playerPos, comPos);
         evoNum = scrEvoChi.EvolutionNum;
 
-        if (bigNum >= bigBorder4 && first == true)
+        if (bigNum >= bigBorder4 && first == true && !another)
         {
             SecondMission_2();
         }
-        else if (bigNum >= bigBorder3 && smallNum >= smallBorder1 && first == true)
+        else if (bigNum >= bigBorder3 && smallNum >= smallBorder1 && first == true && !another)
         {
             SecondMission_2();
         }
-        else if (bigNum >= bigBorder2 && smallNum >= smallBorder2 && first == true)
+        else if (bigNum >= bigBorder2 && smallNum >= smallBorder2 && first == true && !another)
         {
             SecondMission_2();
         }
-        else if (bigNum >= bigBorder1 && smallNum >= smallBorder3 && first == true)
+        else if (bigNum >= bigBorder1 && smallNum >= smallBorder3 && first == true && !another)
         {
             SecondMission_2();
         }
@@ -106,7 +106,7 @@ public class Mission2_M : Missions_M
             FinalMission_2();
         }
 
-        if (achieve >= 99)
+        if (achieve >= 99 && !another)
         {
             SecondMission_2();
         }
