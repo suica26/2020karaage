@@ -357,7 +357,7 @@ public class CharaMoveRigid_R : MonoBehaviour
                         StartCoroutine("FallAttack");
                     }
                 }
-                else if (Input.GetMouseButton(1) && !fallAttack && scrCutter.enabled)
+                /*else if (Input.GetMouseButton(1) && !fallAttack && scrCutter.enabled)
                 {
                     if (cutterFallAttackTimer <= cutterFallAttackTime)
                         cutterFallAttackTimer += Time.deltaTime;
@@ -366,7 +366,7 @@ public class CharaMoveRigid_R : MonoBehaviour
                         fallAttackVer = 2;
                         StartCoroutine("FallAttack");
                     }
-                }
+                }*/
                 else
                 {
                     kickFallAttackTimer = 0f;
@@ -385,7 +385,7 @@ public class CharaMoveRigid_R : MonoBehaviour
                         StartCoroutine("FallAttack");
                     }
                 }
-                else if (pushCutterButton && !fallAttack && scrCutter.enabled)
+                /*else if (pushCutterButton && !fallAttack && scrCutter.enabled)
                 {
                     if (cutterFallAttackTimer <= cutterFallAttackTime)
                         cutterFallAttackTimer += Time.deltaTime;
@@ -394,7 +394,7 @@ public class CharaMoveRigid_R : MonoBehaviour
                         fallAttackVer = 2;
                         StartCoroutine("FallAttack");
                     }
-                }
+                }*/
                 else
                 {
                     kickFallAttackTimer = 0f;

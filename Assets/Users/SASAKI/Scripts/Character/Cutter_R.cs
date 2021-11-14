@@ -121,41 +121,43 @@ public class Cutter_R : MonoBehaviour
 
     public void Cutter()
     {
-        if (!throwingCutter && timer <= 0.5f)
+        //if (!throwingCutter && timer <= 0.5f)
+        //{
+
+        if (scrMove._isFlying)
         {
-            if (scrMove._isFlying)
-            {
-                scrMove._isFlying = false;
-                GetComponent<Rigidbody>().useGravity = true;
-            }
-
-            AttackRestrictions_R.GetInstance().SetTimer(0.75f);
-
-            throwingCutter = true;
-            timer = 0.0f;
-            animTimer = 0.25f;
-
-            if (MoveToCamRot)
-                cutter = Instantiate(preCutter, cutterTransform[scrEvo.EvolutionNum].position, Quaternion.Euler(Camera.main.transform.rotation.eulerAngles));
-            else
-                cutter = Instantiate(preCutter, cutterTransform[scrEvo.EvolutionNum].position, Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0, 0, 0)));
-
-            cutter.transform.localScale = cutter.transform.localScale * cutterSize[scrEvo.EvolutionNum];
-            cutter.transform.GetChild(0).localScale *= cutterSize[scrEvo.EvolutionNum];
-            cutter.GetComponent<CutterMoveFA_R>().enabled = false;
-            CutterMove1_R scrCutter = cutter.GetComponent<CutterMove1_R>();
-            scrCutter.enabled = true;
-            scrCutter.evoSpeed = 1.0f + scrEvo.EvolutionNum * 4.0f;
-            scrCutter.backArea = backAreaTransform[scrEvo.EvolutionNum];
-            scrCutter.cutterBaseSpeed = cutterBaseSpeed;
-            scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.CUTTER, true);
-            Sound.Play("CutterMove");
-
+            scrMove._isFlying = false;
+            GetComponent<Rigidbody>().useGravity = true;
         }
+
+        AttackRestrictions_R.GetInstance().SetTimer(0.75f);
+
+        throwingCutter = true;
+        timer = 0.0f;
+        animTimer = 0.25f;
+
+        if (MoveToCamRot)
+            cutter = Instantiate(preCutter, cutterTransform[scrEvo.EvolutionNum].position, Quaternion.Euler(Camera.main.transform.rotation.eulerAngles));
         else
-        {
-            timer = 0.0f;
-        }
+            cutter = Instantiate(preCutter, cutterTransform[scrEvo.EvolutionNum].position, Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0, 0, 0)));
+
+        Destroy(cutter, 5.0f);
+        cutter.transform.localScale = cutter.transform.localScale * cutterSize[scrEvo.EvolutionNum];
+        cutter.transform.GetChild(0).localScale *= cutterSize[scrEvo.EvolutionNum];
+        cutter.GetComponent<CutterMoveFA_R>().enabled = false;
+        CutterMove1_R scrCutter = cutter.GetComponent<CutterMove1_R>();
+        scrCutter.enabled = true;
+        scrCutter.evoSpeed = 1.0f + scrEvo.EvolutionNum * 4.0f;
+        scrCutter.backArea = backAreaTransform[scrEvo.EvolutionNum];
+        scrCutter.cutterBaseSpeed = cutterBaseSpeed;
+        scrAnim[scrEvo.EvolutionNum].SetAnimator(Transition_R.Anim.CUTTER, true);
+        Sound.Play("CutterMove");
+
+        //}
+        //else
+        //{
+        //    timer = 0.0f;
+        //}
 
         if (mobileMode)
             isCutter = eCutter.wait;
