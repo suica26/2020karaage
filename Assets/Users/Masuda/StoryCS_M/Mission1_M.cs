@@ -207,9 +207,9 @@ public class Mission1_M : Missions_M
     {
         misBox.SetActive(true);
         missionSlide.Play();
-        mission.text = splitText[0];
-        submis.text = splitText[1];
-        exmis.text = splitText[2];
+        mission.text = splits[0];
+        submis.text = splits[1];
+        exmis.text = splits[2];
         first = false;
         second = true;
         per.text = "0%";
@@ -218,9 +218,9 @@ public class Mission1_M : Missions_M
     void SecondMission()
     {
         missionSlide.Play();
-        mission.text = splitText[3];
-        submis.text = splitText[4];
-        exmis.text = splitText[5];
+        mission.text = splits[3];
+        submis.text = splits[4];
+        exmis.text = splits[5];
         second = false;
         third = true;
         achieve = 0;
@@ -230,9 +230,9 @@ public class Mission1_M : Missions_M
     void ThirdMission()
     {
         missionSlide.Play();
-        mission.text = splitText[6];
-        submis.text = splitText[7];
-        exmis.text = splitText[8];
+        mission.text = splits[6];
+        submis.text = splits[7];
+        exmis.text = splits[8];
         third = false;
         fourth = true;
         achieve = 0;
@@ -244,9 +244,9 @@ public class Mission1_M : Missions_M
         fourth = false;
         five = true;
         missionSlide.Play();
-        mission.text = splitText[9];
-        submis.text = splitText[10];
-        exmis.text = splitText[11];
+        mission.text = splits[9];
+        submis.text = splits[10];
+        exmis.text = splits[11];
         achieve = 0;
         per.text = achieve + "/ 3";
     }
@@ -256,9 +256,9 @@ public class Mission1_M : Missions_M
         five = false;
         six = true;
         missionSlide.Play();
-        mission.text = splitText[12];
-        submis.text = splitText[13];
-        exmis.text = splitText[14];
+        mission.text = splits[12];
+        submis.text = splits[13];
+        exmis.text = splits[14];
         achieve = 0;
         per.text = achieve + "/ 3";
     }
@@ -268,9 +268,9 @@ public class Mission1_M : Missions_M
         six = false;
         seven = true;
         missionSlide.Play();
-        mission.text = splitText[15];
-        submis.text = splitText[16];
-        exmis.text = splitText[17];
+        mission.text = splits[15];
+        submis.text = splits[16];
+        exmis.text = splits[17];
         per.text = "";
     }
 
@@ -280,9 +280,9 @@ public class Mission1_M : Missions_M
         six = false;
         final = true;
         missionSlide.Play();
-        mission.text = splitText[18];
-        submis.text = splitText[19];
-        exmis.text = splitText[20];
+        mission.text = splits[18];
+        submis.text = splits[19];
+        exmis.text = splits[20];
         per.text = "";
     }
 
@@ -291,9 +291,9 @@ public class Mission1_M : Missions_M
         eneBillScr.changeDamageFlg();
 
         missionSlide.Play();
-        mission.text = splitText[21];
-        submis.text = splitText[22];
-        exmis.text = splitText[23];
+        mission.text = splits[21];
+        submis.text = splits[22];
+        exmis.text = splits[23];
         final = false;
     }
 

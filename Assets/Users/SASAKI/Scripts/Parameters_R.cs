@@ -168,6 +168,22 @@ public class Parameters_R : MonoBehaviour
                 damaPanel.DamageEffect();
                 hp -= addHP;
                 mainSlider.value -= addHP;
+                if (hp >= 500 && ep >= evo3)
+                {
+                    if (hpSlider[2].value == 500)
+                    {
+                        mainSlider = hpSlider[3];
+                        mainSlider.value = hp - 500;
+                    }
+                }
+                else if (hp < 500 && ep >= evo3)
+                {
+                    if (hpSlider[3].value == 0)
+                    {
+                        mainSlider = hpSlider[2];
+                        mainSlider.value = hp;
+                    }
+                }
             }
             if (hp <= 0)
             {
@@ -226,8 +242,8 @@ public class Parameters_R : MonoBehaviour
             hpSlider[2].value = 500;
             hpSlider[3].value = 500;
             //満タンエフェクト
-            flashBar.SetActive(true);
-            anime.SetBool(strFlash, true);
+            //flashBar.SetActive(true);
+            //anime.SetBool(strFlash, true);
         }
     }
 
@@ -247,6 +263,7 @@ public class Parameters_R : MonoBehaviour
             if (hpSlider[2].value == 500)
             {
                 mainSlider = hpSlider[3];
+                mainSlider.value = hp - 500;
             }
         }
         else if (hp < 500 && ep >= evo3)
@@ -270,17 +287,17 @@ public class Parameters_R : MonoBehaviour
 
         //エサゲージの色変換
         currentPer = epSlider.value / epSlider.maxValue;
-        if (currentPer <= 0.30f)
+        if (currentPer <= 0.40f)
         {
-            sliderFill.color = Color.Lerp(color1, color2, currentPer * 4f);
+            sliderFill.color = Color.Lerp(color1, color2, currentPer * 3);
         }
-        else if (currentPer >= 0.85f)
+        else if (currentPer >= 0.9f)
         {
             sliderFill.color = Color.Lerp(color3, color4, currentPer);
         }
         else
         {
-            sliderFill.color = Color.Lerp(color2, color3, currentPer);
+            sliderFill.color = Color.Lerp(color2, color3, currentPer * 1.5f);
         }
 
         if (scoreEmp >= 1)

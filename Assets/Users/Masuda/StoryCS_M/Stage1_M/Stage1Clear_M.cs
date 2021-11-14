@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.UI;
 
 public class Stage1Clear_M : MonoBehaviour
 {
-    [SerializeField] public GameObject clear, company, next, pause, explo, goalTxt;
+    [SerializeField] public GameObject clear, company, next, pause, explo;
     public bool stageClear, scoreM, timeLines;
     public PlayableDirector pd;
     public float timeLineTime;
+    public Text goalText;
     void Start()
     {
         clear.SetActive(false);
@@ -39,7 +41,7 @@ public class Stage1Clear_M : MonoBehaviour
             Cursor.visible = true;
             clear.SetActive(true);
             next.SetActive(true);
-            goalTxt.SetActive(false);
+            goalText.color = new Color(0, 0, 0, 0);
             stageClear = true;
             Time.timeScale = 0;
         }
