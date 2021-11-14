@@ -86,9 +86,9 @@ public class Mission3_M : Missions_M
     public void FirstMission_3()
     {
         missionSlide.Play();
-        mission.text = splitText[0];
-        submis.text = splitText[1];
-        exmis.text = splitText[2];
+        mission.text = splits[0];
+        submis.text = splits[1];
+        exmis.text = splits[2];
         //per.text = "0%";
         load = "first";
         first = true;
@@ -101,9 +101,9 @@ public class Mission3_M : Missions_M
         bossIcon.SetActive(true);
 
         missionSlide.Play();
-        mission.text = splitText[3];
-        submis.text = splitText[4];
-        exmis.text = splitText[5];
+        mission.text = splits[3];
+        submis.text = splits[4];
+        exmis.text = splits[5];
         load = "second";
         first = false;
         second = true;
@@ -114,8 +114,8 @@ public class Mission3_M : Missions_M
         //敵破壊1
         missionSlide.Play();
         mission.text = "";
-        submis.text = splitText[6];
-        exmis.text = splitText[7];
+        submis.text = splits[6];
+        exmis.text = splits[7];
         //per.text = "0 / 25";//シェフ
         //per2.text = "0 / 10";//警官
         second = false;
@@ -126,8 +126,8 @@ public class Mission3_M : Missions_M
     {
         //支部攻撃2
         missionSlide.Play();
-        submis.text = splitText[8];
-        exmis.text = splitText[9];
+        submis.text = splits[8];
+        exmis.text = splits[9];
         per.text = "";
         per2.text = "";
         third = false;
@@ -138,8 +138,8 @@ public class Mission3_M : Missions_M
     {
         //敵破壊2
         missionSlide.Play();
-        submis.text = splitText[10];
-        exmis.text = splitText[11];
+        submis.text = splits[10];
+        exmis.text = splits[11];
         achieve = 0;
         achieve2 = 0;
         //per.text = "0 / 25";//警官
@@ -152,8 +152,8 @@ public class Mission3_M : Missions_M
     {
         //支部撃破
         missionSlide.Play();
-        submis.text = splitText[12];
-        exmis.text = splitText[13];
+        submis.text = splits[12];
+        exmis.text = splits[13];
         per.text = "";
         per2.text = "";
         five = false;

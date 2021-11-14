@@ -9,10 +9,9 @@ public class DamagePanel_M : MonoBehaviour
 
     void Start()
     {
-        damage.color = Color.clear;
+        
     }
 
-    // Update is called once per frame
     void Update()
     {
         damage.color = Color.Lerp(damage.color, Color.clear, Time.deltaTime * 2);
