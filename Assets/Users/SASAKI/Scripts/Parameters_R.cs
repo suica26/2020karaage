@@ -43,7 +43,7 @@ public class Parameters_R : MonoBehaviour
     private bool HPsound;
     string score;
     //スコア強調
-    public Animator animator, anime;
+    public Animator animator;
     private string strGetScore = "isGetScore", strFlash = "isFlash";
     public EvolutionChicken_R evoChi;
 
@@ -210,11 +210,11 @@ public class Parameters_R : MonoBehaviour
         }
         else if (ScoreAttack_Y.gameMode == mode.ScoreAttack && evoChi.EvolutionNum == 1)
         {
-            epSlider.maxValue = evo2;
+            epSlider.maxValue = evo2 - evo1;
         }
         else if (ScoreAttack_Y.gameMode == mode.ScoreAttack && evoChi.EvolutionNum == 2)
         {
-            epSlider.maxValue = evo3;
+            epSlider.maxValue = evo3 - evo2;
         }
 
         if (ep == evo1)
@@ -249,9 +249,6 @@ public class Parameters_R : MonoBehaviour
             hp = maxHP;
             hpSlider[2].value = 500;
             hpSlider[3].value = 500;
-            //満タンエフェクト
-            //flashBar.SetActive(true);
-            //anime.SetBool(strFlash, true);
         }
     }
 
