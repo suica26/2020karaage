@@ -9,8 +9,8 @@ public class Audio_M : MonoBehaviour
 
     [SerializeField] public static float vol = 0f;
     private SoundVolumeController soundVolumeController;
-    private string[] CatergoryNames = new string[4]{
-        "BGM", "SFX", "Voice", "Ambient"
+    private string[] CatergoryNames = new string[5]{
+        "BGM", "SFX", "Voice", "Ambient", "Action"
     };
 
     private void Start()

@@ -7,9 +7,8 @@ public class SoundVolumeController : MonoBehaviour
 {
     public float currentVolume = 0f;
     public float nowVolume = 0f;
-    public GameObject[] soundmaster;
-    private string[] CatergoryNames = new string[4]{
-        "BGM", "SFX", "Voice", "Ambient"
+    private string[] CatergoryNames = new string[5]{
+        "BGM", "SFX", "Voice", "Ambient", "Action"
     };
     private SaveManager_Y saveManager;
     static private SoundVolumeController instance;
