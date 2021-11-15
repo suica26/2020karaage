@@ -49,7 +49,9 @@ public sealed class ScoreAttack_Y : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Return))
+        {
             Debug.Log($"gameMode:{gameMode},countDown:{countDown},limitTime:{limitTime},Score:{score},evoMatTimer:{evoMatTimer}");
+        }
 
         if (gameMode == mode.ScoreAttack)
         {

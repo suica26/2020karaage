@@ -134,6 +134,7 @@ public class Score_Result_Buttons : MonoBehaviour
     {
         //今いるシーンをやり直す
         ScoreAttack_Y.gameMode = mode.ScoreAttack;
+        ScoreAttack_Y.Init();
         loadPanel.SetActive(true);
         SceneManager.LoadScene(nowSceneName);
     }
@@ -142,6 +143,7 @@ public class Score_Result_Buttons : MonoBehaviour
     {
         //選んだステージを始める
         ScoreAttack_Y.gameMode = mode.ScoreAttack;
+        ScoreAttack_Y.Init();
         loadPanel.SetActive(true);
         SceneManager.LoadScene(scenes[stageNum]);
     }
