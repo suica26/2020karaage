@@ -13,6 +13,7 @@ public class CountDown : MonoBehaviour
     public Pause_M pauseScr;
     public Parameters_R paramScr;
     public Animator anime;
+    public CharaMoveRigid_R charaMove;
     private string strCountDown = "isCountStart";
 
     void Start()
@@ -53,6 +54,7 @@ public class CountDown : MonoBehaviour
                 Time.timeScale = 1;
             //キャラの足を止めたい
             //鶏のスピードを0に？
+            charaMove.stunned = true;
         }
         else if (!countSet && !countFin)
         {
@@ -60,6 +62,7 @@ public class CountDown : MonoBehaviour
             Time.timeScale = 1;
             countFin = true;
             ScoreAttack_Y.countDown = false;
+            charaMove.stunned = false;
         }
     }
 }

@@ -60,7 +60,7 @@ public class CharaMoveRigid_R : MonoBehaviour
 
     // 行動可能か判定
     public bool stunFlag;
-    private bool stunned;
+    public bool stunned; //public M
     private float timer;
 
     // ブラストの移動制御用変数

@@ -208,6 +208,14 @@ public class Parameters_R : MonoBehaviour
         {
             epSlider.maxValue = evo1;
         }
+        else if (ScoreAttack_Y.gameMode == mode.ScoreAttack && evoChi.EvolutionNum == 1)
+        {
+            epSlider.maxValue = evo2;
+        }
+        else if (ScoreAttack_Y.gameMode == mode.ScoreAttack && evoChi.EvolutionNum == 2)
+        {
+            epSlider.maxValue = evo3;
+        }
 
         if (ep == evo1)
         {
@@ -257,7 +265,7 @@ public class Parameters_R : MonoBehaviour
         }
 
         //バグ発生中 第四形態で一度上のゲージまで体力が減ると、回復しても下のゲージに反映されない
-        //一旦Updateに移動
+        //一旦Updateに移動,退化する時の処理
         if (hp >= 500 && ep >= evo3)
         {
             if (hpSlider[2].value == 500)
