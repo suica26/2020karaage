@@ -11,6 +11,7 @@ public class Stage1Clear_M : MonoBehaviour
     public PlayableDirector pd;
     public float timeLineTime;
     public Text goalText;
+    public Parameters_R scrParam;
     void Start()
     {
         clear.SetActive(false);
@@ -31,6 +32,8 @@ public class Stage1Clear_M : MonoBehaviour
         {
             //Time.timeScale = 0;         
             explo.SetActive(true);
+            scrParam.maxHP = 10000;
+            scrParam.hp = 10000;
             pd.Play();
             timeLines = true;
         }

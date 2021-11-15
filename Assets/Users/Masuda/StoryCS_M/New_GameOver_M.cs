@@ -16,6 +16,8 @@ public class New_GameOver_M : MonoBehaviour
     void Start()
     {
         cas = GetComponent<CriAtomSource>();
+        gameOver.color = new Color(1, 1, 1, 0);
+        blackBack.color = new Color(0, 0, 0, 0);
     }
 
     // Update is called once per frame

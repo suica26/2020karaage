@@ -15,7 +15,7 @@ public class Missions_M : MonoBehaviour
                                 bigBorder1, bigBorder2, bigBorder3, bigBorder4;
     public bool first = false, second = false, third = false, fourth = false, five = false,
         six = false, seven = false, final = false, tip = false, another = false;
-    public string txtData;
+    public string strTxtFile;
     public string[] splits;
     [SerializeField] public Animation missionSlide;
     [SerializeField] public float timer, tipsTimer;
@@ -36,8 +36,8 @@ public class Missions_M : MonoBehaviour
         {
             txtFile = japanese;
         }
-        txtData = txtFile.text;
-        splits = txtData.Split(char.Parse("\n"));
+        strTxtFile = txtFile.text;
+        splits = strTxtFile.Split(char.Parse("\n"));
         //misBox.SetActive(false);
         tipsChicken.SetActive(false);
         shibuLight = GameObject.Find("Light_pillar");
