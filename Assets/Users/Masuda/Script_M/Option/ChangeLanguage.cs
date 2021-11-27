@@ -8,7 +8,7 @@ public class ChangeLanguage : MonoBehaviour
     public Text start, howto, option, exit;
     public Text optionTitle, volume, scr, scr1, scr2, lan;
     public Text howTitle, key, mouse, move, jump, pause, blast, kick, cutter;
-    public Text start0, start1, start2, start3;
+    public Text start0, start1, start2, start3, start11, start22, start33;
     public Text score, story;
     public string language;//PlayrPrefsで判別
     private SaveManager_Y saveManager;
@@ -54,6 +54,9 @@ public class ChangeLanguage : MonoBehaviour
         start1.text = "Start1";
         start2.text = "Start2";
         start3.text = "Start3";
+        start11.text = "Start1";
+        start22.text = "Start2";
+        start33.text = "Start3";
         score.text = "Score Attack";
         story.text = "Story Mode";
         PlayerPrefs.SetString("language", "English");
@@ -88,6 +91,9 @@ public class ChangeLanguage : MonoBehaviour
         start1.text = "ステージ1";
         start2.text = "ステージ2";
         start3.text = "ステージ3";
+        start11.text = "ステージ1";
+        start22.text = "ステージ2";
+        start33.text = "ステージ3";
         score.text = "スコアアタック";
         story.text = "ストーリーモード";
         PlayerPrefs.SetString("language", "Japanese");
