@@ -58,7 +58,7 @@ public class MorBlast_R : MonoBehaviour
         //Debug.LogError("scrCutter: " + scrCutter);
         isBlast = false;
 
-        mobileMode = MobileSetting_R.GetInstance().IsMobileMode();
+        mobileMode = SaveManager_Y.GetInstance().isMobile;
         if (mobileMode)
             isBlastMobile = eBlast.wait;
     }

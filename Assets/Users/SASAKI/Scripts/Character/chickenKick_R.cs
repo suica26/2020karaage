@@ -42,7 +42,7 @@ public class chickenKick_R : MonoBehaviour
         chargePoint = 0;
         criAtomSource = GetComponent<CriAtomSource>();
 
-        mobileMode = MobileSetting_R.GetInstance().IsMobileMode();
+        mobileMode = SaveManager_Y.GetInstance().isMobile;
         isKick = eKick.wait;
     }
 
